@@ -1,2 +1,2 @@
-rootProject.name = "Scootin"
+rootProject.name='TempleAppAndroidKotlin'
 include ':app'
