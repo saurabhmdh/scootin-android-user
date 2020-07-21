@@ -7,12 +7,15 @@ import com.scootin.network.manager.NetworkManager
 import com.scootin.network.retrofit.RetrofitBuilderFactory
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
-@Module(includes = [ViewModelModule::class, DBProviderModule::class])
-class TempleAppModule {
+@Module
+@InstallIn(ApplicationComponent::class)
+class AppModule {
 
     @Singleton
     @Provides

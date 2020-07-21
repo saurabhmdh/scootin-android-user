@@ -5,6 +5,8 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'com.cookpad.android.licensetools'
 apply plugin: 'kotlin-allopen'
+apply plugin: 'dagger.hilt.android.plugin'
+
 
 android {
     compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION)
@@ -90,14 +92,16 @@ dependencies {
     implementation deps.retrofit.gson
     implementation deps.retrofit.logging_interceptor
 
-    implementation deps.dagger.runtime
-    implementation deps.dagger.android
-    implementation deps.dagger.android_support
+    implementation deps.hilt.android
+    implementation deps.hilt.hilt_lifecycle_viewmodel
+    kapt deps.hilt.compiler
+    kapt deps.hilt.hilt_compiler
+
+
     implementation deps.kotlin.stdlib
     implementation deps.kotlin.ktx
     implementation deps.kotlin.ktx_fragment
-    kapt deps.dagger.android_support_compiler
-    kapt deps.dagger.compiler
+
 
     implementation deps.gson
     implementation deps.timber

@@ -12,6 +12,6 @@ import com.scootin.database.table.Cache
     ], version = BuildConfig.DB_VERSION, exportSchema = false
 )
 
-abstract class TempleDb : RoomDatabase() {
+abstract class ProjectDb : RoomDatabase() {
     abstract fun cacheDao(): CacheDao
 }

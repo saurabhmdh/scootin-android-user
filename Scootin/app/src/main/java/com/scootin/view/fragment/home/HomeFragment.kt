@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.scootin.databinding.FragmentHomeBinding
-import com.scootin.di.Injectable
 import com.scootin.network.AppExecutors
 import com.scootin.util.fragment.autoCleared
 import com.scootin.viewmodel.home.HomeFragmentViewModel
@@ -17,13 +16,15 @@ import javax.inject.Inject
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.scootin.view.adapter.home.TempleListAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
-class HomeFragment :  Fragment(), Injectable {
+
+@AndroidEntryPoint
+class HomeFragment :  Fragment() {
     private var binding by autoCleared<FragmentHomeBinding>()
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel: HomeFragmentViewModel by viewModels { viewModelFactory }
+
+    private val viewModel: HomeFragmentViewModel by viewModels()
     private lateinit var adapter: TempleListAdapter
 
     @Inject

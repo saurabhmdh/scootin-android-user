@@ -2,19 +2,22 @@ package com.scootin.di
 
 import android.app.Application
 import androidx.room.Room
-import com.scootin.database.TempleDb
+import com.scootin.database.ProjectDb
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import javax.inject.Singleton
 
 @Module
+@InstallIn(ApplicationComponent::class)
 class DBProviderModule {
     @Singleton
     @Provides
-    fun provideDb(app: Application): TempleDb = Room.databaseBuilder(
+    fun provideDb(app: Application): ProjectDb = Room.databaseBuilder(
         app,
-        TempleDb::class.java,
-        "temple.db"
+        ProjectDb::class.java,
+        "scootin.db"
     ).fallbackToDestructiveMigration()
 //        .addMigrations(MIGRATION_2_1)
         .build()

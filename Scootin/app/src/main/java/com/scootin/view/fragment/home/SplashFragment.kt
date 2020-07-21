@@ -10,11 +10,12 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.scootin.R
 import com.scootin.databinding.FragmentSplashBinding
-import com.scootin.di.Injectable
 import com.scootin.util.fragment.autoCleared
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
-class SplashFragment : Fragment(), Injectable {
+@AndroidEntryPoint
+class SplashFragment : Fragment() {
     private var binding by autoCleared<FragmentSplashBinding>()
 
 

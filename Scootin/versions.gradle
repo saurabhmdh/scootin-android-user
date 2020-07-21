@@ -25,7 +25,10 @@ versions.lifecycle = '2.2.0-alpha03'
 versions.lifecycle_viewmodel_ktx = '2.1.0-beta01'
 versions.lifecycle_runtime_ktx = '2.2.0-alpha01'
 
-versions.dagger = "2.25.2"
+versions.hilt = "2.28-alpha"
+versions.hilt_viewmodel= '1.0.0-alpha01'
+
+
 versions.sdtd_plugin = '1.0.0'
 
 versions.kotlin = "1.3.41"
@@ -180,14 +183,15 @@ idSdk.safetynet = "r10.one.auth:safetynet-assertions:$versions.idSdk"
 
 deps.idSdk = idSdk
 
-def dagger = [:]
-dagger.runtime = "com.google.dagger:dagger:$versions.dagger"
-dagger.android = "com.google.dagger:dagger-android:$versions.dagger"
-dagger.android_support = "com.google.dagger:dagger-android-support:$versions.dagger"
-dagger.compiler = "com.google.dagger:dagger-compiler:$versions.dagger"
-dagger.android_support_compiler = "com.google.dagger:dagger-android-processor:$versions.dagger"
+def hilt = [:]
 
-deps.dagger = dagger
+hilt.android = "com.google.dagger:hilt-android:$versions.hilt"
+hilt.hilt_lifecycle_viewmodel = "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hilt_viewmodel"
+
+hilt.compiler = "com.google.dagger:hilt-android-compiler:$versions.hilt"
+hilt.hilt_compiler = "androidx.hilt:hilt-compiler:$versions.hilt_viewmodel"
+hilt.hilt_android_gradle_plugin = "com.google.dagger:hilt-android-gradle-plugin:$versions.hilt"
+deps.hilt = hilt
 
 def retrofit = [:]
 retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
