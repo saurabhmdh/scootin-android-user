@@ -32,19 +32,19 @@ class SplashFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Timber.i("Deeplink path = ${activity?.intent?.data?.path} last path segment = ${activity?.intent?.data?.lastPathSegment} query = ${activity?.intent?.data?.query}")
 
-        Handler().postDelayed({
-            gotoNextFragment()
-        }, 3000)
+//        Handler().postDelayed({
+//            gotoNextFragment()
+//        }, 3000)
 
 
     }
 
-    private fun gotoNextFragment() {
-        findNavController().navigate(
-            R.id.nav_home,
-            null,
-            NavOptions.Builder().setPopUpTo(R.id.splash_fragment, true).build()
-        )
-    }
+//    private fun gotoNextFragment() {
+//        findNavController().navigate(
+//            R.id.nav_home,
+//            null,
+//            NavOptions.Builder().setPopUpTo(R.id.splash_fragment, true).build()
+//        )
+//    }
 
 }
