@@ -1,0 +1,122 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt' //for Dagger and Data Binding https://kotlinlang.org/docs/reference/kapt.html
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'com.cookpad.android.licensetools'
+apply plugin: 'kotlin-allopen'
+
+android {
+    compileSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION)
+    buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        applicationId project.APPLICATIONID
+        minSdkVersion Integer.parseInt(project.ANDROID_BUILD_MIN_SDK_VERSION)
+        targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION)
+        versionName project.VERSION_NAME
+        versionCode Integer.parseInt(project.VERSION_CODE)
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+        testInstrumentationRunner "com.rakuten.travel.consumer.util.TestRunner"
+        buildConfigField "int", "DB_VERSION", project.DATABASE_VERSION
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation deps.support.cardview
+    implementation deps.support.appcompat
+    implementation deps.support.design
+    implementation deps.support.recyclerview
+    implementation deps.support.fragment_ktx
+
+    implementation deps.support.constraintlayout
+    implementation deps.support.multidex
+    implementation deps.support.support_preference_fragment
+    implementation deps.support.palette
+    implementation deps.support.flexbox
+    implementation deps.support.viewpager2
+
+    implementation deps.room.runtime
+    kapt deps.room.compiler
+    implementation deps.room.ktx
+
+    kapt deps.lifecycle.compiler
+    implementation deps.lifecycle.viewmodel_ktx
+    implementation deps.lifecycle.runtime_ktx
+    implementation deps.lifecycle.livedata_ktx
+
+    implementation deps.work.runtime
+    implementation deps.work.runtime_ktx
+
+    implementation deps.kotlinx_coroutines_android
+    //Network Lib.
+    implementation(deps.glide.runtime, {
+        exclude group: "com.android.support"
+    })
+    kapt(deps.glide.compiler, {
+        exclude group: "com.android.support"
+    })
+    implementation(deps.glide.okhttp3, {
+        exclude group: "com.android.support"
+    })
+    implementation deps.retrofit.gson
+    implementation deps.retrofit.logging_interceptor
+
+    implementation deps.dagger.runtime
+    implementation deps.dagger.android
+    implementation deps.dagger.android_support
+    implementation deps.kotlin.stdlib
+    implementation deps.kotlin.ktx
+    implementation deps.kotlin.ktx_fragment
+    kapt deps.dagger.android_support_compiler
+    kapt deps.dagger.compiler
+
+    implementation deps.gson
+    implementation deps.timber
+
+    debugImplementation deps.chunk.runtime
+    releaseImplementation deps.chunk.runtime_no_op
+
+    implementation deps.navigation.navigation_ui_ktx
+    implementation deps.navigation.fragment_ktx
+    implementation deps.lottie
+}
+
+kapt {
+    javacOptions {
+        option("-Xmaxerrs", 5000)
+        option("-Xmaxwarns", 5000)
+    }
+}
+// Android Extensions plugin enhancements reference : https://blog.jetbrains.com/kotlin/2017/08/kotlin-1-1-4-is-out
+androidExtensions {
+    experimental = true
+}
