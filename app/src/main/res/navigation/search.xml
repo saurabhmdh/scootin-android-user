@@ -15,31 +15,15 @@
   ~ limitations under the License.
   -->
 
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/search"
-    app:startDestination="@+id/leaderboard">
+    app:startDestination="@+id/search_fragment">
 
     <fragment
-            android:id="@+id/leaderboard"
-            android:name="com.scootin.view.fragment.listscreen.Leaderboard"
-            android:label="list">
-        <action
-            android:id="@+id/action_leaderboard_to_userProfile"
-            app:destination="@id/userProfile"/>
+            android:id="@+id/search_fragment"
+            android:name="com.scootin.view.fragment.search.SearchFragment"
+            android:label="">
     </fragment>
-    <fragment
-        android:id="@+id/userProfile"
-        android:name="com.scootin.view.fragment.listscreen.UserProfile"
-        android:label="detail">
-        <deepLink
-            android:id="@+id/deepLink"
-            app:uri="www.example.com/user/{userName}"
-            android:autoVerify="true"/>
-        <argument
-            android:name="userName"
-            app:argType="string"/>
-    </fragment>
+
 </navigation>

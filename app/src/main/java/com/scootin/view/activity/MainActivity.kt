@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
      * Called on first creation and when restoring state.
      */
     private fun setupBottomNavigationBar() {
-        val navGraphIds = listOf(R.navigation.home, R.navigation.search, R.navigation.cart)
+        val navGraphIds = listOf(R.navigation.home, R.navigation.search, R.navigation.cart, R.navigation.wallet, R.navigation.account)
 
         // Setup the bottom navigation view with a search of navigation graphs
         val controller = binding.bottomNav.setupWithNavController(
