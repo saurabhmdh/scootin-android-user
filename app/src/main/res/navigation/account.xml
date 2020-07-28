@@ -20,11 +20,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/account"
-    app:startDestination="@+id/titleScreen">
+    app:startDestination="@+id/account_fragment">
 
     <fragment
-        android:id="@+id/titleScreen"
-        android:name="com.scootin.view.fragment.home.HomeFragment"
+        android:id="@+id/account_fragment"
+        android:name="com.scootin.view.fragment.account.AccountFragment"
         android:label="Home">
     </fragment>
 
