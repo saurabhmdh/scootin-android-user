@@ -15,34 +15,13 @@ import timber.log.Timber
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
-    private val viewModel: SplashViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater).also {
             setContentView(it.root)
         }
-        setUi()
+
     }
-
-    private fun setUi() {
-        val video = Uri.parse("android.resource://" + packageName.toString() + "/" + R.raw.video)
-        binding.videoView.apply {
-            setVideoURI(video)
-            setOnCompletionListener { startNextActivity() }
-            start()
-        }
-    }
-
-    private fun startNextActivity() {
-        if (isFinishing) return
-
-        viewModel.firstLaunch().observe(this) {
-            Timber.i("First launch.. $it")
-            //Check for first time launch
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
-    }
-
 }
