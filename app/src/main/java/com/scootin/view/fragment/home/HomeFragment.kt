@@ -15,12 +15,13 @@ import timber.log.Timber
 import javax.inject.Inject
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.scootin.R
 import com.scootin.view.adapter.home.TempleListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class HomeFragment :  Fragment() {
+class HomeFragment :  Fragment(R.layout.fragment_home) {
     private var binding by autoCleared<FragmentHomeBinding>()
 
 
@@ -30,32 +31,22 @@ class HomeFragment :  Fragment() {
     @Inject
     lateinit var appExecutors: AppExecutors
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-        setHasOptionsMenu(true)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initUI()
-        observeDataChange()
+        binding = FragmentHomeBinding.bind(view)
     }
 
-    private fun initUI() {
-        adapter = TempleListAdapter(appExecutors)
-        binding.suggestionList.adapter = adapter
-        binding.suggestionList.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
-    }
+//    private fun initUI() {
+//        adapter = TempleListAdapter(appExecutors)
+//        binding.suggestionList.adapter = adapter
+//        binding.suggestionList.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
+//    }
 
-    private fun observeDataChange() {
-        viewModel.getAllTemples().observe(viewLifecycleOwner) {
-            Timber.i("data from network  ${it.data}")
-            adapter.submitList(it.data)
-        }
-    }
+//
+//    private fun observeDataChange() {
+//        viewModel.getAllTemples().observe(viewLifecycleOwner) {
+//            Timber.i("data from network  ${it.data}")
+//            adapter.submitList(it.data)
+//        }
+//    }
 }

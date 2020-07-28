@@ -11,7 +11,7 @@ import com.scootin.databinding.ActivityMainBinding
 import com.scootin.util.navigation.setupWithNavController
 
 import dagger.hilt.android.AndroidEntryPoint
-
+import java.lang.Exception
 
 
 @AndroidEntryPoint
@@ -46,9 +46,9 @@ class MainActivity : AppCompatActivity() {
      * Called on first creation and when restoring state.
      */
     private fun setupBottomNavigationBar() {
-        val navGraphIds = listOf(R.navigation.home, R.navigation.list, R.navigation.form)
+        val navGraphIds = listOf(R.navigation.home, R.navigation.search, R.navigation.cart)
 
-        // Setup the bottom navigation view with a list of navigation graphs
+        // Setup the bottom navigation view with a search of navigation graphs
         val controller = binding.bottomNav.setupWithNavController(
             navGraphIds = navGraphIds,
             fragmentManager = supportFragmentManager,
@@ -58,7 +58,9 @@ class MainActivity : AppCompatActivity() {
 
         // Whenever the selected controller changes, setup the action bar.
         controller.observe(this, Observer { navController ->
-            setupActionBarWithNavController(navController)
+            try {
+                setupActionBarWithNavController(navController)
+            } catch (e:Exception) {}
         })
         currentNavController = controller
     }

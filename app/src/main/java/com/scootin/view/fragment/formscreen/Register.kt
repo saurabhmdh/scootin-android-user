@@ -19,22 +19,16 @@ package com.scootin.view.fragment.formscreen
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.scootin.R
-import com.scootin.databinding.FragmentRegisterBinding
+
 
 
 /**
- * Shows a register form to showcase UI state persistence. It has a button that goes to [Registered]
+ * Shows a register cart to showcase UI state persistence. It has a button that goes to [Registered]
  */
-class Register : Fragment(R.layout.fragment_register) {
+class Register : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val binding = FragmentRegisterBinding.bind(view)
 
-        binding.signupBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_register_to_registered)
-        }
     }
 }

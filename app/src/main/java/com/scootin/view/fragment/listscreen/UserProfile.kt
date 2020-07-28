@@ -21,20 +21,16 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.scootin.R
-import com.scootin.databinding.FragmentUserProfileBinding
-import com.scootin.view.fragment.listscreen.MyAdapter.Companion.USERNAME_KEY
+
 
 
 /**
  * Shows a profile screen for a user, taking the name from the arguments.
  */
-class UserProfile : Fragment(R.layout.fragment_user_profile) {
+class UserProfile : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val binding = FragmentUserProfileBinding.bind(view)
-
-        binding.profileUserName.text = arguments?.getString(USERNAME_KEY) ?: "Saurabh"
 
     }
 }

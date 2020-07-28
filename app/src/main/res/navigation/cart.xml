@@ -19,27 +19,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list"
-    app:startDestination="@+id/leaderboard">
+    android:id="@+id/cart"
+    app:startDestination="@id/register">
 
     <fragment
-            android:id="@+id/leaderboard"
-            android:name="com.scootin.view.fragment.listscreen.Leaderboard"
-            android:label="list">
+            android:id="@+id/register"
+            android:name="com.scootin.view.fragment.formscreen.Register"
+            android:label="Register">
         <action
-            android:id="@+id/action_leaderboard_to_userProfile"
-            app:destination="@id/userProfile"/>
+            android:id="@+id/action_register_to_registered"
+            app:destination="@id/registered"/>
     </fragment>
     <fragment
-        android:id="@+id/userProfile"
-        android:name="com.scootin.view.fragment.listscreen.UserProfile"
-        android:label="detail">
-        <deepLink
-            android:id="@+id/deepLink"
-            app:uri="www.example.com/user/{userName}"
-            android:autoVerify="true"/>
-        <argument
-            android:name="userName"
-            app:argType="string"/>
-    </fragment>
+        android:id="@+id/registered"
+        android:name="com.scootin.view.fragment.formscreen.Registered"
+        android:label="Registered" />
 </navigation>

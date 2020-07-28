@@ -22,4 +22,4 @@ import com.scootin.R
 /**
  * Shows "Done".
  */
-class Registered : Fragment(R.layout.fragment_registered)
+class Registered : Fragment()
