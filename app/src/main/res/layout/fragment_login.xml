@@ -2,11 +2,65 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@color/light_gray"
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/header_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/bg_login_header" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/get_started"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_image"
+        app:srcCompat="@drawable/bg_get_started_with_scootin" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/third_party_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/get_started"
+        app:srcCompat="@drawable/bg_third_party_login" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/otp_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/third_party_login"
+        app:srcCompat="@drawable/bg_otp_text_fields" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/forgot_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/otp_login"
+        app:srcCompat="@drawable/bg_forgot_password" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/forgot_password"
+        app:srcCompat="@drawable/ic_sign_in" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sign_in"
+        app:srcCompat="@drawable/bg_signup" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
