@@ -36,21 +36,15 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
         }
     }
 
-//    private fun gotoNextFragment() {
-//        findNavController().navigate(
-//            R.id.nav_home,
-//            null,
-//            NavOptions.Builder().setPopUpTo(R.id.splash_fragment, true).build()
-//        )
-//    }
+    private fun gotoLoginFragment() {
+        findNavController().navigate(SplashFragmentDirections.actionSplashToLogin(),
+            NavOptions.Builder().setPopUpTo(R.id.splash, true).build())
+    }
 
     private fun startNextActivity() {
         Timber.i("Starting next activity..")
         viewModel.firstLaunch().observe(viewLifecycleOwner) {
-            if (it) {
-            } else {
-
-            }
+            gotoLoginFragment()
         }
     }
 }

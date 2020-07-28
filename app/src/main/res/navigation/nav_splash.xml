@@ -8,8 +8,14 @@
         android:id="@+id/splash"
         android:name="com.scootin.view.fragment.home.SplashFragment"
         android:label="">
-
+        <action android:id="@+id/action_splash_to_login" app:destination="@id/login"/>
     </fragment>
 
+    <fragment
+        android:id="@+id/login"
+        android:name="com.scootin.view.fragment.home.LoginFragment"
+        android:label="">
+
+    </fragment>
 
 </navigation>
