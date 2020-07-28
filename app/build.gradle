@@ -66,6 +66,8 @@ dependencies {
     implementation deps.support.flexbox
     implementation deps.support.viewpager2
 
+    implementation deps.support.activity_ktx
+
     implementation deps.room.runtime
     kapt deps.room.compiler
     implementation deps.room.ktx
