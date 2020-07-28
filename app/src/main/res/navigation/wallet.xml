@@ -19,19 +19,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/form"
-    app:startDestination="@id/register">
+    android:id="@+id/wallet"
+    app:startDestination="@+id/titleScreen">
 
     <fragment
-            android:id="@+id/register"
-            android:name="com.scootin.view.fragment.formscreen.Register"
-            android:label="Register">
-        <action
-            android:id="@+id/action_register_to_registered"
-            app:destination="@id/registered"/>
+        android:id="@+id/titleScreen"
+        android:name="com.scootin.view.fragment.home.HomeFragment"
+        android:label="Home">
     </fragment>
-    <fragment
-        android:id="@+id/registered"
-        android:name="com.scootin.view.fragment.formscreen.Registered"
-        android:label="Registered" />
+
 </navigation>

@@ -31,6 +31,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:labelVisibilityMode="unlabeled"
+        android:background="@drawable/gradient_bottom"
+        app:itemIconTint="@color/bottom_color"
         app:menu="@menu/bottom_nav"/>
 
 </LinearLayout>

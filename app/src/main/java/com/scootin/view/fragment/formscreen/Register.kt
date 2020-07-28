@@ -23,7 +23,7 @@ import androidx.fragment.app.Fragment
 
 
 /**
- * Shows a register form to showcase UI state persistence. It has a button that goes to [Registered]
+ * Shows a register cart to showcase UI state persistence. It has a button that goes to [Registered]
  */
 class Register : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
