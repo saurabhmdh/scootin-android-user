@@ -11,7 +11,7 @@ import com.scootin.databinding.ActivityMainBinding
 import com.scootin.util.navigation.setupWithNavController
 
 import dagger.hilt.android.AndroidEntryPoint
-
+import java.lang.Exception
 
 
 @AndroidEntryPoint
@@ -58,7 +58,9 @@ class MainActivity : AppCompatActivity() {
 
         // Whenever the selected controller changes, setup the action bar.
         controller.observe(this, Observer { navController ->
-            setupActionBarWithNavController(navController)
+            try {
+                setupActionBarWithNavController(navController)
+            } catch (e:Exception) {}
         })
         currentNavController = controller
     }
