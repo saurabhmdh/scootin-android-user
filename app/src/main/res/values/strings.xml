@@ -3,4 +3,6 @@
 
     <string name="login_forgot_password">Forgot password?</string>
     <string name="login_sign_in">Sign In</string>
+    <string name="login_phone_number">Mobile Number</string>
+    <string name="login_otp">OTP</string>
 </resources>
