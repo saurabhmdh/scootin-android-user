@@ -19,6 +19,7 @@ class LoginFragment:Fragment(R.layout.fragment_login) {
 
         binding.signIn.setOnClickListener {
             startActivity(Intent(requireContext(), MainActivity::class.java))
+            activity?.overridePendingTransition(R.anim.enter, R.anim.exit)
             activity?.finish()
         }
     }
