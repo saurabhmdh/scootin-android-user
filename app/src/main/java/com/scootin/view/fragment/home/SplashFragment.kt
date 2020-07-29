@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.viewModels
+import androidx.core.os.postDelayed
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
@@ -29,11 +30,15 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
         binding = FragmentSplashBinding.bind(view)
 
         val video = Uri.parse("android.resource://" + requireContext().packageName.toString() + "/" + R.raw.video)
-        binding.videoView.apply {
-            setVideoURI(video)
-            setOnCompletionListener { startNextActivity() }
-            start()
-        }
+//        binding.videoView.apply {
+//            setVideoURI(video)
+//            setOnCompletionListener { startNextActivity() }
+//            start()
+//        }
+
+        Handler().postDelayed({
+            startNextActivity()
+        }, 1000)
     }
 
     private fun gotoLoginFragment() {
