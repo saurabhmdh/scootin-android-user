@@ -43,7 +43,11 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
 
     private fun gotoLoginFragment() {
         findNavController().navigate(SplashFragmentDirections.actionSplashToLogin(),
-            NavOptions.Builder().setPopUpTo(R.id.splash, true).build())
+            NavOptions.Builder().setEnterAnim(R.anim.slide_in_right)
+                .setExitAnim(R.anim.slide_out_left)
+                .setPopEnterAnim(R.anim.slide_in_left)
+                .setPopExitAnim(R.anim.slide_out_right)
+                .setPopUpTo(R.id.splash, true).build())
     }
 
     private fun startNextActivity() {
