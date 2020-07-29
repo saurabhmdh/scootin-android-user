@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_alignParentTop="true"
-            android:src="@drawable/ic_scootin_logo_red_final"/>
+            android:src="@drawable/bg_scootin_logo"/>
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/watch_animation"

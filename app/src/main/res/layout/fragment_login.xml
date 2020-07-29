@@ -4,15 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/header_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/bg_login_header" />
+        app:srcCompat="@drawable/bg_scootin_logo" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/get_started"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,24 +21,63 @@
         app:layout_constraintTop_toBottomOf="@id/header_image"
         app:srcCompat="@drawable/bg_get_started_with_scootin" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/third_party_login"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/get_started"
         app:srcCompat="@drawable/bg_third_party_login" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/otp_login"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/phone_number"
+        style="@style/TextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/third_party_login"
-        app:srcCompat="@drawable/bg_otp_text_fields" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/login_phone_number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/third_party_login">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:inputType="phone"
+            android:focusableInTouchMode="true" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/otp_login"
+        style="@style/TextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/login_otp"
+        app:passwordToggleContentDescription="@string/login_otp"
+        app:passwordToggleDrawable="@drawable/ic_password_eye"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/text_input_hint_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phone_number">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_otp_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:inputType="numberPassword"
+            android:maxLength="4"
+            android:focusableInTouchMode="true" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/forgot_password"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
@@ -47,19 +86,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/otp_login" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/sign_in"
-        style="@style/button_red"
-        android:text="@string/login_sign_in"
-        android:layout_width="271dp"
+        app:srcCompat="@drawable/ic_sign_in"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/forgot_password" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/sign_up"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
