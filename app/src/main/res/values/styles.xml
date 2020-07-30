@@ -39,7 +39,7 @@
     <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="colorAccent">@color/text_color_primary</item>
         <item name="hintTextColor">@color/text_color_primary</item>
-        <item name="boxStrokeColor">@color/colorPrimary</item>
+        <item name="boxStrokeColor">@color/text_input_hint_color</item>
     </style>
 
 </resources>
