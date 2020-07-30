@@ -22,13 +22,33 @@
         app:srcCompat="@drawable/bg_get_started_with_scootin" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/third_party_login"
+        android:id="@+id/facebook"
         android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="130dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/get_started"
-        app:srcCompat="@drawable/bg_third_party_login" />
+        app:srcCompat="@drawable/ic_facebook" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/google"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_marginEnd="130dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/get_started"
+        app:srcCompat="@drawable/ic_google" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:id="@+id/or"
+        android:text="Or"
+        style="@style/custom_font_style_black"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/facebook"
+        android:layout_height="wrap_content"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/phone_number"
@@ -40,7 +60,7 @@
         android:layout_marginEnd="16dp"
         android:hint="@string/login_phone_number"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/third_party_login">
+        app:layout_constraintTop_toBottomOf="@+id/or">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_phone_number"
             style="@style/custom_font_style_black"
