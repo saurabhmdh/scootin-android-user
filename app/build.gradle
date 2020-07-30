@@ -115,6 +115,7 @@ dependencies {
     implementation deps.navigation.fragment_ktx
     implementation deps.lottie
     implementation deps.facebook
+    implementation deps.google_login
 }
 
 kapt {
