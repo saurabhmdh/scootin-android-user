@@ -14,6 +14,7 @@ import com.scootin.viewmodel.home.HomeFragmentViewModel
 import timber.log.Timber
 import javax.inject.Inject
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.scootin.R
 import com.scootin.view.adapter.home.TempleListAdapter
@@ -34,6 +35,13 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
+        updateListeners()
+    }
+
+    private fun updateListeners() {
+        binding.express.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.homeToExpressDelivery())
+        }
     }
 
 //    private fun initUI() {
