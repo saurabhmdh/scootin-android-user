@@ -6,8 +6,7 @@ import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import androidx.work.Configuration
 import androidx.work.WorkManager
-import com.facebook.FacebookSdk
-import com.facebook.appevents.AppEventsLogger
+
 import com.scootin.di.DaggerAwareWorkerFactory
 import com.scootin.services.StartUpService
 import com.scootin.util.ReleaseTree
@@ -33,8 +32,7 @@ class ScootinApplication: MultiDexApplication() {
 
         configureWorkManager()
         service.start()
-        FacebookSdk.sdkInitialize(this)
-        AppEventsLogger.activateApp(this)
+
     }
 
     private fun initTimber() {

@@ -22,34 +22,6 @@
         app:layout_constraintTop_toBottomOf="@id/header_image"
         app:srcCompat="@drawable/bg_get_started_with_scootin" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/facebook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/google"
-        app:layout_constraintTop_toBottomOf="@id/get_started"
-        app:srcCompat="@drawable/ic_facebook" />
-
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/google"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/get_started"
-        app:srcCompat="@drawable/ic_google" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/or"
-        style="@style/custom_font_style_black"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Or"
-        android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@id/facebook" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/phone_number"
@@ -60,8 +32,10 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/login_phone_number"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/or">
+        app:layout_constraintTop_toBottomOf="@+id/get_started">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_phone_number"
@@ -80,6 +54,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:hint="@string/login_otp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phone_number"
         app:passwordToggleContentDescription="@string/login_otp"
