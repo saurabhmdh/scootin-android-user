@@ -93,6 +93,7 @@ versions.adjust_installreferrer = '1.1.2'
 versions.adjust_ads = '17.0.0'
 versions.lottieVersion = '3.4.1'
 versions.facebookVersion = '[5,6)'
+versions.googleVersion = '18.1.0'
 
 def deps = [:]
 
@@ -259,6 +260,8 @@ deps.adjust_google_play_services_ads_identifier = "com.google.android.gms:play-s
 deps.lottie = "com.airbnb.android:lottie:$versions.lottieVersion"
 
 deps.facebook = "com.facebook.android:facebook-login:$versions.facebookVersion"
+deps.google_login = "com.google.android.gms:play-services-auth:$versions.googleVersion"
+
 
 def mockito = [:]
 mockito.core = "org.mockito:mockito-core:$versions.mockito"
