@@ -22,7 +22,7 @@
         android:title="" />
     <item
         android:id="@+id/cart"
-        android:icon="@drawable/ic_cart"
+        android:icon="@drawable/ic_shopping"
         android:title="" />
     <item
         android:id="@+id/wallet"
@@ -30,6 +30,6 @@
         android:title="" />
     <item
         android:id="@+id/account"
-        android:icon="@drawable/ic_account"
+        android:icon="@drawable/ic_user"
         android:title="" />
 </menu>
