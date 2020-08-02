@@ -35,6 +35,8 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
+
+        Timber.i("height =  ${binding.express.height} Width = ${binding.express.width}")
         updateListeners()
     }
 
