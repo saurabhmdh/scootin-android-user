@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
@@ -15,19 +16,20 @@ import timber.log.Timber
 
 class CategoryDialogFragment: DialogFragment() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isCancelable = false
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
 
-            builder.setTitle("Select Cetegory").setSingleChoiceItems(getListItem(), 0) { dialog, which ->
+            builder.setTitle(R.string.select_category).setSingleChoiceItems(getListItem(), 0) { dialog, which ->
                 Timber.i("Checked = $which")
-            }.setPositiveButton(android.R.string.ok) { dialog, id ->
+            }.setPositiveButton(R.string.done) { dialog, id ->
                 Timber.i("positive = $id")
-            }.setNegativeButton(android.R.string.cancel) { dialog, id ->
-                Timber.i("user didn't select any option = $id")
-                findNavController().popBackStack()
             }
-
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }

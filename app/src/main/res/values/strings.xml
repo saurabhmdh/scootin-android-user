@@ -5,6 +5,8 @@
     <string name="login_sign_in">Sign In</string>
     <string name="login_phone_number">Mobile Number</string>
     <string name="login_otp">OTP</string>
-    <string name="facebook_app_id">2552001905111430</string>
-    <string name="fb_login_protocol_scheme">fb2552001905111430</string>
+
+    <string name="done">Done</string>
+    <string name="select_category">Select Category</string>
+
 </resources>
