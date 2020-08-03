@@ -3,6 +3,7 @@
     <dimen name="dimen_144">144dp</dimen>
 
     <dimen name="dimen_8">8dp</dimen>
+    <dimen name="home_screen_margin_start">24dp</dimen>
 
     <dimen name="font_size_18">18sp</dimen>
 

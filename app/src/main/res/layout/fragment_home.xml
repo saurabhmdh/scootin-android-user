@@ -13,61 +13,51 @@
         android:layout_width="match_parent"
         android:paddingTop="20dp"
         android:layout_height="wrap_content"
-        android:paddingStart="30dp"
+        android:paddingStart="@dimen/home_screen_margin_start"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:drawableLeft="@drawable/ic_user_location"
+        android:drawableStart="@drawable/ic_user_location"
         android:drawablePadding="8dp"
         style="@style/custom_font_style_white"
         android:text="Finding location.." />
 
     <LinearLayout
         android:id="@+id/line"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         app:layout_constraintTop_toBottomOf="@id/user_location"
-        android:background="@android:color/white"/>
+        android:background="@android:color/white"
+        android:orientation="horizontal" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/express"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="6dp"
-            android:layout_marginStart="30dp"
-            app:layout_constraintTop_toBottomOf="@id/user_location"
-            app:layout_constraintStart_toStartOf="parent"
-            app:cardElevation="12dp"
-            app:cardUseCompatPadding="true">
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:id="@+id/express_delivery"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/bg_express_delivery"/>
-        </androidx.cardview.widget.CardView>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_marginStart="@dimen/home_screen_margin_start"
+        app:layout_constraintTop_toBottomOf="@id/line"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/express"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/bg_express_delivery"/>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
-            app:layout_constraintTop_toBottomOf="@id/user_location"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:cardCornerRadius="6dp"
-            app:cardElevation="12dp"
-            app:cardUseCompatPadding="true">
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/bg_city_wide_delivery"/>
-        </androidx.cardview.widget.CardView>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/city_wide_delivery"
+        android:layout_width="wrap_content"
+        android:layout_marginEnd="@dimen/home_screen_margin_start"
+        app:layout_constraintTop_toBottomOf="@id/line"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/bg_city_wide_delivery"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/essentials_grocery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="@dimen/home_screen_margin_start"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/express"
         app:srcCompat="@drawable/bg_essentials_grocery"/>
@@ -76,7 +66,7 @@
         android:id="@+id/sweet_snacks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="@dimen/home_screen_margin_start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/essentials_grocery"
         app:srcCompat="@drawable/bg_sweet_snacks"/>
@@ -85,7 +75,7 @@
         android:id="@+id/vegetables_fruits"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="@dimen/home_screen_margin_start"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sweet_snacks"
         app:srcCompat="@drawable/bg_vegetables_fruits"/>
@@ -94,7 +84,7 @@
         android:id="@+id/medicines"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="@dimen/home_screen_margin_start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/vegetables_fruits"
         app:srcCompat="@drawable/bg_medicines"/>
@@ -103,7 +93,7 @@
         android:id="@+id/stationery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="@dimen/home_screen_margin_start"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/medicines"
         app:srcCompat="@drawable/bg_stationery"/>
@@ -112,7 +102,7 @@
         android:id="@+id/clothing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="@dimen/home_screen_margin_start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/stationery"
         app:srcCompat="@drawable/bg_clothing"/>
