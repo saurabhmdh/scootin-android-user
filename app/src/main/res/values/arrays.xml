@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="express_delivery_options">
+        <item>Grocery | Essentials</item>
+        <item>Medicine | Sanity Items</item>
+        <item>Snacks</item>
+        <item>Electronic Items</item>
+        <item>Stationery</item>
+        <item>Pam Shop</item>
+        <item>Flower | Cake</item>
+    </string-array>
+</resources>
