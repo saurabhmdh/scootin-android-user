@@ -18,8 +18,8 @@ class ExpressDeliveryFragment: Fragment(R.layout.fragment_express_delivery) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentExpressDeliveryBinding.bind(view)
 
-        val lottieDialogFragment = CategoryDialogFragment()
-        lottieDialogFragment.show(childFragmentManager, "")
+        val dailog = CategoryDialogFragment()
+        dailog.show(childFragmentManager, "")
 
     }
 }
