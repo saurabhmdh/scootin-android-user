@@ -1,15 +1,18 @@
 package com.scootin.view.activity
 
 
+import android.content.Intent
 import android.os.Bundle
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.scootin.R
 import com.scootin.databinding.ActivityMainBinding
+import com.scootin.util.constants.AppConstants
 import com.scootin.util.navigation.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -69,6 +72,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return currentNavController?.value?.navigateUp() ?: false
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == AppConstants.RESULT_LOAD_IMAGE_VIDEO) {
+            val navHostFragment = supportFragmentManager.fragments.first() as? NavHostFragment
+            if (navHostFragment != null) {
+                val childFragments = navHostFragment.childFragmentManager.fragments
+                childFragments.forEach { fragment ->
+                    fragment.onActivityResult(requestCode, resultCode, data)
+                }
+            }
+        }
     }
 
 

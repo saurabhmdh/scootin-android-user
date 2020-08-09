@@ -1,0 +1,99 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+
+        <variable
+            name="data"
+            type="com.scootin.util.media.UploadedItem" />
+
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/user_selected_image"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:background="#ff4547"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RelativeLayout
+            android:id="@+id/retry_overlay"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:background="@color/uploading_transparent"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/retry_again"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_retry_upload" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/search_text_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/retry_again"
+                android:layout_centerInParent="true"
+                android:text="Retry"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/dimen_10"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/progressbar_overlay"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:background="@color/uploading_transparent"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ProgressBar
+                android:id="@+id/upload_progress_bar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/dimen_30"
+                android:indeterminate="false"
+                android:max="100"
+                android:progressDrawable="@drawable/uploading_curved_progress_bar" />
+
+        </RelativeLayout>
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/discard_image"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:padding="@dimen/dimen_4"
+            android:src="@drawable/ic_icon_discard_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
