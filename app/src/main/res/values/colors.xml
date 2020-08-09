@@ -9,4 +9,11 @@
 
     <color name="text_color_primary">@android:color/black</color>
     <color name="text_color_secondary">@android:color/white</color>
+    <color name="uploading_transparent">#66000000</color>
+
+    <color name="actionbar_gradient_start">#24A8F0</color>
+    <color name="actionbar_gradient_end">#45AFEC</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray_33">#333333</color>
+    <color name="grey_EA">#EAEAEA</color>
 </resources>
