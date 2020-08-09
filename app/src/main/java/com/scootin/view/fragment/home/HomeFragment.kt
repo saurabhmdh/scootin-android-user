@@ -45,6 +45,10 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
             findNavController().navigate(HomeFragmentDirections.homeToExpressDelivery())
         }
 
+        binding.cityWideDelivery.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.homeToCitywide())
+        }
+
         binding.essentialsGrocery.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.homeToExpressDelivery())
         }
@@ -59,11 +63,16 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
 
 
         binding.medicines.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.homeToCake())
+            findNavController().navigate(HomeFragmentDirections.homeToMedicines())
         }
 
         binding.clothing.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.homeToSnacks())
+        }
+
+
+        binding.vegetablesFruits.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.homeToVeg())
         }
 
 

@@ -9,4 +9,14 @@
         <item>Pam Shop</item>
         <item>Flower | Cake</item>
     </string-array>
+
+    <string-array name="citywide_delivery_options">
+        <item>Documents | Books</item>
+        <item>Food | Edible Items</item>
+        <item>Flowers | Cake</item>
+        <item>Electronic Items</item>
+        <item>Household Items</item>
+        <item>Items for Repairinf</item>
+        <item>Clothes | Shoes</item>
+    </string-array>
 </resources>
