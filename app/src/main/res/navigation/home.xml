@@ -40,6 +40,30 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/home_to_sweets"
+            app:destination="@id/sweets"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/home_to_snacks"
+            app:destination="@id/snacks"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/home_to_cake"
+            app:destination="@id/cake"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -49,6 +73,21 @@
     <fragment
         android:id="@+id/stationary"
         android:name="com.scootin.view.fragment.delivery.stationary.StationaryDeliveryFragment"
+        android:label="Home"></fragment>
+
+    <fragment
+        android:id="@+id/sweets"
+        android:name="com.scootin.view.fragment.delivery.sweet.SweetsDeliveryFragment"
+        android:label="Home"></fragment>
+
+    <fragment
+        android:id="@+id/cake"
+        android:name="com.scootin.view.fragment.delivery.sweet.CakeDeliveryFragment"
+        android:label="Home"></fragment>
+
+    <fragment
+        android:id="@+id/snacks"
+        android:name="com.scootin.view.fragment.delivery.sweet.SnacksDeliveryFragment"
         android:label="Home"></fragment>
 
 </navigation>
