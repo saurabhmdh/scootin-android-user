@@ -44,6 +44,10 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         binding.express.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.homeToExpressDelivery())
         }
+
+        binding.stationery.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.homeToStationary())
+        }
     }
 
 //    private fun initUI() {
