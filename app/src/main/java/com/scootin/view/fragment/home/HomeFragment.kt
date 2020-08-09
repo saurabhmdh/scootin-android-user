@@ -46,7 +46,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         }
 
         binding.cityWideDelivery.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.homeToCitywide())
+            findNavController().navigate(HomeFragmentDirections.homeToCityDelivery())
         }
 
         binding.essentialsGrocery.setOnClickListener {

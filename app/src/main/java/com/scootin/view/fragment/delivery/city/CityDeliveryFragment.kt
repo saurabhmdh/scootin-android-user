@@ -23,13 +23,14 @@ import com.scootin.util.ui.UtilPermission
 import com.scootin.util.ui.presentSnackBar
 import com.scootin.view.adapter.EDItemAddAdapter
 import com.scootin.view.adapter.UploadImageAdapter
+import com.scootin.view.fragment.dialogs.CategoryDialogFragment
 import com.scootin.view.fragment.dialogs.CitywideCategoryDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CitywideDeliveryFragment : Fragment(R.layout.fragment_express_delivery) {
+class CityDeliveryFragment : Fragment(R.layout.fragment_express_delivery) {
     private var binding by autoCleared<FragmentExpressDeliveryBinding>()
     val filesCantBeUploadedList = mutableListOf<String>()
     private var snackbar: Snackbar? = null
@@ -49,7 +50,7 @@ class CitywideDeliveryFragment : Fragment(R.layout.fragment_express_delivery) {
         lottieDialogFragment.show(childFragmentManager, "")
         setAdaper()
         binding.save.setOnClickListener {
-            if (binding.itemAddEditText.text.toString().isNotEmpty()) {
+            if(binding.itemAddEditText.text.toString().isNotEmpty()) {
                 itemAddList.add(binding.itemAddEditText.text.toString())
                 edItemAddAdapter.submitList(itemAddList)
                 binding.itemAddEditText.setText("")
