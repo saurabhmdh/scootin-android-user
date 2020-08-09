@@ -42,6 +42,14 @@
             app:popExitAnim="@anim/slide_out_right" />
 
         <action
+            android:id="@+id/home_to_essential"
+            app:destination="@id/grocery"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
             android:id="@+id/home_to_stationary"
             app:destination="@id/stationary"
             app:enterAnim="@anim/slide_in_right"
@@ -128,6 +136,11 @@
     <fragment
         android:id="@+id/cityDelivery"
         android:name="com.scootin.view.fragment.delivery.city.CityDeliveryFragment"
+        android:label="Home"></fragment>
+
+    <fragment
+        android:id="@+id/grocery"
+        android:name="com.scootin.view.fragment.delivery.essential.EssentialsGroceryDeliveryFragment"
         android:label="Home"></fragment>
 
 </navigation>

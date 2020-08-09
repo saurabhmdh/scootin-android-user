@@ -19,4 +19,10 @@
         <item>Items for Repairinf</item>
         <item>Clothes | Shoes</item>
     </string-array>
+
+    <string-array name="essential_options">
+        <item>Would you like to select from product menu</item>
+        <item>Upload|Take a photo of Hand Written List of items</item>
+    </string-array>
+
 </resources>

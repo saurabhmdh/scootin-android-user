@@ -50,7 +50,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         }
 
         binding.essentialsGrocery.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.homeToExpressDelivery())
+            findNavController().navigate(HomeFragmentDirections.homeToEssential())
         }
 
         binding.stationery.setOnClickListener {
