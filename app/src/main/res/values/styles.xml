@@ -13,11 +13,6 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.NoActionBar.Splash" parent="AppTheme.NoActionBar">
-        <item name="android:statusBarColor">@android:color/white</item>
-        <item name="android:windowLightStatusBar">true</item>
-    </style>
-
     <style name="custom_font_style_red" parent="@android:style/TextAppearance.Medium">
         <item name="android:fontFamily">@font/mons_medium</item>
         <item name="android:textColor">@color/text_color</item>
