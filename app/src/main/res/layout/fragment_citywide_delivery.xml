@@ -3,145 +3,96 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/ic_background"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/ic_background"
         android:paddingStart="16dp"
         android:paddingEnd="16dp">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/express"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            app:cardCornerRadius="6dp"
-            app:cardElevation="12dp"
-            app:cardUseCompatPadding="true"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/express_delivery"
+            android:layout_marginTop="60dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/ic_citywide_delivery_big" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/express_delivery"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_citywide_delivery_big" />
-        </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/selectedCategory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Selected Category"
-            style="@style/custom_font_bold_style_black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/express" />
-
-        <TextView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/grocery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="Grocery | Essential"
-            android:textColor="@color/gray_33"
-            android:textSize="16dp"
+            app:srcCompat="@drawable/bg_food_edible_items"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selectedCategory" />
+            app:layout_constraintTop_toBottomOf="@+id/express_delivery" />
 
-        <TextView
-            android:id="@+id/max"
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="end"
-            android:text="(Max 10 items are invloved)"
-            android:textColor="@color/gray_33"
-            android:textSize="16dp"
+            app:srcCompat="@drawable/bg_limit_10_kg"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selectedCategory" />
+            app:layout_constraintTop_toBottomOf="@+id/express_delivery" />
 
         <View
             android:id="@+id/empty"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginBottom="16dp"
+            android:layout_height="1dp"
             android:background="@color/text_color_primary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/grocery" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/uploadPhoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_camera_button"
+            android:layout_marginTop="@dimen/dimen_8"
+            android:src="@drawable/bg_click_a_photo_of_item"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/empty" />
 
-        <TextView
-            android:id="@+id/takePhoto"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/bg_rectangle"
-            android:gravity="center"
-            android:text="Upload a photo of Hand written list"
-            android:textColor="@color/gray_33"
-            android:textSize="18dp"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/sender_photo_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/ic_sender_photo_box"
             app:layout_constraintTop_toBottomOf="@+id/uploadPhoto" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/selectedImageGallery"
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/receiver_photo_box"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_20"
-            android:fillViewport="true"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/takePhoto"
-            app:spanCount="3"
-            tools:itemCount="20"
-            tools:spanCount="3" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/bg_receivers_photo_box"
+            app:layout_constraintTop_toBottomOf="@+id/uploadPhoto" />
 
         <TextView
             android:id="@+id/warning"
+            style="@style/custom_font_bold_style_black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="*To be sure that, delivered and sent items are the same"
-            android:textColor="@color/gray_33"
-            android:textSize="16dp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/selectedImageGallery" />
-
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Delivery Fee rs 45.00"
-            android:textColor="@color/gray_33"
-            android:textSize="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/warning" />
+            app:layout_constraintTop_toBottomOf="@id/sender_photo_box" />
 
         <TextView
             android:id="@+id/pickupAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/custom_font_bold_style_black"
             android:text="Pick-Up"
-            android:textStyle="bold"
+            android:layout_marginTop="30dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/price" />
+            app:layout_constraintTop_toBottomOf="@+id/warning" />
 
         <EditText
             android:id="@+id/address"
+            style="@style/custom_font_style_black_small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Current Location(Home) | Type a new Address"
@@ -151,30 +102,31 @@
 
         <TextView
             android:id="@+id/dropAddress"
+            style="@style/custom_font_bold_style_black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Drop:"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/address" />
 
         <EditText
-            android:id="@+id/mobileNumber"
+            android:id="@+id/edit_drop_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Current Location(Home) | Type a new Address"
-            android:inputType="phone"
-            android:textColor="@color/gray_33"
+            android:inputType="text"
+            style="@style/custom_font_style_black_small"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dropAddress" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/placeOrder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_place_order"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mobileNumber" />
+            app:layout_constraintTop_toBottomOf="@+id/edit_drop_address" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
