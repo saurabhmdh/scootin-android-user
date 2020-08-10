@@ -49,8 +49,9 @@ class CityDeliveryFragment : Fragment(R.layout.fragment_citywide_delivery) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCitywideDeliveryBinding.bind(view)
 
-        val lottieDialogFragment = CitywideCategoryDialogFragment()
-        lottieDialogFragment.show(childFragmentManager, "")
+        val citywideCategoryDialogFragment = CitywideCategoryDialogFragment()
+        citywideCategoryDialogFragment.show(childFragmentManager, "")
+
         setAdaper()
         binding.uploadPhoto.setOnClickListener {
             showMediaGallery()
