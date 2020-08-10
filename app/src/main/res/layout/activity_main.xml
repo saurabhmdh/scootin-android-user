@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:labelVisibilityMode="unlabeled"
-        android:background="@drawable/gradient_bottom"
+        android:background="@drawable/ic_navigation_botton_background"
         app:itemIconTint="@android:color/white"
         app:menu="@menu/bottom_nav"/>
 
