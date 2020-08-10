@@ -48,17 +48,17 @@ class ExpressDeliveryFragment : Fragment(R.layout.fragment_express_delivery) {
         val dailog = CategoryDialogFragment()
         dailog.show(childFragmentManager, "")
 
-        setAdaper()
-        binding.save.setOnClickListener {
-            if(binding.itemAddEditText.text.toString().isNotEmpty()) {
-                itemAddList.add(binding.itemAddEditText.text.toString())
-                edItemAddAdapter.submitList(itemAddList)
-                binding.itemAddEditText.setText("")
-            }
-        }
-        binding.uploadPhoto.setOnClickListener {
-            showMediaGallery()
-        }
+//        setAdaper()
+//        binding.save.setOnClickListener {
+//            if(binding.itemAddEditText.text.toString().isNotEmpty()) {
+//                itemAddList.add(binding.itemAddEditText.text.toString())
+//                edItemAddAdapter.submitList(itemAddList)
+//                binding.itemAddEditText.setText("")
+//            }
+//        }
+//        binding.uploadPhoto.setOnClickListener {
+//            showMediaGallery()
+//        }
 
     }
 
@@ -73,9 +73,9 @@ class ExpressDeliveryFragment : Fragment(R.layout.fragment_express_delivery) {
 
             })
 
-        binding.list.apply {
-            adapter = edItemAddAdapter
-        }
+//        binding.list.apply {
+//            adapter = edItemAddAdapter
+//        }
 
         mediaAdapter =
             UploadImageAdapter(
@@ -94,9 +94,9 @@ class ExpressDeliveryFragment : Fragment(R.layout.fragment_express_delivery) {
                     }
 
                 })
-        binding.selectedImageGallery.apply {
-            adapter = mediaAdapter
-        }
+//        binding.selectedImageGallery.apply {
+//            adapter = mediaAdapter
+//        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
