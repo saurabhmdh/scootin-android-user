@@ -21,6 +21,7 @@ class CitywideCategoryDialogFragment : DialogFragment() {
             val builder = AlertDialog.Builder(it)
 
             builder.setTitle(R.string.select_category)
+                .setIcon(R.drawable.ic_category_popup)
                 .setSingleChoiceItems(getListItem(), 0) { dialog, which ->
                     Timber.i("Checked = $which")
                 }.setPositiveButton(R.string.done) { dialog, id ->
