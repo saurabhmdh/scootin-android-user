@@ -18,7 +18,7 @@ class CitywideCategoryDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
-            val builder = AlertDialog.Builder(it)
+            val builder = AlertDialog.Builder(it, R.style.dialog_theme)
 
             builder.setTitle(R.string.select_category)
                 .setIcon(R.drawable.ic_category_popup)
