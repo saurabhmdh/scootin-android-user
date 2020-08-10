@@ -2,15 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <VideoView
-        android:id="@+id/videoView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignParentStart="true"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/logo"
+        android:paddingTop="@dimen/dimen_30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true" />
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/ic_scootin_logo_red_final_blend_shadow"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/cancel_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:lottie_rawRes="@raw/colourful_loader"
+        app:lottie_loop="true"
+        android:layout_below="@id/logo"
+        app:lottie_autoPlay="true" />
 
 </RelativeLayout>
