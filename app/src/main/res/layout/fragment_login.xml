@@ -11,7 +11,7 @@
         android:layout_height="200dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bg_scootin_logo" />
+        app:srcCompat="@drawable/ic_scootin_logo_red_final_blend_shadow" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/get_started"
