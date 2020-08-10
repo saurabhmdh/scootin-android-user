@@ -1,4 +1,4 @@
-package com.scootin.view.fragment.delivery.express
+package com.scootin.view.fragment.delivery.city
 
 import android.app.Activity
 import android.content.Context
@@ -6,12 +6,14 @@ import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.scootin.R
-import com.scootin.databinding.FragmentExpressDeliveryBinding
+import com.scootin.databinding.FragmentCitywideDeliveryBinding
 import com.scootin.databinding.SelectedImageVideoBinding
 import com.scootin.network.AppExecutors
 import com.scootin.util.constants.AppConstants
@@ -23,14 +25,16 @@ import com.scootin.util.ui.UtilPermission
 import com.scootin.util.ui.presentSnackBar
 import com.scootin.view.adapter.EDItemAddAdapter
 import com.scootin.view.adapter.UploadImageAdapter
-import com.scootin.view.fragment.dialogs.CategoryDialogFragment
+import com.scootin.view.fragment.dialogs.CitywideCategoryDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import java.io.File
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
-class ExpressDeliveryFragment : Fragment(R.layout.fragment_express_delivery) {
-    private var binding by autoCleared<FragmentExpressDeliveryBinding>()
+class CityDeliveryFragment : Fragment(R.layout.fragment_citywide_delivery) {
+    private var binding by autoCleared<FragmentCitywideDeliveryBinding>()
     val filesCantBeUploadedList = mutableListOf<String>()
     private var snackbar: Snackbar? = null
 
@@ -43,40 +47,32 @@ class ExpressDeliveryFragment : Fragment(R.layout.fragment_express_delivery) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentExpressDeliveryBinding.bind(view)
+        binding = FragmentCitywideDeliveryBinding.bind(view)
 
-        val dailog = CategoryDialogFragment()
-        dailog.show(childFragmentManager, "")
-
+        val lottieDialogFragment = CitywideCategoryDialogFragment()
+        lottieDialogFragment.show(childFragmentManager, "")
         setAdaper()
-        binding.save.setOnClickListener {
-            if(binding.itemAddEditText.text.toString().isNotEmpty()) {
-                itemAddList.add(binding.itemAddEditText.text.toString())
-                edItemAddAdapter.submitList(itemAddList)
-                binding.itemAddEditText.setText("")
-            }
-        }
         binding.uploadPhoto.setOnClickListener {
             showMediaGallery()
         }
 
+        binding.takePhoto.setOnClickListener {
+            takePhoto()
+        }
+    }
+
+    fun takePhoto() {
+        val intent = Intent("android.media.action.IMAGE_CAPTURE")
+        val photo = File(Environment.getExternalStorageDirectory(), "Pic.jpg")
+        intent.putExtra(
+            MediaStore.EXTRA_OUTPUT,
+            Uri.fromFile(photo)
+        )
+        val imageUri = Uri.fromFile(photo)
+        this.startActivityForResult(intent, 100)
     }
 
     private fun setAdaper() {
-        edItemAddAdapter =
-            EDItemAddAdapter(appExecutors, object : EDItemAddAdapter.ImageAdapterClickLister {
-                override fun onIncrementItem(view: View) {
-                }
-
-                override fun onDecrementItem(view: View) {
-                }
-
-            })
-
-        binding.list.apply {
-            adapter = edItemAddAdapter
-        }
-
         mediaAdapter =
             UploadImageAdapter(
                 appExecutors,

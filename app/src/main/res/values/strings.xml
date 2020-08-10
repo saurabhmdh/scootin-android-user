@@ -8,5 +8,6 @@
 
     <string name="done">Done</string>
     <string name="select_category">Select Category</string>
+    <string name="type_your_list_additionaly_you_can_mention_size_also_e_g_coke_250ml">Type your list, additionaly you can mention size also E.g Coke 250ml</string>
 
 </resources>

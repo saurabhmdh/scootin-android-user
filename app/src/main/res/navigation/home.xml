@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2019, The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,26 +14,148 @@
   ~ limitations under the License.
   -->
 
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home"
-    app:startDestination="@+id/titleScreen">
+    app:startDestination="@+id/titleScreen"
+    tools:ignore="UnusedNavigation">
 
     <fragment
         android:id="@+id/titleScreen"
         android:name="com.scootin.view.fragment.home.HomeFragment"
         android:label="Home">
-        <action android:id="@+id/home_to_express_delivery"
+        <action
+            android:id="@+id/home_to_express_delivery"
             app:destination="@id/express_delivery"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/home_to_city_delivery"
+            app:destination="@id/cityDelivery"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/home_to_essential"
+            app:destination="@id/grocery"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/home_to_sweets"
+            app:destination="@id/sweetsCategory"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/home_to_stationary"
+            app:destination="@id/stationary"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+
+        <action
+            android:id="@+id/home_to_veg"
+            app:destination="@id/veg"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/home_to_medicines"
+            app:destination="@id/medicines"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
-    <fragment android:id="@+id/express_delivery"
-        android:name="com.scootin.view.fragment.delivery.express.ExpressDeliveryFragment">
+    <fragment
+        android:id="@+id/express_delivery"
+        android:name="com.scootin.view.fragment.delivery.express.ExpressDeliveryFragment"></fragment>
+
+
+    <fragment
+        android:id="@+id/stationary"
+        android:name="com.scootin.view.fragment.delivery.stationary.StationaryDeliveryFragment"
+        android:label="Home"></fragment>
+
+    <fragment
+        android:id="@+id/sweets"
+        android:name="com.scootin.view.fragment.delivery.sweet.SweetsDeliveryFragment"
+        android:label="Home"></fragment>
+
+    <fragment
+        android:id="@+id/cake"
+        android:name="com.scootin.view.fragment.delivery.sweet.CakeDeliveryFragment"
+        android:label="Home"></fragment>
+
+    <fragment
+        android:id="@+id/snacks"
+        android:name="com.scootin.view.fragment.delivery.sweet.SnacksDeliveryFragment"
+        android:label="Home"></fragment>
+
+    <fragment
+        android:id="@+id/veg"
+        android:name="com.scootin.view.fragment.delivery.veg.VegetableDeliveryFragment"
+        android:label="Home"></fragment>
+
+    <fragment
+        android:id="@+id/medicines"
+        android:name="com.scootin.view.fragment.delivery.medicines.MedicinesDeliveryFragment"
+        android:label="Home"></fragment>
+
+    <fragment
+        android:id="@+id/cityDelivery"
+        android:name="com.scootin.view.fragment.delivery.city.CityDeliveryFragment"
+        android:label="Home"></fragment>
+
+    <fragment
+        android:id="@+id/grocery"
+        android:name="com.scootin.view.fragment.delivery.essential.EssentialsGroceryDeliveryFragment"
+        android:label="Home"></fragment>
+
+    <fragment
+        android:id="@+id/sweetsCategory"
+        android:name="com.scootin.view.fragment.delivery.sweet.SweetsCategoryFragment"
+        android:label="Home">
+        <action
+            android:id="@+id/home_to_sweets"
+            app:destination="@id/sweets"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/home_to_snacks"
+            app:destination="@id/snacks"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/home_to_cake"
+            app:destination="@id/cake"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
     </fragment>
+
 </navigation>
