@@ -49,7 +49,7 @@ class SweetsCategoryFragment : Fragment(R.layout.fragment_sweets_category) {
         }
 
         binding.cakenbouquet.setOnClickListener {
-//            findNavController().navigate(HomeFragmentDirections.homeToStationary())
+            findNavController().navigate(SweetsCategoryFragmentDirections.homeToCakenbouqet())
         }
 
 
