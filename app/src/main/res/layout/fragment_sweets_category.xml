@@ -43,7 +43,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/line"
-            app:srcCompat="@drawable/bg_express_delivery" />
+            app:srcCompat="@drawable/ic_sweets_category" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/city_wide_delivery"
@@ -64,7 +64,7 @@
             android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/express"
-            app:srcCompat="@drawable/bg_essentials_grocery" />
+            app:srcCompat="@drawable/ic_sweets" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/bakery"
@@ -73,7 +73,7 @@
             android:layout_marginEnd="@dimen/home_screen_margin_start"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sweets"
-            app:srcCompat="@drawable/bg_sweet_snacks" />
+            app:srcCompat="@drawable/ic_bakery_cakes" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/snacks"
@@ -82,7 +82,7 @@
             android:layout_marginStart="@dimen/home_screen_margin_start"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bakery"
-            app:srcCompat="@drawable/bg_vegetables_fruits" />
+            app:srcCompat="@drawable/ic_snacks" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/cakenbouquet"
@@ -91,7 +91,7 @@
             android:layout_marginEnd="@dimen/home_screen_margin_start"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/snacks"
-            app:srcCompat="@drawable/bg_medicines" />
+            app:srcCompat="@drawable/ic_cake_n_bouquet_big" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
