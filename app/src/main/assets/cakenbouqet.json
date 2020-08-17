@@ -1,0 +1,188 @@
+{
+  "cake": [
+    {
+      "detail": "Motichoor Ladoo",
+      "discountprice": "MRP 250$",
+      "id": "0",
+      "image": "",
+      "name": "Buisness Name",
+      "price": {
+        "total": 250,
+        "discount": 200,
+        "title": " 500 DISCOUNT",
+        "unit": "500gm per kg"
+      }
+    },
+    {
+      "detail": "Ladoo",
+      "discountprice": "MRP 3350$",
+      "id": "0",
+      "image": "",
+      "name": "Buisness Name",
+      "price": {
+        "total": 250,
+        "discount": 200,
+        "title": " 500 DISCOUNT",
+        "unit": "500gm per kg"
+      }
+    },
+    {
+      "detail": "Besan Ladoo",
+      "discountprice": "MRP 230$",
+      "id": "0",
+      "image": "",
+      "name": "Buisness Name",
+      "price": {
+        "total": 250,
+        "discount": 200,
+        "title": " 500 DISCOUNT",
+        "unit": "500gm per kg"
+      }
+    },
+    {
+      "detail": "Kajoo Barfi",
+      "discountprice": "MRP 350$",
+      "id": "0",
+      "image": "",
+      "name": "Buisness Name",
+      "price": {
+        "total": 250,
+        "discount": 200,
+        "title": " 500 DISCOUNT",
+        "unit": "500gm per kg"
+      }
+    },
+    {
+      "detail": "Barfi",
+      "discountprice": "MRP 3250$",
+      "id": "0",
+      "image": "",
+      "name": "Buisness Name",
+      "price": {
+        "total": 250,
+        "discount": 200,
+        "title": " 500 DISCOUNT",
+        "unit": "500gm per kg"
+      }
+    },
+    {
+      "detail": "Gulab Jamun",
+      "discountprice": "MRP 3250$",
+      "id": "0",
+      "image": "",
+      "name": "Buisness Name",
+      "price": {
+        "total": 250,
+        "discount": 200,
+        "title": " 500 DISCOUNT",
+        "unit": "500gm per kg"
+      }
+    },
+    {
+      "detail": "Peda",
+      "discountprice": "MRP 3250$",
+      "price": {
+        "total": 250,
+        "discount": 200,
+        "title": " 500 DISCOUNT",
+        "unit": "500gm per kg"
+      },
+      "id": "0",
+      "image": "",
+      "name": "Buisness Name"
+    }
+  ],
+  "bouqet": [
+    {
+      "detail": "Motichoor Ladoo",
+      "discountprice": "MRP 250$",
+      "id": "0",
+      "image": "",
+      "name": "Buisness Name",
+      "price": {
+        "total": 250,
+        "discount": 200,
+        "title": " 500 DISCOUNT",
+        "unit": "500gm per kg"
+      }
+    },
+    {
+      "detail": "Ladoo",
+      "discountprice": "MRP 3350$",
+      "id": "0",
+      "image": "",
+      "name": "Buisness Name",
+      "price": {
+        "total": 250,
+        "discount": 200,
+        "title": " 500 DISCOUNT",
+        "unit": "500gm per kg"
+      }
+    },
+    {
+      "detail": "Besan Ladoo",
+      "discountprice": "MRP 230$",
+      "id": "0",
+      "image": "",
+      "name": "Buisness Name",
+      "price": {
+        "total": 250,
+        "discount": 200,
+        "title": " 500 DISCOUNT",
+        "unit": "500gm per kg"
+      }
+    },
+    {
+      "detail": "Kajoo Barfi",
+      "discountprice": "MRP 350$",
+      "id": "0",
+      "image": "",
+      "name": "Buisness Name",
+      "price": {
+        "total": 250,
+        "discount": 200,
+        "title": " 500 DISCOUNT",
+        "unit": "500gm per kg"
+      }
+    },
+    {
+      "detail": "Barfi",
+      "discountprice": "MRP 3250$",
+      "id": "0",
+      "image": "",
+      "name": "Buisness Name",
+      "price": {
+        "total": 250,
+        "discount": 200,
+        "title": " 500 DISCOUNT",
+        "unit": "500gm per kg"
+      }
+    },
+    {
+      "detail": "Gulab Jamun",
+      "discountprice": "MRP 3250$",
+      "id": "0",
+      "image": "",
+      "name": "Buisness Name",
+      "price": {
+        "total": 250,
+        "discount": 200,
+        "title": " 500 DISCOUNT",
+        "unit": "500gm per kg"
+      }
+    },
+    {
+      "detail": "Peda",
+      "discountprice": "MRP 3250$",
+      "price": {
+        "total": 250,
+        "discount": 200,
+        "title": " 500 DISCOUNT",
+        "unit": "500gm per kg"
+      },
+      "id": "0",
+      "image": "",
+      "name": "Buisness Name"
+    }
+  ]
+}
