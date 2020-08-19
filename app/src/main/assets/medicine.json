@@ -1,0 +1,83 @@
+[
+  {
+    "discount": "MRP 250$",
+    "distance": "500 km",
+    "id": "0",
+    "image": "1240$",
+    "isOpen": true,
+    "name": "Mansa Stationaries Classic",
+    "rating": 3.5
+  },
+  {
+    "discount": "MRP 3350$",
+    "distance": "2 km",
+    "id": "0",
+    "image": "2240$",
+    "isOpen": true,
+    "name": "Mansa Stationaries JK Paper",
+    "rating": 4.0
+  },
+  {
+    "discount": "MRP 230$",
+    "distance": "200 km",
+    "id": "0",
+    "image": "2240$",
+    "isOpen": true,
+    "name": "Mansa Stationaries MEAD",
+    "rating": 2.0
+  },
+  {
+    "discount": "MRP 350$",
+    "distance": "100 km",
+    "id": "0",
+    "image": "2240$",
+    "isOpen": false,
+    "name": "Mansa Stationaries Brand name",
+    "rating": 5.0
+  },
+  {
+    "discount": "MRP 3250$",
+    "distance": "1500 km",
+    "id": "0",
+    "image": "2240$",
+    "isOpen": false,
+    "name": "Mansa Stationaries Exclusive",
+    "rating": 2.0
+  },
+  {
+    "discount": "MRP 3250$",
+    "distance": "300 km",
+    "id": "0",
+    "image": "2240$",
+    "isOpen": false,
+    "name": "Mansa Stationaries Classic",
+    "rating": 2.0
+  },
+  {
+    "discount": "MRP 3250$",
+    "distance": "200 km",
+    "id": "0",
+    "image": "2240$",
+    "isOpen": true,
+    "name": "Mansa Stationaries Classic",
+    "rating": 2.0
+  },
+  {
+    "discount": "MRP 3250$",
+    "distance": "500 km",
+    "id": "0",
+    "image": "2240$",
+    "isOpen": false,
+    "name": "Mansa Stationaries Classic",
+    "rating": 3.5
+  },
+  {
+    "discount": "MRP 3250$",
+    "distance": "15 km",
+    "id": "0",
+    "image": "2240$",
+    "isOpen": true,
+    "name": "Mansa Stationaries Classic",
+    "rating": 4.5
+  }
+]
