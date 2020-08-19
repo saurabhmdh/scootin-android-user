@@ -10,4 +10,14 @@
     <string name="select_category">Select Category</string>
     <string name="type_your_list_additionaly_you_can_mention_size_also_e_g_coke_250ml">Type your list, additionaly you can mention size also E.g Coke 250ml</string>
 
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <!--
+        This is the name that users will see when interacting with this channel.
+        It should describe the category of notifications that will be sent through this channel
+     -->
+    <!-- [START fcm_default_icon_string] -->
+    <string name="default_notification_channel_name" translatable="true">Weather</string>
+    <!-- [END fcm_default_icon_string] -->
+    <string name="msg_subscribe_failed">Failed to subscribe to weather topic</string>
+    <string name="fcm_message">FCM Message</string>
 </resources>

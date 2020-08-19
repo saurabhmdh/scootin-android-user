@@ -6,6 +6,7 @@ apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'com.cookpad.android.licensetools'
 apply plugin: 'kotlin-allopen'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'com.google.gms.google-services'
 
 
 android {
@@ -69,6 +70,7 @@ dependencies {
     implementation deps.support.activity_ktx
 
     implementation deps.room.runtime
+    implementation 'com.google.firebase:firebase-messaging:20.2.0'
     kapt deps.room.compiler
     implementation deps.room.ktx
 
