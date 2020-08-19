@@ -3,18 +3,22 @@ package com.scootin.view.activity
 
 import android.content.Intent
 import android.os.Bundle
-
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.iid.InstanceIdResult
 import com.scootin.R
 import com.scootin.databinding.ActivityMainBinding
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.navigation.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -31,12 +35,21 @@ class MainActivity : AppCompatActivity() {
             setContentView(it.root)
         }
 
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(object : OnCompleteListener<InstanceIdResult?> {
+                override fun onComplete(task: Task<InstanceIdResult?>) {
+                    if (!task.isSuccessful()) {
+                        return
+                    }
+                    val token = task.result?.token
+                    Timber.i("Token = $token")
+                }
+            })
 
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         } // Else, need to wait for onRestoreInstanceState
     }
-
 
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -51,7 +64,8 @@ class MainActivity : AppCompatActivity() {
      * Called on first creation and when restoring state.
      */
     private fun setupBottomNavigationBar() {
-        val navGraphIds = listOf(R.navigation.home, R.navigation.cart, R.navigation.wallet, R.navigation.account)
+        val navGraphIds =
+            listOf(R.navigation.home, R.navigation.cart, R.navigation.wallet, R.navigation.account)
 
         // Setup the bottom navigation view with a search of navigation graphs
         val controller = binding.bottomNav.setupWithNavController(
@@ -65,7 +79,8 @@ class MainActivity : AppCompatActivity() {
         controller.observe(this, Observer { navController ->
             try {
                 setupActionBarWithNavController(navController)
-            } catch (e:Exception) {}
+            } catch (e: Exception) {
+            }
         })
         currentNavController = controller
     }
@@ -86,7 +101,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
 
 }
