@@ -16,6 +16,7 @@ import javax.inject.Inject
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.google.firebase.iid.FirebaseInstanceId
 import com.scootin.R
 import com.scootin.view.adapter.home.TempleListAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,6 +39,16 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
 
         Timber.i("height =  ${binding.express.height} Width = ${binding.express.width}")
         updateListeners()
+
+        //Let me try firebase integration..
+        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener {
+            if(!it.isSuccessful) {
+                Timber.i("Saurabh getInstanceId failed")
+                return@addOnCompleteListener
+            }
+            val token = it.result?.token
+            Timber.i("Saurabh : Device token $token")
+        }
     }
 
     private fun updateListeners() {
