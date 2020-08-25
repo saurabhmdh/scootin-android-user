@@ -18,17 +18,17 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
 
     @Inject
     lateinit var appExecutors: AppExecutors
-    private lateinit var snacksItemAddAdapter: VegItemAddAdapter
+    private lateinit var vegItemAddAdapter: VegItemAddAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentVegetableDeliveryBinding.bind(view)
         setAdaper()
-        snacksItemAddAdapter.submitList(setList())
+        vegItemAddAdapter.submitList(setList())
     }
 
     private fun setAdaper() {
-        snacksItemAddAdapter =
+        vegItemAddAdapter =
             VegItemAddAdapter(
                 appExecutors,
                 object : VegItemAddAdapter.ImageAdapterClickLister {
@@ -41,7 +41,7 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
                 })
 
         binding.list.apply {
-            adapter = snacksItemAddAdapter
+            adapter = vegItemAddAdapter
         }
     }
 

@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.scootin.R
 import com.scootin.databinding.FragmentStationaryDeliveryBinding
+import com.scootin.databinding.FragmentSweetsDeliveryBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.sweets.SweetsItem
 import com.scootin.util.fragment.autoCleared
@@ -14,21 +15,21 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
-    private var binding by autoCleared<FragmentStationaryDeliveryBinding>()
+    private var binding by autoCleared<FragmentSweetsDeliveryBinding>()
 
     @Inject
     lateinit var appExecutors: AppExecutors
-    private lateinit var stationaryAdapter: SweetsItemAddAdapter
+    private lateinit var sweetsAdapter: SweetsItemAddAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentStationaryDeliveryBinding.bind(view)
+        binding = FragmentSweetsDeliveryBinding.bind(view)
         setAdaper()
-        stationaryAdapter.submitList(setList())
+        sweetsAdapter.submitList(setList())
     }
 
     private fun setAdaper() {
-        stationaryAdapter =
+        sweetsAdapter =
             SweetsItemAddAdapter(
                 appExecutors,
                 object : SweetsItemAddAdapter.ImageAdapterClickLister {
@@ -41,7 +42,7 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
                 })
 
         binding.list.apply {
-            adapter = stationaryAdapter
+            adapter = sweetsAdapter
         }
     }
 

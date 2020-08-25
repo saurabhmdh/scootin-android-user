@@ -72,7 +72,9 @@ class SweetsItemAddAdapter(
             R.layout.simple_spinner_dropdown_item,
             items
         )
+
         binding.spinner.setAdapter(adapter)
+
     }
 
     interface ImageAdapterClickLister {

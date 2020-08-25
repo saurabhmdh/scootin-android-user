@@ -1,118 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/ic_background"
     android:layout_height="match_parent">
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_background"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/express"
+        android:layout_height="match_parent"
+
+   >
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/express"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_sweets_card" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/materialRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            app:cardCornerRadius="6dp"
-            app:cardElevation="12dp"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="136dp"
+            android:textSize="12sp"
+            android:text="By store name"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/express_delivery"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_sweets_item" />
-        </androidx.cardview.widget.CardView>
-
-        <EditText
-            android:id="@+id/itemAddEditText"
-            android:layout_width="match_parent"
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/materialRadioButton2"
+            android:selectAllOnFocus="false"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/gray_33"
-            android:hint="Search by store name"
-            android:imeOptions="actionDone"
-            android:inputType="text"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="12sp"
+            android:text="By Product name"
+            app:layout_constraintBottom_toTopOf="@+id/srchsweets"
+            app:layout_constraintStart_toEndOf="@+id/materialRadioButton"
             app:layout_constraintTop_toBottomOf="@+id/express" />
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/srchsweets"
+            android:layout_width="match_parent"
+            android:layout_height="23dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="16dp"
+            app:defaultQueryHint="Search by store name"
+            app:iconifiedByDefault="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/express"
+            app:queryHint="Search by store name"
+            app:searchIcon="@null" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_20"
-            android:fillViewport="true"
-            android:orientation="vertical"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/itemAddEditText" />
-
-        <TextView
-            android:id="@+id/option"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="OR"
-            android:textColor="@color/gray_33"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/list" />
-
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Delivery Fee rs 45.00"
-            android:textColor="@color/gray_33"
-            android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/list" />
-
-        <TextView
-            android:id="@+id/details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Delivering To:"
-            android:textColor="@color/gray_33"
-            android:textSize="16dp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/option" />
+            app:layout_constraintTop_toBottomOf="@id/srchsweets" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
 
-        <EditText
-            android:id="@+id/address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Current Location(Home) | Type a new Address"
-            android:inputType="text"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/details" />
 
-        <EditText
-            android:id="@+id/mobileNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Mobile \n No incase something is unclear or unavailable from list"
-            android:inputType="phone"
-            android:textColor="@color/gray_33"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/address" />
-
-        <ImageView
-            android:id="@+id/placeOrder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_place_order"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mobileNumber" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
