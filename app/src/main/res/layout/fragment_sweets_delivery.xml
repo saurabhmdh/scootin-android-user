@@ -1,59 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bg_screen"
     android:layout_width="match_parent"
-    android:background="@drawable/ic_background"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_background">
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+
     android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        android:layout_height="match_parent"
-
-   >
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/express"
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_sweets_card" />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/materialRadioButton"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/express"
             android:layout_width="wrap_content"
+
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="136dp"
-            android:textSize="12sp"
-            android:text="By store name"
+            android:layout_marginTop="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_sweets_card" />
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/materialRadioButton2"
-            android:selectAllOnFocus="false"
+        <RadioGroup
+            android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="8dp"
-            android:textSize="12sp"
-            android:text="By Product name"
-            app:layout_constraintBottom_toTopOf="@+id/srchsweets"
-            app:layout_constraintStart_toEndOf="@+id/materialRadioButton"
-            app:layout_constraintTop_toBottomOf="@+id/express" />
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="152dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+
+                android:id="@+id/materialRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="By store"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RadioButton
+                android:id="@+id/materialRadioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+
+                android:selectAllOnFocus="false"
+                android:text="By Product"
+                android:textSize="14sp" />
+        </RadioGroup>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_search_field_base_line"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/radioGroup" />
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/srchsweets"
             android:layout_width="match_parent"
-            android:layout_height="23dp"
-            android:layout_marginStart="16dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="35dp"
             android:layout_marginEnd="16dp"
             app:defaultQueryHint="Search by store name"
@@ -62,20 +83,33 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/express"
-            app:queryHint="Search by store name"
+            app:queryBackground="@null"
+            app:queryHint="Search"
             app:searchIcon="@null" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_search_field_base_line"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/srchsweets" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/srchsweets" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
+</LinearLayout>
 
 

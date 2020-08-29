@@ -1,6 +1,6 @@
 package com.scootin.view.adapter
 
-import android.R
+import com.scootin.R
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
@@ -69,11 +69,12 @@ class SweetsItemAddAdapter(
         val items = arrayOf("500g", "1kg", "2kg")
         val adapter = ArrayAdapter<String>(
             binding.count.context,
-            R.layout.simple_spinner_dropdown_item,
+            R.layout.spinner_layout,
             items
         )
 
         binding.spinner.setAdapter(adapter)
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
 
     }
 

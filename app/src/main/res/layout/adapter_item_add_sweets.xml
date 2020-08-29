@@ -6,18 +6,17 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_height="wrap_content"
+
         android:background="@drawable/ic_product_bg"
         android:orientation="horizontal"
         android:padding="4dp">
 
+
         <ImageView
             android:id="@+id/image"
-            android:layout_width="150dp"
-            android:layout_height="120dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:layout_gravity="start"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
@@ -28,9 +27,10 @@
             android:src="@drawable/laddoo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/space"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.666" />
 
         <ImageView
             android:id="@+id/space"
@@ -51,9 +51,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:text="Hello"
+            android:text="Business name"
             android:textAllCaps="true"
             android:textStyle="bold"
+            android:fontFamily="@font/montserrat_bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,7 +62,7 @@
             android:id="@+id/detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             android:text="Hello"
             android:textColor="@android:color/black"
@@ -72,8 +73,9 @@
             android:id="@+id/discountPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat_regular"
             android:text="250$"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detail" />
@@ -82,8 +84,9 @@
             android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montserrat_regular"
             android:text="100$"
             android:textColor="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
@@ -92,15 +95,13 @@
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="120dp"
-            android:layout_height="22dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/border_linear_layout_grey"
-            android:pointerIcon="vertical_double_arrow"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
+            android:background="@drawable/spinner_grad_bg"
+            android:paddingStart="8dp"
             android:spinnerMode="dropdown"
             app:layout_constraintBottom_toBottomOf="parent"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.724" />
@@ -110,41 +111,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="92dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-
             android:orientation="horizontal"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.909"
-            app:layout_constraintStart_toEndOf="@+id/image"
             app:layout_constraintTop_toBottomOf="@+id/spinner">
 
             <ImageView
                 android:id="@+id/decrement"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-
-
+                android:layout_width="16dp"
+                android:layout_marginTop="3dp"
+                android:layout_height="16dp"
                 android:src="@drawable/ic_minus_bttn" />
 
             <TextView
                 android:id="@+id/count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="1"
-                android:textSize="15dp"
-                android:textColor="#455535" />
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/increment"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="3dp"
                 android:src="@drawable/ic_plus_bttn" />
         </LinearLayout>
 
