@@ -2,6 +2,7 @@ package com.scootin.view.adapter
 
 import com.scootin.R
 import android.annotation.SuppressLint
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,6 +54,7 @@ class SweetsItemAddAdapter(
             binding.discountPrice.setText(discountprice)
             binding.price.setText(price)
         }
+        binding.discountPrice.paintFlags= Paint.STRIKE_THRU_TEXT_FLAG
 
         binding.increment.setOnClickListener {
             val number = binding.count.text.toString().toInt()

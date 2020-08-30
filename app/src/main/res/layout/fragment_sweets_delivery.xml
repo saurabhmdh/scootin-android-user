@@ -60,7 +60,7 @@
                 android:buttonTint="#808080"
                 android:textColor="#808080"
                 android:selectAllOnFocus="false"
-                android:text="By store"
+                android:text="By Store"
                 android:textStyle="bold"
                 android:textSize="12sp" />
         </RadioGroup>

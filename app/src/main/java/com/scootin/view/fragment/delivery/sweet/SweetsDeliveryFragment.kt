@@ -26,6 +26,7 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
         binding = FragmentSweetsDeliveryBinding.bind(view)
         setAdaper()
         sweetsAdapter.submitList(setList())
+
     }
 
     private fun setAdaper() {

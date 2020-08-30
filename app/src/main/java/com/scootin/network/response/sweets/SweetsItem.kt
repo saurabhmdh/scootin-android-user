@@ -9,3 +9,9 @@ data class SweetsItem(
     val image: String
 
 )
+data class SweetsStore(
+    val id: String,
+    val name: String,
+    val distance: String,
+    val rating: Double
+)
