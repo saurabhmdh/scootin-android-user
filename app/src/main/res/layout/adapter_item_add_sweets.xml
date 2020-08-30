@@ -1,16 +1,15 @@
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="5dp"
     xmlns:card_view="http://schemas.android.com/apk/res-auto">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:background="@drawable/ic_product_bg"
-        android:orientation="horizontal"
-        android:padding="4dp">
+        android:orientation="horizontal">
 
 
         <ImageView
@@ -34,7 +33,7 @@
 
         <ImageView
             android:id="@+id/space"
-            android:layout_width="3dp"
+            android:layout_width="4dp"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
@@ -52,6 +51,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:text="Business name"
+            android:textColor="#a9a9a9"
             android:textAllCaps="true"
             android:textStyle="bold"
             android:fontFamily="@font/montserrat_bold"
@@ -67,7 +67,8 @@
             android:text="Hello"
             android:textColor="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name" />
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            android:fontFamily="@font/montserrat_regular"/>
 
         <TextView
             android:id="@+id/discountPrice"
@@ -77,6 +78,9 @@
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/montserrat_regular"
             android:text="250$"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:ellipsize="end"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detail" />
 
@@ -88,6 +92,7 @@
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/montserrat_regular"
             android:text="100$"
+            android:textStyle="bold"
             android:textColor="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/discountPrice" />
@@ -111,7 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="16dp"
             android:orientation="horizontal"
             android:paddingStart="8dp"

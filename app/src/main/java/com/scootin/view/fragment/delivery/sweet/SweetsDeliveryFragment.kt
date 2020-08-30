@@ -51,7 +51,7 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
         list.add(
             SweetsItem(
                 "0",
-                "Buisness Name",
+                "Business Name",
                 "Motichoor Ladoo",
                 "MRP 250$",
                 "1240$",
@@ -61,7 +61,7 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
         list.add(
             SweetsItem(
                 "0",
-                "Buisness Name",
+                "Business Name",
                 "Ladoo",
                 "MRP 3350$",
                 "2240$",
@@ -71,7 +71,7 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
         list.add(
             SweetsItem(
                 "0",
-                "Buisness Name",
+                "Business Name",
                 "Besan Ladoo",
                 "MRP 230$",
                 "2240$",
@@ -81,7 +81,7 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
         list.add(
             SweetsItem(
                 "0",
-                "Buisness Name",
+                "Business Name",
                 "Kajoo Barfi",
                 "MRP 350$",
                 "2240$",
@@ -91,7 +91,7 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
         list.add(
             SweetsItem(
                 "0",
-                "Buisness Name",
+                "Business Name",
                 "Barfi",
                 "MRP 3250$",
                 "2240$",
@@ -101,7 +101,7 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
         list.add(
             SweetsItem(
                 "0",
-                "Buisness Name",
+                "Business Name",
                 "Gulab Jamun",
                 "MRP 3250$",
                 "2240$",
@@ -111,7 +111,7 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
         list.add(
             SweetsItem(
                 "0",
-                "Buisness Name",
+                "Business Name",
                 "Peda",
                 "MRP 3250$",
                 "2240$",
