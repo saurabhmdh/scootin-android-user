@@ -19,9 +19,9 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentLoginBinding.bind(view)
 
-        binding.signIn.setOnClickListener {
-            openHomeScreen()
-        }
+       binding.signIn.setOnClickListener {
+           openHomeScreen()
+       }
     }
     private fun openHomeScreen() {
         startActivity(Intent(requireContext(), MainActivity::class.java))

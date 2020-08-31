@@ -12,6 +12,9 @@
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="query_hint"><font size="15" fontfamily="@font/montserrat_regular">Search</font></string>
+    <string name="edittxt_hint"><font size="15" fontfamily="@font/montserrat_light">Phone No. (10 Digits)</font></string>
+    <string name="edittxt_hint_OTP"><font size="15" fontfamily="@font/montserrat_light">OTP</font></string>
+    <string name="edittxt_hint_Pin"><font size="15" fontfamily="@font/montserrat_light">City Pin Code</font></string>
     <!--
         This is the name that users will see when interacting with this channel.
         It should describe the category of notifications that will be sent through this channel
