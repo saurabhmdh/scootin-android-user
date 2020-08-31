@@ -7,7 +7,7 @@
     android:background="@drawable/ic_background">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/login_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="125dp"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editText_PhnNo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -40,7 +40,9 @@
         app:layout_constraintBottom_toTopOf="@+id/baseline_PhnNo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:inputType="number"/>
+        android:inputType="number"
+        android:maxLines="1"
+        android:maxLength="10"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -75,7 +77,8 @@
         app:layout_constraintBottom_toTopOf="@+id/baseline_OTP"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:inputType="text"/>
+        android:inputType="number"
+        android:maxLines="1"/>
 
     <ImageView
         android:id="@+id/baseline_OTP"
@@ -88,7 +91,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_PhnNo" />
     <EditText
         android:id="@+id/editTextPin"
         android:layout_width="match_parent"
@@ -102,7 +105,9 @@
         app:layout_constraintBottom_toTopOf="@+id/baseline_Pin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:inputType="number"/>
+        android:inputType="number"
+        android:maxLines="1"
+        android:maxLength="6"/>
 
     <ImageView
         android:id="@+id/baseline_Pin"
@@ -129,6 +134,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextPin" />
 
     <ImageView
+        android:id="@+id/senAgain_LoginOtp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="66dp"
