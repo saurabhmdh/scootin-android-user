@@ -1,106 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/ic_background"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_background">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/header_image"
-        android:paddingTop="130dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_scootin_logo_red_final_blend_shadow" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/get_started"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_image"
-        app:srcCompat="@drawable/bg_get_started_with_scootin" />
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phone_number"
-        style="@style/TextInputLayoutStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:hint="@string/login_phone_number"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/get_started">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_phone_number"
-            style="@style/custom_font_style_black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="phone" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/otp_login"
-        style="@style/TextInputLayoutStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:hint="@string/login_otp"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone_number"
-        app:passwordToggleContentDescription="@string/login_otp"
-        app:passwordToggleDrawable="@drawable/ic_password_eye"
-        app:passwordToggleEnabled="true"
-        app:passwordToggleTint="@color/text_input_hint_color">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_otp_login"
-            style="@style/custom_font_style_black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberPassword"
-            android:maxLength="10" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/forgot_password"
-        style="@style/custom_font_style_red"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/login_forgot_password"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/otp_login" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/sign_in"
+    <ImageView
+        android:id="@+id/login_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="125dp"
+        android:src="@drawable/ic_scootin_logo_no_shadow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/forgot_password"
-        app:srcCompat="@drawable/ic_sign_in" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/sign_up"
+
+    <ImageView
+        android:id="@+id/txt_getStartedwithScootin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="276dp"
+        android:src="@drawable/ic_get_started_with_scootin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editText_PhnNo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="120dp"
+        android:background="@null"
+        android:fontFamily="@font/montserrat_regular"
+        android:hint="@string/edittxt_hint"
+        android:textColorHint="#696969"
+        app:layout_constraintBottom_toTopOf="@+id/baseline_PhnNo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sign_in"
-        app:srcCompat="@drawable/bg_signup" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:inputType="number"
+        android:maxLines="1"
+        android:maxLength="10"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="336dp"
+        android:layout_marginEnd="24dp"
+        android:src="@drawable/ic_send_otp_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/baseline_PhnNo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="354dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/ic_search_field_base_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/editTextOTP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@null"
+        android:fontFamily="@font/montserrat_regular"
+        android:hint="@string/edittxt_hint_OTP"
+        android:textColorHint="#696969"
+        app:layout_constraintBottom_toTopOf="@+id/baseline_OTP"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:inputType="number"
+        android:maxLines="1"/>
+
+    <ImageView
+        android:id="@+id/baseline_OTP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/ic_search_field_base_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_PhnNo" />
+    <EditText
+        android:id="@+id/editTextPin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@null"
+        android:fontFamily="@font/montserrat_regular"
+        android:hint="@string/edittxt_hint_Pin"
+        android:textColorHint="#696969"
+        app:layout_constraintBottom_toTopOf="@+id/baseline_Pin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:inputType="number"
+        android:maxLines="1"
+        android:maxLength="6"/>
+
+    <ImageView
+        android:id="@+id/baseline_Pin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/ic_search_field_base_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextOTP" />
+
+
+    <ImageView
+        android:id="@+id/txt_didnt_get_OTP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="38dp"
+        android:src="@drawable/ic_didnt_receive_otp_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPin" />
+
+    <ImageView
+        android:id="@+id/senAgain_LoginOtp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="66dp"
+        android:src="@drawable/ic_send_again_button"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_didnt_get_OTP"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txt_didnt_get_OTP" />
+
+    <ImageView
+        android:id="@+id/signIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="53dp"
+        android:src="@drawable/ic_sign_in"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_didnt_get_OTP" />
+
+    <ImageView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_background_bottom_banner_for_login_screen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
