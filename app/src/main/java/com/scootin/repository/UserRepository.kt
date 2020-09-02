@@ -4,18 +4,20 @@ import androidx.lifecycle.LiveData
 import com.scootin.network.api.APIService
 import com.scootin.network.api.NetworkBoundResource
 import com.scootin.network.api.Resource
-import com.scootin.network.response.TempleInfo
+import com.scootin.network.response.login.ResponseUser
 import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
 
-class TempleRepo @Inject constructor(
+@Singleton
+class UserRepository @Inject constructor(
     private val services: APIService
 ) {
-
-    fun getAllTemples(
+    fun doLogin(
+        options: Map<String, String>,
         context: CoroutineContext
-    ): LiveData<Resource<List<TempleInfo>>> = object : NetworkBoundResource<List<TempleInfo>>(context) {
-        override suspend fun createCall(): Response<List<TempleInfo>> = services.getAllTemples()
+    ): LiveData<Resource<ResponseUser>> = object : NetworkBoundResource<ResponseUser>(context) {
+        override suspend fun createCall(): Response<ResponseUser> = services.doLogin(options)
     }.asLiveData()
 }
