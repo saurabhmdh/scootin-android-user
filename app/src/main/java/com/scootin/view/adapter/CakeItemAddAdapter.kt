@@ -2,6 +2,7 @@ package com.scootin.view.adapter
 
 import android.R
 import android.annotation.SuppressLint
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,6 +54,7 @@ class CakeItemAddAdapter(
             binding.discountPrice.setText(discountprice)
             binding.price.setText(price)
         }
+        binding.discountPrice.paintFlags= Paint.STRIKE_THRU_TEXT_FLAG
 
         binding.increment.setOnClickListener {
             val number = binding.count.text.toString().toInt()
@@ -66,13 +68,16 @@ class CakeItemAddAdapter(
             imageAdapterClickListener.onDecrementItem(it)
         }
 
-        val items = arrayOf("1 pounds", "2 pounds", "3 pounds")
+        val items = arrayOf("01 Pound", "02 Pounds", "03 Pounds")
         val adapter = ArrayAdapter<String>(
             binding.count.context,
-            R.layout.simple_spinner_dropdown_item,
+            com.scootin.R.layout.spinner_layout,
             items
         )
+
         binding.spinner.setAdapter(adapter)
+        adapter.setDropDownViewResource(com.scootin.R.layout.support_simple_spinner_dropdown_item)
+
     }
 
     interface ImageAdapterClickLister {

@@ -50,8 +50,8 @@ class CakeDeliveryFragment : Fragment(R.layout.fragment_cake_delivery) {
         list.add(
             CakeItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "500 sheet paper rim",
+                "Mansa Bakery",
+                "Chocolate Cake",
                 "MRP 250$",
                 "1240$",
                 "",
@@ -61,8 +61,8 @@ class CakeDeliveryFragment : Fragment(R.layout.fragment_cake_delivery) {
         list.add(
             CakeItem(
                 "0",
-                "Mansa Stationaries JK Paper",
-                "400 sheet paper rim",
+                "HM Bakery",
+                "Vanilla Cake",
                 "MRP 3350$",
                 "2240$",
                 "",
@@ -72,8 +72,8 @@ class CakeDeliveryFragment : Fragment(R.layout.fragment_cake_delivery) {
         list.add(
             CakeItem(
                 "0",
-                "Mansa Stationaries MEAD",
-                "200 sheet paper rim",
+                "Fresh Bakery",
+                "Chocolate Cake",
                 "MRP 230$",
                 "2240$",
                 "",
@@ -83,8 +83,8 @@ class CakeDeliveryFragment : Fragment(R.layout.fragment_cake_delivery) {
         list.add(
             CakeItem(
                 "0",
-                "Mansa Stationaries Brand name",
-                "100 sheet paper rim",
+                "Fresh Bakery",
+                "Chocolate Cake",
                 "MRP 350$",
                 "2240$",
                 "",
@@ -94,8 +94,8 @@ class CakeDeliveryFragment : Fragment(R.layout.fragment_cake_delivery) {
         list.add(
             CakeItem(
                 "0",
-                "Mansa Stationaries Exclusive",
-                "1500 sheet paper rim",
+                "Fresh Bakery",
+                "Chocolate Cake",
                 "MRP 3250$",
                 "2240$",
                 "",
@@ -105,8 +105,8 @@ class CakeDeliveryFragment : Fragment(R.layout.fragment_cake_delivery) {
         list.add(
             CakeItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "300 sheet paper rim",
+                "Fresh Bakery",
+                "Chocolate Cake",
                 "MRP 3250$",
                 "2240$",
                 "",
@@ -116,8 +116,8 @@ class CakeDeliveryFragment : Fragment(R.layout.fragment_cake_delivery) {
         list.add(
             CakeItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "200 sheet paper rim",
+                "Fresh Bakery",
+                "Chocolate Cake",
                 "MRP 3250$",
                 "2240$",
                 "",
@@ -127,8 +127,8 @@ class CakeDeliveryFragment : Fragment(R.layout.fragment_cake_delivery) {
         list.add(
             CakeItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "500 sheet paper rim",
+                "Fresh Bakery",
+                "Chocolate Cake",
                 "MRP 3250$",
                 "2240$",
                 "",
@@ -138,8 +138,8 @@ class CakeDeliveryFragment : Fragment(R.layout.fragment_cake_delivery) {
         list.add(
             CakeItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "15 sheet paper rim",
+                "Fresh Bakery",
+                "Chocolate Cake",
                 "MRP 3250$",
                 "2240$",
                 ""
