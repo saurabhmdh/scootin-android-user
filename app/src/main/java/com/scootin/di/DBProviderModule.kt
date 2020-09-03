@@ -21,4 +21,10 @@ class DBProviderModule {
     ).fallbackToDestructiveMigration()
 //        .addMigrations(MIGRATION_2_1)
         .build()
+
+
+
+    @Singleton
+    @Provides
+    fun provideCacheDao(db: ProjectDb) = db.cacheDao()
 }
