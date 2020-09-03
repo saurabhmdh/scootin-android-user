@@ -45,6 +45,7 @@
         android:maxLength="10"/>
 
     <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="336dp"
@@ -60,7 +61,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="354dp"
         android:layout_marginEnd="20dp"
-        android:src="@drawable/ic_search_field_base_line"
+        android:src="@drawable/ic_text_field_mobile_number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -87,7 +88,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
-        android:src="@drawable/ic_search_field_base_line"
+        android:src="@drawable/ic_text_field_otp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -116,7 +117,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
-        android:src="@drawable/ic_search_field_base_line"
+        android:src="@drawable/ic_text_field_city_pin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -137,10 +138,10 @@
         android:id="@+id/senAgain_LoginOtp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="66dp"
+        android:layout_marginStart="3dp"
         android:src="@drawable/ic_send_again_button"
         app:layout_constraintBottom_toBottomOf="@+id/txt_didnt_get_OTP"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txt_didnt_get_OTP"
         app:layout_constraintTop_toTopOf="@+id/txt_didnt_get_OTP" />
 
     <ImageView
@@ -155,11 +156,12 @@
 
     <ImageView
 
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_background_bottom_banner_for_login_screen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

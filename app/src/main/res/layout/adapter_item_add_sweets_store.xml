@@ -33,12 +33,12 @@
 
         <ImageView
             android:id="@+id/space"
-            android:layout_width="4dp"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
 
-            android:src="@drawable/marginbg"
+            android:src="@drawable/product_bg_band"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,7 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="Business name"
@@ -59,11 +59,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/detail"
+            android:id="@+id/distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
+            android:textStyle="bold"
             android:fontFamily="@font/montserrat_regular"
             android:text="Hello"
             android:textColor="@android:color/black"
@@ -73,28 +74,46 @@
             android:id="@+id/onlinestatus_store"
             android:layout_width="80dp"
             android:layout_height="18dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:background="@drawable/spinner_grad_bg"
             android:paddingStart="8dp"
             android:text="Online"
-            android:textColor="#32cd32"
+            android:textColor="#50c878"
             app:layout_constraintStart_toEndOf="@+id/space"
-            app:layout_constraintTop_toBottomOf="@+id/detail" />
+            app:layout_constraintTop_toBottomOf="@+id/distance" />
 
         <TextView
-            android:layout_width="80dp"
+            android:id="@+id/txt_rating"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
-            android:fontFamily="@font/montserrat_regular"
+            android:fontFamily="@font/montserrat_bold"
             android:text="Rating:"
             android:textColor="@android:color/black"
-            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/space"
             app:layout_constraintTop_toBottomOf="@id/onlinestatus_store" />
 
+
+        <RatingBar
+            android:id="@+id/rating_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:numStars="5"
+            android:progressTint="#8b0000"
+            android:progressBackgroundTint="#8b0000"
+            android:secondaryProgressTint="#8b0000"
+            android:stepSize="0.1"
+            android:isIndicator="true"
+            style="?android:attr/ratingBarStyleSmall"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_rating"
+            app:layout_constraintStart_toEndOf="@+id/txt_rating"
+            app:layout_constraintTop_toTopOf="@+id/txt_rating" />
+
         <ImageView
+            android:id="@+id/btn_select"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="255dp"

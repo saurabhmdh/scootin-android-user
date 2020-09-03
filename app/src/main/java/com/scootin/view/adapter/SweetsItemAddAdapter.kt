@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.scootin.databinding.AdapterItemAddSweetsBinding
+import com.scootin.databinding.AdapterItemAddSweetsStoreBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.sweets.SweetsItem
 import timber.log.Timber
@@ -17,6 +18,7 @@ import timber.log.Timber
 class SweetsItemAddAdapter(
     val appExecutors: AppExecutors,
     val imageAdapterClickListener: ImageAdapterClickLister
+
 ) : DataBoundListAdapter<SweetsItem, AdapterItemAddSweetsBinding>(
     appExecutors,
     diffCallback = object : DiffUtil.ItemCallback<SweetsItem>() {
@@ -35,7 +37,8 @@ class SweetsItemAddAdapter(
             return oldItem == newItem
         }
     }
-) {
+)
+{
     override fun createBinding(parent: ViewGroup): AdapterItemAddSweetsBinding =
         AdapterItemAddSweetsBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
