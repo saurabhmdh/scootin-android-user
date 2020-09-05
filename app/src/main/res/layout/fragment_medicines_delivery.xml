@@ -1,118 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bg_screen"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_background"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+        android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/express"
             android:layout_width="wrap_content"
+
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            app:cardCornerRadius="6dp"
-            app:cardElevation="12dp"
-            app:cardUseCompatPadding="true"
+            android:layout_marginTop="60dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_medicine_card" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/express_delivery"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_medicine" />
-        </androidx.cardview.widget.CardView>
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/srchsweets"
+            android:layout_width="match_parent"
+            android:layout_height="18dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:iconifiedByDefault="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/express"
+            app:queryBackground="@null"
+            app:queryHint="@string/query_hint_medicine"
+            app:searchIcon="@null" />
 
-        <EditText
-            android:id="@+id/itemAddEditText"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/search_base_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/gray_33"
-            android:hint="Search by store name"
-            android:imeOptions="actionDone"
-            android:inputType="text"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_search_field_base_line"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/express" />
+            app:layout_constraintTop_toBottomOf="@+id/srchsweets" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_20"
-            android:fillViewport="true"
-            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="15dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/itemAddEditText" />
-
-        <TextView
-            android:id="@+id/option"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="OR"
-            android:textColor="@color/gray_33"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/list" />
-
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Delivery Fee rs 45.00"
-            android:textColor="@color/gray_33"
-            android:textSize="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/list" />
-
-        <TextView
-            android:id="@+id/details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Delivering To:"
-            android:textColor="@color/gray_33"
-            android:textSize="16dp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/option" />
-
-        <EditText
-            android:id="@+id/address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Current Location(Home) | Type a new Address"
-            android:inputType="text"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/details" />
-
-        <EditText
-            android:id="@+id/mobileNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Mobile \n No incase something is unclear or unavailable from list"
-            android:inputType="phone"
-            android:textColor="@color/gray_33"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/address" />
-
-        <ImageView
-            android:id="@+id/placeOrder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_place_order"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mobileNumber" />
-
+            app:layout_constraintTop_toBottomOf="@+id/search_base_line" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</LinearLayout>
+
+

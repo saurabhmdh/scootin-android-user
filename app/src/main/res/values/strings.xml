@@ -12,6 +12,8 @@
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="query_hint"><font size="15" fontfamily="@font/montserrat_regular">Search</font></string>
+    <string name="query_hint_veg"><font size="15" fontfamily="@font/montserrat_regular">Search Vegetable or fruit</font></string>
+    <string name="query_hint_medicine"><font size="15" fontfamily="@font/montserrat_regular">Search by Store</font></string>
     <string name="edittxt_hint"><font size="15" fontfamily="@font/montserrat_light">Phone No. (10 Digits)</font></string>
     <string name="edittxt_hint_OTP"><font size="15" fontfamily="@font/montserrat_light">OTP</font></string>
     <string name="edittxt_hint_Pin"><font size="15" fontfamily="@font/montserrat_light">City Pin Code</font></string>

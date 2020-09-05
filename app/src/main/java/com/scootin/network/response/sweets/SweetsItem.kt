@@ -13,5 +13,7 @@ data class SweetsStore(
     val id: String,
     val name: String,
     val distance: String,
-    val rating: Int
+    val rating: Float,
+    val isOpen: Boolean,
+    val image:String
 )

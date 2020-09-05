@@ -7,8 +7,10 @@ import com.scootin.R
 import com.scootin.databinding.FragmentGroceryDeliveryBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.stationary.StationaryItem
+import com.scootin.network.response.sweets.SweetsItem
+import com.scootin.network.response.sweets.SweetsStore
 import com.scootin.util.fragment.autoCleared
-import com.scootin.view.adapter.StationaryItemAddAdapter
+import com.scootin.view.adapter.*
 import com.scootin.view.fragment.dialogs.CategoryDialogFragment
 import com.scootin.view.fragment.dialogs.EssentialCategoryDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +22,8 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
 
     @Inject
     lateinit var appExecutors: AppExecutors
-    private lateinit var stationaryAdapter: StationaryItemAddAdapter
+    private lateinit var essentialAdapter: EssentialGroceryAddAdapter
+    private lateinit var essentialGroceryStoreAdapter: EssentialGroceryStoreAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,14 +31,26 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
         val lottieDialogFragment = EssentialCategoryDialogFragment()
         lottieDialogFragment.show(childFragmentManager, "")
         setAdaper()
-        stationaryAdapter.submitList(setList())
+        essentialAdapter.submitList(setList())
+        binding.radioGroup.setOnCheckedChangeListener { radioGroup, optionId ->
+            when (optionId) {
+                R.id.materialRadioButton -> {
+                    setAdaper()
+                    essentialAdapter.submitList(setList())
+                }
+                R.id.materialRadioButton2 -> {
+                    setStoreAdapter()
+                    essentialGroceryStoreAdapter.submitList(setStoreList())
+                }
+            }
+        }
     }
 
     private fun setAdaper() {
-        stationaryAdapter =
-            StationaryItemAddAdapter(
+        essentialAdapter =
+            EssentialGroceryAddAdapter(
                 appExecutors,
-                object : StationaryItemAddAdapter.ImageAdapterClickLister {
+                object : EssentialGroceryAddAdapter.ImageAdapterClickLister {
                     override fun onIncrementItem(view: View) {
                     }
 
@@ -45,103 +60,146 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
                 })
 
         binding.list.apply {
-            adapter = stationaryAdapter
+            adapter = essentialAdapter
         }
     }
 
-    private fun setList(): ArrayList<StationaryItem> {
-        val list = ArrayList<StationaryItem>()
+    private fun setStoreAdapter() {
+        essentialGroceryStoreAdapter = EssentialGroceryStoreAdapter(
+            appExecutors,
+            object : EssentialGroceryStoreAdapter.StoreImageAdapterClickListener {
+
+                override fun onSelectButtonSelected(view: View) {
+                }
+
+            })
+        binding.list.apply {
+            adapter = essentialGroceryStoreAdapter
+        }
+    }
+
+
+    private fun setList(): ArrayList<SweetsItem> {
+        val list = ArrayList<SweetsItem>()
         list.add(
-            StationaryItem(
+            SweetsItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "500 sheet paper rim",
-                "MRP 250$",
-                "1240$",
+                "Brand Name",
+                "Product Name- Type",
+                "MRP Rs 206",
+                "Rs 205",
                 ""
             )
         )
         list.add(
-            StationaryItem(
+            SweetsItem(
                 "0",
-                "Mansa Stationaries JK Paper",
-                "400 sheet paper rim",
-                "MRP 3350$",
-                "2240$",
+                "Aashirvaad",
+                "Atta- Select Whole Wheat",
+                "MRP Rs 225",
+                "Rs 209",
                 ""
             )
         )
         list.add(
-            StationaryItem(
+            SweetsItem(
                 "0",
-                "Mansa Stationaries MEAD",
-                "200 sheet paper rim",
-                "MRP 230$",
-                "2240$",
+                "Aashirvaad",
+                "Ataa- Sugar Release Control",
+                "MRP Rs 254",
+                "Rs 250",
                 ""
             )
         )
         list.add(
-            StationaryItem(
+            SweetsItem(
                 "0",
-                "Mansa Stationaries Brand name",
-                "100 sheet paper rim",
-                "MRP 350$",
-                "2240$",
+                "patanjali",
+                "Whole Wheat Chakki Fresh",
+                "MRP Rs 206",
+                "Rs 205",
                 ""
             )
         )
         list.add(
-            StationaryItem(
+            SweetsItem(
                 "0",
-                "Mansa Stationaries Exclusive",
-                "1500 sheet paper rim",
-                "MRP 3250$",
-                "2240$",
+                "Brand Name",
+                "Product Name- Type",
+                "MRP Rs 206",
+                "Rs 205",
                 ""
             )
         )
         list.add(
-            StationaryItem(
+            SweetsItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "300 sheet paper rim",
-                "MRP 3250$",
-                "2240$",
+                "Brand Name",
+                "Product Name- Type",
+                "MRP Rs 206",
+                "Rs 205",
                 ""
             )
         )
         list.add(
-            StationaryItem(
+            SweetsItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "200 sheet paper rim",
-                "MRP 3250$",
-                "2240$",
+                "Brand Name",
+                "Product Name- Type",
+                "MRP Rs 206",
+                "Rs 205",
                 ""
             )
         )
         list.add(
-            StationaryItem(
+            SweetsItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "500 sheet paper rim",
-                "MRP 3250$",
-                "2240$",
+                "Brand Name",
+                "Product Name- Type",
+                "MRP Rs 206",
+                "Rs 205",
                 ""
             )
         )
         list.add(
-            StationaryItem(
+            SweetsItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "15 sheet paper rim",
-                "MRP 3250$",
-                "2240$",
+                "Brand Name",
+                "Product Name- Type",
+                "MRP Rs 206",
+                "Rs 205",
                 ""
             )
         )
+
         return list
     }
 
+    private fun setStoreList(): ArrayList<SweetsStore> {
+        val storelist = ArrayList<SweetsStore>()
+        storelist.add(
+            SweetsStore("0", "Business Name", "500m", 4f,true,"")
+        )
+        storelist.add(
+            SweetsStore("0", "Business Name", "500m", 4.4f,false,"")
+        )
+        storelist.add(
+            SweetsStore("0", "Business Name", "500m", 4.3f,true,"")
+        )
+        storelist.add(
+            SweetsStore("0", "Business Name", "500m", 3.6f,true,"")
+        )
+        storelist.add(
+            SweetsStore("0", "Business Name", "500m", 4.8f,true,"")
+        )
+        storelist.add(
+            SweetsStore("0", "Business Name", "500m", 4.2f,true,"")
+        )
+        storelist.add(
+            SweetsStore("0", "Business Name", "500m", 4.0f,true,"")
+        )
+        return storelist
+
+    }
 }
+

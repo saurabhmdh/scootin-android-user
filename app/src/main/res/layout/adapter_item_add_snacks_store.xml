@@ -8,19 +8,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="89dp"
-        android:background="@drawable/ic_item_bg"
+        android:background="@drawable/ic_product_bg"
         android:orientation="horizontal">
 
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image"
+            android:id="@+id/image_store"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_gravity="start"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="14dp"
-
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,11 +32,11 @@
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
+
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/image"
+            app:layout_constraintStart_toEndOf="@+id/image_store"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/ic_item_bg_band" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -57,11 +56,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/detail"
+            android:id="@+id/distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="3dp"
             android:fontFamily="@font/montserrat_regular"
             android:maxLength="30"
             android:text="Hello"
@@ -71,70 +69,60 @@
             app:layout_constraintStart_toEndOf="@+id/space"
             app:layout_constraintTop_toBottomOf="@+id/name" />
 
+
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/onlinestatus_store"
+            android:layout_width="60dp"
+            android:layout_height="16dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/montserrat_regular"
-            android:text="100$"
-            android:textColor="@android:color/black"
-            android:textSize="11dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/space"
-            app:layout_constraintTop_toBottomOf="@+id/spinner" />
-
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/spinner"
-            android:layout_width="140dp"
-            android:layout_height="17dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="2dp"
             android:background="@drawable/spinner_grad_bg"
-            android:paddingStart="5dp"
-            android:spinnerMode="dropdown"
-            android:theme="@style/ThemeOverlay.AppCompat.Light"
+            android:paddingStart="8dp"
+            android:text="Online"
+            android:textColor="#50c878"
+            android:textSize="12dp"
             app:layout_constraintStart_toEndOf="@+id/space"
-            app:layout_constraintTop_toBottomOf="@+id/detail" />
+            app:layout_constraintTop_toBottomOf="@+id/distance" />
 
-        <LinearLayout
-            android:id="@+id/operation"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Rating:"
+            android:textColor="@android:color/black"
+            android:textSize="12dp"
+            app:layout_constraintStart_toEndOf="@+id/space"
+            app:layout_constraintTop_toBottomOf="@+id/onlinestatus_store" />
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/rating_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:numStars="5"
+            android:rating="3"
+            android:progressTint="#8b0000"
+            android:progressBackgroundTint="#8b0000"
+            android:secondaryProgressTint="#8b0000"
+            android:stepSize="0.1"
+            android:isIndicator="true"
+            style="?android:attr/ratingBarStyleSmall"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_rating"
+            app:layout_constraintStart_toEndOf="@+id/txt_rating"
+            app:layout_constraintTop_toTopOf="@+id/txt_rating" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:orientation="horizontal"
-
+            android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/decrement"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginTop="3dp"
-                app:srcCompat="@drawable/ic_minus_bttn" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_regular"
-                android:paddingStart="4dp"
-                android:paddingEnd="4dp"
-                android:text="1"
-                android:textColor="@android:color/black"
-                android:textSize="16sp" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/increment"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginTop="3dp"
-                app:srcCompat="@drawable/ic_plus_bttn" />
-        </LinearLayout>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/select_button_selector" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

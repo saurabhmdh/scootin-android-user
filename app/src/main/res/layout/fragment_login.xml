@@ -6,23 +6,23 @@
     android:layout_height="match_parent"
     android:background="@drawable/ic_background">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/login_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="125dp"
-        android:src="@drawable/ic_scootin_logo_no_shadow"
+        app:srcCompat="@drawable/ic_scootin_logo_no_shadow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/txt_getStartedwithScootin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="276dp"
-        android:src="@drawable/ic_get_started_with_scootin"
+        app:srcCompat="@drawable/ic_get_started_with_scootin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -44,24 +44,24 @@
         android:maxLines="1"
         android:maxLength="10"/>
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="336dp"
         android:layout_marginEnd="24dp"
-        android:src="@drawable/ic_send_otp_button"
+        app:srcCompat="@drawable/ic_send_otp_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/baseline_PhnNo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="354dp"
         android:layout_marginEnd="20dp"
-        android:src="@drawable/ic_text_field_mobile_number"
+        app:srcCompat="@drawable/ic_text_field_mobile_number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -81,14 +81,14 @@
         android:inputType="number"
         android:maxLines="1"/>
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/baseline_OTP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
-        android:src="@drawable/ic_text_field_otp"
+        app:srcCompat="@drawable/ic_text_field_otp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,51 +110,51 @@
         android:maxLines="1"
         android:maxLength="6"/>
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/baseline_Pin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
-        android:src="@drawable/ic_text_field_city_pin"
+        app:srcCompat="@drawable/ic_text_field_city_pin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextOTP" />
 
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/txt_didnt_get_OTP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="66dp"
         android:layout_marginTop="38dp"
-        android:src="@drawable/ic_didnt_receive_otp_text"
+        app:srcCompat="@drawable/ic_didnt_receive_otp_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPin" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/senAgain_LoginOtp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
-        android:src="@drawable/ic_send_again_button"
+        app:srcCompat="@drawable/ic_send_again_button"
         app:layout_constraintBottom_toBottomOf="@+id/txt_didnt_get_OTP"
         app:layout_constraintStart_toEndOf="@+id/txt_didnt_get_OTP"
         app:layout_constraintTop_toTopOf="@+id/txt_didnt_get_OTP" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/signIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="53dp"
-        android:src="@drawable/ic_sign_in"
+        app:srcCompat="@drawable/ic_sign_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_didnt_get_OTP" />
 
-    <ImageView
+   <!-- <ImageView
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -162,6 +162,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

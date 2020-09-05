@@ -5,16 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import com.scootin.R
-import com.scootin.databinding.AdapterItemAddSweetsStoreBinding
+import com.scootin.databinding.AdapterItemAddEssentialgroceryStoreBinding
+import com.scootin.databinding.AdapterItemAddSnacksStoreBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.sweets.SweetsStore
 import timber.log.Timber
 
-class SweetsStoreAdapter (
+class SnacksStoreAdapter (
     val appExecutors: AppExecutors,
     val imageAdapterClickLister:StoreImageAdapterClickListener
-): DataBoundListAdapter<SweetsStore,AdapterItemAddSweetsStoreBinding>(
+): DataBoundListAdapter<SweetsStore, AdapterItemAddSnacksStoreBinding>(
     appExecutors,
     diffCallback = object : DiffUtil.ItemCallback<SweetsStore>(){
         override fun areItemsTheSame(oldItem: SweetsStore, newItem: SweetsStore): Boolean {
@@ -27,19 +27,19 @@ class SweetsStoreAdapter (
 
     }
 ) {
-    override fun createBinding(parent: ViewGroup): AdapterItemAddSweetsStoreBinding =
-        AdapterItemAddSweetsStoreBinding.inflate(
+    override fun createBinding(parent: ViewGroup): AdapterItemAddSnacksStoreBinding =
+        AdapterItemAddSnacksStoreBinding.inflate(
             LayoutInflater.from(parent.context),parent,false
         )
 
 
     override fun bind(
-        binding: AdapterItemAddSweetsStoreBinding,
+        binding: AdapterItemAddSnacksStoreBinding,
         item: SweetsStore,
         position: Int,
         isLast: Boolean
     ) {
-       Timber.i("item = $item")
+        Timber.i("item = $item")
         item.apply {
             binding.name.setText(name)
             binding.distance.setText(distance)

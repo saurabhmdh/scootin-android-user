@@ -50,73 +50,95 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
         list.add(
             SweetsItem(
                 "0",
-                "Buisness Name",
-                "Motichoor Ladoo",
-                "MRP 250$",
-                "1240$",
+                "Business Name",
+                "Cauliflower",
+                "MRP: Rs 25",
+                "Rs 22",
                 ""
             )
         )
         list.add(
             SweetsItem(
                 "0",
-                "Buisness Name",
-                "Ladoo",
-                "MRP 3350$",
-                "2240$",
+                "Business Name",
+                "Cauliflower",
+                "MRP: Rs 25",
+                "Rs 22",
                 ""
             )
         )
         list.add(
             SweetsItem(
                 "0",
-                "Buisness Name",
-                "Besan Ladoo",
-                "MRP 230$",
-                "2240$",
+                "Business Name",
+                "Cauliflower",
+                "MRP: Rs 25",
+                "Rs 22",
                 ""
             )
         )
         list.add(
             SweetsItem(
                 "0",
-                "Buisness Name",
-                "Kajoo Barfi",
-                "MRP 350$",
-                "2240$",
+                "Business Name",
+                "Cauliflower",
+                "MRP: Rs 25",
+                "Rs 22",
                 ""
             )
         )
         list.add(
             SweetsItem(
                 "0",
-                "Buisness Name",
-                "Barfi",
-                "MRP 3250$",
-                "2240$",
+                "Business Name",
+                "Cauliflower",
+                "MRP: Rs 25",
+                "Rs 22",
                 ""
             )
         )
         list.add(
             SweetsItem(
                 "0",
-                "Buisness Name",
-                "Gulab Jamun",
-                "MRP 3250$",
-                "2240$",
+                "Business Name",
+                "Cauliflower",
+                "MRP: Rs 25",
+                "Rs 22",
                 ""
             )
         )
         list.add(
             SweetsItem(
                 "0",
-                "Buisness Name",
-                "Peda",
-                "MRP 3250$",
-                "2240$",
+                "Business Name",
+                "Cauliflower",
+                "MRP: Rs 25",
+                "Rs 22",
                 ""
             )
         )
+        list.add(
+            SweetsItem(
+                "0",
+                "Business Name",
+                "Cauliflower",
+                "MRP: Rs 25",
+                "Rs 22",
+                ""
+            )
+        )
+        list.add(
+            SweetsItem(
+                "0",
+                "Business Name",
+                "Cauliflower",
+                "MRP: Rs 25",
+                "Rs 22",
+                ""
+            )
+        )
+
+
         return list
     }
 

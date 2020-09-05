@@ -22,7 +22,7 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
     @Inject
     lateinit var appExecutors: AppExecutors
     private lateinit var sweetsAdapter: SweetsItemAddAdapter
-    private lateinit var sweetsStoreAdapter:SweetsStoreAdapter
+    private lateinit var sweetsStoreAdapter: SweetsStoreAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,12 +30,12 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
         setAdaper()
         sweetsAdapter.submitList(setList())
         binding.radioGroup.setOnCheckedChangeListener { radioGroup, optionId ->
-            when (optionId){
-                R.id.materialRadioButton->{
-                  setAdaper()
+            when (optionId) {
+                R.id.materialRadioButton -> {
+                    setAdaper()
                     sweetsAdapter.submitList(setList())
                 }
-                R.id.materialRadioButton2 ->{
+                R.id.materialRadioButton2 -> {
                     setStoreAdapter()
                     sweetsStoreAdapter.submitList(setStoreList())
                 }
@@ -62,20 +62,21 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
             adapter = sweetsAdapter
         }
     }
-    private fun setStoreAdapter(){
-        sweetsStoreAdapter=SweetsStoreAdapter(
+
+    private fun setStoreAdapter() {
+        sweetsStoreAdapter = SweetsStoreAdapter(
             appExecutors,
-            object : SweetsStoreAdapter.StoreImageAdapterClickListener{
+            object : SweetsStoreAdapter.StoreImageAdapterClickListener {
 
                 override fun onSelectButtonSelected(view: View) {
                 }
 
             })
         binding.list.apply {
-            adapter=sweetsStoreAdapter
-        }
+            adapter = sweetsStoreAdapter
         }
     }
+
 
     private fun setList(): ArrayList<SweetsItem> {
         val list = ArrayList<SweetsItem>()
@@ -151,29 +152,31 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
         )
         return list
     }
-  private fun setStoreList():ArrayList<SweetsStore> {
-    val storelist= ArrayList<SweetsStore>()
-      storelist.add(
-          SweetsStore("0","Business Name","500m",4)
-      )
-      storelist.add(
-          SweetsStore("0","Business Name","500m",4)
-      )
-      storelist.add(
-          SweetsStore("0","Business Name","500m",4)
-      )
-      storelist.add(
-          SweetsStore("0","Business Name","500m",4)
-      )
-      storelist.add(
-          SweetsStore("0","Business Name","500m",4)
-      )
-      storelist.add(
-          SweetsStore("0","Business Name","500m",4)
-      )
-      storelist.add(
-          SweetsStore("0","Business Name","500m",4)
-      )
-      return storelist
 
-  }
+    private fun setStoreList(): ArrayList<SweetsStore> {
+        val storelist = ArrayList<SweetsStore>()
+        storelist.add(
+            SweetsStore("0", "Business Name", "500m", 4f,true,"")
+        )
+        storelist.add(
+            SweetsStore("0", "Business Name", "500m", 4.4f,true,"")
+        )
+        storelist.add(
+            SweetsStore("0", "Business Name", "500m", 4.3f,true,"")
+        )
+        storelist.add(
+            SweetsStore("0", "Business Name", "500m", 3.6f,true,"")
+        )
+        storelist.add(
+            SweetsStore("0", "Business Name", "500m", 4.8f,true,"")
+        )
+        storelist.add(
+            SweetsStore("0", "Business Name", "500m", 4.2f,true,"")
+        )
+        storelist.add(
+            SweetsStore("0", "Business Name", "500m", 4.0f,true,"")
+        )
+        return storelist
+
+    }
+}

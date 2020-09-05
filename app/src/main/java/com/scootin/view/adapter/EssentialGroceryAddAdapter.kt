@@ -1,6 +1,5 @@
 package com.scootin.view.adapter
 
-import com.scootin.R
 import android.annotation.SuppressLint
 import android.graphics.Paint
 import android.view.LayoutInflater
@@ -8,16 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.scootin.databinding.AdapterItemAddVegBinding
+import com.scootin.R
+import com.scootin.databinding.AdapterItemAddEssentialGroceryBinding
+import com.scootin.databinding.AdapterItemAddSweetsBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.sweets.SweetsItem
 import timber.log.Timber
 
-
-class VegItemAddAdapter(
+class EssentialGroceryAddAdapter (
     val appExecutors: AppExecutors,
     val imageAdapterClickListener: ImageAdapterClickLister
-) : DataBoundListAdapter<SweetsItem, AdapterItemAddVegBinding>(
+
+) : DataBoundListAdapter<SweetsItem, AdapterItemAddEssentialGroceryBinding>(
     appExecutors,
     diffCallback = object : DiffUtil.ItemCallback<SweetsItem>() {
         override fun areItemsTheSame(
@@ -35,14 +36,15 @@ class VegItemAddAdapter(
             return oldItem == newItem
         }
     }
-) {
-    override fun createBinding(parent: ViewGroup): AdapterItemAddVegBinding =
-        AdapterItemAddVegBinding.inflate(
+)
+{
+    override fun createBinding(parent: ViewGroup): AdapterItemAddEssentialGroceryBinding =
+        AdapterItemAddEssentialGroceryBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
 
     override fun bind(
-        binding: AdapterItemAddVegBinding,
+        binding: AdapterItemAddEssentialGroceryBinding,
         item: SweetsItem,
         position: Int,
         isLast: Boolean
@@ -51,8 +53,8 @@ class VegItemAddAdapter(
         item.apply {
             binding.name.setText(name)
             binding.detail.setText(detail)
-            binding.price.setText(price)
             binding.discountPrice.setText(discountprice)
+            binding.price.setText(price)
         }
         binding.discountPrice.paintFlags= Paint.STRIKE_THRU_TEXT_FLAG
 
@@ -68,14 +70,16 @@ class VegItemAddAdapter(
             imageAdapterClickListener.onDecrementItem(it)
         }
 
-        val items = arrayOf("1/2kg", "1kg", "2kg")
+        val items = arrayOf("500g", "1kg", "2kg")
         val adapter = ArrayAdapter<String>(
             binding.count.context,
             R.layout.spinner_layout_essential,
             items
         )
+
         binding.spinner.setAdapter(adapter)
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+
     }
 
     interface ImageAdapterClickLister {

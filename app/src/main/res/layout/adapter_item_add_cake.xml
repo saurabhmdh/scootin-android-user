@@ -7,44 +7,39 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="157dp"
         android:background="@drawable/ic_product_bg"
         android:orientation="horizontal">
 
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:layout_gravity="start"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
-
             android:scaleType="fitXY"
-            android:src="@drawable/cake_img"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/space"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.666" />
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/cake_img" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/space"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
-
-            android:src="@drawable/product_bg_band"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/product_bg_band" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/name"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
@@ -59,7 +54,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/detail"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
@@ -73,7 +68,7 @@
             app:layout_constraintTop_toBottomOf="@+id/name"
             android:fontFamily="@font/montserrat_regular"/>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/discountPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -88,7 +83,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detail" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -101,7 +96,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/discountPrice" />
 
-        <Spinner
+        <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/spinner"
             android:layout_width="120dp"
             android:layout_height="18dp"
@@ -125,35 +120,33 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="16dp"
             android:orientation="horizontal"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinner">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/decrement"
                 android:layout_width="16dp"
                 android:layout_marginTop="3dp"
                 android:layout_height="16dp"
-                android:src="@drawable/ic_minus_bttn" />
+                app:srcCompat="@drawable/ic_minus_bttn" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_regular"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
                 android:text="1"
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/increment"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_marginTop="3dp"
-                android:src="@drawable/ic_plus_bttn" />
+                app:srcCompat="@drawable/ic_plus_bttn" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

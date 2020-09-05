@@ -4,7 +4,6 @@ data class MedicinesItem(
     val id: String,
     val name: String,
     val distance: String,
-    val discount: String,
     val image: String,
     val isOpen: Boolean,
     val rating: Double

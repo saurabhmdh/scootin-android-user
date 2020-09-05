@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.scootin.databinding.AdapterItemAddSnacksBinding
 import com.scootin.network.AppExecutors
+import com.scootin.network.response.sweets.SnackItem
 import com.scootin.network.response.sweets.SweetsItem
 import timber.log.Timber
 
@@ -16,20 +17,20 @@ import timber.log.Timber
 class SnacksItemAddAdapter(
     val appExecutors: AppExecutors,
     val imageAdapterClickListener: ImageAdapterClickLister
-) : DataBoundListAdapter<SweetsItem, AdapterItemAddSnacksBinding>(
+) : DataBoundListAdapter<SnackItem, AdapterItemAddSnacksBinding>(
     appExecutors,
-    diffCallback = object : DiffUtil.ItemCallback<SweetsItem>() {
+    diffCallback = object : DiffUtil.ItemCallback<SnackItem>() {
         override fun areItemsTheSame(
-            oldItem: SweetsItem,
-            newItem: SweetsItem
+            oldItem: SnackItem,
+            newItem: SnackItem
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
         @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
-            oldItem: SweetsItem,
-            newItem: SweetsItem
+            oldItem: SnackItem,
+            newItem: SnackItem
         ): Boolean {
             return oldItem == newItem
         }
@@ -42,7 +43,7 @@ class SnacksItemAddAdapter(
 
     override fun bind(
         binding: AdapterItemAddSnacksBinding,
-        item: SweetsItem,
+        item: SnackItem,
         position: Int,
         isLast: Boolean
     ) {
@@ -68,10 +69,13 @@ class SnacksItemAddAdapter(
         val items = arrayOf("500g", "02Pc", "2kg")
         val adapter = ArrayAdapter<String>(
             binding.count.context,
-            R.layout.simple_spinner_dropdown_item,
+            com.scootin.R.layout.spinner_layout,
             items
         )
+
         binding.spinner.setAdapter(adapter)
+        adapter.setDropDownViewResource(com.scootin.R.layout.support_simple_spinner_dropdown_item)
+
     }
 
     interface ImageAdapterClickLister {

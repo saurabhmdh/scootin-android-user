@@ -50,10 +50,9 @@ class MedicinesDeliveryFragment : Fragment(R.layout.fragment_medicines_delivery)
         list.add(
             MedicinesItem(
                 "0",
-                "Mansa Stationaries Classic",
+                "Raj Pharmacy",
                 "500 km",
-                "MRP 250$",
-                "1240$",
+                "",
                 true,
                 3.5
             )
@@ -61,89 +60,111 @@ class MedicinesDeliveryFragment : Fragment(R.layout.fragment_medicines_delivery)
         list.add(
             MedicinesItem(
                 "0",
-                "Mansa Stationaries JK Paper",
+                "Medic Shop",
                 "2 km",
-                "MRP 3350$",
-                "2240$",
-                true,
+                "",
+                false,
                 4.0
             )
         )
         list.add(
             MedicinesItem(
                 "0",
-                "Mansa Stationaries MEAD",
-                "200 km",
-                "MRP 230$",
-                "2240$",
-                true,
-                2.0
-            )
-        )
-        list.add(
-            MedicinesItem(
-                "0",
-                "Mansa Stationaries Brand name",
-                "100 km",
-                "MRP 350$",
-                "2240$",
-                false,
-                5.0
-            )
-        )
-        list.add(
-            MedicinesItem(
-                "0",
-                "Mansa Stationaries Exclusive",
-                "1500 km",
-                "MRP 3250$",
-                "2240$",
-                false,
-                2.0
-            )
-        )
-        list.add(
-            MedicinesItem(
-                "0",
-                "Mansa Stationaries Classic",
-                "300 km",
-                "MRP 3250$",
-                "2240$",
-                false,
-                2.0
-            )
-        )
-        list.add(
-            MedicinesItem(
-                "0",
-                "Mansa Stationaries Classic",
-                "200 km",
-                "MRP 3250$",
-                "2240$",
-                true,
-                2.0
-            )
-        )
-        list.add(
-            MedicinesItem(
-                "0",
-                "Mansa Stationaries Classic",
+                "Raj Pharmacy",
                 "500 km",
-                "MRP 3250$",
-                "2240$",
-                false,
+                "",
+                true,
                 3.5
             )
         )
         list.add(
             MedicinesItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "15 km",
-                "MRP 3250$",
-                "2240$",
+                "Medic Shop",
+                "2 km",
+                "",
+                false,
+                4.0
+            )
+        )
+        list.add(
+            MedicinesItem(
+                "0",
+                "Raj Pharmacy",
+                "500 km",
+                "",
                 true,
-                4.5
+                3.5
+            )
+        )
+        list.add(
+            MedicinesItem(
+                "0",
+                "Medic Shop",
+                "2 km",
+                "",
+                false,
+                4.0
+            )
+        )
+        list.add(
+            MedicinesItem(
+                "0",
+                "Raj Pharmacy",
+                "500 km",
+                "",
+                true,
+                3.5
+            )
+        )
+        list.add(
+            MedicinesItem(
+                "0",
+                "Medic Shop",
+                "2 km",
+                "",
+                false,
+                4.0
+            )
+        )
+        list.add(
+            MedicinesItem(
+                "0",
+                "Raj Pharmacy",
+                "500 km",
+                "",
+                true,
+                3.5
+            )
+        )
+        list.add(
+            MedicinesItem(
+                "0",
+                "Medic Shop",
+                "2 km",
+                "",
+                false,
+                4.0
+            )
+        )
+        list.add(
+            MedicinesItem(
+                "0",
+                "Raj Pharmacy",
+                "500 km",
+                "",
+                true,
+                3.5
+            )
+        )
+        list.add(
+            MedicinesItem(
+                "0",
+                "Medic Shop",
+                "2 km",
+                "",
+                false,
+                4.0
             )
         )
         return list

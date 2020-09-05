@@ -7,48 +7,45 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="157dp"
         android:background="@drawable/ic_product_bg"
         android:orientation="horizontal">
 
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_store"
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:layout_gravity="start"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
 
             android:scaleType="fitXY"
-            android:src="@drawable/laddoo"
+            app:srcCompat="@drawable/laddoo"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/space"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.666" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/space"
-            android:layout_width="wrap_content"
+            android:layout_width="10dp"
             android:layout_height="0dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
 
-            android:src="@drawable/product_bg_band"
+            android:layout_marginBottom="16dp"
+            app:srcCompat="@drawable/product_bg_band"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/image_store"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="Business name"
@@ -58,23 +55,24 @@
             app:layout_constraintStart_toEndOf="@+id/space"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
-            android:textStyle="bold"
             android:fontFamily="@font/montserrat_regular"
             android:text="Hello"
             android:textColor="@android:color/black"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/space"
             app:layout_constraintTop_toBottomOf="@+id/name" />
-        <TextView
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/onlinestatus_store"
             android:layout_width="80dp"
             android:layout_height="18dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:background="@drawable/spinner_grad_bg"
             android:paddingStart="8dp"
@@ -83,11 +81,11 @@
             app:layout_constraintStart_toEndOf="@+id/space"
             app:layout_constraintTop_toBottomOf="@+id/distance" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="Rating:"
@@ -96,7 +94,7 @@
             app:layout_constraintTop_toBottomOf="@id/onlinestatus_store" />
 
 
-        <RatingBar
+        <androidx.appcompat.widget.AppCompatRatingBar
             android:id="@+id/rating_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -106,20 +104,19 @@
             android:progressBackgroundTint="#8b0000"
             android:secondaryProgressTint="#8b0000"
             android:stepSize="0.1"
-            android:isIndicator="true"
             style="?android:attr/ratingBarStyleSmall"
             app:layout_constraintBottom_toBottomOf="@+id/txt_rating"
             app:layout_constraintStart_toEndOf="@+id/txt_rating"
             app:layout_constraintTop_toTopOf="@+id/txt_rating" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btn_select"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="255dp"
             android:layout_marginTop="124dp"
-            android:src="@drawable/select_button_selector"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="16dp"
+            app:srcCompat="@drawable/select_button_selector"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

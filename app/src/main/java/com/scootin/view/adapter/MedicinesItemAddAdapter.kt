@@ -47,9 +47,8 @@ class MedicinesItemAddAdapter(
         item.apply {
             binding.name.setText(name)
             binding.distance.setText(distance)
-            binding.discount.setText(discount)
-            binding.ratingBar.rating = rating.toFloat()
-            if (isOpen) binding.openStatus.setText("OPEN") else binding.openStatus.setText("CLOSE")
+            binding.ratingbar.rating = rating.toFloat()
+            if (isOpen) binding.onlinestatusStore.setText("Online") else binding.onlinestatusStore.setText("Offline")
         }
     }
 
