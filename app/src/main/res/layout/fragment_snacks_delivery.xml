@@ -46,7 +46,8 @@
                 android:textColor="#808080"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:buttonTint="#808080"/>
+                android:buttonTint="#808080"
+                android:checked="true"/>
 
             <RadioButton
                 android:id="@+id/materialRadioButton2"

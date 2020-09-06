@@ -24,7 +24,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/dhokla" />
+            app:srcCompat="@drawable/store" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/space"

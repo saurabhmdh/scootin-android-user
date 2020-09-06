@@ -20,27 +20,7 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_bakery_card" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/srchsweets"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Eggless Only"
-                android:fontFamily="@font/montserrat_regular"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-
+            app:srcCompat="@drawable/ic_clothing_card" />
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="wrap_content"

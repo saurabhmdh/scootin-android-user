@@ -14,7 +14,7 @@ fun View.visibleGone(show: Boolean) {
 }
 
 @BindingAdapter("setImage")
-fun ImageView.setImage(url: String?) {
+fun ImageView.setImage(url: String) {
     GlideApp.with(this.context).setDefaultRequestOptions(getDefaultImage())
         .load(url)
         .transition(DrawableTransitionOptions.withCrossFade())

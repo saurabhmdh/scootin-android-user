@@ -81,6 +81,14 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/home_to_clothes"
+            app:destination="@id/clothingCategory"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
     </fragment>
 
     <fragment
@@ -132,6 +140,14 @@
         android:id="@+id/cakenbouquet"
         android:name="com.scootin.view.fragment.delivery.sweet.CakenBouqetDeliveryFragment"
         android:label="Home"></fragment>
+    <fragment
+        android:id="@+id/innerwearmen"
+        android:name="com.scootin.view.fragment.delivery.clothing.ClothingInnerWearMenFragment"
+        android:label="Home"></fragment>
+    <fragment
+        android:id="@+id/innerwearwomen"
+        android:name="com.scootin.view.fragment.delivery.clothing.ClothingInnerWearWomen"
+        android:label="Home"></fragment>
 
 
     <fragment
@@ -171,5 +187,27 @@
             app:popExitAnim="@anim/slide_out_right" />
 
     </fragment>
+    <fragment
+        android:id="@+id/clothingCategory"
+        android:name="com.scootin.view.fragment.delivery.clothing.ClothingCategoryFragment"
+        android:label="Home">
+    <action
+        android:id="@+id/home_to_meninnerwear"
+        app:destination="@id/innerwearmen"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <action
+        android:id="@+id/home_to_womeninnerwear"
+        app:destination="@id/innerwearwomen"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+
 
 </navigation>

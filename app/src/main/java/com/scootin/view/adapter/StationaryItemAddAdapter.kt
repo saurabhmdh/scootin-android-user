@@ -1,6 +1,7 @@
 package com.scootin.view.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,9 +48,11 @@ class StationaryItemAddAdapter(
         item.apply {
             binding.name.setText(name)
             binding.detail.setText(detail)
-            binding.discountPrice.setText(discountprice)
             binding.price.setText(price)
+            binding.shopName.setText(shopName)
+            binding.discountPrice.setText(discountPrice)
         }
+        binding.discountPrice.paintFlags= Paint.STRIKE_THRU_TEXT_FLAG
 
         binding.increment.setOnClickListener {
             val number = binding.count.text.toString().toInt()

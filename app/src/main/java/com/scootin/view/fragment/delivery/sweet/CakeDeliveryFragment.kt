@@ -7,8 +7,10 @@ import com.scootin.R
 import com.scootin.databinding.FragmentCakeDeliveryBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.sweets.CakeItem
+import com.scootin.network.response.sweets.SweetsStore
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.CakeItemAddAdapter
+import com.scootin.view.adapter.SweetsStoreAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -19,12 +21,26 @@ class CakeDeliveryFragment : Fragment(R.layout.fragment_cake_delivery) {
     @Inject
     lateinit var appExecutors: AppExecutors
     private lateinit var cakeAdapter: CakeItemAddAdapter
+    private lateinit var cakeStoreAdapter: SweetsStoreAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCakeDeliveryBinding.bind(view)
         setAdaper()
         cakeAdapter.submitList(setList())
+        binding.radioGroup.setOnCheckedChangeListener { radioGroup, optionId ->
+            when (optionId) {
+                R.id.materialRadioButton -> {
+                    setAdaper()
+                    cakeAdapter.submitList(setList())
+                }
+                R.id.materialRadioButton2 -> {
+                    setStoreAdapter()
+                    cakeStoreAdapter.submitList(setStoreList())
+                }
+            }
+        }
+
     }
 
     private fun setAdaper() {
@@ -42,6 +58,19 @@ class CakeDeliveryFragment : Fragment(R.layout.fragment_cake_delivery) {
 
         binding.list.apply {
             adapter = cakeAdapter
+        }
+    }
+    private fun setStoreAdapter() {
+        cakeStoreAdapter = SweetsStoreAdapter(
+            appExecutors,
+            object : SweetsStoreAdapter.StoreImageAdapterClickListener {
+
+                override fun onSelectButtonSelected(view: View) {
+                }
+
+            })
+        binding.list.apply {
+            adapter = cakeStoreAdapter
         }
     }
 
@@ -147,6 +176,32 @@ class CakeDeliveryFragment : Fragment(R.layout.fragment_cake_delivery) {
             )
         )
         return list
+    }
+    private fun setStoreList(): ArrayList<SweetsStore> {
+        val storelist = ArrayList<SweetsStore>()
+        storelist.add(
+            SweetsStore("0", "Business Name", "500m", 4f,true,"")
+        )
+        storelist.add(
+            SweetsStore("0", "Business Name", "500m", 4.4f,true,"")
+        )
+        storelist.add(
+            SweetsStore("0", "Business Name", "500m", 4.3f,true,"")
+        )
+        storelist.add(
+            SweetsStore("0", "Business Name", "500m", 3.6f,true,"")
+        )
+        storelist.add(
+            SweetsStore("0", "Business Name", "500m", 4.8f,true,"")
+        )
+        storelist.add(
+            SweetsStore("0", "Business Name", "500m", 4.2f,true,"")
+        )
+        storelist.add(
+            SweetsStore("0", "Business Name", "500m", 4.0f,true,"")
+        )
+        return storelist
+
     }
 
 }

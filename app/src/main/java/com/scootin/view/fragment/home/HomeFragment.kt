@@ -78,7 +78,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         }
 
         binding.clothing.setOnClickListener {
-//            findNavController().navigate(HomeFragmentDirections.homeToSnacks())
+            findNavController().navigate(HomeFragmentDirections.homeToClothes())
         }
 
 

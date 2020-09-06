@@ -51,49 +51,10 @@ class GroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_delivery) {
             StationaryItem(
                 "0",
                 "Mansa Stationaries Classic",
+                "Classic",
                 "500 sheet paper rim",
-                "MRP 250$",
-                "1240$",
-                ""
-            )
-        )
-        list.add(
-            StationaryItem(
-                "0",
-                "Mansa Stationaries JK Paper",
-                "400 sheet paper rim",
-                "MRP 3350$",
-                "2240$",
-                ""
-            )
-        )
-        list.add(
-            StationaryItem(
-                "0",
-                "Mansa Stationaries MEAD",
-                "200 sheet paper rim",
-                "MRP 230$",
-                "2240$",
-                ""
-            )
-        )
-        list.add(
-            StationaryItem(
-                "0",
-                "Mansa Stationaries Brand name",
-                "100 sheet paper rim",
-                "MRP 350$",
-                "2240$",
-                ""
-            )
-        )
-        list.add(
-            StationaryItem(
-                "0",
-                "Mansa Stationaries Exclusive",
-                "1500 sheet paper rim",
-                "MRP 3250$",
-                "2240$",
+                "MRP: Rs 124",
+                "Rs 110",
                 ""
             )
         )
@@ -101,29 +62,10 @@ class GroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_delivery) {
             StationaryItem(
                 "0",
                 "Mansa Stationaries Classic",
-                "300 sheet paper rim",
-                "MRP 3250$",
-                "2240$",
-                ""
-            )
-        )
-        list.add(
-            StationaryItem(
-                "0",
-                "Mansa Stationaries Classic",
-                "200 sheet paper rim",
-                "MRP 3250$",
-                "2240$",
-                ""
-            )
-        )
-        list.add(
-            StationaryItem(
-                "0",
-                "Mansa Stationaries Classic",
+                "Classic",
                 "500 sheet paper rim",
-                "MRP 3250$",
-                "2240$",
+                "MRP: Rs 124",
+                "Rs 110",
                 ""
             )
         )
@@ -131,9 +73,76 @@ class GroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_delivery) {
             StationaryItem(
                 "0",
                 "Mansa Stationaries Classic",
-                "15 sheet paper rim",
-                "MRP 3250$",
-                "2240$",
+                "Classic",
+                "500 sheet paper rim",
+                "MRP: Rs 124",
+                "Rs 110",
+                ""
+            )
+        )
+        list.add(
+            StationaryItem(
+                "0",
+                "Mansa Stationaries Classic",
+                "Classic",
+                "500 sheet paper rim",
+                "MRP: Rs 124",
+                "Rs 110",
+                ""
+            )
+        )
+        list.add(
+            StationaryItem(
+                "0",
+                "Mansa Stationaries Classic",
+                "Classic",
+                "500 sheet paper rim",
+                "MRP: Rs 124",
+                "Rs 110",
+                ""
+            )
+        )
+        list.add(
+            StationaryItem(
+                "0",
+                "Mansa Stationaries Classic",
+                "Classic",
+                "500 sheet paper rim",
+                "MRP: Rs 124",
+                "Rs 110",
+                ""
+            )
+        )
+        list.add(
+            StationaryItem(
+                "0",
+                "Mansa Stationaries Classic",
+                "Classic",
+                "500 sheet paper rim",
+                "MRP: Rs 124",
+                "Rs 110",
+                ""
+            )
+        )
+        list.add(
+            StationaryItem(
+                "0",
+                "Mansa Stationaries Classic",
+                "Classic",
+                "500 sheet paper rim",
+                "MRP: Rs 124",
+                "Rs 110",
+                ""
+            )
+        )
+        list.add(
+            StationaryItem(
+                "0",
+                "Mansa Stationaries Classic",
+                "Classic",
+                "500 sheet paper rim",
+                "MRP: Rs 124",
+                "Rs 110",
                 ""
             )
         )

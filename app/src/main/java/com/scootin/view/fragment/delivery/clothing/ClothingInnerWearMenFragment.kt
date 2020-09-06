@@ -1,50 +1,51 @@
-package com.scootin.view.fragment.delivery.stationary
+package com.scootin.view.fragment.delivery.clothing
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.scootin.R
+import com.scootin.databinding.FragmentClothingDeliveryBinding
+import com.scootin.databinding.FragmentClothingPageBinding
+import com.scootin.databinding.FragmentMenInnerWearBinding
 import com.scootin.databinding.FragmentStationaryDeliveryBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.stationary.StationaryItem
 import com.scootin.network.response.sweets.SweetsStore
 import com.scootin.util.fragment.autoCleared
-import com.scootin.view.adapter.EssentialGroceryStoreAdapter
 import com.scootin.view.adapter.StationaryItemAddAdapter
 import com.scootin.view.adapter.StationaryStoreAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-
 @AndroidEntryPoint
-class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_delivery) {
-    private var binding by autoCleared<FragmentStationaryDeliveryBinding>()
+class ClothingInnerWearMenFragment : Fragment(R.layout.fragment_clothing_delivery) {
+    private var binding by autoCleared<FragmentClothingDeliveryBinding>()
 
     @Inject
     lateinit var appExecutors: AppExecutors
-    private lateinit var stationaryAdapter: StationaryItemAddAdapter
-    private lateinit var stationaryStoreAdapter: StationaryStoreAdapter
+    private lateinit var clothingAdapter: StationaryItemAddAdapter
+    private lateinit var clothingStoreAdapter: StationaryStoreAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentStationaryDeliveryBinding.bind(view)
+        binding = FragmentClothingDeliveryBinding.bind(view)
         setAdaper()
-        stationaryAdapter.submitList(setList())
+        clothingAdapter.submitList(setList())
         binding.radioGroup.setOnCheckedChangeListener { radioGroup, optionId ->
             when (optionId) {
                 R.id.materialRadioButton -> {
                     setAdaper()
-                    stationaryAdapter.submitList(setList())
+                    clothingAdapter.submitList(setList())
                 }
                 R.id.materialRadioButton2 -> {
                     setStoreAdapter()
-                    stationaryStoreAdapter.submitList(setStoreList())
+                    clothingStoreAdapter.submitList(setStoreList())
                 }
             }
         }
     }
 
     private fun setAdaper() {
-        stationaryAdapter =
+        clothingAdapter =
             StationaryItemAddAdapter(
                 appExecutors,
                 object : StationaryItemAddAdapter.ImageAdapterClickLister {
@@ -57,11 +58,11 @@ class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_deliver
                 })
 
         binding.list.apply {
-            adapter = stationaryAdapter
+            adapter = clothingAdapter
         }
     }
     private fun setStoreAdapter() {
-        stationaryStoreAdapter = StationaryStoreAdapter(
+        clothingStoreAdapter = StationaryStoreAdapter(
             appExecutors,
             object : StationaryStoreAdapter.StoreImageAdapterClickListener {
 
@@ -70,7 +71,7 @@ class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_deliver
 
             })
         binding.list.apply {
-            adapter = stationaryStoreAdapter
+            adapter = clothingStoreAdapter
         }
     }
 
@@ -79,9 +80,9 @@ class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_deliver
         list.add(
             StationaryItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "Classic",
-                "500 sheet paper rim",
+                "business man",
+                "brand",
+                "Product Description",
                 "MRP: Rs 124",
                 "Rs 110",
                 ""
@@ -90,9 +91,9 @@ class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_deliver
         list.add(
             StationaryItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "Classic",
-                "500 sheet paper rim",
+                "business man",
+                "brand",
+                "Product Description",
                 "MRP: Rs 124",
                 "Rs 110",
                 ""
@@ -101,9 +102,9 @@ class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_deliver
         list.add(
             StationaryItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "Classic",
-                "500 sheet paper rim",
+                "business man",
+                "brand",
+                "Product Description",
                 "MRP: Rs 124",
                 "Rs 110",
                 ""
@@ -112,9 +113,9 @@ class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_deliver
         list.add(
             StationaryItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "Classic",
-                "500 sheet paper rim",
+                "business man",
+                "brand",
+                "Product Description",
                 "MRP: Rs 124",
                 "Rs 110",
                 ""
@@ -123,9 +124,9 @@ class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_deliver
         list.add(
             StationaryItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "Classic",
-                "500 sheet paper rim",
+                "business man",
+                "brand",
+                "Product Description",
                 "MRP: Rs 124",
                 "Rs 110",
                 ""
@@ -134,9 +135,9 @@ class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_deliver
         list.add(
             StationaryItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "Classic",
-                "500 sheet paper rim",
+                "business man",
+                "brand",
+                "Product Description",
                 "MRP: Rs 124",
                 "Rs 110",
                 ""
@@ -145,9 +146,9 @@ class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_deliver
         list.add(
             StationaryItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "Classic",
-                "500 sheet paper rim",
+                "business man",
+                "brand",
+                "Product Description",
                 "MRP: Rs 124",
                 "Rs 110",
                 ""
@@ -156,9 +157,9 @@ class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_deliver
         list.add(
             StationaryItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "Classic",
-                "500 sheet paper rim",
+                "business man",
+                "brand",
+                "Product Description",
                 "MRP: Rs 124",
                 "Rs 110",
                 ""
@@ -167,14 +168,15 @@ class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_deliver
         list.add(
             StationaryItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "Classic",
-                "500 sheet paper rim",
+                "business man",
+                "brand",
+                "Product Description",
                 "MRP: Rs 124",
                 "Rs 110",
                 ""
             )
         )
+
 
 
         return list

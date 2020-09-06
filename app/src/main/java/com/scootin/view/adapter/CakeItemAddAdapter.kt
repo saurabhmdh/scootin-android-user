@@ -1,6 +1,5 @@
 package com.scootin.view.adapter
 
-import android.R
 import android.annotation.SuppressLint
 import android.graphics.Paint
 import android.view.LayoutInflater
@@ -8,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.DiffUtil
+import com.scootin.R
+import com.scootin.bindings.setImage
 import com.scootin.databinding.AdapterItemAddCakeBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.sweets.CakeItem
@@ -53,8 +54,10 @@ class CakeItemAddAdapter(
             binding.detail.setText(detail)
             binding.discountPrice.setText(discountprice)
             binding.price.setText(price)
+            if(isVeg) binding.vegOrNonveg.setImageResource(R.drawable.ic_veg_mark) else binding.vegOrNonveg.setImageResource(R.drawable.ic_non_veg_mark)
         }
         binding.discountPrice.paintFlags= Paint.STRIKE_THRU_TEXT_FLAG
+
 
         binding.increment.setOnClickListener {
             val number = binding.count.text.toString().toInt()
