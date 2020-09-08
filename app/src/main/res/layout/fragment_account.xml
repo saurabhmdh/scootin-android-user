@@ -46,7 +46,7 @@
             android:textSize="15sp"
             android:padding="2dp"
             android:backgroundTint="#FFFFFF"
-            android:background="#FFFFFF"
+            android:background="?attr/selectableItemBackground"
             android:hint="@string/name_surname"
             app:layout_constraintStart_toStartOf="@+id/full_name_text_view"
             app:layout_constraintTop_toBottomOf="@id/user_profile"/>
@@ -86,7 +86,7 @@
             android:textSize="15sp"
             android:padding="2dp"
             android:backgroundTint="#FFFFFF"
-            android:background="#FFFFFF"
+            android:background="?attr/selectableItemBackground"
             android:hint="@string/pre_added"
             app:layout_constraintStart_toStartOf="@+id/full_name_text_view"
             app:layout_constraintTop_toBottomOf="@id/full_name_text_view"/>
@@ -126,7 +126,7 @@
             android:textSize="15sp"
             android:padding="2dp"
             android:backgroundTint="#FFFFFF"
-            android:background="#FFFFFF"
+            android:background="?attr/selectableItemBackground"
             android:hint="@string/email_id"
             app:layout_constraintStart_toStartOf="@+id/full_name_text_view"
             app:layout_constraintTop_toBottomOf="@id/phone_number_text_view"/>
@@ -192,7 +192,7 @@
             android:textSize="15sp"
             android:padding="2dp"
             android:backgroundTint="#FFFFFF"
-            android:background="#FFFFFF"
+            android:background="?attr/selectableItemBackground"
             android:hint="@string/h_no_flat_no_building_society_name"
             app:layout_constraintStart_toStartOf="@+id/full_name_text_view"
             app:layout_constraintTop_toBottomOf="@id/default_delivery_text_view"/>
@@ -234,7 +234,7 @@
             android:textSize="15sp"
             android:padding="2dp"
             android:backgroundTint="#FFFFFF"
-            android:background="#FFFFFF"
+            android:background="?attr/selectableItemBackground"
             android:hint="@string/street_ward_colony_name"
             app:layout_constraintStart_toStartOf="@+id/full_name_text_view"
             app:layout_constraintTop_toBottomOf="@id/default_address_text_view"/>
@@ -275,7 +275,7 @@
             android:textSize="15sp"
             android:padding="2dp"
             android:backgroundTint="#FFFFFF"
-            android:background="#FFFFFF"
+            android:background="?attr/selectableItemBackground"
             android:hint="   City Name"
             app:layout_constraintStart_toStartOf="@+id/full_name_text_view"
             app:layout_constraintTop_toBottomOf="@id/default_area_text_view"/>
@@ -308,7 +308,7 @@
             android:textSize="15sp"
             android:padding="2dp"
             android:backgroundTint="#FFFFFF"
-            android:background="#FFFFFF"
+            android:background="?attr/selectableItemBackground"
             android:hint="@string/_0123456"
             app:layout_constraintStart_toEndOf="@+id/default_pin_text_view"
             app:layout_constraintTop_toBottomOf="@id/default_area_text_view"/>
@@ -350,7 +350,7 @@
             android:textSize="15sp"
             android:padding="2dp"
             android:backgroundTint="#FFFFFF"
-            android:background="#FFFFFF"
+            android:background="?attr/selectableItemBackground"
             android:hint="@string/state_name"
             app:layout_constraintStart_toStartOf="@+id/full_name_text_view"
             app:layout_constraintTop_toBottomOf="@id/default_city_text_view"/>
