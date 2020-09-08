@@ -16,6 +16,7 @@ abstract class DataBoundListAdapter<T, V : ViewDataBinding>(
         .setBackgroundThreadExecutor(appExecutors.diskIO())
         .build()
 ) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBoundViewHolder<V> {
         val binding = createBinding(parent)
         return DataBoundViewHolder(binding)

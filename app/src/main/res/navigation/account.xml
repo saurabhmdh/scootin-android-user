@@ -28,32 +28,32 @@
         android:label="Home">
 
         <action
-            android:id="@+id/action_account_fragment_to_saved_cart_image_button"
-            app:destination="@id/saved_cart_image_button"
+            android:id="@+id/account_to_cart_fragment"
+            app:destination="@id/cart_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
 
         <action
-            android:id="@+id/action_account_fragment_to_my_orders_image_button"
-            app:destination="@id/my_orders_image_button"
+            android:id="@+id/account_to_orders_fragment"
+            app:destination="@id/orders_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
 
         <action
-            android:id="@+id/action_account_fragment_to_support_feedback_image_button"
-            app:destination="@id/support_feedback_image_button"
+            android:id="@+id/account_to_support_fragment"
+            app:destination="@id/support_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
 
         <action
-            android:id="@+id/action_account_fragment_to_add_new_address_image_button"
-            app:destination="@id/add_new_address_image_button"
+            android:id="@+id/account_to_address_fragment"
+            app:destination="@id/address_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -62,23 +62,23 @@
     </fragment>
 
     <fragment
-        android:id="@+id/add_new_address_image_button"
-        android:name="com.scootin.view.fragment.account.addNewAddress.addNewAddress"
+        android:id="@+id/address_fragment"
+        android:name="com.scootin.view.fragment.account.Address.AddressFragment"
         android:label="Account"/>
 
     <fragment
-        android:id="@+id/my_orders_image_button"
-        android:name="com.scootin.view.fragment.account.myOrders.myOrders"
+        android:id="@+id/orders_fragment"
+        android:name="com.scootin.view.fragment.account.Orders.OrderFragment"
         android:label="Account"/>
 
     <fragment
-        android:id="@+id/saved_cart_image_button"
-        android:name="com.scootin.view.fragment.account.saveCards.saveCards"
+        android:id="@+id/cart_fragment"
+        android:name="com.scootin.view.fragment.account.Cards.CardFragment"
         android:label="Account"/>
 
     <fragment
-        android:id="@+id/support_feedback_image_button"
-        android:name="com.scootin.view.fragment.account.customerSupport.customerSupport"
+        android:id="@+id/support_fragment"
+        android:name="com.scootin.view.fragment.account.Support.SupportFragment"
         android:label="Account"/>
 
 </navigation>

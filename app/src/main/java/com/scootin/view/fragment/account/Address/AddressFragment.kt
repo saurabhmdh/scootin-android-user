@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.scootin.R
 import com.scootin.databinding.FragmentAccountBinding
+import com.scootin.databinding.FragmentAddNewAddressBinding
 import com.scootin.network.AppExecutors
 import com.scootin.util.fragment.autoCleared
 import com.scootin.viewmodel.account.AccountFragmentViewModel
@@ -18,7 +19,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class AddressFragment : Fragment(R.layout.fragment_add_new_address) {
 
-    private var binding by autoCleared<FragmentAccountBinding>()
+    private var binding by autoCleared<FragmentAddNewAddressBinding>()
     private val viewModel: AddressFragmentViewModel by viewModels()
 
     @Inject
@@ -26,7 +27,7 @@ class AddressFragment : Fragment(R.layout.fragment_add_new_address) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentAccountBinding.bind(view)
+        binding = FragmentAddNewAddressBinding.bind(view)
 
     }
 }
