@@ -83,6 +83,7 @@ dependencies {
 
     implementation deps.room.runtime
     implementation 'com.google.firebase:firebase-messaging:20.2.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt deps.room.compiler
     implementation deps.room.ktx
 
