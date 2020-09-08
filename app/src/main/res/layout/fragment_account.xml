@@ -28,6 +28,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:padding="3dp"
+            android:theme="@style/custom_font_style_black"
             android:text="@string/full_name"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -40,13 +41,13 @@
             android:id="@+id/entered_name_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
+            android:layout_marginStart="110dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
             android:textSize="15sp"
             android:padding="2dp"
             android:backgroundTint="#FFFFFF"
-            android:background="#FFFFFF"
+            android:background="?attr/selectableItemBackground"
             android:hint="@string/name_surname"
             app:layout_constraintStart_toStartOf="@+id/full_name_text_view"
             app:layout_constraintTop_toBottomOf="@id/user_profile"/>
@@ -69,8 +70,9 @@
             android:layout_marginTop="5dp"
             android:padding="3dp"
             android:text="@string/phone_no"
-            android:textSize="15sp"
             android:textStyle="bold"
+            android:textSize="15sp"
+            android:theme="@style/custom_font_style_black"
             android:textColor="#616161"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -80,13 +82,13 @@
             android:id="@+id/entered_phone_number_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
+            android:layout_marginStart="110dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
             android:textSize="15sp"
             android:padding="2dp"
             android:backgroundTint="#FFFFFF"
-            android:background="#FFFFFF"
+            android:background="?attr/selectableItemBackground"
             android:hint="@string/pre_added"
             app:layout_constraintStart_toStartOf="@+id/full_name_text_view"
             app:layout_constraintTop_toBottomOf="@id/full_name_text_view"/>
@@ -111,6 +113,7 @@
             android:text="Email ID: "
             android:textSize="15sp"
             android:textStyle="bold"
+            android:theme="@style/custom_font_style_black"
             android:textColor="#616161"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -120,13 +123,13 @@
             android:id="@+id/entered_email_id_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
+            android:layout_marginStart="110dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
             android:textSize="15sp"
             android:padding="2dp"
             android:backgroundTint="#FFFFFF"
-            android:background="#FFFFFF"
+            android:background="?attr/selectableItemBackground"
             android:hint="@string/email_id"
             app:layout_constraintStart_toStartOf="@+id/full_name_text_view"
             app:layout_constraintTop_toBottomOf="@id/phone_number_text_view"/>
@@ -148,6 +151,7 @@
             android:text="@string/default_delivery_address"
             android:textSize="15sp"
             android:textStyle="bold"
+            android:theme="@style/custom_font_style_black"
             android:layout_marginTop="30dp"
             android:layout_marginStart="25dp"
 
@@ -155,7 +159,7 @@
             app:layout_constraintTop_toBottomOf="@id/email_id_text_view"/>
 
         <View
-            android:layout_width="165dp"
+            android:layout_width="197dp"
             android:layout_height="1dp"
             android:background="#595959"
             android:layout_marginStart="25dp"
@@ -175,6 +179,7 @@
             android:layout_marginTop="30dp"
             android:padding="3dp"
             android:text="Address"
+            android:theme="@style/custom_font_style_black"
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="#616161"
@@ -192,7 +197,7 @@
             android:textSize="15sp"
             android:padding="2dp"
             android:backgroundTint="#FFFFFF"
-            android:background="#FFFFFF"
+            android:background="?attr/selectableItemBackground"
             android:hint="@string/h_no_flat_no_building_society_name"
             app:layout_constraintStart_toStartOf="@+id/full_name_text_view"
             app:layout_constraintTop_toBottomOf="@id/default_delivery_text_view"/>
@@ -217,6 +222,7 @@
             android:layout_marginTop="5dp"
             android:padding="3dp"
             android:text="Area"
+            android:theme="@style/custom_font_style_black"
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="#616161"
@@ -234,7 +240,7 @@
             android:textSize="15sp"
             android:padding="2dp"
             android:backgroundTint="#FFFFFF"
-            android:background="#FFFFFF"
+            android:background="?attr/selectableItemBackground"
             android:hint="@string/street_ward_colony_name"
             app:layout_constraintStart_toStartOf="@+id/full_name_text_view"
             app:layout_constraintTop_toBottomOf="@id/default_address_text_view"/>
@@ -258,6 +264,7 @@
             android:layout_marginTop="5dp"
             android:padding="3dp"
             android:text="@string/city"
+            android:theme="@style/custom_font_style_black"
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="#616161"
@@ -275,7 +282,7 @@
             android:textSize="15sp"
             android:padding="2dp"
             android:backgroundTint="#FFFFFF"
-            android:background="#FFFFFF"
+            android:background="?attr/selectableItemBackground"
             android:hint="   City Name"
             app:layout_constraintStart_toStartOf="@+id/full_name_text_view"
             app:layout_constraintTop_toBottomOf="@id/default_area_text_view"/>
@@ -287,6 +294,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pin"
+            android:theme="@style/custom_font_style_black"
             android:layout_marginStart="25dp"
             android:layout_marginTop="5dp"
             android:padding="3dp"
@@ -298,20 +306,19 @@
             app:layout_constraintTop_toBottomOf="@id/default_area_text_view"/>
 
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/entered_pin_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="270dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="20dp"
-            android:textSize="15sp"
-            android:padding="2dp"
-            android:backgroundTint="#FFFFFF"
-            android:background="#FFFFFF"
-            android:hint="@string/_0123456"
-            app:layout_constraintStart_toEndOf="@+id/default_pin_text_view"
-            app:layout_constraintTop_toBottomOf="@id/default_area_text_view"/>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/entered_pin_edit_text"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:background="?attr/selectableItemBackground"
+                android:backgroundTint="#FFFFFF"
+                android:hint="@string/_0123456"
+                android:padding="2dp"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@+id/default_pin_text_view"
+                app:layout_constraintTop_toBottomOf="@id/default_area_text_view" />
 
 
         <View
@@ -333,6 +340,7 @@
             android:layout_marginTop="5dp"
             android:padding="3dp"
             android:text="@string/state"
+            android:theme="@style/custom_font_style_black"
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="#616161"
@@ -350,7 +358,7 @@
             android:textSize="15sp"
             android:padding="2dp"
             android:backgroundTint="#FFFFFF"
-            android:background="#FFFFFF"
+            android:background="?attr/selectableItemBackground"
             android:hint="@string/state_name"
             app:layout_constraintStart_toStartOf="@+id/full_name_text_view"
             app:layout_constraintTop_toBottomOf="@id/default_city_text_view"/>
@@ -384,6 +392,7 @@
             android:textColor="#595959"
             android:textStyle="bold"
             android:text="@string/home"
+            android:theme="@style/custom_font_style_black"
 
             app:layout_constraintTop_toBottomOf="@id/default_state_text_view"
             app:layout_constraintStart_toEndOf="@id/home_radio_button"/>
@@ -395,7 +404,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="55dp"
 
             app:layout_constraintStart_toStartOf="@id/home_text_view"
             app:layout_constraintTop_toBottomOf="@id/default_state_text_view"/>
@@ -409,6 +418,7 @@
             android:textColor="#595959"
             android:textStyle="bold"
             android:text="@string/office"
+            android:theme="@style/custom_font_style_black"
 
             app:layout_constraintTop_toBottomOf="@id/default_state_text_view"
             app:layout_constraintStart_toEndOf="@id/office_radio_button"/>
@@ -420,7 +430,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="55dp"
 
             app:layout_constraintStart_toStartOf="@id/office_text_view"
             app:layout_constraintTop_toBottomOf="@id/default_state_text_view"/>
@@ -434,14 +444,15 @@
             android:textColor="#595959"
             android:textStyle="bold"
             android:text="@string/other"
+            android:theme="@style/custom_font_style_black"
 
             app:layout_constraintTop_toBottomOf="@id/default_state_text_view"
             app:layout_constraintStart_toEndOf="@id/other_radio_button"/>
 
 <!--TODO Default Add new address SVG Layout-->
 
-        <ImageButton
-            android:id="@+id/add_new_address_image_button"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/address_fragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
@@ -456,8 +467,8 @@
 
 <!--TODO Default my orders svg Layout-->
 
-        <ImageButton
-            android:id="@+id/my_orders_image_button"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/orders_fragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
@@ -467,13 +478,13 @@
             android:layout_marginStart="25dp"
 
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_new_address_image_button"
+            app:layout_constraintTop_toBottomOf="@id/address_fragment"
             android:contentDescription="@string/my_order" />
 
 <!--TODO Default save Cart svg Layout-->
 
-        <ImageButton
-            android:id="@+id/saved_cart_image_button"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cards_fragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
@@ -483,13 +494,13 @@
             android:layout_marginStart="25dp"
 
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/my_orders_image_button"
+            app:layout_constraintTop_toBottomOf="@id/orders_fragment"
             android:contentDescription="@string/save_cart" />
 
 <!--TODO Default my orders svg Layout-->
 
-        <ImageButton
-            android:id="@+id/support_feedback_image_button"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/support_fragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
@@ -499,7 +510,7 @@
             android:layout_marginStart="25dp"
 
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/saved_cart_image_button"
+            app:layout_constraintTop_toBottomOf="@id/cards_fragment"
             android:contentDescription="@string/feedback" />
 
 
