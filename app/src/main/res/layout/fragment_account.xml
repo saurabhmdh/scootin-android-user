@@ -28,6 +28,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:padding="3dp"
+            android:theme="@style/custom_font_style_black"
             android:text="@string/full_name"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -40,7 +41,7 @@
             android:id="@+id/entered_name_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
+            android:layout_marginStart="110dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="20dp"
             android:textSize="15sp"
@@ -69,8 +70,9 @@
             android:layout_marginTop="5dp"
             android:padding="3dp"
             android:text="@string/phone_no"
-            android:textSize="15sp"
             android:textStyle="bold"
+            android:textSize="15sp"
+            android:theme="@style/custom_font_style_black"
             android:textColor="#616161"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +82,7 @@
             android:id="@+id/entered_phone_number_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
+            android:layout_marginStart="110dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
             android:textSize="15sp"
@@ -111,6 +113,7 @@
             android:text="Email ID: "
             android:textSize="15sp"
             android:textStyle="bold"
+            android:theme="@style/custom_font_style_black"
             android:textColor="#616161"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -120,7 +123,7 @@
             android:id="@+id/entered_email_id_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
+            android:layout_marginStart="110dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
             android:textSize="15sp"
@@ -148,6 +151,7 @@
             android:text="@string/default_delivery_address"
             android:textSize="15sp"
             android:textStyle="bold"
+            android:theme="@style/custom_font_style_black"
             android:layout_marginTop="30dp"
             android:layout_marginStart="25dp"
 
@@ -155,7 +159,7 @@
             app:layout_constraintTop_toBottomOf="@id/email_id_text_view"/>
 
         <View
-            android:layout_width="165dp"
+            android:layout_width="197dp"
             android:layout_height="1dp"
             android:background="#595959"
             android:layout_marginStart="25dp"
@@ -175,6 +179,7 @@
             android:layout_marginTop="30dp"
             android:padding="3dp"
             android:text="Address"
+            android:theme="@style/custom_font_style_black"
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="#616161"
@@ -217,6 +222,7 @@
             android:layout_marginTop="5dp"
             android:padding="3dp"
             android:text="Area"
+            android:theme="@style/custom_font_style_black"
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="#616161"
@@ -258,6 +264,7 @@
             android:layout_marginTop="5dp"
             android:padding="3dp"
             android:text="@string/city"
+            android:theme="@style/custom_font_style_black"
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="#616161"
@@ -287,6 +294,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pin"
+            android:theme="@style/custom_font_style_black"
             android:layout_marginStart="25dp"
             android:layout_marginTop="5dp"
             android:padding="3dp"
@@ -300,7 +308,7 @@
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/entered_pin_edit_text"
-                android:layout_width="117dp"
+                android:layout_width="114dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
@@ -332,6 +340,7 @@
             android:layout_marginTop="5dp"
             android:padding="3dp"
             android:text="@string/state"
+            android:theme="@style/custom_font_style_black"
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="#616161"
@@ -383,6 +392,7 @@
             android:textColor="#595959"
             android:textStyle="bold"
             android:text="@string/home"
+            android:theme="@style/custom_font_style_black"
 
             app:layout_constraintTop_toBottomOf="@id/default_state_text_view"
             app:layout_constraintStart_toEndOf="@id/home_radio_button"/>
@@ -394,7 +404,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="55dp"
 
             app:layout_constraintStart_toStartOf="@id/home_text_view"
             app:layout_constraintTop_toBottomOf="@id/default_state_text_view"/>
@@ -408,6 +418,7 @@
             android:textColor="#595959"
             android:textStyle="bold"
             android:text="@string/office"
+            android:theme="@style/custom_font_style_black"
 
             app:layout_constraintTop_toBottomOf="@id/default_state_text_view"
             app:layout_constraintStart_toEndOf="@id/office_radio_button"/>
@@ -419,7 +430,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="55dp"
 
             app:layout_constraintStart_toStartOf="@id/office_text_view"
             app:layout_constraintTop_toBottomOf="@id/default_state_text_view"/>
@@ -433,6 +444,7 @@
             android:textColor="#595959"
             android:textStyle="bold"
             android:text="@string/other"
+            android:theme="@style/custom_font_style_black"
 
             app:layout_constraintTop_toBottomOf="@id/default_state_text_view"
             app:layout_constraintStart_toEndOf="@id/other_radio_button"/>
