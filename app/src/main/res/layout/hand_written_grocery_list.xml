@@ -20,15 +20,16 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_citywide_delivery_big" />
+            app:srcCompat="@drawable/ic_eng_card" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/grocery"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/express_delivery"
-            app:srcCompat="@drawable/bg_food_edible_items" />
+            app:srcCompat="@drawable/ic_hand_written_list_text" />
 
         <View
             android:id="@+id/empty"
@@ -41,20 +42,29 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/empty"
+            app:srcCompat="@drawable/ic_slot_time_text" />
+
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/uploadPhoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="195dp"
-            android:src="@drawable/ic_camera_button"
+            android:layout_marginTop="197dp"
+            android:src="@drawable/ic_camera_button_grocerylist"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/sender_photo_box"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="232dp"
-            android:src="@drawable/ic_text_grp"
+            android:layout_marginTop="236dp"
+            android:textColor="#000"
+            android:text="Please provide a clear and readable photo.\n\nPlease provide your mobile number also so that we can call you incase something is unclear or unnavailable from the list"
+            app:layout_constraintEnd_toStartOf="@+id/receiver_photo_box"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,46 +72,22 @@
             android:id="@+id/receiver_photo_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="230dp"
-            android:src="@drawable/ic_sender_photo_box"
+            android:layout_marginTop="236dp"
+            android:src="@drawable/ic_image_preview_box_grocerylist"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/warning"
-            android:layout_width="match_parent"
-            android:layout_height="18dp"
-            android:layout_marginTop="390dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="I have read and agree to the terms and conditions."
-                android:textSize="12sp"
-                app:layout_constraintTop_toBottomOf="@id/sender_photo_box" />
-        </LinearLayout>
-
-
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/pickupAddress"
             style="@style/custom_font_bold_style_black"
             android:layout_width="wrap_content"
-            android:layout_height="13dp"
-            android:layout_marginTop="8dp"
-            android:text="Pick Up Location:"
-            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:srcCompat="@drawable/ic_delivering_to"
             android:textSize="12sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/warning" />
+            app:layout_constraintTop_toBottomOf="@+id/sender_photo_box" />
 
         <EditText
             android:id="@+id/address"
@@ -115,28 +101,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pickupAddress" />
 
-        <TextView
-            android:id="@+id/dropAddress"
-            style="@style/custom_font_bold_style_black"
-            android:layout_width="match_parent"
-            android:layout_height="13dp"
-            android:text="Delivery Location:"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/address" />
 
         <EditText
             android:id="@+id/edit_drop_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/montserrat_regular"
-            android:hint="@string/edittxt_hint_citywide"
+            android:hint="@string/edittxt_hint_eng_mobno"
             android:inputType="text"
             android:textSize="12dp"
             android:drawableLeft="@drawable/ic_location_icon"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dropAddress" />
+            app:layout_constraintTop_toBottomOf="@+id/address" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/appCompatImageView"

@@ -5,7 +5,7 @@
     <string name="login_sign_in">Sign In</string>
     <string name="login_phone_number">Mobile Number</string>
     <string name="login_otp">OTP</string>
-
+    <string name="default_address"><u>Default Delivery Address</u></string>
     <string name="done">Done</string>
     <string name="select_category">Select Category</string>
     <string name="type_your_list_additionaly_you_can_mention_size_also_e_g_coke_250ml">Type your list, additionaly you can mention size also E.g Coke 250ml</string>
@@ -15,6 +15,8 @@
     <string name="query_hint_veg"><font size="15" fontfamily="@font/montserrat_regular">Search Vegetable or fruit</font></string>
     <string name="query_hint_medicine"><font size="15" fontfamily="@font/montserrat_regular">Search by Store</font></string>
     <string name="edittxt_hint"><font size="15" fontfamily="@font/montserrat_light">Phone No. (10 Digits)</font></string>
+    <string name="edittxt_hint_citywide"><font size="12" fontfamily="@font/montserrat_light">Current Location(Home) | Type a new Address</font></string>
+    <string name="edittxt_hint_eng_mobno"><font size="12" fontfamily="@font/montserrat_light">Mobile No.</font></string>
     <string name="edittxt_hint_OTP"><font size="15" fontfamily="@font/montserrat_light">OTP</font></string>
     <string name="edittxt_hint_Pin"><font size="15" fontfamily="@font/montserrat_light">City Pin Code</font></string>
     <!--
