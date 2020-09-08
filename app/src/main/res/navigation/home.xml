@@ -93,61 +93,61 @@
 
     <fragment
         android:id="@+id/express_delivery"
-        android:name="com.scootin.view.fragment.delivery.express.ExpressDeliveryFragment"></fragment>
+        android:name="com.scootin.view.fragment.delivery.express.ExpressDeliveryFragment" />
 
 
     <fragment
         android:id="@+id/stationary"
         android:name="com.scootin.view.fragment.delivery.stationary.StationaryDeliveryFragment"
-        android:label="Home"></fragment>
+        android:label="Home" />
 
     <fragment
         android:id="@+id/sweets"
         android:name="com.scootin.view.fragment.delivery.sweet.SweetsDeliveryFragment"
-        android:label="Home"></fragment>
+        android:label="Home" />
 
     <fragment
         android:id="@+id/cake"
         android:name="com.scootin.view.fragment.delivery.sweet.CakeDeliveryFragment"
-        android:label="Home"></fragment>
+        android:label="Home" />
 
     <fragment
         android:id="@+id/snacks"
         android:name="com.scootin.view.fragment.delivery.sweet.SnacksDeliveryFragment"
-        android:label="Home"></fragment>
+        android:label="Home" />
 
     <fragment
         android:id="@+id/veg"
         android:name="com.scootin.view.fragment.delivery.veg.VegetableDeliveryFragment"
-        android:label="Home"></fragment>
+        android:label="Home" />
 
     <fragment
         android:id="@+id/medicines"
         android:name="com.scootin.view.fragment.delivery.medicines.MedicinesDeliveryFragment"
-        android:label="Home"></fragment>
+        android:label="Home" />
 
     <fragment
         android:id="@+id/cityDelivery"
         android:name="com.scootin.view.fragment.delivery.city.CityDeliveryFragment"
-        android:label="Home"></fragment>
+        android:label="Home" />
 
     <fragment
         android:id="@+id/grocery"
         android:name="com.scootin.view.fragment.delivery.essential.EssentialsGroceryDeliveryFragment"
-        android:label="Home"></fragment>
+        android:label="Home" />
 
     <fragment
         android:id="@+id/cakenbouquet"
         android:name="com.scootin.view.fragment.delivery.sweet.CakenBouqetDeliveryFragment"
-        android:label="Home"></fragment>
+        android:label="Home" />
     <fragment
         android:id="@+id/innerwearmen"
         android:name="com.scootin.view.fragment.delivery.clothing.ClothingInnerWearMenFragment"
-        android:label="Home"></fragment>
+        android:label="Home" />
     <fragment
         android:id="@+id/innerwearwomen"
         android:name="com.scootin.view.fragment.delivery.clothing.ClothingInnerWearWomen"
-        android:label="Home"></fragment>
+        android:label="Home" />
 
 
     <fragment

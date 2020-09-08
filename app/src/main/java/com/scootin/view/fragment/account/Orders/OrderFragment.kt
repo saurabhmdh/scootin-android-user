@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.scootin.R
 import com.scootin.databinding.FragmentAccountBinding
+import com.scootin.databinding.FragmentMyOrdersBinding
 import com.scootin.network.AppExecutors
 import com.scootin.util.fragment.autoCleared
 import com.scootin.viewmodel.account.AccountFragmentViewModel
@@ -14,9 +15,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class OrdersFragment : Fragment(R.layout.fragment_my_orders) {
+class OrderFragment : Fragment(R.layout.fragment_my_orders) {
 
-    private var binding by autoCleared<FragmentAccountBinding>()
+    private var binding by autoCleared<FragmentMyOrdersBinding>()
     private val viewModel: OrderFragmentViewModel by viewModels()
 
     @Inject
@@ -24,7 +25,7 @@ class OrdersFragment : Fragment(R.layout.fragment_my_orders) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentAccountBinding.bind(view)
+        binding = FragmentMyOrdersBinding.bind(view)
 
     }
 }
