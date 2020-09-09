@@ -11,7 +11,6 @@ import com.scootin.network.response.sweets.SweetsStore
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.EssentialGroceryStoreAdapter
 import com.scootin.view.adapter.StationaryItemAddAdapter
-import com.scootin.view.adapter.StationaryStoreAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -22,7 +21,7 @@ class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_deliver
     @Inject
     lateinit var appExecutors: AppExecutors
     private lateinit var stationaryAdapter: StationaryItemAddAdapter
-    private lateinit var stationaryStoreAdapter: StationaryStoreAdapter
+    private lateinit var stationaryStoreAdapter: EssentialGroceryStoreAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,9 +60,9 @@ class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_deliver
         }
     }
     private fun setStoreAdapter() {
-        stationaryStoreAdapter = StationaryStoreAdapter(
+        stationaryStoreAdapter = EssentialGroceryStoreAdapter(
             appExecutors,
-            object : StationaryStoreAdapter.StoreImageAdapterClickListener {
+            object : EssentialGroceryStoreAdapter.StoreImageAdapterClickListener {
 
                 override fun onSelectButtonSelected(view: View) {
                 }

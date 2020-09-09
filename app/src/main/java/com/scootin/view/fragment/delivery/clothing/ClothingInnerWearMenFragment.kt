@@ -5,15 +5,12 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.scootin.R
 import com.scootin.databinding.FragmentClothingDeliveryBinding
-import com.scootin.databinding.FragmentClothingPageBinding
-import com.scootin.databinding.FragmentMenInnerWearBinding
-import com.scootin.databinding.FragmentStationaryDeliveryBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.stationary.StationaryItem
 import com.scootin.network.response.sweets.SweetsStore
 import com.scootin.util.fragment.autoCleared
+import com.scootin.view.adapter.EssentialGroceryStoreAdapter
 import com.scootin.view.adapter.StationaryItemAddAdapter
-import com.scootin.view.adapter.StationaryStoreAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 @AndroidEntryPoint
@@ -23,7 +20,7 @@ class ClothingInnerWearMenFragment : Fragment(R.layout.fragment_clothing_deliver
     @Inject
     lateinit var appExecutors: AppExecutors
     private lateinit var clothingAdapter: StationaryItemAddAdapter
-    private lateinit var clothingStoreAdapter: StationaryStoreAdapter
+    private lateinit var clothingStoreAdapter: EssentialGroceryStoreAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,9 +59,9 @@ class ClothingInnerWearMenFragment : Fragment(R.layout.fragment_clothing_deliver
         }
     }
     private fun setStoreAdapter() {
-        clothingStoreAdapter = StationaryStoreAdapter(
+        clothingStoreAdapter = EssentialGroceryStoreAdapter(
             appExecutors,
-            object : StationaryStoreAdapter.StoreImageAdapterClickListener {
+            object : EssentialGroceryStoreAdapter.StoreImageAdapterClickListener {
 
                 override fun onSelectButtonSelected(view: View) {
                 }
