@@ -5,5 +5,5 @@ import com.scootin.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CartFragment: Fragment(R.layout.fragment_cart) {
+class CartFragment: Fragment(R.layout.fragment_payment_page) {
 }
