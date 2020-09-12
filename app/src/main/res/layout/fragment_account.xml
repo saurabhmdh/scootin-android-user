@@ -21,7 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/full_name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,6 +46,7 @@
             android:layout_marginEnd="20dp"
             android:textSize="15sp"
             android:padding="2dp"
+            android:theme="@style/custom_font_bold_style_black"
             android:backgroundTint="#FFFFFF"
             android:background="?attr/selectableItemBackground"
             android:hint="@string/name_surname"
@@ -62,7 +63,7 @@
 
 <!--TODO Phone Number Layout-->
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/phone_number_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -103,7 +104,7 @@
 
 <!--TODO Email ID Layout-->
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/email_id_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -144,7 +145,7 @@
 
 <!--TODO Default Delivery Address TextView-->
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/default_delivery_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -171,7 +172,7 @@
 <!--TODO Default Delivery Address Layout-->
 
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/default_address_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -214,7 +215,7 @@
 <!--TODO Default Delivery Address Layout-->
 
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/default_area_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -256,7 +257,7 @@
 <!--TODO Default City Address Layout-->
 
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/default_city_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -289,7 +290,7 @@
 
 <!--TODO Default Pin Address Layout-->
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/default_pin_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -332,7 +333,7 @@
 <!--TODO Default Delivery State Layout-->
 
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/default_state_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -383,7 +384,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/default_state_text_view"/>
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/home_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -409,7 +410,7 @@
             app:layout_constraintStart_toStartOf="@id/home_text_view"
             app:layout_constraintTop_toBottomOf="@id/default_state_text_view"/>
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/office_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -435,7 +436,7 @@
             app:layout_constraintStart_toStartOf="@id/office_text_view"
             app:layout_constraintTop_toBottomOf="@id/default_state_text_view"/>
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/other_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
