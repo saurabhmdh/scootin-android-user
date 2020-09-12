@@ -72,7 +72,7 @@
             android:text="@string/phone_no"
             android:textStyle="bold"
             android:textSize="15sp"
-            android:theme="@style/custom_font_style_black"
+            style="@style/custom_font_style_black"
             android:textColor="#616161"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -113,7 +113,7 @@
             android:text="Email ID: "
             android:textSize="15sp"
             android:textStyle="bold"
-            android:theme="@style/custom_font_style_black"
+            style="@style/custom_font_style_black"
             android:textColor="#616161"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -151,7 +151,7 @@
             android:text="@string/default_delivery_address"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:theme="@style/custom_font_style_black"
+            style="@style/custom_font_style_black"
             android:layout_marginTop="30dp"
             android:layout_marginStart="25dp"
 
@@ -179,7 +179,7 @@
             android:layout_marginTop="30dp"
             android:padding="3dp"
             android:text="@string/address"
-            android:theme="@style/custom_font_style_black"
+            style="@style/custom_font_style_black"
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="#616161"
@@ -222,7 +222,7 @@
             android:layout_marginTop="5dp"
             android:padding="3dp"
             android:text="@string/area"
-            android:theme="@style/custom_font_style_black"
+            style="@style/custom_font_style_black"
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="#616161"
@@ -264,7 +264,7 @@
             android:layout_marginTop="5dp"
             android:padding="3dp"
             android:text="@string/city"
-            android:theme="@style/custom_font_style_black"
+            style="@style/custom_font_style_black"
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="#616161"
@@ -294,7 +294,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/pin"
-            android:theme="@style/custom_font_style_black"
+            style="@style/custom_font_style_black"
             android:layout_marginStart="25dp"
             android:layout_marginTop="5dp"
             android:padding="3dp"
@@ -340,7 +340,7 @@
             android:layout_marginTop="5dp"
             android:padding="3dp"
             android:text="@string/state"
-            android:theme="@style/custom_font_style_black"
+            style="@style/custom_font_style_black"
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="#616161"
@@ -392,7 +392,7 @@
             android:textColor="#595959"
             android:textStyle="bold"
             android:text="@string/home"
-            android:theme="@style/custom_font_style_black"
+            style="@style/custom_font_style_black"
 
             app:layout_constraintTop_toBottomOf="@id/default_state_text_view"
             app:layout_constraintStart_toEndOf="@id/home_radio_button"/>
@@ -418,7 +418,7 @@
             android:textColor="#595959"
             android:textStyle="bold"
             android:text="@string/office"
-            android:theme="@style/custom_font_style_black"
+            style="@style/custom_font_style_black"
 
             app:layout_constraintTop_toBottomOf="@id/default_state_text_view"
             app:layout_constraintStart_toEndOf="@id/office_radio_button"/>
@@ -444,7 +444,7 @@
             android:textColor="#595959"
             android:textStyle="bold"
             android:text="@string/other"
-            android:theme="@style/custom_font_style_black"
+            style="@style/custom_font_style_black"
 
             app:layout_constraintTop_toBottomOf="@id/default_state_text_view"
             app:layout_constraintStart_toEndOf="@id/other_radio_button"/>

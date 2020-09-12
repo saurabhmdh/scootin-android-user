@@ -34,19 +34,19 @@ class AccountFragment: Fragment(R.layout.fragment_account)  {
 
         binding.addressFragment.setOnClickListener {
 
-            findNavController().navigate(account_fragmentDirections.accountToAddressFragment())
+            findNavController().navigate(AccountFragmentDirections.accountToAddressFragment())
         }
 
         binding.ordersFragment.setOnClickListener{
-            findNavController().navigate(account_fragmentDirections.accountToOrdersFragment())
+            findNavController().navigate(AccountFragmentDirections.accountToOrdersFragment())
         }
 
         binding.cardsFragment.setOnClickListener{
-            findNavController().navigate(account_fragmentDirections.accountToCartFragment())
+            findNavController().navigate(AccountFragmentDirections.accountToCartFragment())
         }
 
         binding.supportFragment.setOnClickListener{
-            findNavController().navigate(account_fragmentDirections.accountToSupportFragment())
+            findNavController().navigate(AccountFragmentDirections.accountToSupportFragment())
         }
 
     }
