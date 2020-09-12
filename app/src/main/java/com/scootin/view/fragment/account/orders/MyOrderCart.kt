@@ -1,10 +1,10 @@
 package com.scootin.view.fragment.account.orders
 
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.scootin.R
 import com.scootin.databinding.FragmentMyOrdersBinding
 import com.scootin.network.AppExecutors
@@ -14,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
+
 class MyOrderCart : Fragment(R.layout.fragment_my_orders) {
 
     private var binding by autoCleared<FragmentMyOrdersBinding>()
@@ -30,7 +31,6 @@ class MyOrderCart : Fragment(R.layout.fragment_my_orders) {
     }
 
     private fun updateListeners(){
-
 
     }
 }

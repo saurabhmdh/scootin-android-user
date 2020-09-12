@@ -1,6 +1,5 @@
 package com.scootin.view.fragment.account.cards
 
-
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment

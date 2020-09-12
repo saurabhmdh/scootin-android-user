@@ -25,5 +25,17 @@
     <fragment
         android:id="@+id/cart_fragment"
         android:name="com.scootin.view.fragment.cart.CartFragment"
-        android:label="Registered" />
+        android:label="Registered" >
+        <action
+            android:id="@+id/action_cart_fragment_to_card_payment"
+            app:destination="@id/card_payment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/card_payment"
+        android:name="com.scootin.view.fragment.cart.CardPaymentPageFragment"
+        android:label="Registered"/>
 </navigation>
