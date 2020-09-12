@@ -175,6 +175,7 @@
             android:textSize="13sp"
             android:textStyle="bold"
             android:text="@string/_91_9000000000"
+
             app:layout_constraintStart_toStartOf="@id/call_active"
             app:layout_constraintTop_toBottomOf="@id/order_id_for_call" />
 
