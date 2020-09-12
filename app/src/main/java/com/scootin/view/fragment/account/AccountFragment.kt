@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class account_fragment: Fragment(R.layout.fragment_account)  {
+class AccountFragment: Fragment(R.layout.fragment_account)  {
 
     private var binding by autoCleared<FragmentAccountBinding>()
     private val viewModel: AccountFragmentViewModel by viewModels()
