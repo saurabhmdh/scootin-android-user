@@ -30,7 +30,7 @@
             android:background="@drawable/text_view_border"
             android:textStyle="bold"
             android:paddingStart="@dimen/dimen_10"
-            android:theme="@style/custom_font_bold_style_black"
+            style="@style/custom_font_bold_style_black"
             android:text="@string/OrderID"
 
             app:layout_constraintEnd_toEndOf="parent"
@@ -122,7 +122,7 @@
             android:layout_marginStart="@dimen/dimen_20"
             android:text="@string/or_contact_us_for_older_orders"
             android:textStyle="bold"
-            android:theme="@style/custom_font_bold_style_black"
+            style="@style/custom_font_bold_style_black"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/send_inactive"/>
