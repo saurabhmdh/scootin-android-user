@@ -67,15 +67,18 @@
             app:layout_constraintTop_toBottomOf="@id/baseline"
             android:background="@drawable/ic_payment_cad_graphics">
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/card_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0000 0000 0000 0000"
-                android:textColor="#fff"
+                android:layout_marginLeft="22dp"
+                android:layout_marginTop="90dp"
+                android:hint="0000 0000 0000 0000"
+                android:textColorHint="#fff"
                 android:textStyle="bold"
-                android:layout_marginTop="95dp"
-                android:layout_marginLeft="22dp"/>
+                android:textColor="#000"
+                android:background="@null"/>
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/valid_thru"
                 android:layout_width="wrap_content"
