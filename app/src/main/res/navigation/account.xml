@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/account_fragment"
-        android:name="com.scootin.view.fragment.account.account_fragment"
+        android:name="com.scootin.view.fragment.account.AccountFragment"
         android:label="Home">
 
         <action
@@ -63,22 +63,23 @@
 
     <fragment
         android:id="@+id/address_fragment"
-        android:name="com.scootin.view.fragment.account.address.address_fragment"
+        android:name="com.scootin.view.fragment.account.address.AddressFragment"
         android:label="Account"/>
 
     <fragment
         android:id="@+id/orders_fragment"
-        android:name="com.scootin.view.fragment.account.orders.order_fragment"
-        android:label="Account"/>
+        android:name="com.scootin.view.fragment.account.orders.MyOrderCart"
+        android:label="Account">
+    </fragment>
 
     <fragment
         android:id="@+id/cart_fragment"
-        android:name="com.scootin.view.fragment.account.cards.card_fragment"
+        android:name="com.scootin.view.fragment.account.cards.CardFragment"
         android:label="Account"/>
 
     <fragment
         android:id="@+id/support_fragment"
-        android:name="com.scootin.view.fragment.account.support.support_fragment"
+        android:name="com.scootin.view.fragment.account.support.SupportFragment"
         android:label="Account"/>
 
 </navigation>
