@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class AccountFragment: Fragment(R.layout.fragment_account)  {
+class account_fragment: Fragment(R.layout.fragment_account)  {
 
     private var binding by autoCleared<FragmentAccountBinding>()
     private val viewModel: AccountFragmentViewModel by viewModels()
@@ -34,19 +34,19 @@ class AccountFragment: Fragment(R.layout.fragment_account)  {
 
         binding.addressFragment.setOnClickListener {
 
-            findNavController().navigate(AccountFragmentDirections.accountToAddressFragment())
+            findNavController().navigate(account_fragmentDirections.accountToAddressFragment())
         }
 
         binding.ordersFragment.setOnClickListener{
-            findNavController().navigate(AccountFragmentDirections.accountToOrdersFragment())
+            findNavController().navigate(account_fragmentDirections.accountToOrdersFragment())
         }
 
         binding.cardsFragment.setOnClickListener{
-            findNavController().navigate(AccountFragmentDirections.accountToCartFragment())
+            findNavController().navigate(account_fragmentDirections.accountToCartFragment())
         }
 
         binding.supportFragment.setOnClickListener{
-            findNavController().navigate(AccountFragmentDirections.accountToSupportFragment())
+            findNavController().navigate(account_fragmentDirections.accountToSupportFragment())
         }
 
     }
