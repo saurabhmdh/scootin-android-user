@@ -1,14 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.fragment.account.Support.SupportFragment">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@drawable/ic_background">
 
-</FrameLayout>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/customerSupportHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="66dp"
+            android:src="@drawable/ic_customer_support_card"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatCheckedTextView
+            android:id="@+id/order_id"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_marginTop="@dimen/dimen_30"
+            android:layout_marginStart="@dimen/dimen_20"
+            android:layout_marginEnd="@dimen/dimen_20"
+            android:singleLine="true"
+            android:gravity="center|start"
+            android:background="@drawable/text_view_border"
+            android:textStyle="bold"
+            android:paddingStart="@dimen/dimen_10"
+            style="@style/custom_font_bold_style_black"
+            android:text="@string/OrderID"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/customerSupportHeader"
+            tools:ignore="RtlSymmetry" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/customer_query"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:layout_marginStart="@dimen/dimen_20"
+            android:layout_marginEnd="@dimen/dimen_20"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:textSize="13sp"
+            android:gravity="start"
+            android:paddingTop="5dp"
+            android:paddingStart="@dimen/dimen_10"
+            android:hint="@string/enter_your_query"
+            android:background="@drawable/text_view_border"
+
+            app:layout_constraintTop_toBottomOf="@+id/order_id"
+            tools:ignore="RtlSymmetry" />
+
+        <androidx.appcompat.widget.AppCompatCheckedTextView
+            android:id="@+id/text_limit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_250"
+            android:textSize="12sp"
+            android:textColor="@color/separatorColor"
+            android:layout_marginEnd="@dimen/dimen_20"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/customer_query"
+            tools:ignore="SmallSp" />
+
+        <androidx.appcompat.widget.AppCompatCheckedTextView
+            android:id="@+id/separator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/separator"
+            android:textSize="12sp"
+            android:textColor="@color/separatorColor"
+
+            app:layout_constraintTop_toBottomOf="@id/customer_query"
+            app:layout_constraintEnd_toStartOf="@id/text_limit"
+            tools:ignore="SmallSp" />
+
+        <androidx.appcompat.widget.AppCompatCheckedTextView
+            android:id="@+id/number_of_text_typed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_0"
+            android:textSize="12sp"
+            android:textColor="@color/separatorColor"
+
+            app:layout_constraintTop_toBottomOf="@id/customer_query"
+            app:layout_constraintEnd_toStartOf="@+id/separator"
+            tools:ignore="SmallSp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/send_active"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_20"
+            android:layout_marginTop="@dimen/dimen_20"
+            android:src="@drawable/ic_send_active"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_limit"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/send_inactive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_20"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:src="@drawable/ic_send_inactive"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/send_active"/>
+
+        <androidx.appcompat.widget.AppCompatCheckedTextView
+            android:id="@+id/contact_us_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:layout_marginStart="@dimen/dimen_20"
+            android:text="@string/or_contact_us_for_older_orders"
+            android:textStyle="bold"
+            style="@style/custom_font_bold_style_black"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/send_inactive"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/mail_us"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_30"
+            android:layout_marginStart="@dimen/dimen_20"
+            android:src="@drawable/ic_mail_customer_support"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/contact_us_header"/>
+
+        <androidx.appcompat.widget.AppCompatCheckedTextView
+            android:id="@+id/order_id_for_call"
+            android:layout_width="189dp"
+            android:layout_height="22dp"
+            android:gravity="center"
+            android:paddingStart="5dp"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:text="@string/enter_order_id_for_call_support"
+            android:layout_marginStart="@dimen/dimen_30"
+            android:background="@drawable/text_view_border"
+            android:textSize="13sp"
+            android:textStyle="bold"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mail_us"
+            tools:ignore="RtlSymmetry" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/call_active"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_20"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:src="@drawable/ic_call_customer_support_active"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/order_id_for_call"/>
+
+        <androidx.appcompat.widget.AppCompatCheckedTextView
+            android:id="@+id/support_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="18dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="@string/_91_9000000000"
+
+            app:layout_constraintStart_toStartOf="@id/call_active"
+            app:layout_constraintTop_toBottomOf="@id/order_id_for_call" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/call_inactive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_20"
+            android:layout_marginStart="@dimen/dimen_20"
+            android:src="@drawable/ic_call_customer_support_inactive"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/support_number"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -21,14 +21,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/full_name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:padding="3dp"
-            android:theme="@style/custom_font_style_black"
             android:text="@string/full_name"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -46,6 +45,7 @@
             android:layout_marginEnd="20dp"
             android:textSize="15sp"
             android:padding="2dp"
+            android:theme="@style/custom_font_bold_style_black"
             android:backgroundTint="#FFFFFF"
             android:background="?attr/selectableItemBackground"
             android:hint="@string/name_surname"
@@ -62,7 +62,7 @@
 
 <!--TODO Phone Number Layout-->
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/phone_number_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
             android:text="@string/phone_no"
             android:textStyle="bold"
             android:textSize="15sp"
-            android:theme="@style/custom_font_style_black"
+            style="@style/custom_font_style_black"
             android:textColor="#616161"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +103,7 @@
 
 <!--TODO Email ID Layout-->
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/email_id_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
             android:text="Email ID: "
             android:textSize="15sp"
             android:textStyle="bold"
-            android:theme="@style/custom_font_style_black"
+            style="@style/custom_font_style_black"
             android:textColor="#616161"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -144,14 +144,14 @@
 
 <!--TODO Default Delivery Address TextView-->
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/default_delivery_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/default_delivery_address"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:theme="@style/custom_font_style_black"
+            style="@style/custom_font_style_black"
             android:layout_marginTop="30dp"
             android:layout_marginStart="25dp"
 
@@ -171,15 +171,15 @@
 <!--TODO Default Delivery Address Layout-->
 
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/default_address_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:layout_marginTop="30dp"
             android:padding="3dp"
-            android:text="Address"
-            android:theme="@style/custom_font_style_black"
+            android:text="@string/address"
+            style="@style/custom_font_style_black"
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="#616161"
@@ -214,15 +214,15 @@
 <!--TODO Default Delivery Address Layout-->
 
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/default_area_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:layout_marginTop="5dp"
             android:padding="3dp"
-            android:text="Area"
-            android:theme="@style/custom_font_style_black"
+            android:text="@string/area"
+            style="@style/custom_font_style_black"
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="#616161"
@@ -256,7 +256,7 @@
 <!--TODO Default City Address Layout-->
 
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/default_city_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -264,7 +264,7 @@
             android:layout_marginTop="5dp"
             android:padding="3dp"
             android:text="@string/city"
-            android:theme="@style/custom_font_style_black"
+            style="@style/custom_font_style_black"
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="#616161"
@@ -289,12 +289,12 @@
 
 <!--TODO Default Pin Address Layout-->
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/default_pin_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pin"
-            android:theme="@style/custom_font_style_black"
+            android:text="@string/pin"
+            style="@style/custom_font_style_black"
             android:layout_marginStart="25dp"
             android:layout_marginTop="5dp"
             android:padding="3dp"
@@ -332,7 +332,7 @@
 <!--TODO Default Delivery State Layout-->
 
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/default_state_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -340,7 +340,7 @@
             android:layout_marginTop="5dp"
             android:padding="3dp"
             android:text="@string/state"
-            android:theme="@style/custom_font_style_black"
+            style="@style/custom_font_style_black"
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="#616161"
@@ -383,7 +383,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/default_state_text_view"/>
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/home_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -392,7 +392,7 @@
             android:textColor="#595959"
             android:textStyle="bold"
             android:text="@string/home"
-            android:theme="@style/custom_font_style_black"
+            style="@style/custom_font_style_black"
 
             app:layout_constraintTop_toBottomOf="@id/default_state_text_view"
             app:layout_constraintStart_toEndOf="@id/home_radio_button"/>
@@ -409,7 +409,7 @@
             app:layout_constraintStart_toStartOf="@id/home_text_view"
             app:layout_constraintTop_toBottomOf="@id/default_state_text_view"/>
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/office_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -418,7 +418,7 @@
             android:textColor="#595959"
             android:textStyle="bold"
             android:text="@string/office"
-            android:theme="@style/custom_font_style_black"
+            style="@style/custom_font_style_black"
 
             app:layout_constraintTop_toBottomOf="@id/default_state_text_view"
             app:layout_constraintStart_toEndOf="@id/office_radio_button"/>
@@ -435,7 +435,7 @@
             app:layout_constraintStart_toStartOf="@id/office_text_view"
             app:layout_constraintTop_toBottomOf="@id/default_state_text_view"/>
 
-        <androidx.appcompat.widget.AppCompatCheckedTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/other_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -444,7 +444,7 @@
             android:textColor="#595959"
             android:textStyle="bold"
             android:text="@string/other"
-            android:theme="@style/custom_font_style_black"
+            style="@style/custom_font_style_black"
 
             app:layout_constraintTop_toBottomOf="@id/default_state_text_view"
             app:layout_constraintStart_toEndOf="@id/other_radio_button"/>

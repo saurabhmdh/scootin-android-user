@@ -1,12 +1,10 @@
-package com.scootin.view.fragment.account.Cards
-
+package com.scootin.view.fragment.account.cards
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.scootin.R
-import com.scootin.databinding.FragmentAccountBinding
 import com.scootin.databinding.FragmentSaveCardsBinding
 import com.scootin.network.AppExecutors
 import com.scootin.util.fragment.autoCleared

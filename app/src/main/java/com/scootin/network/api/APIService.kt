@@ -10,5 +10,7 @@ import retrofit2.http.POST
 interface APIService {
 
     @POST("auth/login")
-    suspend fun doLogin(@Body options: Map<String, String>, @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()): Response<ResponseUser>
+    suspend fun doLogin(@Body options: Map<String, String>,
+                        @HeaderMap map: Map<String, String>
+                        = AppHeaders.getHeaderMap()): Response<ResponseUser>
 }
