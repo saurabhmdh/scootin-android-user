@@ -20,6 +20,9 @@
     <string name="edittxt_hint_eng_mobno"><font size="12" fontfamily="@font/montserrat_light">Mobile No.</font></string>
     <string name="edittxt_hint_OTP"><font size="15" fontfamily="@font/montserrat_light">OTP</font></string>
     <string name="edittxt_hint_Pin"><font size="15" fontfamily="@font/montserrat_light">City Pin Code</font></string>
+    <string name="edittxt_card_exp_date"><font size="14" fontfamily="@font/montserrat_bold">MM/YY</font></string>
+    <string name="edittxt_card_name"><font size="14" fontfamily="@font/montserrat_bold">Name on card</font></string>
+    <string name="edittxt_security_code"><font size="14" fontfamily="@font/montserrat_bold">Security Code</font></string>
 =======
 
 >>>>>>> 652b822723b56c3a815cee47bf82f31b1d1c013e

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<RelativeLayout
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:paddingBottom="2dp">
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Item 01"
+        android:textSize="12sp"
+        android:textColor="#000"
+        android:paddingLeft="2dp"/>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rs."
+        android:textSize="12sp"
+        android:textColor="#000"
+        android:layout_toLeftOf="@id/item_cost"/>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/item_cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="230"
+        android:textSize="12sp"
+        android:textColor="#000"
+        android:layout_alignParentRight="true"
+        android:paddingRight="2dp"/>
+</RelativeLayout>
+</layout>

@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.firebase.iid.FirebaseInstanceId
 import com.scootin.R
+import com.scootin.network.api.Status
 import com.scootin.view.adapter.home.TempleListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -48,6 +49,22 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
             }
             val token = it.result?.token
             Timber.i("Saurabh : Device token $token")
+        }
+        doNetworkCall()
+    }
+
+    private fun doNetworkCall() {
+        viewModel.getHomeCategory().observe(viewLifecycleOwner){
+            when (it.status) {
+                Status.ERROR -> {
+
+                }
+                Status.SUCCESS -> {
+                    Timber.i("Samridhi ${it.data}")
+                }
+                Status.LOADING -> {
+                }
+            }
         }
     }
 

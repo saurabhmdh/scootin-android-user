@@ -3,7 +3,7 @@ package com.scootin.util.constants
 import android.Manifest
 
 object AppConstants {
-    const val APPLICATION_BASE_URL = "http://35.240.180.204:80/"
+    const val APPLICATION_BASE_URL = "https://ferrous-agency-286401.el.r.appspot.com/"
     const val TIMEOUT_SECOND = 60
 
     var PERMISSION_READ_WRITE = arrayOf(

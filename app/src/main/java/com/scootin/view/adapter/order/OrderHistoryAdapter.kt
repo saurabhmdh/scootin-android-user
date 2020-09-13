@@ -1,17 +1,15 @@
-package com.scootin.view.adapter.order_history
+package com.scootin.view.adapter.order
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.scootin.R
-import com.scootin.databinding.AdapterItemAddSnacksBinding
 import com.scootin.databinding.AdapterOrderHistoryListBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.orders.OrderHistoryList
-import com.scootin.network.response.sweets.SnackItem
 import com.scootin.view.adapter.DataBoundListAdapter
 import timber.log.Timber
 
@@ -55,7 +53,16 @@ class OrderHistoryAdapter (
             binding.date.setText(orderDate)
             binding.orderStatus.setText(status)
             binding.orderType.setText(deliveryType)
-            if(status=="Ongoing")binding.imgTrack.setImageResource(R.drawable.ic_track_text_button)
+            if(status=="Ongoing"){
+                binding.imgTrack.setImageResource(R.drawable.ic_track_text_button)
+                binding.orderStatus.setTextColor(Color.parseColor("#FF834A"))
+            }
+            else if(status=="Delivered"){
+                binding.orderStatus.setTextColor(Color.parseColor("#38AA35"))
+            }
+            else{
+                binding.orderStatus.setTextColor(Color.parseColor("#D10000"))
+            }
         }
         binding.imgTrack.setOnClickListener {
 

@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 
-class MyOrderCart : Fragment(R.layout.fragment_my_orders) {
+class MyOrderCart : Fragment(R.layout.fragment_order_history) {
 
     private var binding by autoCleared<FragmentMyOrdersBinding>()
     private val viewModel: OrderFragmentViewModel by viewModels()

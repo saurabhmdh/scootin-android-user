@@ -76,36 +76,50 @@
                 android:hint="0000 0000 0000 0000"
                 android:textColorHint="#fff"
                 android:textStyle="bold"
-                android:textColor="#000"
+                android:inputType="number"
+                android:textColor="#fff"
                 android:background="@null"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/valid_thru"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="MM/YY"
-                android:textColor="#fff"
-                android:textStyle="bold"
+                android:layout_marginLeft="100dp"
                 android:layout_marginTop="122dp"
-                android:layout_marginLeft="100dp"/>
-            <androidx.appcompat.widget.AppCompatTextView
+                android:textSize="14sp"
+                android:background="@null"
+                android:textColor="#fff"
+                android:hint="@string/edittxt_card_exp_date"
+                android:textColorHint="#fff"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/name_on_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name on Card"
                 android:textColor="#fff"
+                android:textSize="14sp"
+                android:background="@null"
+                android:inputType="text"
+                android:hint="@string/edittxt_card_name"
+                android:textColorHint="#fff"
                 android:textStyle="bold"
                 android:layout_marginTop="145dp"
                 android:layout_marginLeft="22dp"/>
-            <androidx.appcompat.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/security_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Security Code"
                 android:textColor="#fff"
+                android:textSize="14sp"
+                android:background="@null"
+                android:hint="@string/edittxt_security_code"
+                android:textColorHint="#fff"
                 android:textStyle="bold"
+                android:inputType="numberPassword"
                 android:layout_marginTop="145dp"
-                android:layout_marginLeft="205dp"/>
+                android:layout_marginLeft="205dp"
+                android:maxLength="3"/>
 
         </RelativeLayout>
 

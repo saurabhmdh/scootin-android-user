@@ -14,8 +14,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
+            android:layout_marginTop="1dp"
             android:text="#0720280002"
             android:textColor="#000"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -35,8 +37,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="95dp"
+            android:layout_marginTop="3dp"
+            android:fontFamily="@font/montserrat_regular"
             android:text="Essential and Grocery"
             android:textColor="#000"
+            android:textSize="12sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/orderId" />
 
@@ -45,9 +51,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="85dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/montserrat_regular"
             android:text="28.07.2020"
             android:textColor="#000"
+            android:textSize="12sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/orderType" />
 
@@ -56,7 +65,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="66dp"
+            android:layout_marginTop="3dp"
             android:text="Rs. 560"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:fontFamily="@font/montserrat_regular"
             android:textColor="#000"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/date" />
@@ -66,9 +79,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="4dp"
+            android:fontFamily="@font/montserrat_bold"
             android:text="Ongoing"
-            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textSize="11sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appCompatImageView2" />
 
