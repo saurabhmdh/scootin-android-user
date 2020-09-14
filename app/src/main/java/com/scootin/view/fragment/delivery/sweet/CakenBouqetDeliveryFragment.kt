@@ -27,7 +27,7 @@ class CakenBouqetDeliveryFragment : Fragment(R.layout.fragment_cake_n_bouqetdeli
         binding = FragmentCakeNBouqetdeliveryBinding.bind(view)
         setAdaper()
         cakeAdapter.submitList(setList())
-        bouqetAdapter.submitList(setList())
+        bouqetAdapter.submitList(setBouquetList())
     }
 
     private fun setAdaper() {
@@ -56,7 +56,7 @@ class CakenBouqetDeliveryFragment : Fragment(R.layout.fragment_cake_n_bouqetdeli
                     }
                 })
 
-        binding.bouqetList.apply {
+        binding.bouquetRecycler.apply {
             adapter = bouqetAdapter
         }
     }
@@ -66,8 +66,8 @@ class CakenBouqetDeliveryFragment : Fragment(R.layout.fragment_cake_n_bouqetdeli
         list.add(
             CakeItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "500 sheet paper rim",
+                "Mansa Bakery",
+                "Chocolate Cake",
                 "MRP 250$",
                 "1240$",
                 "",
@@ -77,10 +77,10 @@ class CakenBouqetDeliveryFragment : Fragment(R.layout.fragment_cake_n_bouqetdeli
         list.add(
             CakeItem(
                 "0",
-                "Mansa Stationaries JK Paper",
-                "400 sheet paper rim",
-                "MRP 3350$",
-                "2240$",
+                "Mansa Bakery",
+                "Chocolate Cake",
+                "MRP 250$",
+                "1240$",
                 "",
                 true
             )
@@ -88,43 +88,10 @@ class CakenBouqetDeliveryFragment : Fragment(R.layout.fragment_cake_n_bouqetdeli
         list.add(
             CakeItem(
                 "0",
-                "Mansa Stationaries MEAD",
-                "200 sheet paper rim",
-                "MRP 230$",
-                "2240$",
-                "",
-                false
-            )
-        )
-        list.add(
-            CakeItem(
-                "0",
-                "Mansa Stationaries Brand name",
-                "100 sheet paper rim",
-                "MRP 350$",
-                "2240$",
-                "",
-                false
-            )
-        )
-        list.add(
-            CakeItem(
-                "0",
-                "Mansa Stationaries Exclusive",
-                "1500 sheet paper rim",
-                "MRP 3250$",
-                "2240$",
-                "",
-                false
-            )
-        )
-        list.add(
-            CakeItem(
-                "0",
-                "Mansa Stationaries Classic",
-                "300 sheet paper rim",
-                "MRP 3250$",
-                "2240$",
+                "Mansa Bakery",
+                "Chocolate Cake",
+                "MRP 250$",
+                "1240$",
                 "",
                 true
             )
@@ -132,37 +99,84 @@ class CakenBouqetDeliveryFragment : Fragment(R.layout.fragment_cake_n_bouqetdeli
         list.add(
             CakeItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "200 sheet paper rim",
-                "MRP 3250$",
-                "2240$",
+                "Mansa Bakery",
+                "Chocolate Cake",
+                "MRP 250$",
+                "1240$",
                 "",
-                false
+                true
             )
         )
         list.add(
             CakeItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "500 sheet paper rim",
-                "MRP 3250$",
-                "2240$",
+                "Mansa Bakery",
+                "Chocolate Cake",
+                "MRP 250$",
+                "1240$",
                 "",
-                false
+                true
             )
         )
         list.add(
             CakeItem(
                 "0",
-                "Mansa Stationaries Classic",
-                "15 sheet paper rim",
-                "MRP 3250$",
-                "2240$",
-                ""
-                , false
+                "Mansa Bakery",
+                "Chocolate Cake",
+                "MRP 250$",
+                "1240$",
+                "",
+                true
             )
         )
+        list.add(
+            CakeItem(
+                "0",
+                "Mansa Bakery",
+                "Chocolate Cake",
+                "MRP 250$",
+                "1240$",
+                "",
+                true
+            )
+        )
+
         return list
+    }
+    private fun setBouquetList(): ArrayList<CakeItem> {
+        val list = ArrayList<CakeItem>()
+        list.add(
+            CakeItem("0",
+        "",
+        "White Roses",
+        "",
+        "Rs. 120",
+        "",
+        true)
+        )
+        list.add(CakeItem("0",
+            "",
+            "White Roses",
+            "",
+            "Rs. 120",
+            "",
+            true))
+        list.add(CakeItem("0",
+            "",
+            "White Roses",
+            "",
+            "Rs. 120",
+            "",
+            true))
+        list.add(CakeItem("0",
+            "",
+            "White Roses",
+            "",
+            "Rs. 120",
+            "",
+            true))
+        return list
+
     }
 
 }

@@ -1,148 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bg_screen"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_background">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_background"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+        android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/express"
             android:layout_width="wrap_content"
+
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            app:cardCornerRadius="6dp"
-            app:cardElevation="12dp"
-            app:cardUseCompatPadding="true"
+            android:layout_marginTop="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_bakery_flower_combo_card" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/srchsweets"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Eggless Only"
+                android:fontFamily="@font/montserrat_regular"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="Cake Selection"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/imageView"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="178dp"
+            android:layout_marginEnd="20dp"
+            android:background="#595959"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/express_delivery"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/ic_cake_n_bouquet_big" />
-        </androidx.cardview.widget.CardView>
-
-        <EditText
-            android:id="@+id/itemAddEditText"
+            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/srchsweets"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Search by store name"
-            android:imeOptions="actionDone"
-            android:inputType="text"
-            android:textColor="@color/gray_33"
+            android:layout_height="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="16dp"
+            app:iconifiedByDefault="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/express" />
+            app:layout_constraintTop_toBottomOf="@+id/express"
+            app:queryBackground="@null"
+            app:queryHint="@string/query_hint"
+            app:searchIcon="@null" />
+        <View
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="200dp"
+            android:layout_marginEnd="20dp"
+            android:background="#595959"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_20"
-            android:fillViewport="true"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="206dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/appCompatTextView2"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/itemAddEditText"
-            app:spanCount="2"
-            tools:itemCount="20"
-            tools:spanCount="2" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
-        <TextView
-            android:id="@+id/bouqetTitle"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Bouqet Section"
-            android:textColor="@color/gray_33"
-            android:textSize="18dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="Flower Selection"
+            android:textColor="#000"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/list" />
+            app:layout_constraintBottom_toTopOf="@id/bouquet_recycler"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/bouqetList"
+            android:id="@+id/bouquet_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_20"
-            android:fillViewport="true"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bouqetTitle"
-            app:spanCount="2"
-            tools:itemCount="20"
-            tools:spanCount="2" />
-
-        <TextView
-            android:id="@+id/option"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="OR"
-            android:textColor="@color/gray_33"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bouqetList" />
-
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Delivery Fee rs 45.00"
-            android:textColor="@color/gray_33"
-            android:textSize="16dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="479dp"
+            android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bouqetList" />
-
-        <TextView
-            android:id="@+id/details"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Delivering To:"
-            android:textColor="@color/gray_33"
-            android:textSize="16dp"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/option" />
-
-        <EditText
-            android:id="@+id/address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Current Location(Home) | Type a new Address"
-            android:inputType="text"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/details" />
-
-        <EditText
-            android:id="@+id/mobileNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Mobile \n No incase something is unclear or unavailable from list"
-            android:inputType="phone"
-            android:textColor="@color/gray_33"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/address" />
-
-        <ImageView
-            android:id="@+id/placeOrder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_place_order"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mobileNumber" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</LinearLayout>

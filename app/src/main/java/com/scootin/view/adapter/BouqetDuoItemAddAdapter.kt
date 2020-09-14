@@ -1,6 +1,6 @@
 package com.scootin.view.adapter
 
-import android.R
+import com.scootin.R
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
@@ -47,17 +47,19 @@ class BouqetDuoItemAddAdapter(
     ) {
         Timber.i("item = $item")
         item.apply {
-            binding.name.setText(name)
             binding.price.setText(price)
+            binding.detail.setText(detail)
         }
 
-        val items = arrayOf("1 pounds", "2 pounds", "3 pounds")
+        val items = arrayOf("10 Flowers", "15 Flowers", "20 Flowers")
         val adapter = ArrayAdapter<String>(
-            binding.name.context,
-            R.layout.simple_spinner_dropdown_item,
+            binding.count.context,
+            R.layout.bouquet_spinner_layout,
+
             items
         )
         binding.spinner.setAdapter(adapter)
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
     }
 
     interface ImageAdapterClickLister {

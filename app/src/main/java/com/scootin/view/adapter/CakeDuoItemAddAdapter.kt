@@ -1,6 +1,6 @@
 package com.scootin.view.adapter
 
-import android.R
+import com.scootin.R
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
@@ -65,13 +65,14 @@ class CakeDuoItemAddAdapter(
             imageAdapterClickListener.onDecrementItem(it)
         }
 
-        val items = arrayOf("1 pounds", "2 pounds", "3 pounds")
+        val items = arrayOf("1 pound", "2 pounds", "3 pounds")
         val adapter = ArrayAdapter<String>(
             binding.count.context,
-            R.layout.simple_spinner_dropdown_item,
+            R.layout.spinner_layout,
             items
         )
         binding.spinner.setAdapter(adapter)
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
     }
 
     interface ImageAdapterClickLister {

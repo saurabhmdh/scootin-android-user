@@ -12,11 +12,11 @@
             android:id="@+id/order_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="66dp"
+            android:layout_marginTop="60dp"
             android:src="@drawable/ic_order_history_card"
 
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/order_id"

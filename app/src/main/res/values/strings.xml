@@ -23,6 +23,15 @@
     <string name="edittxt_card_exp_date"><font size="14" fontfamily="@font/montserrat_bold">MM/YY</font></string>
     <string name="edittxt_card_name"><font size="14" fontfamily="@font/montserrat_bold">Name on card</font></string>
     <string name="edittxt_security_code"><font size="14" fontfamily="@font/montserrat_bold">Security Code</font></string>
+    <string name="edittxt_user_name"><font size="15" fontfamily="@font/montserrat_bold">Name</font></string>
+    <string name="edittxt_user_mob_no"><font size="15" fontfamily="@font/montserrat_bold">Phone Number</font></string>
+    <string name="edittxt_user_address"><font size="15" fontfamily="@font/montserrat_bold">Address</font></string>
+    <string name="edittxt_user_area"><font size="15" fontfamily="@font/montserrat_bold">Area</font></string>
+    <string name="edittxt_user_email"><font size="15" fontfamily="@font/montserrat_bold">Email</font></string>
+    <string name="edittxt_user_city"><font size="15" fontfamily="@font/montserrat_bold">City</font></string>
+    <string name="edittxt_user_pin"><font size="15" fontfamily="@font/montserrat_bold">Pin</font></string>
+    <string name="edittxt_user_state"><font size="15" fontfamily="@font/montserrat_bold">State</font></string>
+    <string name="edittxt_orderid_call_support"><font size="12" fontfamily="@font/montserrat_bold">Enter Order ID for Call Support</font></string>
 =======
 
 >>>>>>> 652b822723b56c3a815cee47bf82f31b1d1c013e
