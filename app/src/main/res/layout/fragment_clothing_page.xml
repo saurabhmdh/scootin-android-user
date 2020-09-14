@@ -33,17 +33,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/ic_page_text" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <View
             android:id="@+id/clothing_base_line"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="1dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="178dp"
             android:layout_marginEnd="20dp"
+            android:background="@color/text_color_primary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_card_base_line" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/menInnerWear"

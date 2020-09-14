@@ -30,6 +30,10 @@
     <string name="edittxt_user_email"><font size="15" fontfamily="@font/montserrat_bold">Email</font></string>
     <string name="edittxt_user_city"><font size="15" fontfamily="@font/montserrat_bold">City</font></string>
     <string name="edittxt_user_pin"><font size="15" fontfamily="@font/montserrat_bold">Pin</font></string>
+    <string name="edittxt_item1"><font size="15" fontfamily="@font/montserrat_bold">Item 01</font></string>
+    <string name="edittxt_item2"><font size="15" fontfamily="@font/montserrat_bold">Item 02</font></string>
+    <string name="edittxt_item3"><font size="15" fontfamily="@font/montserrat_bold">Item 03</font></string>
+    <string name="edittxt_item4"><font size="15" fontfamily="@font/montserrat_bold">Item 04</font></string>
     <string name="edittxt_user_state"><font size="15" fontfamily="@font/montserrat_bold">State</font></string>
     <string name="edittxt_orderid_call_support"><font size="12" fontfamily="@font/montserrat_bold">Enter Order ID for Call Support</font></string>
 =======

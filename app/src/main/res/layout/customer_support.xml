@@ -72,6 +72,42 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+        <androidx.appcompat.widget.AppCompatCheckedTextView
+            android:id="@+id/text_limit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_250"
+            android:textSize="12sp"
+            android:textColor="@color/separatorColor"
+            android:layout_marginEnd="@dimen/dimen_20"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/message_box"
+            tools:ignore="SmallSp" />
+
+        <androidx.appcompat.widget.AppCompatCheckedTextView
+            android:id="@+id/separator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/separator"
+            android:textSize="12sp"
+            android:textColor="@color/separatorColor"
+
+            app:layout_constraintTop_toBottomOf="@id/message_box"
+            app:layout_constraintEnd_toStartOf="@id/text_limit"
+            tools:ignore="SmallSp" />
+
+        <androidx.appcompat.widget.AppCompatCheckedTextView
+            android:id="@+id/number_of_text_typed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_0"
+            android:textSize="12sp"
+            android:textColor="@color/separatorColor"
+
+            app:layout_constraintTop_toBottomOf="@id/message_box"
+            app:layout_constraintEnd_toStartOf="@+id/separator"
+            tools:ignore="SmallSp" />
 
         <androidx.appcompat.widget.AppCompatImageView
 
