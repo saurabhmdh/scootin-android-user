@@ -59,7 +59,12 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
 
 
 }
@@ -78,12 +83,11 @@ dependencies {
     implementation deps.support.palette
     implementation deps.support.flexbox
     implementation deps.support.viewpager2
-
+    implementation deps.support.annotations
     implementation deps.support.activity_ktx
 
     implementation deps.room.runtime
-    implementation 'com.google.firebase:firebase-messaging:20.2.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation deps.play.firebase
 
     kapt deps.room.compiler
     implementation deps.room.ktx
@@ -130,7 +134,6 @@ dependencies {
     implementation deps.navigation.navigation_ui_ktx
     implementation deps.navigation.fragment_ktx
     implementation deps.lottie
-
 }
 
 kapt {

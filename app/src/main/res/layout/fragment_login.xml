@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/editText_PhnNo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,12 +40,12 @@
         app:layout_constraintBottom_toTopOf="@+id/baseline_PhnNo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:inputType="number"
+        android:inputType="phone"
         android:maxLines="1"
         android:maxLength="10"/>
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/send_otp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="336dp"
@@ -55,11 +55,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatImageView
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-
         android:layout_marginEnd="20dp"
         app:srcCompat="@drawable/ic_text_field_mobile_number"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +74,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <EditText
+
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/editTextOTP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -104,48 +103,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText_PhnNo" />
-    <EditText
-        android:id="@+id/editTextPin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@null"
-        android:fontFamily="@font/montserrat_regular"
-        android:hint="@string/edittxt_hint_Pin"
-        android:textColorHint="#696969"
-        app:layout_constraintBottom_toTopOf="@+id/baseline_Pin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:inputType="number"
-        android:maxLines="1"
-        android:maxLength="6"/>
 
-    <androidx.appcompat.widget.AppCompatImageView
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        app:srcCompat="@drawable/ic_text_field_city_pin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-         />
-
-    <View
-        android:id="@+id/baseline_Pin"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        android:background="@color/text_color_primary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextOTP"/>
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/txt_didnt_get_OTP"
         android:layout_width="wrap_content"
@@ -154,7 +112,7 @@
         android:layout_marginTop="38dp"
         app:srcCompat="@drawable/ic_didnt_receive_otp_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPin" />
+        app:layout_constraintTop_toBottomOf="@+id/baseline_OTP" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/senAgain_LoginOtp"

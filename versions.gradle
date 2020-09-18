@@ -94,6 +94,7 @@ versions.adjust_ads = '17.0.0'
 versions.lottieVersion = '3.4.1'
 //versions.facebookVersion = '[5,6)'
 //versions.googleVersion = '18.1.0'
+versions.firebase = '20.2.4'
 
 def deps = [:]
 
@@ -116,7 +117,7 @@ deps.arch_core = arch_core
 
 
 def support = [:]
-support.annotations = "androidx.annotation:annotation:$versions.support"
+support.annotations = "androidx.annotation:annotation:$versions.support_annotation"
 support.appcompat = "androidx.appcompat:appcompat:$versions.support_appcompat"
 support.recyclerview = "androidx.recyclerview:recyclerview:$versions.support_recyclerview"
 support.cardview = "androidx.cardview:cardview:$versions.support"
@@ -176,6 +177,7 @@ def play = [:]
 play.map = "com.google.android.gms:play-services-maps:$versions.play"
 play.location = "com.google.android.gms:play-services-location:$versions.play"
 play.core = "com.google.android.play:core:$versions.core"
+play.firebase = "com.google.firebase:firebase-messaging:$versions.firebase"
 
 deps.play = play
 

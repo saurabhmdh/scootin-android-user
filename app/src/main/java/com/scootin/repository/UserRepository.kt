@@ -20,4 +20,6 @@ class UserRepository @Inject constructor(
     ): LiveData<Resource<ResponseUser>> = object : NetworkBoundResource<ResponseUser>(context) {
         override suspend fun createCall(): Response<ResponseUser> = services.doLogin(options)
     }.asLiveData()
+
+    suspend fun sendOTP(options: Map<String, String>) = services.requestOTP(options)
 }
