@@ -122,7 +122,6 @@ dependencies {
 
     implementation deps.kotlin.stdlib
     implementation deps.kotlin.ktx
-    implementation deps.kotlin.ktx_fragment
 
 
     implementation deps.gson

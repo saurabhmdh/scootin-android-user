@@ -20,4 +20,6 @@ interface APIService {
 
     @POST("auth/generate-otp")
     suspend fun requestOTP(@Body options: Map<String, String>, @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()) : Response<ResponseBody>
+
+
 }
