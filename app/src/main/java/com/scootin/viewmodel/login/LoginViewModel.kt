@@ -14,6 +14,7 @@ import com.scootin.repository.UserRepository
 import com.scootin.util.constants.AppConstants
 import com.scootin.viewmodel.base.ObservableViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LoginViewModel @ViewModelInject internal constructor(
     private val userRepo: UserRepository,
@@ -24,7 +25,7 @@ class LoginViewModel @ViewModelInject internal constructor(
     private val _doLogin = MutableLiveData<RequestLogin>()
 
     val loginComplete = Transformations.switchMap(_doLogin) { request->
-        if(request.userName.isEmpty() || request.password.isEmpty()) {
+        if (request.userName.isEmpty() || request.password.isEmpty()) {
             AbsentLiveData.create()
         } else {
             userRepo.doLogin(mapOf("user" to request.userName, "pwd" to request.password),
@@ -46,4 +47,11 @@ class LoginViewModel @ViewModelInject internal constructor(
     }
 
     data class RequestLogin(val userName: String, val password: String)
+
+    fun requestOTP(mobileNumber: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            userRepo.sendOTP(mapOf("mobileNo" to mobileNumber))
+        }
+    }
+
 }
