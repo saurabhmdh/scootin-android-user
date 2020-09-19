@@ -48,8 +48,8 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         updateListeners()
 
         //Find user location
-        checkForMap()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        checkForMap()
 
         //Let me try firebase integration..
         FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener {
