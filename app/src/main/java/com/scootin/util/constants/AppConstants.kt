@@ -10,7 +10,7 @@ object AppConstants {
         Manifest.permission.READ_EXTERNAL_STORAGE,
         Manifest.permission.WRITE_EXTERNAL_STORAGE
     )
-
+    const val RC_LOCATION_PERMISSIONS = 0x01
     const val RC_READ_WRITE_PERMISSION = 0x02
     const val USER_INFO = "user-data"
     const val AUTHORIZATION = "Authorization"
@@ -19,5 +19,11 @@ object AppConstants {
     /* Constant value for Write Review Screen */
     const val RESULT_LOAD_IMAGE_VIDEO = 1
     const val UPLOAD_IMAGE_SIZE = 10 * 1024 * 1024 // 10 MB
+
+    var PERMISSIONS_LOCATION = arrayOf(
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    )
+
 
 }
