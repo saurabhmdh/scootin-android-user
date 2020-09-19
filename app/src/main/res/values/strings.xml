@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">Scootin</string>
+    <string name="app_name" translatable="false">Scootin</string>
+    <string name = "google_maps_key" translatable="false">AIzaSyBV57UA9d4G4J1Z2XnZFiGykdv0ZLcaAuI</string>
 
-    <string name = "google_maps_key">AIzaSyBV57UA9d4G4J1Z2XnZFiGykdv0ZLcaAuI</string>
+
     <string name="login_forgot_password">Forgot password?</string>
     <string name="login_sign_in">Sign In</string>
     <string name="login_phone_number">Mobile Number</string>
@@ -40,9 +41,7 @@
     <string name="edittxt_item4"><font size="15" fontfamily="@font/montserrat_bold">Item 04</font></string>
     <string name="edittxt_user_state"><font size="15" fontfamily="@font/montserrat_bold">State</font></string>
     <string name="edittxt_orderid_call_support"><font size="12" fontfamily="@font/montserrat_bold">Enter Order ID for Call Support</font></string>
-=======
 
->>>>>>> 652b822723b56c3a815cee47bf82f31b1d1c013e
     <!--
         This is the name that users will see when interacting with this channel.
         It should describe the category of notifications that will be sent through this channel
@@ -118,4 +117,7 @@
     <string name="address">Address</string>
     <string name="area">Area</string>
     <string name="pin">Pin</string>
+
+
+
 </resources>
