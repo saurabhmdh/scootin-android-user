@@ -29,7 +29,8 @@
             android:layout_marginStart="20dp"
             android:fontFamily="@font/montserrat_regular"
             android:text="Store Name"
-            android:textSize="15sp"
+            android:textSize="13sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/imageView"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -42,6 +43,7 @@
             android:fontFamily="@font/montserrat_regular"
             android:text="(Max. 10 items are allowed)"
             android:textSize="12sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/imageView"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -63,22 +65,24 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="199dp"
             android:layout_marginEnd="15dp"
+            android:orientation="vertical"
             android:background="@drawable/ic_item_list_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" >
 
             <androidx.appcompat.widget.SearchView
+                android:id="@+id/srchsweets"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:scrollbars="none"
-                app:searchIcon="@null"
-                android:layout_marginTop="4dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="25dp"
-                app:queryHint="Search and add items"
-                android:background="@drawable/search_background"
-                />
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:iconifiedByDefault="false"
+                app:queryBackground="@drawable/search_background"
+                app:queryHint="@string/query_hint"
+                app:searchIcon="@null"/>
+
 
 
         </LinearLayout>
