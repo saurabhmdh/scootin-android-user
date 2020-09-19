@@ -7,11 +7,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.scootin.R
 import com.scootin.databinding.FragmentClothingPageBinding
-import com.scootin.databinding.FragmentSweetsCategoryBinding
 import com.scootin.network.AppExecutors
 import com.scootin.util.fragment.autoCleared
-import com.scootin.view.adapter.home.TempleListAdapter
-import com.scootin.view.fragment.delivery.sweet.SweetsCategoryFragmentDirections
 import com.scootin.viewmodel.home.HomeFragmentViewModel
 import timber.log.Timber
 import javax.inject.Inject

@@ -19,17 +19,15 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.firebase.iid.FirebaseInstanceId
 import com.scootin.R
 import com.scootin.network.api.Status
-import com.scootin.view.adapter.home.TempleListAdapter
+
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class HomeFragment :  Fragment(R.layout.fragment_home) {
     private var binding by autoCleared<FragmentHomeBinding>()
-
-
     private val viewModel: HomeFragmentViewModel by viewModels()
-    private lateinit var adapter: TempleListAdapter
+
 
     @Inject
     lateinit var appExecutors: AppExecutors
