@@ -9,9 +9,12 @@ object AppHeaders {
 
     var userID: String = ""
     var token:String = ""
+
     var role: ROLE = ROLE.USER
 
-    fun getHeaderMap() = hashMapOf(AppConstants.AUTHORIZATION to token)
+    const val PREFIX = "Bearer "
+
+    fun getHeaderMap() = hashMapOf(AppConstants.AUTHORIZATION to PREFIX + token)
 
     fun updateUserData(user: ResponseUser) {
         userID = user.userID
