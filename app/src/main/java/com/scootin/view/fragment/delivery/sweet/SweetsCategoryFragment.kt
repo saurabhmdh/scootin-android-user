@@ -9,7 +9,6 @@ import com.scootin.R
 import com.scootin.databinding.FragmentSweetsCategoryBinding
 import com.scootin.network.AppExecutors
 import com.scootin.util.fragment.autoCleared
-import com.scootin.view.adapter.home.TempleListAdapter
 import com.scootin.viewmodel.home.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -22,7 +21,7 @@ class SweetsCategoryFragment : Fragment(R.layout.fragment_sweets_category) {
 
 
     private val viewModel: HomeFragmentViewModel by viewModels()
-    private lateinit var adapter: TempleListAdapter
+
 
     @Inject
     lateinit var appExecutors: AppExecutors
