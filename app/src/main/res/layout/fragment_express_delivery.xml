@@ -1,176 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bg_screen"
     android:layout_width="match_parent"
-    android:background="@drawable/ic_background"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_background">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+        android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/express_delivery"
+            android:id="@+id/expresslogo"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="60dp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/ic_express_delivery_big" />
+            app:srcCompat="@drawable/ic_ex_dlvr_card_on_store_page" />
 
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/grocery"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_info_field"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/express_delivery" />
-
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:id="@+id/itemCardView"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="16dp"-->
-<!--            app:cardCornerRadius="8dp"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/grocery"-->
-<!--            card_view:cardElevation="10dp">-->
-
-<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_margin="16dp"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent">-->
-
-<!--                <LinearLayout-->
-<!--                    android:id="@+id/itemEdit"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent">-->
-
-<!--                    <EditText-->
-<!--                        android:id="@+id/itemAddEditText"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_weight="4"-->
-<!--                        android:inputType="text"-->
-<!--                        android:imeOptions="actionDone"-->
-<!--                        android:hint="@string/type_your_list_additionaly_you_can_mention_size_also_e_g_coke_250ml" />-->
-
-<!--                    <ImageView-->
-<!--                        android:id="@+id/save"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_weight="1"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:src="@android:drawable/ic_menu_set_as" />-->
-<!--                </LinearLayout>-->
-
-
-<!--                <androidx.recyclerview.widget.RecyclerView-->
-<!--                    android:id="@+id/list"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="@dimen/dimen_20"-->
-<!--                    android:fillViewport="true"-->
-<!--                    android:orientation="vertical"-->
-<!--                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/itemEdit" />-->
-
-<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
-<!--        </androidx.cardview.widget.CardView>-->
-
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/itemCardView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="@dimen/dimen_10"
-            app:srcCompat="@drawable/ic_list_text_box"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/grocery" />
-
-        <TextView
-            style="@style/custom_font_bold_style_black"
-            android:id="@+id/option"
+        <EditText
+            android:id="@+id/location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="OR"
-            android:textAlignment="center"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/itemCardView" />
-
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/uploadPhoto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_camera_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/option" />
-
-        <TextView
-            android:id="@+id/details"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Delivering To:"
-            style="@style/custom_font_bold_style_black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/uploadPhoto" />
-
-        <EditText
-            android:id="@+id/address"
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            android:hint="Current Location(Home) | Type a new Address"
-            style="@style/custom_font_style_black_small"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/preview"
-            app:layout_constraintTop_toBottomOf="@+id/details" />
-
-        <EditText
-            android:id="@+id/mobileNumber"
-            android:layout_width="270dp"
-            android:lines="1"
-            android:layout_height="wrap_content"
-            android:hint="Mobile No incase something is unclear or unavailable from list"
-            style="@style/custom_font_style_black_small"
-            app:layout_constraintEnd_toEndOf="@id/preview"
-            app:layout_constraintTop_toBottomOf="@+id/address" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/preview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:paddingStart="@dimen/dimen_8"
-            android:src="@drawable/ic_image_preview_box"
-            app:layout_constraintStart_toEndOf="@id/mobileNumber"
-            app:layout_constraintTop_toBottomOf="@+id/uploadPhoto" />
-
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/placeOrder"
-            android:layout_width="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_place_order"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="145dp"
+            android:layout_marginEnd="20dp"
+            android:drawableStart="@drawable/ic_location_icon"
+            android:fontFamily="@font/montserrat_regular"
+            android:hint="@string/edittxt_hint_expressdel"
+            android:inputType="text"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mobileNumber" />
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="15dp"
+            android:paddingBottom="55dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/location" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</LinearLayout>

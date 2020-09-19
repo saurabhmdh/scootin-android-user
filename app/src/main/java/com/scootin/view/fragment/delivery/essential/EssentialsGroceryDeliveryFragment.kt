@@ -6,12 +6,10 @@ import androidx.fragment.app.Fragment
 import com.scootin.R
 import com.scootin.databinding.FragmentGroceryDeliveryBinding
 import com.scootin.network.AppExecutors
-import com.scootin.network.response.stationary.StationaryItem
 import com.scootin.network.response.sweets.SweetsItem
 import com.scootin.network.response.sweets.SweetsStore
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.*
-import com.scootin.view.fragment.dialogs.CategoryDialogFragment
 import com.scootin.view.fragment.dialogs.EssentialCategoryDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

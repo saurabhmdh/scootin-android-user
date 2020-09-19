@@ -93,7 +93,18 @@
 
     <fragment
         android:id="@+id/express_delivery"
-        android:name="com.scootin.view.fragment.delivery.express.ExpressDeliveryFragment" />
+        android:name="com.scootin.view.fragment.delivery.express.ExpressDeliveryFragment"
+        android:label="Home">
+
+
+        <action
+            android:id="@+id/action_express_delivery_to_express_orders2"
+            app:destination="@id/express_orders" />
+    </fragment>
+    <fragment
+        android:id="@+id/express_orders"
+        android:name="com.scootin.view.fragment.delivery.express.ExpressDeliveryOrders"
+        android:label="Express"/>
 
 
     <fragment

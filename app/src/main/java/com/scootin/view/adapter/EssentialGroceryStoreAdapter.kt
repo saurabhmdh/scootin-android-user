@@ -1,12 +1,13 @@
 package com.scootin.view.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import com.scootin.R
 import com.scootin.databinding.AdapterItemAddEssentialgroceryStoreBinding
-import com.scootin.databinding.AdapterItemAddSweetsStoreBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.sweets.SweetsStore
 import timber.log.Timber
@@ -44,11 +45,23 @@ class EssentialGroceryStoreAdapter (
             binding.name.setText(name)
             binding.distance.setText(distance)
             binding.ratingCount.setRating(rating)
-            if (isOpen) binding.onlinestatusStore.setText("Online") else binding.onlinestatusStore.setText("Offline")
+            if (isOpen){
+                binding.onlinestatusStore.setText("Online")
+                binding.btnSelect.setImageResource(R.drawable.ic_select_button_active)
+                binding.btnSelect.setOnClickListener {
+                    imageAdapterClickLister.onSelectButtonSelected(it)
+                }
+            }
+            else{
+                binding.onlinestatusStore.setText("Offline")
+                binding.onlinestatusStore.setTextColor(Color.parseColor("#990f02"))
+                binding.btnSelect.setImageResource(R.drawable.ic_select_button_inactive)
+
+            }
+
         }
-        binding.btnSelect.setOnClickListener {
-            imageAdapterClickLister.onSelectButtonSelected(it)
-        }
+
+
     }
     interface StoreImageAdapterClickListener{
         fun onSelectButtonSelected(view: View)

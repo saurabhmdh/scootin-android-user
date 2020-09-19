@@ -17,6 +17,7 @@
     <string name="edittxt_hint"><font size="15" fontfamily="@font/montserrat_light">Phone No. (10 Digits)</font></string>
     <string name="edittxt_hint_citywide"><font size="12" fontfamily="@font/montserrat_light">Current Location(Home) | Type a new Address</font></string>
     <string name="edittxt_hint_payment"><font size="12" fontfamily="@font/montserrat_light">Delivery Location(Home) | Type a new Address</font></string>
+    <string name="edittxt_hint_expressdel"><font size="12" fontfamily="@font/montserrat_light">Location</font></string>
     <string name="edittxt_hint_eng_mobno"><font size="12" fontfamily="@font/montserrat_light">Mobile No.</font></string>
     <string name="edittxt_hint_OTP"><font size="15" fontfamily="@font/montserrat_light">OTP</font></string>
     <string name="edittxt_hint_Pin"><font size="15" fontfamily="@font/montserrat_light">City Pin Code</font></string>
