@@ -23,7 +23,6 @@ class SplashViewModel @ViewModelInject internal constructor(
 
     fun firstLaunch() = liveData(viewModelScope.coroutineContext + Dispatchers.IO) {
         val userData = cacheDao.getCacheData(AppConstants.USER_INFO)
-
         if (userData == null) {
             emit(true)
         } else {
@@ -37,8 +36,8 @@ class SplashViewModel @ViewModelInject internal constructor(
             apiService.refreshToken(mapOf("auth" to AppHeaders.token)).body()?.let {
                 userInfo = it
             }
-            val userData = Gson().toJson(userInfo)
-            cacheDao.insert(Cache(AppConstants.USER_INFO, userData))
+            val updatedUserInfo = Gson().toJson(userInfo)
+            cacheDao.insert(Cache(AppConstants.USER_INFO, updatedUserInfo))
             AppHeaders.updateUserData(userInfo)
 
             emit(false)

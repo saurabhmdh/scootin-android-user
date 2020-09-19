@@ -1,29 +1,39 @@
 package com.scootin.view.fragment.home
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.scootin.R
+import com.scootin.view.activity.MainActivity
 import com.scootin.viewmodel.home.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 
 @AndroidEntryPoint
 class SplashFragment : Fragment(R.layout.fragment_splash) {
     private val viewModel: SplashViewModel by viewModels()
 
+    private var timeout: Boolean = false
+    private var dataLoaded: Boolean = false
+    private var firstTime: Boolean = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.firstLaunch().observe(viewLifecycleOwner, {
+            dataLoaded = true
+            firstTime = it
+        })
+
         Handler().postDelayed({
-            startNextActivity()
+            timeout = true
+            tryToGoNext()
         }, 3000)
     }
 
@@ -38,10 +48,21 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
         )
     }
 
-    private fun startNextActivity() {
-        Timber.i("Starting next activity..")
-        viewModel.firstLaunch().observe(viewLifecycleOwner) {
-            gotoLoginFragment()
+    private fun tryToGoNext() {
+        if (canGoNextStep()) {
+            if (firstTime) {
+                gotoLoginFragment()
+            } else {
+                openHomeScreen()
+            }
         }
+    }
+
+    private fun canGoNextStep() = timeout && dataLoaded
+
+    private fun openHomeScreen() {
+        startActivity(Intent(requireContext(), MainActivity::class.java))
+        activity?.overridePendingTransition(R.anim.enter, R.anim.exit)
+        activity?.finish()
     }
 }
