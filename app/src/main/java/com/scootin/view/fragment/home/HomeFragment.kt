@@ -1,24 +1,29 @@
 package com.scootin.view.fragment.home
 
+import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+
 import com.scootin.databinding.FragmentHomeBinding
 import com.scootin.network.AppExecutors
 import com.scootin.util.fragment.autoCleared
 import com.scootin.viewmodel.home.HomeFragmentViewModel
 import timber.log.Timber
 import javax.inject.Inject
-import androidx.lifecycle.observe
+
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
+
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.firebase.iid.FirebaseInstanceId
 import com.scootin.R
 import com.scootin.network.api.Status
+import com.scootin.util.constants.AppConstants
+import com.scootin.util.ui.UtilPermission
 
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,6 +32,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment :  Fragment(R.layout.fragment_home) {
     private var binding by autoCleared<FragmentHomeBinding>()
     private val viewModel: HomeFragmentViewModel by viewModels()
+
+    //This code is for Rider..
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
 
     @Inject
@@ -39,20 +47,25 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         Timber.i("height =  ${binding.express.height} Width = ${binding.express.width}")
         updateListeners()
 
+        //Find user location
+        checkForMap()
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+
         //Let me try firebase integration..
         FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener {
             if(!it.isSuccessful) {
-                Timber.i("Saurabh getInstanceId failed")
                 return@addOnCompleteListener
             }
             val token = it.result?.token
             Timber.i("Saurabh : Device token $token")
+            //Update FCM ID for user & read user from user info.
         }
         doNetworkCall()
     }
 
+
     private fun doNetworkCall() {
-        viewModel.getHomeCategory().observe(viewLifecycleOwner){
+        viewModel.getHomeCategory().observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.ERROR -> {
 
@@ -63,7 +76,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
                 Status.LOADING -> {
                 }
             }
-        }
+        })
     }
 
     private fun updateListeners() {
@@ -104,17 +117,47 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
 
     }
 
-//    private fun initUI() {
-//        adapter = TempleListAdapter(appExecutors)
-//        binding.suggestionList.adapter = adapter
-//        binding.suggestionList.addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
-//    }
 
-//
-//    private fun observeDataChange() {
-//        viewModel.getAllTemples().observe(viewLifecycleOwner) {
-//            Timber.i("data from network  ${it.data}")
-//            adapter.submitList(it.data)
-//        }
-//    }
+    private fun setupLocationUpdateListener() {
+        try {
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location: Location? ->
+                    //https://developers.google.com/maps/documentation/geocoding/overview?csw=1#ReverseGeocoding
+                    Timber.i("fusedLocationClient lastLocation: = ${location}")
+                    location?.let {
+                        Timber.i("get location: ${location.latitude}, ${location.longitude}")
+                    }
+                }
+                .addOnFailureListener {
+                    Timber.i("update location fail: $it")
+                }
+        } catch (e: SecurityException) {
+            Timber.i("We don't have permission of map: ${e.message}")
+            UtilPermission.requestMapPermission(this)
+        }
+    }
+
+
+    private fun checkForMap() {
+        if (!UtilPermission.hasMapPermission(requireContext())) {
+            UtilPermission.requestMapPermission(this)
+        } else {
+            setupLocationUpdateListener()
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            AppConstants.RC_LOCATION_PERMISSIONS -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    setupLocationUpdateListener()
+                }
+            }
+            else -> {}
+        }
+    }
 }

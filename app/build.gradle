@@ -88,6 +88,10 @@ dependencies {
 
     implementation deps.room.runtime
     implementation deps.play.firebase
+    implementation deps.play.map
+    implementation deps.play.location
+    implementation deps.play.core
+    implementation deps.map_utils
 
     kapt deps.room.compiler
     implementation deps.room.ktx
