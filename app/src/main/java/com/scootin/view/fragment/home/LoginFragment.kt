@@ -11,7 +11,6 @@ import com.scootin.databinding.FragmentLoginBinding
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.activity.MainActivity
 import com.scootin.viewmodel.login.LoginViewModel
-import androidx.lifecycle.observe
 import com.rakuten.travel.consumer.extensions.updateVisibility
 import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
