@@ -5,6 +5,7 @@ import com.scootin.network.api.APIService
 import com.scootin.network.api.NetworkBoundResource
 import com.scootin.network.api.Resource
 import com.scootin.network.response.login.ResponseUser
+import okhttp3.ResponseBody
 import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -21,5 +22,14 @@ class UserRepository @Inject constructor(
         override suspend fun createCall(): Response<ResponseUser> = services.doLogin(options)
     }.asLiveData()
 
-    suspend fun sendOTP(options: Map<String, String>) = services.requestOTP(options)
+//    suspend fun sendOTP(options: Map<String, String>) = services.requestOTP(options)
+
+    fun sendOTP(
+        options: Map<String, String>,
+        context: CoroutineContext
+    ): LiveData<Resource<ResponseBody>> = object : NetworkBoundResource<ResponseBody>(context) {
+        override suspend fun createCall(): Response<ResponseBody> = services.requestOTP(options)
+    }.asLiveData()
+
+
 }

@@ -21,5 +21,6 @@ interface APIService {
     @POST("auth/generate-otp")
     suspend fun requestOTP(@Body options: Map<String, String>, @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()) : Response<ResponseBody>
 
-
+    @POST("/auth/refresh/user")
+    suspend fun refreshToken(@Body options: Map<String, String>, @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()): Response<ResponseUser>
 }
