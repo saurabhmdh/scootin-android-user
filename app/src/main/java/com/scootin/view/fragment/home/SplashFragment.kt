@@ -13,6 +13,7 @@ import com.scootin.R
 import com.scootin.view.activity.MainActivity
 import com.scootin.viewmodel.home.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -49,6 +50,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     }
 
     private fun tryToGoNext() {
+        Timber.i("tryToGoNext lets check the status ${canGoNextStep()}")
         if (canGoNextStep()) {
             if (firstTime) {
                 gotoLoginFragment()

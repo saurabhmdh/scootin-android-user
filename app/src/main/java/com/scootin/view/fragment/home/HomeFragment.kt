@@ -5,6 +5,7 @@ import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -23,6 +24,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.firebase.iid.FirebaseInstanceId
 import com.scootin.R
 import com.scootin.network.api.Status
+import com.scootin.network.response.categories.HomeResponseCategory
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.ui.UtilPermission
 
@@ -37,6 +39,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     //This code is for Rider..
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
+    private lateinit var homeCategoryList: List<HomeResponseCategory>
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -69,15 +72,31 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         viewModel.getHomeCategory().observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.ERROR -> {
-
                 }
                 Status.SUCCESS -> {
-                    Timber.i("Samridhi ${it.data}")
+                    Timber.i("Category Response ${it.data}")
+                    it.data?.let {list->
+                        homeCategoryList = list
+                    }
                 }
                 Status.LOADING -> {
                 }
             }
         })
+    }
+
+
+    private fun isActiveCategory(tag: Any?): Boolean {
+        if (!::homeCategoryList.isInitialized) {
+            return true
+        }
+        val tagID = tag as String?
+        val data = homeCategoryList.find { it.id == tagID?.toInt()}
+        return data?.active == true && !data.deleted
+    }
+
+    private fun showDisabledText() {
+        Toast.makeText(context, R.string.category_disabled ,Toast.LENGTH_SHORT).show()
     }
 
     private fun updateListeners() {
@@ -90,29 +109,53 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         }
 
         binding.essentialsGrocery.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.homeToEssential())
+            if (isActiveCategory(it.tag)) {
+                findNavController().navigate(HomeFragmentDirections.homeToEssential())
+            } else {
+                showDisabledText()
+            }
         }
 
         binding.stationery.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.homeToStationary())
+            if (isActiveCategory(it.tag)) {
+                findNavController().navigate(HomeFragmentDirections.homeToStationary())
+            } else {
+                showDisabledText()
+            }
         }
 
         binding.sweetSnacks.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.homeToSweets())
+            if (isActiveCategory(it.tag)) {
+                findNavController().navigate(HomeFragmentDirections.homeToSweets())
+            } else {
+                showDisabledText()
+            }
         }
 
 
         binding.medicines.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.homeToMedicines())
+            if (isActiveCategory(it.tag)) {
+                findNavController().navigate(HomeFragmentDirections.homeToMedicines())
+            } else {
+                showDisabledText()
+            }
         }
 
         binding.clothing.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.homeToClothes())
+            if (isActiveCategory(it.tag)) {
+                findNavController().navigate(HomeFragmentDirections.homeToClothes())
+            } else {
+                showDisabledText()
+            }
         }
 
 
         binding.vegetablesFruits.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.homeToVeg())
+            if (isActiveCategory(it.tag)) {
+                findNavController().navigate(HomeFragmentDirections.homeToVeg())
+            } else {
+                showDisabledText()
+            }
         }
 
 
@@ -122,13 +165,10 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     private fun setupLocationUpdateListener() {
         try {
             fusedLocationClient.lastLocation
-                .addOnSuccessListener { location: Location? ->
+                .addOnSuccessListener { location: Location ->
                     //https://developers.google.com/maps/documentation/geocoding/overview?csw=1#ReverseGeocoding
-                    Timber.i("fusedLocationClient lastLocation: = ${location}")
-
-                    location?.let {
-                        updateLocationName(it)
-                    }
+                    Timber.i("fusedLocationClient lastLocation: = $location")
+                    updateLocationName(location)
                 }
                 .addOnFailureListener {
                     Timber.i("update location fail: $it")
