@@ -86,11 +86,12 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     }
 
 
-    private fun isActiveCategory(tag: String): Boolean {
+    private fun isActiveCategory(tag: Any?): Boolean {
         if (!::homeCategoryList.isInitialized) {
             return true
         }
-        val data = homeCategoryList.find { it.id == tag.toInt()}
+        val tagID = tag as String?
+        val data = homeCategoryList.find { it.id == tagID?.toInt()}
         return data?.active == true && !data.deleted
     }
 
@@ -108,7 +109,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         }
 
         binding.essentialsGrocery.setOnClickListener {
-            if (isActiveCategory(tag!!)) {
+            if (isActiveCategory(it.tag)) {
                 findNavController().navigate(HomeFragmentDirections.homeToEssential())
             } else {
                 showDisabledText()
@@ -116,7 +117,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         }
 
         binding.stationery.setOnClickListener {
-            if (isActiveCategory(tag!!)) {
+            if (isActiveCategory(it.tag)) {
                 findNavController().navigate(HomeFragmentDirections.homeToStationary())
             } else {
                 showDisabledText()
@@ -124,7 +125,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         }
 
         binding.sweetSnacks.setOnClickListener {
-            if (isActiveCategory(tag!!)) {
+            if (isActiveCategory(it.tag)) {
                 findNavController().navigate(HomeFragmentDirections.homeToSweets())
             } else {
                 showDisabledText()
@@ -133,7 +134,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
 
 
         binding.medicines.setOnClickListener {
-            if (isActiveCategory(tag!!)) {
+            if (isActiveCategory(it.tag)) {
                 findNavController().navigate(HomeFragmentDirections.homeToMedicines())
             } else {
                 showDisabledText()
@@ -141,7 +142,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         }
 
         binding.clothing.setOnClickListener {
-            if (isActiveCategory(tag!!)) {
+            if (isActiveCategory(it.tag)) {
                 findNavController().navigate(HomeFragmentDirections.homeToClothes())
             } else {
                 showDisabledText()
@@ -150,7 +151,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
 
 
         binding.vegetablesFruits.setOnClickListener {
-            if (isActiveCategory(tag!!)) {
+            if (isActiveCategory(it.tag)) {
                 findNavController().navigate(HomeFragmentDirections.homeToVeg())
             } else {
                 showDisabledText()
