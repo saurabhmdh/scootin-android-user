@@ -60,6 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginStart="@dimen/home_screen_margin_start"
+        android:tag="252"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/express"
         app:srcCompat="@drawable/bg_essentials_grocery"/>
@@ -69,6 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/home_screen_margin_start"
+        android:tag="253"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/essentials_grocery"
         app:srcCompat="@drawable/bg_sweet_snacks"/>
@@ -78,6 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/home_screen_margin_start"
+        android:tag="254"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/sweet_snacks"
         app:srcCompat="@drawable/bg_vegetables_fruits"/>
@@ -87,6 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/home_screen_margin_start"
+        android:tag="255"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/vegetables_fruits"
         app:srcCompat="@drawable/bg_medicines"/>
@@ -96,6 +100,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/home_screen_margin_start"
+        android:tag="256"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/medicines"
         app:srcCompat="@drawable/bg_stationery"/>
@@ -105,6 +110,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/home_screen_margin_start"
+        android:tag="257"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/stationery"
         app:srcCompat="@drawable/bg_clothing"/>

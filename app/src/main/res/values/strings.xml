@@ -12,6 +12,8 @@
     <string name="select_category">Select Category</string>
 
 
+    <string name="category_disabled">This category has been in active by administrator..</string>
+
     <string name="type_your_list_additionaly_you_can_mention_size_also_e_g_coke_250ml">Type your list, additionaly you can mention size also E.g Coke 250ml</string>
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
