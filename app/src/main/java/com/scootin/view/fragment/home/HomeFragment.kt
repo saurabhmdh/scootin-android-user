@@ -1,6 +1,7 @@
 package com.scootin.view.fragment.home
 
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.view.View
@@ -124,8 +125,9 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
                 .addOnSuccessListener { location: Location? ->
                     //https://developers.google.com/maps/documentation/geocoding/overview?csw=1#ReverseGeocoding
                     Timber.i("fusedLocationClient lastLocation: = ${location}")
+
                     location?.let {
-                        Timber.i("get location: ${location.latitude}, ${location.longitude}")
+                        updateLocationName(it)
                     }
                 }
                 .addOnFailureListener {
@@ -135,6 +137,14 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
             Timber.i("We don't have permission of map: ${e.message}")
             UtilPermission.requestMapPermission(this)
         }
+    }
+
+    private fun updateLocationName(location: Location) {
+        Timber.i("get location: ${location.latitude}, ${location.longitude}")
+        val result = Geocoder(context).getFromLocation(location.latitude, location.longitude, 1)
+        Timber.i("location result = " + result.getOrNull(0))
+
+        binding.userLocation.text = result.getOrNull(0)?.getAddressLine(0).orEmpty()
     }
 
 
