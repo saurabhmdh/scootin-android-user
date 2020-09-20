@@ -11,7 +11,7 @@
     <string name="done">Done</string>
     <string name="select_category">Select Category</string>
 
-<<<<<<< HEAD
+
 =======
 
     <string name="category_disabled">This category has been in active by administrator..</string>
@@ -25,6 +25,7 @@
     <string name="query_hint_medicine"><font size="15" fontfamily="@font/montserrat_regular">Search by Store</font></string>
     <string name="edittxt_hint"><font size="15" fontfamily="@font/montserrat_light">Phone No. (10 Digits)</font></string>
     <string name="edittxt_hint_citywide"><font size="12" fontfamily="@font/montserrat_light">Current Location(Home) | Type a new Address</font></string>
+    <string name="edittxt_hint_express_mobile"><font size="12" fontfamily="@font/montserrat_light">Mobile No.(Incase something is unclear or unavailable from the list)</font></string>
     <string name="edittxt_hint_payment"><font size="12" fontfamily="@font/montserrat_light">Delivery Location(Home) | Type a new Address</font></string>
     <string name="edittxt_hint_expressdel"><font size="12" fontfamily="@font/montserrat_light">Location</font></string>
     <string name="edittxt_hint_eng_mobno"><font size="12" fontfamily="@font/montserrat_light">Mobile No.</font></string>
