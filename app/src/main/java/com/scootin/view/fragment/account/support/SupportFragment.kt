@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.scootin.R
 import com.scootin.databinding.CustomerSupportBinding
-import com.scootin.databinding.FragmentCustomerSupportBinding
 import com.scootin.network.AppExecutors
 import com.scootin.util.fragment.autoCleared
 import com.scootin.viewmodel.account.SupportFragmentViewModel
