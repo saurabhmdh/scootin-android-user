@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="236dp"
             android:textColor="#000"
-            android:text="Please provide a clear and readable photo.\n\nPlease provide your mobile number also so that we can call you incase something is unclear or unnavailable from the list"
+            android:text="@string/grocery_order_instruction"
             app:layout_constraintEnd_toStartOf="@+id/receiver_photo_box"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -127,6 +127,7 @@
             android:id="@+id/appCompatImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/edit_drop_address"
             app:srcCompat="@drawable/ic_total_distance" />

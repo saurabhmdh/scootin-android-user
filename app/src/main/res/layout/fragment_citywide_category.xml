@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/ic_background">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_citywide_delivery_big"
+        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true"/>
+    <EditText
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_regular"
+        android:hint="@string/edittxt_hint_citywide"
+        android:inputType="text"
+        android:textSize="12dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:drawableLeft="@drawable/ic_location_icon"/>
+
+    <LinearLayout
+        android:layout_width="228dp"
+        android:layout_height="292dp"
+        android:background="@drawable/ic_category_selection_bg_citywide"
+        android:layout_marginTop="208dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="48dp"
+            android:orientation="vertical">
+
+            <RadioButton
+
+                android:id="@+id/materialRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="Document | Books"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#808080"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:buttonTint="#808080"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/materialRadioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:buttonTint="#808080"
+                android:textColor="#808080"
+                android:selectAllOnFocus="false"
+                android:text="Food | Edible item"
+                android:textStyle="bold"
+                android:textSize="13sp" />
+            <RadioButton
+                android:id="@+id/materialRadioButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:buttonTint="#808080"
+                android:textColor="#808080"
+                android:selectAllOnFocus="false"
+                android:text="Flowers | Cake"
+                android:textStyle="bold"
+                android:textSize="13sp" />
+            <RadioButton
+                android:id="@+id/materialRadioButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:buttonTint="#808080"
+                android:textColor="#808080"
+                android:selectAllOnFocus="false"
+                android:text="Electronics Items"
+                android:textStyle="bold"
+                android:textSize="13sp" />
+            <RadioButton
+                android:id="@+id/materialRadioButton5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:buttonTint="#808080"
+                android:textColor="#808080"
+                android:selectAllOnFocus="false"
+                android:text="Household Items"
+                android:textStyle="bold"
+                android:textSize="13sp" />
+            <RadioButton
+                android:id="@+id/materialRadioButton6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:buttonTint="#808080"
+                android:textColor="#808080"
+                android:selectAllOnFocus="false"
+                android:text="Items for Repairing"
+                android:textStyle="bold"
+                android:textSize="13sp" />
+            <RadioButton
+                android:id="@+id/materialRadioButton7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:buttonTint="#808080"
+                android:textColor="#808080"
+                android:selectAllOnFocus="false"
+                android:text="Clothes | Shoes"
+                android:textStyle="bold"
+                android:textSize="13sp" />
+        </RadioGroup>
+
+
+
+    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btn_done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="75dp"
+        android:padding="5dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_done_button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
+</RelativeLayout>

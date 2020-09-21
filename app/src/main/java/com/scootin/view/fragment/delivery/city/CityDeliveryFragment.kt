@@ -23,10 +23,6 @@ class CityDeliveryFragment : Fragment(R.layout.fragment_citywide_delivery) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCitywideDeliveryBinding.bind(view)
-
-        val citywideCategoryDialogFragment = CitywideCategoryDialogFragment()
-        citywideCategoryDialogFragment.show(childFragmentManager, "")
-
     }
 
 }
