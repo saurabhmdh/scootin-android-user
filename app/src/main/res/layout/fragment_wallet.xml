@@ -5,5 +5,5 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Wallet"/>
+        android:text="Payment testing"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

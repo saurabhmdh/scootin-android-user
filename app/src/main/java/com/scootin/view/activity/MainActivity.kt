@@ -10,15 +10,17 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.razorpay.PaymentResultListener
 import com.scootin.R
 import com.scootin.databinding.ActivityMainBinding
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.navigation.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), PaymentResultListener {
 
     private lateinit var binding: ActivityMainBinding
     private var currentNavController: LiveData<NavController>? = null
@@ -88,5 +90,11 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    override fun onPaymentSuccess(razorpayPaymentId: String?) {
+        Timber.i("Payment $razorpayPaymentId")
+    }
 
+    override fun onPaymentError(errorCode: Int, response: String?) {
+        Timber.i("onPaymentError $errorCode response = $response")
+    }
 }
