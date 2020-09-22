@@ -58,6 +58,9 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="@string/razor_pay_api_key" />
     </application>
 
 </manifest>

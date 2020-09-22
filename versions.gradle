@@ -93,6 +93,8 @@ versions.lottieVersion = '3.4.1'
 //versions.googleVersion = '18.1.0'
 versions.firebase = '20.2.4'
 
+versions.razoy_pay_checkout = '1.5.16'
+
 def deps = [:]
 
 def apptest = [:]
@@ -257,8 +259,8 @@ deps.adjust_installreferrer = "com.android.installreferrer:installreferrer:$vers
 deps.adjust_google_play_services_ads_identifier = "com.google.android.gms:play-services-ads-identifier:$versions.adjust_ads"
 deps.lottie = "com.airbnb.android:lottie:$versions.lottieVersion"
 
-//deps.facebook = "com.facebook.android:facebook-login:$versions.facebookVersion"
-//deps.google_login = "com.google.android.gms:play-services-auth:$versions.googleVersion"
+deps.razoy_pay = "com.razorpay:checkout:$versions.razoy_pay_checkout"
+
 
 
 def mockito = [:]
