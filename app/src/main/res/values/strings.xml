@@ -12,16 +12,20 @@
     <string name="select_category">Select Category</string>
 
 
+=======
+
     <string name="category_disabled">This category has been in active by administrator..</string>
 
     <string name="type_your_list_additionaly_you_can_mention_size_also_e_g_coke_250ml">Type your list, additionaly you can mention size also E.g Coke 250ml</string>
 
+>>>>>>> a50d1fbadff4fab55c359fdd52037ba33ec59a83
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="query_hint"><font size="15" fontfamily="@font/montserrat_regular">Search</font></string>
     <string name="query_hint_veg"><font size="15" fontfamily="@font/montserrat_regular">Search Vegetable or fruit</font></string>
     <string name="query_hint_medicine"><font size="15" fontfamily="@font/montserrat_regular">Search by Store</font></string>
     <string name="edittxt_hint"><font size="15" fontfamily="@font/montserrat_light">Phone No. (10 Digits)</font></string>
     <string name="edittxt_hint_citywide"><font size="12" fontfamily="@font/montserrat_light">Current Location(Home) | Type a new Address</font></string>
+    <string name="edittxt_hint_express_mobile"><font size="12" fontfamily="@font/montserrat_light">Mobile No.(Incase something is unclear or unavailable from the list)</font></string>
     <string name="edittxt_hint_payment"><font size="12" fontfamily="@font/montserrat_light">Delivery Location(Home) | Type a new Address</font></string>
     <string name="edittxt_hint_expressdel"><font size="12" fontfamily="@font/montserrat_light">Location</font></string>
     <string name="edittxt_hint_eng_mobno"><font size="12" fontfamily="@font/montserrat_light">Mobile No.</font></string>
@@ -73,16 +77,15 @@
     <string name="other">Other</string>
     <string name="state">State</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="finding_location">Finding location..</string>
     <string name="OrderID">Order ID: #0820260001</string>
-    <string name="enter_your_query">Please tell us how can we help you</string>
     <string name="_250">250</string>
     <string name="separator">/</string>
     <string name="_0">0</string>
     <string name="or_contact_us_for_older_orders">Or Contact Us For Older Orders</string>
     <string name="enter_order_id_for_call_support">Enter Order Id For Call Support</string>
-    <string name="_91_9000000000">+91-9000000000</string>
+
     <string name="_0720280002">#0720280002</string>
     <string name="essential_grocery"><![CDATA[Essential & Grocery]]></string>
     <string name="help">HELP</string>
@@ -119,7 +122,9 @@
     <string name="address">Address</string>
     <string name="area">Area</string>
     <string name="pin">Pin</string>
-
+    <string name="shop_by_product_or_store">Shop by Product or \nStore</string>
+    <string name="upload_a_photo_of_hand_written_list">Upload a Photo of Hand \nWritten List</string>
+    <string name="grocery_order_instruction">Please provide a clear and readable photo.\n\nPlease provide your mobile number also so that we can call you incase something is unclear or unnavailable from the list</string>
 
 
 </resources>

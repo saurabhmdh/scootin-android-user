@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/ic_background">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_eng_card"
+        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true"/>
+    <View
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="178dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/text_color_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="228dp"
+        android:layout_height="292dp"
+        android:background="@drawable/ic_category_bg"
+        android:layout_marginTop="208dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="80dp"
+            android:orientation="vertical">
+
+            <RadioButton
+
+                android:id="@+id/materialRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="@string/shop_by_product_or_store"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#808080"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:buttonTint="#808080"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/materialRadioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:buttonTint="#808080"
+                android:textColor="#808080"
+                android:selectAllOnFocus="false"
+                android:text="@string/upload_a_photo_of_hand_written_list"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                android:layout_marginTop="15dp"/>
+        </RadioGroup>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Delivery Slot"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="#000"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="16dp"/>
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:layout_width="match_parent"
+            android:layout_height="22dp"
+            android:background="@drawable/spinner_grad_bg"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="24dp"/>
+
+    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btn_done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="75dp"
+        android:padding="5dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_done_button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
+</RelativeLayout>

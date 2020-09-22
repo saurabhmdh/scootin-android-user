@@ -26,8 +26,6 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentGroceryDeliveryBinding.bind(view)
-        val lottieDialogFragment = EssentialCategoryDialogFragment()
-        lottieDialogFragment.show(childFragmentManager, "")
         setAdaper()
         essentialAdapter.submitList(setList())
         binding.radioGroup.setOnCheckedChangeListener { radioGroup, optionId ->
