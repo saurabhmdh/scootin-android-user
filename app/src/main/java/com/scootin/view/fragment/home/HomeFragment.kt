@@ -206,10 +206,12 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     }
 
     private fun handlePlaceSuccessResponse(place: Place?) {
-        Timber.i("Place: ${place?.name}, ${place?.id} ")
-        Timber.i("Place: ${place?.latLng?.latitude}, ${place?.latLng?.longitude}, ${place?.address} ")
-        updateAddress(place?.address)
-        updateServiceArea(place?.latLng)
+        place?.let {
+            Timber.i("Place: ${it.name}, ${it.id} ")
+            Timber.i("Place: ${it.latLng?.latitude}, ${it.latLng?.longitude}, ${it.address} ")
+            updateAddress(it.address)
+            updateServiceArea(it.latLng)
+        }
     }
 
     private fun updateServiceArea(location: LatLng?) {
@@ -260,7 +262,9 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
                 if (task.isSuccessful) {
                     val response = task.result
                     val place = response?.placeLikelihoods?.first()?.place
-                    handlePlaceSuccessResponse(place)
+                    place?.let {
+                        handlePlaceSuccessResponse(place)
+                    }
                 } else {
                     val exception = task.exception
                     if (exception is ApiException) {
