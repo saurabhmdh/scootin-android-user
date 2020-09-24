@@ -11,29 +11,39 @@
     <string name="done">Done</string>
     <string name="select_category">Select Category</string>
 
-
-=======
-
     <string name="category_disabled">This category has been in active by administrator..</string>
+
+    <!-- Error messages -->
+    <string name="error_message_invalid_mobile">Please provide a valid mobile number</string>
+    <string name="error_message_invalid_otp">Please provide a valid OTP</string>
+    <string name="server_error">Server error, try again later !!</string>
+
+
+    <!-- Success Messages -->
+    <string name="success_message_otp">OTP has been send to %1$s</string>
+
 
     <string name="type_your_list_additionaly_you_can_mention_size_also_e_g_coke_250ml">Type your list, additionaly you can mention size also E.g Coke 250ml</string>
 
->>>>>>> a50d1fbadff4fab55c359fdd52037ba33ec59a83
+
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
-    <string name="query_hint"><font size="15" fontfamily="@font/montserrat_regular">Search</font></string>
-    <string name="query_hint_veg"><font size="15" fontfamily="@font/montserrat_regular">Search Vegetable or fruit</font></string>
-    <string name="query_hint_medicine"><font size="15" fontfamily="@font/montserrat_regular">Search by Store</font></string>
-    <string name="edittxt_hint"><font size="15" fontfamily="@font/montserrat_light">Phone No. (10 Digits)</font></string>
-    <string name="edittxt_hint_citywide"><font size="12" fontfamily="@font/montserrat_light">Current Location(Home) | Type a new Address</font></string>
-    <string name="edittxt_hint_express_mobile"><font size="12" fontfamily="@font/montserrat_light">Mobile No.(Incase something is unclear or unavailable from the list)</font></string>
-    <string name="edittxt_hint_payment"><font size="12" fontfamily="@font/montserrat_light">Delivery Location(Home) | Type a new Address</font></string>
-    <string name="edittxt_hint_expressdel"><font size="12" fontfamily="@font/montserrat_light">Location</font></string>
-    <string name="edittxt_hint_eng_mobno"><font size="12" fontfamily="@font/montserrat_light">Mobile No.</font></string>
-    <string name="edittxt_hint_OTP"><font size="15" fontfamily="@font/montserrat_light">OTP</font></string>
-    <string name="edittxt_hint_Pin"><font size="15" fontfamily="@font/montserrat_light">City Pin Code</font></string>
-    <string name="edittxt_card_exp_date"><font size="14" fontfamily="@font/montserrat_bold">MM/YY</font></string>
-    <string name="edittxt_card_name"><font size="14" fontfamily="@font/montserrat_bold">Name on card</font></string>
-    <string name="edittxt_security_code"><font size="14" fontfamily="@font/montserrat_bold">Security Code</font></string>
+    <string name="query_hint">Search</string>
+    <string name="query_hint_veg">Search Vegetable or fruit</string>
+    <string name="query_hint_medicine">Search by Store</string>
+    <string name="edittxt_hint">Phone No. (10 Digits)</string>
+    <string name="edittxt_hint_citywide">Current Location(Home) | Type a new Address</string>
+    <string name="edittxt_hint_express_mobile">Mobile No.(Incase something is unclear or unavailable from the list)</string>
+
+
+    <string name="edittxt_hint_payment">Delivery Location(Home) | Type a new Address</string>
+    <string name="edittxt_hint_expressdel">Location</string>
+    <string name="edittxt_hint_eng_mobno">Mobile No.</string>
+    <string name="edittxt_hint_OTP">OTP</string>
+    <string name="edittxt_hint_Pin">City Pin Code</string>
+    <string name="edittxt_card_exp_date">MM/YY</string>
+    <string name="edittxt_card_name">Name on card</string>
+    <string name="edittxt_security_code">Security Code</string>
+
     <string name="edittxt_user_name"><font size="15" fontfamily="@font/montserrat_bold">Name</font></string>
     <string name="edittxt_user_mob_no"><font size="15" fontfamily="@font/montserrat_bold">Phone Number</font></string>
     <string name="edittxt_user_address"><font size="15" fontfamily="@font/montserrat_bold">Address</font></string>

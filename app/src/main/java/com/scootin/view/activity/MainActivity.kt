@@ -78,15 +78,15 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == AppConstants.RESULT_LOAD_IMAGE_VIDEO) {
-            val navHostFragment = supportFragmentManager.fragments.first() as? NavHostFragment
-            if (navHostFragment != null) {
-                val childFragments = navHostFragment.childFragmentManager.fragments
-                childFragments.forEach { fragment ->
-                    fragment.onActivityResult(requestCode, resultCode, data)
-                }
+
+        val navHostFragment = supportFragmentManager.fragments.first() as? NavHostFragment
+        if (navHostFragment != null) {
+            val childFragments = navHostFragment.childFragmentManager.fragments
+            childFragments.forEach { fragment ->
+                fragment.onActivityResult(requestCode, resultCode, data)
             }
         }
+
     }
 
 

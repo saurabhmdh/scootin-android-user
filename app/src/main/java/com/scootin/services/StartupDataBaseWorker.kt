@@ -3,6 +3,8 @@ package com.scootin.services
 import android.app.Application
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import com.google.android.libraries.places.api.Places
+import com.scootin.R
 import com.scootin.di.IWorkerFactory
 import com.scootin.network.AppExecutors
 import kotlinx.coroutines.coroutineScope
@@ -15,6 +17,9 @@ class StartupDataBaseWorker (
 ): CoroutineWorker(context, params) {
     override suspend fun doWork(): Result = coroutineScope {
         Timber.i("Running Successfully..")
+
+        Places.initialize(context, context.getString(R.string.google_maps_key))
+
         Result.success()
     }
 

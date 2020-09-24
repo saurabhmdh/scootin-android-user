@@ -3,7 +3,6 @@ package com.scootin.extensions
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import com.rakuten.travel.consumer.extensions.updateVisibility
 import com.scootin.R
 
 fun View.slideUpDownVisibility(isVisible: Boolean) {

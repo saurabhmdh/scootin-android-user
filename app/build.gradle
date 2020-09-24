@@ -21,7 +21,7 @@ android {
         versionCode Integer.parseInt(project.VERSION_CODE)
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
-        testInstrumentationRunner "com.rakuten.travel.consumer.util.TestRunner"
+
         buildConfigField "int", "DB_VERSION", project.DATABASE_VERSION
     }
 
@@ -91,6 +91,8 @@ dependencies {
     implementation deps.play.map
     implementation deps.play.location
     implementation deps.play.core
+    implementation deps.play.places
+
     implementation deps.map_utils
 
     kapt deps.room.compiler

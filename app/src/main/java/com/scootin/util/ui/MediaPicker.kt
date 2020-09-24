@@ -24,7 +24,7 @@ class MediaPicker(val context: Activity) {
     fun getImagePickerSelectionPanel() {
         val storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
-        val fname = "Rakuten_travel_$timeStamp"
+        val fname = "random_$timeStamp"
 
         val sdImageMainDirectory = File(storageDir, fname)
         val outputFileUri = Uri.fromFile(sdImageMainDirectory)

@@ -1,15 +1,15 @@
 package com.scootin.view.fragment.home
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Geocoder
-import android.location.Location
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-
 import com.scootin.databinding.FragmentHomeBinding
 import com.scootin.network.AppExecutors
 import com.scootin.util.fragment.autoCleared
@@ -18,13 +18,18 @@ import timber.log.Timber
 import javax.inject.Inject
 
 import androidx.navigation.fragment.findNavController
-
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
+import com.google.android.libraries.places.widget.Autocomplete
+import com.google.android.libraries.places.widget.AutocompleteActivity
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.google.firebase.iid.FirebaseInstanceId
 import com.scootin.R
 import com.scootin.network.api.Status
-import com.scootin.network.response.categories.HomeResponseCategory
+import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.ui.UtilPermission
 
@@ -36,13 +41,15 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     private var binding by autoCleared<FragmentHomeBinding>()
     private val viewModel: HomeFragmentViewModel by viewModels()
 
-    //This code is for Rider..
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     private lateinit var homeCategoryList: List<HomeResponseCategory>
 
     @Inject
     lateinit var appExecutors: AppExecutors
+
+    private val AUTOCOMPLETE_REQUEST_CODE = 1
+
+    val fields = listOf(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,8 +58,6 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         Timber.i("height =  ${binding.express.height} Width = ${binding.express.width}")
         updateListeners()
 
-        //Find user location
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         checkForMap()
 
         //Let me try firebase integration..
@@ -67,6 +72,31 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         doNetworkCall()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        Timber.i("onActivityResult $requestCode $resultCode -> $data")
+
+        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
+            when (resultCode) {
+                Activity.RESULT_OK -> {
+                    data?.let {
+                        val place = Autocomplete.getPlaceFromIntent(data)
+                        handlePlaceSuccessResponse(place)
+                    }
+                }
+                AutocompleteActivity.RESULT_ERROR -> {
+                    data?.let {
+                        val status = Autocomplete.getStatusFromIntent(data)
+                        Timber.i(status.statusMessage)
+                    }
+                }
+                Activity.RESULT_CANCELED -> {
+                    // The user canceled the operation.
+                }
+            }
+            return
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
 
     private fun doNetworkCall() {
         viewModel.getHomeCategory().observe(viewLifecycleOwner, {
@@ -82,6 +112,14 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
                 Status.LOADING -> {
                 }
             }
+        })
+
+        viewModel.serviceArea.observe(viewLifecycleOwner, {
+            Toast.makeText(context, "Congratulation!! We are serving in area = " +it.name, Toast.LENGTH_LONG).show()
+        })
+
+        viewModel.serviceAreaError.observe(viewLifecycleOwner, {
+            Toast.makeText(context, "Sorry!! Our services are not allowed in this area..\n Please change the location..", Toast.LENGTH_LONG).show()
         })
     }
 
@@ -159,40 +197,40 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         }
 
 
+        binding.userLocation.setOnClickListener {
+            val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
+                .build(requireContext())
+            startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)
+        }
+
     }
 
+    private fun handlePlaceSuccessResponse(place: Place?) {
+        Timber.i("Place: ${place?.name}, ${place?.id} ")
+        Timber.i("Place: ${place?.latLng?.latitude}, ${place?.latLng?.longitude}, ${place?.address} ")
+        updateAddress(place?.address)
+        updateServiceArea(place?.latLng)
+    }
 
-    private fun setupLocationUpdateListener() {
-        try {
-            fusedLocationClient.lastLocation
-                .addOnSuccessListener { location: Location ->
-                    //https://developers.google.com/maps/documentation/geocoding/overview?csw=1#ReverseGeocoding
-                    Timber.i("fusedLocationClient lastLocation: = $location")
-                    updateLocationName(location)
-                }
-                .addOnFailureListener {
-                    Timber.i("update location fail: $it")
-                }
-        } catch (e: SecurityException) {
-            Timber.i("We don't have permission of map: ${e.message}")
-            UtilPermission.requestMapPermission(this)
+    private fun updateServiceArea(location: LatLng?) {
+        location?.let {
+            Timber.i("get location: ${it.latitude}, ${it.longitude}")
+            viewModel.findServiceArea(it.latitude, it.longitude)
+        }
+
+    }
+
+    private fun updateAddress(address : String?) {
+        address?.let {
+            binding.userLocation.text = it
         }
     }
-
-    private fun updateLocationName(location: Location) {
-        Timber.i("get location: ${location.latitude}, ${location.longitude}")
-        val result = Geocoder(context).getFromLocation(location.latitude, location.longitude, 1)
-        Timber.i("location result = " + result.getOrNull(0))
-
-        binding.userLocation.text = result.getOrNull(0)?.getAddressLine(0).orEmpty()
-    }
-
 
     private fun checkForMap() {
         if (!UtilPermission.hasMapPermission(requireContext())) {
             UtilPermission.requestMapPermission(this)
         } else {
-            setupLocationUpdateListener()
+            getAddressFromPlaces()
         }
     }
 
@@ -204,10 +242,34 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         when (requestCode) {
             AppConstants.RC_LOCATION_PERMISSIONS -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    setupLocationUpdateListener()
+                    getAddressFromPlaces()
                 }
             }
             else -> {}
+        }
+    }
+
+    private fun getAddressFromPlaces() {
+        val request: FindCurrentPlaceRequest = FindCurrentPlaceRequest.newInstance(fields)
+
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
+            PackageManager.PERMISSION_GRANTED) {
+            val placesClient = Places.createClient(requireContext())
+            val placeResponse = placesClient.findCurrentPlace(request)
+            placeResponse.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val response = task.result
+                    val place = response?.placeLikelihoods?.first()?.place
+                    handlePlaceSuccessResponse(place)
+                } else {
+                    val exception = task.exception
+                    if (exception is ApiException) {
+                        Timber.e( "Place not found: ${exception.statusCode}")
+                    }
+                }
+            }
+        } else {
+            UtilPermission.requestMapPermission(this)
         }
     }
 }

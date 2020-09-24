@@ -92,7 +92,7 @@ versions.lottieVersion = '3.4.1'
 //versions.facebookVersion = '[5,6)'
 //versions.googleVersion = '18.1.0'
 versions.firebase = '20.2.4'
-
+versions.places = '2.4.0'
 versions.razoy_pay_checkout = '1.5.16'
 
 def deps = [:]
@@ -177,6 +177,7 @@ play.map = "com.google.android.gms:play-services-maps:$versions.play"
 play.location = "com.google.android.gms:play-services-location:$versions.play"
 play.core = "com.google.android.play:core:$versions.core"
 play.firebase = "com.google.firebase:firebase-messaging:$versions.firebase"
+play.places = "com.google.android.libraries.places:places:$versions.places"
 
 deps.play = play
 
