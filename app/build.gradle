@@ -21,7 +21,7 @@ android {
         versionCode Integer.parseInt(project.VERSION_CODE)
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
-        testInstrumentationRunner "com.rakuten.travel.consumer.util.TestRunner"
+
         buildConfigField "int", "DB_VERSION", project.DATABASE_VERSION
     }
 

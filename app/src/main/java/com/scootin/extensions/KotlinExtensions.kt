@@ -1,4 +1,4 @@
-package com.rakuten.travel.consumer.extensions
+package com.scootin.extensions
 
 import android.content.Context
 import android.content.ContextWrapper

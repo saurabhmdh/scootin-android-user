@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
-import com.rakuten.travel.consumer.extensions.updateVisibility
+
 import com.scootin.databinding.SelectedImageVideoBinding
+import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.util.interfaces.IMediaItem
