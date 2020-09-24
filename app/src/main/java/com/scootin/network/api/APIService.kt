@@ -1,7 +1,8 @@
 package com.scootin.network.api
 
 import com.scootin.network.manager.AppHeaders
-import com.scootin.network.response.categories.HomeResponseCategory
+import com.scootin.network.response.home.HomeResponseCategory
+import com.scootin.network.response.home.ResponseServiceArea
 import com.scootin.network.response.login.ResponseUser
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -23,4 +24,8 @@ interface APIService {
 
     @POST("/auth/refresh/user")
     suspend fun refreshToken(@Body options: Map<String, String>, @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()): Response<ResponseUser>
+
+
+    @POST("/service-area/find-by-location")
+    suspend fun findServiceArea(@Body options: Map<String, String>, @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()): Response<ResponseServiceArea>
 }
