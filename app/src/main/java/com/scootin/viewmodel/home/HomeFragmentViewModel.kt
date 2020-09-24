@@ -21,6 +21,8 @@ internal constructor(
 
     val serviceArea = MutableLiveData<ServiceArea>()
 
+    val serviceAreaError = MutableLiveData<Boolean>()
+
     fun getHomeCategory()= categoryRepository.getHomeCategory(viewModelScope.coroutineContext + Dispatchers.IO)
 
     fun findServiceArea(latitude: Double, longitude: Double) {
@@ -30,9 +32,14 @@ internal constructor(
             if (response.isSuccessful) {
                 val result = response.body()
                 Timber.i("We find decide your service area = ${result}")
-                result?.let {
-                    serviceArea.postValue(ServiceArea(it.id, it.name))
+
+                if (result == null) {
+                    serviceAreaError.postValue(true)
+                } else {
+                    serviceArea.postValue(ServiceArea(result.id, result.name))
                 }
+            } else {
+                serviceAreaError.postValue(true)
             }
         }
     }
