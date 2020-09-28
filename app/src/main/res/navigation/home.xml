@@ -27,11 +27,11 @@
         android:label="Home">
         <action
             android:id="@+id/home_to_express_delivery"
-            app:destination="@id/express_delivery"
+            app:destination="@id/expressDeliveryCategoryFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"/>
 
         <action
             android:id="@+id/home_to_city_delivery"
@@ -252,7 +252,10 @@
         app:popEnterAnim="@anim/slide_in_left"
         app:popExitAnim="@anim/slide_out_right" />
     </fragment>
-
+    <fragment
+        android:id="@+id/expressDeliveryCategoryFragment"
+        android:name="com.scootin.view.fragment.delivery.express.ExpressDeliveryCategoryFragment"
+        android:label="ExpressDeliveryCategoryFragment" />
 
 
 </navigation>

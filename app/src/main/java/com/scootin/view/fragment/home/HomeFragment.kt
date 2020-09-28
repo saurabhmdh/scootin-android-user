@@ -16,7 +16,7 @@ import com.scootin.util.fragment.autoCleared
 import com.scootin.viewmodel.home.HomeFragmentViewModel
 import timber.log.Timber
 import javax.inject.Inject
-
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.maps.model.LatLng
