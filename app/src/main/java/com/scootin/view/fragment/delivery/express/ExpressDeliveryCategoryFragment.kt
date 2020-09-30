@@ -27,7 +27,7 @@ class ExpressDeliveryCategoryFragment : Fragment(R.layout.fragment_express_deliv
 
     private val viewModel: HomeFragmentViewModel by viewModels()
 
-
+    var mSelectPos=-1
     private lateinit var homeCategoryList: List<HomeResponseCategory>
 
     @Inject
@@ -45,7 +45,15 @@ class ExpressDeliveryCategoryFragment : Fragment(R.layout.fragment_express_deliv
 
     private fun setStoreAdapter() {
         expressDeliveryAdapter = ExpressCategoryAdapter(
-            appExecutors)
+            appExecutors,ExpressDeliveryCategoryFragment(),
+            object : ExpressCategoryAdapter.StoreImageAdapterClickListener {
+
+                override fun onSelectButtonSelected(position: Int) {
+                    mSelectPos=position
+                    expressDeliveryAdapter.notifyDataSetChanged()
+                }
+
+            })
         binding.list.apply {
             adapter = expressDeliveryAdapter
         }

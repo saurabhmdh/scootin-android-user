@@ -255,7 +255,11 @@
     <fragment
         android:id="@+id/expressDeliveryCategoryFragment"
         android:name="com.scootin.view.fragment.delivery.express.ExpressDeliveryCategoryFragment"
-        android:label="ExpressDeliveryCategoryFragment" />
+        android:label="ExpressDeliveryCategoryFragment" >
+        <action
+            android:id="@+id/action_expressDeliveryCategoryFragment_to_express_delivery"
+            app:destination="@id/express_delivery" />
+    </fragment>
 
 
 </navigation>

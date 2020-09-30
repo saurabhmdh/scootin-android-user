@@ -43,7 +43,7 @@ class ExpressDeliveryFragment : Fragment(R.layout.fragment_express_delivery_cate
             object : EssentialGroceryStoreAdapter.StoreImageAdapterClickListener {
 
                 override fun onSelectButtonSelected(view: View) {
-                    findNavController().navigate(ExpressDeliveryFragmentDirections.actionExpressDeliveryToExpressOrders2())
+                    //findNavController().navigate(ExpressDeliveryFragmentDirections.actionExpressDeliveryToExpressOrders2())
                 }
 
             })
