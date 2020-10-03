@@ -23,8 +23,11 @@ class DBProviderModule {
         .build()
 
 
-
     @Singleton
     @Provides
     fun provideCacheDao(db: ProjectDb) = db.cacheDao()
+
+    @Singleton
+    @Provides
+    fun provideLocationDao(db: ProjectDb) = db.locationDao()
 }

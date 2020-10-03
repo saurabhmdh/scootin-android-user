@@ -3,6 +3,7 @@ package com.scootin.viewmodel.home
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.scootin.database.dao.LocationDao
 import com.scootin.network.api.APIService
 import com.scootin.repository.CategoryRepository
 import com.scootin.view.vo.ServiceArea
@@ -16,8 +17,11 @@ import kotlin.coroutines.CoroutineContext
 class HomeFragmentViewModel @ViewModelInject
 internal constructor(
     private val categoryRepository: CategoryRepository,
-    private val apiService: APIService
+    private val apiService: APIService,
+    private val locationDao: LocationDao
 ) : ObservableViewModel(), CoroutineScope {
+
+    val presentLocation = locationDao.getCurrentLocation()
 
     val serviceArea = MutableLiveData<ServiceArea>()
 

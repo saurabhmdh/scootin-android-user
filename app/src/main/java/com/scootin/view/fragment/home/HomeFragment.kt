@@ -203,6 +203,10 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
             startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)
         }
 
+        viewModel.presentLocation.observe(viewLifecycleOwner, {
+            Timber.i("We have got below location $it")
+        })
+
     }
 
     private fun handlePlaceSuccessResponse(place: Place?) {
