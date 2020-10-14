@@ -205,6 +205,9 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
 
         viewModel.presentLocation.observe(viewLifecycleOwner, {
             Timber.i("We have got below location $it")
+            if(it != null) {
+                updateAddress(it.address)
+            }
         })
 
     }
@@ -213,6 +216,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         place?.let {
             Timber.i("Place: ${it.name}, ${it.id} ")
             Timber.i("Place: ${it.latLng?.latitude}, ${it.latLng?.longitude}, ${it.address} ")
+            viewModel.updateLocation(place)
             updateAddress(it.address)
             updateServiceArea(it.latLng)
         }
@@ -256,6 +260,12 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     }
 
     private fun getAddressFromPlaces() {
+        //Check where viewmodel has or not..
+        if (viewModel.presentLocation.value != null) {
+            Timber.i("Already has location..")
+            return
+        }
+        Timber.i("We need to find location of user.")
         val request: FindCurrentPlaceRequest = FindCurrentPlaceRequest.newInstance(fields)
 
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==

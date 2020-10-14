@@ -13,8 +13,11 @@ interface LocationDao {
     suspend fun insert(location: EntityLocation)
 
     @Query("SELECT * FROM entity_location")
-    fun getCurrentLocation(): LiveData<EntityLocation>
+    fun getCurrentLocation(): LiveData<EntityLocation?>
 
     @Query("SELECT * FROM entity_location")
     suspend fun getEntityLocation(): EntityLocation
+
+    @Query("DELETE FROM entity_location")
+    fun clearAll()
 }

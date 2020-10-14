@@ -37,6 +37,8 @@ fun Int?.orDefault(value: Int): Int = this ?: value
 
 fun Long?.orZero(): Long = this ?: 0L
 
+fun Double?.orDefault(value: Double): Double = this ?: value
+
 fun Date?.orCurrentDate(): Date = this ?: Date()
 
 inline fun <reified T : Fragment> instanceOf(vararg params: Pair<String, Any>) =

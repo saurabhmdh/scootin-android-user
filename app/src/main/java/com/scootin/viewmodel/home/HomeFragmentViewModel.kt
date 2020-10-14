@@ -3,7 +3,9 @@ package com.scootin.viewmodel.home
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.google.android.libraries.places.api.model.Place
 import com.scootin.database.dao.LocationDao
+import com.scootin.database.table.EntityLocation
 import com.scootin.network.api.APIService
 import com.scootin.repository.CategoryRepository
 import com.scootin.view.vo.ServiceArea
@@ -48,6 +50,11 @@ internal constructor(
         }
     }
 
+    fun updateLocation(place: Place) {
+        launch {
+            locationDao.insert(EntityLocation(place))
+        }
+    }
     override val coroutineContext: CoroutineContext
         get() = viewModelScope.coroutineContext + Dispatchers.IO
 
