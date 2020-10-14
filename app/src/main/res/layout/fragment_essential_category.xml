@@ -11,6 +11,17 @@
         app:srcCompat="@drawable/ic_eng_card"
         android:layout_marginTop="60dp"
         android:layout_centerHorizontal="true"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back_arrow" />
+
     <View
         android:id="@+id/imageView"
         android:layout_width="match_parent"
@@ -38,7 +49,6 @@
             android:orientation="vertical">
 
             <RadioButton
-
                 android:id="@+id/materialRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

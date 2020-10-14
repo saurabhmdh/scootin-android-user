@@ -260,7 +260,6 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     }
 
     private fun getAddressFromPlaces() {
-        //Check where viewmodel has or not..
         if (viewModel.presentLocation.value != null) {
             Timber.i("Already has location..")
             return
