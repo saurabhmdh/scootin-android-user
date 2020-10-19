@@ -9,6 +9,7 @@ import com.scootin.network.api.Resource
 import com.scootin.network.request.RequestSearch
 import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.repository.SearchRepository
+import com.scootin.util.constants.AppConstants
 import com.scootin.viewmodel.base.ObservableViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -21,20 +22,24 @@ class CategoriesViewModel @ViewModelInject internal constructor(
     searchRepository: SearchRepository
 ) : ObservableViewModel() {
 
-    val _searchShop = MutableLiveData<SearchShopsByCategory>()
+    private val _searchShop = MutableLiveData<SearchShopsByCategory>()
 
-    class SearchShopsByCategory(categoryID: Int, query: String)
+    data class SearchShopsByCategory(val query: String)
 
-    fun doSearchShop(categoryID: Int, query: String) {
-        _searchShop.postValue(SearchShopsByCategory(categoryID, query))
+    fun doSearchShop(query: String) {
+        _searchShop.postValue(SearchShopsByCategory(query))
     }
 
-    val shops: LiveData<Response<List<SearchShopsByCategoryResponse>>> = _searchShop.switchMap { searchDetail ->
+    val shops: LiveData<Response<List<SearchShopsByCategoryResponse>>> = _searchShop.switchMap { search ->
+
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-            Timber.i("Search Detail ${searchDetail}")
+            Timber.i("Search Detail ${search.query}")
             val locationInfo = locationDao.getEntityLocation()
-            val request = RequestSearch(locationInfo.longitude, locationInfo.latitude, "tea")
-            emit(searchRepository.searchShops(request, "8052", "253"))
+            val mainCategory = cacheDao.getCacheData(AppConstants.MAIN_CATEGORY)?.value
+            val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
+
+            val request = RequestSearch(locationInfo.longitude, locationInfo.latitude,search.query)
+            emit(searchRepository.searchShops(request, serviceArea.orEmpty(), mainCategory.orEmpty()))
         }
     }
 

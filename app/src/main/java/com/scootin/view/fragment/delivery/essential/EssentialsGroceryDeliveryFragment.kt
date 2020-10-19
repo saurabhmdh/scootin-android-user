@@ -71,7 +71,7 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
                         }
                         1 -> {
                             query?.let {
-                                viewModel.doSearchShop(23, it)
+                                viewModel.doSearchShop(it)
                             }
                         }
                     }

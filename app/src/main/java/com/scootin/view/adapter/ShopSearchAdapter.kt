@@ -36,10 +36,12 @@ class ShopSearchAdapter (
     ) {
         Timber.i("item = $item")
         item.apply {
+
+            //TODO: Its should use databinding..
             binding.name.setText(name)
             binding.distance.setText(distance)
 
-//            binding.ratingCount.setRating(rating)
+            binding.ratingCount.setRating(rating.toFloat())
 
 //            if (isOpen){
             binding.onlinestatusStore.setText("Online")

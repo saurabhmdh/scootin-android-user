@@ -148,6 +148,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
 
         binding.essentialsGrocery.setOnClickListener {
             if (isActiveCategory(it.tag)) {
+                viewModel.updateMainCategory(it.tag as String?)
                 findNavController().navigate(HomeFragmentDirections.homeToEssential())
             } else {
                 showDisabledText()
@@ -156,6 +157,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
 
         binding.stationery.setOnClickListener {
             if (isActiveCategory(it.tag)) {
+                viewModel.updateMainCategory(it.tag as String?)
                 findNavController().navigate(HomeFragmentDirections.homeToStationary())
             } else {
                 showDisabledText()
@@ -164,6 +166,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
 
         binding.sweetSnacks.setOnClickListener {
             if (isActiveCategory(it.tag)) {
+                viewModel.updateMainCategory(it.tag as String?)
                 findNavController().navigate(HomeFragmentDirections.homeToSweets())
             } else {
                 showDisabledText()
@@ -173,6 +176,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
 
         binding.medicines.setOnClickListener {
             if (isActiveCategory(it.tag)) {
+                viewModel.updateMainCategory(it.tag as String?)
                 findNavController().navigate(HomeFragmentDirections.homeToMedicines())
             } else {
                 showDisabledText()
@@ -181,6 +185,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
 
         binding.clothing.setOnClickListener {
             if (isActiveCategory(it.tag)) {
+                viewModel.updateMainCategory(it.tag as String?)
                 findNavController().navigate(HomeFragmentDirections.homeToClothes())
             } else {
                 showDisabledText()
@@ -190,6 +195,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
 
         binding.vegetablesFruits.setOnClickListener {
             if (isActiveCategory(it.tag)) {
+                viewModel.updateMainCategory(it.tag as String?)
                 findNavController().navigate(HomeFragmentDirections.homeToVeg())
             } else {
                 showDisabledText()
