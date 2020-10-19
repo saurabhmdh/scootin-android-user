@@ -5,15 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import com.scootin.R
-import com.scootin.databinding.AdapterOrderHistoryListBinding
 import com.scootin.databinding.AdapterOrderSummaryBinding
 import com.scootin.network.AppExecutors
-import com.scootin.network.response.orders.OrderHistoryList
 import com.scootin.network.response.orders.OrderedItemsList
 import com.scootin.view.adapter.DataBoundListAdapter
 import timber.log.Timber
-import javax.inject.Inject
 
 class OrderSummaryAdapter (
     val appExecutors: AppExecutors,
