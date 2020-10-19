@@ -19,6 +19,7 @@ object AppConstants {
 
     const val SERVICE_AREA = "service-area"
 
+    const val FCM_ID = "fcm-id"
     /* Constant value for Write Review Screen */
     const val RESULT_LOAD_IMAGE_VIDEO = 1
     const val UPLOAD_IMAGE_SIZE = 10 * 1024 * 1024 // 10 MB

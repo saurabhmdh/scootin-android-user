@@ -39,7 +39,7 @@ class SplashViewModel @ViewModelInject internal constructor(
             val updatedUserInfo = Gson().toJson(userInfo)
             cacheDao.insert(Cache(AppConstants.USER_INFO, updatedUserInfo))
             AppHeaders.updateUserData(userInfo)
-
+            Timber.i("Saurabh user value $userInfo")
             emit(false)
         }
     }

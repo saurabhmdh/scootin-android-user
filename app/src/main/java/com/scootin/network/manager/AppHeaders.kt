@@ -17,7 +17,7 @@ object AppHeaders {
     fun getHeaderMap() = hashMapOf(AppConstants.AUTHORIZATION to PREFIX + token)
 
     fun updateUserData(user: ResponseUser) {
-        userID = user.userID
+        userID = user.user
         token = user.getTokenData()
         role = user.role
     }
