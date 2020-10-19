@@ -22,15 +22,15 @@ class CategoriesViewModel @ViewModelInject internal constructor(
     searchRepository: SearchRepository
 ) : ObservableViewModel() {
 
-    private val _searchShop = MutableLiveData<SearchShopsByCategory>()
+    private val _search = MutableLiveData<SearchShopsByCategory>()
 
     data class SearchShopsByCategory(val query: String)
 
-    fun doSearchShop(query: String) {
-        _searchShop.postValue(SearchShopsByCategory(query))
+    fun doSearch(query: String) {
+        _search.postValue(SearchShopsByCategory(query))
     }
 
-    val shops: LiveData<Response<List<SearchShopsByCategoryResponse>>> = _searchShop.switchMap { search ->
+    val shops: LiveData<Response<List<SearchShopsByCategoryResponse>>> = _search.switchMap { search ->
 
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
             Timber.i("Search Detail ${search.query}")
@@ -45,5 +45,18 @@ class CategoriesViewModel @ViewModelInject internal constructor(
 
     private val handler = CoroutineExceptionHandler { _, exception ->
         Timber.i("Caught  $exception")
+    }
+
+    val product: LiveData<Response<List<SearchShopsByCategoryResponse>>> = _search.switchMap { search ->
+
+        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+            Timber.i("Search Detail ${search.query}")
+            val locationInfo = locationDao.getEntityLocation()
+            val mainCategory = cacheDao.getCacheData(AppConstants.MAIN_CATEGORY)?.value
+            val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
+
+            val request = RequestSearch(locationInfo.longitude, locationInfo.latitude,search.query)
+            emit(searchRepository.searchShops(request, serviceArea.orEmpty(), mainCategory.orEmpty()))
+        }
     }
 }
