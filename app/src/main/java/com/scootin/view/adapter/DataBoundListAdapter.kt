@@ -6,11 +6,12 @@ import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.scootin.network.AppExecutors
+import com.scootin.network.response.sweets.CakeItem
 import com.scootin.view.holders.DataBoundViewHolder
 
 abstract class DataBoundListAdapter<T, V : ViewDataBinding>(
     appExecutors: AppExecutors,
-    diffCallback: DiffUtil.ItemCallback<T>
+    diffCallback: DiffUtil.ItemCallback<CakeItem>
 ) : ListAdapter<T, DataBoundViewHolder<V>>(
     AsyncDifferConfig.Builder<T>(diffCallback)
         .setBackgroundThreadExecutor(appExecutors.diskIO())

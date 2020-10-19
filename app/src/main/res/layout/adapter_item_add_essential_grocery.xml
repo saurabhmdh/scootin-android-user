@@ -4,6 +4,13 @@
     android:layout_marginBottom="5dp"
     xmlns:card_view="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="data"
+            type="com.scootin.network.response.SearchProductsByCategoryResponse"/>
+
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,13 +27,13 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="12dp"
-
+            app:setImage="@{data.productImage.url}"
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/aashirvaad_atta" />
-
+             />
+<!--        app:setImage="@{data.productImage.url}"-->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/space"
             android:layout_width="wrap_content"
@@ -45,16 +52,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/montserrat_regular"
             android:maxLength="20"
-            android:text="Business name"
+
             android:textAllCaps="true"
             android:textColor="#a9a9a9"
             android:textSize="11sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/space"
             app:layout_constraintTop_toTopOf="parent" />
+<!--        android:text="@{data.title}"-->
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/detail"
@@ -63,28 +71,29 @@
             android:layout_marginStart="8dp"
             android:fontFamily="@font/montserrat_regular"
             android:maxLength="30"
-            android:text="Hello"
+            android:layout_marginTop="4dp"
+
             android:textColor="@android:color/black"
             android:textSize="11sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/space"
             app:layout_constraintTop_toBottomOf="@+id/name" />
-
+<!--        android:text="@{data.description}"-->
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="@dimen/dimen_10"
+            android:layout_marginTop="4dp"
             android:fontFamily="@font/montserrat_regular"
-            android:text="100$"
+
             android:textColor="@android:color/black"
             android:textSize="11dp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/space"
             app:layout_constraintTop_toBottomOf="@+id/detail" />
-
+<!--        android:text="@{data.price}"-->
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/discountPrice"
             android:layout_width="wrap_content"
@@ -94,12 +103,13 @@
             android:ellipsize="end"
             android:fontFamily="@font/montserrat_regular"
             android:singleLine="true"
-            android:text="250$"
+
             android:textColor="#a9a9a9"
             android:textSize="11dp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/price"
             app:layout_constraintStart_toEndOf="@+id/space" />
+<!--        android:text="@{data.price}"-->
         <!--<androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/spinner"
             android:layout_width="140dp"

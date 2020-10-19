@@ -9,10 +9,8 @@ import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.scootin.R
 import com.scootin.databinding.AdapterItemAddEssentialGroceryBinding
-import com.scootin.databinding.AdapterItemAddSweetsBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.sweets.SweetsItem
-import timber.log.Timber
 
 class EssentialGroceryAddAdapter (
     val appExecutors: AppExecutors,
@@ -49,13 +47,7 @@ class EssentialGroceryAddAdapter (
         position: Int,
         isLast: Boolean
     ) {
-        Timber.i("item = $item")
-        item.apply {
-            binding.name.setText(name)
-            binding.detail.setText(detail)
-            binding.discountPrice.setText(discountprice)
-            binding.price.setText(price)
-        }
+
         binding.discountPrice.paintFlags= Paint.STRIKE_THRU_TEXT_FLAG
 
         binding.increment.setOnClickListener {

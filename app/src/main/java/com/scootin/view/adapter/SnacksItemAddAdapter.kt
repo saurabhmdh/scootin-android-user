@@ -1,6 +1,5 @@
 package com.scootin.view.adapter
 
-import android.R
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.DiffUtil
 import com.scootin.databinding.AdapterItemAddSnacksBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.sweets.SnackItem
-import com.scootin.network.response.sweets.SweetsItem
 import timber.log.Timber
 
 

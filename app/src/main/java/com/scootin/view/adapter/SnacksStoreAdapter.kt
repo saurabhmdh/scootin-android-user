@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import com.scootin.databinding.AdapterItemAddEssentialgroceryStoreBinding
 import com.scootin.databinding.AdapterItemAddSnacksStoreBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.sweets.SweetsStore

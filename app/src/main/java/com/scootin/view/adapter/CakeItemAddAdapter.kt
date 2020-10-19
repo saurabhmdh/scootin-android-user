@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.scootin.R
-import com.scootin.bindings.setImage
 import com.scootin.databinding.AdapterItemAddCakeBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.sweets.CakeItem

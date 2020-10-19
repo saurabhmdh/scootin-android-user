@@ -5,13 +5,10 @@ import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.scootin.R
 import com.scootin.databinding.AdapterItemAddEssentialGroceryBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.SearchProductsByCategoryResponse
-import timber.log.Timber
 
 
 class ProductSearchAdapter (
@@ -26,6 +23,8 @@ class ProductSearchAdapter (
             newItem: SearchProductsByCategoryResponse
         ) = oldItem.id == newItem.id
 
+
+        @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
             oldItem: SearchProductsByCategoryResponse,
             newItem: SearchProductsByCategoryResponse
@@ -33,24 +32,11 @@ class ProductSearchAdapter (
     }
 )
 {
-    override fun createBinding(parent: ViewGroup): AdapterItemAddEssentialGroceryBinding =
-        AdapterItemAddEssentialGroceryBinding.inflate(
+    override fun createBinding(parent: ViewGroup): AdapterItemAddEssentialGroceryBinding {
+       val binding= AdapterItemAddEssentialGroceryBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
+
         )
-
-    override fun bind(
-        binding: AdapterItemAddEssentialGroceryBinding,
-        item: SearchProductsByCategoryResponse,
-        position: Int,
-        isLast: Boolean
-    ) {
-        Timber.i("item = $item")
-
-        binding.name.setText(item.title)
-        binding.detail.setText(item.description)
-        binding.discountPrice.setText(item.price.toString())
-        binding.price.setText(item.price.toString())
-
         binding.discountPrice.paintFlags= Paint.STRIKE_THRU_TEXT_FLAG
 
         binding.increment.setOnClickListener {
@@ -64,6 +50,17 @@ class ProductSearchAdapter (
                 binding.count.text = number.dec().toString()
             imageAdapterClickListener.onDecrementItem(it)
         }
+        return binding
+    }
+    override fun bind(
+        binding: AdapterItemAddEssentialGroceryBinding,
+        item: SearchProductsByCategoryResponse,
+        position: Int,
+        isLast: Boolean
+    ) {
+        binding.data = item
+
+
 
 //        val items = arrayOf("500g", "1kg", "2kg")
 //        val adapter = ArrayAdapter<String>(
