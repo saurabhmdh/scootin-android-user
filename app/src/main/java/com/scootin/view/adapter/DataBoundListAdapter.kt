@@ -11,7 +11,7 @@ import com.scootin.view.holders.DataBoundViewHolder
 
 abstract class DataBoundListAdapter<T, V : ViewDataBinding>(
     appExecutors: AppExecutors,
-    diffCallback: DiffUtil.ItemCallback<CakeItem>
+    diffCallback: DiffUtil.ItemCallback<T>
 ) : ListAdapter<T, DataBoundViewHolder<V>>(
     AsyncDifferConfig.Builder<T>(diffCallback)
         .setBackgroundThreadExecutor(appExecutors.diskIO())
