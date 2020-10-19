@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.scootin.databinding.AdapterItemAddSweetsBinding
-import com.scootin.databinding.AdapterItemAddSweetsStoreBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.sweets.SweetsItem
 import timber.log.Timber
