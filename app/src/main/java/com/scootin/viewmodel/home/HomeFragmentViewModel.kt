@@ -82,9 +82,10 @@ internal constructor(
             token?.let {
                 val cache = cacheDao.getCacheData(AppConstants.FCM_ID)
 
-                if ((cache == null || cache.value != it ) && AppHeaders.userID.isNullOrEmpty().not()) {
+                if ((cache == null || cache.value != it ) && AppHeaders.userID.isEmpty().not()) {
                     Timber.i("Data which need to update to server user ${AppHeaders.userID} value $it")
                     userRepository.updateFCMId(AppHeaders.userID, RequestFCM(it))
+                    cacheDao.insert(Cache(AppConstants.FCM_ID, it))
                 }
             }
         }
