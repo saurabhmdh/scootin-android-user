@@ -27,4 +27,6 @@ class SearchRepository @Inject constructor(
 //    }.asLiveData()
 
     suspend fun searchShops(requestSearch: RequestSearch, serviceAreaId: String, categoryId: String) = services.findShops(serviceAreaId, categoryId, requestSearch)
+
+    suspend fun searchProducts(query: String, serviceAreaId: String, categoryId: String) = services.findProducts(serviceAreaId, categoryId, RequestSearch(query=query))
 }

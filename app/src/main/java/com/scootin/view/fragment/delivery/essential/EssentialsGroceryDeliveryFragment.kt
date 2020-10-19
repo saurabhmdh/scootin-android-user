@@ -30,7 +30,7 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
 
     @Inject
     lateinit var appExecutors: AppExecutors
-    private lateinit var essentialAdapter: EssentialGroceryAddAdapter
+    private lateinit var productSearchAdapter: ProductSearchAdapter
     private lateinit var shopSearchAdapter: ShopSearchAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,8 +39,6 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
         updateUI()
         updateListeners()
 
-
-        essentialAdapter.submitList(setList())
         binding.radioGroup.setOnCheckedChangeListener { radioGroup, optionId ->
             when (optionId) {
                 R.id.by_product -> {
@@ -94,13 +92,19 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
             }
             Timber.i("Search result for shop ${it.body()}")
         }
+
+        viewModel.product.observe(viewLifecycleOwner) {
+            if (it.isSuccessful) {
+                productSearchAdapter.submitList(it.body())
+            }
+        }
     }
 
 
     private fun setProductAdapter() {
-        essentialAdapter = EssentialGroceryAddAdapter(
+        productSearchAdapter = ProductSearchAdapter(
                 appExecutors,
-                object : EssentialGroceryAddAdapter.ImageAdapterClickLister {
+                object : ProductSearchAdapter.ImageAdapterClickLister {
                     override fun onIncrementItem(view: View) {
                     }
 
@@ -110,7 +114,7 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
                 })
 
         binding.productList.apply {
-            adapter = essentialAdapter
+            adapter = productSearchAdapter
         }
     }
 
@@ -124,103 +128,6 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
         binding.storeList.apply {
             adapter = shopSearchAdapter
         }
-    }
-
-
-    private fun setList(): ArrayList<SweetsItem> {
-        val list = ArrayList<SweetsItem>()
-        list.add(
-            SweetsItem(
-                "0",
-                "Brand Name",
-                "Product Name- Type",
-                "MRP Rs 206",
-                "Rs 205",
-                ""
-            )
-        )
-        list.add(
-            SweetsItem(
-                "0",
-                "Aashirvaad",
-                "Atta- Select Whole Wheat",
-                "MRP Rs 225",
-                "Rs 209",
-                ""
-            )
-        )
-        list.add(
-            SweetsItem(
-                "0",
-                "Aashirvaad",
-                "Ataa- Sugar Release Control",
-                "MRP Rs 254",
-                "Rs 250",
-                ""
-            )
-        )
-        list.add(
-            SweetsItem(
-                "0",
-                "patanjali",
-                "Whole Wheat Chakki Fresh",
-                "MRP Rs 206",
-                "Rs 205",
-                ""
-            )
-        )
-        list.add(
-            SweetsItem(
-                "0",
-                "Brand Name",
-                "Product Name- Type",
-                "MRP Rs 206",
-                "Rs 205",
-                ""
-            )
-        )
-        list.add(
-            SweetsItem(
-                "0",
-                "Brand Name",
-                "Product Name- Type",
-                "MRP Rs 206",
-                "Rs 205",
-                ""
-            )
-        )
-        list.add(
-            SweetsItem(
-                "0",
-                "Brand Name",
-                "Product Name- Type",
-                "MRP Rs 206",
-                "Rs 205",
-                ""
-            )
-        )
-        list.add(
-            SweetsItem(
-                "0",
-                "Brand Name",
-                "Product Name- Type",
-                "MRP Rs 206",
-                "Rs 205",
-                ""
-            )
-        )
-        list.add(
-            SweetsItem(
-                "0",
-                "Brand Name",
-                "Product Name- Type",
-                "MRP Rs 206",
-                "Rs 205",
-                ""
-            )
-        )
-
-        return list
     }
 }
 

@@ -7,6 +7,7 @@ import com.scootin.database.dao.LocationDao
 import com.scootin.network.api.APIService
 import com.scootin.network.api.Resource
 import com.scootin.network.request.RequestSearch
+import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.repository.SearchRepository
 import com.scootin.util.constants.AppConstants
@@ -47,16 +48,14 @@ class CategoriesViewModel @ViewModelInject internal constructor(
         Timber.i("Caught  $exception")
     }
 
-    val product: LiveData<Response<List<SearchShopsByCategoryResponse>>> = _search.switchMap { search ->
+    val product: LiveData<Response<List<SearchProductsByCategoryResponse>>> = _search.switchMap { search ->
 
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
             Timber.i("Search Detail ${search.query}")
-            val locationInfo = locationDao.getEntityLocation()
             val mainCategory = cacheDao.getCacheData(AppConstants.MAIN_CATEGORY)?.value
             val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
 
-            val request = RequestSearch(locationInfo.longitude, locationInfo.latitude,search.query)
-            emit(searchRepository.searchShops(request, serviceArea.orEmpty(), mainCategory.orEmpty()))
+            emit(searchRepository.searchProducts(search.query, serviceArea.orEmpty(), mainCategory.orEmpty()))
         }
     }
 }
