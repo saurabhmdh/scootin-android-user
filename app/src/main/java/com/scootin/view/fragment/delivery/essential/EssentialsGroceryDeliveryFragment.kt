@@ -15,6 +15,7 @@ import com.scootin.network.response.sweets.SweetsStore
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.*
 import com.scootin.view.fragment.dialogs.EssentialCategoryDialogFragment
+import com.scootin.viewmodel.delivery.CategoriesViewModel
 import com.scootin.viewmodel.delivery.essential.EssentialsGroceryDeliveryViewModel
 import com.scootin.viewmodel.home.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,18 +25,18 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_delivery) {
     private var binding by autoCleared<FragmentGroceryDeliveryBinding>()
-    private val viewModel: EssentialsGroceryDeliveryViewModel by viewModels()
+    private val viewModel: CategoriesViewModel by viewModels()
 
     @Inject
     lateinit var appExecutors: AppExecutors
 //    private lateinit var essentialAdapter: EssentialGroceryAddAdapter
 
-    private lateinit var essentialGroceryStoreAdapter: EssentialGroceryStoreAdapter
+    private lateinit var shopSearchAdapter: ShopSearchAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentGroceryDeliveryBinding.bind(view)
-
+        updateUI()
         updateListeners()
 
 
@@ -56,22 +57,43 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
 //        }
     }
 
+    private fun updateUI() {
+        setStoreAdapter()
+    }
+
     private fun updateListeners() {
         binding.srchsweets.setOnQueryTextListener(
             object :SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    Timber.i("onQueryTextSubmit $query")
+                    when (binding.radioGroup.getCheckedRadioButtonPosition()) {
+                        0 -> {
+                            //By Product
+                        }
+                        1 -> {
+                            query?.let {
+                                viewModel.doSearchShop(23, it)
+                            }
+                        }
+                    }
+                    Timber.i("onQueryTextSubmit $query ")
+
                     return false
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
-                    //Timber.i("onQueryTextChange $newText")
                     return false
                 }
 
             }
         )
         binding.back.setOnClickListener { findNavController().popBackStack() }
+
+        viewModel.shops.observe(viewLifecycleOwner) {
+            if (it.isSuccessful) {
+                shopSearchAdapter.submitList(it.body())
+            }
+            Timber.i("Search result for shop ${it.body()}")
+        }
     }
 
 
@@ -92,22 +114,20 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
 //            adapter = essentialAdapter
 //        }
 //    }
-//
-//    private fun setStoreAdapter() {
-//        essentialGroceryStoreAdapter = EssentialGroceryStoreAdapter(
-//            appExecutors,
-//            object : EssentialGroceryStoreAdapter.StoreImageAdapterClickListener {
-//
-//                override fun onSelectButtonSelected(view: View) {
-//                }
-//
-//            })
-//        binding.list.apply {
-//            adapter = essentialGroceryStoreAdapter
-//        }
-//    }
-//
-//
+
+    private fun setStoreAdapter() {
+        shopSearchAdapter = ShopSearchAdapter(
+            appExecutors, object : ShopSearchAdapter.StoreImageAdapterClickListener {
+                override fun onSelectButtonSelected(view: View) {
+                    //TODO: We need to go for search Product in this store..
+                }
+            })
+        binding.list.apply {
+            adapter = shopSearchAdapter
+        }
+    }
+
+
 //    private fun setList(): ArrayList<SweetsItem> {
 //        val list = ArrayList<SweetsItem>()
 //        list.add(

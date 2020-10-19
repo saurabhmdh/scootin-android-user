@@ -1,15 +1,14 @@
 package com.scootin.network.api
 
 import com.scootin.network.manager.AppHeaders
+import com.scootin.network.request.RequestSearch
+import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.network.response.home.ResponseServiceArea
 import com.scootin.network.response.login.ResponseUser
 import okhttp3.ResponseBody
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.HeaderMap
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface APIService {
 
@@ -28,4 +27,13 @@ interface APIService {
 
     @POST("/service-area/find-by-location")
     suspend fun findServiceArea(@Body options: Map<String, String>, @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()): Response<ResponseServiceArea>
+
+
+    //8052 // 253 //Tea
+    @POST("/search/{serviceAreaId}/{categoryId}/get-all-shops")
+    suspend fun findShops(
+        @Path("serviceAreaId") serviceAreaId: String,
+        @Path("categoryId") categoryId: String,
+        @Body requestSearch: RequestSearch
+    ): Response<List<SearchShopsByCategoryResponse>>
 }

@@ -14,7 +14,7 @@ import timber.log.Timber
 
 class EssentialGroceryStoreAdapter (
     val appExecutors: AppExecutors,
-    val imageAdapterClickLister:StoreImageAdapterClickListener
+    val imageAdapterClickLister: StoreImageAdapterClickListener
 ): DataBoundListAdapter<SweetsStore, AdapterItemAddEssentialgroceryStoreBinding>(
     appExecutors,
     diffCallback = object : DiffUtil.ItemCallback<SweetsStore>(){
