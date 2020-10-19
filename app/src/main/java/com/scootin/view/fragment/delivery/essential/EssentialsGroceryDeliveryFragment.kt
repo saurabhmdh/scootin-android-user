@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.scootin.R
 import com.scootin.databinding.FragmentGroceryDeliveryBinding
 import com.scootin.extensions.getCheckedRadioButtonPosition
+import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.sweets.SweetsItem
 import com.scootin.network.response.sweets.SweetsStore
@@ -29,8 +30,7 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
 
     @Inject
     lateinit var appExecutors: AppExecutors
-//    private lateinit var essentialAdapter: EssentialGroceryAddAdapter
-
+    private lateinit var productSearchAdapter: ProductSearchAdapter
     private lateinit var shopSearchAdapter: ShopSearchAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,44 +39,42 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
         updateUI()
         updateListeners()
 
-
-
-//        setAdaper()
-//        essentialAdapter.submitList(setList())
-//        binding.radioGroup.setOnCheckedChangeListener { radioGroup, optionId ->
-//            when (optionId) {
-//                R.id.materialRadioButton -> {
-//                    setAdaper()
-//                    essentialAdapter.submitList(setList())
-//                }
-//                R.id.materialRadioButton2 -> {
-//                    setStoreAdapter()
-//                    essentialGroceryStoreAdapter.submitList(setStoreList())
-//                }
-//            }
-//        }
+        binding.radioGroup.setOnCheckedChangeListener { radioGroup, optionId ->
+            when (optionId) {
+                R.id.by_product -> {
+                    binding.productList.updateVisibility(true)
+                    binding.storeList.updateVisibility(false)
+                }
+                R.id.by_store -> {
+                    binding.productList.updateVisibility(false)
+                    binding.storeList.updateVisibility(true)
+                }
+            }
+        }
     }
 
     private fun updateUI() {
         setStoreAdapter()
+        setProductAdapter()
     }
 
     private fun updateListeners() {
-        binding.srchsweets.setOnQueryTextListener(
+        binding.searchBox.setOnQueryTextListener(
             object :SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     when (binding.radioGroup.getCheckedRadioButtonPosition()) {
                         0 -> {
-                            //By Product
+                            query?.let {
+                                viewModel.doSearch(it)
+                            }
                         }
                         1 -> {
                             query?.let {
-                                viewModel.doSearchShop(23, it)
+                                viewModel.doSearch(it)
                             }
                         }
                     }
                     Timber.i("onQueryTextSubmit $query ")
-
                     return false
                 }
 
@@ -94,26 +92,31 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
             }
             Timber.i("Search result for shop ${it.body()}")
         }
+
+        viewModel.product.observe(viewLifecycleOwner) {
+            if (it.isSuccessful) {
+                productSearchAdapter.submitList(it.body())
+            }
+        }
     }
 
 
-//    private fun setAdaper() {
-//        essentialAdapter =
-//            EssentialGroceryAddAdapter(
-//                appExecutors,
-//                object : EssentialGroceryAddAdapter.ImageAdapterClickLister {
-//                    override fun onIncrementItem(view: View) {
-//                    }
-//
-//                    override fun onDecrementItem(view: View) {
-//                    }
-//
-//                })
-//
-//        binding.list.apply {
-//            adapter = essentialAdapter
-//        }
-//    }
+    private fun setProductAdapter() {
+        productSearchAdapter = ProductSearchAdapter(
+                appExecutors,
+                object : ProductSearchAdapter.ImageAdapterClickLister {
+                    override fun onIncrementItem(view: View) {
+                    }
+
+                    override fun onDecrementItem(view: View) {
+                    }
+
+                })
+
+        binding.productList.apply {
+            adapter = productSearchAdapter
+        }
+    }
 
     private fun setStoreAdapter() {
         shopSearchAdapter = ShopSearchAdapter(
@@ -122,133 +125,9 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
                     //TODO: We need to go for search Product in this store..
                 }
             })
-        binding.list.apply {
+        binding.storeList.apply {
             adapter = shopSearchAdapter
         }
     }
-
-
-//    private fun setList(): ArrayList<SweetsItem> {
-//        val list = ArrayList<SweetsItem>()
-//        list.add(
-//            SweetsItem(
-//                "0",
-//                "Brand Name",
-//                "Product Name- Type",
-//                "MRP Rs 206",
-//                "Rs 205",
-//                ""
-//            )
-//        )
-//        list.add(
-//            SweetsItem(
-//                "0",
-//                "Aashirvaad",
-//                "Atta- Select Whole Wheat",
-//                "MRP Rs 225",
-//                "Rs 209",
-//                ""
-//            )
-//        )
-//        list.add(
-//            SweetsItem(
-//                "0",
-//                "Aashirvaad",
-//                "Ataa- Sugar Release Control",
-//                "MRP Rs 254",
-//                "Rs 250",
-//                ""
-//            )
-//        )
-//        list.add(
-//            SweetsItem(
-//                "0",
-//                "patanjali",
-//                "Whole Wheat Chakki Fresh",
-//                "MRP Rs 206",
-//                "Rs 205",
-//                ""
-//            )
-//        )
-//        list.add(
-//            SweetsItem(
-//                "0",
-//                "Brand Name",
-//                "Product Name- Type",
-//                "MRP Rs 206",
-//                "Rs 205",
-//                ""
-//            )
-//        )
-//        list.add(
-//            SweetsItem(
-//                "0",
-//                "Brand Name",
-//                "Product Name- Type",
-//                "MRP Rs 206",
-//                "Rs 205",
-//                ""
-//            )
-//        )
-//        list.add(
-//            SweetsItem(
-//                "0",
-//                "Brand Name",
-//                "Product Name- Type",
-//                "MRP Rs 206",
-//                "Rs 205",
-//                ""
-//            )
-//        )
-//        list.add(
-//            SweetsItem(
-//                "0",
-//                "Brand Name",
-//                "Product Name- Type",
-//                "MRP Rs 206",
-//                "Rs 205",
-//                ""
-//            )
-//        )
-//        list.add(
-//            SweetsItem(
-//                "0",
-//                "Brand Name",
-//                "Product Name- Type",
-//                "MRP Rs 206",
-//                "Rs 205",
-//                ""
-//            )
-//        )
-//
-//        return list
-//    }
-//
-//    private fun setStoreList(): ArrayList<SweetsStore> {
-//        val storelist = ArrayList<SweetsStore>()
-//        storelist.add(
-//            SweetsStore("0", "Business Name", "500m", 4f,true,"")
-//        )
-//        storelist.add(
-//            SweetsStore("0", "Business Name", "500m", 4.4f,false,"")
-//        )
-//        storelist.add(
-//            SweetsStore("0", "Business Name", "500m", 4.3f,true,"")
-//        )
-//        storelist.add(
-//            SweetsStore("0", "Business Name", "500m", 3.6f,true,"")
-//        )
-//        storelist.add(
-//            SweetsStore("0", "Business Name", "500m", 4.8f,true,"")
-//        )
-//        storelist.add(
-//            SweetsStore("0", "Business Name", "500m", 4.2f,true,"")
-//        )
-//        storelist.add(
-//            SweetsStore("0", "Business Name", "500m", 4.0f,true,"")
-//        )
-//        return storelist
-//
-//    }
 }
 

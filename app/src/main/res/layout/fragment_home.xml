@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:drawableStart="@drawable/ic_user_location"
         android:drawablePadding="8dp"
-        android:lines="1"
+        android:maxLines="2"
         style="@style/custom_font_style_white"
         android:text="@string/finding_location"
         tools:ignore="MissingConstraints,RtlSymmetry" />

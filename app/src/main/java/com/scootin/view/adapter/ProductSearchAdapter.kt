@@ -9,32 +9,27 @@ import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.scootin.R
 import com.scootin.databinding.AdapterItemAddEssentialGroceryBinding
-import com.scootin.databinding.AdapterItemAddSweetsBinding
 import com.scootin.network.AppExecutors
-import com.scootin.network.response.sweets.SweetsItem
+import com.scootin.network.response.SearchProductsByCategoryResponse
 import timber.log.Timber
 
-class EssentialGroceryAddAdapter (
+
+class ProductSearchAdapter (
     val appExecutors: AppExecutors,
     val imageAdapterClickListener: ImageAdapterClickLister
 
-) : DataBoundListAdapter<SweetsItem, AdapterItemAddEssentialGroceryBinding>(
+) : DataBoundListAdapter<SearchProductsByCategoryResponse, AdapterItemAddEssentialGroceryBinding>(
     appExecutors,
-    diffCallback = object : DiffUtil.ItemCallback<SweetsItem>() {
+    diffCallback = object : DiffUtil.ItemCallback<SearchProductsByCategoryResponse>() {
         override fun areItemsTheSame(
-            oldItem: SweetsItem,
-            newItem: SweetsItem
-        ): Boolean {
-            return oldItem.id == newItem.id
-        }
+            oldItem: SearchProductsByCategoryResponse,
+            newItem: SearchProductsByCategoryResponse
+        ) = oldItem.id == newItem.id
 
-        @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
-            oldItem: SweetsItem,
-            newItem: SweetsItem
-        ): Boolean {
-            return oldItem == newItem
-        }
+            oldItem: SearchProductsByCategoryResponse,
+            newItem: SearchProductsByCategoryResponse
+        ) = oldItem == newItem
     }
 )
 {
@@ -45,17 +40,17 @@ class EssentialGroceryAddAdapter (
 
     override fun bind(
         binding: AdapterItemAddEssentialGroceryBinding,
-        item: SweetsItem,
+        item: SearchProductsByCategoryResponse,
         position: Int,
         isLast: Boolean
     ) {
         Timber.i("item = $item")
-        item.apply {
-            binding.name.setText(name)
-            binding.detail.setText(detail)
-            binding.discountPrice.setText(discountprice)
-            binding.price.setText(price)
-        }
+
+        binding.name.setText(item.title)
+        binding.detail.setText(item.description)
+        binding.discountPrice.setText(item.price.toString())
+        binding.price.setText(item.price.toString())
+
         binding.discountPrice.paintFlags= Paint.STRIKE_THRU_TEXT_FLAG
 
         binding.increment.setOnClickListener {
@@ -70,15 +65,15 @@ class EssentialGroceryAddAdapter (
             imageAdapterClickListener.onDecrementItem(it)
         }
 
-        val items = arrayOf("500g", "1kg", "2kg")
-        val adapter = ArrayAdapter<String>(
-            binding.count.context,
-            R.layout.spinner_layout_essential,
-            items
-        )
-
+//        val items = arrayOf("500g", "1kg", "2kg")
+//        val adapter = ArrayAdapter<String>(
+//            binding.count.context,
+//            R.layout.spinner_layout_essential,
+//            items
+//        )
+//
 //        binding.spinner.setAdapter(adapter)
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+//        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
 
     }
 

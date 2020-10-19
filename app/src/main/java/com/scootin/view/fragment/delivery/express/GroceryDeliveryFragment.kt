@@ -40,9 +40,9 @@ class GroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_delivery) {
 
                 })
 
-        binding.list.apply {
-            adapter = stationaryAdapter
-        }
+//        binding.list.apply {
+//            adapter = stationaryAdapter
+//        }
     }
 
     private fun setList(): ArrayList<StationaryItem> {

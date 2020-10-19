@@ -4,10 +4,13 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.android.libraries.places.api.model.Place
+import com.scootin.database.dao.CacheDao
 import com.scootin.database.dao.LocationDao
+import com.scootin.database.table.Cache
 import com.scootin.database.table.EntityLocation
 import com.scootin.network.api.APIService
 import com.scootin.repository.CategoryRepository
+import com.scootin.util.constants.AppConstants
 import com.scootin.view.vo.ServiceArea
 import com.scootin.viewmodel.base.ObservableViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -20,7 +23,8 @@ class HomeFragmentViewModel @ViewModelInject
 internal constructor(
     private val categoryRepository: CategoryRepository,
     private val apiService: APIService,
-    private val locationDao: LocationDao
+    private val locationDao: LocationDao,
+    private val cacheDao: CacheDao
 ) : ObservableViewModel(), CoroutineScope {
 
     val presentLocation = locationDao.getCurrentLocation()
@@ -42,6 +46,7 @@ internal constructor(
                 if (result == null) {
                     serviceAreaError.postValue(true)
                 } else {
+                    cacheDao.insert(Cache(AppConstants.SERVICE_AREA, result.id.toString()))
                     serviceArea.postValue(ServiceArea(result.id, result.name))
                 }
             } else {
@@ -55,6 +60,16 @@ internal constructor(
             locationDao.insert(EntityLocation(place))
         }
     }
+
+    fun updateMainCategory(selectedCategoryID: String?) {
+        launch {
+            selectedCategoryID?.let {
+                cacheDao.insert(Cache(AppConstants.MAIN_CATEGORY, it))
+            }
+        }
+    }
+
+
     override val coroutineContext: CoroutineContext
         get() = viewModelScope.coroutineContext + Dispatchers.IO
 

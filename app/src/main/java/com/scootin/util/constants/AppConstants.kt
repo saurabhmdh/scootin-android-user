@@ -12,9 +12,12 @@ object AppConstants {
     )
     const val RC_LOCATION_PERMISSIONS = 0x01
     const val RC_READ_WRITE_PERMISSION = 0x02
+
     const val USER_INFO = "user-data"
     const val AUTHORIZATION = "Authorization"
+    const val MAIN_CATEGORY = "main-category"
 
+    const val SERVICE_AREA = "service-area"
 
     /* Constant value for Write Review Screen */
     const val RESULT_LOAD_IMAGE_VIDEO = 1

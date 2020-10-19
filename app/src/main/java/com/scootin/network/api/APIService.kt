@@ -2,6 +2,7 @@ package com.scootin.network.api
 
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.RequestSearch
+import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.network.response.home.ResponseServiceArea
@@ -36,4 +37,13 @@ interface APIService {
         @Path("categoryId") categoryId: String,
         @Body requestSearch: RequestSearch
     ): Response<List<SearchShopsByCategoryResponse>>
+
+
+    @POST("/search/{serviceAreaId}/{categoryId}/get-all-products")
+    suspend fun findProducts(
+        @Path("serviceAreaId") serviceAreaId: String,
+        @Path("categoryId") categoryId: String,
+        @Body requestSearch: RequestSearch
+    ): Response<List<SearchProductsByCategoryResponse>>
+
 }
