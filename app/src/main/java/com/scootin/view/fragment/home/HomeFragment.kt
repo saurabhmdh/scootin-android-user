@@ -29,6 +29,7 @@ import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.google.firebase.iid.FirebaseInstanceId
 import com.scootin.R
 import com.scootin.network.api.Status
+import com.scootin.network.manager.AppHeaders
 import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.ui.UtilPermission
@@ -66,8 +67,8 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
                 return@addOnCompleteListener
             }
             val token = it.result?.token
-            Timber.i("Saurabh : Device token $token")
-            //Update FCM ID for user & read user from user info.
+            Timber.i("Saurabh : Device token $token for user ${AppHeaders.userID}")
+            viewModel.updateFCMID(token)
         }
         doNetworkCall()
     }

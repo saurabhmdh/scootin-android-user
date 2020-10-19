@@ -1,6 +1,7 @@
 package com.scootin.network.api
 
 import com.scootin.network.manager.AppHeaders
+import com.scootin.network.request.RequestFCM
 import com.scootin.network.request.RequestSearch
 import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.SearchShopsByCategoryResponse
@@ -30,7 +31,6 @@ interface APIService {
     suspend fun findServiceArea(@Body options: Map<String, String>, @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()): Response<ResponseServiceArea>
 
 
-    //8052 // 253 //Tea
     @POST("/search/{serviceAreaId}/{categoryId}/get-all-shops")
     suspend fun findShops(
         @Path("serviceAreaId") serviceAreaId: String,
@@ -46,4 +46,7 @@ interface APIService {
         @Body requestSearch: RequestSearch
     ): Response<List<SearchProductsByCategoryResponse>>
 
+
+    @POST("notification/user/{id}/update-fcm")
+    suspend fun updateFCMID(@Path("id") userMobileNumber: String, @Body requestFCM: RequestFCM): Response<ResponseUser>
 }
