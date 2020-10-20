@@ -12,9 +12,8 @@ import com.scootin.network.AppExecutors
 import com.scootin.network.response.SearchProductsByCategoryResponse
 
 
-class ProductSearchAdapter (
-    val appExecutors: AppExecutors,
-    val imageAdapterClickListener: ImageAdapterClickLister
+class AddCartItemAdapter (
+    val appExecutors: AppExecutors
 
 ) : DataBoundListAdapter<SearchProductsByCategoryResponse, AdapterItemAddEssentialGroceryBinding>(
     appExecutors,
@@ -40,26 +39,8 @@ class ProductSearchAdapter (
         )
         binding.discountPrice.paintFlags= Paint.STRIKE_THRU_TEXT_FLAG
 
-        binding.increment.setOnClickListener {
-            val number = binding.count.text.toString().toInt()
-            binding.count.text = number.inc().toString()
-            imageAdapterClickListener.onIncrementItem(it)
-        }
-        binding.decrement.setOnClickListener {
-            val number = binding.count.text.toString().toInt()
-            if (number > 0)
-                binding.count.text = number.dec().toString()
-            imageAdapterClickListener.onDecrementItem(it)
-        }
-
         binding.operation.updateVisibility(false)
         binding.addItem.updateVisibility(true)
-
-        binding.addItem.setOnClickListener {
-            binding.operation.updateVisibility(true)
-            binding.addItem.updateVisibility(false)
-            imageAdapterClickListener.onAddViewClick()
-        }
 
         return binding
     }
@@ -86,9 +67,4 @@ class ProductSearchAdapter (
 
     }
 
-    interface ImageAdapterClickLister {
-        fun onIncrementItem(view: View)
-        fun onDecrementItem(view: View)
-        fun onAddViewClick()
-    }
 }
