@@ -98,6 +98,10 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
                 productSearchAdapter.submitList(it.body())
             }
         }
+
+        binding.checkout.setOnClickListener {
+            findNavController().navigate(EssentialsGroceryDeliveryFragmentDirections.essentialGroceryToWallet())
+        }
     }
 
 
@@ -106,9 +110,14 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
                 appExecutors,
                 object : ProductSearchAdapter.ImageAdapterClickLister {
                     override fun onIncrementItem(view: View) {
+
                     }
 
                     override fun onDecrementItem(view: View) {
+                    }
+
+                    override fun onAddViewClick() {
+                        binding.checkout.updateVisibility(true)
                     }
 
                 })

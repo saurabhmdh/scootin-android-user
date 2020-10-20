@@ -31,7 +31,7 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
 
         <action
             android:id="@+id/home_to_city_delivery"
@@ -112,7 +112,7 @@
     <fragment
         android:id="@+id/essential_handwritten_list"
         android:name="com.scootin.view.fragment.delivery.essential.EssentialHandwrittenFragment"
-        android:label="Home"/>
+        android:label="Home" />
     <fragment
         android:id="@+id/express_delivery"
         android:name="com.scootin.view.fragment.delivery.express.ExpressDeliveryFragment"
@@ -126,7 +126,7 @@
     <fragment
         android:id="@+id/express_orders"
         android:name="com.scootin.view.fragment.delivery.express.ExpressDeliveryOrders"
-        android:label="Express"/>
+        android:label="Express" />
 
 
     <fragment
@@ -166,7 +166,7 @@
     <fragment
         android:id="@+id/cityCategory"
         android:name="com.scootin.view.fragment.delivery.city.FragmentCityWideCategory"
-        android:label="Home" >
+        android:label="Home">
         <action
             android:id="@+id/citycategory_to_citydelivery"
             app:destination="@id/cityDelivery"
@@ -176,9 +176,37 @@
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
+
     <fragment
         android:id="@+id/grocery"
         android:name="com.scootin.view.fragment.delivery.essential.EssentialsGroceryDeliveryFragment"
+        android:label="Home">
+        <action
+            android:id="@+id/essential_grocery_to_wallet"
+            app:destination="@id/add_to_cart_list"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/add_to_cart_list"
+        android:name="com.scootin.view.fragment.cart.CartListFragment"
+        android:label="Home">
+        <action
+            android:id="@+id/add_cart_to_wallet"
+            app:destination="@id/wallet_fragment_grocery"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/wallet_fragment_grocery"
+        android:name="com.scootin.view.fragment.wallet.WalletFragment"
         android:label="Home" />
 
     <fragment
@@ -193,7 +221,6 @@
         android:id="@+id/innerwearwomen"
         android:name="com.scootin.view.fragment.delivery.clothing.ClothingInnerWearWomen"
         android:label="Home" />
-
 
     <fragment
         android:id="@+id/sweetsCategory"
@@ -236,26 +263,26 @@
         android:id="@+id/clothingCategory"
         android:name="com.scootin.view.fragment.delivery.clothing.ClothingCategoryFragment"
         android:label="Home">
-    <action
-        android:id="@+id/home_to_meninnerwear"
-        app:destination="@id/innerwearmen"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/home_to_meninnerwear"
+            app:destination="@id/innerwearmen"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
 
-    <action
-        android:id="@+id/home_to_womeninnerwear"
-        app:destination="@id/innerwearwomen"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/home_to_womeninnerwear"
+            app:destination="@id/innerwearwomen"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/expressDeliveryCategoryFragment"
         android:name="com.scootin.view.fragment.delivery.express.ExpressDeliveryCategoryFragment"
-        android:label="ExpressDeliveryCategoryFragment" >
+        android:label="ExpressDeliveryCategoryFragment">
         <action
             android:id="@+id/action_expressDeliveryCategoryFragment_to_express_delivery"
             app:destination="@id/express_delivery" />

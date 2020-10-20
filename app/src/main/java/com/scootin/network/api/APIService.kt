@@ -50,14 +50,14 @@ interface APIService {
     suspend fun updateFCMID(@Path("id") userMobileNumber: String, @Body requestFCM: RequestFCM): Response<ResponseUser>
 
     @GET("/order/capture-payment")
-    suspend fun capturePayment(): Response<CapturePaymentRequest>
+    suspend fun capturePayment(@Body request: CapturePaymentRequest): Response<String>
 
     @GET("/cart/add-to-cart")
-    suspend fun addToCart(): Response<AddToCartRequest>
+    suspend fun addToCart(@Body request: AddToCartRequest): Response<String>
 
     @GET("/order/orders/count-total")
     suspend fun countTotal()
 
     @GET("/order/place-order")
-    suspend fun placeOrder(): Response<PlaceOrderRequest>
+    suspend fun placeOrder(@Body request: PlaceOrderRequest): Response<String>
 }
