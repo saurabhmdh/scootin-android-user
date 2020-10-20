@@ -33,5 +33,5 @@ class UserRepository @Inject constructor(
     }.asLiveData()
 
 
-    suspend fun updateFCMId(mobileNumber: String, request: RequestFCM) = services.updateFCMID(mobileNumber, request)
+    suspend fun updateFCMId(id: String, request: RequestFCM) = services.updateFCMID(id, request)
 }

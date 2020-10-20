@@ -55,6 +55,9 @@ class WalletFragment: Fragment(R.layout.fragment_wallet){
 
            options.put("prefill", prefill)
            co.open(activity, options)
+
+           //Razorpay will return 3 values.. Which we need to check
+           //capture-payment
        }catch (e: Exception){
            Toast.makeText(activity,"Error in payment: "+ e.message,Toast.LENGTH_LONG).show()
            e.printStackTrace()
