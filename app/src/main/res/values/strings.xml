@@ -36,7 +36,7 @@
 
 
     <string name="edittxt_hint_payment">Delivery Location(Home) | Type a new Address</string>
-    <string name="edittxt_hint_expressdel">Location</string>
+
     <string name="edittxt_hint_eng_mobno">Mobile No.</string>
     <string name="edittxt_hint_OTP">OTP</string>
     <string name="edittxt_hint_Pin">City Pin Code</string>
