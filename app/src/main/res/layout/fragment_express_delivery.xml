@@ -22,6 +22,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_ex_dlvr_card_on_store_page" />
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -30,7 +31,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_back_arrow" />
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,7 +40,7 @@
             android:layout_marginEnd="20dp"
             android:drawableStart="@drawable/ic_location_icon"
             android:fontFamily="@font/montserrat_regular"
-            android:hint="@string/edittxt_hint_expressdel"
+            android:hint="@string/edittxt_hint_payment"
             android:inputType="text"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"

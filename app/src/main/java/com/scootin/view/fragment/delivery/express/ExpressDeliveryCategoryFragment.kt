@@ -37,10 +37,15 @@ class ExpressDeliveryCategoryFragment : Fragment(R.layout.fragment_express_deliv
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentExpressDeliveryBinding.bind(view)
+        setupListener()
+
         setStoreAdapter()
         doNetworkCall()
     }
 
+    private fun setupListener() {
+        binding.back.setOnClickListener { findNavController().popBackStack() }
+    }
 
 
     private fun setStoreAdapter() {
@@ -75,14 +80,6 @@ class ExpressDeliveryCategoryFragment : Fragment(R.layout.fragment_express_deliv
                 Status.LOADING -> {
                 }
             }
-        })
-
-        viewModel.serviceArea.observe(viewLifecycleOwner, {
-            Toast.makeText(context, "Congratulation!! We are serving in area = " +it.name, Toast.LENGTH_LONG).show()
-        })
-
-        viewModel.serviceAreaError.observe(viewLifecycleOwner, {
-            Toast.makeText(context, "Sorry!! Our services are not allowed in this area..\n Please change the location..", Toast.LENGTH_LONG).show()
         })
     }
 }
