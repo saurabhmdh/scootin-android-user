@@ -8,6 +8,7 @@ import com.scootin.util.constants.AppConstants
 object AppHeaders {
 
     var userID: String = ""
+    var userMobileNumber: String = ""
     var token:String = ""
 
     var role: ROLE = ROLE.USER
@@ -17,7 +18,8 @@ object AppHeaders {
     fun getHeaderMap() = hashMapOf(AppConstants.AUTHORIZATION to PREFIX + token)
 
     fun updateUserData(user: ResponseUser) {
-        userID = user.user
+        userID = user.id.toString()
+        userMobileNumber = user.user
         token = user.getTokenData()
         role = user.role
     }
