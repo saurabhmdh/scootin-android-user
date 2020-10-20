@@ -1,8 +1,7 @@
 package com.scootin.network.api
 
 import com.scootin.network.manager.AppHeaders
-import com.scootin.network.request.RequestFCM
-import com.scootin.network.request.RequestSearch
+import com.scootin.network.request.*
 import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.network.response.home.HomeResponseCategory
@@ -49,4 +48,16 @@ interface APIService {
 
     @POST("notification/user/{id}/update-fcm")
     suspend fun updateFCMID(@Path("id") userMobileNumber: String, @Body requestFCM: RequestFCM): Response<ResponseUser>
+
+    @GET("/order/capture-payment")
+    suspend fun capturePayment(): Response<CapturePaymentRequest>
+
+    @GET("/cart/add-to-cart")
+    suspend fun addToCart(): Response<AddToCartRequest>
+
+    @GET("/order/orders/count-total")
+    suspend fun countTotal()
+
+    @GET("/order/place-order")
+    suspend fun placeOrder(): Response<PlaceOrderRequest>
 }
