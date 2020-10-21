@@ -6,6 +6,7 @@ import com.scootin.database.dao.CacheDao
 import com.scootin.database.dao.LocationDao
 import com.scootin.network.api.APIService
 import com.scootin.network.api.Resource
+import com.scootin.network.request.AddToCartRequest
 import com.scootin.network.request.RequestSearch
 import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.SearchShopsByCategoryResponse
@@ -20,7 +21,7 @@ import timber.log.Timber
 class CategoriesViewModel @ViewModelInject internal constructor(
     private val cacheDao: CacheDao,
     private val locationDao: LocationDao,
-    searchRepository: SearchRepository
+    val searchRepository: SearchRepository
 ) : ObservableViewModel() {
 
     private val _search = MutableLiveData<SearchShopsByCategory>()
@@ -56,6 +57,18 @@ class CategoriesViewModel @ViewModelInject internal constructor(
             val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
 
             emit(searchRepository.searchProducts(search.query, serviceArea.orEmpty(), mainCategory.orEmpty()))
+        }
+    }
+
+    val addToCartLiveData = MutableLiveData<AddToCartRequest>()
+
+    fun addToCart(addToCartRequest: AddToCartRequest){
+        addToCartLiveData.postValue(addToCartRequest)
+    }
+
+    val addToCartMap = addToCartLiveData.switchMap {
+        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+            emit(searchRepository.addToCart(it))
         }
     }
 }

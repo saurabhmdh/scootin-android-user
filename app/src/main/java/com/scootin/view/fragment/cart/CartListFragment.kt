@@ -39,7 +39,7 @@ class CartListFragment : Fragment(R.layout.fragment_cart_list) {
     }
 
     private fun setListener() {
-        binding.confirmButton.setOnClickListener {
+        binding.checkout.setOnClickListener {
             findNavController().navigate(CartListFragmentDirections.addCartToWallet())
         }
     }

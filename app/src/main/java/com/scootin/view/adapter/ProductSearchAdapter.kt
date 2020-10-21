@@ -43,13 +43,13 @@ class ProductSearchAdapter (
         binding.increment.setOnClickListener {
             val number = binding.count.text.toString().toInt()
             binding.count.text = number.inc().toString()
-            imageAdapterClickListener.onIncrementItem(it)
+            imageAdapterClickListener.onIncrementItem(it, binding.data)
         }
         binding.decrement.setOnClickListener {
             val number = binding.count.text.toString().toInt()
             if (number > 0)
                 binding.count.text = number.dec().toString()
-            imageAdapterClickListener.onDecrementItem(it)
+            imageAdapterClickListener.onDecrementItem(it, binding.data)
         }
 
         binding.operation.updateVisibility(false)
@@ -87,8 +87,8 @@ class ProductSearchAdapter (
     }
 
     interface ImageAdapterClickLister {
-        fun onIncrementItem(view: View)
-        fun onDecrementItem(view: View)
+        fun onIncrementItem(view: View, item: SearchProductsByCategoryResponse?)
+        fun onDecrementItem(view: View, item: SearchProductsByCategoryResponse?)
         fun onAddViewClick()
     }
 }
