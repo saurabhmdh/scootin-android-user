@@ -52,7 +52,7 @@ interface APIService {
     @GET("/order/capture-payment")
     suspend fun capturePayment(@Body request: CapturePaymentRequest): Response<String>
 
-    @GET("/cart/add-to-cart")
+    @POST("/cart/add-to-cart")
     suspend fun addToCart(@Body request: AddToCartRequest): Response<String>
 
     @GET("/order/orders/count-total")

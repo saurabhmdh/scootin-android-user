@@ -119,22 +119,20 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
                 object : ProductSearchAdapter.ImageAdapterClickLister {
                     override fun onIncrementItem(
                         view: View,
-                        item: SearchProductsByCategoryResponse?
+                        item: SearchProductsByCategoryResponse?,
+                        count: Int
                     ) {
-                        val addToCartRequest = AddToCartRequest(AppHeaders.userID, item?.id, 1)
+                        val addToCartRequest = AddToCartRequest(AppHeaders.userID, item?.id, count)
                         viewModel.addToCart(addToCartRequest)
                     }
 
                     override fun onDecrementItem(
                         view: View,
-                        item: SearchProductsByCategoryResponse?
+                        item: SearchProductsByCategoryResponse?,
+                        count: Int
                     ) {
-                        val addToCartRequest = AddToCartRequest(AppHeaders.userID, item?.id, 1)
+                        val addToCartRequest = AddToCartRequest(AppHeaders.userID, item?.id, count)
                         viewModel.addToCart(addToCartRequest)
-                    }
-
-                    override fun onAddViewClick() {
-                        binding.checkout.updateVisibility(true)
                     }
 
                 })
