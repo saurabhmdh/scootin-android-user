@@ -4,8 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.scootin.database.dao.CacheDao
 import com.scootin.database.dao.LocationDao
-import com.scootin.network.api.APIService
-import com.scootin.network.api.Resource
+import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.AddToCartRequest
 import com.scootin.network.request.RequestSearch
 import com.scootin.network.response.SearchProductsByCategoryResponse
@@ -32,43 +31,90 @@ class CategoriesViewModel @ViewModelInject internal constructor(
         _search.postValue(SearchShopsByCategory(query))
     }
 
-    val shops: LiveData<Response<List<SearchShopsByCategoryResponse>>> = _search.switchMap { search ->
+    val shops: LiveData<Response<List<SearchShopsByCategoryResponse>>> =
+        _search.switchMap { search ->
 
-        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-            Timber.i("Search Detail ${search.query}")
-            val locationInfo = locationDao.getEntityLocation()
-            val mainCategory = cacheDao.getCacheData(AppConstants.MAIN_CATEGORY)?.value
-            val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
+            liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+                Timber.i("Search Detail ${search.query}")
+                val locationInfo = locationDao.getEntityLocation()
+                val mainCategory = cacheDao.getCacheData(AppConstants.MAIN_CATEGORY)?.value
+                val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
 
-            val request = RequestSearch(locationInfo.longitude, locationInfo.latitude,search.query)
-            emit(searchRepository.searchShops(request, serviceArea.orEmpty(), mainCategory.orEmpty()))
+                val request =
+                    RequestSearch(locationInfo.longitude, locationInfo.latitude, search.query)
+                emit(
+                    searchRepository.searchShops(
+                        request,
+                        serviceArea.orEmpty(),
+                        mainCategory.orEmpty()
+                    )
+                )
+            }
         }
-    }
 
     private val handler = CoroutineExceptionHandler { _, exception ->
         Timber.i("Caught  $exception")
     }
 
-    val product: LiveData<Response<List<SearchProductsByCategoryResponse>>> = _search.switchMap { search ->
+    val product: LiveData<Response<List<SearchProductsByCategoryResponse>>> =
+        _search.switchMap { search ->
 
-        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-            Timber.i("Search Detail ${search.query}")
-            val mainCategory = cacheDao.getCacheData(AppConstants.MAIN_CATEGORY)?.value
-            val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
+            liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+                Timber.i("Search Detail ${search.query}")
+                val mainCategory = cacheDao.getCacheData(AppConstants.MAIN_CATEGORY)?.value
+                val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
 
-            emit(searchRepository.searchProducts(search.query, serviceArea.orEmpty(), mainCategory.orEmpty()))
+                emit(
+                    searchRepository.searchProducts(
+                        search.query,
+                        serviceArea.orEmpty(),
+                        mainCategory.orEmpty()
+                    )
+                )
+            }
         }
-    }
 
     val addToCartLiveData = MutableLiveData<AddToCartRequest>()
 
-    fun addToCart(addToCartRequest: AddToCartRequest){
+    fun addToCart(addToCartRequest: AddToCartRequest) {
         addToCartLiveData.postValue(addToCartRequest)
     }
 
     val addToCartMap = addToCartLiveData.switchMap {
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
             emit(searchRepository.addToCart(it))
+        }
+    }
+
+    val getUserCartList = MutableLiveData<String>()
+
+    fun userCartList() {
+        getUserCartList.postValue(AppHeaders.userID)
+    }
+
+    val getUserCartListLiveData = getUserCartList.switchMap {
+        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+            emit(searchRepository.getUserCartList(it))
+        }
+    }
+
+    val addMoney =  liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+        Timber.i("addMoney in viewmodel 1")
+        emit(searchRepository.addMoney())
+    }
+
+    val listTransaction = MutableLiveData<Int>()
+
+    fun listTransaction(transaction: Int) {
+        listTransaction.postValue(transaction)
+    }
+
+
+    val listTransactionLiveData = listTransaction.switchMap {
+        Timber.i("listTransaction in viewmodel")
+        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+            Timber.i("listTransaction in viewmodel 1")
+            emit(searchRepository.listTransaction())
         }
     }
 }

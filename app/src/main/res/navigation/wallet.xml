@@ -24,8 +24,7 @@
 
     <fragment
         android:id="@+id/wallet_fragment"
-        android:name="com.scootin.view.fragment.wallet.WalletFragment"
-        android:label="Home">
-    </fragment>
+        android:name="com.scootin.view.fragment.wallet.MyWalletFragment"
+        android:label="Home"></fragment>
 
 </navigation>

@@ -1,5 +1,6 @@
 package com.scootin.view.fragment.wallet
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -9,6 +10,7 @@ import com.razorpay.PaymentResultListener
 import com.scootin.R
 import com.scootin.databinding.FragmentHomeBinding
 import com.scootin.databinding.FragmentWalletBinding
+import com.scootin.network.manager.AppHeaders
 import com.scootin.util.fragment.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
@@ -50,8 +52,8 @@ class WalletFragment: Fragment(R.layout.fragment_wallet){
 
 
            val prefill = JSONObject()
-           prefill.put("email","sumit.gupta@example.com")
-           prefill.put("contact","9876543210")
+//           prefill.put("email","sumit.gupta@example.com")
+           prefill.put("contact",AppHeaders.userMobileNumber)
 
            options.put("prefill", prefill)
            co.open(activity, options)
@@ -63,6 +65,11 @@ class WalletFragment: Fragment(R.layout.fragment_wallet){
            e.printStackTrace()
        }
    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Timber.i("data := ${data}")
+    }
 
 
 }

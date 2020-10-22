@@ -3,56 +3,48 @@ package com.scootin.view.adapter
 import android.annotation.SuppressLint
 import android.graphics.Paint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import com.scootin.databinding.AdapterItemAddEssentialGroceryBinding
-import com.scootin.extensions.updateVisibility
+import com.scootin.databinding.AdapterItemAddCardListBinding
 import com.scootin.network.AppExecutors
-import com.scootin.network.response.SearchProductsByCategoryResponse
+import com.scootin.network.response.cart.CartListResponseItem
 
 
-class AddCartItemAdapter (
+class AddCartItemAdapter(
     val appExecutors: AppExecutors
 
-) : DataBoundListAdapter<SearchProductsByCategoryResponse, AdapterItemAddEssentialGroceryBinding>(
+) : DataBoundListAdapter<CartListResponseItem, AdapterItemAddCardListBinding>(
     appExecutors,
-    diffCallback = object : DiffUtil.ItemCallback<SearchProductsByCategoryResponse>() {
+    diffCallback = object : DiffUtil.ItemCallback<CartListResponseItem>() {
         override fun areItemsTheSame(
-            oldItem: SearchProductsByCategoryResponse,
-            newItem: SearchProductsByCategoryResponse
+            oldItem: CartListResponseItem,
+            newItem: CartListResponseItem
         ) = oldItem.id == newItem.id
 
 
         @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
-            oldItem: SearchProductsByCategoryResponse,
-            newItem: SearchProductsByCategoryResponse
+            oldItem: CartListResponseItem,
+            newItem: CartListResponseItem
         ) = oldItem == newItem
     }
-)
-{
-    override fun createBinding(parent: ViewGroup): AdapterItemAddEssentialGroceryBinding {
-       val binding= AdapterItemAddEssentialGroceryBinding.inflate(
+) {
+    override fun createBinding(parent: ViewGroup): AdapterItemAddCardListBinding {
+        val binding = AdapterItemAddCardListBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
 
         )
-        binding.discountPrice.paintFlags= Paint.STRIKE_THRU_TEXT_FLAG
-
-        binding.operation.updateVisibility(false)
-        binding.addItem.updateVisibility(true)
-
+        binding.discountPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
         return binding
     }
 
     override fun bind(
-        binding: AdapterItemAddEssentialGroceryBinding,
-        item: SearchProductsByCategoryResponse,
+        binding: AdapterItemAddCardListBinding,
+        item: CartListResponseItem,
         position: Int,
         isLast: Boolean
     ) {
         binding.data = item
-
 
 
 //        val items = arrayOf("500g", "1kg", "2kg")
