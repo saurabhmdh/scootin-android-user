@@ -49,5 +49,9 @@ class AccountFragment: Fragment(R.layout.fragment_account)  {
             findNavController().navigate(AccountFragmentDirections.accountToSupportFragment())
         }
 
+        binding.update.setOnClickListener{
+            viewModel.updateDefaultAddress("")
+        }
+
     }
 }

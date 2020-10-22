@@ -87,4 +87,13 @@ interface APIService {
     @GET("/wallet/list-transaction")
     suspend fun listTransaction(): Response<List<WalletTransactionResponse>>
 
+    @GET("/address/update-default-address/{userId}/{addressId}")
+    suspend fun updateDefaultAddress(): Response<List<WalletTransactionResponse>>
+
+    @GET("/address/add-new-address/{userId}")
+    suspend fun addNewAddress(): Response<List<WalletTransactionResponse>>
+
+
+
+
 }

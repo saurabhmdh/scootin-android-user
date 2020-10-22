@@ -364,7 +364,7 @@
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/entered_state_edit_text"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="80dp"
             android:layout_marginTop="5dp"
@@ -431,6 +431,16 @@
             android:textStyle="bold"
             android:fontFamily="@font/montserrat_regular"/>
          </RadioGroup>
+
+        <Button
+            android:id="@+id/update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="UPDATE"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            app:layout_constraintTop_toBottomOf="@+id/default_state_text_view"/>
 
 <!--TODO Default Add new address SVG Layout-->
 

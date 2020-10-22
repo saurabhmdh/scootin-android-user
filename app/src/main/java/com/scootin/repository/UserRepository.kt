@@ -34,4 +34,9 @@ class UserRepository @Inject constructor(
 
 
     suspend fun updateFCMId(id: String, request: RequestFCM) = services.updateFCMID(id, request)
+
+    suspend fun addNewAddress() = services.addNewAddress()
+
+    suspend fun updateDefaultAddress() = services.updateDefaultAddress()
+
 }
