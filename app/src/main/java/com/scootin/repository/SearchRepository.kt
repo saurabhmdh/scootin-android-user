@@ -40,4 +40,6 @@ class SearchRepository @Inject constructor(
 
     suspend fun listTransaction() = services.listTransaction()
 
+    suspend fun findProductFromShop(shopId: Int) = services.findProductFromShop(shopId)
+
 }
