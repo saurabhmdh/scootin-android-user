@@ -119,8 +119,8 @@ data class CartListResponseItem(
         val hasDefault: Boolean,
         val id: Int,
         val pincode: String,
-        val stateDetails: StateDetails,
-        val userInfo: UserInfoX
+        val stateDetails: StateDetails?,
+        val userInfo: UserInfoX?
     ) : Parcelable
 
     @Parcelize

@@ -94,6 +94,6 @@ interface APIService {
     suspend fun addNewAddress(@Path("userID") userId: String, @Body address: CartListResponseItem.Address): Response<String>
 
     @GET("/address/get-all-address/{userId}")
-    suspend fun getAllAdress(@Path("userID") userId: String): Response<String>
+    suspend fun getAllAdress(@Path("userID") userId: String): Response<List<CartListResponseItem.Address>>
 
 }

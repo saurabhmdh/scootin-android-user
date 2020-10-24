@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.scootin.R
 import com.scootin.databinding.FragmentAccountBinding
 import com.scootin.network.AppExecutors
+import com.scootin.network.response.cart.CartListResponseItem
 import com.scootin.util.fragment.autoCleared
 import com.scootin.viewmodel.account.AccountFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,7 +35,10 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
 
     private fun initObservers(view: View) {
         viewModel.getAllAddress(1)
-        viewModel.addNewAddress(null)
+
+        // TODO pass address object
+        val address = CartListResponseItem.Address("","","","",false,true,1,"",null,null)
+        viewModel.addNewAddress(address)
         viewModel.updateDefaultAddress("")
         viewModel.addNewAddressLiveData.observe(viewLifecycleOwner, Observer {
 
