@@ -1,10 +1,9 @@
 package com.scootin.viewmodel.account
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
-import androidx.lifecycle.switchMap
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.scootin.network.manager.AppHeaders
+import com.scootin.network.response.cart.CartListResponseItem
 import com.scootin.repository.UserRepository
 import com.scootin.viewmodel.base.ObservableViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -18,10 +17,10 @@ internal constructor(
 
 //    fun getAllTemples() = templeRepo.getAllTemples(viewModelScope.coroutineContext + Dispatchers.IO)
 
-    val addNewAddress = MutableLiveData<Int>()
+    val addNewAddress = MutableLiveData<CartListResponseItem.Address>()
 
-    fun addNewAddress(transaction: Int) {
-        addNewAddress.postValue(transaction)
+    fun addNewAddress(address: CartListResponseItem.Address) {
+        addNewAddress.postValue(address)
     }
 
     private val handler = CoroutineExceptionHandler { _, exception ->
@@ -32,7 +31,8 @@ internal constructor(
         Timber.i("addNewAddress in viewmodel")
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
             Timber.i("addNewAddress in viewmodel 1")
-            emit(userRepository.addNewAddress())
+            // TODO add new Address
+            emit(userRepository.addNewAddress(it))
         }
     }
 
@@ -46,7 +46,22 @@ internal constructor(
         Timber.i("addNewAddress in viewmodel")
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
             Timber.i("addNewAddress in viewmodel 1")
-            emit(userRepository.updateDefaultAddress())
+            // TODO get addressId
+            emit(userRepository.updateDefaultAddress(it))
+        }
+    }
+
+    val getAllAddress = MutableLiveData<Int>()
+
+    fun getAllAddress(value: Int) {
+        getAllAddress.postValue(value)
+    }
+
+    val getAllAddressLiveData = getAllAddress.switchMap {
+        Timber.i("addNewAddress in viewmodel")
+        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+            Timber.i("addNewAddress in viewmodel 1")
+            emit(userRepository.getAllAddress())
         }
     }
 }

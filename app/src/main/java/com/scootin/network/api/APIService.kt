@@ -88,12 +88,12 @@ interface APIService {
     suspend fun listTransaction(): Response<List<WalletTransactionResponse>>
 
     @GET("/address/update-default-address/{userId}/{addressId}")
-    suspend fun updateDefaultAddress(): Response<List<WalletTransactionResponse>>
+    suspend fun updateDefaultAddress(@Path("userID") userId: String, @Path("addressId") addressId: String): Response<String>
 
     @GET("/address/add-new-address/{userId}")
-    suspend fun addNewAddress(): Response<List<WalletTransactionResponse>>
+    suspend fun addNewAddress(@Path("userID") userId: String, @Body address: CartListResponseItem.Address): Response<String>
 
-
-
+    @GET("/address/get-all-address/{userId}")
+    suspend fun getAllAdress(@Path("userID") userId: String): Response<String>
 
 }
