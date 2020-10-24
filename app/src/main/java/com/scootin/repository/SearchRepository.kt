@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import com.scootin.network.api.APIService
 import com.scootin.network.api.NetworkBoundResource
 import com.scootin.network.api.Resource
+import com.scootin.network.manager.AppHeaders
+import com.scootin.network.request.AddToCartRequest
 import com.scootin.network.request.RequestSearch
 import com.scootin.network.response.SearchShopsByCategoryResponse
 import retrofit2.Response
@@ -29,4 +31,13 @@ class SearchRepository @Inject constructor(
     suspend fun searchShops(requestSearch: RequestSearch, serviceAreaId: String, categoryId: String) = services.findShops(serviceAreaId, categoryId, requestSearch)
 
     suspend fun searchProducts(query: String, serviceAreaId: String, categoryId: String) = services.findProducts(serviceAreaId, categoryId, RequestSearch(query=query))
+
+    suspend fun addToCart(request: AddToCartRequest) = services.addToCart(request)
+
+    suspend fun getUserCartList(userId: String) = services.getUserCartList(userId)
+
+    suspend fun addMoney() = services.addMoney()
+
+    suspend fun listTransaction() = services.listTransaction()
+
 }

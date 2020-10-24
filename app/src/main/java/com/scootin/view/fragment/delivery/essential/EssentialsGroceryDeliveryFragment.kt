@@ -5,12 +5,16 @@ import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.scootin.R
 import com.scootin.databinding.FragmentGroceryDeliveryBinding
 import com.scootin.extensions.getCheckedRadioButtonPosition
 import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
+import com.scootin.network.manager.AppHeaders
+import com.scootin.network.request.AddToCartRequest
+import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.sweets.SweetsItem
 import com.scootin.network.response.sweets.SweetsStore
 import com.scootin.util.fragment.autoCleared
@@ -51,6 +55,10 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
                 }
             }
         }
+
+        viewModel.addToCartMap.observe(viewLifecycleOwner, Observer {
+            Timber.i("Status addToCartLiveData = ${it.isSuccessful} ")
+        })
     }
 
     private fun updateUI() {
@@ -109,15 +117,22 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
         productSearchAdapter = ProductSearchAdapter(
                 appExecutors,
                 object : ProductSearchAdapter.ImageAdapterClickLister {
-                    override fun onIncrementItem(view: View) {
-
+                    override fun onIncrementItem(
+                        view: View,
+                        item: SearchProductsByCategoryResponse?,
+                        count: Int
+                    ) {
+                        val addToCartRequest = AddToCartRequest(AppHeaders.userID, item?.id, count)
+                        viewModel.addToCart(addToCartRequest)
                     }
 
-                    override fun onDecrementItem(view: View) {
-                    }
-
-                    override fun onAddViewClick() {
-                        binding.checkout.updateVisibility(true)
+                    override fun onDecrementItem(
+                        view: View,
+                        item: SearchProductsByCategoryResponse?,
+                        count: Int
+                    ) {
+                        val addToCartRequest = AddToCartRequest(AppHeaders.userID, item?.id, count)
+                        viewModel.addToCart(addToCartRequest)
                     }
 
                 })

@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import com.scootin.network.api.APIService
 import com.scootin.network.api.NetworkBoundResource
 import com.scootin.network.api.Resource
+import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.RequestFCM
+import com.scootin.network.response.cart.CartListResponseItem
 import com.scootin.network.response.login.ResponseUser
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -34,4 +36,11 @@ class UserRepository @Inject constructor(
 
 
     suspend fun updateFCMId(id: String, request: RequestFCM) = services.updateFCMID(id, request)
+
+    suspend fun updateDefaultAddress(addressId: String) = services.updateDefaultAddress(AppHeaders.userID, addressId)
+
+    suspend fun addNewAddress(address: CartListResponseItem.Address) = services.addNewAddress(AppHeaders.userID, address)
+
+    suspend fun getAllAddress() = services.getAllAdress(AppHeaders.userID)
+
 }
