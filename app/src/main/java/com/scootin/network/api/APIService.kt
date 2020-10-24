@@ -96,4 +96,7 @@ interface APIService {
     @GET("/address/get-all-address/{userId}")
     suspend fun getAllAdress(@Path("userID") userId: String): Response<List<CartListResponseItem.Address>>
 
+    @GET("/search/{shopId}/get-all-products")
+    suspend fun findProductFromShop(@Path("shopID") shopID: Int): Response<List<SearchProductsByCategoryResponse>>
+
 }
