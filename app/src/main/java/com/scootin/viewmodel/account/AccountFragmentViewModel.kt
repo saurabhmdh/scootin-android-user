@@ -3,7 +3,7 @@ package com.scootin.viewmodel.account
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.scootin.network.manager.AppHeaders
-import com.scootin.network.response.cart.CartListResponseItem
+import com.scootin.network.response.Address
 import com.scootin.repository.UserRepository
 import com.scootin.viewmodel.base.ObservableViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -17,9 +17,9 @@ internal constructor(
 
 //    fun getAllTemples() = templeRepo.getAllTemples(viewModelScope.coroutineContext + Dispatchers.IO)
 
-    val addNewAddress = MutableLiveData<CartListResponseItem.Address>()
+    val addNewAddress = MutableLiveData<Address>()
 
-    fun addNewAddress(address: CartListResponseItem.Address) {
+    fun addNewAddress(address: Address) {
         addNewAddress.postValue(address)
     }
 
@@ -43,9 +43,9 @@ internal constructor(
     }
 
     val updateDefaultAddressLiveData = updateDefaultAddress.switchMap {
-        Timber.i("addNewAddress in viewmodel")
+        Timber.i("updateDefaultAddress in viewmodel")
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-            Timber.i("addNewAddress in viewmodel 1")
+            Timber.i("updateDefaultAddress in viewmodel 1")
             // TODO get addressId
             emit(userRepository.updateDefaultAddress(it))
         }
@@ -58,9 +58,9 @@ internal constructor(
     }
 
     val getAllAddressLiveData = getAllAddress.switchMap {
-        Timber.i("addNewAddress in viewmodel")
+        Timber.i("getAllAddress in viewmodel")
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-            Timber.i("addNewAddress in viewmodel 1")
+            Timber.i("getAllAddress in viewmodel 1")
             emit(userRepository.getAllAddress())
         }
     }

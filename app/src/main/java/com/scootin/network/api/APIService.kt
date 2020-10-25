@@ -2,6 +2,7 @@ package com.scootin.network.api
 
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.*
+import com.scootin.network.response.Address
 import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.network.response.cart.CartListResponseItem
@@ -9,6 +10,7 @@ import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.network.response.home.ResponseServiceArea
 import com.scootin.network.response.login.ResponseUser
 import com.scootin.network.response.wallet.WalletTransactionResponse
+import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -90,13 +92,18 @@ interface APIService {
     @GET("/address/update-default-address/{userId}/{addressId}")
     suspend fun updateDefaultAddress(@Path("userID") userId: String, @Path("addressId") addressId: String): Response<String>
 
-    @GET("/address/add-new-address/{userId}")
-    suspend fun addNewAddress(@Path("userID") userId: String, @Body address: CartListResponseItem.Address): Response<String>
+    @POST("/address/add-new-address")
+    suspend fun addNewAddress(/*@Path("userID") userId: String,*/ @Body address: Address): Response<String>
 
     @GET("/address/get-all-address/{userId}")
-    suspend fun getAllAdress(@Path("userID") userId: String): Response<List<CartListResponseItem.Address>>
+    suspend fun getAllAdress(@Path("userID") userId: String): Response<List<Address>>
 
     @GET("/search/{shopId}/get-all-products")
     suspend fun findProductFromShop(@Path("shopID") shopID: Int): Response<List<SearchProductsByCategoryResponse>>
+
+    @Multipart
+    @POST("/media/upload-image")
+    suspend fun uploadImage(@Part file: MultipartBody.Part,): Response<String>
+
 
 }
