@@ -7,10 +7,11 @@
     android:layout_height="fill_parent"
     android:background="@drawable/ic_background">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+<!--
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/customer_support_logo"
             android:layout_width="wrap_content"
@@ -41,6 +42,7 @@
             android:layout_marginEnd="20dp"
             android:background="@drawable/ic_order_id_field"
             android:orientation="horizontal"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -75,6 +77,7 @@
             android:layout_marginEnd="20dp"
             android:background="@drawable/ic_message_box"
             android:gravity="start"
+            android:visibility="gone"
             android:hint="Please tell us how can we help"
             android:padding="2dp"
             android:textSize="13sp"
@@ -86,6 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/_250"
+            android:visibility="gone"
             android:textSize="12sp"
             android:textColor="@color/separatorColor"
             android:layout_marginEnd="@dimen/dimen_20"
@@ -101,7 +105,7 @@
             android:text="@string/separator"
             android:textSize="12sp"
             android:textColor="@color/separatorColor"
-
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/message_box"
             app:layout_constraintEnd_toStartOf="@id/text_limit"
             tools:ignore="SmallSp" />
@@ -114,6 +118,7 @@
             android:textSize="12sp"
             android:textColor="@color/separatorColor"
 
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/message_box"
             app:layout_constraintEnd_toStartOf="@+id/separator"
             tools:ignore="SmallSp" />
@@ -125,6 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="341dp"
             android:layout_marginEnd="20dp"
+            android:visibility="gone"
             android:src="@drawable/ic_send_active"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -138,41 +144,40 @@
             android:layout_marginTop="8dp"
             android:text="Or Contact Us for older orders:"
             android:textColor="#000"
+            android:visibility="gone"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_send_active" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/mail_customer_support"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="411dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_mail_customer_support" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_send_active" />-->
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/appCompatEditText"
             android:layout_width="206dp"
             android:layout_height="18dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="462dp"
             android:background="@drawable/ic_order_id_field_for_call"
             android:hint="@string/edittxt_orderid_call_support"
             android:paddingLeft="2dp"
             android:textColor="#000"
             android:textColorHint="#000"
             android:textSize="12sp"
+            android:layout_marginTop="300dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/mail_customer_support"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_mail_customer_support" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/active_call_support"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="495dp"
             android:background="@drawable/ic_call_customer_support_active"
             android:gravity="center_vertical"
             android:paddingLeft="45dp"
@@ -182,5 +187,5 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </LinearLayout>

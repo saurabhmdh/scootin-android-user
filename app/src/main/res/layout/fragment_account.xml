@@ -482,10 +482,9 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:src="@drawable/ic_saved_cards_tab"
-
+            android:visibility="gone"
             android:layout_marginTop="6dp"
             android:layout_marginStart="25dp"
-
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/orders_fragment"
             android:contentDescription="@string/save_cart" />
