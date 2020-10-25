@@ -1,5 +1,7 @@
 package com.scootin.viewmodel.delivery
 
+import android.content.Context
+import android.net.Uri
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.scootin.database.dao.CacheDao
@@ -11,11 +13,17 @@ import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.repository.SearchRepository
 import com.scootin.util.constants.AppConstants
+import com.scootin.util.ui.FileUtils
 import com.scootin.viewmodel.base.ObservableViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import timber.log.Timber
+import java.io.File
+
 
 class CategoriesViewModel @ViewModelInject internal constructor(
     private val cacheDao: CacheDao,
@@ -98,7 +106,7 @@ class CategoriesViewModel @ViewModelInject internal constructor(
         }
     }
 
-    val addMoney =  liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+    val addMoney = liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
         Timber.i("addMoney in viewmodel 1")
         emit(searchRepository.addMoney())
     }
@@ -107,6 +115,17 @@ class CategoriesViewModel @ViewModelInject internal constructor(
 
     fun listTransaction(transaction: Int) {
         listTransaction.postValue(transaction)
+    }
+
+    fun uploadImage(context: Context, uri: Uri) {
+        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+            Timber.i("uploadImage ")
+            val filePath = FileUtils.getPath(context, uri)
+            val file = File(filePath)
+            val filePart =
+                MultipartBody.Part.createFormData("media", file.name)
+            emit(searchRepository.uploadImage(filePart))
+        }
     }
 
 

@@ -197,7 +197,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/default_delivery_text_view" />
 
-        <androidx.appcompat.widget.AppCompatEditText
+            <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/entered_address_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -432,16 +432,6 @@
             android:fontFamily="@font/montserrat_regular"/>
          </RadioGroup>
 
-        <Button
-            android:id="@+id/update"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="UPDATE"
-            android:textStyle="bold"
-            android:textAllCaps="true"
-            app:layout_constraintTop_toBottomOf="@+id/default_state_text_view"/>
-
 <!--TODO Default Add new address SVG Layout-->
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -457,6 +447,277 @@
             android:src="@drawable/ic_add_new_address_tab_account"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/radio_group" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/newAddressLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/address_fragment">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/default_address_text_view1"
+                style="@style/custom_font_style_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="12dp"
+                android:padding="3dp"
+                android:text="@string/address"
+                android:textColor="#616161"
+                android:textSize="15sp"
+                android:textStyle="bold"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/entered_address_edit_text1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="20dp"
+                android:background="@null"
+                android:hint="@string/edittxt_user_address"
+                android:maxLines="1"
+                android:padding="2dp"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#595959"
+                android:layout_marginStart="27dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/default_address_text_view1"/>
+
+
+            <!--TODO Default Delivery Address Layout-->
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/default_area_text_view1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="5dp"
+                android:padding="3dp"
+                android:text="@string/area"
+                style="@style/custom_font_style_black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#616161"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/default_address_text_view1" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/entered_area_edit_text1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                android:textSize="15sp"
+                android:padding="2dp"
+                android:maxLines="1"
+                android:background="@null"
+                android:hint="@string/edittxt_user_area"
+                app:layout_constraintStart_toStartOf="@+id/full_name_text_view1"
+                app:layout_constraintTop_toBottomOf="@id/default_address_text_view1"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#595959"
+                android:layout_marginStart="27dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintTop_toBottomOf="@id/default_area_text_view1"/>
+
+            <!--TODO Default City Address Layout-->
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/default_city_text_view1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="5dp"
+                android:padding="3dp"
+                android:text="@string/city"
+                style="@style/custom_font_style_black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#616161"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/default_area_text_view1" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/entered_city_edit_text1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="200dp"
+                android:textSize="15sp"
+                android:maxLines="1"
+                android:padding="2dp"
+                android:background="@null"
+                android:hint="@string/edittxt_user_city"
+                app:layout_constraintStart_toStartOf="@+id/full_name_text_view1"
+                app:layout_constraintTop_toBottomOf="@id/default_area_text_view1"/>
+
+            <!--TODO Default Pin Address Layout-->
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/default_pin_text_view1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pin"
+                style="@style/custom_font_style_black"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="5dp"
+                android:padding="3dp"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#616161"
+
+                app:layout_constraintStart_toEndOf="@+id/entered_city_edit_text1"
+                app:layout_constraintTop_toBottomOf="@id/default_area_text_view1"/>
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/entered_pin_edit_text1"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@null"
+                android:hint="@string/edittxt_user_pin"
+                android:maxLines="1"
+                android:padding="2dp"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@+id/default_pin_text_view1"
+                app:layout_constraintTop_toBottomOf="@id/default_area_text_view1" />
+
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="#595959"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/default_city_text_view1" />
+
+            <!--TODO Default Delivery State Layout-->
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/default_state_text_view1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="5dp"
+                android:padding="3dp"
+                android:text="@string/state"
+                style="@style/custom_font_style_black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#616161"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/default_city_text_view1" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/entered_state_edit_text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                android:textSize="15sp"
+                android:padding="2dp"
+                android:hint="@string/edittxt_user_state"
+                android:maxLines="1"
+                android:background="@null"
+                app:layout_constraintStart_toStartOf="@+id/full_name_text_view1"
+                app:layout_constraintTop_toBottomOf="@id/default_city_text_view1"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#595959"
+                android:layout_marginStart="27dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintTop_toBottomOf="@id/default_state_text_view1"/>
+
+            <!--TODO Default Radio Button Home Layout-->
+            <RadioGroup
+                android:id="@+id/radio_group1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/default_state_text_view1">
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/home_radio_button1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Home"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_regular"
+                    />
+
+
+
+                <!--TODO Default Radio Button office Layout-->
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/office_radio_button1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Office"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_regular"/>
+
+                <!--TODO Default Radio Button Other Layout-->
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/other_radio_button1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Other"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_regular"/>
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/update1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="UPDATE"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                app:layout_constraintTop_toBottomOf="@+id/default_state_text_view1"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 <!--TODO Default my orders svg Layout-->
 
@@ -471,7 +732,7 @@
             android:layout_marginStart="25dp"
 
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/address_fragment"
+            app:layout_constraintTop_toBottomOf="@id/newAddressLayout"
             android:contentDescription="@string/my_order" />
 
 <!--TODO Default save Cart svg Layout-->
@@ -482,10 +743,9 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackground"
             android:src="@drawable/ic_saved_cards_tab"
-
+            android:visibility="gone"
             android:layout_marginTop="6dp"
             android:layout_marginStart="25dp"
-
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/orders_fragment"
             android:contentDescription="@string/save_cart" />
