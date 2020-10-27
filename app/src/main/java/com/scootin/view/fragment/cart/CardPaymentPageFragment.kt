@@ -74,8 +74,6 @@ class CardPaymentPageFragment : Fragment(R.layout.fragment_paymentt_status) {
         viewModel.promCodeRequestLiveData.observe(viewLifecycleOwner, Observer {
             Timber.i("applyCoupon = ${it}")
         })
-
-
     }
 
     private fun callPaymentUiFunction(response: PlaceOrderResponse?) {
