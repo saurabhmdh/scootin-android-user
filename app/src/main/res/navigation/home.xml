@@ -180,33 +180,7 @@
     <fragment
         android:id="@+id/grocery"
         android:name="com.scootin.view.fragment.delivery.essential.EssentialsGroceryDeliveryFragment"
-        android:label="Home">
-        <action
-            android:id="@+id/essential_grocery_to_wallet"
-            app:destination="@id/add_to_cart_list"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/add_to_cart_list"
-        android:name="com.scootin.view.fragment.cart.CartListFragment"
-        android:label="Home">
-        <action
-            android:id="@+id/add_cart_to_wallet"
-            app:destination="@id/wallet_fragment_grocery"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right">
-            <argument
-                android:name="orderId"
-                app:argType="integer" />
-        </action>
-    </fragment>
+        android:label="Home" />
 
     <fragment
         android:id="@+id/wallet_fragment_grocery"

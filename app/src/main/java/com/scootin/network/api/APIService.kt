@@ -9,6 +9,7 @@ import com.scootin.network.response.cart.CartListResponseItem
 import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.network.response.home.ResponseServiceArea
 import com.scootin.network.response.login.ResponseUser
+import com.scootin.network.response.placeOrder.PlaceOrderResponse
 import com.scootin.network.response.wallet.WalletTransactionResponse
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
@@ -77,10 +78,7 @@ interface APIService {
     @GET("/order/orders/count-total")
     suspend fun countTotal()
 
-    @GET("/order/place-order")
-    suspend fun placeOrder(@Body request: PlaceOrderRequest): Response<String>
-
-    @POST("/cart/get-cart/{userID}")
+    @GET("/cart/get-cart/{userID}")
     suspend fun getUserCartList(@Path("userID") userId: String): Response<List<CartListResponseItem>>
 
     @POST("/wallet/add-money")
@@ -90,7 +88,10 @@ interface APIService {
     suspend fun listTransaction(): Response<List<WalletTransactionResponse>>
 
     @GET("/address/update-default-address/{userId}/{addressId}")
-    suspend fun updateDefaultAddress(@Path("userID") userId: String, @Path("addressId") addressId: String): Response<String>
+    suspend fun updateDefaultAddress(
+        @Path("userID") userId: String,
+        @Path("addressId") addressId: String
+    ): Response<String>
 
     @POST("/address/add-new-address")
     suspend fun addNewAddress(/*@Path("userID") userId: String,*/ @Body address: Address): Response<String>
@@ -103,7 +104,32 @@ interface APIService {
 
     @Multipart
     @POST("/media/upload-image")
-    suspend fun uploadImage(@Part file: MultipartBody.Part,): Response<String>
+    suspend fun uploadImage(@Part file: MultipartBody.Part): Response<String>
 
+    @POST("/order/place-order/{userId}")
+    suspend fun placeOrder(
+        @Path("userId") userId: Int,
+        @Body request: PlaceOrderRequest
+    ): Response<PlaceOrderResponse>
+
+    @POST("/order/user-confirm-order/{orderId}/{userId}")
+    suspend fun userConfirmOrder(
+        @Path("orderId") orderId: Int,
+        @Path("userId") userId: Int,
+        @Body orderRequest: OrderRequest
+    ): Response<PlaceOrderResponse>
+
+    @POST("/payment/apply-promocode/{orderId}/{userId}")
+    suspend fun applyPromoCode(
+        @Path("orderId") orderId: Int,
+        @Path("userId") userId: Int,
+        @Body promoCodeRequest: PromoCodeRequest
+    ): Response<PlaceOrderResponse>
+
+
+    @POST("/payment/payment-verified")
+    suspend fun verifyPayment(
+        @Body verifyAmountRequest: VerifyAmountRequest
+    ): Response<String>
 
 }

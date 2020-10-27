@@ -6,15 +6,18 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.scootin.R
 import com.scootin.databinding.HandWrittenGroceryListBinding
 import com.scootin.network.glide.GlideApp
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.fragment.autoCleared
+import com.scootin.util.ui.FileUtils
 import com.scootin.util.ui.MediaPicker
 import com.scootin.util.ui.UtilPermission
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class EssentialHandwrittenFragment : Fragment(R.layout.hand_written_grocery_list) {
@@ -27,6 +30,10 @@ class EssentialHandwrittenFragment : Fragment(R.layout.hand_written_grocery_list
         binding.uploadPhoto.setOnClickListener {
             onClickOfUploadMedia()
         }
+
+        viewModel.filePathLiveData.observe(viewLifecycleOwner, Observer {
+            Timber.i("EssentialHandwrittenFragment response = ${it.code()} ${it.isSuccessful}")
+        })
     }
 
     private fun onClickOfUploadMedia() {
@@ -43,7 +50,10 @@ class EssentialHandwrittenFragment : Fragment(R.layout.hand_written_grocery_list
             context?.let { context ->
                 GlideApp.with(requireContext()).load(intent.data).into(binding.receiverPhotoBox)
                 intent.data?.let {
-                    viewModel.uploadImage(requireContext(), it)
+
+//                    viewModel.filePath(filePath)
+                    viewModel.filePath(it)
+//                    viewModel.uploadImage(requireContext(), it)
                 }
             }
         }

@@ -25,7 +25,7 @@ class CartFragment: Fragment(R.layout.fragment_payment_page) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPaymentPageBinding.bind(view)
         binding.payByCardsTab.setOnClickListener {
-            findNavController().navigate(CartFragmentDirections.actionCartFragmentToCardPayment())
+//            findNavController().navigate(CartFragmentDirections.actionCartFragmentToCardPayment())
         }
 
     }

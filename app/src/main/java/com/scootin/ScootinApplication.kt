@@ -26,7 +26,7 @@ class ScootinApplication: MultiDexApplication() {
     lateinit var service: StartUpService
 
     override fun onCreate() {
-        updateStrictPolicy()
+//        updateStrictPolicy()
         super.onCreate()
         initTimber()
 
