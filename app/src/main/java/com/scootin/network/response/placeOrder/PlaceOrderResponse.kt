@@ -62,7 +62,8 @@ data class PlaceOrderResponse(
         val id: Int,
         val payment_status: String,
         val totalAmount: Double,
-        val totalGSTAmount: Int
+        val totalGSTAmount: Int,
+        val orderReference: String?
     ) : Parcelable
 
     @Parcelize

@@ -20,7 +20,7 @@ import timber.log.Timber
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), PaymentResultListener {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var currentNavController: LiveData<NavController>? = null
@@ -90,12 +90,4 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
 
     }
 
-
-    override fun onPaymentSuccess(razorpayPaymentId: String?) {
-        Timber.i("Payment $razorpayPaymentId")
-    }
-
-    override fun onPaymentError(errorCode: Int, response: String?) {
-        Timber.i("onPaymentError $errorCode response = $response")
-    }
 }

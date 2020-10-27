@@ -1,5 +1,5 @@
 package com.scootin.network.request
 
 class VerifyAmountRequest(
-    val transactionId: String // paymentMode
+    val transactionId: String? // paymentMode
 )
