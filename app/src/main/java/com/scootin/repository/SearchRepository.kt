@@ -1,19 +1,11 @@
 package com.scootin.repository
 
-import androidx.lifecycle.LiveData
 import com.scootin.network.api.APIService
-import com.scootin.network.api.NetworkBoundResource
-import com.scootin.network.api.Resource
 import com.scootin.network.manager.AppHeaders
-import com.scootin.network.request.AddToCartRequest
-import com.scootin.network.request.RequestSearch
-import com.scootin.network.response.SearchShopsByCategoryResponse
+import com.scootin.network.request.*
 import okhttp3.MultipartBody
-import retrofit2.Response
-import java.io.File
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.coroutines.CoroutineContext
 
 
 @Singleton
@@ -30,9 +22,14 @@ class SearchRepository @Inject constructor(
 //        override suspend fun createCall(): Response<List<SearchShopsByCategoryResponse>> = services.findShop(serviceAreaId, categoryId, requestSearch)
 //    }.asLiveData()
 
-    suspend fun searchShops(requestSearch: RequestSearch, serviceAreaId: String, categoryId: String) = services.findShops(serviceAreaId, categoryId, requestSearch)
+    suspend fun searchShops(
+        requestSearch: RequestSearch,
+        serviceAreaId: String,
+        categoryId: String
+    ) = services.findShops(serviceAreaId, categoryId, requestSearch)
 
-    suspend fun searchProducts(query: String, serviceAreaId: String, categoryId: String) = services.findProducts(serviceAreaId, categoryId, RequestSearch(query=query))
+    suspend fun searchProducts(query: String, serviceAreaId: String, categoryId: String) =
+        services.findProducts(serviceAreaId, categoryId, RequestSearch(query = query))
 
     suspend fun addToCart(request: AddToCartRequest) = services.addToCart(request)
 
@@ -46,15 +43,15 @@ class SearchRepository @Inject constructor(
 
     suspend fun uploadImage(filePart: MultipartBody.Part) = services.uploadImage(filePart)
 
-    /*  fun uploadImage(context: CoroutineContext, filePath: String, uploadCallbacks: UploadCallbacks) =
-          object : NetworkBoundResource<MediaServerResponse>(context) {
-              val file = File(filePath)
-              val fileBody = ProgressRequestBody(file, "multipart/form-data", uploadCallbacks)
-              val filePart =
-                  MultipartBody.Part.createFormData("media", file.name, fileBody)
+    suspend fun placeOrder(placeOrderRequest: PlaceOrderRequest) =
+        services.placeOrder(AppHeaders.userID.toInt(), placeOrderRequest)
 
-              override suspend fun createCall(): Response<MediaServerResponse> =
-                  services.uploadImage(filePart)
-          }.asLiveData()*/
+    suspend fun userConfirmOrder(orderId: Int, orderRequest: OrderRequest) =
+        services.userConfirmOrder(orderId, AppHeaders.userID.toInt(), orderRequest)
 
+    suspend fun applyPromoCode(orderId: Int, promoCodeRequest: PromoCodeRequest) =
+        services.applyPromoCode(orderId, AppHeaders.userID.toInt(), promoCodeRequest)
+
+    suspend fun verifyPayment(verifyAmountRequest: VerifyAmountRequest) =
+        services.verifyPayment(verifyAmountRequest)
 }

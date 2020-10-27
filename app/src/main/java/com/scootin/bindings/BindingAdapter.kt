@@ -19,7 +19,7 @@ fun View.visibleGone(show: Boolean) {
 }
 
 @BindingAdapter("setImage")
-fun ImageView.setImage(url: String) {
+fun ImageView.setImage(url: String?) {
     GlideApp.with(this.context).setDefaultRequestOptions(getDefaultImage())
         .load(url)
         .transition(DrawableTransitionOptions.withCrossFade())
@@ -34,7 +34,7 @@ fun getDefaultImage() = RequestOptions().apply {
 @BindingAdapter("setPrice")
 fun TextView.setPrice(value: Double) {
     val format: Format = NumberFormat.getCurrencyInstance(Locale("en", "in"))
-    val finalValue =  format.format(BigDecimal(value))
+    val finalValue = format.format(BigDecimal(value))
 
     text = finalValue
 }

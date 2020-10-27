@@ -106,10 +106,6 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
                 productSearchAdapter.submitList(it.body())
             }
         }
-
-        binding.checkout.setOnClickListener {
-            findNavController().navigate(EssentialsGroceryDeliveryFragmentDirections.essentialGroceryToWallet())
-        }
     }
 
 
@@ -122,7 +118,7 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
                         item: SearchProductsByCategoryResponse?,
                         count: Int
                     ) {
-                        val addToCartRequest = AddToCartRequest(AppHeaders.userID, item?.id, count)
+                        val addToCartRequest = AddToCartRequest(AppHeaders.userID.toInt(), item?.id, count)
                         viewModel.addToCart(addToCartRequest)
                     }
 
@@ -131,7 +127,7 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
                         item: SearchProductsByCategoryResponse?,
                         count: Int
                     ) {
-                        val addToCartRequest = AddToCartRequest(AppHeaders.userID, item?.id, count)
+                        val addToCartRequest = AddToCartRequest(AppHeaders.userID.toInt(), item?.id, count)
                         viewModel.addToCart(addToCartRequest)
                     }
 
