@@ -64,6 +64,8 @@ class CardPaymentPageFragment : Fragment(R.layout.fragment_paymentt_status) {
             if(paymentMode == "ONLINE"){
                 // launch payment screen
 //                findNavController().navigate()
+            } else {
+                // launch success screen
             }
         })
 

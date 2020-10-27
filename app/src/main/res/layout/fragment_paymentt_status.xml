@@ -68,8 +68,8 @@
                 android:layout_height="wrap_content"
                 android:buttonTint="#808080"
                 android:checked="true"
-                android:tag="ONLINE"
                 android:fontFamily="@font/montserrat_regular"
+                android:tag="ONLINE"
                 android:text="Online Mode"
                 android:textColor="#808080"
                 android:textSize="12sp"
@@ -82,9 +82,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="#808080"
-                android:tag="CASH"
                 android:fontFamily="@font/montserrat_regular"
                 android:selectAllOnFocus="false"
+                android:tag="CASH"
                 android:text="Cash On Delivery"
                 android:textColor="#808080"
                 android:textSize="12sp"
@@ -121,16 +121,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/couponEdittext" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/confirm_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="80dp"
-            android:gravity="center"
-            android:text="Proceed to Payment"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_marginBottom="100dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_shopnow_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
