@@ -1,21 +1,26 @@
 package com.scootin.view.fragment.cart
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.razorpay.Checkout
 import com.scootin.R
 import com.scootin.databinding.FragmentPaymenttStatusBinding
 import com.scootin.network.AppExecutors
+import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.PlaceOrderRequest
 import com.scootin.network.response.placeOrder.PlaceOrderResponse
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.AddCartItemAdapter
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONObject
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -30,9 +35,14 @@ class CardPaymentPageFragment : Fragment(R.layout.fragment_paymentt_status) {
     var paymentMode ="CASH"
     var orderId = ""
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPaymenttStatusBinding.bind(view)
+        Checkout.preload(context)
         setListener()
         viewModel.placeOrder.postValue(PlaceOrderRequest(7553, false))
     }
@@ -60,10 +70,12 @@ class CardPaymentPageFragment : Fragment(R.layout.fragment_paymentt_status) {
 
         viewModel.orderRequestLiveData.observe(viewLifecycleOwner, Observer {
             Timber.i("orderRequest = ${it}")
+            val response = it.body()
+            orderId = "${response?.id}"
             // TODO launch payment screen if paymentMode is online
             if(paymentMode == "ONLINE"){
                 // launch payment screen
-//                findNavController().navigate()
+                startPayment()
             } else {
                 // launch success screen
             }
@@ -80,5 +92,42 @@ class CardPaymentPageFragment : Fragment(R.layout.fragment_paymentt_status) {
 
     private fun callPaymentUiFunction(response: PlaceOrderResponse?) {
         orderId = response?.id.toString()
+    }
+
+    private fun startPayment() {
+        val co = Checkout()
+
+        try {
+            val options = JSONObject()
+            options.put("name","Scootin Inc")
+            options.put("description","Demoing Charges")
+            //You can omit the image option to fetch the image from dashboard
+            options.put("image","https://image-res.s3.ap-south-1.amazonaws.com/scootin-logo.png")
+            options.put("theme.color", "#E90000")
+            options.put("currency","INR")
+             options.put("order_id", orderId)
+
+//            options.put("amount","50000")//pass amount in currency subunits
+
+
+
+            val prefill = JSONObject()
+//           prefill.put("email","sumit.gupta@example.com")
+            prefill.put("contact", AppHeaders.userMobileNumber)
+
+            options.put("prefill", prefill)
+            co.open(activity, options)
+
+            //Razorpay will return 3 values.. Which we need to check
+            //capture-payment
+        }catch (e: Exception){
+            Toast.makeText(activity,"Error in payment: "+ e.message, Toast.LENGTH_LONG).show()
+            e.printStackTrace()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Timber.i("data := ${data}")
     }
 }
