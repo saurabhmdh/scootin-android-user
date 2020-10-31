@@ -21,11 +21,9 @@ object UtilPermission {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
-    fun requestForReadWritePermission(context: Context) {
-
-        ActivityCompat
-            .requestPermissions(
-                context as Activity,
+    fun requestForReadWritePermission(context: Activity) {
+        ActivityCompat.requestPermissions(
+                context,
                 AppConstants.PERMISSION_READ_WRITE,
                 AppConstants.RC_READ_WRITE_PERMISSION
             )
