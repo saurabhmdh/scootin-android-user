@@ -3,7 +3,6 @@ package com.scootin.view.activity
 
 import android.content.Intent
 import android.os.Bundle
-
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -13,14 +12,16 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.razorpay.PaymentResultListener
 import com.scootin.R
 import com.scootin.databinding.ActivityMainBinding
-import com.scootin.util.constants.AppConstants
+import com.scootin.network.request.VerifyAmountRequest
 import com.scootin.util.navigation.setupWithNavController
+import com.scootin.view.fragment.cart.CardPaymentPageFragment
+import com.scootin.view.fragment.wallet.MyWalletFragment
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), PaymentResultListener {
 
     private lateinit var binding: ActivityMainBinding
     private var currentNavController: LiveData<NavController>? = null
@@ -40,7 +41,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         // Now that BottomNavigationBar has restored its instance state
@@ -53,7 +53,8 @@ class MainActivity : AppCompatActivity() {
      * Called on first creation and when restoring state.
      */
     private fun setupBottomNavigationBar() {
-        val navGraphIds = listOf(R.navigation.home, R.navigation.cart, R.navigation.wallet, R.navigation.account)
+        val navGraphIds =
+            listOf(R.navigation.home, R.navigation.cart, R.navigation.wallet, R.navigation.account)
 
         // Setup the bottom navigation view with a search of navigation graphs
         val controller = binding.bottomNav.setupWithNavController(
@@ -67,7 +68,8 @@ class MainActivity : AppCompatActivity() {
         controller.observe(this, Observer { navController ->
             try {
                 setupActionBarWithNavController(navController)
-            } catch (e:Exception) {}
+            } catch (e: Exception) {
+            }
         })
         currentNavController = controller
     }
@@ -90,4 +92,37 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+    override fun onPaymentSuccess(razorpayPaymentId: String?) {
+        Timber.i("Payment $razorpayPaymentId")
+        supportFragmentManager.fragments.forEach {
+            if((it is NavHostFragment) == true){
+                if (it != null) {
+                    val childFragments = it.childFragmentManager.fragments
+                    childFragments.forEach { fragment ->
+                        if (fragment is MyWalletFragment) {
+                            (fragment).onPaymentSuccess(razorpayPaymentId)
+                        } else if (fragment is CardPaymentPageFragment) {
+                            fragment.onPaymentSuccess(razorpayPaymentId)
+                        }
+                    }
+                }
+            }
+        }
+        val navHostFragment = supportFragmentManager.fragments.first() as? NavHostFragment
+        if (navHostFragment != null) {
+            val childFragments = navHostFragment.childFragmentManager.fragments
+            childFragments.forEach { fragment ->
+                if (fragment is MyWalletFragment) {
+                    (fragment).onPaymentSuccess(razorpayPaymentId)
+                } else if (fragment is CardPaymentPageFragment) {
+                    fragment.onPaymentSuccess(razorpayPaymentId)
+                }
+            }
+        }
+    }
+
+    override fun onPaymentError(errorCode: Int, response: String?) {
+        Timber.i("onPaymentError $errorCode response = $response")
+    }
 }
