@@ -19,6 +19,7 @@ import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+//Media permission error... its crashing
 @AndroidEntryPoint
 class EssentialHandwrittenFragment : Fragment(R.layout.hand_written_grocery_list) {
     private var binding by autoCleared<HandWrittenGroceryListBinding>()
@@ -40,7 +41,7 @@ class EssentialHandwrittenFragment : Fragment(R.layout.hand_written_grocery_list
         if (UtilPermission.hasReadWritePermission(requireContext())) {
             MediaPicker(requireActivity()).getImagePickerSelectionPanel()
         } else {
-            UtilPermission.requestForReadWritePermission(requireContext())
+            UtilPermission.requestForReadWritePermission(requireActivity())
         }
     }
 
