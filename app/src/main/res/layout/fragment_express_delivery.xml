@@ -1,63 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/bg_screen"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/ic_background">
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_ex_dlvr_card_on_store_page"
+        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back_arrow" />
+
+    <EditText
+        android:id="@+id/address"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_regular"
+        android:hint="@string/edittxt_hint_citywide"
+        android:inputType="text"
+        android:textSize="12dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:drawableLeft="@drawable/ic_location_icon"/>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/expresslogo"
+    <LinearLayout
+        android:layout_width="228dp"
+        android:layout_height="292dp"
+        android:background="@drawable/ic_category_selection_bg_citywide"
+        android:layout_marginTop="208dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
+        <RadioGroup
+            android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="48dp"
+            android:orientation="vertical">
 
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_ex_dlvr_card_on_store_page" />
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_back_arrow" />
+            <RadioButton
+                android:id="@+id/materialRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="252"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="@string/string_essentials"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#808080"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:buttonTint="#808080"
+                android:checked="true"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="145dp"
-            android:layout_marginEnd="20dp"
-            android:drawableStart="@drawable/ic_location_icon"
-            android:fontFamily="@font/montserrat_regular"
-            android:hint="@string/edittxt_hint_payment"
-            android:inputType="text"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <RadioButton
+                android:id="@+id/materialRadioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:buttonTint="#808080"
+                android:textColor="#808080"
+                android:tag="253"
+                android:selectAllOnFocus="false"
+                android:text="@string/string_sweet"
+                android:textStyle="bold"
+                android:textSize="13sp" />
+            <RadioButton
+                android:id="@+id/materialRadioButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:buttonTint="#808080"
+                android:textColor="#808080"
+                android:selectAllOnFocus="false"
+                android:tag="254"
+                android:text="@string/string_vegitable"
+                android:textStyle="bold"
+                android:textSize="13sp" />
+            <RadioButton
+                android:id="@+id/materialRadioButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:buttonTint="#808080"
+                android:textColor="#808080"
+                android:selectAllOnFocus="false"
+                android:tag="255"
+                android:text="@string/string_medicines"
+                android:textStyle="bold"
+                android:textSize="13sp" />
+            <RadioButton
+                android:id="@+id/materialRadioButton5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:buttonTint="#808080"
+                android:textColor="#808080"
+                android:tag="256"
+                android:selectAllOnFocus="false"
+                android:text="@string/string_stationary"
+                android:textStyle="bold"
+                android:textSize="13sp" />
+            <RadioButton
+                android:id="@+id/materialRadioButton6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:buttonTint="#808080"
+                android:textColor="#808080"
+                android:tag="257"
+                android:selectAllOnFocus="false"
+                android:text="@string/string_clothing"
+                android:textStyle="bold"
+                android:textSize="13sp" />
+        </RadioGroup>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="15dp"
-            android:paddingBottom="55dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/location" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</LinearLayout>
+
+
+    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btn_done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="75dp"
+        android:padding="5dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_done_button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"/>
+</RelativeLayout>

@@ -37,7 +37,7 @@
 
         <action
             android:id="@+id/account_to_orders_fragment"
-            app:destination="@id/orders_fragment"
+            app:destination="@id/order_history_fragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -66,11 +66,14 @@
         android:name="com.scootin.view.fragment.account.address.AddressFragment"
         android:label="Account"/>
 
-    <fragment
-        android:id="@+id/orders_fragment"
-        android:name="com.scootin.view.fragment.orders.OrderSummaryFragment"
-        android:label="Account">
-    </fragment>
+    <fragment android:id="@+id/order_history_fragment"
+        android:name="com.scootin.view.fragment.orders.OrderHistoryFragment"
+        />
+<!--    <fragment-->
+<!--        android:id="@+id/orders_fragment"-->
+<!--        android:name="com.scootin.view.fragment.orders.OrderSummaryFragment"-->
+<!--        android:label="Account">-->
+<!--    </fragment>-->
 
     <fragment
         android:id="@+id/cart_fragment"
