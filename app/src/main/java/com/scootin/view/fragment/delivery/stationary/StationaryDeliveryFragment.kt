@@ -2,6 +2,7 @@ package com.scootin.view.fragment.delivery.stationary
 
 import android.os.Bundle
 import android.view.View
+import android.widget.RadioButton
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,6 +16,7 @@ import com.scootin.network.AppExecutors
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.AddToCartRequest
 import com.scootin.network.response.SearchProductsByCategoryResponse
+import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.network.response.stationary.StationaryItem
 import com.scootin.network.response.sweets.SweetsStore
 import com.scootin.util.fragment.autoCleared
@@ -147,8 +149,12 @@ class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_deliver
     private fun setStoreAdapter() {
         shopSearchAdapter = ShopSearchAdapter(
             appExecutors, object : ShopSearchAdapter.StoreImageAdapterClickListener {
-                override fun onSelectButtonSelected(view: View) {
-                    //TODO: We need to go for search Product in this store..
+                override fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse) {
+                    Timber.i("Shop Info $shopInfo")
+                    viewModel.updateShop(shopInfo.shopID)
+                    binding.productList.updateVisibility(true)
+                    binding.storeList.updateVisibility(false)
+                    (binding.radioGroup.getChildAt(0) as RadioButton).isChecked = true
                 }
             })
         binding.storeList.apply {

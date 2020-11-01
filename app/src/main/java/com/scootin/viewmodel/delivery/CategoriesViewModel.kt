@@ -6,6 +6,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.scootin.database.dao.CacheDao
 import com.scootin.database.dao.LocationDao
+import com.scootin.extensions.DoubleTrigger
 import com.scootin.extensions.orZero
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.*
@@ -33,6 +34,12 @@ class CategoriesViewModel @ViewModelInject internal constructor(
 ) : ObservableViewModel() {
 
     private val _search = MutableLiveData<SearchShopsByCategory>()
+
+    private val _selectedShop = MutableLiveData<Long>()
+
+    fun updateShop(shopId: Long) {
+        _selectedShop.postValue(shopId)
+    }
 
     data class SearchShopsByCategory(val query: String)
 
@@ -66,20 +73,18 @@ class CategoriesViewModel @ViewModelInject internal constructor(
     }
 
     val product: LiveData<Response<List<SearchProductsByCategoryResponse>>> =
-        _search.switchMap { search ->
-
+        DoubleTrigger<SearchShopsByCategory, Long>(_search, _selectedShop).switchMap {pair ->
             liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-                Timber.i("Search Detail ${search.query}")
+                Timber.i("Search Detail ${pair.first?.query}  second ${pair.second.orZero()}")
                 val mainCategory = cacheDao.getCacheData(AppConstants.MAIN_CATEGORY)?.value
                 val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
-
-                emit(
-                    searchRepository.searchProducts(
-                        search.query,
-                        serviceArea.orEmpty(),
-                        mainCategory.orEmpty()
-                    )
-                )
+                val k = pair.second.orZero()
+                if (k == 0L) {
+                    emit(searchRepository.searchProducts(pair.first?.query.orEmpty(), serviceArea.orEmpty(), mainCategory.orEmpty()))
+                } else {
+                    // -- When user select a shop
+                    emit(searchRepository.findProductFromShop(pair.second.orZero() , pair.first?.query.orEmpty()))
+                }
             }
         }
 
