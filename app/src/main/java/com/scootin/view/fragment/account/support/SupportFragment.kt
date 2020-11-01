@@ -4,8 +4,10 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.scootin.R
 import com.scootin.databinding.CustomerSupportBinding
 import com.scootin.network.AppExecutors
@@ -27,17 +29,11 @@ class SupportFragment : Fragment(R.layout.customer_support) {
         super.onViewCreated(view, savedInstanceState)
         binding = CustomerSupportBinding.bind(view)
         binding.mailCustomerSupport.setOnClickListener {
-/* Create the Intent */
-            val emailIntent = Intent(android.content.Intent.ACTION_SEND)
-
-/* Fill it with Data */
-            emailIntent.setType("plain/text")
-            emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, arrayOf("support@scootin.co.in"))
-            emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Regarding order ID ${binding.appCompatEditText.text.toString()}" )
-            emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Text")
-/* Send it off to the Activity-Chooser */
-            requireContext().startActivity(Intent.createChooser(emailIntent, "Send mail..."))
+            sendEmail("support@scootin.co.in", "Regarding order ID ${binding.editTextForOrderId.text.toString()}", "");
         }
+
+        setupListener()
+
         binding.activeCallSupport.setOnClickListener {
             val mobileNumber = binding.activeCallSupport.text
             val intent = Intent()
@@ -47,4 +43,23 @@ class SupportFragment : Fragment(R.layout.customer_support) {
         }
     }
 
+    private fun sendEmail(address: String, subject: String, body: String){
+        val TO = arrayOf(address)
+        val uri = Uri.parse(address)
+            .buildUpon()
+            .appendQueryParameter("subject", subject)
+            .appendQueryParameter("body", body)
+            .build()
+        val emailIntent = Intent(Intent.ACTION_SENDTO, uri).apply {
+            setData(Uri.parse("mailto:$address"))
+            putExtra(Intent.EXTRA_SUBJECT, subject)
+            putExtra(Intent.EXTRA_TEXT, body)
+            putExtra(Intent.EXTRA_EMAIL, TO)
+        }
+        ContextCompat.startActivity(requireContext(), Intent.createChooser(emailIntent, "Send mail..."), null)
+    }
+
+    private fun setupListener() {
+        binding.back.setOnClickListener { findNavController().popBackStack() }
+    }
 }
