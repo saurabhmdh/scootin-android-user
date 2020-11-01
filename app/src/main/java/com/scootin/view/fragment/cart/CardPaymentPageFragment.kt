@@ -2,37 +2,46 @@ package com.scootin.view.fragment.cart
 
 import android.content.Intent
 import android.os.Bundle
+
 import android.view.View
-import android.widget.RadioButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+
 import androidx.navigation.fragment.navArgs
 import com.razorpay.Checkout
 import com.scootin.R
 import com.scootin.databinding.FragmentPaymenttStatusBinding
+import com.scootin.extensions.getCheckedRadioButtonPosition
 import com.scootin.network.AppExecutors
+import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
+import com.scootin.network.request.OrderRequest
 import com.scootin.network.request.VerifyAmountRequest
 import com.scootin.network.response.placeOrder.PlaceOrderResponse
 import com.scootin.util.fragment.autoCleared
-import com.scootin.viewmodel.delivery.CategoriesViewModel
+import com.scootin.view.fragment.BaseFragment
+
+import com.scootin.viewmodel.payment.PaymentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
 import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CardPaymentPageFragment : Fragment(R.layout.fragment_paymentt_status) {
+class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) {
     private var binding by autoCleared<FragmentPaymenttStatusBinding>()
-    private val viewModel: CategoriesViewModel by viewModels()
+    private val viewModel: PaymentViewModel by viewModels()
 
     private val args: CardPaymentPageFragmentArgs by navArgs()
+
     @Inject
     lateinit var appExecutors: AppExecutors
-    var paymentMode = "ONLINE"
-    var orderId = ""
+
+    //Order ID = 20655
+    private val orderId by lazy {
+        args.orderId
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,16 +51,27 @@ class CardPaymentPageFragment : Fragment(R.layout.fragment_paymentt_status) {
     }
 
     private fun setListener() {
-
-        binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
-
-            val button = group.findViewById<RadioButton>(checkedId)
-            Timber.i("tag = ${button.tag}")
-            paymentMode = button.tag.toString()
-        }
-
         binding.confirmButton.setOnClickListener {
-            viewModel.orderRequest(mapOf("paymentMode" to paymentMode, "orderId" to orderId))
+
+            val mode = when(binding.radioGroup.getCheckedRadioButtonPosition()) {
+                0 -> {"ONLINE"}
+                1 -> {"CASH"}
+                else -> {""}
+            }
+            showLoading()
+            viewModel.userConfirmOrder(orderId.toString(), AppHeaders.userID, OrderRequest(mode)).observe(viewLifecycleOwner) {
+                when(it.status) {
+                    Status.SUCCESS -> {
+                        Timber.i(" data ${it.data}")
+                        dismissLoading()
+                        startPayment(it.data?.paymentDetails?.orderReference.orEmpty())
+                    }
+                    Status.ERROR -> {
+                        dismissLoading()
+                    }
+                    Status.LOADING -> {}
+                }
+            }
         }
 
         Timber.i("Order ID = " + args.orderId)
@@ -77,26 +97,26 @@ class CardPaymentPageFragment : Fragment(R.layout.fragment_paymentt_status) {
 //            }
 //        })
 
+
         binding.applyPromoButton.setOnClickListener {
-            viewModel.promCodeRequest(
-                mapOf(
-                    "orderID" to orderId,
-                    "promocode" to binding.couponEdittext.text.toString()
-                )
-            )
+            viewModel.promCodeRequest(orderId.toString(), binding.couponEdittext.text.toString()).observe(viewLifecycleOwner) {
+                if (it.isSuccessful) {
+                    Toast.makeText(context, "Coupon has been applied.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Invalid Coupon code", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
-        viewModel.promCodeRequestLiveData.observe(viewLifecycleOwner, Observer {
-            Timber.i("applyCoupon = ${it}")
-        })
 
-        viewModel.verifyPaymentRequestLiveData.observe(viewLifecycleOwner, Observer {
-            Timber.i("verifyPaymentRequestLiveData = ${it}")
+        viewModel.verifyPaymentRequestLiveData.observe(viewLifecycleOwner, {
+            Timber.i("verifyPaymentRequestLiveData = $it")
         })
     }
 
     private fun callPaymentUiFunction(response: PlaceOrderResponse?) {
-        orderId = response?.id.toString()
+        //Lets discuss this later
+        //orderId = response?.id.toString()
     }
 
     private fun startPayment(orderReferenceId: String) {

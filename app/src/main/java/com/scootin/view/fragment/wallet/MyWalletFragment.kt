@@ -49,9 +49,9 @@ class MyWalletFragment : Fragment(R.layout.fragment_wallet_my) {
             startPayment(binding.addMoneyEditText.text.toString())
         }
 
-        viewModel.verifyPaymentRequestLiveData.observe(viewLifecycleOwner, Observer {
-            Timber.i("wallet verifyPaymentRequestLiveData = ${it}")
-        })
+//        viewModel.verifyPaymentRequestLiveData.observe(viewLifecycleOwner, Observer {
+//            Timber.i("wallet verifyPaymentRequestLiveData = ${it}")
+//        })
     }
 
     private fun setProductAdapter() {
@@ -97,6 +97,6 @@ class MyWalletFragment : Fragment(R.layout.fragment_wallet_my) {
 
     fun onPaymentSuccess(razorpayPaymentId: String?){
         Timber.i("onPaymentSuccess = ${razorpayPaymentId}")
-        viewModel.verifyPaymentRequest(VerifyAmountRequest(razorpayPaymentId))
+//        viewModel.verifyPaymentRequest(VerifyAmountRequest(razorpayPaymentId))
     }
 }
