@@ -7,6 +7,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.scootin.R
 import com.scootin.databinding.HandWrittenGroceryListBinding
 import com.scootin.network.glide.GlideApp
@@ -19,7 +20,7 @@ import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
-//Media permission error... its crashing
+
 @AndroidEntryPoint
 class EssentialHandwrittenFragment : Fragment(R.layout.hand_written_grocery_list) {
     private var binding by autoCleared<HandWrittenGroceryListBinding>()
@@ -35,6 +36,7 @@ class EssentialHandwrittenFragment : Fragment(R.layout.hand_written_grocery_list
         viewModel.filePathLiveData.observe(viewLifecycleOwner, Observer {
             Timber.i("EssentialHandwrittenFragment response = ${it.code()} ${it.isSuccessful}")
         })
+        binding.back.setOnClickListener { findNavController().popBackStack() }
     }
 
     private fun onClickOfUploadMedia() {
@@ -51,10 +53,8 @@ class EssentialHandwrittenFragment : Fragment(R.layout.hand_written_grocery_list
             context?.let { context ->
                 GlideApp.with(requireContext()).load(intent.data).into(binding.receiverPhotoBox)
                 intent.data?.let {
-
-//                    viewModel.filePath(filePath)
                     viewModel.filePath(it)
-//                    viewModel.uploadImage(requireContext(), it)
+
                 }
             }
         }
