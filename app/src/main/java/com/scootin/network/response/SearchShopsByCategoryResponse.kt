@@ -10,5 +10,5 @@ data class SearchShopsByCategoryResponse(
     val name: String,
     val online: Boolean,
     val rating: Double,
-    val shopID: Int
+    val shopID: Long
 )

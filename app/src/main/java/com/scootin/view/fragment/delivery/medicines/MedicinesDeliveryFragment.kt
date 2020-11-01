@@ -15,6 +15,7 @@ import com.scootin.network.AppExecutors
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.AddToCartRequest
 import com.scootin.network.response.SearchProductsByCategoryResponse
+import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.ProductSearchAdapter
 import com.scootin.view.adapter.ShopSearchAdapter
@@ -81,7 +82,7 @@ class MedicinesDeliveryFragment : Fragment(R.layout.fragment_medicines_delivery)
     private fun setStoreAdapter() {
         shopSearchAdapter = ShopSearchAdapter(
             appExecutors, object : ShopSearchAdapter.StoreImageAdapterClickListener {
-                override fun onSelectButtonSelected(view: View) {
+                override fun onSelectButtonSelected(view: SearchShopsByCategoryResponse) {
                     //TODO: We need to go for search Product in this store..
                 }
             })

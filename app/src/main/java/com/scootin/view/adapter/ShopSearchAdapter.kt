@@ -47,7 +47,7 @@ class ShopSearchAdapter (
             binding.onlinestatusStore.setText("Online")
             binding.btnSelect.setImageResource(R.drawable.ic_select_button_active)
             binding.btnSelect.setOnClickListener {
-                imageAdapterClickLister.onSelectButtonSelected(it)
+                imageAdapterClickLister.onSelectButtonSelected(item)
             }
 //            }
 //            else{
@@ -62,6 +62,6 @@ class ShopSearchAdapter (
 
     }
     interface StoreImageAdapterClickListener{
-        fun onSelectButtonSelected(view: View)
+        fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse)
     }
 }

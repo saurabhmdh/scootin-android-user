@@ -39,7 +39,7 @@ class SearchRepository @Inject constructor(
 
     suspend fun listTransaction() = services.listTransaction()
 
-    suspend fun findProductFromShop(shopId: Int) = services.findProductFromShop(shopId)
+    suspend fun findProductFromShop(shopId: Long, query: String) = services.findProductFromShop(shopId, RequestSearch(query = query))
 
     suspend fun uploadImage(filePart: MultipartBody.Part) = services.uploadImage(filePart)
 

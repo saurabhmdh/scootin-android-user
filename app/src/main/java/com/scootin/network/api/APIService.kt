@@ -62,6 +62,8 @@ interface APIService {
         @Body requestSearch: RequestSearch
     ): Response<List<SearchProductsByCategoryResponse>>
 
+    @GET("/search/{shopId}/get-all-products")
+    suspend fun findProductFromShop(@Path("shopId") shopId: Long, @Body requestSearch: RequestSearch): Response<List<SearchProductsByCategoryResponse>>
 
     @POST("notification/user/{id}/update-fcm")
     suspend fun updateFCMID(
@@ -99,8 +101,6 @@ interface APIService {
     @GET("/address/get-all-address/{userId}")
     suspend fun getAllAdress(@Path("userID") userId: String): Response<List<Address>>
 
-    @GET("/search/{shopId}/get-all-products")
-    suspend fun findProductFromShop(@Path("shopID") shopID: Int): Response<List<SearchProductsByCategoryResponse>>
 
     @Multipart
     @POST("/media/upload-image")

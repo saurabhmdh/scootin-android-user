@@ -2,6 +2,7 @@ package com.scootin.view.fragment.delivery.essential
 
 import android.os.Bundle
 import android.view.View
+import android.widget.RadioButton
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,17 +16,15 @@ import com.scootin.network.AppExecutors
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.AddToCartRequest
 import com.scootin.network.response.SearchProductsByCategoryResponse
-import com.scootin.network.response.sweets.SweetsItem
-import com.scootin.network.response.sweets.SweetsStore
+import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.util.fragment.autoCleared
-import com.scootin.view.adapter.*
-import com.scootin.view.fragment.dialogs.EssentialCategoryDialogFragment
+import com.scootin.view.adapter.ProductSearchAdapter
+import com.scootin.view.adapter.ShopSearchAdapter
 import com.scootin.viewmodel.delivery.CategoriesViewModel
-import com.scootin.viewmodel.delivery.essential.EssentialsGroceryDeliveryViewModel
-import com.scootin.viewmodel.home.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_delivery) {
@@ -71,7 +70,7 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
         viewModel.doSearch("")
 
         binding.searchBox.setOnQueryTextListener(
-            object :SearchView.OnQueryTextListener {
+            object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     when (binding.radioGroup.getCheckedRadioButtonPosition()) {
                         0 -> {
@@ -114,27 +113,35 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
 
     private fun setProductAdapter() {
         productSearchAdapter = ProductSearchAdapter(
-                appExecutors,
-                object : ProductSearchAdapter.ImageAdapterClickLister {
-                    override fun onIncrementItem(
-                        view: View,
-                        item: SearchProductsByCategoryResponse?,
-                        count: Int
-                    ) {
-                        val addToCartRequest = AddToCartRequest(AppHeaders.userID.toInt(), item?.id, count)
-                        viewModel.addToCart(addToCartRequest)
-                    }
+            appExecutors,
+            object : ProductSearchAdapter.ImageAdapterClickLister {
+                override fun onIncrementItem(
+                    view: View,
+                    item: SearchProductsByCategoryResponse?,
+                    count: Int
+                ) {
+                    val addToCartRequest = AddToCartRequest(
+                        AppHeaders.userID.toInt(),
+                        item?.id,
+                        count
+                    )
+                    viewModel.addToCart(addToCartRequest)
+                }
 
-                    override fun onDecrementItem(
-                        view: View,
-                        item: SearchProductsByCategoryResponse?,
-                        count: Int
-                    ) {
-                        val addToCartRequest = AddToCartRequest(AppHeaders.userID.toInt(), item?.id, count)
-                        viewModel.addToCart(addToCartRequest)
-                    }
+                override fun onDecrementItem(
+                    view: View,
+                    item: SearchProductsByCategoryResponse?,
+                    count: Int
+                ) {
+                    val addToCartRequest = AddToCartRequest(
+                        AppHeaders.userID.toInt(),
+                        item?.id,
+                        count
+                    )
+                    viewModel.addToCart(addToCartRequest)
+                }
 
-                })
+            })
 
         binding.productList.apply {
             adapter = productSearchAdapter
@@ -144,8 +151,12 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
     private fun setStoreAdapter() {
         shopSearchAdapter = ShopSearchAdapter(
             appExecutors, object : ShopSearchAdapter.StoreImageAdapterClickListener {
-                override fun onSelectButtonSelected(view: View) {
-                    //TODO: We need to go for search Product in this store..
+                override fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse) {
+                    Timber.i("Shop Info $shopInfo")
+                    viewModel.updateShop(shopInfo.shopID)
+                    binding.productList.updateVisibility(true)
+                    binding.storeList.updateVisibility(false)
+                    (binding.radioGroup.getChildAt(0) as RadioButton).isChecked = true
                 }
             })
         binding.storeList.apply {
