@@ -38,7 +38,7 @@ class ClothingCategoryFragment : Fragment(R.layout.fragment_clothing_page) {
             findNavController().navigate(ClothingCategoryFragmentDirections.homeToWomeninnerwear())
         }
 
-
+        binding.back.setOnClickListener { findNavController().popBackStack() }
 
     }
 }
