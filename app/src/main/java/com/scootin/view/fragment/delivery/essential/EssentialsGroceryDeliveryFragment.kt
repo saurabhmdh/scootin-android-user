@@ -67,6 +67,9 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
     }
 
     private fun updateListeners() {
+        //When the screen load lets load the data for empty screen
+        viewModel.doSearch("")
+
         binding.searchBox.setOnQueryTextListener(
             object :SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
