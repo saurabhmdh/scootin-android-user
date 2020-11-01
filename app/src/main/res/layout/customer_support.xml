@@ -11,7 +11,6 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/customer_support_logo"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -21,6 +20,7 @@
             app:srcCompat="@drawable/ic_customer_support_card" />
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -29,65 +29,30 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_back_arrow" />
 
-        <LinearLayout
-            android:id="@+id/order_id_tab"
-            android:layout_width="match_parent"
-            android:layout_height="18dp"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/mail_customer_support"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="182dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/ic_order_id_field"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="300dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
-                android:text="Order ID:"
-                android:textColor="#000"
-                android:textSize="13dp"
-                android:textStyle="bold" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/order_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
-                android:text="#0820260001"
-                android:textColor="#000"
-                android:textSize="13dp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_mail_customer_support" />
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/appCompatEditText"
+            android:id="@+id/edit_text_for_order_id"
             android:layout_width="206dp"
             android:layout_height="18dp"
             android:layout_marginStart="20dp"
             android:background="@drawable/ic_order_id_field_for_call"
             android:hint="@string/edittxt_orderid_call_support"
             android:paddingLeft="2dp"
+            android:layout_marginTop="20dp"
             android:textColor="#000"
             android:textColorHint="#000"
             android:textSize="12sp"
-            android:layout_marginTop="300dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/mail_customer_support"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_mail_customer_support" />
+            app:layout_constraintTop_toBottomOf="@id/mail_customer_support"  />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/active_call_support"
@@ -97,10 +62,11 @@
             android:background="@drawable/ic_call_customer_support_active"
             android:gravity="center_vertical"
             android:paddingLeft="45dp"
+            android:layout_marginTop="20dp"
             android:text="+91-0000000000"
             android:textColor="#000"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/edit_text_for_order_id" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
