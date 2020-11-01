@@ -2,172 +2,92 @@ package com.scootin.view.fragment.delivery.medicines
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.scootin.R
 import com.scootin.databinding.FragmentMedicinesDeliveryBinding
+import com.scootin.extensions.getCheckedRadioButtonPosition
+import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
-import com.scootin.network.response.medicines.MedicinesItem
+import com.scootin.network.manager.AppHeaders
+import com.scootin.network.request.AddToCartRequest
+import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.util.fragment.autoCleared
-import com.scootin.view.adapter.MedicinesItemAddAdapter
+import com.scootin.view.adapter.ProductSearchAdapter
+import com.scootin.view.adapter.ShopSearchAdapter
+import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MedicinesDeliveryFragment : Fragment(R.layout.fragment_medicines_delivery) {
     private var binding by autoCleared<FragmentMedicinesDeliveryBinding>()
+    private val viewModel: CategoriesViewModel by viewModels()
 
     @Inject
     lateinit var appExecutors: AppExecutors
-    private lateinit var stationaryAdapter: MedicinesItemAddAdapter
+    private lateinit var shopSearchAdapter: ShopSearchAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMedicinesDeliveryBinding.bind(view)
-        setAdaper()
-        stationaryAdapter.submitList(setList())
+
+        updateUI()
+        updateListeners()
+        binding.storeList.updateVisibility(true)
+        viewModel.addToCartMap.observe(viewLifecycleOwner, Observer {
+            Timber.i("Status addToCartLiveData = ${it.isSuccessful} ")
+        })
     }
 
-    private fun setAdaper() {
-        stationaryAdapter =
-            MedicinesItemAddAdapter(
-                appExecutors,
-                object : MedicinesItemAddAdapter.ImageAdapterClickLister {
-                    override fun onIncrementItem(view: View) {
+    private fun updateUI() {
+        setStoreAdapter()
+    }
+
+    private fun updateListeners() {
+        //When the screen load lets load the data for empty screen
+        viewModel.doSearch("")
+
+        binding.searchBox.setOnQueryTextListener(
+            object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    query?.let {
+                        viewModel.doSearch(it)
                     }
+                    Timber.i("onQueryTextSubmit $query ")
+                    return false
+                }
 
-                    override fun onDecrementItem(view: View) {
-                    }
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    return false
+                }
 
-                })
+            }
+        )
+        binding.back.setOnClickListener { findNavController().popBackStack() }
 
-        binding.list.apply {
-            adapter = stationaryAdapter
+        viewModel.shops.observe(viewLifecycleOwner) {
+            if (it.isSuccessful) {
+                shopSearchAdapter.submitList(it.body())
+            }
+            Timber.i("Search result for shop ${it.body()}")
         }
     }
 
-    private fun setList(): ArrayList<MedicinesItem> {
-        val list = ArrayList<MedicinesItem>()
-        list.add(
-            MedicinesItem(
-                "0",
-                "Raj Pharmacy",
-                "500 km",
-                "",
-                true,
-                3.5
-            )
-        )
-        list.add(
-            MedicinesItem(
-                "0",
-                "Medic Shop",
-                "2 km",
-                "",
-                false,
-                4.0
-            )
-        )
-        list.add(
-            MedicinesItem(
-                "0",
-                "Raj Pharmacy",
-                "500 km",
-                "",
-                true,
-                3.5
-            )
-        )
-        list.add(
-            MedicinesItem(
-                "0",
-                "Medic Shop",
-                "2 km",
-                "",
-                false,
-                4.0
-            )
-        )
-        list.add(
-            MedicinesItem(
-                "0",
-                "Raj Pharmacy",
-                "500 km",
-                "",
-                true,
-                3.5
-            )
-        )
-        list.add(
-            MedicinesItem(
-                "0",
-                "Medic Shop",
-                "2 km",
-                "",
-                false,
-                4.0
-            )
-        )
-        list.add(
-            MedicinesItem(
-                "0",
-                "Raj Pharmacy",
-                "500 km",
-                "",
-                true,
-                3.5
-            )
-        )
-        list.add(
-            MedicinesItem(
-                "0",
-                "Medic Shop",
-                "2 km",
-                "",
-                false,
-                4.0
-            )
-        )
-        list.add(
-            MedicinesItem(
-                "0",
-                "Raj Pharmacy",
-                "500 km",
-                "",
-                true,
-                3.5
-            )
-        )
-        list.add(
-            MedicinesItem(
-                "0",
-                "Medic Shop",
-                "2 km",
-                "",
-                false,
-                4.0
-            )
-        )
-        list.add(
-            MedicinesItem(
-                "0",
-                "Raj Pharmacy",
-                "500 km",
-                "",
-                true,
-                3.5
-            )
-        )
-        list.add(
-            MedicinesItem(
-                "0",
-                "Medic Shop",
-                "2 km",
-                "",
-                false,
-                4.0
-            )
-        )
-        return list
+    private fun setStoreAdapter() {
+        shopSearchAdapter = ShopSearchAdapter(
+            appExecutors, object : ShopSearchAdapter.StoreImageAdapterClickListener {
+                override fun onSelectButtonSelected(view: View) {
+                    //TODO: We need to go for search Product in this store..
+                }
+            })
+        binding.storeList.apply {
+            adapter = shopSearchAdapter
+        }
     }
 
 }
