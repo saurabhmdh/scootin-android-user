@@ -12,6 +12,7 @@ import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.*
 import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.SearchShopsByCategoryResponse
+import com.scootin.repository.PaymentRepository
 import com.scootin.repository.SearchRepository
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.ui.FileUtils
@@ -30,6 +31,7 @@ class CategoriesViewModel @ViewModelInject internal constructor(
     private val cacheDao: CacheDao,
     private val locationDao: LocationDao,
     val searchRepository: SearchRepository,
+    private val paymentRepository: PaymentRepository,
     private val application: Application
 ) : ObservableViewModel() {
 
@@ -213,4 +215,7 @@ class CategoriesViewModel @ViewModelInject internal constructor(
             emit(searchRepository.verifyPayment(it))
         }
     }
+
+
+    fun getTotalPrice(userId: String) = paymentRepository.getTotalPriceFromCart(userId, viewModelScope.coroutineContext + Dispatchers.IO + handler)
 }

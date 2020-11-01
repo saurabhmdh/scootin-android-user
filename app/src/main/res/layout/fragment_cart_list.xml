@@ -54,30 +54,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Total:"
+                style="@style/custom_font_style_black"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="400"
+                android:layout_marginStart="@dimen/dimen_10"
+                style="@style/custom_font_style_black"
+                android:fontFamily="@font/montserrat_regular"
                 app:layout_constraintStart_toEndOf="@+id/total"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/discountPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Saved Rs 40"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/total" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/checkout"

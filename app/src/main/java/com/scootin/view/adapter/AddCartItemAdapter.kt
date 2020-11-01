@@ -10,9 +10,9 @@ import com.scootin.network.AppExecutors
 import com.scootin.network.response.cart.CartListResponseItem
 
 
+//Handle add and remove from cart..
 class AddCartItemAdapter(
     val appExecutors: AppExecutors
-
 ) : DataBoundListAdapter<CartListResponseItem, AdapterItemAddCardListBinding>(
     appExecutors,
     diffCallback = object : DiffUtil.ItemCallback<CartListResponseItem>() {
@@ -32,7 +32,6 @@ class AddCartItemAdapter(
     override fun createBinding(parent: ViewGroup): AdapterItemAddCardListBinding {
         val binding = AdapterItemAddCardListBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
-
         )
         binding.discountPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
         return binding
@@ -45,18 +44,6 @@ class AddCartItemAdapter(
         isLast: Boolean
     ) {
         binding.data = item
-
-
-//        val items = arrayOf("500g", "1kg", "2kg")
-//        val adapter = ArrayAdapter<String>(
-//            binding.count.context,
-//            R.layout.spinner_layout_essential,
-//            items
-//        )
-//
-//        binding.spinner.setAdapter(adapter)
-//        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
-
     }
 
 }

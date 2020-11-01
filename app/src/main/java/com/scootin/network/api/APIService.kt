@@ -132,4 +132,9 @@ interface APIService {
         @Body verifyAmountRequest: VerifyAmountRequest
     ): Response<String>
 
+
+    @GET("/cart/get-cart-price/{userId}")
+    suspend fun getTotalPriceFromCart(
+        @Path("userId") userId: String
+    ): Response<Double>
 }
