@@ -102,18 +102,6 @@ class CategoriesViewModel @ViewModelInject internal constructor(
         }
     }
 
-    val getUserCartList = MutableLiveData<String>()
-
-    fun userCartList() {
-        getUserCartList.postValue(AppHeaders.userID)
-    }
-
-    val getUserCartListLiveData = getUserCartList.switchMap {
-        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-            emit(searchRepository.getUserCartList(it))
-        }
-    }
-
     val addMoney = liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
         Timber.i("addMoney in viewmodel 1")
         emit(searchRepository.addMoney())
@@ -149,21 +137,6 @@ class CategoriesViewModel @ViewModelInject internal constructor(
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
             Timber.i("listTransaction in viewmodel 1")
             emit(searchRepository.listTransaction())
-        }
-    }
-
-    val placeOrder = MutableLiveData<PlaceOrderRequest>()
-
-    fun placeOrder(request: PlaceOrderRequest) {
-        placeOrder.postValue(request)
-    }
-
-    val placeOrderLiveData = placeOrder.switchMap {
-        Timber.i("placeOrder in viewmodel")
-        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-            Timber.i("placeOrder in viewmodel 1")
-            // TODO need to change
-            emit(searchRepository.placeOrder(it))
         }
     }
 
@@ -217,5 +190,5 @@ class CategoriesViewModel @ViewModelInject internal constructor(
     }
 
 
-    fun getTotalPrice(userId: String) = paymentRepository.getTotalPriceFromCart(userId, viewModelScope.coroutineContext + Dispatchers.IO + handler)
+
 }
