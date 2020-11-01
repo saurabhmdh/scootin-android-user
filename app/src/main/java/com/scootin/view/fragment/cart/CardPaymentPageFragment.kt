@@ -64,7 +64,11 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                     Status.SUCCESS -> {
                         Timber.i(" data ${it.data}")
                         dismissLoading()
-                        startPayment(it.data?.paymentDetails?.orderReference.orEmpty())
+                        if (it.data?.paymentDetails?.payment_mode.equals("ONLINE")) {
+                            startPayment(it.data?.paymentDetails?.orderReference.orEmpty())
+                        } else {
+                            //ALOK send success order has been created..
+                        }
                     }
                     Status.ERROR -> {
                         dismissLoading()
@@ -73,30 +77,6 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                 }
             }
         }
-
-        Timber.i("Order ID = " + args.orderId)
-
-//        viewModel.placeOrderLiveData.observe(viewLifecycleOwner, Observer {
-//            Timber.i("placeOrder = ${it}")
-//            // call payment UI
-//
-//            val data = it.body()
-//            callPaymentUiFunction(data)
-//        })
-
-//        viewModel.orderRequestLiveData.observe(viewLifecycleOwner, Observer {
-//            Timber.i("orderRequest = ${it}")
-//            val response = it.body()
-//            orderId = "${response?.id}"
-//            // TODO launch payment screen if paymentMode is online
-//            if (paymentMode == "ONLINE") {
-//                // launch payment screen
-//                startPayment(response?.paymentDetails?.orderReference.orEmpty())
-//            } else {
-//                // launch success screen
-//            }
-//        })
-
 
         binding.applyPromoButton.setOnClickListener {
             viewModel.promCodeRequest(orderId.toString(), binding.couponEdittext.text.toString()).observe(viewLifecycleOwner) {

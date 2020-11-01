@@ -61,6 +61,7 @@ data class PlaceOrderResponse(
         val deliveryFreeAmount: Double,
         val id: Long,
         val payment_status: String,
+        val payment_mode: String,
         val totalAmount: Double,
         val totalGSTAmount: Double,
         val orderReference: String?
