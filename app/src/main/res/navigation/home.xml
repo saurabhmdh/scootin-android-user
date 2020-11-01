@@ -267,4 +267,20 @@
     </fragment>
 
 
+    <fragment
+        android:id="@+id/orderPlace"
+        android:name="com.scootin.view.fragment.orders.OrderPlacedFragment"
+        android:label="OrderPlacedFragment" />
+
+    <fragment
+        android:id="@+id/orderConfirm"
+        android:name="com.scootin.view.fragment.orders.OrderConfirmedFragment"
+        android:label="OrderConfirmedFragment" />
+
+    <fragment
+        android:id="@+id/successFragment"
+        android:name="com.scootin.view.fragment.orders.SuccessFragment"
+        android:label="SuccessFragment" />
+
+
 </navigation>
