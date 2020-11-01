@@ -114,15 +114,15 @@ interface APIService {
 
     @POST("/order/user-confirm-order/{orderId}/{userId}")
     suspend fun userConfirmOrder(
-        @Path("orderId") orderId: Int,
-        @Path("userId") userId: Int,
+        @Path("orderId") orderId: String,
+        @Path("userId") userId: String,
         @Body orderRequest: OrderRequest
     ): Response<PlaceOrderResponse>
 
     @POST("/payment/apply-promocode/{orderId}/{userId}")
     suspend fun applyPromoCode(
-        @Path("orderId") orderId: Int,
-        @Path("userId") userId: Int,
+        @Path("orderId") orderId: String,
+        @Path("userId") userId: String,
         @Body promoCodeRequest: PromoCodeRequest
     ): Response<PlaceOrderResponse>
 

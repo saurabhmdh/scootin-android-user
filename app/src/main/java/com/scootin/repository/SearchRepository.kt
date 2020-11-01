@@ -43,13 +43,4 @@ class SearchRepository @Inject constructor(
 
     suspend fun uploadImage(filePart: MultipartBody.Part) = services.uploadImage(filePart)
 
-
-    suspend fun userConfirmOrder(orderId: Int, orderRequest: OrderRequest) =
-        services.userConfirmOrder(orderId, AppHeaders.userID.toInt(), orderRequest)
-
-    suspend fun applyPromoCode(orderId: Int, promoCodeRequest: PromoCodeRequest) =
-        services.applyPromoCode(orderId, AppHeaders.userID.toInt(), promoCodeRequest)
-
-    suspend fun verifyPayment(verifyAmountRequest: VerifyAmountRequest) =
-        services.verifyPayment(verifyAmountRequest)
 }
