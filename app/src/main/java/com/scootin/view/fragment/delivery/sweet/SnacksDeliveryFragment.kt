@@ -5,17 +5,12 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.scootin.R
 import com.scootin.databinding.FragmentSnacksDeliveryBinding
-import com.scootin.databinding.FragmentStationaryDeliveryBinding
 import com.scootin.network.AppExecutors
-import com.scootin.network.response.stationary.StationaryItem
 import com.scootin.network.response.sweets.SnackItem
-import com.scootin.network.response.sweets.SweetsItem
 import com.scootin.network.response.sweets.SweetsStore
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.SnacksItemAddAdapter
 import com.scootin.view.adapter.SnacksStoreAdapter
-import com.scootin.view.adapter.StationaryItemAddAdapter
-import com.scootin.view.adapter.SweetsStoreAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

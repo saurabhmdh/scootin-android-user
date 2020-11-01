@@ -8,20 +8,15 @@
         android:layout_height="match_parent"
         android:background="@drawable/ic_background">
 
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/user_location"
-            style="@style/custom_font_style_white"
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_user_location"
-            android:drawablePadding="8dp"
-            android:paddingStart="@dimen/home_screen_margin_start"
-            android:paddingTop="20dp"
-            android:text="Finding location.."
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_back_arrow" />
 
         <LinearLayout
             android:id="@+id/line"
@@ -32,7 +27,8 @@
             android:layout_marginEnd="30dp"
             android:background="@android:color/white"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/user_location" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/express"
