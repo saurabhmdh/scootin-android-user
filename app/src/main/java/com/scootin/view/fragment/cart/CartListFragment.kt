@@ -7,8 +7,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.scootin.R
+import com.scootin.bindings.setPrice
 import com.scootin.databinding.FragmentCartListBinding
+import com.scootin.extensions.orDefault
 import com.scootin.network.AppExecutors
+import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.AddCartItemAdapter
@@ -60,6 +63,16 @@ class CartListFragment : Fragment(R.layout.fragment_cart_list) {
                 addCartItemAdapter.submitList(data)
             }
         })
+
+        viewModel.getTotalPrice(AppHeaders.userID).observe(viewLifecycleOwner) {
+            when(it.status) {
+                Status.SUCCESS -> {
+                    binding.price.setPrice(it.data.orDefault(0.0))
+                }
+                Status.LOADING -> {}
+                Status.ERROR -> {}
+            }
+        }
     }
 
 
