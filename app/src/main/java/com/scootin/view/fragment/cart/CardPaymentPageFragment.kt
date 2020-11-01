@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 
 import androidx.navigation.fragment.navArgs
 import com.razorpay.Checkout
@@ -91,7 +92,10 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
 
         viewModel.verifyPaymentRequestLiveData.observe(viewLifecycleOwner, {
             Timber.i("verifyPaymentRequestLiveData = $it")
+            //Display the success response.. and clear the stack..
         })
+
+        binding.back.setOnClickListener { findNavController().popBackStack() }
     }
 
     private fun callPaymentUiFunction(response: PlaceOrderResponse?) {
@@ -117,8 +121,6 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
             options.put("prefill", prefill)
             co.open(activity, options)
 
-            //Razorpay will return 3 values.. Which we need to check
-            //capture-payment
         } catch (e: Exception) {
             Toast.makeText(activity, "Error in payment: " + e.message, Toast.LENGTH_LONG).show()
             e.printStackTrace()
