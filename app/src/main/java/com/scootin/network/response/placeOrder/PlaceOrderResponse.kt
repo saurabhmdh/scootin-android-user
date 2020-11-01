@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 data class PlaceOrderResponse(
     val addressDetails: AddressDetails,
     val expressDelivery: Boolean,
-    val id: Int,
+    val id: Long,
     val orderDate: OrderDate,
     val orderStatus: String,
     val paymentDetails: PaymentDetails,
@@ -23,7 +23,7 @@ data class PlaceOrderResponse(
         val city: String,
         val deleted: Boolean,
         val hasDefault: Boolean,
-        val id: Int,
+        val id: Long,
         val pincode: String,
         val stateDetails: StateDetails,
         val userInfo: UserInfo
@@ -31,14 +31,14 @@ data class PlaceOrderResponse(
 
     @Parcelize
     data class CountryDetails(
-        val id: Int,
+        val id: Long,
         val name: String
     ) : Parcelable
 
     @Parcelize
     data class StateDetails(
         val countryDetails: CountryDetails,
-        val id: Int,
+        val id: Long,
         val name: String
     ) : Parcelable
 
@@ -48,7 +48,7 @@ data class PlaceOrderResponse(
         val created_date: Long,
         val deleted: Boolean,
         val fcm_id: String,
-        val id: Int,
+        val id: Long,
         val last_modified_date: Long,
         val mobile_number: String,
         val otp: String,
@@ -58,11 +58,11 @@ data class PlaceOrderResponse(
     @Parcelize
     data class PaymentDetails(
         val amount: Double,
-        val deliveryFreeAmount: Int,
-        val id: Int,
+        val deliveryFreeAmount: Double,
+        val id: Long,
         val payment_status: String,
         val totalAmount: Double,
-        val totalGSTAmount: Int,
+        val totalGSTAmount: Double,
         val orderReference: String?
     ) : Parcelable
 

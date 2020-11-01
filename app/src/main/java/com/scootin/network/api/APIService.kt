@@ -108,7 +108,7 @@ interface APIService {
 
     @POST("/order/place-order/{userId}")
     suspend fun placeOrder(
-        @Path("userId") userId: Int,
+        @Path("userId") userId: String,
         @Body request: PlaceOrderRequest
     ): Response<PlaceOrderResponse>
 

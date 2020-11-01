@@ -25,7 +25,7 @@
     <fragment
         android:id="@+id/cart_fragment"
         android:name="com.scootin.view.fragment.cart.CartListFragment"
-        android:label="Registered">
+        android:label="">
         <action
             android:id="@+id/action_cart_fragment_to_card_payment"
             app:destination="@id/card_payment"
@@ -37,5 +37,9 @@
     <fragment
         android:id="@+id/card_payment"
         android:name="com.scootin.view.fragment.cart.CardPaymentPageFragment"
-        android:label="Registered" />
+        android:label="" >
+        <argument
+            android:name="order_id"
+            app:argType="long" />
+    </fragment>
 </navigation>

@@ -8,12 +8,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import com.razorpay.Checkout
 import com.scootin.R
 import com.scootin.databinding.FragmentPaymenttStatusBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.manager.AppHeaders
-import com.scootin.network.request.PlaceOrderRequest
 import com.scootin.network.request.VerifyAmountRequest
 import com.scootin.network.response.placeOrder.PlaceOrderResponse
 import com.scootin.util.fragment.autoCleared
@@ -28,6 +28,7 @@ class CardPaymentPageFragment : Fragment(R.layout.fragment_paymentt_status) {
     private var binding by autoCleared<FragmentPaymenttStatusBinding>()
     private val viewModel: CategoriesViewModel by viewModels()
 
+    private val args: CardPaymentPageFragmentArgs by navArgs()
     @Inject
     lateinit var appExecutors: AppExecutors
     var paymentMode = "ONLINE"
@@ -38,7 +39,6 @@ class CardPaymentPageFragment : Fragment(R.layout.fragment_paymentt_status) {
         binding = FragmentPaymenttStatusBinding.bind(view)
         Checkout.preload(context)
         setListener()
-        viewModel.placeOrder.postValue(PlaceOrderRequest(7553, false))
     }
 
     private fun setListener() {
@@ -54,26 +54,28 @@ class CardPaymentPageFragment : Fragment(R.layout.fragment_paymentt_status) {
             viewModel.orderRequest(mapOf("paymentMode" to paymentMode, "orderId" to orderId))
         }
 
-        viewModel.placeOrderLiveData.observe(viewLifecycleOwner, Observer {
-            Timber.i("placeOrder = ${it}")
-            // call payment UI
+        Timber.i("Order ID = " + args.orderId)
 
-            val data = it.body()
-            callPaymentUiFunction(data)
-        })
+//        viewModel.placeOrderLiveData.observe(viewLifecycleOwner, Observer {
+//            Timber.i("placeOrder = ${it}")
+//            // call payment UI
+//
+//            val data = it.body()
+//            callPaymentUiFunction(data)
+//        })
 
-        viewModel.orderRequestLiveData.observe(viewLifecycleOwner, Observer {
-            Timber.i("orderRequest = ${it}")
-            val response = it.body()
-            orderId = "${response?.id}"
-            // TODO launch payment screen if paymentMode is online
-            if (paymentMode == "ONLINE") {
-                // launch payment screen
-                startPayment(response?.paymentDetails?.orderReference.orEmpty())
-            } else {
-                // launch success screen
-            }
-        })
+//        viewModel.orderRequestLiveData.observe(viewLifecycleOwner, Observer {
+//            Timber.i("orderRequest = ${it}")
+//            val response = it.body()
+//            orderId = "${response?.id}"
+//            // TODO launch payment screen if paymentMode is online
+//            if (paymentMode == "ONLINE") {
+//                // launch payment screen
+//                startPayment(response?.paymentDetails?.orderReference.orEmpty())
+//            } else {
+//                // launch success screen
+//            }
+//        })
 
         binding.applyPromoButton.setOnClickListener {
             viewModel.promCodeRequest(
@@ -108,10 +110,8 @@ class CardPaymentPageFragment : Fragment(R.layout.fragment_paymentt_status) {
             options.put("theme.color", "#E90000")
             options.put("currency", "INR")
             options.put("order_id", orderReferenceId)
-
-//            options.put("amount","50000")//pass amount in currency subunits
             val prefill = JSONObject()
-//           prefill.put("email","sumit.gupta@example.com")
+           prefill.put("email","support@scootin.co.in")
             prefill.put("contact", AppHeaders.userMobileNumber)
 
             options.put("prefill", prefill)
