@@ -3,6 +3,7 @@ package com.scootin.view.fragment.orders
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.scootin.R
 import com.scootin.databinding.FragmentOrderHistoryBinding
 import com.scootin.network.AppExecutors
@@ -24,9 +25,16 @@ class OrderHistoryFragment: Fragment(R.layout.fragment_order_history) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentOrderHistoryBinding.bind(view)
         setAdaper()
+
+        setupListener()
         orderHistoryAdapter.submitList(setList())
 
     }
+
+    private fun setupListener() {
+        binding.back.setOnClickListener { findNavController().popBackStack() }
+    }
+
     private fun setAdaper() {
         orderHistoryAdapter =
             OrderHistoryAdapter(
