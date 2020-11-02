@@ -1,19 +1,23 @@
 package com.scootin.network.response.order
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class UserInfo(
     val active: Boolean,
     val createdAt: Long,
     val deleted: Boolean,
-    val email: Any,
+    val email: String,
     val fcmId: String,
-    val firstName: Any,
+    val firstName: String,
     val id: Int,
-    val lastName: Any,
+    val lastName: String,
     val mobileNumber: String,
     val modified: Long,
     val otp: String,
     val otpExpireTime: Long,
-    val password: Any,
-    val profilePicture: Any,
+    val password: String,
+    val profilePicture: String,
     val walletInfoDetails: WalletInfoDetails
-)
+): Parcelable

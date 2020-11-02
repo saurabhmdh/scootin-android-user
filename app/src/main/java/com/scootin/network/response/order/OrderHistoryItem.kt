@@ -1,5 +1,9 @@
 package com.scootin.network.response.order
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class OrderHistoryItem(
     val addressDetails: AddressDetails,
     val directOrder: Boolean,
@@ -9,5 +13,5 @@ data class OrderHistoryItem(
     val orderStatus: String,
     val rejectReason: String,
     val totalAmount: Double,
-    val userInfo: UserInfoX
-)
+    val userInfo: UserInfo
+):Parcelable

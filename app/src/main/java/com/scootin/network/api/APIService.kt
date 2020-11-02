@@ -12,6 +12,7 @@ import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.network.response.home.ResponseServiceArea
 import com.scootin.network.response.login.ResponseUser
 import com.scootin.network.response.order.OrderHistoryItem
+import com.scootin.network.response.orderdetail.OrderDetail
 import com.scootin.network.response.orders.DirectOrderResponse
 import com.scootin.network.response.placeOrder.PlaceOrderResponse
 import com.scootin.network.response.wallet.AddWalletResponse
@@ -157,4 +158,8 @@ interface APIService {
 
     @GET("/order-history/users/{userId}/get-all")
     suspend fun getAllOrdersForUser(@Path("userId") userId: String): Response<List<OrderHistoryItem>>
+
+    @GET("/order/orders/get-direct-order/{id}")
+    suspend fun getDirectOrder(@Path("id") id: String): Response<OrderDetail>
+
 }

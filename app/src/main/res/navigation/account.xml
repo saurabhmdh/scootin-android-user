@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2019, The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +16,6 @@
 
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/account"
     app:startDestination="@id/account_fragment">
 
@@ -74,12 +72,20 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right">
+            <argument
+                android:name="orderId"
+                app:argType="string" />
+        </action>
     </fragment>
 
     <fragment
         android:id="@+id/track_fragment"
-        android:name="com.scootin.view.fragment.account.orders.MyOrderTrack" />
+        android:name="com.scootin.view.fragment.account.orders.MyOrderTrack">
+        <argument
+            android:name="orderId"
+            app:argType="string" />
+    </fragment>
     <!--    <fragment-->
     <!--        android:id="@+id/orders_fragment"-->
     <!--        android:name="com.scootin.view.fragment.orders.OrderSummaryFragment"-->

@@ -24,4 +24,7 @@ internal constructor(
     fun getAllOrdersForUser() =
         orderRepository.getAllOrdersForUser(viewModelScope.coroutineContext + Dispatchers.IO + handler)
 
+    fun getDirectOrder(orderId: String) =
+        orderRepository.getDirectOrder(orderId,viewModelScope.coroutineContext + Dispatchers.IO + handler)
+
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -13,11 +13,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-
             android:src="@drawable/ic_order_history_card"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,42 +31,37 @@
             android:id="@+id/order_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/OrderID"
+            android:layout_marginStart="@dimen/dimen_20"
+            android:layout_marginTop="@dimen/dimen_20"
             android:textColor="#000000"
             android:textStyle="bold"
-            android:layout_marginTop="@dimen/dimen_20"
-            android:layout_marginStart="@dimen/dimen_20"
-
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/order_header"/>
+            app:layout_constraintTop_toBottomOf="@id/order_header" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/help_key"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_20"
-            android:src="@drawable/ic_help_button"
             android:layout_marginEnd="@dimen/dimen_20"
-
-            app:layout_constraintTop_toBottomOf="@id/order_header"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:src="@drawable/ic_help_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/order_header" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/order_date_time"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_marginTop="7dp"
-            android:textSize="13sp"
-            android:paddingStart="5dp"
-            android:background="#D6DDFF"
-            android:textColor="#4E4E4E"
-            android:textStyle="bold"
-            android:gravity="center|start"
             android:layout_marginStart="@dimen/dimen_20"
+            android:layout_marginTop="7dp"
             android:layout_marginEnd="@dimen/dimen_20"
-            android:text="@string/placed_on_wed_26_aug_20_04_38_pm"
-            android:theme="@style/custom_font_bold_style_black"
-
+            android:background="#D6DDFF"
+            android:gravity="center|start"
+            android:paddingStart="5dp"
+            android:textColor="#4E4E4E"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/order_id"
             tools:ignore="RtlSymmetry" />
 
@@ -74,8 +69,8 @@
             android:id="@+id/gradient_band"
             android:layout_width="match_parent"
             android:layout_height="24dp"
-            android:layout_marginTop="5dp"
             android:layout_marginStart="@dimen/dimen_20"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="@dimen/dimen_20"
             android:src="@drawable/ic_gradient_band"
             app:layout_constraintEnd_toEndOf="parent"
@@ -86,11 +81,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1.5dp"
-            android:text="@string/order_has_been_placed"
-            android:theme="@style/custom_font_bold_style_black"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"
             android:gravity="center"
+            android:text="@string/order_has_been_placed"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/gradient_band"
             app:layout_constraintTop_toTopOf="@id/gradient_band" />
 
@@ -98,14 +92,12 @@
             android:id="@+id/delivery_on_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/delivery_on"
+            android:layout_marginStart="@dimen/dimen_20"
             android:layout_marginTop="5dp"
-            android:textStyle="bold"
+            android:text="@string/delivery_on"
             android:textColor="#525252"
             android:textSize="11.6sp"
-            android:theme="@style/custom_font_bold_style_black"
-            android:layout_marginStart="@dimen/dimen_20"
-
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/gradient_band"
             tools:ignore="SmallSp" />
@@ -115,13 +107,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_20"
-            android:theme="@style/custom_font_bold_style_black"
-            android:text="@string/placed_on_wed_26_aug_20_08_00_pm_09_00_pm"
             android:layout_marginTop="5dp"
+            android:textColor="#000000"
             android:textSize="11sp"
             android:textStyle="bold"
-            android:textColor="#000000"
-
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/delivery_on_header"
             tools:ignore="SmallSp" />
@@ -133,9 +122,8 @@
             android:layout_marginStart="@dimen/dimen_20"
             android:layout_marginTop="@dimen/dimen_30"
             android:src="@drawable/ic_placed_inactive"
-
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/order_date_time_header"/>
+            app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
 
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -144,9 +132,8 @@
             android:layout_height="@dimen/dimen_10"
             android:layout_marginTop="43dp"
             android:src="@drawable/ic_progress_bar_grey"
-
             app:layout_constraintStart_toEndOf="@id/place_icon"
-            app:layout_constraintTop_toBottomOf="@id/order_date_time_header"/>
+            app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/packed_icon"
@@ -154,9 +141,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_30"
             android:src="@drawable/ic_packed_inactive"
-
-            app:layout_constraintTop_toBottomOf="@id/order_date_time_header"
-            app:layout_constraintStart_toEndOf="@id/progressId"/>
+            app:layout_constraintStart_toEndOf="@id/progressId"
+            app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
 
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -165,9 +151,8 @@
             android:layout_height="@dimen/dimen_10"
             android:layout_marginTop="43dp"
             android:src="@drawable/ic_progress_bar_grey"
-
             app:layout_constraintStart_toEndOf="@id/packed_icon"
-            app:layout_constraintTop_toBottomOf="@id/order_date_time_header"/>
+            app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/dispatched_icon"
@@ -175,7 +160,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:src="@drawable/ic_dispatched_inactive"
-
             app:layout_constraintStart_toEndOf="@id/progressId2"
             app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
 
@@ -185,40 +169,35 @@
             android:layout_height="@dimen/dimen_10"
             android:layout_marginTop="43dp"
             android:src="@drawable/ic_progress_bar_grey"
-
             app:layout_constraintEnd_toStartOf="@id/delivered_icon"
             app:layout_constraintStart_toEndOf="@id/dispatched_icon"
-            app:layout_constraintTop_toBottomOf="@id/order_date_time_header"/>
+            app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/delivered_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_30"
-            android:src="@drawable/ic_delivered_inactive"
             android:layout_marginEnd="@dimen/dimen_20"
-
-
-            app:layout_constraintTop_toBottomOf="@id/order_date_time_header"
-            app:layout_constraintStart_toEndOf="@id/progressId3"/>
+            android:src="@drawable/ic_delivered_inactive"
+            app:layout_constraintStart_toEndOf="@id/progressId3"
+            app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/pay_on_delivery_header"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_marginTop="@dimen/dimen_20"
-            android:textSize="13sp"
-            android:paddingStart="5dp"
-            android:background="#D6DDFF"
-            android:textColor="#2A2A2A"
-            android:textStyle="bold"
-            android:gravity="center|start"
             android:layout_marginStart="@dimen/dimen_20"
+            android:layout_marginTop="@dimen/dimen_20"
             android:layout_marginEnd="@dimen/dimen_20"
+            android:background="#D6DDFF"
+            android:gravity="center|start"
+            android:paddingStart="5dp"
             android:text="@string/pay_on_delivery"
-            android:theme="@style/custom_font_bold_style_black"
-
+            android:textColor="#2A2A2A"
+            android:textSize="13sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/packed_icon"
             tools:ignore="RtlSymmetry" />
@@ -229,10 +208,8 @@
             android:layout_marginStart="152dp"
             android:layout_marginTop="25dp"
             android:text="@string/scootin"
-            android:textStyle="bold|italic"
             android:textColor="#E60000"
-            android:theme="@style/custom_font_bold_style_black"
-
+            android:textStyle="bold|italic"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/packed_icon" />
 
@@ -242,10 +219,8 @@
             android:layout_marginStart="209dp"
             android:layout_marginTop="25dp"
             android:text="@string/wallet"
-            android:textStyle="bold"
             android:textColor="#2A2A2A"
-            android:theme="@style/custom_font_bold_style_black"
-
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/packed_icon" />
 
@@ -254,13 +229,12 @@
             android:id="@+id/total_amount_base"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_marginTop="@dimen/dimen_20"
-            android:background="#D6DDFF"
             android:layout_marginStart="@dimen/dimen_20"
+            android:layout_marginTop="@dimen/dimen_20"
             android:layout_marginEnd="@dimen/dimen_20"
-
-            app:layout_constraintStart_toStartOf="parent"
+            android:background="#D6DDFF"
             app:layout_constraintEnd_toStartOf="@+id/cancel_button"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pay_on_delivery_header"
             tools:ignore="RtlSymmetry" />
 
@@ -268,16 +242,14 @@
             android:id="@+id/item_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/_30_items"
-            android:textSize="13sp"
-            android:paddingStart="5dp"
-            android:textColor="#2A2A2A"
-            android:textStyle="bold"
-            android:gravity="center|start"
-            android:layout_marginTop="26dp"
             android:layout_marginStart="25dp"
-            android:theme="@style/custom_font_bold_style_black"
-
+            android:layout_marginTop="26dp"
+            android:gravity="center|start"
+            android:paddingStart="5dp"
+            android:text="@string/_30_items"
+            android:textColor="#2A2A2A"
+            android:textSize="13sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pay_on_delivery_header"
             tools:ignore="RtlSymmetry" />
@@ -286,15 +258,13 @@
             android:id="@+id/total_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="13sp"
-            android:paddingStart="5dp"
-            android:layout_marginTop="26dp"
             android:layout_marginStart="10dp"
-            android:textColor="#2A2A2A"
-            android:textStyle="bold"
-            android:theme="@style/custom_font_bold_style_black"
+            android:layout_marginTop="26dp"
+            android:paddingStart="5dp"
             android:text="@string/amount_rs_3250"
-
+            android:textColor="#2A2A2A"
+            android:textSize="13sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/item_count"
             app:layout_constraintTop_toBottomOf="@+id/pay_on_delivery_header"
             tools:ignore="RtlSymmetry" />
@@ -308,17 +278,16 @@
             android:src="@drawable/ic_cancel_order_button_active"
 
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pay_on_delivery_header"/>
+            app:layout_constraintTop_toBottomOf="@+id/pay_on_delivery_header" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/item_added_count"
             android:layout_width="match_parent"
             android:layout_height="23dp"
-            android:layout_marginTop="@dimen/dimen_20"
-            android:background="#D6DDFF"
             android:layout_marginStart="@dimen/dimen_20"
+            android:layout_marginTop="@dimen/dimen_20"
             android:layout_marginEnd="@dimen/dimen_20"
-
+            android:background="#D6DDFF"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/total_amount_base"
             tools:ignore="RtlSymmetry" />
@@ -327,12 +296,10 @@
             android:id="@+id/itemCount1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
             android:layout_marginStart="@dimen/dimen_30"
+            android:layout_marginTop="22dp"
             android:text="@string/item_01"
             android:textSize="12sp"
-            android:theme="@style/custom_font_bold_style_black"
-
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/total_amount_base" />
 
@@ -344,8 +311,6 @@
             android:layout_marginEnd="@dimen/dimen_30"
             android:text="@string/rs_152"
             android:textSize="12sp"
-            android:theme="@style/custom_font_bold_style_black"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/total_amount_base" />
 
@@ -353,12 +318,10 @@
             android:id="@+id/itemCount2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:layout_marginStart="@dimen/dimen_30"
+            android:layout_marginTop="5dp"
             android:text="@string/item_02"
             android:textSize="12sp"
-            android:theme="@style/custom_font_bold_style_black"
-
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/itemCount1" />
 
@@ -370,8 +333,6 @@
             android:layout_marginEnd="@dimen/dimen_30"
             android:text="@string/rs_192"
             android:textSize="12sp"
-            android:theme="@style/custom_font_bold_style_black"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/itemPrice1" />
 
@@ -379,11 +340,10 @@
             android:id="@+id/item_added_count1"
             android:layout_width="match_parent"
             android:layout_height="23dp"
-            android:layout_marginTop="@dimen/dimen_20"
-            android:background="#D6DDFF"
             android:layout_marginStart="@dimen/dimen_20"
+            android:layout_marginTop="@dimen/dimen_20"
             android:layout_marginEnd="@dimen/dimen_20"
-
+            android:background="#D6DDFF"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_added_count"
             tools:ignore="RtlSymmetry" />
@@ -392,12 +352,10 @@
             android:id="@+id/itemCount3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
             android:layout_marginStart="@dimen/dimen_30"
+            android:layout_marginTop="22dp"
             android:text="@string/item_03"
             android:textSize="12sp"
-            android:theme="@style/custom_font_bold_style_black"
-
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_added_count" />
 
@@ -409,21 +367,17 @@
             android:layout_marginEnd="@dimen/dimen_30"
             android:text="@string/rs_205_00"
             android:textSize="12sp"
-            android:theme="@style/custom_font_bold_style_black"
-
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/itemPrice1"/>
+            app:layout_constraintTop_toBottomOf="@+id/itemPrice1" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/itemCount4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3.5dp"
             android:layout_marginStart="@dimen/dimen_30"
+            android:layout_marginTop="3.5dp"
             android:text="@string/item_04"
             android:textSize="12sp"
-            android:theme="@style/custom_font_bold_style_black"
-
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/itemCount3" />
 
@@ -435,20 +389,17 @@
             android:layout_marginEnd="@dimen/dimen_30"
             android:text="@string/rs_40_00"
             android:textSize="12sp"
-            android:theme="@style/custom_font_bold_style_black"
-
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/itemPrice3"/>
+            app:layout_constraintTop_toBottomOf="@+id/itemPrice3" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/item_added_count2"
             android:layout_width="match_parent"
             android:layout_height="23dp"
-            android:layout_marginTop="@dimen/dimen_20"
-            android:background="#D6DDFF"
             android:layout_marginStart="@dimen/dimen_20"
+            android:layout_marginTop="@dimen/dimen_20"
             android:layout_marginEnd="@dimen/dimen_20"
-
+            android:background="#D6DDFF"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_added_count1"
             tools:ignore="RtlSymmetry" />
@@ -457,14 +408,12 @@
             android:id="@+id/itemCount5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginStart="@dimen/dimen_30"
+            android:layout_marginTop="20dp"
             android:text="@string/item_05"
             android:textSize="12sp"
-            android:theme="@style/custom_font_bold_style_black"
-
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_added_count1"/>
+            app:layout_constraintTop_toBottomOf="@+id/item_added_count1" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/itemPrice5"
@@ -474,23 +423,19 @@
             android:layout_marginEnd="@dimen/dimen_30"
             android:text="@string/rs_708_00"
             android:textSize="12sp"
-            android:theme="@style/custom_font_bold_style_black"
-
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_added_count1"/>
+            app:layout_constraintTop_toBottomOf="@+id/item_added_count1" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/itemCount6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="@dimen/dimen_30"
+            android:layout_marginTop="8dp"
             android:text="@string/item_06"
             android:textSize="12sp"
-            android:theme="@style/custom_font_bold_style_black"
-
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/itemCount5"/>
+            app:layout_constraintTop_toBottomOf="@+id/itemCount5" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/itemPrice6"
@@ -500,20 +445,17 @@
             android:layout_marginEnd="@dimen/dimen_30"
             android:text="@string/rs_430_00"
             android:textSize="12sp"
-            android:theme="@style/custom_font_bold_style_black"
-
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/itemPrice5"/>
+            app:layout_constraintTop_toBottomOf="@+id/itemPrice5" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/item_added_count3"
             android:layout_width="match_parent"
             android:layout_height="23dp"
-            android:layout_marginTop="@dimen/dimen_20"
-            android:background="#D6DDFF"
             android:layout_marginStart="@dimen/dimen_20"
+            android:layout_marginTop="@dimen/dimen_20"
             android:layout_marginEnd="@dimen/dimen_20"
-
+            android:background="#D6DDFF"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_added_count2"
             tools:ignore="RtlSymmetry" />
@@ -522,14 +464,12 @@
             android:id="@+id/itemCount7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
             android:layout_marginStart="@dimen/dimen_30"
+            android:layout_marginTop="6dp"
             android:text="@string/item_07"
             android:textSize="12sp"
-            android:theme="@style/custom_font_bold_style_black"
-
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/itemCount6"/>
+            app:layout_constraintTop_toBottomOf="@+id/itemCount6" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/itemPrice7"
@@ -539,11 +479,8 @@
             android:layout_marginEnd="@dimen/dimen_30"
             android:text="@string/rs_128_00"
             android:textSize="12sp"
-            android:theme="@style/custom_font_bold_style_black"
-
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/itemPrice6"/>
-
+            app:layout_constraintTop_toBottomOf="@+id/itemPrice6" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
