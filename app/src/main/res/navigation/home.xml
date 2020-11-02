@@ -103,21 +103,41 @@
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/essential_category_to_handwritten"
+            app:destination="@id/essential_shop_select"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/essential_shop_select"
+        android:name="com.scootin.view.fragment.delivery.essential.EssentialSelectShopFragment"
+        android:label="" >
+        <action
+            android:id="@+id/shop_selection_to_handwritten"
             app:destination="@id/essential_handwritten_list"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+
     <fragment
         android:id="@+id/essential_handwritten_list"
         android:name="com.scootin.view.fragment.delivery.essential.EssentialHandwrittenFragment"
-        android:label="Home" />
+        android:label="Home" >
+        <argument
+            android:name="shop_id"
+            app:argType="long" />
+        <argument
+            android:name="shop_name"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/express_delivery"
         android:name="com.scootin.view.fragment.delivery.express.ExpressDeliveryFragment"
         android:label="Home">
-
 
         <action
             android:id="@+id/action_express_delivery_to_express_orders2"
@@ -127,8 +147,6 @@
         android:id="@+id/express_orders"
         android:name="com.scootin.view.fragment.delivery.express.ExpressDeliveryOrders"
         android:label="Express" />
-
-
     <fragment
         android:id="@+id/stationary"
         android:name="com.scootin.view.fragment.delivery.stationary.StationaryDeliveryFragment"

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.scootin.R
 import com.scootin.databinding.HandWrittenGroceryListBinding
 import com.scootin.network.glide.GlideApp
@@ -26,9 +27,16 @@ class EssentialHandwrittenFragment : Fragment(R.layout.hand_written_grocery_list
     private var binding by autoCleared<HandWrittenGroceryListBinding>()
     private val viewModel: CategoriesViewModel by viewModels()
 
+    private val args: EssentialHandwrittenFragmentArgs by navArgs()
+
+    private val shopId by lazy {
+        args.shopId
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = HandWrittenGroceryListBinding.bind(view)
+
         binding.uploadPhoto.setOnClickListener {
             onClickOfUploadMedia()
         }
