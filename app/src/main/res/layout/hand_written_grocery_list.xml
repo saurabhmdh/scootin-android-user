@@ -111,17 +111,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pickupAddress" />
 
-
-            <EditText
-                android:id="@+id/edit_drop_address"
+            <TextView
+                android:id="@+id/mobile_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:drawableLeft="@drawable/ic_location_icon"
                 android:fontFamily="@font/montserrat_regular"
                 android:hint="@string/edittxt_hint_eng_mobno"
-                android:inputType="text"
-                android:textSize="12dp"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/address" />
 
@@ -131,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edit_drop_address"
+                app:layout_constraintTop_toBottomOf="@id/mobile_no"
                 app:srcCompat="@drawable/ic_total_distance" />
 
 
@@ -139,7 +137,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edit_drop_address"
+                app:layout_constraintTop_toBottomOf="@id/mobile_no"
                 app:srcCompat="@drawable/ic_charges_text" />
 
             <androidx.appcompat.widget.AppCompatImageView

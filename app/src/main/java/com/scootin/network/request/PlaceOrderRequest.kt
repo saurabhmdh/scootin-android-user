@@ -1,6 +1,6 @@
 package com.scootin.network.request
 
 class PlaceOrderRequest(
-    val addressId: Int, // addressId
+    val addressId: Long, // addressId
     val expressDelivery: Boolean // false
 )

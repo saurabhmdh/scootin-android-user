@@ -3,6 +3,8 @@ package com.scootin.viewmodel.wallet
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
+import com.scootin.network.request.AddMoneyWallet
+import com.scootin.network.request.VerifyAmountRequest
 import com.scootin.repository.WalletRepository
 import com.scootin.viewmodel.base.ObservableViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -20,4 +22,7 @@ class WalletViewModel @ViewModelInject internal constructor(
         Timber.i("Caught  $exception")
     }
 
+    fun addMoneyToWallet(userId: String, addMoneyWallet: AddMoneyWallet) = walletRepository.addMoney(userId, addMoneyWallet, viewModelScope.coroutineContext + Dispatchers.IO + handler)
+
+    fun verifyWalletPayment(userId: String, verifyRequest: VerifyAmountRequest) = walletRepository.verifyWalletPayment(userId, verifyRequest, viewModelScope.coroutineContext + Dispatchers.IO + handler)
 }

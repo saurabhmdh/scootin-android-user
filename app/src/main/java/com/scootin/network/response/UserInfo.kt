@@ -1,5 +1,9 @@
 package com.scootin.network.response
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class UserInfo(
     val active: Boolean,
     val created_date: Long,
@@ -11,10 +15,12 @@ data class UserInfo(
     val otp: String,
     val otp_expire_time: Long,
     val walletInfoDetails: WalletInfoDetails
-) {
+): Parcelable {
+
+    @Parcelize
     data class WalletInfoDetails(
         val balance: Int,
         val currency: String,
         val id: Int
-    )
+    ): Parcelable
 }

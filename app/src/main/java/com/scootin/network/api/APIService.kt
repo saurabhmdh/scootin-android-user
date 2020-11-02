@@ -3,6 +3,7 @@ package com.scootin.network.api
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.*
 import com.scootin.network.response.Address
+import com.scootin.network.response.Media
 import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.network.response.State
@@ -11,7 +12,9 @@ import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.network.response.home.ResponseServiceArea
 import com.scootin.network.response.login.ResponseUser
 import com.scootin.network.response.order.OrderHistoryItem
+import com.scootin.network.response.orders.DirectOrderResponse
 import com.scootin.network.response.placeOrder.PlaceOrderResponse
+import com.scootin.network.response.wallet.AddWalletResponse
 import com.scootin.network.response.wallet.WalletTransactionResponse
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
@@ -76,23 +79,22 @@ interface APIService {
         @Body requestFCM: RequestFCM
     ): Response<ResponseUser>
 
-    @GET("/order/capture-payment")
-    suspend fun capturePayment(@Body request: CapturePaymentRequest): Response<String>
 
     @POST("/cart/add-to-cart")
     suspend fun addToCart(@Body request: AddToCartRequest): Response<String>
 
-    @GET("/order/orders/count-total")
-    suspend fun countTotal()
 
     @GET("/cart/get-cart/{userID}")
     suspend fun getUserCartList(@Path("userID") userId: String): Response<List<CartListResponseItem>>
 
-    @POST("/wallet/add-money")
-    suspend fun addMoney(): Response<String>
+    @POST("/wallet/add-money/{userId}")
+    suspend fun addMoney(@Path("userId") userId: String, @Body addMoneyWallet: AddMoneyWallet): Response<AddWalletResponse>
 
     @GET("/wallet/list-transaction/{userId}")
     suspend fun listTransaction(@Path("userId") userId: String): Response<List<WalletTransactionResponse>>
+
+    @POST("/wallet/verifyPayment/{userId}")
+    suspend fun verifyWalletPayment(@Path("userId") userId: String, @Body verify: VerifyAmountRequest): Response<String>
 
     @GET("/address/update-default-address/{userId}/{addressId}")
     suspend fun updateDefaultAddress(
@@ -108,7 +110,15 @@ interface APIService {
 
     @Multipart
     @POST("/media/upload-image")
-    suspend fun uploadImage(@Part file: MultipartBody.Part): Response<String>
+    suspend fun uploadImage(@Part file: MultipartBody.Part): Response<Media>
+
+
+    @POST("/order/place-order-direct/{userId}")
+    suspend fun placeDirectOrder(
+        @Path("userId") userId: String,
+        @Body request: DirectOrderRequest
+    ): Response<DirectOrderResponse>
+
 
     @POST("/order/place-order/{userId}")
     suspend fun placeOrder(
