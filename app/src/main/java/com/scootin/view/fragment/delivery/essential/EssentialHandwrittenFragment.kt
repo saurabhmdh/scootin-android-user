@@ -59,7 +59,7 @@ class EssentialHandwrittenFragment : BaseFragment(R.layout.hand_written_grocery_
             Toast.makeText(context, "Invalid Media", Toast.LENGTH_SHORT).show()
             return
         }
-        showLoading();
+        showLoading()
         viewModel.placeDirectOrder(
             AppHeaders.userID,
             DirectOrderRequest(AppConstants.defaultAddressId, false, mediaId, shopId)).observe(viewLifecycleOwner) {
@@ -94,8 +94,10 @@ class EssentialHandwrittenFragment : BaseFragment(R.layout.hand_written_grocery_
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         if (requestCode == AppConstants.RESULT_LOAD_IMAGE_VIDEO && resultCode == Activity.RESULT_OK && null != intent) {
             //Call view model to upload media..
+            showLoading()
             intent.data?.let { uri ->
                 viewModel.uploadMedia(uri).observe(viewLifecycleOwner) {response->
+                    dismissLoading()
                     if(response.isSuccessful) {
                         val media = response.body() ?: return@observe
                         GlideApp.with(requireContext()).load(media.url).into(binding.receiverPhotoBox)
