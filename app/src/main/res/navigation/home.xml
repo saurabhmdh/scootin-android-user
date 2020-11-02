@@ -225,6 +225,10 @@
         android:id="@+id/innerwearwomen"
         android:name="com.scootin.view.fragment.delivery.clothing.ClothingInnerWearWomen"
         android:label="Home" />
+    <fragment
+        android:id="@+id/express_delivery_shoplist"
+        android:name="com.scootin.view.fragment.delivery.express.ExpressDeliveryShopListFragment"
+        android:label="Home" />
 
     <fragment
         android:id="@+id/sweetsCategory"
@@ -289,7 +293,11 @@
         android:label="ExpressDeliveryCategoryFragment">
         <action
             android:id="@+id/action_expressDeliveryCategoryFragment_to_express_delivery"
-            app:destination="@id/express_delivery" />
+            app:destination="@id/express_delivery_shoplist"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
 
