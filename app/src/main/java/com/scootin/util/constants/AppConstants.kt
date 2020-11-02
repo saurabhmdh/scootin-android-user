@@ -32,4 +32,5 @@ object AppConstants {
     )
 
 
+    const val defaultAddressId = 7553L
 }

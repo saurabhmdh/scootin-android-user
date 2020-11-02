@@ -17,6 +17,7 @@ import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.PlaceOrderRequest
+import com.scootin.util.constants.AppConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.AddCartItemAdapter
 import com.scootin.view.fragment.BaseFragment
@@ -56,7 +57,7 @@ class CartListFragment : BaseFragment(R.layout.fragment_cart_list) {
     private fun setListener() {
         binding.checkout.setOnClickListener {
             showLoading()
-            viewModel.generateOrder(AppHeaders.userID, PlaceOrderRequest(7553, false)).observe(viewLifecycleOwner) {
+            viewModel.generateOrder(AppHeaders.userID, PlaceOrderRequest(AppConstants.defaultAddressId, false)).observe(viewLifecycleOwner) {
 
                 when (it.status) {
                     Status.SUCCESS -> {

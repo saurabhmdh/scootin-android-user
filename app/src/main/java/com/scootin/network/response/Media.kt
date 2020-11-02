@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 data class Media(
     val deleted: Boolean,
     val filename: String,
-    val id: Int,
+    val id: Long,
     val type: String,
     val url: String
 ): Parcelable
