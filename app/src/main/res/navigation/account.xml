@@ -15,8 +15,7 @@
   ~ limitations under the License.
   -->
 
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/account"
@@ -33,7 +32,7 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
 
         <action
             android:id="@+id/account_to_orders_fragment"
@@ -41,7 +40,7 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
 
         <action
             android:id="@+id/account_to_support_fragment"
@@ -49,7 +48,7 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
 
         <action
             android:id="@+id/account_to_address_fragment"
@@ -57,32 +56,44 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
 
     </fragment>
 
     <fragment
         android:id="@+id/address_fragment"
         android:name="com.scootin.view.fragment.account.address.AddressFragment"
-        android:label="Account"/>
+        android:label="Account" />
 
-    <fragment android:id="@+id/order_history_fragment"
-        android:name="com.scootin.view.fragment.orders.OrderHistoryFragment"
-        />
-<!--    <fragment-->
-<!--        android:id="@+id/orders_fragment"-->
-<!--        android:name="com.scootin.view.fragment.orders.OrderSummaryFragment"-->
-<!--        android:label="Account">-->
-<!--    </fragment>-->
+    <fragment
+        android:id="@+id/order_history_fragment"
+        android:name="com.scootin.view.fragment.orders.OrderHistoryFragment">
+        <action
+            android:id="@+id/order_to_track_fragment"
+            app:destination="@id/track_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/track_fragment"
+        android:name="com.scootin.view.fragment.account.orders.MyOrderTrack" />
+    <!--    <fragment-->
+    <!--        android:id="@+id/orders_fragment"-->
+    <!--        android:name="com.scootin.view.fragment.orders.OrderSummaryFragment"-->
+    <!--        android:label="Account">-->
+    <!--    </fragment>-->
 
     <fragment
         android:id="@+id/cart_fragment"
         android:name="com.scootin.view.fragment.account.cards.CardFragment"
-        android:label="Account"/>
+        android:label="Account" />
 
     <fragment
         android:id="@+id/support_fragment"
         android:name="com.scootin.view.fragment.account.support.SupportFragment"
-        android:label="Account"/>
+        android:label="Account" />
 
 </navigation>

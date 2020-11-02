@@ -1,16 +1,17 @@
 package com.scootin.network.api
 
-import com.scootin.database.table.State
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.*
 import com.scootin.network.response.Address
 import com.scootin.network.response.Media
 import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.SearchShopsByCategoryResponse
+import com.scootin.network.response.State
 import com.scootin.network.response.cart.CartListResponseItem
 import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.network.response.home.ResponseServiceArea
 import com.scootin.network.response.login.ResponseUser
+import com.scootin.network.response.order.OrderHistoryItem
 import com.scootin.network.response.orders.DirectOrderResponse
 import com.scootin.network.response.placeOrder.PlaceOrderResponse
 import com.scootin.network.response.wallet.AddWalletResponse
@@ -67,7 +68,10 @@ interface APIService {
     ): Response<List<SearchProductsByCategoryResponse>>
 
     @GET("/search/{shopId}/get-all-products")
-    suspend fun findProductFromShop(@Path("shopId") shopId: Long, @Body requestSearch: RequestSearch): Response<List<SearchProductsByCategoryResponse>>
+    suspend fun findProductFromShop(
+        @Path("shopId") shopId: Long,
+        @Body requestSearch: RequestSearch
+    ): Response<List<SearchProductsByCategoryResponse>>
 
     @POST("notification/user/{id}/update-fcm")
     suspend fun updateFCMID(
@@ -103,7 +107,6 @@ interface APIService {
 
     @GET("/address/get-all-address/{userId}")
     suspend fun getAllAdress(@Path("userID") userId: String): Response<List<Address>>
-
 
     @Multipart
     @POST("/media/upload-image-android")
@@ -152,4 +155,6 @@ interface APIService {
     @GET("/register/get-all-states")
     suspend fun getAllState(): Response<List<State>>
 
+    @GET("/order-history/users/{userId}/get-all")
+    suspend fun getAllOrdersForUser(@Path("userId") userId: String): Response<List<OrderHistoryItem>>
 }
