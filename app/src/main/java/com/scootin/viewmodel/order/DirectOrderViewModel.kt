@@ -32,24 +32,6 @@ class DirectOrderViewModel @ViewModelInject internal constructor(
         Timber.i("Caught  $exception")
     }
 
-//    val filePath = MutableLiveData<Uri>()
-//
-//    fun filePath(uri: Uri) {
-//        filePath.postValue(uri)
-//    }
-//
-//    val filePathLiveData = filePath.switchMap {
-//        Timber.i("filePath in viewmodel")
-//        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-//            Timber.i("filePath in viewmodel 1")
-//            val filePath = FileUtils.getPath(application, it)
-//            val file = File(filePath)
-//            val requestBody = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
-//            val filePart = MultipartBody.Part.createFormData("media", file.name, requestBody)
-//            emit(searchRepository.uploadImage(filePart))
-//        }
-//    }
-
     fun uploadMedia(data: Uri) = liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
         val filePath = FileUtils.getPath(application, data)
         val file = File(filePath)

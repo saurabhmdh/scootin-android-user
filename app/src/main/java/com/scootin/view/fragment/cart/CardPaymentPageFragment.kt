@@ -67,7 +67,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                         if (it.data?.paymentDetails?.payment_mode.equals("ONLINE")) {
                             startPayment(it.data?.paymentDetails?.orderReference.orEmpty())
                         } else {
-                            //ALOK send success order has been created..
+                            findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage())
                         }
                     }
                     Status.ERROR -> {
@@ -91,7 +91,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
 
         viewModel.verifyPaymentRequestLiveData.observe(viewLifecycleOwner, {
             Timber.i("verifyPaymentRequestLiveData = $it")
-            //ALOK -> Display the success response.. and clear the stack..
+            findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage())
         })
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
@@ -114,7 +114,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
             options.put("currency", "INR")
             options.put("order_id", orderReferenceId)
             val prefill = JSONObject()
-           prefill.put("email","support@scootin.co.in")
+            prefill.put("email","support@scootin.co.in")
             prefill.put("contact", AppHeaders.userMobileNumber)
 
             options.put("prefill", prefill)
