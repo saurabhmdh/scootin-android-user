@@ -36,20 +36,8 @@ class PaymentViewModel @ViewModelInject internal constructor(
 
     fun userConfirmOrder(orderId: String, userId: String, orderRequest: OrderRequest) = orderRepository.userConfirmOrder(orderId, userId, orderRequest, viewModelScope.coroutineContext + Dispatchers.IO + handler)
 
-    val verifyPaymentRequest = MutableLiveData<VerifyAmountRequest>()
 
-    fun verifyPaymentRequest(request: VerifyAmountRequest) {
-        verifyPaymentRequest.postValue(request)
-    }
-
-    val verifyPaymentRequestLiveData = verifyPaymentRequest.switchMap {
-        Timber.i("verifyPaymentRequest in viewmodel")
-        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-            Timber.i("verifyPaymentRequest in viewmodel 1")
-            // TODO need to change
-            emit(paymentRepository.verifyPayment(it))
-        }
-    }
+    fun verifyPayment(request: VerifyAmountRequest) = paymentRepository.verifyPayment(request, viewModelScope.coroutineContext + Dispatchers.IO + handler)
 
 
     private val handler = CoroutineExceptionHandler { _, exception ->

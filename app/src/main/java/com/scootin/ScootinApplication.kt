@@ -6,6 +6,7 @@ import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import androidx.work.Configuration
 import androidx.work.WorkManager
+import com.razorpay.Checkout
 
 import com.scootin.di.DaggerAwareWorkerFactory
 import com.scootin.services.StartUpService
@@ -29,7 +30,7 @@ class ScootinApplication: MultiDexApplication() {
 //        updateStrictPolicy()
         super.onCreate()
         initTimber()
-
+        Checkout.preload(this)
         configureWorkManager()
         service.start()
 

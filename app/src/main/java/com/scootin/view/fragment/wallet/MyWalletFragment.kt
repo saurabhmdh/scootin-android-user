@@ -36,7 +36,7 @@ class MyWalletFragment : Fragment(R.layout.fragment_wallet_my) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentWalletMyBinding.bind(view)
-        Checkout.preload(context)
+        //Checkout.preload(context)
         setProductAdapter()
 
         loadData()

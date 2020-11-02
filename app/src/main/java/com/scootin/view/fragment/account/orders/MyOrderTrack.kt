@@ -64,9 +64,13 @@ class MyOrderTrack : Fragment(R.layout.fragment_my_order_track) {
     }
 
     private fun updateListeners() {
+
         binding.helpKey.setOnClickListener {
             findNavController().navigate(MyInDirectOrderTrackDirections.inorderToCustomerSupport())
         }
+
+        binding.back.setOnClickListener { findNavController().popBackStack() }
+
     }
 
 }

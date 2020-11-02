@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.scootin.R
@@ -18,16 +17,16 @@ import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.DirectOrderRequest
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.fragment.autoCleared
-import com.scootin.util.ui.FileUtils
 import com.scootin.util.ui.MediaPicker
 import com.scootin.util.ui.UtilPermission
+import com.scootin.view.fragment.BaseFragment
 import com.scootin.viewmodel.order.DirectOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 
 @AndroidEntryPoint
-class EssentialHandwrittenFragment : Fragment(R.layout.hand_written_grocery_list) {
+class EssentialHandwrittenFragment : BaseFragment(R.layout.hand_written_grocery_list) {
     private var binding by autoCleared<HandWrittenGroceryListBinding>()
     private val viewModel: DirectOrderViewModel by viewModels()
 
@@ -48,13 +47,6 @@ class EssentialHandwrittenFragment : Fragment(R.layout.hand_written_grocery_list
             onClickOfUploadMedia()
         }
 
-        viewModel.filePathLiveData.observe(viewLifecycleOwner, { data->
-            Timber.i("EssentialHandwrittenFragment response = ${data.isSuccessful}")
-            if (data.isSuccessful) {
-                val media = data.body()
-                //mediaId = media?.id ?: -1L
-            }
-        })
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
         binding.placeOrder.setOnClickListener {
@@ -67,15 +59,20 @@ class EssentialHandwrittenFragment : Fragment(R.layout.hand_written_grocery_list
             Toast.makeText(context, "Invalid Media", Toast.LENGTH_SHORT).show()
             return
         }
+        showLoading()
         viewModel.placeDirectOrder(
             AppHeaders.userID,
             DirectOrderRequest(AppConstants.defaultAddressId, false, mediaId, shopId)).observe(viewLifecycleOwner) {
             when(it.status) {
                 Status.SUCCESS -> {
-                    Toast.makeText(context, "Your order has been recieved successfully", Toast.LENGTH_SHORT).show()
+                    dismissLoading()
+                    Toast.makeText(context, "Your order has been received successfully", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(EssentialHandwrittenFragmentDirections.directOrderConfirmation())
                 }
                 Status.LOADING -> {}
-                Status.ERROR -> {}
+                Status.ERROR -> {
+                    dismissLoading()
+                }
             }
         }
     }
@@ -96,11 +93,18 @@ class EssentialHandwrittenFragment : Fragment(R.layout.hand_written_grocery_list
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         if (requestCode == AppConstants.RESULT_LOAD_IMAGE_VIDEO && resultCode == Activity.RESULT_OK && null != intent) {
-            context?.let { context ->
-                GlideApp.with(requireContext()).load(intent.data).into(binding.receiverPhotoBox)
-                intent.data?.let {
-                    viewModel.filePath(it)
-
+            //Call view model to upload media..
+            showLoading()
+            intent.data?.let { uri ->
+                viewModel.uploadMedia(uri).observe(viewLifecycleOwner) {response->
+                    dismissLoading()
+                    if(response.isSuccessful) {
+                        val media = response.body() ?: return@observe
+                        GlideApp.with(requireContext()).load(media.url).into(binding.receiverPhotoBox)
+                        mediaId = media.id
+                    } else {
+                        Toast.makeText(context, "There is some error media", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }

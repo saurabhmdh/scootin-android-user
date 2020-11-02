@@ -7,8 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
-import com.scootin.database.dao.CacheDao
-import com.scootin.database.dao.LocationDao
 import com.scootin.network.request.DirectOrderRequest
 import com.scootin.repository.OrderRepository
 import com.scootin.repository.SearchRepository
@@ -19,9 +17,9 @@ import kotlinx.coroutines.Dispatchers
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import timber.log.Timber
 import java.io.File
-import kotlin.coroutines.CoroutineContext
 
 
 class DirectOrderViewModel @ViewModelInject internal constructor(
@@ -34,23 +32,11 @@ class DirectOrderViewModel @ViewModelInject internal constructor(
         Timber.i("Caught  $exception")
     }
 
-    val filePath = MutableLiveData<Uri>()
-
-    fun filePath(uri: Uri) {
-        filePath.postValue(uri)
-    }
-
-    val filePathLiveData = filePath.switchMap {
-        Timber.i("filePath in viewmodel")
-        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-            Timber.i("filePath in viewmodel 1")
-            val filePath = FileUtils.getPath(application, it)
-            val file = File(filePath)
-            val requestBody = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
-            val filePart =
-                MultipartBody.Part.createFormData("media", file.name, requestBody)
-            emit(searchRepository.uploadImage(filePart))
-        }
+    fun uploadMedia(data: Uri) = liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+        val filePath = FileUtils.getPath(application, data)
+        val file = File(filePath)
+        val filePart = MultipartBody.Part.createFormData("multipartFile", file.name, file.asRequestBody())
+        emit(searchRepository.uploadImage(filePart))
     }
 
     fun placeDirectOrder(userId: String, request: DirectOrderRequest) = orderRepository.placeDirectOrder(userId, request, viewModelScope.coroutineContext + Dispatchers.IO + handler)
