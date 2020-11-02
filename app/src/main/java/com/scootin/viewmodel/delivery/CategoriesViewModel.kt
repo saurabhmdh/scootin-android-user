@@ -31,7 +31,6 @@ class CategoriesViewModel @ViewModelInject internal constructor(
     private val cacheDao: CacheDao,
     private val locationDao: LocationDao,
     val searchRepository: SearchRepository,
-    private val paymentRepository: PaymentRepository,
     private val application: Application
 ) : ObservableViewModel() {
 
@@ -102,17 +101,6 @@ class CategoriesViewModel @ViewModelInject internal constructor(
         }
     }
 
-    val addMoney = liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-        Timber.i("addMoney in viewmodel 1")
-        emit(searchRepository.addMoney())
-    }
-
-    val listTransaction = MutableLiveData<Int>()
-
-    fun listTransaction(transaction: Int) {
-        listTransaction.postValue(transaction)
-    }
-
     val filePath = MutableLiveData<Uri>()
 
     fun filePath(uri: Uri) {
@@ -129,14 +117,6 @@ class CategoriesViewModel @ViewModelInject internal constructor(
             val filePart =
                 MultipartBody.Part.createFormData("media", file.name, requestBody)
             emit(searchRepository.uploadImage(filePart))
-        }
-    }
-
-    val listTransactionLiveData = listTransaction.switchMap {
-        Timber.i("listTransaction in viewmodel")
-        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-            Timber.i("listTransaction in viewmodel 1")
-            emit(searchRepository.listTransaction())
         }
     }
 }

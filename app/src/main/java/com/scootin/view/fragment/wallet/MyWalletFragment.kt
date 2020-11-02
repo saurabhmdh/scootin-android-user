@@ -10,11 +10,13 @@ import com.razorpay.Checkout
 import com.scootin.R
 import com.scootin.databinding.FragmentWalletMyBinding
 import com.scootin.network.AppExecutors
+import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.VerifyAmountRequest
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.WalletAdapter
 import com.scootin.viewmodel.delivery.CategoriesViewModel
+import com.scootin.viewmodel.wallet.WalletViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
 import timber.log.Timber
@@ -23,7 +25,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MyWalletFragment : Fragment(R.layout.fragment_wallet_my) {
 
-    private val viewModel: CategoriesViewModel by viewModels()
+    private val viewModel: WalletViewModel by viewModels()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -35,14 +37,22 @@ class MyWalletFragment : Fragment(R.layout.fragment_wallet_my) {
         binding = FragmentWalletMyBinding.bind(view)
         Checkout.preload(context)
         setProductAdapter()
-        viewModel.listTransaction(1)
-        viewModel.listTransactionLiveData.observe(viewLifecycleOwner, Observer {
-            walletAdapter.submitList(it.body())
-        })
 
-        viewModel.addMoney.observe(viewLifecycleOwner, Observer {
-            Timber.i("addMoney = ${it.body()}")
-        })
+
+        viewModel.listTransaction(AppHeaders.userID).observe(viewLifecycleOwner) {
+            when(it.status) {
+                Status.SUCCESS -> {
+                    walletAdapter.submitList(it.data)
+                }
+                Status.LOADING -> {}
+                Status.ERROR -> {}
+            }
+        }
+
+
+//        viewModel.addMoney.observe(viewLifecycleOwner, Observer {
+//            Timber.i("addMoney = ${it.body()}")
+//        })
 
         binding.addMoney.setOnClickListener {
             //Let me start payment directly
@@ -76,12 +86,10 @@ class MyWalletFragment : Fragment(R.layout.fragment_wallet_my) {
             options.put("currency","INR");
             // options.put("order_id", "order_DBJOWzybf0sJbb");
 
-            options.put("amount",price)//pass amount in currency subunits
-
-
+            options.put("amount",(price.toDouble() * 100))//pass amount in currency subunits
 
             val prefill = JSONObject()
-//           prefill.put("email","sumit.gupta@example.com")
+            prefill.put("email","support@scootin.co.in")
             prefill.put("contact", AppHeaders.userMobileNumber)
 
             options.put("prefill", prefill)
@@ -89,7 +97,7 @@ class MyWalletFragment : Fragment(R.layout.fragment_wallet_my) {
 
             //Razorpay will return 3 values.. Which we need to check
             //capture-payment
-        }catch (e: Exception){
+        } catch (e: Exception) {
             Toast.makeText(activity,"Error in payment: "+ e.message, Toast.LENGTH_LONG).show()
             e.printStackTrace()
         }
