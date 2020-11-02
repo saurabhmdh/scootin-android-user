@@ -106,8 +106,8 @@ interface APIService {
 
 
     @Multipart
-    @POST("/media/upload-image")
-    suspend fun uploadImage(@Part file: MultipartBody.Part): Response<Media>
+    @POST("/media/upload-image-android")
+    suspend fun uploadImage(@Part multipartFile: MultipartBody.Part): Response<Media>
 
 
     @POST("/order/place-order-direct/{userId}")

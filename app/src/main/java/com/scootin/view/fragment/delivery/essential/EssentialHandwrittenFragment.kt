@@ -63,7 +63,7 @@ class EssentialHandwrittenFragment : Fragment(R.layout.hand_written_grocery_list
             DirectOrderRequest(AppConstants.defaultAddressId, false, mediaId, shopId)).observe(viewLifecycleOwner) {
             when(it.status) {
                 Status.SUCCESS -> {
-                    Toast.makeText(context, "Your order has been recieved successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Your order has been received successfully", Toast.LENGTH_SHORT).show()
                 }
                 Status.LOADING -> {}
                 Status.ERROR -> {}

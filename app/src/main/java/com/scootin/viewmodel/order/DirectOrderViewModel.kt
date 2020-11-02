@@ -17,6 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import timber.log.Timber
 import java.io.File
 
@@ -52,8 +53,7 @@ class DirectOrderViewModel @ViewModelInject internal constructor(
     fun uploadMedia(data: Uri) = liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
         val filePath = FileUtils.getPath(application, data)
         val file = File(filePath)
-        val requestBody = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
-        val filePart = MultipartBody.Part.createFormData("media", file.name, requestBody)
+        val filePart = MultipartBody.Part.createFormData("multipartFile", file.name, file.asRequestBody())
         emit(searchRepository.uploadImage(filePart))
     }
 
