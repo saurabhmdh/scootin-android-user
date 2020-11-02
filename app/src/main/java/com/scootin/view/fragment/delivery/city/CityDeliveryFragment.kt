@@ -56,33 +56,33 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
         binding.placeOrder.setOnClickListener {
-            placeDirectOrder()
+            //placeDirectOrder()
         }
     }
 
-    private fun placeDirectOrder() {
-        if (mediaId == -1L) {
-            Toast.makeText(context, "Invalid Media", Toast.LENGTH_SHORT).show()
-            return
-        }
-        showLoading()
-        viewModel.placeDirectOrder(
-            AppHeaders.userID,
-            DirectOrderRequest(AppConstants.defaultAddressId, false, mediaId, shopId)
-        ).observe(viewLifecycleOwner) {
-            when(it.status) {
-                Status.SUCCESS -> {
-                    dismissLoading()
-                    Toast.makeText(context, "Your order has been received successfully", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(CityDeliveryFragmentDirections.directOrderConfirmation())
-                }
-                Status.LOADING -> {}
-                Status.ERROR -> {
-                   dismissLoading()
-                }
-            }
-        }
-    }
+//    private fun placeDirectOrder() {
+//        if (mediaId == -1L) {
+//            Toast.makeText(context, "Invalid Media", Toast.LENGTH_SHORT).show()
+//            return
+//        }
+//        showLoading()
+//        viewModel.placeDirectOrder(
+//            AppHeaders.userID,
+//            DirectOrderRequest(AppConstants.defaultAddressId, false, mediaId, shopId)
+//        ).observe(viewLifecycleOwner) {
+//            when(it.status) {
+//                Status.SUCCESS -> {
+//                    dismissLoading()
+//                    Toast.makeText(context, "Your order has been received successfully", Toast.LENGTH_SHORT).show()
+//                    findNavController().navigate(CityDeliveryFragmentDirections.directOrderConfirmation())
+//                }
+//                Status.LOADING -> {}
+//                Status.ERROR -> {
+//                   dismissLoading()
+//                }
+//            }
+//        }
+//    }
 
     private fun updateListener() {
         binding.mobileNo.setText("Mobile number "+ AppHeaders.userMobileNumber)
