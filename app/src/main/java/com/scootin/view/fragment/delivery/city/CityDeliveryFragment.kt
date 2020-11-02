@@ -24,7 +24,6 @@ import com.scootin.view.fragment.BaseFragment
 import com.scootin.util.ui.MediaPicker
 import com.scootin.util.ui.UtilPermission
 import com.scootin.view.fragment.delivery.essential.EssentialHandwrittenFragmentArgs
-import com.scootin.view.fragment.delivery.essential.EssentialHandwrittenFragmentDirections
 import com.scootin.view.fragment.dialogs.CitywideCategoryDialogFragment
 import com.scootin.viewmodel.order.DirectOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
