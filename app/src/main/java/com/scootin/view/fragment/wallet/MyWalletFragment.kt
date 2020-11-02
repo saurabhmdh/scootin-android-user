@@ -12,6 +12,7 @@ import com.scootin.databinding.FragmentWalletMyBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
+import com.scootin.network.request.AddMoneyWallet
 import com.scootin.network.request.VerifyAmountRequest
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.WalletAdapter
@@ -38,7 +39,14 @@ class MyWalletFragment : Fragment(R.layout.fragment_wallet_my) {
         Checkout.preload(context)
         setProductAdapter()
 
+        loadData()
 
+        binding.addMoney.setOnClickListener {
+            handleAddMoney()
+        }
+    }
+
+    private fun loadData() {
         viewModel.listTransaction(AppHeaders.userID).observe(viewLifecycleOwner) {
             when(it.status) {
                 Status.SUCCESS -> {
@@ -48,20 +56,22 @@ class MyWalletFragment : Fragment(R.layout.fragment_wallet_my) {
                 Status.ERROR -> {}
             }
         }
+    }
 
-
-//        viewModel.addMoney.observe(viewLifecycleOwner, Observer {
-//            Timber.i("addMoney = ${it.body()}")
-//        })
-
-        binding.addMoney.setOnClickListener {
-            //Let me start payment directly
-            startPayment(binding.addMoneyEditText.text.toString())
+    private fun handleAddMoney() {
+        val input = binding.addMoneyEditText.text.toString().toDoubleOrNull() ?: return
+        viewModel.addMoneyToWallet(AppHeaders.userID, AddMoneyWallet(input)).observe(viewLifecycleOwner) {
+            when (it.status) {
+                Status.SUCCESS -> {
+                    it.data?.orderId?.let {orderId->
+                        startPayment(input * 100, orderId)
+                    }
+                }
+                Status.LOADING -> {}
+                Status.ERROR -> {}
+            }
         }
 
-//        viewModel.verifyPaymentRequestLiveData.observe(viewLifecycleOwner, Observer {
-//            Timber.i("wallet verifyPaymentRequestLiveData = ${it}")
-//        })
     }
 
     private fun setProductAdapter() {
@@ -73,20 +83,17 @@ class MyWalletFragment : Fragment(R.layout.fragment_wallet_my) {
 
     }
 
-    private fun startPayment(price: String) {
+    private fun startPayment(price: Double, orderId: String) {
         val co = Checkout()
 
         try {
             val options = JSONObject()
             options.put("name","Scootin Inc")
-            options.put("description","Demoing Charges")
-            //You can omit the image option to fetch the image from dashboard
             options.put("image","https://image-res.s3.ap-south-1.amazonaws.com/scootin-logo.png")
             options.put("theme.color", "#E90000")
-            options.put("currency","INR");
-            // options.put("order_id", "order_DBJOWzybf0sJbb");
-
-            options.put("amount",(price.toDouble() * 100))//pass amount in currency subunits
+            options.put("currency","INR")
+            options.put("order_id", orderId)
+            options.put("amount", price)
 
             val prefill = JSONObject()
             prefill.put("email","support@scootin.co.in")
@@ -94,17 +101,24 @@ class MyWalletFragment : Fragment(R.layout.fragment_wallet_my) {
 
             options.put("prefill", prefill)
             co.open(activity, options)
-
-            //Razorpay will return 3 values.. Which we need to check
-            //capture-payment
         } catch (e: Exception) {
             Toast.makeText(activity,"Error in payment: "+ e.message, Toast.LENGTH_LONG).show()
             e.printStackTrace()
         }
     }
 
-    fun onPaymentSuccess(razorpayPaymentId: String?){
+    fun onPaymentSuccess(razorpayPaymentId: String?) {
         Timber.i("onPaymentSuccess = ${razorpayPaymentId}")
-//        viewModel.verifyPaymentRequest(VerifyAmountRequest(razorpayPaymentId))
+        viewModel.verifyWalletPayment(AppHeaders.userID, VerifyAmountRequest(razorpayPaymentId)).observe(viewLifecycleOwner) {
+            when(it.status) {
+                Status.SUCCESS -> {
+                    binding.addMoneyEditText.setText("")
+                    loadData()
+                    Toast.makeText(requireContext(), "Money added to wallet", Toast.LENGTH_LONG).show()
+                }
+                Status.ERROR -> {}
+                Status.LOADING -> {}
+            }
+        }
     }
 }
