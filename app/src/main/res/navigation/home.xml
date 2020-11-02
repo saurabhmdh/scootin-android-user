@@ -188,7 +188,17 @@
     <fragment
         android:id="@+id/cityDelivery"
         android:name="com.scootin.view.fragment.delivery.city.CityDeliveryFragment"
-        android:label="Home" />
+        android:label="Home" >
+        <action android:id="@+id/direct_order_confirmation"
+            app:destination="@id/orderPlace"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+<!--        <argument-->
+<!--            android:name="shop_id"-->
+<!--            app:argType="long" />-->
+    </fragment>
     <fragment
         android:id="@+id/cityCategory"
         android:name="com.scootin.view.fragment.delivery.city.FragmentCityWideCategory"
