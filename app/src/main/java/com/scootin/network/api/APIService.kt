@@ -108,6 +108,13 @@ interface APIService {
     suspend fun uploadImage(@Part file: MultipartBody.Part): Response<String>
 
     @POST("/order/place-order/{userId}")
+    suspend fun placeDirectOrder(
+        @Path("userId") userId: String,
+        @Body request: DirectOrderRequest
+    ): Response<PlaceOrderResponse>
+
+
+    @POST("/order/place-order/{userId}")
     suspend fun placeOrder(
         @Path("userId") userId: String,
         @Body request: PlaceOrderRequest
