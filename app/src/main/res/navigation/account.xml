@@ -77,6 +77,18 @@
                 android:name="orderId"
                 app:argType="string" />
         </action>
+
+        <action
+            android:id="@+id/inorder_to_track_fragment"
+            app:destination="@id/inorder_track_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+            <argument
+                android:name="orderId"
+                app:argType="string" />
+        </action>
     </fragment>
 
     <fragment
@@ -85,6 +97,28 @@
         <argument
             android:name="orderId"
             app:argType="string" />
+        <action
+            android:id="@+id/order_to_customerSupport"
+            app:destination="@id/support_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/inorder_track_fragment"
+        android:name="com.scootin.view.fragment.account.orders.MyInDirectOrderTrack">
+        <argument
+            android:name="orderId"
+            app:argType="string" />
+        <action
+            android:id="@+id/inorder_to_customerSupport"
+            app:destination="@id/support_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <!--    <fragment-->
     <!--        android:id="@+id/orders_fragment"-->

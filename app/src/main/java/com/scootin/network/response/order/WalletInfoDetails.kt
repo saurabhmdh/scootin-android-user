@@ -9,5 +9,5 @@ data class WalletInfoDetails(
     val currency: String,
     val id: Int,
     val lastUpdated: Long,
-    val lastUpdatedBy: Long
+    val lastUpdatedBy: String
 ): Parcelable

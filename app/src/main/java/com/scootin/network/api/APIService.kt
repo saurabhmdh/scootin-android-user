@@ -10,6 +10,7 @@ import com.scootin.network.response.State
 import com.scootin.network.response.cart.CartListResponseItem
 import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.network.response.home.ResponseServiceArea
+import com.scootin.network.response.inorder.InOrderDetail
 import com.scootin.network.response.login.ResponseUser
 import com.scootin.network.response.order.OrderHistoryItem
 import com.scootin.network.response.orderdetail.OrderDetail
@@ -161,5 +162,8 @@ interface APIService {
 
     @GET("/order/orders/get-direct-order/{id}")
     suspend fun getDirectOrder(@Path("id") id: String): Response<OrderDetail>
+
+    @GET("/order/orders/get-order/{id}")
+    suspend fun getOrder(@Path("id") id: String): Response<InOrderDetail>
 
 }

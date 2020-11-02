@@ -11,11 +11,11 @@ import com.scootin.databinding.FragmentOrderHistoryBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.response.order.OrderHistoryItem
-import com.scootin.network.response.orders.OrderHistoryList
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.order.OrderHistoryAdapter
 import com.scootin.viewmodel.account.OrderFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -38,13 +38,15 @@ class OrderHistoryFragment : Fragment(R.layout.fragment_order_history) {
 
     private fun setViewModel() {
         viewModel.getAllOrdersForUser().observe(viewLifecycleOwner, Observer {
+            Timber.i("response status = ${it.status}")
             when (it.status) {
                 Status.SUCCESS -> {
                     val responseList = it.data
+                    Timber.i("response list size = ${responseList?.size}")
                     orderHistoryAdapter.submitList(responseList)
                 }
                 else -> {
-
+                    Timber.e("message = ${it.message}")
                 }
             }
         })
@@ -60,7 +62,20 @@ class OrderHistoryFragment : Fragment(R.layout.fragment_order_history) {
                 appExecutors,
                 object : OrderHistoryAdapter.ImageAdapterClickLister {
                     override fun onViewDetailsSelected(view: View, item: OrderHistoryItem) {
-                        findNavController().navigate(OrderHistoryFragmentDirections.orderToTrackFragment(item.id.toString()))
+                        if (item.directOrder) {
+                            findNavController().navigate(
+                                OrderHistoryFragmentDirections.orderToTrackFragment(
+                                    item.id.toString()
+                                )
+                            )
+                        }
+                        else {
+                            findNavController().navigate(
+                                OrderHistoryFragmentDirections.inorderToTrackFragment(
+                                    item.id.toString()
+                                )
+                            )
+                        }
                     }
                 })
 

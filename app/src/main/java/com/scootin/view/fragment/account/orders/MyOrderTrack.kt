@@ -5,12 +5,14 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.scootin.R
 import com.scootin.databinding.FragmentMyOrderTrackBinding
 import com.scootin.network.AppExecutors
+import com.scootin.network.api.Status
+import com.scootin.network.response.orderdetail.OrderDetail
 import com.scootin.util.fragment.autoCleared
-import com.scootin.viewmodel.account.MyOrderCartViewModel
 import com.scootin.viewmodel.account.OrderFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -32,7 +34,6 @@ class MyOrderTrack : Fragment(R.layout.fragment_my_order_track) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMyOrderTrackBinding.bind(view)
-        updateView()
         updateViewModel()
         updateListeners()
     }
@@ -40,19 +41,32 @@ class MyOrderTrack : Fragment(R.layout.fragment_my_order_track) {
     private fun updateViewModel() {
         viewModel.getDirectOrder(args.orderId).observe(viewLifecycleOwner, Observer {
             Timber.i("orderId = ${it.status} : ${it.data}")
+            when(it.status){
+                Status.SUCCESS ->
+                {
+                    val data = it.data
+                    updateView(data)
+                }
+            }
         })
     }
 
-    private fun updateView() {
-        val orderId = args.orderId
-       /* binding.orderId.text = "Order ID: ${order.id}"
-        binding.orderDateTime.text = "Placed on ${order.orderDate.epochSecond}"
-        binding.orderDateTimeHeader.text = "Placed on ${order.orderDate.epochSecond}"
-        binding.totalAmount.text = "Amount Rs. ${order.totalAmount}"
-        binding.itemCount.text = "30 items"*/
+    private fun updateView(data: OrderDetail?) {
+        data?.let {
+            it.apply {
+                binding.orderId.text = "Order ID: ${id}"
+                binding.orderDateTime.text = "Placed on ${orderDate}"
+                binding.orderDateTimeHeader.text = "Placed on ${orderDate}"
+                binding.totalAmount.text = "Amount Rs. ${paymentDetails.deliveryFreeAmount}"
+                binding.itemCount.text = "30 items"
+            }
+        }
     }
 
     private fun updateListeners() {
+        binding.helpKey.setOnClickListener {
+            findNavController().navigate(MyInDirectOrderTrackDirections.inorderToCustomerSupport())
+        }
     }
 
 }
