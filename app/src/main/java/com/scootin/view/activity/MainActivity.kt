@@ -95,6 +95,20 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
 
     override fun onPaymentSuccess(razorpayPaymentId: String?) {
         Timber.i("Payment $razorpayPaymentId")
+        supportFragmentManager.fragments.forEach {
+            if(it is NavHostFragment?){
+                if (it != null) {
+                    val childFragments = it.childFragmentManager.fragments
+                    childFragments.forEach { fragment ->
+                        if (fragment is MyWalletFragment) {
+                            (fragment).onPaymentSuccess(razorpayPaymentId)
+                        } else if (fragment is CardPaymentPageFragment) {
+                            fragment.onPaymentSuccess(razorpayPaymentId)
+                        }
+                    }
+                }
+            }
+        }
         val navHostFragment = supportFragmentManager.fragments.first() as? NavHostFragment
         if (navHostFragment != null) {
             val childFragments = navHostFragment.childFragmentManager.fragments

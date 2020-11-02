@@ -144,7 +144,7 @@ interface APIService {
     @POST("/payment/payment-verified")
     suspend fun verifyPayment(
         @Body verifyAmountRequest: VerifyAmountRequest
-    ): Response<String>
+    ): Response<PlaceOrderResponse>
 
 
     @GET("/cart/get-cart-price/{userId}")

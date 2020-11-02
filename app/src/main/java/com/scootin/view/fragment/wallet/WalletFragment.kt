@@ -28,7 +28,7 @@ class WalletFragment: Fragment(R.layout.fragment_wallet){
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentWalletBinding.bind(view)
 
-        Checkout.preload(context)
+        //Checkout.preload(context)
 
         //Let me start payment directly
         startPayment()
