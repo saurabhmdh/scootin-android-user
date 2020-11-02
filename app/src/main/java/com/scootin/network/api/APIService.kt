@@ -109,8 +109,8 @@ interface APIService {
     suspend fun getAllAdress(@Path("userID") userId: String): Response<List<Address>>
 
     @Multipart
-    @POST("/media/upload-image")
-    suspend fun uploadImage(@Part file: MultipartBody.Part): Response<Media>
+    @POST("/media/upload-image-android")
+    suspend fun uploadImage(@Part multipartFile: MultipartBody.Part): Response<Media>
 
 
     @POST("/order/place-order-direct/{userId}")
