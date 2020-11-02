@@ -60,7 +60,7 @@ class OrderHistoryFragment : Fragment(R.layout.fragment_order_history) {
                 appExecutors,
                 object : OrderHistoryAdapter.ImageAdapterClickLister {
                     override fun onViewDetailsSelected(view: View, item: OrderHistoryItem) {
-                        findNavController().navigate(OrderHistoryFragmentDirections.orderToTrackFragment())
+                        findNavController().navigate(OrderHistoryFragmentDirections.orderToTrackFragment(item.id.toString()))
                     }
                 })
 
