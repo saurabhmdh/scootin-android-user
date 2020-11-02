@@ -88,19 +88,10 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
             }
         }
 
-
-        viewModel.verifyPaymentRequestLiveData.observe(viewLifecycleOwner, {
-            Timber.i("verifyPaymentRequestLiveData = $it")
-            findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage())
-        })
-
         binding.back.setOnClickListener { findNavController().popBackStack() }
     }
 
-    private fun callPaymentUiFunction(response: PlaceOrderResponse?) {
-        //Lets discuss this later
-        //orderId = response?.id.toString()
-    }
+
 
     private fun startPayment(orderReferenceId: String) {
         val co = Checkout()
@@ -133,6 +124,14 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
 
     fun onPaymentSuccess(razorpayPaymentId: String?){
         Timber.i("onPaymentSuccess = ${razorpayPaymentId}")
-        viewModel.verifyPaymentRequest(VerifyAmountRequest(razorpayPaymentId))
+        viewModel.verifyPayment(VerifyAmountRequest(razorpayPaymentId)).observe(viewLifecycleOwner) {
+            when(it.status) {
+                Status.LOADING -> {}
+                Status.SUCCESS -> {
+                    findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage())
+                }
+                Status.ERROR -> {}
+            }
+        }
     }
 }

@@ -28,5 +28,12 @@ class PaymentRepository @Inject constructor(
 
     suspend fun applyPromoCode(orderId: String, userId: String, promoCodeRequest: PromoCodeRequest) = services.applyPromoCode(orderId, userId, promoCodeRequest)
 
-    suspend fun verifyPayment(verifyAmountRequest: VerifyAmountRequest) = services.verifyPayment(verifyAmountRequest)
+//    suspend fun verifyPayment(verifyAmountRequest: VerifyAmountRequest) = services.verifyPayment(verifyAmountRequest)
+
+    fun verifyPayment(
+        verifyAmountRequest: VerifyAmountRequest,
+        context: CoroutineContext
+    ): LiveData<Resource<String>> = object : NetworkBoundResource<String>(context) {
+        override suspend fun createCall(): Response<String> = services.verifyPayment(verifyAmountRequest)
+    }.asLiveData()
 }
