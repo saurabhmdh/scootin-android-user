@@ -9,27 +9,29 @@ import androidx.recyclerview.widget.DiffUtil
 import com.scootin.R
 import com.scootin.databinding.AdapterOrderHistoryListBinding
 import com.scootin.network.AppExecutors
-import com.scootin.network.response.orders.OrderHistoryList
+import com.scootin.network.response.order.OrderHistoryItem
 import com.scootin.view.adapter.DataBoundListAdapter
 import timber.log.Timber
+import java.text.DateFormat
+import java.util.*
 
-class OrderHistoryAdapter (
+class OrderHistoryAdapter(
     val appExecutors: AppExecutors,
     val imageAdapterClickListener: ImageAdapterClickLister
-) : DataBoundListAdapter<OrderHistoryList, AdapterOrderHistoryListBinding>(
+) : DataBoundListAdapter<OrderHistoryItem, AdapterOrderHistoryListBinding>(
     appExecutors,
-    diffCallback = object : DiffUtil.ItemCallback<OrderHistoryList>() {
+    diffCallback = object : DiffUtil.ItemCallback<OrderHistoryItem>() {
         override fun areItemsTheSame(
-            oldItem: OrderHistoryList,
-            newItem: OrderHistoryList
+            oldItem: OrderHistoryItem,
+            newItem: OrderHistoryItem
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
         @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
-            oldItem: OrderHistoryList,
-            newItem: OrderHistoryList
+            oldItem: OrderHistoryItem,
+            newItem: OrderHistoryItem
         ): Boolean {
             return oldItem == newItem
         }
@@ -42,36 +44,38 @@ class OrderHistoryAdapter (
 
     override fun bind(
         binding: AdapterOrderHistoryListBinding,
-        item: OrderHistoryList,
+        item: OrderHistoryItem,
         position: Int,
         isLast: Boolean
     ) {
-        Timber.i("item = $item")
+        Timber.i("item = $item ${item.id}")
         item.apply {
-            binding.orderId.setText(orderId)
-            binding.amount.setText(amount)
-            binding.date.setText(orderDate)
-            binding.orderStatus.setText(status)
+            binding.orderId.setText(id.toString())
+            binding.amount.setText("$totalAmount")
+            binding.date.setText(
+                DateFormat.getDateInstance(DateFormat.SHORT).format(Date(orderDate.nano))
+            )
+            binding.orderStatus.setText(orderStatus)
+            var deliveryType = "Indirect"
+            if (directOrder) deliveryType = "Direct"
             binding.orderType.setText(deliveryType)
-            if(status=="Ongoing"){
+            if (orderStatus == "Ongoing") {
                 binding.imgTrack.setImageResource(R.drawable.ic_track_text_button)
                 binding.orderStatus.setTextColor(Color.parseColor("#FF834A"))
-            }
-            else if(status=="Delivered"){
+            } else if (orderStatus == "Delivered") {
                 binding.orderStatus.setTextColor(Color.parseColor("#38AA35"))
-            }
-            else{
+            } else {
                 binding.orderStatus.setTextColor(Color.parseColor("#D10000"))
             }
         }
         binding.imgTrack.setOnClickListener {
 
-            imageAdapterClickListener.onViewDetailsSelected(it)
+            imageAdapterClickListener.onViewDetailsSelected(it, item)
         }
     }
 
     interface ImageAdapterClickLister {
-        fun onViewDetailsSelected(view: View)
+        fun onViewDetailsSelected(view: View, item: OrderHistoryItem)
     }
 }
 
