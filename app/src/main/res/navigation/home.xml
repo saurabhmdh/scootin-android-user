@@ -281,7 +281,7 @@
         android:label="ExpressDeliveryCategoryFragment">
         <action
             android:id="@+id/action_expressDeliveryCategoryFragment_to_express_delivery"
-            app:destination="@id/express_delivery" />
+            app:destination="@id/express_orders" />
     </fragment>
 
 
