@@ -10,6 +10,7 @@ import com.scootin.network.response.cart.CartListResponseItem
 import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.network.response.home.ResponseServiceArea
 import com.scootin.network.response.login.ResponseUser
+import com.scootin.network.response.orders.DirectOrderResponse
 import com.scootin.network.response.placeOrder.PlaceOrderResponse
 import com.scootin.network.response.wallet.AddWalletResponse
 import com.scootin.network.response.wallet.WalletTransactionResponse
@@ -107,11 +108,12 @@ interface APIService {
     @POST("/media/upload-image")
     suspend fun uploadImage(@Part file: MultipartBody.Part): Response<String>
 
-    @POST("/order/place-order/{userId}")
+
+    @POST("/order/place-order-direct/{userId}")
     suspend fun placeDirectOrder(
         @Path("userId") userId: String,
         @Body request: DirectOrderRequest
-    ): Response<PlaceOrderResponse>
+    ): Response<DirectOrderResponse>
 
 
     @POST("/order/place-order/{userId}")
