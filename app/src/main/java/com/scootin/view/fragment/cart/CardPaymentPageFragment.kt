@@ -5,7 +5,6 @@ import android.os.Bundle
 
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 
@@ -14,12 +13,12 @@ import com.razorpay.Checkout
 import com.scootin.R
 import com.scootin.databinding.FragmentPaymenttStatusBinding
 import com.scootin.extensions.getCheckedRadioButtonPosition
+import com.scootin.extensions.orDefault
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.OrderRequest
 import com.scootin.network.request.VerifyAmountRequest
-import com.scootin.network.response.placeOrder.PlaceOrderResponse
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.fragment.BaseFragment
 
@@ -65,7 +64,8 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                         Timber.i(" data ${it.data}")
                         dismissLoading()
                         if (it.data?.paymentDetails?.payment_mode.equals("ONLINE")) {
-                            startPayment(it.data?.paymentDetails?.orderReference.orEmpty())
+                            val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
+                            startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
                         } else {
                             findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage())
                         }
@@ -93,7 +93,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
 
 
 
-    private fun startPayment(orderReferenceId: String) {
+    private fun startPayment(orderReferenceId: String, price: Double) {
         val co = Checkout()
 
         try {
@@ -103,6 +103,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
             options.put("image", "https://image-res.s3.ap-south-1.amazonaws.com/scootin-logo.png")
             options.put("theme.color", "#E90000")
             options.put("currency", "INR")
+            options.put("amount", price)
             options.put("order_id", orderReferenceId)
             val prefill = JSONObject()
             prefill.put("email","support@scootin.co.in")
