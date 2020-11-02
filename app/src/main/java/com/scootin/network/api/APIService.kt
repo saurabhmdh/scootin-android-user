@@ -1,5 +1,6 @@
 package com.scootin.network.api
 
+import com.scootin.database.table.State
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.*
 import com.scootin.network.response.Address
@@ -137,4 +138,8 @@ interface APIService {
     suspend fun getTotalPriceFromCart(
         @Path("userId") userId: String
     ): Response<Double>
+
+    @GET("/register/get-all-states")
+    suspend fun getAllState(): Response<List<State>>
+
 }

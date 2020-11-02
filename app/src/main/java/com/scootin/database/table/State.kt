@@ -8,13 +8,12 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "state")
 @JvmSuppressWildcards
 data class State(
-    val countryDetails: CountryDetails,
     @PrimaryKey
     val id: Int,
     val name: String
 ) {
-    data class CountryDetails(
+   /* data class CountryDetails(
         val id: Int,
         val name: String
-    )
+    )*/
 }
