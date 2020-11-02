@@ -65,12 +65,12 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
             }
         }
 
-        addressViewModel.state(1)
-        addressViewModel.stateLiveData.observe(viewLifecycleOwner, Observer {
-            if (it.isSuccessful) {
-                stateList = it.body() as ArrayList<State>
-            }
-        })
+        /* addressViewModel.state(1)
+         addressViewModel.stateLiveData.observe(viewLifecycleOwner, Observer {
+             if (it.isSuccessful) {
+                 stateList = it.body() as ArrayList<State>
+             }
+         })*/
     }
 
     private fun updateListeners() {
