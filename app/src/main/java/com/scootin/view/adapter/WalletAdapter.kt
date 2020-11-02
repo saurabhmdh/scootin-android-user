@@ -2,7 +2,9 @@ package com.scootin.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
+import com.scootin.R
 import com.scootin.databinding.AdapterItemTransactionBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.wallet.WalletTransactionResponse
@@ -42,9 +44,17 @@ class WalletAdapter(
         position: Int,
         isLast: Boolean
     ) {
+        if (position%2 ==0) {
+            binding.name.background = ContextCompat.getDrawable(binding.name.context, R.drawable.ic_grey_background_bar)
+        } else {
+            binding.name.background = null
+        }
+
         val format: Format = NumberFormat.getCurrencyInstance(Locale("en", "in"))
         val finalValue = format.format(BigDecimal(item.amount))
 
-        binding.name.text = "${item.transactionDate} ${item.paymentType} $finalValue"
+        val displayText = "$finalValue ${item.paymentType} on ${item.transactionDate}"
+
+        binding.name.text = displayText
     }
 }

@@ -86,12 +86,10 @@ class MyWalletFragment : Fragment(R.layout.fragment_wallet_my) {
             options.put("currency","INR");
             // options.put("order_id", "order_DBJOWzybf0sJbb");
 
-            options.put("amount",price)//pass amount in currency subunits
-
-
+            options.put("amount",(price.toDouble() * 100))//pass amount in currency subunits
 
             val prefill = JSONObject()
-//           prefill.put("email","sumit.gupta@example.com")
+            prefill.put("email","support@scootin.co.in")
             prefill.put("contact", AppHeaders.userMobileNumber)
 
             options.put("prefill", prefill)
@@ -99,7 +97,7 @@ class MyWalletFragment : Fragment(R.layout.fragment_wallet_my) {
 
             //Razorpay will return 3 values.. Which we need to check
             //capture-payment
-        }catch (e: Exception){
+        } catch (e: Exception) {
             Toast.makeText(activity,"Error in payment: "+ e.message, Toast.LENGTH_LONG).show()
             e.printStackTrace()
         }
