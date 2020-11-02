@@ -42,6 +42,8 @@ class UserRepository @Inject constructor(
 
     suspend fun addNewAddress(address: Address) = services.addNewAddress(/*AppHeaders.userID,*/ address)
 
-    suspend fun getAllAddress() = services.getAllAdress()
+    suspend fun getAllAddress() = services.getAllAdress(AppHeaders.userID)
+
+    suspend fun getAllState() = services.getAllState()
 
 }

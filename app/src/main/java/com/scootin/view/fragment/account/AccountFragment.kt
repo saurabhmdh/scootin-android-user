@@ -89,7 +89,7 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
         }
 
         binding.update1.setOnClickListener {
-            val address = Address(
+            val address = Address(1,
                 binding.enteredAddressEditText1.text.toString(),
                 "type",
                 binding.enteredCityEditText1.text.toString(),
