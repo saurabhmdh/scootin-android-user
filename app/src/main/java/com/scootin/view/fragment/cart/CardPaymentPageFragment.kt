@@ -39,7 +39,6 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
     @Inject
     lateinit var appExecutors: AppExecutors
 
-    //Order ID = 20655
     private val orderId by lazy {
         args.orderId
     }
@@ -92,7 +91,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
 
         viewModel.verifyPaymentRequestLiveData.observe(viewLifecycleOwner, {
             Timber.i("verifyPaymentRequestLiveData = $it")
-            //Display the success response.. and clear the stack..
+            //ALOK -> Display the success response.. and clear the stack..
         })
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
