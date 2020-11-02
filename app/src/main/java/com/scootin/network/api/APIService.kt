@@ -4,6 +4,7 @@ import com.scootin.database.table.State
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.*
 import com.scootin.network.response.Address
+import com.scootin.network.response.Media
 import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.network.response.cart.CartListResponseItem
@@ -106,7 +107,7 @@ interface APIService {
 
     @Multipart
     @POST("/media/upload-image")
-    suspend fun uploadImage(@Part file: MultipartBody.Part): Response<String>
+    suspend fun uploadImage(@Part file: MultipartBody.Part): Response<Media>
 
 
     @POST("/order/place-order-direct/{userId}")

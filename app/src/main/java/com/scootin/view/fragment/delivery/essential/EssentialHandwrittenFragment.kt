@@ -4,19 +4,24 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.scootin.R
 import com.scootin.databinding.HandWrittenGroceryListBinding
+import com.scootin.network.api.Status
 import com.scootin.network.glide.GlideApp
+import com.scootin.network.manager.AppHeaders
+import com.scootin.network.request.DirectOrderRequest
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.util.ui.FileUtils
 import com.scootin.util.ui.MediaPicker
 import com.scootin.util.ui.UtilPermission
-import com.scootin.viewmodel.delivery.CategoriesViewModel
+import com.scootin.viewmodel.order.DirectOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -24,19 +29,60 @@ import timber.log.Timber
 @AndroidEntryPoint
 class EssentialHandwrittenFragment : Fragment(R.layout.hand_written_grocery_list) {
     private var binding by autoCleared<HandWrittenGroceryListBinding>()
-    private val viewModel: CategoriesViewModel by viewModels()
+    private val viewModel: DirectOrderViewModel by viewModels()
+
+    private val args: EssentialHandwrittenFragmentArgs by navArgs()
+
+    private val shopId by lazy {
+        args.shopId
+    }
+
+    private var mediaId = -1L
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = HandWrittenGroceryListBinding.bind(view)
+
+        updateListener()
         binding.uploadPhoto.setOnClickListener {
             onClickOfUploadMedia()
         }
 
-        viewModel.filePathLiveData.observe(viewLifecycleOwner, Observer {
-            Timber.i("EssentialHandwrittenFragment response = ${it.code()} ${it.isSuccessful}")
+        viewModel.filePathLiveData.observe(viewLifecycleOwner, { data->
+            Timber.i("EssentialHandwrittenFragment response = ${data.isSuccessful}")
+            if (data.isSuccessful) {
+                val media = data.body()
+                //mediaId = media?.id ?: -1L
+            }
         })
         binding.back.setOnClickListener { findNavController().popBackStack() }
+
+        binding.placeOrder.setOnClickListener {
+            placeDirectOrder()
+        }
+    }
+
+    private fun placeDirectOrder() {
+        if (mediaId == -1L) {
+            Toast.makeText(context, "Invalid Media", Toast.LENGTH_SHORT).show()
+            return
+        }
+        viewModel.placeDirectOrder(
+            AppHeaders.userID,
+            DirectOrderRequest(AppConstants.defaultAddressId, false, mediaId, shopId)).observe(viewLifecycleOwner) {
+            when(it.status) {
+                Status.SUCCESS -> {
+                    Toast.makeText(context, "Your order has been recieved successfully", Toast.LENGTH_SHORT).show()
+                }
+                Status.LOADING -> {}
+                Status.ERROR -> {}
+            }
+        }
+    }
+
+    private fun updateListener() {
+        binding.mobileNo.setText("Mobile number "+AppHeaders.userMobileNumber)
+
     }
 
     private fun onClickOfUploadMedia() {
