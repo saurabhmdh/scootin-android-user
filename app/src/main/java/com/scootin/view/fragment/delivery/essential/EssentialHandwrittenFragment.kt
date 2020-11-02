@@ -19,13 +19,14 @@ import com.scootin.util.constants.AppConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.util.ui.MediaPicker
 import com.scootin.util.ui.UtilPermission
+import com.scootin.view.fragment.BaseFragment
 import com.scootin.viewmodel.order.DirectOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 
 @AndroidEntryPoint
-class EssentialHandwrittenFragment : Fragment(R.layout.hand_written_grocery_list) {
+class EssentialHandwrittenFragment : BaseFragment(R.layout.hand_written_grocery_list) {
     private var binding by autoCleared<HandWrittenGroceryListBinding>()
     private val viewModel: DirectOrderViewModel by viewModels()
 
@@ -58,15 +59,19 @@ class EssentialHandwrittenFragment : Fragment(R.layout.hand_written_grocery_list
             Toast.makeText(context, "Invalid Media", Toast.LENGTH_SHORT).show()
             return
         }
+        showLoading();
         viewModel.placeDirectOrder(
             AppHeaders.userID,
             DirectOrderRequest(AppConstants.defaultAddressId, false, mediaId, shopId)).observe(viewLifecycleOwner) {
             when(it.status) {
                 Status.SUCCESS -> {
+                    dismissLoading()
                     Toast.makeText(context, "Your order has been received successfully", Toast.LENGTH_SHORT).show()
                 }
                 Status.LOADING -> {}
-                Status.ERROR -> {}
+                Status.ERROR -> {
+                    dismissLoading()
+                }
             }
         }
     }
