@@ -1,12 +1,15 @@
 package com.scootin.view.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.scootin.databinding.AdapterItemTransactionBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.wallet.WalletTransactionResponse
+import java.math.BigDecimal
+import java.text.Format
+import java.text.NumberFormat
+import java.util.*
 
 
 class WalletAdapter(
@@ -20,7 +23,6 @@ class WalletAdapter(
         ) = oldItem.id == newItem.id
 
 
-        @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
             oldItem: WalletTransactionResponse,
             newItem: WalletTransactionResponse
@@ -30,7 +32,6 @@ class WalletAdapter(
     override fun createBinding(parent: ViewGroup): AdapterItemTransactionBinding {
         val binding = AdapterItemTransactionBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
-
         )
         return binding
     }
@@ -41,7 +42,9 @@ class WalletAdapter(
         position: Int,
         isLast: Boolean
     ) {
-        binding.name.text =
-            "${item.transactionDate} ${item.transactionDescription} ${item.transactionReference} ${item.transactionStatus}"
+        val format: Format = NumberFormat.getCurrencyInstance(Locale("en", "in"))
+        val finalValue = format.format(BigDecimal(item.amount))
+
+        binding.name.text = "${item.transactionDate} ${item.paymentType} $finalValue"
     }
 }
