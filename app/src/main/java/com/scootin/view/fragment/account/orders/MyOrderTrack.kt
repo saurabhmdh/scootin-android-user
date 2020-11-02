@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.scootin.R
 import com.scootin.databinding.FragmentMyOrderTrackBinding
@@ -53,6 +54,7 @@ class MyOrderTrack : Fragment(R.layout.fragment_my_order_track) {
     }
 
     private fun updateListeners() {
+        binding.back.setOnClickListener { findNavController().popBackStack() }
     }
 
 }

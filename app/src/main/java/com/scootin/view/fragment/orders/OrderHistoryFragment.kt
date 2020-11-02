@@ -33,7 +33,6 @@ class OrderHistoryFragment : Fragment(R.layout.fragment_order_history) {
         setAdaper()
         setViewModel()
         setupListener()
-//        orderHistoryAdapter.submitList(setList())
     }
 
     private fun setViewModel() {
