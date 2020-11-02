@@ -10,7 +10,6 @@ import com.scootin.repository.UserRepository
 import com.scootin.viewmodel.base.ObservableViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class AddressFragmentViewModel @ViewModelInject
@@ -21,7 +20,7 @@ internal constructor(
     val state = MutableLiveData<Int>()
 
     fun state(i: Int) {
-        address.postValue(i)
+        state.postValue(i)
     }
 
     private val handler = CoroutineExceptionHandler { _, exception ->
