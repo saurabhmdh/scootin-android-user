@@ -8,10 +8,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.OpenableColumns
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView.OnEditorActionListener
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.scootin.R
-import com.scootin.databinding.FragmentExpressDeliveryBinding
 import com.scootin.databinding.FragmentExpressDeliveryOrdersBinding
 import com.scootin.databinding.SelectedImageVideoBinding
 import com.scootin.network.AppExecutors
@@ -24,13 +25,17 @@ import com.scootin.util.ui.UtilPermission
 import com.scootin.util.ui.presentSnackBar
 import com.scootin.view.adapter.EDItemAddAdapter
 import com.scootin.view.adapter.UploadImageAdapter
+import com.scootin.view.adapter.WalletAdapter
+import com.scootin.view.adapter.order.SearchitemAdapter
 import com.scootin.view.fragment.dialogs.CategoryDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
 class ExpressDeliveryOrders : Fragment(R.layout.fragment_express_delivery_orders) {
+    lateinit var searchItemAddAdapter: SearchitemAdapter
     private var binding by autoCleared<FragmentExpressDeliveryOrdersBinding>()
     val filesCantBeUploadedList = mutableListOf<String>()
     private var snackbar: Snackbar? = null
@@ -48,6 +53,18 @@ class ExpressDeliveryOrders : Fragment(R.layout.fragment_express_delivery_orders
 
         val dailog = CategoryDialogFragment()
         dailog.show(childFragmentManager, "")
+        setSearchSuggestionList()
+        binding.searchSuggestion.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+            Timber.i("action id = ${actionId}")
+            when (actionId) {
+                EditorInfo.IME_ACTION_DONE -> {
+                    Timber.i("action id = ${actionId}")
+                    searchItemAddAdapter.addList(binding.searchSuggestion.text.toString())
+                    return@OnEditorActionListener true
+                }
+            }
+            false
+        })
 
 //        setAdaper()
 //        binding.save.setOnClickListener {
@@ -62,6 +79,7 @@ class ExpressDeliveryOrders : Fragment(R.layout.fragment_express_delivery_orders
 //        }
 
     }
+
 
     private fun setAdaper() {
         edItemAddAdapter =
@@ -98,6 +116,24 @@ class ExpressDeliveryOrders : Fragment(R.layout.fragment_express_delivery_orders
 //        binding.selectedImageGallery.apply {
 //            adapter = mediaAdapter
 //        }
+    }
+
+    private fun setSearchSuggestionList() {
+        searchItemAddAdapter = SearchitemAdapter(appExecutors, object : SearchitemAdapter.OnItemClickListener{
+            override fun onIncrement(count: String) {
+                Timber.i("increment count = $count")
+            }
+
+            override fun onDecrement(count: String) {
+                Timber.i("decrement count = $count")
+            }
+
+        })
+
+        binding.searchList.apply {
+            adapter = searchItemAddAdapter
+        }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
