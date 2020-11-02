@@ -10,6 +10,7 @@ import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.network.response.home.ResponseServiceArea
 import com.scootin.network.response.login.ResponseUser
 import com.scootin.network.response.placeOrder.PlaceOrderResponse
+import com.scootin.network.response.wallet.AddWalletResponse
 import com.scootin.network.response.wallet.WalletTransactionResponse
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
@@ -71,23 +72,22 @@ interface APIService {
         @Body requestFCM: RequestFCM
     ): Response<ResponseUser>
 
-    @GET("/order/capture-payment")
-    suspend fun capturePayment(@Body request: CapturePaymentRequest): Response<String>
 
     @POST("/cart/add-to-cart")
     suspend fun addToCart(@Body request: AddToCartRequest): Response<String>
 
-    @GET("/order/orders/count-total")
-    suspend fun countTotal()
 
     @GET("/cart/get-cart/{userID}")
     suspend fun getUserCartList(@Path("userID") userId: String): Response<List<CartListResponseItem>>
 
-    @POST("/wallet/add-money")
-    suspend fun addMoney(): Response<String>
+    @POST("/wallet/add-money/{userId}")
+    suspend fun addMoney(@Path("userId") userId: String, @Body addMoneyWallet: AddMoneyWallet): Response<AddWalletResponse>
 
     @GET("/wallet/list-transaction/{userId}")
     suspend fun listTransaction(@Path("userId") userId: String): Response<List<WalletTransactionResponse>>
+
+    @POST("/wallet/verifyPayment/{userId}")
+    suspend fun verifyWalletPayment(@Path("userId") userId: String, @Body verify: VerifyAmountRequest): Response<String>
 
     @GET("/address/update-default-address/{userId}/{addressId}")
     suspend fun updateDefaultAddress(
