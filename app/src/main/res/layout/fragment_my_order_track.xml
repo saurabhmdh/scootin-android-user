@@ -285,7 +285,7 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="26dp"
             android:paddingStart="5dp"
-            app:setPrice="@{data.orderDetails.paymentDetails.deliveryFreeAmount}"
+            app:setPrice="@{data.orderDetails.paymentDetails.totalAmount}"
             android:textColor="#2A2A2A"
             android:textSize="13sp"
             android:textStyle="bold"

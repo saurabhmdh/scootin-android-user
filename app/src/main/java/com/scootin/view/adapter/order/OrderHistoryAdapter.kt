@@ -14,8 +14,7 @@ import com.scootin.network.AppExecutors
 import com.scootin.network.response.order.OrderHistoryItem
 import com.scootin.view.adapter.DataBoundListAdapter
 import timber.log.Timber
-import java.text.DateFormat
-import java.util.*
+
 
 class OrderHistoryAdapter(
     val appExecutors: AppExecutors,
@@ -64,10 +63,10 @@ class OrderHistoryAdapter(
 
             binding.orderType.setText(deliveryType)
 
-            if (orderStatus == "Ongoing") {
+            if (orderStatus == "PLACED") {
                 binding.imgTrack.setImageResource(R.drawable.ic_track_text_button)
                 binding.orderStatus.setTextColor(Color.parseColor("#FF834A"))
-            } else if (orderStatus == "Delivered") {
+            } else if (orderStatus == "DELIVERED") {
                 binding.orderStatus.setTextColor(Color.parseColor("#38AA35"))
             } else {
                 binding.orderStatus.setTextColor(Color.parseColor("#D10000"))
