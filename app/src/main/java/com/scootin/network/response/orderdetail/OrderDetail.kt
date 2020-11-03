@@ -6,7 +6,7 @@ data class OrderDetail(
     val id: Long,
     val media: Media,
     val orderDate: String,
-    val order_status: String,
+    val orderStatus: String,
     val paymentDetails: PaymentDetails,
     val reviewDoneIndicator: Boolean,
     val shopManagement: ShopManagement,

@@ -45,7 +45,7 @@ class DirectOrderDetailFragment : Fragment(R.layout.fragment_track_direct_order)
             when (it.status) {
                 Status.SUCCESS -> {
                     binding.data = it.data
-
+                    updateSelectors(it.data?.orderStatus)
                 }
             }
         })
@@ -60,6 +60,32 @@ class DirectOrderDetailFragment : Fragment(R.layout.fragment_track_direct_order)
         }
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
+
+    }
+
+    private fun updateSelectors(orderStatus: String?) {
+        orderStatus?.let {
+            when(it) {
+                "PLACED" -> {
+                    binding.placeIcon.isSelected = true
+                }
+                "PACKED" -> {
+                    binding.placeIcon.isSelected = true
+                    binding.packedIcon.isSelected = true
+                }
+                "DISPATCHED" -> {
+                    binding.placeIcon.isSelected = true
+                    binding.packedIcon.isSelected = true
+                    binding.dispatchedIcon.isSelected = true
+                }
+                "COMPLETED" -> {
+                    binding.placeIcon.isSelected = true
+                    binding.packedIcon.isSelected = true
+                    binding.dispatchedIcon.isSelected = true
+                    binding.deliveredIcon.isSelected = true
+                }
+            }
+        }
 
     }
 

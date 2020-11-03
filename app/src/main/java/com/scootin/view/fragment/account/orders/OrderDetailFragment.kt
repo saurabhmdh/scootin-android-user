@@ -52,23 +52,37 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
                 Status.SUCCESS -> {
                     binding.data = it.data
                     orderDetailAdapter.submitList(it.data?.orderInventoryDetailsList)
+                    updateSelectors(it.data?.orderDetails?.orderStatus)
                 }
             }
         })
     }
 
-//    private fun updateView(data: InOrderDetail) {
-//        data.apply {
-//            binding.orderId.text = "Order ID: ${id}"
-//            binding.orderDateTime.text = "Placed on ${orderDetails.orderDate}"
-//            binding.orderDateTimeHeader.text = "Placed on ${orderDetails.orderDate}"
-//            binding.totalAmount.text =
-//                "Amount Rs. ${orderDetails.paymentDetails.deliveryFreeAmount}"
-//            binding.itemCount.text = "${orderInventoryDetailsList.size} items"
-//            orderDetailAdapter.submitList(orderInventoryDetailsList)
-//        }
-//    }
+    private fun updateSelectors(orderStatus: String?) {
+        orderStatus?.let {
+            when(it) {
+                "PLACED" -> {
+                    binding.placeIcon.isSelected = true
+                }
+                "PACKED" -> {
+                    binding.placeIcon.isSelected = true
+                    binding.packedIcon.isSelected = true
+                }
+                "DISPATCHED" -> {
+                    binding.placeIcon.isSelected = true
+                    binding.packedIcon.isSelected = true
+                    binding.dispatchedIcon.isSelected = true
+                }
+                "COMPLETED" -> {
+                    binding.placeIcon.isSelected = true
+                    binding.packedIcon.isSelected = true
+                    binding.dispatchedIcon.isSelected = true
+                    binding.deliveredIcon.isSelected = true
+                }
+            }
+        }
 
+    }
     private fun setInorderAdapter() {
         orderDetailAdapter = OrderDetailAdapter(appExecutors)
         binding.orderList.apply {
