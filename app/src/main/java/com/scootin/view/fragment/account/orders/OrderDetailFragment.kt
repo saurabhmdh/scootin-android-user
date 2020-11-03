@@ -33,6 +33,7 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMyOrderTrackBinding.bind(view)
+        binding.lifecycleOwner = this
         setInorderAdapter()
         updateViewModel()
         updateListeners()
@@ -49,26 +50,23 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
             Timber.i("orderId = ${it.status} : ${it.data}")
             when (it.status) {
                 Status.SUCCESS -> {
-                    val data = it.data
-                    data?.let {
-                        updateView(data)
-                    }
+                    binding.data = it.data
                 }
             }
         })
     }
 
-    private fun updateView(data: InOrderDetail) {
-        data.apply {
-            binding.orderId.text = "Order ID: ${id}"
-            binding.orderDateTime.text = "Placed on ${orderDetails.orderDate}"
-            binding.orderDateTimeHeader.text = "Placed on ${orderDetails.orderDate}"
-            binding.totalAmount.text =
-                "Amount Rs. ${orderDetails.paymentDetails.deliveryFreeAmount}"
-            binding.itemCount.text = "${orderInventoryDetailsList.size} items"
-            orderDetailAdapter.submitList(orderInventoryDetailsList)
-        }
-    }
+//    private fun updateView(data: InOrderDetail) {
+//        data.apply {
+//            binding.orderId.text = "Order ID: ${id}"
+//            binding.orderDateTime.text = "Placed on ${orderDetails.orderDate}"
+//            binding.orderDateTimeHeader.text = "Placed on ${orderDetails.orderDate}"
+//            binding.totalAmount.text =
+//                "Amount Rs. ${orderDetails.paymentDetails.deliveryFreeAmount}"
+//            binding.itemCount.text = "${orderInventoryDetailsList.size} items"
+//            orderDetailAdapter.submitList(orderInventoryDetailsList)
+//        }
+//    }
 
     private fun setInorderAdapter() {
         orderDetailAdapter = OrderDetailAdapter(appExecutors)

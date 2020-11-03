@@ -38,3 +38,7 @@ fun TextView.setPrice(value: Double) {
 
     text = finalValue
 }
+@BindingAdapter("setToIntText")
+fun TextView.setToIntText(value: Long) {
+    text = value.toString()
+}

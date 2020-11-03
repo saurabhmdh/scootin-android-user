@@ -57,7 +57,7 @@ class DirectOrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
                 binding.orderDateTime.text = "Placed on ${orderDate}"
                 binding.orderDateTimeHeader.text = "Placed on ${orderDate}"
                 binding.totalAmount.text = "Amount Rs. ${paymentDetails.deliveryFreeAmount}"
-                binding.itemCount.text = "30 items"
+                //binding.itemCount.text = "30 items"
             }
         }
     }
