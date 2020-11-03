@@ -51,6 +51,7 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
             when (it.status) {
                 Status.SUCCESS -> {
                     binding.data = it.data
+                    orderDetailAdapter.submitList(it.data?.orderInventoryDetailsList)
                 }
             }
         })
