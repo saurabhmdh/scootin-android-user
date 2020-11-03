@@ -53,7 +53,7 @@ class OrderHistoryAdapter(
             binding.orderId.setText(id.toString())
             binding.amount.setText("$totalAmount")
             binding.date.setText(
-                DateFormat.getDateInstance(DateFormat.SHORT).format(Date(orderDate.nano))
+                orderDate
             )
             binding.orderStatus.setText(orderStatus)
             var deliveryType = "Indirect"

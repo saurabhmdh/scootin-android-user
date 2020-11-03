@@ -196,7 +196,30 @@
     <fragment
         android:id="@+id/medicines"
         android:name="com.scootin.view.fragment.delivery.medicines.MedicinesDeliveryFragment"
-        android:label="Home" />
+        android:label="Home">
+        <action
+            android:id="@+id/action_medicine_to_express_orders2"
+            app:destination="@id/medicine_order" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/medicine_order"
+        android:name="com.scootin.view.fragment.delivery.medicines.MedicineDeliveryOrders"
+        android:label="Express">
+        <argument
+            android:name="shop_id"
+            app:argType="long" />
+        <argument
+            android:name="shop_name"
+            app:argType="string" />
+        <action
+            android:id="@+id/direct_order_confirmation"
+            app:destination="@id/orderPlace"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 
     <fragment
         android:id="@+id/cityDelivery"
