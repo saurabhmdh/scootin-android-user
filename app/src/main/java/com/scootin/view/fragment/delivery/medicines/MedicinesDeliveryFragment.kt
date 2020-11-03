@@ -9,15 +9,10 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.scootin.R
 import com.scootin.databinding.FragmentMedicinesDeliveryBinding
-import com.scootin.extensions.getCheckedRadioButtonPosition
 import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
-import com.scootin.network.manager.AppHeaders
-import com.scootin.network.request.AddToCartRequest
-import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.util.fragment.autoCleared
-import com.scootin.view.adapter.ProductSearchAdapter
 import com.scootin.view.adapter.ShopSearchAdapter
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -82,8 +77,14 @@ class MedicinesDeliveryFragment : Fragment(R.layout.fragment_medicines_delivery)
     private fun setStoreAdapter() {
         shopSearchAdapter = ShopSearchAdapter(
             appExecutors, object : ShopSearchAdapter.StoreImageAdapterClickListener {
-                override fun onSelectButtonSelected(view: SearchShopsByCategoryResponse) {
-                    //TODO: We need to go for search Product in this store..
+                override fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse) {
+                    Timber.i("Shop Info $shopInfo")
+                    val direction =
+                        MedicinesDeliveryFragmentDirections.actionMedicineToExpressOrders2(
+                            shopInfo.shopID,
+                            shopInfo.name
+                        )
+                    findNavController().navigate(direction)
                 }
             })
         binding.storeList.apply {
