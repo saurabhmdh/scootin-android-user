@@ -14,8 +14,7 @@ import com.scootin.network.AppExecutors
 import com.scootin.network.response.order.OrderHistoryItem
 import com.scootin.view.adapter.DataBoundListAdapter
 import timber.log.Timber
-import java.text.DateFormat
-import java.util.*
+
 
 class OrderHistoryAdapter(
     val appExecutors: AppExecutors,
@@ -73,8 +72,7 @@ class OrderHistoryAdapter(
                 binding.orderStatus.setTextColor(Color.parseColor("#D10000"))
             }
         }
-        binding.imgTrack.setOnClickListener {
-            if(item.orderStatus=="REJECTED"||item.orderStatus=="COMPLETED")
+        binding.rootView.setOnClickListener {
             imageAdapterClickListener.onViewDetailsSelected(it, item)
         }
     }

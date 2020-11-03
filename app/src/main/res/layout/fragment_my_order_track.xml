@@ -235,18 +235,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/packed_icon" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="209dp"
-            android:layout_marginTop="25dp"
-            android:text="@string/wallet"
-            android:textColor="#2A2A2A"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/packed_icon" />
-
-
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/total_amount_base"
             android:layout_width="match_parent"
