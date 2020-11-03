@@ -64,17 +64,17 @@ class OrderHistoryAdapter(
 
             binding.orderType.setText(deliveryType)
 
-            if (orderStatus == "Ongoing") {
+            if (orderStatus == "PLACED") {
                 binding.imgTrack.setImageResource(R.drawable.ic_track_text_button)
                 binding.orderStatus.setTextColor(Color.parseColor("#FF834A"))
-            } else if (orderStatus == "Delivered") {
+            } else if (orderStatus == "DELIVERED") {
                 binding.orderStatus.setTextColor(Color.parseColor("#38AA35"))
             } else {
                 binding.orderStatus.setTextColor(Color.parseColor("#D10000"))
             }
         }
         binding.imgTrack.setOnClickListener {
-
+            if(item.orderStatus=="REJECTED"||item.orderStatus=="COMPLETED")
             imageAdapterClickListener.onViewDetailsSelected(it, item)
         }
     }
