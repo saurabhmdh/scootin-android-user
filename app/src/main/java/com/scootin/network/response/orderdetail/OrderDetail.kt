@@ -3,7 +3,7 @@ package com.scootin.network.response.orderdetail
 data class OrderDetail(
     val addressDetails: AddressDetails,
     val expressDelivery: Boolean,
-    val id: Int,
+    val id: Long,
     val media: Media,
     val orderDate: OrderDate,
     val order_status: String,

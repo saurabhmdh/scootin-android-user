@@ -11,73 +11,69 @@ import androidx.navigation.fragment.findNavController
 import com.scootin.R
 import com.scootin.databinding.FragmentExpressDeliveryBinding
 import com.scootin.databinding.FragmentExpressDeliveryCategoryBinding
+import com.scootin.databinding.FragmentExpressDeliveryShopSelectBinding
+import com.scootin.databinding.FragmentGroceryDeliveryShopSelectBinding
 import com.scootin.network.AppExecutors
+import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.network.response.sweets.SweetsStore
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.EssentialGroceryStoreAdapter
+import com.scootin.view.adapter.ShopSearchAdapter
+import com.scootin.view.fragment.delivery.essential.EssentialSelectShopFragmentDirections
 import com.scootin.view.fragment.home.HomeFragmentDirections
+import com.scootin.viewmodel.delivery.CategoriesViewModel
 import com.scootin.viewmodel.home.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ExpressDeliveryFragment : Fragment(R.layout.fragment_express_delivery_category) {
-    private var binding by autoCleared<FragmentExpressDeliveryCategoryBinding>()
+class ExpressDeliveryFragment : Fragment(R.layout.fragment_express_delivery_shop_select) {
+    private var binding by autoCleared<FragmentExpressDeliveryShopSelectBinding>()
     @Inject
     lateinit var appExecutors: AppExecutors
-    private lateinit var expressDeliveryAdapter: EssentialGroceryStoreAdapter
+    private lateinit var shopSearchAdapter: ShopSearchAdapter
+    private val viewModel: CategoriesViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentExpressDeliveryCategoryBinding.bind(view)
-        setStoreAdapter()
-        expressDeliveryAdapter.submitList(setStoreList())
+        binding = FragmentExpressDeliveryShopSelectBinding.bind(view)
+        updateUI()
+        updateListeners()
+
     }
 
+    private fun updateUI() {
+        setStoreAdapter()
+    }
 
+    private fun updateListeners() {
+        //When the screen load lets load the data for empty screen
+        viewModel.doSearch("")
 
-    private fun setStoreAdapter() {
-        expressDeliveryAdapter = EssentialGroceryStoreAdapter(
-            appExecutors,
-            object : EssentialGroceryStoreAdapter.StoreImageAdapterClickListener {
+        binding.back.setOnClickListener { findNavController().popBackStack() }
 
-                override fun onSelectButtonSelected(view: View) {
-                    //findNavController().navigate(ExpressDeliveryFragmentDirections.actionExpressDeliveryToExpressOrders2())
-                }
-
-            })
-        binding.list.apply {
-            adapter = expressDeliveryAdapter
+        viewModel.shops.observe(viewLifecycleOwner) {
+            if (it.isSuccessful) {
+                shopSearchAdapter.submitList(it.body())
+            }
+            Timber.i("Search result for shop ${it.body()}")
         }
     }
 
-
-
-    private fun setStoreList(): ArrayList<SweetsStore> {
-        val storelist = ArrayList<SweetsStore>()
-        storelist.add(
-            SweetsStore("0", "Business Name", "500m", 4f,true,"")
-        )
-        storelist.add(
-            SweetsStore("0", "Business Name", "500m", 4.4f,false,"")
-        )
-        storelist.add(
-            SweetsStore("0", "Business Name", "500m", 4.3f,true,"")
-        )
-        storelist.add(
-            SweetsStore("0", "Business Name", "500m", 3.6f,true,"")
-        )
-        storelist.add(
-            SweetsStore("0", "Business Name", "500m", 4.8f,true,"")
-        )
-        storelist.add(
-            SweetsStore("0", "Business Name", "500m", 4.2f,true,"")
-        )
-        storelist.add(
-            SweetsStore("0", "Business Name", "500m", 4.0f,true,"")
-        )
-        return storelist
+    private fun setStoreAdapter() {
+        shopSearchAdapter = ShopSearchAdapter(
+            appExecutors, object : ShopSearchAdapter.StoreImageAdapterClickListener {
+                override fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse) {
+                    Timber.i("Shop Info $shopInfo")
+                    val direction = ExpressDeliveryFragmentDirections.actionExpressDeliveryToExpressOrders2(shopInfo.shopID, shopInfo.name)
+                    findNavController().navigate(direction)
+                }
+            })
+        binding.storeList.apply {
+            adapter = shopSearchAdapter
+        }
     }
 }
 
