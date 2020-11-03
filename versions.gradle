@@ -94,6 +94,8 @@ versions.lottieVersion = '3.4.1'
 versions.firebase = '20.2.4'
 versions.places = '2.4.0'
 versions.razoy_pay_checkout = '1.5.16'
+versions.image_picker = '1.7.5'
+
 
 def deps = [:]
 
@@ -261,8 +263,8 @@ deps.adjust_google_play_services_ads_identifier = "com.google.android.gms:play-s
 deps.lottie = "com.airbnb.android:lottie:$versions.lottieVersion"
 
 deps.razoy_pay = "com.razorpay:checkout:$versions.razoy_pay_checkout"
-
-
+deps.image_picker = "com.github.dhaval2404:imagepicker:$versions.image_picker"
+deps.inline_activity_result = 'com.github.florent37:inline-activity-result-kotlin:1.0.4'
 
 def mockito = [:]
 mockito.core = "org.mockito:mockito-core:$versions.mockito"

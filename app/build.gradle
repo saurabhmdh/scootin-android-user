@@ -140,6 +140,9 @@ dependencies {
     implementation deps.lottie
 
     implementation deps.razoy_pay
+    implementation deps.image_picker
+    implementation deps.inline_activity_result
+
 }
 
 kapt {

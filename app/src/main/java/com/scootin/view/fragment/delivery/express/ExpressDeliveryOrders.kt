@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.gson.Gson
 import com.scootin.R
 import com.scootin.databinding.FragmentExpressDeliveryOrdersBinding
@@ -28,6 +29,7 @@ import com.scootin.view.fragment.BaseFragment
 import com.scootin.viewmodel.order.DirectOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import java.io.File
 import javax.inject.Inject
 
 
@@ -148,30 +150,29 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
     }
 
     private fun onClickOfUploadMedia() {
-        if (UtilPermission.hasReadWritePermission(requireContext())) {
-            MediaPicker(requireActivity()).getImagePickerSelectionPanel()
-        } else {
-            UtilPermission.requestForReadWritePermission(requireActivity())
-        }
+        ImagePicker.with(this)
+            .start { resultCode, data ->
+                if (resultCode == Activity.RESULT_OK) {
+                    uploadMedia(ImagePicker.getFile(data))
+                } else if (resultCode == ImagePicker.RESULT_ERROR) {
+                    Toast.makeText(context, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Task Cancelled", Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
-        if (requestCode == AppConstants.RESULT_LOAD_IMAGE_VIDEO && resultCode == Activity.RESULT_OK && null != intent) {
-            //Call view model to upload media..
-            showLoading()
-            intent.data?.let { uri ->
-                viewModel.uploadMedia(uri).observe(viewLifecycleOwner) { response ->
-                    dismissLoading()
-                    if (response.isSuccessful) {
-                        val media = response.body() ?: return@observe
-                        GlideApp.with(requireContext()).load(media.url)
-                            .into(binding.appCompatImageView7)
-                        mediaId = media.id
-                    } else {
-                        Toast.makeText(context, "There is some error media", Toast.LENGTH_SHORT)
-                            .show()
-                    }
+    private fun uploadMedia(file: File?) {
+        file?.let {
+            viewModel.uploadMedia(it).observe(viewLifecycleOwner) {response->
+                Timber.i("Media viewModel.uploadMedia ${response.isSuccessful}")
+                dismissLoading()
+                if(response.isSuccessful) {
+                    val media = response.body() ?: return@observe
+                    GlideApp.with(requireContext()).load(media.url).into(binding.appCompatImageView7)
+                    mediaId = media.id
+                } else {
+                    Toast.makeText(context, "There is some error media", Toast.LENGTH_SHORT).show()
                 }
             }
         }

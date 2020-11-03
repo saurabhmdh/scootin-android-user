@@ -43,6 +43,7 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
         binding.helpKey.setOnClickListener {
             findNavController().navigate(OrderDetailFragmentDirections.inorderToCustomerSupport())
         }
+        binding.back.setOnClickListener { findNavController().popBackStack() }
     }
 
     private fun updateViewModel() {
