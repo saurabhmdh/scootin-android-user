@@ -25,7 +25,6 @@ import com.scootin.util.ui.MediaPicker
 import com.scootin.util.ui.UtilPermission
 import com.scootin.view.adapter.order.SearchitemAdapter
 import com.scootin.view.fragment.BaseFragment
-import com.scootin.view.fragment.delivery.essential.EssentialHandwrittenFragmentDirections
 import com.scootin.viewmodel.order.DirectOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -62,7 +61,12 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
             when (actionId) {
                 EditorInfo.IME_ACTION_DONE -> {
                     Timber.i("action id = ${actionId}")
-                    searchItemAddAdapter.addList(SearchISuggestiontem(binding.searchSuggestion.text.toString(), 0))
+                    searchItemAddAdapter.addList(
+                        SearchISuggestiontem(
+                            binding.searchSuggestion.text.toString(),
+                            0
+                        )
+                    )
                     return@OnEditorActionListener true
                 }
             }
@@ -116,7 +120,13 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
         Timber.i("Json : ${Gson().toJson(searchItemAddAdapter.list)}")
         viewModel.placeDirectOrder(
             AppHeaders.userID,
-            DirectOrderRequest(AppConstants.defaultAddressId, true, mediaId, shopId, Gson().toJson(searchItemAddAdapter.list).toString())
+            DirectOrderRequest(
+                AppConstants.defaultAddressId,
+                true,
+                mediaId,
+                shopId,
+                Gson().toJson(searchItemAddAdapter.list).toString()
+            )
         ).observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
@@ -126,7 +136,7 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
                         "Your order has been received successfully",
                         Toast.LENGTH_SHORT
                     ).show()
-                    findNavController().navigate(EssentialHandwrittenFragmentDirections.directOrderConfirmation())
+                    findNavController().navigate(ExpressDeliveryOrdersDirections.directOrderConfirmation())
                 }
                 Status.LOADING -> {
                 }
