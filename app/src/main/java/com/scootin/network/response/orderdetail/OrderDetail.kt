@@ -5,11 +5,7 @@ data class OrderDetail(
     val expressDelivery: Boolean,
     val id: Long,
     val media: Media,
-<<<<<<< HEAD
-    val orderDate: Long,
-=======
     val orderDate: String,
->>>>>>> saurabh
     val order_status: String,
     val paymentDetails: PaymentDetails,
     val reviewDoneIndicator: Boolean,
