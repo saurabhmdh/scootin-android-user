@@ -78,10 +78,6 @@
             android:background="#D6DDFF"
             android:gravity="center|start"
             android:paddingStart="5dp"
-<<<<<<< HEAD
-            app:setDateFromOrderDate="@{data.orderDetails.orderDate}"
-=======
->>>>>>> saurabh
             android:textColor="#4E4E4E"
             android:textSize="13sp"
             android:textStyle="bold"

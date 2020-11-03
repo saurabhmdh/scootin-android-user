@@ -1,7 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.4.20-RC'
     apply from: 'versions.gradle'
     addRepos(repositories)
 
@@ -14,10 +13,6 @@ buildscript {
         classpath deps.kotlin.allopen
         classpath deps.hilt.hilt_android_gradle_plugin
         classpath 'com.google.gms:google-services:4.3.3'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-    repositories {
-        mavenCentral()
     }
 }
 
