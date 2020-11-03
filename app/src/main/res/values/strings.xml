@@ -89,7 +89,7 @@
     <!-- TODO: Remove or change this placeholder text -->
 
     <string name="finding_location">Finding location..</string>
-    <string name="OrderID">Order ID: #0820260001</string>
+    <string name="OrderID">Order ID:</string>
     <string name="_250">250</string>
     <string name="separator">/</string>
     <string name="_0">0</string>
@@ -114,7 +114,7 @@
     <string name="scootin">Scootin</string>
     <string name="wallet">Wallet</string>
     <string name="_30_items">30 Items</string>
-    <string name="amount_rs_3250">Amount Rs. 3250 /-</string>
+    <string name="amount_rs_3250">Amount</string>
     <string name="item_01">Item 01</string>
     <string name="rs_152">Rs. 152.00</string>
     <string name="item_02">item 02</string>

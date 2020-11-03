@@ -10,5 +10,6 @@ data class OrderDetail(
     val paymentDetails: PaymentDetails,
     val reviewDoneIndicator: Boolean,
     val shopManagement: ShopManagement,
-    val userInfo: UserInfo
+    val userInfo: UserInfo,
+val totalAmount:Double
 )
