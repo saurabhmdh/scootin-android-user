@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.scootin.R
 import com.scootin.databinding.FragmentMyOrderTrackBinding
+import com.scootin.databinding.FragmentTrackDirectOrderBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.response.orderdetail.OrderDetail
@@ -19,9 +20,9 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class DirectOrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
+class DirectOrderDetailFragment : Fragment(R.layout.fragment_track_direct_order) {
 
-    private var binding by autoCleared<FragmentMyOrderTrackBinding>()
+    private var binding by autoCleared<FragmentTrackDirectOrderBinding>()
 //    private val viewModel: MyOrderCartViewModel by viewModels()
 
     private val viewModel: OrderFragmentViewModel by viewModels()
@@ -33,7 +34,7 @@ class DirectOrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentMyOrderTrackBinding.bind(view)
+        binding = FragmentTrackDirectOrderBinding.bind(view)
         updateViewModel()
         updateListeners()
     }
@@ -43,24 +44,14 @@ class DirectOrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
             Timber.i("orderId = ${it.status} : ${it.data}")
             when (it.status) {
                 Status.SUCCESS -> {
-                    val data = it.data
-                    updateView(data)
+                    binding.data = it.data
+
                 }
             }
         })
     }
 
-    private fun updateView(data: OrderDetail?) {
-        data?.let {
-            it.apply {
-                binding.orderId.text = "Order ID: ${id}"
-                binding.orderDateTime.text = "Placed on ${orderDate}"
-                binding.orderDateTimeHeader.text = "Placed on ${orderDate}"
-                binding.totalAmount.text = "Amount Rs. ${paymentDetails.deliveryFreeAmount}"
-                //binding.itemCount.text = "30 items"
-            }
-        }
-    }
+
 
     private fun updateListeners() {
 
