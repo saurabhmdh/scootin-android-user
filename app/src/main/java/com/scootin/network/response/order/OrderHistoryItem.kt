@@ -9,7 +9,7 @@ data class OrderHistoryItem(
     val directOrder: Boolean,
     val expressDelivery: Boolean,
     val id: Int,
-    val orderDate: OrderDate,
+    val orderDate: String,
     val orderStatus: String,
     val rejectReason: String,
     val totalAmount: Double,
