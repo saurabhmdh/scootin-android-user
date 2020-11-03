@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.scootin.R
+import com.scootin.bindings.setDateFromOrderDate
+import com.scootin.bindings.setPrice
 import com.scootin.databinding.AdapterOrderHistoryListBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.order.OrderHistoryItem
@@ -51,10 +53,8 @@ class OrderHistoryAdapter(
         Timber.i("item = $item ${item.id}")
         item.apply {
             binding.orderId.setText(id.toString())
-            binding.amount.setText("$totalAmount")
-            binding.date.setText(
-                orderDate
-            )
+            binding.amount.setPrice(totalAmount)
+            binding.date.setDateFromOrderDate(orderDate)
             binding.orderStatus.setText(orderStatus)
             var deliveryType = "Indirect"
             if (directOrder) deliveryType = "Direct"
