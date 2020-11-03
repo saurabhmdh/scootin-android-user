@@ -56,9 +56,14 @@ class OrderHistoryAdapter(
             binding.amount.setPrice(totalAmount)
             binding.date.setDateFromOrderDate(orderDate)
             binding.orderStatus.setText(orderStatus)
-            var deliveryType = "Indirect"
-            if (directOrder) deliveryType = "Direct"
+
+            var deliveryType = "Normal"
+            if (item.expressDelivery) {
+                deliveryType = "Express"
+            }
+
             binding.orderType.setText(deliveryType)
+
             if (orderStatus == "Ongoing") {
                 binding.imgTrack.setImageResource(R.drawable.ic_track_text_button)
                 binding.orderStatus.setTextColor(Color.parseColor("#FF834A"))
