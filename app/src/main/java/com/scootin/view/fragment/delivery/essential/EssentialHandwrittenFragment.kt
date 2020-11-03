@@ -67,7 +67,7 @@ class EssentialHandwrittenFragment : BaseFragment(R.layout.hand_written_grocery_
                 Status.SUCCESS -> {
                     dismissLoading()
                     Toast.makeText(context, "Your order has been received successfully", Toast.LENGTH_SHORT).show()
-//                    findNavController().navigate(EssentialHandwrittenFragmentDirections.directOrderConfirmation())
+                    findNavController().navigate(EssentialHandwrittenFragmentDirections.directOrderConfirmation())
                 }
                 Status.LOADING -> {}
                 Status.ERROR -> {
