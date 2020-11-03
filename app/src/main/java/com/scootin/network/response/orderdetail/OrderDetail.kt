@@ -11,5 +11,5 @@ data class OrderDetail(
     val reviewDoneIndicator: Boolean,
     val shopManagement: ShopManagement,
     val userInfo: UserInfo,
-val totalAmount:Double
+    val totalAmount:Double
 )
