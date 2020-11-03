@@ -1,5 +1,6 @@
 package com.scootin.bindings
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -11,6 +12,7 @@ import com.scootin.network.glide.GlideApp
 import java.math.BigDecimal
 import java.text.Format
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 @BindingAdapter("visibleGone")
@@ -37,6 +39,20 @@ fun TextView.setPrice(value: Double) {
     val finalValue = format.format(BigDecimal(value))
 
     text = finalValue
+}
+@SuppressLint("SimpleDateFormat")
+@BindingAdapter("setDateFromOrderDate")
+fun TextView.setDateFromOrderDate(orderDate: String?) {
+    orderDate?.let {
+        val k = orderDate.toLongOrNull()
+        if (k != null) {
+            val data = Date(k)
+            val simpleDateFormat = SimpleDateFormat("dd-MMM-yyyy")
+            text = simpleDateFormat.format(data)
+        } else {
+            text = orderDate.substring(0, 12)
+        }
+    }
 }
 @BindingAdapter("setToIntText")
 fun TextView.setToIntText(value: Long) {

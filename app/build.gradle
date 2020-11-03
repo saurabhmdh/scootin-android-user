@@ -140,6 +140,8 @@ dependencies {
     implementation deps.lottie
 
     implementation deps.razoy_pay
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
 kapt {
@@ -151,4 +153,7 @@ kapt {
 // Android Extensions plugin enhancements reference : https://blog.jetbrains.com/kotlin/2017/08/kotlin-1-1-4-is-out
 androidExtensions {
     experimental = true
+}
+repositories {
+    mavenCentral()
 }
