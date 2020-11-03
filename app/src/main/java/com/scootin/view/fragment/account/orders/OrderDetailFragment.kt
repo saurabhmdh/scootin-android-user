@@ -1,4 +1,4 @@
-package com.scootin.view.fragment.acc
+package com.scootin.view.fragment.account.orders
 
 import com.scootin.view.fragment.account.orders.OrderDetailFragmentArgs
 import com.scootin.view.fragment.account.orders.OrderDetailFragmentDirections
@@ -58,30 +58,6 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
                     orderDetailAdapter.submitList(it.data?.orderInventoryDetailsList)
                     updateSelectors(it.data?.orderDetails?.orderStatus)
 
-                    if(it.data?.orderDetails?.orderStatus =="PLACED"){
-                        binding.packedIcon.isSelected=true
-                    }
-                    if(it.data?.orderDetails?.orderStatus =="PACKED"){
-                        binding.packedIcon.isSelected=true
-                        binding.progressId.isSelected=true
-                        binding.packedIcon.isSelected=true
-                    }
-                    if(it.data?.orderDetails?.orderStatus =="DISPATCHED"){
-                        binding.packedIcon.isSelected=true
-                        binding.progressId.isSelected=true
-                        binding.packedIcon.isSelected=true
-                        binding.progressId2.isSelected=true
-                        binding.dispatchedIcon.isSelected=true
-                    }
-                    if(it.data?.orderDetails?.orderStatus =="DELIVERED"){
-                        binding.packedIcon.isSelected=true
-                        binding.progressId.isSelected=true
-                        binding.packedIcon.isSelected=true
-                        binding.progressId2.isSelected=true
-                        binding.dispatchedIcon.isSelected=true
-                        binding.progressId3.isSelected=true
-                        binding.deliveredIcon.isSelected=true
-                    }
                 }
             }
         })
@@ -95,21 +71,27 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
                 }
                 "PACKED" -> {
                     binding.placeIcon.isSelected = true
+                    binding.progressId.isSelected=true
                     binding.packedIcon.isSelected = true
                 }
                 "DISPATCHED" -> {
                     binding.placeIcon.isSelected = true
+                    binding.progressId.isSelected=true
                     binding.packedIcon.isSelected = true
+                    binding.progressId2.isSelected=true
                     binding.dispatchedIcon.isSelected = true
                 }
                 "COMPLETED" -> {
                     binding.placeIcon.isSelected = true
+                    binding.progressId.isSelected=true
                     binding.packedIcon.isSelected = true
+                    binding.progressId2.isSelected=true
                     binding.dispatchedIcon.isSelected = true
+                    binding.progressId3.isSelected=true
                     binding.deliveredIcon.isSelected = true
                 }
             }
-        }
+       }
 
     }
     private fun setInorderAdapter() {

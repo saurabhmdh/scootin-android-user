@@ -72,17 +72,23 @@ class DirectOrderDetailFragment : Fragment(R.layout.fragment_track_direct_order)
                 }
                 "PACKED" -> {
                     binding.placeIcon.isSelected = true
+                    binding.progressId.isSelected=true
                     binding.packedIcon.isSelected = true
                 }
                 "DISPATCHED" -> {
                     binding.placeIcon.isSelected = true
+                    binding.progressId.isSelected=true
                     binding.packedIcon.isSelected = true
+                    binding.progressId2.isSelected=true
                     binding.dispatchedIcon.isSelected = true
                 }
                 "COMPLETED" -> {
                     binding.placeIcon.isSelected = true
+                    binding.progressId.isSelected=true
                     binding.packedIcon.isSelected = true
+                    binding.progressId2.isSelected=true
                     binding.dispatchedIcon.isSelected = true
+                    binding.progressId3.isSelected=true
                     binding.deliveredIcon.isSelected = true
                 }
             }
