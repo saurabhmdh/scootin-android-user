@@ -13,7 +13,6 @@ import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.response.inorder.InOrderDetail
 import com.scootin.util.fragment.autoCleared
-import com.scootin.view.adapter.WalletAdapter
 import com.scootin.view.adapter.order.OrderDetailAdapter
 import com.scootin.viewmodel.account.OrderFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +20,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MyInDirectOrderTrack : Fragment(R.layout.fragment_my_order_track) {
+class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
 
     private var binding by autoCleared<FragmentMyOrderTrackBinding>()
 
@@ -29,7 +28,7 @@ class MyInDirectOrderTrack : Fragment(R.layout.fragment_my_order_track) {
     lateinit var appExecutors: AppExecutors
     private val viewModel: OrderFragmentViewModel by viewModels()
     private lateinit var orderDetailAdapter: OrderDetailAdapter
-    private val args: MyInDirectOrderTrackArgs by navArgs()
+    private val args: OrderDetailFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,7 +40,7 @@ class MyInDirectOrderTrack : Fragment(R.layout.fragment_my_order_track) {
 
     private fun updateListeners() {
         binding.helpKey.setOnClickListener {
-            findNavController().navigate(MyInDirectOrderTrackDirections.inorderToCustomerSupport())
+            findNavController().navigate(OrderDetailFragmentDirections.inorderToCustomerSupport())
         }
     }
 
@@ -64,7 +63,8 @@ class MyInDirectOrderTrack : Fragment(R.layout.fragment_my_order_track) {
             binding.orderId.text = "Order ID: ${id}"
             binding.orderDateTime.text = "Placed on ${orderDetails.orderDate}"
             binding.orderDateTimeHeader.text = "Placed on ${orderDetails.orderDate}"
-            binding.totalAmount.text = "Amount Rs. ${orderDetails.paymentDetails.deliveryFreeAmount}"
+            binding.totalAmount.text =
+                "Amount Rs. ${orderDetails.paymentDetails.deliveryFreeAmount}"
             binding.itemCount.text = "${orderInventoryDetailsList.size} items"
             orderDetailAdapter.submitList(orderInventoryDetailsList)
         }

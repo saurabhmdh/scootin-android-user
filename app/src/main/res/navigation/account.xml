@@ -93,7 +93,7 @@
 
     <fragment
         android:id="@+id/track_fragment"
-        android:name="com.scootin.view.fragment.account.orders.MyOrderTrack">
+        android:name="com.scootin.view.fragment.account.orders.DirectOrderDetailFragment">
         <argument
             android:name="orderId"
             app:argType="string" />
@@ -108,7 +108,7 @@
 
     <fragment
         android:id="@+id/inorder_track_fragment"
-        android:name="com.scootin.view.fragment.account.orders.MyInDirectOrderTrack">
+        android:name="com.scootin.view.fragment.account.orders.OrderDetailFragment">
         <argument
             android:name="orderId"
             app:argType="string" />

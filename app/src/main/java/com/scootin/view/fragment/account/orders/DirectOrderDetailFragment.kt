@@ -19,14 +19,14 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MyOrderTrack : Fragment(R.layout.fragment_my_order_track) {
+class DirectOrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
 
     private var binding by autoCleared<FragmentMyOrderTrackBinding>()
 //    private val viewModel: MyOrderCartViewModel by viewModels()
 
     private val viewModel: OrderFragmentViewModel by viewModels()
 
-    private val args: MyOrderTrackArgs by navArgs()
+    private val args: DirectOrderDetailFragmentArgs by navArgs()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -41,9 +41,8 @@ class MyOrderTrack : Fragment(R.layout.fragment_my_order_track) {
     private fun updateViewModel() {
         viewModel.getDirectOrder(args.orderId).observe(viewLifecycleOwner, Observer {
             Timber.i("orderId = ${it.status} : ${it.data}")
-            when(it.status){
-                Status.SUCCESS ->
-                {
+            when (it.status) {
+                Status.SUCCESS -> {
                     val data = it.data
                     updateView(data)
                 }
@@ -66,7 +65,7 @@ class MyOrderTrack : Fragment(R.layout.fragment_my_order_track) {
     private fun updateListeners() {
 
         binding.helpKey.setOnClickListener {
-            findNavController().navigate(MyInDirectOrderTrackDirections.inorderToCustomerSupport())
+            findNavController().navigate(DirectOrderDetailFragmentDirections.orderToCustomerSupport())
         }
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
