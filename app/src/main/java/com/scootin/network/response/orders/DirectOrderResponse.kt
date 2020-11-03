@@ -8,15 +8,10 @@ data class DirectOrderResponse(
     val expressDelivery: Boolean,
     val id: Int,
     val media: Media,
-    val orderDate: OrderDate,
+    val orderDate: String,
     val order_status: String,
     val paymentDetails: PaymentDetails,
     val reviewDoneIndicator: Boolean,
     val shopManagement: ShopManagement,
     val userInfo: UserInfo
-) {
-    data class OrderDate(
-        val nanos: Int,
-        val seconds: Int
-    )
-}
+)

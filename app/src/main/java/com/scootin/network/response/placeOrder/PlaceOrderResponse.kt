@@ -11,7 +11,7 @@ data class PlaceOrderResponse(
     val addressDetails: Address,
     val expressDelivery: Boolean,
     val id: Long,
-    val orderDate: OrderDate,
+    val orderDate: String,
     val orderStatus: String,
     val paymentDetails: PaymentDetails,
     val reviewDoneIndicator: Boolean,
