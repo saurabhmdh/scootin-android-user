@@ -1,22 +1,24 @@
 package com.scootin.view.adapter.order
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.scootin.R
 import com.scootin.network.AppExecutors
+import com.scootin.network.response.SearchISuggestiontem
 
 
 class SearchitemAdapter(
     val appExecutors: AppExecutors, val listener : OnItemClickListener
 ) : RecyclerView.Adapter<SearchitemAdapter.SearchViewHolder>() {
 
-    val list = ArrayList<String>()
+    val list = ArrayList<SearchISuggestiontem>()
 
     class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val editTextView = itemView.findViewById<AppCompatEditText>(R.id.appCompatEditText2)
@@ -33,15 +35,30 @@ class SearchitemAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: SearchViewHolder, position: Int) {
-        viewHolder.editTextView.setText(list.get(position))
+        val item = list.get(position)
+        viewHolder.editTextView.setText(item.name)
+        viewHolder.editTextView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                item.name = s.toString()
+                viewHolder.editTextView.setText(item.name)
+            }
+        })
         viewHolder.incrementTV.setOnClickListener {
-            viewHolder.count.text = "${ viewHolder.count.text.toString().toInt().inc()}"
-            listener.onIncrement(viewHolder.count.text.toString())
+            item.count = viewHolder.count.text.toString().toInt().inc()
+            viewHolder.count.text = "${item.count}"
+            listener.onIncrement(item.count.toString())
         }
         viewHolder.decrementTV.setOnClickListener {
             if(viewHolder.count.text.toString().toInt() > 0) {
-                viewHolder.count.text = "${viewHolder.count.text.toString().toInt().dec()}"
-                listener.onDecrement(viewHolder.count.text.toString())
+                item.count = viewHolder.count.text.toString().toInt().dec()
+                viewHolder.count.text = "${item.count}"
+                listener.onDecrement(item.count.toString())
             }
         }
     }
@@ -50,7 +67,7 @@ class SearchitemAdapter(
         return list.size
     }
 
-    fun addList(item: String) {
+    fun addList(item: SearchISuggestiontem) {
         list.add(item)
         if(list.isEmpty().not())
         notifyItemInserted(list.size-1)
