@@ -73,8 +73,7 @@ class OrderHistoryAdapter(
                 binding.orderStatus.setTextColor(Color.parseColor("#D10000"))
             }
         }
-        binding.imgTrack.setOnClickListener {
-
+        binding.rootView.setOnClickListener {
             imageAdapterClickListener.onViewDetailsSelected(it, item)
         }
     }
