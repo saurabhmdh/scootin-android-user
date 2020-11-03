@@ -64,7 +64,21 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
                 "PLACED" -> {
                     binding.placeIcon.isSelected = true
                 }
-
+                "PACKED" -> {
+                    binding.placeIcon.isSelected = true
+                    binding.packedIcon.isSelected = true
+                }
+                "DISPATCHED" -> {
+                    binding.placeIcon.isSelected = true
+                    binding.packedIcon.isSelected = true
+                    binding.dispatchedIcon.isSelected = true
+                }
+                "COMPLETED" -> {
+                    binding.placeIcon.isSelected = true
+                    binding.packedIcon.isSelected = true
+                    binding.dispatchedIcon.isSelected = true
+                    binding.deliveredIcon.isSelected = true
+                }
             }
         }
 
