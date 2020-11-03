@@ -35,6 +35,7 @@ class DirectOrderDetailFragment : Fragment(R.layout.fragment_track_direct_order)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentTrackDirectOrderBinding.bind(view)
+        binding.back.setOnClickListener { findNavController().popBackStack() }
         updateViewModel()
         updateListeners()
     }

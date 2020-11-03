@@ -1,4 +1,7 @@
-package com.scootin.view.fragment.account.orders
+package com.scootin.view.fragment.acc
+
+import com.scootin.view.fragment.account.orders.OrderDetailFragmentArgs
+import com.scootin.view.fragment.account.orders.OrderDetailFragmentDirections
 
 import android.os.Bundle
 import android.view.View
@@ -33,6 +36,7 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMyOrderTrackBinding.bind(view)
+        binding.back.setOnClickListener { findNavController().popBackStack() }
         binding.lifecycleOwner = this
         setInorderAdapter()
         updateViewModel()
@@ -53,6 +57,31 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
                     binding.data = it.data
                     orderDetailAdapter.submitList(it.data?.orderInventoryDetailsList)
                     updateSelectors(it.data?.orderDetails?.orderStatus)
+
+                    if(it.data?.orderDetails?.orderStatus =="PLACED"){
+                        binding.packedIcon.isSelected=true
+                    }
+                    if(it.data?.orderDetails?.orderStatus =="PACKED"){
+                        binding.packedIcon.isSelected=true
+                        binding.progressId.isSelected=true
+                        binding.packedIcon.isSelected=true
+                    }
+                    if(it.data?.orderDetails?.orderStatus =="DISPATCHED"){
+                        binding.packedIcon.isSelected=true
+                        binding.progressId.isSelected=true
+                        binding.packedIcon.isSelected=true
+                        binding.progressId2.isSelected=true
+                        binding.dispatchedIcon.isSelected=true
+                    }
+                    if(it.data?.orderDetails?.orderStatus =="DELIVERED"){
+                        binding.packedIcon.isSelected=true
+                        binding.progressId.isSelected=true
+                        binding.packedIcon.isSelected=true
+                        binding.progressId2.isSelected=true
+                        binding.dispatchedIcon.isSelected=true
+                        binding.progressId3.isSelected=true
+                        binding.deliveredIcon.isSelected=true
+                    }
                 }
             }
         })
