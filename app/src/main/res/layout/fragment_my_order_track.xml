@@ -78,7 +78,6 @@
             android:background="#D6DDFF"
             android:gravity="center|start"
             android:paddingStart="5dp"
-            setToIntText="@{data.orderDetails.orderDate.nanos}"
             android:textColor="#4E4E4E"
             android:textSize="13sp"
             android:textStyle="bold"
