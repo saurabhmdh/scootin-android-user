@@ -92,6 +92,8 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
 
     private fun onClickOfUploadMedia() {
         ImagePicker.with(this)
+            .compress(1024)
+            .maxResultSize(1080, 1080)
             .start { resultCode, data ->
                 if (resultCode == Activity.RESULT_OK) {
                     uploadMedia(ImagePicker.getFile(data))
@@ -104,11 +106,12 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
     }
 
     private fun uploadMedia(file: File?) {
+        showLoading()
         file?.let {
             viewModel.uploadMedia(it).observe(viewLifecycleOwner) {response->
                 Timber.i("Media viewModel.uploadMedia ${response.isSuccessful}")
-                dismissLoading()
                 if(response.isSuccessful) {
+                    dismissLoading()
                     val media = response.body() ?: return@observe
                     GlideApp.with(requireContext()).load(media.url).into(binding.receiverPhotoBox)
                     mediaId = media.id
