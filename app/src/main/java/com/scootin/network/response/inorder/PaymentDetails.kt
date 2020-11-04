@@ -11,7 +11,5 @@ data class PaymentDetails(
     val promoCodeApplied: Any,
     val promoCodeID: Any,
     val totalAmount: Double,
-    val totalGSTAmount: Int,
-    val transactionReference: Any,
-    val usedWalletAmount: Any
+    val totalGSTAmount: Double
 )

@@ -10,5 +10,5 @@ data class OrderInventoryDetails(
     val orderDetails: OrderDetail,
     val quantity: Int,
     val totalAmount: Double,
-    val totalGSTAmount: Int
+    val totalGSTAmount: Double
 )
