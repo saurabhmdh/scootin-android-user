@@ -4,6 +4,8 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -219,12 +221,14 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
 
     }
 
-    private fun handlePlaceSuccessResponse(place: Place?) {
+    private fun handlePlaceSuccessResponse(place: Place?, adminArea: String? = null) {
         place?.let {
             Timber.i("Place: ${it.name}, ${it.id} ")
-            Timber.i("Place: ${it.latLng?.latitude}, ${it.latLng?.longitude}, ${it.address} ")
-            viewModel.updateLocation(place)
-            updateAddress(it.address)
+            val address = adminArea ?: it.address
+            Timber.i("Place: ${adminArea},  ${it.address} final address $address")
+            Timber.i("Place: ${it.latLng?.latitude}, ${it.latLng?.longitude}")
+            viewModel.updateLocation(place, adminArea)
+            updateAddress(address)
             updateServiceArea(it.latLng)
         }
     }
@@ -282,8 +286,12 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
                 if (task.isSuccessful) {
                     val response = task.result
                     val place = response?.placeLikelihoods?.first()?.place
+
                     place?.let {
-                        handlePlaceSuccessResponse(place)
+                        //Lets try geo coder
+                        val listOfAddress = Geocoder(context).getFromLocation(it.latLng!!.latitude, it.latLng!!.longitude, 1)
+                        val address = listOfAddress.firstOrNull()
+                        handlePlaceSuccessResponse(place, address?.subAdminArea)
                     }
                 } else {
                     val exception = task.exception
