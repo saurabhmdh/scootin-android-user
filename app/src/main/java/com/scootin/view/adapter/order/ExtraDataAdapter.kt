@@ -19,13 +19,13 @@ class ExtraDataAdapter (
         override fun areItemsTheSame(
             oldItem: SearchISuggestiontem,
             newItem: SearchISuggestiontem
-        ) = oldItem.id == newItem.id
+        ) = oldItem.name == newItem.name
 
 
         override fun areContentsTheSame(
             oldItem: SearchISuggestiontem,
             newItem: SearchISuggestiontem
-        ) = oldItem.id == newItem.id
+        ) = oldItem == newItem
     }
 ) {
     override fun createBinding(parent: ViewGroup):AdapterExtraDataBinding {

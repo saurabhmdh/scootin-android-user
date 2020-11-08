@@ -1,3 +1,3 @@
 package com.scootin.network.response
 
-class SearchISuggestiontem(var name: String,var count: Int,val id:Int)
+data class SearchISuggestiontem(var name: String,var count: Int)
