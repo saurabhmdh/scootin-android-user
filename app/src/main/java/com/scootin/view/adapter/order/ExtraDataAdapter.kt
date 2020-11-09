@@ -5,26 +5,24 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.scootin.databinding.AdapterExtraDataBinding
-import com.scootin.databinding.AdapterItemOrderDetailBinding
 import com.scootin.network.AppExecutors
-import com.scootin.network.response.SearchISuggestiontem
-import com.scootin.network.response.inorder.OrderInventoryDetails
+import com.scootin.network.response.ExtraDataItem
 import com.scootin.view.adapter.DataBoundListAdapter
 
 class ExtraDataAdapter (
     val appExecutors: AppExecutors
-) : DataBoundListAdapter<SearchISuggestiontem, AdapterExtraDataBinding>(
+) : DataBoundListAdapter<ExtraDataItem, AdapterExtraDataBinding>(
     appExecutors,
-    diffCallback = object : DiffUtil.ItemCallback<SearchISuggestiontem>() {
+    diffCallback = object : DiffUtil.ItemCallback<ExtraDataItem>() {
         override fun areItemsTheSame(
-            oldItem: SearchISuggestiontem,
-            newItem: SearchISuggestiontem
+            oldItem: ExtraDataItem,
+            newItem: ExtraDataItem
         ) = oldItem.name == newItem.name
 
 
         override fun areContentsTheSame(
-            oldItem: SearchISuggestiontem,
-            newItem: SearchISuggestiontem
+            oldItem: ExtraDataItem,
+            newItem: ExtraDataItem
         ) = oldItem == newItem
     }
 ) {
@@ -37,7 +35,7 @@ class ExtraDataAdapter (
 
     override fun bind(
         binding: AdapterExtraDataBinding,
-        item: SearchISuggestiontem,
+        item: ExtraDataItem,
         position: Int,
         isLast: Boolean
     ) {

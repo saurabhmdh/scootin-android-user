@@ -11,14 +11,14 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.scootin.R
 import com.scootin.network.AppExecutors
-import com.scootin.network.response.SearchISuggestiontem
+import com.scootin.network.response.ExtraDataItem
 
 
 class SearchitemAdapter(
     val appExecutors: AppExecutors, val listener : OnItemClickListener
 ) : RecyclerView.Adapter<SearchitemAdapter.SearchViewHolder>() {
 
-    val list = ArrayList<SearchISuggestiontem>()
+    val list = ArrayList<ExtraDataItem>()
 
     class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val editTextView = itemView.findViewById<AppCompatEditText>(R.id.appCompatEditText2)
@@ -67,7 +67,7 @@ class SearchitemAdapter(
         return list.size
     }
 
-    fun addList(item: SearchISuggestiontem) {
+    fun addList(item: ExtraDataItem) {
         list.add(item)
         if(list.isEmpty().not())
         notifyItemInserted(list.size-1)
