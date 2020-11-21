@@ -77,10 +77,12 @@ class CartListFragment : BaseFragment(R.layout.fragment_cart_list) {
     private fun setData() {
         Timber.i("userId = ${AppHeaders.userID}")
         viewModel.userCartList()
-        viewModel.getUserCartListLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.getUserCartListLiveData.observe(viewLifecycleOwner, {
             if (it.isSuccessful) {
                 Timber.i("userCartList = ${it.body()?.size}")
                 val data = it.body()
+
+                enableDisableVisibility(data.isNullOrEmpty())
                 addCartItemAdapter.submitList(data)
             }
         })
@@ -93,6 +95,22 @@ class CartListFragment : BaseFragment(R.layout.fragment_cart_list) {
                 Status.LOADING -> {}
                 Status.ERROR -> {}
             }
+        }
+    }
+
+    private fun enableDisableVisibility(empty: Boolean) {
+        if (empty) {
+            binding.emptyText.visibility = View.VISIBLE
+            binding.shopNow.visibility = View.VISIBLE
+
+            binding.productList.visibility = View.GONE
+            binding.checkoutLayout.visibility = View.GONE
+        } else {
+            binding.emptyText.visibility = View.GONE
+            binding.shopNow.visibility = View.GONE
+
+            binding.productList.visibility = View.VISIBLE
+            binding.checkoutLayout.visibility = View.VISIBLE
         }
     }
 
