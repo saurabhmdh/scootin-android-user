@@ -51,12 +51,14 @@ internal constructor(
                 Timber.i("We find decide your service area = ${result}")
 
                 if (result == null) {
+                    cacheDao.deleteCache(AppConstants.SERVICE_AREA)
                     serviceAreaError.postValue(true)
                 } else {
                     cacheDao.insert(Cache(AppConstants.SERVICE_AREA, result.id.toString()))
                     serviceArea.postValue(ServiceArea(result.id, result.name))
                 }
             } else {
+                cacheDao.deleteCache(AppConstants.SERVICE_AREA)
                 serviceAreaError.postValue(true)
             }
         }
