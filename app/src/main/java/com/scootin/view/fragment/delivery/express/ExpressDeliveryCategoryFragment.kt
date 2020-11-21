@@ -46,7 +46,7 @@ class ExpressDeliveryCategoryFragment : Fragment(R.layout.fragment_express_deliv
             val selectedView = binding.radioGroup.get(position)
 
             Timber.i("selected view ${selectedView.tag}")
-            viewModel.updateMainCategory(it.tag as String?)
+            viewModel.updateMainCategory(selectedView.tag as String?)
 
             //Move to next screen
             findNavController().navigate(ExpressDeliveryCategoryFragmentDirections.actionExpressDeliveryCategoryFragmentToExpressDelivery())

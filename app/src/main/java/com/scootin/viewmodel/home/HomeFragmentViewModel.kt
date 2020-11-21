@@ -49,11 +49,11 @@ internal constructor(
             if (response.isSuccessful) {
                 val result = response.body()
                 Timber.i("We find decide your service area = ${result}")
-
                 if (result == null) {
                     cacheDao.deleteCache(AppConstants.SERVICE_AREA)
                     serviceAreaError.postValue(true)
                 } else {
+                    //Check for previous selected area if its different then remove item from cart...
                     cacheDao.insert(Cache(AppConstants.SERVICE_AREA, result.id.toString()))
                     serviceArea.postValue(ServiceArea(result.id, result.name))
                 }
