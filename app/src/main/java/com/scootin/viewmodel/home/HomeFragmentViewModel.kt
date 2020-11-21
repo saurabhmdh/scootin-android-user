@@ -62,9 +62,14 @@ internal constructor(
         }
     }
 
-    fun updateLocation(place: Place) {
+    fun updateLocation(place: Place, adminArea: String? = null) {
         launch {
-            locationDao.insert(EntityLocation(place))
+            val addressComponent = EntityLocation(place).apply {
+                adminArea?.let {
+                    address = it
+                }
+            }
+            locationDao.insert(addressComponent)
         }
     }
 

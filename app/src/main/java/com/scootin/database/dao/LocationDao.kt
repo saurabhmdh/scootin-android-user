@@ -18,6 +18,6 @@ interface LocationDao {
     @Query("SELECT * FROM entity_location")
     suspend fun getEntityLocation(): EntityLocation
 
-    @Query("DELETE FROM entity_location")
+    @Query("DELETE FROM entity_location WHERE 1")
     fun clearAll()
 }
