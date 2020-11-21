@@ -19,6 +19,7 @@ import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.PlaceOrderRequest
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.fragment.autoCleared
+import com.scootin.view.activity.MainActivity
 import com.scootin.view.adapter.AddCartItemAdapter
 import com.scootin.view.fragment.BaseFragment
 import com.scootin.viewmodel.cart.CartViewModel
@@ -81,7 +82,6 @@ class CartListFragment : BaseFragment(R.layout.fragment_cart_list) {
             if (it.isSuccessful) {
                 Timber.i("userCartList = ${it.body()?.size}")
                 val data = it.body()
-
                 enableDisableVisibility(data.isNullOrEmpty())
                 addCartItemAdapter.submitList(data)
             }
@@ -95,6 +95,11 @@ class CartListFragment : BaseFragment(R.layout.fragment_cart_list) {
                 Status.LOADING -> {}
                 Status.ERROR -> {}
             }
+        }
+
+        binding.shopNow.setOnClickListener {
+            val activity = activity as MainActivity?
+            activity?.moveToAnotherTab(R.id.home)
         }
     }
 
