@@ -13,7 +13,9 @@ import com.scootin.databinding.FragmentTrackDirectOrderBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.response.orderdetail.OrderDetail
+import com.scootin.util.Conversions
 import com.scootin.util.fragment.autoCleared
+import com.scootin.view.adapter.order.ExtraDataAdapter
 import com.scootin.viewmodel.account.OrderFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -26,7 +28,7 @@ class DirectOrderDetailFragment : Fragment(R.layout.fragment_track_direct_order)
 //    private val viewModel: MyOrderCartViewModel by viewModels()
 
     private val viewModel: OrderFragmentViewModel by viewModels()
-
+    private var itemsAdapter by autoCleared<ExtraDataAdapter>()
     private val args: DirectOrderDetailFragmentArgs by navArgs()
 
     @Inject
@@ -38,6 +40,7 @@ class DirectOrderDetailFragment : Fragment(R.layout.fragment_track_direct_order)
         binding.back.setOnClickListener { findNavController().popBackStack() }
         updateViewModel()
         updateListeners()
+        initUI()
     }
 
     private fun updateViewModel() {
@@ -47,6 +50,11 @@ class DirectOrderDetailFragment : Fragment(R.layout.fragment_track_direct_order)
                 Status.SUCCESS -> {
                     binding.data = it.data
                     updateSelectors(it.data?.orderStatus)
+                    if (it.data?.extraData.isNullOrEmpty().not()) {
+                        val extra = Conversions.convertExtraData(it.data?.extraData)
+                        Timber.i("Extra $extra")
+                        itemsAdapter.submitList(extra)
+                    }
                 }
             }
         })
@@ -95,5 +103,8 @@ class DirectOrderDetailFragment : Fragment(R.layout.fragment_track_direct_order)
         }
 
     }
-
+    private fun initUI() {
+        itemsAdapter = ExtraDataAdapter(appExecutors)
+        binding.recycler.adapter=itemsAdapter
+    }
 }

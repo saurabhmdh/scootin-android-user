@@ -1,7 +1,6 @@
 package com.scootin.view.fragment.delivery.express
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -19,7 +18,7 @@ import com.scootin.network.api.Status
 import com.scootin.network.glide.GlideApp
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.DirectOrderRequest
-import com.scootin.network.response.SearchISuggestiontem
+import com.scootin.network.response.ExtraDataItem
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.util.ui.MediaPicker
@@ -64,7 +63,7 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
                 EditorInfo.IME_ACTION_DONE -> {
                     Timber.i("action id = ${actionId}")
                     searchItemAddAdapter.addList(
-                        SearchISuggestiontem(
+                        ExtraDataItem(
                             binding.searchSuggestion.text.toString(),
                             0
                         )
