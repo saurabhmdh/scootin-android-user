@@ -81,7 +81,7 @@ interface APIService {
         @Body requestFCM: RequestFCM
     ): Response<ResponseUser>
 
-    @DELETE("/cart/clear-cart/{userID}")
+    @DELETE("/cart/clear-cart/{userId}")
     suspend fun deleteCart(@Path("userId") userId: String): Response<String>
 
     @POST("/cart/update-cart")

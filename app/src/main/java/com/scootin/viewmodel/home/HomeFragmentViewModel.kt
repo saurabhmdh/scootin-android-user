@@ -14,6 +14,7 @@ import com.scootin.network.api.APIService
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.RequestFCM
 import com.scootin.network.response.login.ResponseUser
+import com.scootin.repository.CartRepository
 import com.scootin.repository.CategoryRepository
 import com.scootin.repository.UserRepository
 import com.scootin.util.constants.AppConstants
@@ -31,6 +32,7 @@ internal constructor(
     private val apiService: APIService,
     private val locationDao: LocationDao,
     private val cacheDao: CacheDao,
+    private val cartRepository: CartRepository,
     private val userRepository: UserRepository
 ) : ObservableViewModel(), CoroutineScope {
 
@@ -54,6 +56,11 @@ internal constructor(
                     serviceAreaError.postValue(true)
                 } else {
                     //Check for previous selected area if its different then remove item from cart...
+                    val previousServiceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)
+                    if (previousServiceArea?.value != result.id.toString()) {
+                       Timber.i("User change his location..")
+                        cartRepository.deleteCart(AppHeaders.userID)
+                    }
                     cacheDao.insert(Cache(AppConstants.SERVICE_AREA, result.id.toString()))
                     serviceArea.postValue(ServiceArea(result.id, result.name))
                 }
