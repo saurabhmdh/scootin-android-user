@@ -37,7 +37,7 @@ class StationeryViewModel @ViewModelInject internal constructor(
             val mainCategory = cacheDao.getCacheData(AppConstants.MAIN_CATEGORY)?.value
             val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
 
-            val request = RequestSearch(locationInfo.longitude, locationInfo.latitude,search.query)
+            val request = RequestSearch(locationInfo.latitude, locationInfo.longitude, search.query)
             emit(searchRepository.searchShops(request, serviceArea.orEmpty(), mainCategory.orEmpty()))
         }
     }

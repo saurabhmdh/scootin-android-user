@@ -62,7 +62,7 @@ class CategoriesViewModel @ViewModelInject internal constructor(
                 val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
 
                 val request =
-                    RequestSearch(locationInfo.longitude, locationInfo.latitude, search.query)
+                    RequestSearch(locationInfo.latitude, locationInfo.longitude, search.query)
                 emit(
                     searchRepository.searchShops(
                         request,
