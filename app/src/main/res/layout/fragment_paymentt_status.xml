@@ -112,19 +112,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/applyCoupon" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/applyPromoButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:padding="@dimen/dimen_10"
+            android:layout_marginEnd="@dimen/dimen_20"
+            android:background="@android:color/holo_orange_light"
             android:text="Apply Coupon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/couponEdittext" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/confirm_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Pay now"
+            android:textColor="@color/white"
+            android:background="@android:color/holo_green_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="100dp"

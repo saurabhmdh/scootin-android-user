@@ -8,8 +8,8 @@ data class PaymentDetails(
     val amount: Double,
     val deliveryFreeAmount: Double,
     val id: Long,
-    val payment_status: String,
-    val payment_mode: String,
+    val paymentStatus: String,
+    val paymentMode: String,
     val totalAmount: Double,
     val totalGSTAmount: Double,
     val orderReference: String?
