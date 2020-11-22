@@ -82,6 +82,7 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
         binding.uploadPhoto.setOnClickListener {
             onClickOfUploadMedia()
         }
+        binding.back.setOnClickListener { findNavController().popBackStack() }
     }
 
     private fun setSearchSuggestionList() {
