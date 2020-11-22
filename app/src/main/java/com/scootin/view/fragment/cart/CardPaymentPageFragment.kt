@@ -63,7 +63,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                     Status.SUCCESS -> {
                         Timber.i(" data ${it.data}")
                         dismissLoading()
-                        if (it.data?.paymentDetails?.payment_mode.equals("ONLINE")) {
+                        if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
                             val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
                             startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
                         } else {

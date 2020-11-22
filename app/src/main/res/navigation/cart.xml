@@ -48,7 +48,7 @@
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right" />
     </fragment>
-
+<!--    should have information about payment-->
     <fragment
         android:id="@+id/order_confirmation"
         android:name="com.scootin.view.fragment.orders.OrderConfirmedFragment"
