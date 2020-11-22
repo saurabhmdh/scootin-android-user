@@ -57,8 +57,8 @@ class CakeDeliveryFragment : Fragment(R.layout.fragment_cake_delivery) {
             }
         }
 
-        viewModel.addToCartMap.observe(viewLifecycleOwner, Observer {
-            Timber.i("Status addToCartLiveData = ${it.isSuccessful} ")
+        viewModel.addToCartMap.observe(viewLifecycleOwner, {
+            Timber.i("Status addToCartLiveData = ${it?.isSuccessful} ")
         })
 
     }

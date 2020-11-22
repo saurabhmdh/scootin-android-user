@@ -55,8 +55,8 @@ class ClothingInnerWearMenFragment : Fragment(R.layout.fragment_clothing_deliver
             }
         }
 
-        viewModel.addToCartMap.observe(viewLifecycleOwner, Observer {
-            Timber.i("Status addToCartLiveData = ${it.isSuccessful} ")
+        viewModel.addToCartMap.observe(viewLifecycleOwner, {
+            Timber.i("Status addToCartLiveData = ${it?.isSuccessful} ")
         })
     }
 

@@ -43,14 +43,19 @@ class ProductSearchAdapter (
         binding.increment.setOnClickListener {
             val number = binding.count.text.toString().toInt()
             binding.count.text = number.inc().toString()
-            imageAdapterClickListener.onIncrementItem(it, binding.data, number)
+            imageAdapterClickListener.onIncrementItem(it, binding.data, number.inc())
         }
         binding.decrement.setOnClickListener {
             val number = binding.count.text.toString().toInt()
-            if (number > 0)
+            if (number > 0) {
                 binding.count.text = number.dec().toString()
-            imageAdapterClickListener.onDecrementItem(it, binding.data, number)
+                imageAdapterClickListener.onDecrementItem(it, binding.data, number.dec())
+            }
+            //Invalid case.. number can't be negative
         }
+
+        //Need to handle case when its again 0..
+
 
         binding.operation.updateVisibility(false)
         binding.addItem.updateVisibility(true)
