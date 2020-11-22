@@ -175,7 +175,7 @@
             android:layout_width="61dp"
             android:layout_height="@dimen/dimen_10"
             android:layout_marginTop="43dp"
-            android:src="@drawable/ic_progress_bar_grey"
+            android:src="@drawable/selector_band"
             app:layout_constraintStart_toEndOf="@id/packed_icon"
             app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
 
@@ -193,7 +193,7 @@
             android:layout_width="61dp"
             android:layout_height="@dimen/dimen_10"
             android:layout_marginTop="43dp"
-            android:src="@drawable/ic_progress_bar_grey"
+            android:src="@drawable/selector_band"
             app:layout_constraintEnd_toStartOf="@id/delivered_icon"
             app:layout_constraintStart_toEndOf="@id/dispatched_icon"
             app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />

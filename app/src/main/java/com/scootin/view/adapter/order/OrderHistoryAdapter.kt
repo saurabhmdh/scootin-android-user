@@ -63,12 +63,15 @@ class OrderHistoryAdapter(
 
             binding.orderType.setText(deliveryType)
 
-            if (orderStatus == "PLACED") {
+            if (orderStatus == "PLACED" || orderStatus=="UNCONFIRMED" || orderStatus=="PACKED") {
                 binding.imgTrack.setImageResource(R.drawable.ic_track_text_button)
+                binding.orderStatus.setText("Ongoing")
                 binding.orderStatus.setTextColor(Color.parseColor("#FF834A"))
-            } else if (orderStatus == "DELIVERED") {
+            } else if (orderStatus == "COMPLETED") {
+                binding.orderStatus.setText("Delivered")
                 binding.orderStatus.setTextColor(Color.parseColor("#38AA35"))
-            } else {
+            } else if(orderStatus=="CANCELLED") {
+                binding.orderStatus.setText("Cancelled")
                 binding.orderStatus.setTextColor(Color.parseColor("#D10000"))
             }
         }
