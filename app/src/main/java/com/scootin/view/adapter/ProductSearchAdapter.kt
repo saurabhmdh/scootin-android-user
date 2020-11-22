@@ -47,10 +47,14 @@ class ProductSearchAdapter (
         }
         binding.decrement.setOnClickListener {
             val number = binding.count.text.toString().toInt()
-            if (number > 0)
+            if (number > 0) {
                 binding.count.text = number.dec().toString()
+            }
             imageAdapterClickListener.onDecrementItem(it, binding.data, number)
         }
+
+        //Need to handle case when its again 0..
+
 
         binding.operation.updateVisibility(false)
         binding.addItem.updateVisibility(true)

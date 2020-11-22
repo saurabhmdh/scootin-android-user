@@ -19,6 +19,9 @@ import com.scootin.util.ui.FileUtils
 import com.scootin.viewmodel.base.ObservableViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.mapLatest
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -92,14 +95,20 @@ class CategoriesViewModel @ViewModelInject internal constructor(
     val addToCartLiveData = MutableLiveData<AddToCartRequest>()
 
     fun addToCart(addToCartRequest: AddToCartRequest) {
+        Timber.i("Saurabh add to cart $addToCartRequest")
         addToCartLiveData.postValue(addToCartRequest)
     }
 
-    val addToCartMap = addToCartLiveData.switchMap {
-        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-            emit(searchRepository.addToCart(it))
-        }
-    }
+    //Wrong code
+//    val addToCartMap = addToCartLiveData.switchMap {
+//        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+//            emit(searchRepository.addToCart(it))
+//        }
+//    }
 
-
+    val addToCartMap = addToCartLiveData.asFlow().debounce(AppConstants.DEBOUNCE_TIME).mapLatest {
+        searchRepository.addToCart(it)
+    }.catch {
+        Timber.i("Some error code")
+    }.asLiveData()
 }

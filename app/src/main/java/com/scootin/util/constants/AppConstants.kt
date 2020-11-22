@@ -33,4 +33,6 @@ object AppConstants {
 
 
     const val defaultAddressId = 7553L
+
+    const val DEBOUNCE_TIME = 200L
 }

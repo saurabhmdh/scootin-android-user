@@ -120,10 +120,12 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
                     item: SearchProductsByCategoryResponse?,
                     count: Int
                 ) {
+                    Timber.i("Saurabh onIncrementItem $count")
+                    //Increment and decrement will be done one by one
                     val addToCartRequest = AddToCartRequest(
                         AppHeaders.userID.toInt(),
                         item?.id,
-                        count
+                        1
                     )
                     viewModel.addToCart(addToCartRequest)
                 }
@@ -133,10 +135,11 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
                     item: SearchProductsByCategoryResponse?,
                     count: Int
                 ) {
+                    Timber.i("Saurabh onDecrementItem $count")
                     val addToCartRequest = AddToCartRequest(
                         AppHeaders.userID.toInt(),
                         item?.id,
-                        count
+                        -1
                     )
                     viewModel.addToCart(addToCartRequest)
                 }

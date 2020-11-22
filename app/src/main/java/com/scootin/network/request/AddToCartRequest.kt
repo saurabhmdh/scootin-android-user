@@ -1,6 +1,6 @@
 package com.scootin.network.request
 
-class AddToCartRequest(
+data class AddToCartRequest(
     val userID: Int,
     val inventoryID: Int?,
     val quantity: Int
