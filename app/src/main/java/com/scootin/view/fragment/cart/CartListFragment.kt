@@ -19,6 +19,7 @@ import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.PlaceOrderRequest
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.fragment.autoCleared
+import com.scootin.view.activity.MainActivity
 import com.scootin.view.adapter.AddCartItemAdapter
 import com.scootin.view.fragment.BaseFragment
 import com.scootin.viewmodel.cart.CartViewModel
@@ -77,10 +78,11 @@ class CartListFragment : BaseFragment(R.layout.fragment_cart_list) {
     private fun setData() {
         Timber.i("userId = ${AppHeaders.userID}")
         viewModel.userCartList()
-        viewModel.getUserCartListLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.getUserCartListLiveData.observe(viewLifecycleOwner, {
             if (it.isSuccessful) {
                 Timber.i("userCartList = ${it.body()?.size}")
                 val data = it.body()
+                enableDisableVisibility(data.isNullOrEmpty())
                 addCartItemAdapter.submitList(data)
             }
         })
@@ -93,6 +95,27 @@ class CartListFragment : BaseFragment(R.layout.fragment_cart_list) {
                 Status.LOADING -> {}
                 Status.ERROR -> {}
             }
+        }
+
+        binding.shopNow.setOnClickListener {
+            val activity = activity as MainActivity?
+            activity?.moveToAnotherTab(R.id.home)
+        }
+    }
+
+    private fun enableDisableVisibility(empty: Boolean) {
+        if (empty) {
+            binding.emptyText.visibility = View.VISIBLE
+            binding.shopNow.visibility = View.VISIBLE
+
+            binding.productList.visibility = View.GONE
+            binding.checkoutLayout.visibility = View.GONE
+        } else {
+            binding.emptyText.visibility = View.GONE
+            binding.shopNow.visibility = View.GONE
+
+            binding.productList.visibility = View.VISIBLE
+            binding.checkoutLayout.visibility = View.VISIBLE
         }
     }
 

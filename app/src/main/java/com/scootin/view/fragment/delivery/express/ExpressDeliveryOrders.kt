@@ -81,6 +81,8 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
         binding.appCompatImageView6.setOnClickListener {
             onClickOfUploadMedia()
         }
+
+        binding.back.setOnClickListener { findNavController().popBackStack() }
     }
 
     private fun setSearchSuggestionList() {

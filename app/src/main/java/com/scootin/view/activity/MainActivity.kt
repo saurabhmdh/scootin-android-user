@@ -3,12 +3,16 @@ package com.scootin.view.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.razorpay.PaymentResultListener
 import com.scootin.R
 import com.scootin.databinding.ActivityMainBinding
@@ -24,7 +28,6 @@ import timber.log.Timber
 class MainActivity : AppCompatActivity(), PaymentResultListener {
 
     private lateinit var binding: ActivityMainBinding
-    private var currentNavController: LiveData<NavController>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,33 +52,27 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
         setupBottomNavigationBar()
     }
 
-    /**
-     * Called on first creation and when restoring state.
-     */
     private fun setupBottomNavigationBar() {
-        val navGraphIds =
-            listOf(R.navigation.home, R.navigation.cart, R.navigation.wallet, R.navigation.account)
-
-        // Setup the bottom navigation view with a search of navigation graphs
-        val controller = binding.bottomNav.setupWithNavController(
-            navGraphIds = navGraphIds,
-            fragmentManager = supportFragmentManager,
-            containerId = R.id.nav_host_container,
-            intent = intent
+        val navGraphIds = setOf(
+            R.id.titleScreen,
+            R.id.account_fragment,
+            R.id.cart_fragment,
+            R.id.wallet_fragment
         )
+        val bottomView = findViewById<BottomNavigationView>(R.id.bottom_nav)
 
-        // Whenever the selected controller changes, setup the action bar.
-        controller.observe(this, Observer { navController ->
-            try {
-                setupActionBarWithNavController(navController)
-            } catch (e: Exception) {
+        val navController = findNavController(R.id.nav_host_container)
+
+        navController.addOnDestinationChangedListener { navController, navDestination, bundle ->
+            if (navGraphIds.contains(navDestination.id)) {
+                Timber.i("Show")
+                bottomView.visibility = View.VISIBLE
+            } else {
+                Timber.i("Its time to hide navigation controller")
+                bottomView.visibility = View.GONE
             }
-        })
-        currentNavController = controller
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        return currentNavController?.value?.navigateUp() ?: false
+        }
+        bottomView.setupWithNavController(navController)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -124,5 +121,10 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
 
     override fun onPaymentError(errorCode: Int, response: String?) {
         Timber.i("onPaymentError $errorCode response = $response")
+    }
+
+    fun moveToAnotherTab(id: Int) {
+        val navigationView = binding.bottomNav
+        navigationView.selectedItemId = id // R.id.reservation
     }
 }

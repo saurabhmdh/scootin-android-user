@@ -21,8 +21,6 @@ class AddCartItemAdapter(
             newItem: CartListResponseItem
         ) = oldItem.id == newItem.id
 
-
-        @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
             oldItem: CartListResponseItem,
             newItem: CartListResponseItem
@@ -44,6 +42,7 @@ class AddCartItemAdapter(
         isLast: Boolean
     ) {
         binding.data = item
+        binding.count.text = item.quantity?.toString()
     }
 
 }
