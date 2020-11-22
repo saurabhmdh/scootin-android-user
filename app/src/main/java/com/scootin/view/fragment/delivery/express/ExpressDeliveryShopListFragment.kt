@@ -44,8 +44,8 @@ class ExpressDeliveryShopListFragment : Fragment(R.layout.fragment_express_deliv
         updateUI()
         updateListeners()
 
-        viewModel.addToCartMap.observe(viewLifecycleOwner, Observer {
-            Timber.i("Status addToCartLiveData = ${it.isSuccessful} ")
+        viewModel.addToCartMap.observe(viewLifecycleOwner, {
+            Timber.i("Status addToCartLiveData = ${it?.isSuccessful} ")
         })
     }
 

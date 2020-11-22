@@ -56,7 +56,7 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
         }
 
         viewModel.addToCartMap.observe(viewLifecycleOwner, Observer {
-            Timber.i("Status addToCartLiveData = ${it.isSuccessful} ")
+            Timber.i("Status addToCartLiveData = ${it?.isSuccessful} ")
         })
     }
 
@@ -125,7 +125,7 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
                     val addToCartRequest = AddToCartRequest(
                         AppHeaders.userID.toInt(),
                         item?.id,
-                        1
+                        count
                     )
                     viewModel.addToCart(addToCartRequest)
                 }
@@ -139,7 +139,7 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
                     val addToCartRequest = AddToCartRequest(
                         AppHeaders.userID.toInt(),
                         item?.id,
-                        -1
+                        count
                     )
                     viewModel.addToCart(addToCartRequest)
                 }

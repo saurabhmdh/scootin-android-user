@@ -53,8 +53,8 @@ class SnacksDeliveryFragment : Fragment(R.layout.fragment_snacks_delivery) {
             }
         }
 
-        viewModel.addToCartMap.observe(viewLifecycleOwner, Observer {
-            Timber.i("Status addToCartLiveData = ${it.isSuccessful} ")
+        viewModel.addToCartMap.observe(viewLifecycleOwner, {
+            Timber.i("Status addToCartLiveData = ${it?.isSuccessful} ")
         })
     }
 

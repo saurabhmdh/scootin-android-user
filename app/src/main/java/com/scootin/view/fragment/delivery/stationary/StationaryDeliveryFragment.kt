@@ -62,8 +62,8 @@ class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_deliver
             }
         }
 
-        viewModel.addToCartMap.observe(viewLifecycleOwner, Observer {
-            Timber.i("Status addToCartLiveData = ${it.isSuccessful} ")
+        viewModel.addToCartMap.observe(viewLifecycleOwner, {
+            Timber.i("Status addToCartLiveData = ${it?.isSuccessful} ")
         })
     }
     private fun updateUI() {

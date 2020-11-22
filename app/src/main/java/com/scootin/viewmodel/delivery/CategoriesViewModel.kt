@@ -12,13 +12,13 @@ import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.*
 import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.SearchShopsByCategoryResponse
+import com.scootin.repository.CartRepository
 import com.scootin.repository.PaymentRepository
 import com.scootin.repository.SearchRepository
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.ui.FileUtils
 import com.scootin.viewmodel.base.ObservableViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.mapLatest
@@ -34,7 +34,8 @@ class CategoriesViewModel @ViewModelInject internal constructor(
     private val cacheDao: CacheDao,
     private val locationDao: LocationDao,
     val searchRepository: SearchRepository,
-    private val application: Application
+    private val application: Application,
+    private val cartRepository: CartRepository
 ) : ObservableViewModel() {
 
     private val _search = MutableLiveData<SearchShopsByCategory>()
@@ -99,16 +100,20 @@ class CategoriesViewModel @ViewModelInject internal constructor(
         addToCartLiveData.postValue(addToCartRequest)
     }
 
-    //Wrong code
-//    val addToCartMap = addToCartLiveData.switchMap {
-//        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-//            emit(searchRepository.addToCart(it))
-//        }
-//    }
 
-    val addToCartMap = addToCartLiveData.asFlow().debounce(AppConstants.DEBOUNCE_TIME).mapLatest {
-        searchRepository.addToCart(it)
-    }.catch {
-        Timber.i("Some error code")
-    }.asLiveData()
+
+    private var job: Deferred<Unit>? = null
+    val addToCartMap = addToCartLiveData.switchMap { cartData ->
+        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+            job?.cancel()
+            var data: Response<String>? = null
+            job = CoroutineScope(Dispatchers.IO).async {
+                delay(AppConstants.DEBOUNCE_TIME)
+                data = cartRepository.updateCart(cartData)
+            }
+            job?.await()
+            emit(data)
+        }
+    }
+
 }

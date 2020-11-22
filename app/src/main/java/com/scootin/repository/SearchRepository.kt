@@ -31,7 +31,6 @@ class SearchRepository @Inject constructor(
     suspend fun searchProducts(query: String, serviceAreaId: String, categoryId: String) =
         services.findProducts(serviceAreaId, categoryId, RequestSearch(query = query))
 
-    suspend fun addToCart(request: AddToCartRequest) = services.addToCart(request)
 
     suspend fun getUserCartList(userId: String) = services.getUserCartList(userId)
 

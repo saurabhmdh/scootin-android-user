@@ -60,7 +60,7 @@ class ClothingInnerWearWomen : Fragment(R.layout.fragment_clothing_delivery) {
         }
 
         viewModel.addToCartMap.observe(viewLifecycleOwner, Observer {
-            Timber.i("Status addToCartLiveData = ${it.isSuccessful} ")
+            Timber.i("Status addToCartLiveData = ${it?.isSuccessful} ")
         })
 
     }

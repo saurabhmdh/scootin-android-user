@@ -81,10 +81,11 @@ interface APIService {
         @Body requestFCM: RequestFCM
     ): Response<ResponseUser>
 
+    @DELETE("/cart/clear-cart/{userID}")
+    suspend fun deleteCart(@Path("userId") userId: String): Response<String>
 
-    @POST("/cart/add-to-cart")
-    suspend fun addToCart(@Body request: AddToCartRequest): Response<String>
-
+    @POST("/cart/update-cart")
+    suspend fun updateCart(@Body request: AddToCartRequest): Response<String>
 
     @GET("/cart/get-cart/{userID}")
     suspend fun getUserCartList(@Path("userID") userId: String): Response<List<CartListResponseItem>>

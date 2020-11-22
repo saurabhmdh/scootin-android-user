@@ -35,8 +35,8 @@ class MedicinesDeliveryFragment : Fragment(R.layout.fragment_medicines_delivery)
         updateUI()
         updateListeners()
         binding.storeList.updateVisibility(true)
-        viewModel.addToCartMap.observe(viewLifecycleOwner, Observer {
-            Timber.i("Status addToCartLiveData = ${it.isSuccessful} ")
+        viewModel.addToCartMap.observe(viewLifecycleOwner, {
+            Timber.i("Status addToCartLiveData = ${it?.isSuccessful} ")
         })
     }
 
