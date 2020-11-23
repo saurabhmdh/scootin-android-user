@@ -34,7 +34,7 @@ class AddCartItemAdapter(
         val binding = AdapterItemAddCardListBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
-        binding.discountPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+        binding.price.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
 
         binding.increment.setOnClickListener {
             val number = binding.count.text.toString().toInt()
