@@ -12,6 +12,7 @@ import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.*
 import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.SearchShopsByCategoryResponse
+import com.scootin.network.response.cart.CartListResponseItem
 import com.scootin.repository.CartRepository
 import com.scootin.repository.PaymentRepository
 import com.scootin.repository.SearchRepository
@@ -96,7 +97,6 @@ class CategoriesViewModel @ViewModelInject internal constructor(
     val addToCartLiveData = MutableLiveData<AddToCartRequest>()
 
     fun addToCart(addToCartRequest: AddToCartRequest) {
-        Timber.i("Saurabh add to cart $addToCartRequest")
         addToCartLiveData.postValue(addToCartRequest)
     }
 
@@ -106,7 +106,7 @@ class CategoriesViewModel @ViewModelInject internal constructor(
     val addToCartMap = addToCartLiveData.switchMap { cartData ->
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
             job?.cancel()
-            var data: Response<String>? = null
+            var data: Response<CartListResponseItem>? = null
             job = CoroutineScope(Dispatchers.IO).async {
                 delay(AppConstants.DEBOUNCE_TIME)
                 data = cartRepository.updateCart(cartData)

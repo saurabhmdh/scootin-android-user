@@ -85,7 +85,7 @@ interface APIService {
     suspend fun deleteCart(@Path("userId") userId: String): Response<String>
 
     @POST("/cart/update-cart")
-    suspend fun updateCart(@Body request: AddToCartRequest): Response<String>
+    suspend fun updateCart(@Body request: AddToCartRequest): Response<CartListResponseItem>
 
     @GET("/cart/get-cart-count/{userId}")
     suspend fun getCartCount(@Path("userId") userId: String): Response<String>
