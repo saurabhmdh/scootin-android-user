@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/ic_background"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <LinearLayout
-        android:id="@+id/bg_screen"
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:background="@drawable/ic_background"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -20,7 +12,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_eng_card" />
@@ -101,27 +92,28 @@
             android:background="@color/text_color_primary"
             app:layout_constraintTop_toBottomOf="@id/search_box"/>
 
+<!--        https://stackoverflow.com/questions/45998522/recyclerview-does-not-show-all-items-inside-fragment-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/product_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="@dimen/dimen_10"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="15dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_box" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/store_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="@dimen/dimen_10"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="15dp"
             android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_box" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</LinearLayout>
-</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
