@@ -13,4 +13,6 @@ class CartRepository @Inject constructor(
     suspend fun updateCart(request: AddToCartRequest) = services.updateCart(request)
 
     suspend fun deleteCart(userId: String) = services.deleteCart(userId)
+
+    suspend fun getCartCount(userId: String) = services.getCartCount(userId)
 }

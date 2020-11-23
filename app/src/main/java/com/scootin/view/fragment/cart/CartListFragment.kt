@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.scootin.R
 import com.scootin.bindings.setPrice
@@ -100,6 +101,14 @@ class CartListFragment : BaseFragment(R.layout.fragment_cart_list) {
         binding.shopNow.setOnClickListener {
             val activity = activity as MainActivity?
             activity?.moveToAnotherTab(R.id.home)
+        }
+
+        viewModel.getCartCount(AppHeaders.userID).observe(viewLifecycleOwner) {
+            if (it.isSuccessful) {
+                val result = it.body()?.toInt()
+                val activity = activity as MainActivity?
+                activity?.setupBadging(result.orZero())
+            }
         }
     }
 

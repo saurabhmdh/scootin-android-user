@@ -2,22 +2,18 @@ package com.scootin.view.activity
 
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
-import androidx.navigation.NavController
+import androidx.core.view.forEachIndexed
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.razorpay.PaymentResultListener
 import com.scootin.R
 import com.scootin.databinding.ActivityMainBinding
-import com.scootin.network.request.VerifyAmountRequest
-import com.scootin.util.navigation.setupWithNavController
 import com.scootin.view.fragment.cart.CardPaymentPageFragment
 import com.scootin.view.fragment.wallet.MyWalletFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,6 +37,7 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         } // Else, need to wait for onRestoreInstanceState
+
     }
 
 
@@ -126,5 +123,18 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
     fun moveToAnotherTab(id: Int) {
         val navigationView = binding.bottomNav
         navigationView.selectedItemId = id // R.id.reservation
+    }
+
+    fun setupBadging(count: Int) {
+        val item = binding.bottomNav.menu.getItem(1)
+        val badgeDrawable = binding.bottomNav.getOrCreateBadge(item.itemId)
+        if (count == 0) {
+            badgeDrawable.number = 0
+            badgeDrawable.setVisible(false, true)
+        } else {
+            badgeDrawable.number = count
+            badgeDrawable.backgroundColor = Color.BLUE
+            badgeDrawable.setVisible(true, true)
+        }
     }
 }

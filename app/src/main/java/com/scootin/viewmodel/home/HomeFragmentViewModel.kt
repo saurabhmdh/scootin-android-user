@@ -2,6 +2,7 @@ package com.scootin.viewmodel.home
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.google.android.libraries.places.api.model.Place
 import com.google.gson.Gson
@@ -20,6 +21,7 @@ import com.scootin.repository.UserRepository
 import com.scootin.util.constants.AppConstants
 import com.scootin.view.vo.ServiceArea
 import com.scootin.viewmodel.base.ObservableViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -103,6 +105,15 @@ internal constructor(
                 }
             }
         }
+    }
+
+
+    fun getCartCount(userId: String) = liveData(coroutineContext + handler) {
+        emit(cartRepository.getCartCount(userId))
+    }
+
+    private val handler = CoroutineExceptionHandler { _, exception ->
+        Timber.i("Caught  $exception")
     }
 
     override val coroutineContext: CoroutineContext

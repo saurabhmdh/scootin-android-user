@@ -30,11 +30,13 @@ import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.google.firebase.iid.FirebaseInstanceId
 import com.scootin.R
+import com.scootin.extensions.orZero
 import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.ui.UtilPermission
+import com.scootin.view.activity.MainActivity
 
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -219,6 +221,13 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
             }
         })
 
+        viewModel.getCartCount(AppHeaders.userID).observe(viewLifecycleOwner) {
+            if (it.isSuccessful) {
+                val result = it.body()?.toInt()
+                val activity = activity as MainActivity?
+                activity?.setupBadging(result.orZero())
+            }
+        }
     }
 
     private fun handlePlaceSuccessResponse(place: Place?, adminArea: String? = null) {
