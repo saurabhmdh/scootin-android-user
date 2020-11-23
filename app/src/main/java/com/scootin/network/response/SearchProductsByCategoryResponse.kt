@@ -10,7 +10,8 @@ class SearchProductsByCategoryResponse(
     val quantity: Int?,
     val serviceID: ServiceID,
     val shopManagement: ShopManagement,
-    val title: String?
+    val title: String?,
+    val discountPrice: Double?,
 ) {
     data class CategoryDetails(
         val active: Boolean,

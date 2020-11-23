@@ -25,7 +25,8 @@ data class CartListResponseItem(
         val quantity: Int?,
         val serviceID: ServiceIDX,
         val shopManagement: ShopManagement,
-        val title: String?
+        val title: String?,
+        val discountPrice: Double?
     ) : Parcelable
 
     @Parcelize
