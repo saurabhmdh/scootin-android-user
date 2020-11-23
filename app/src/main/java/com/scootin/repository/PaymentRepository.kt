@@ -20,12 +20,7 @@ class PaymentRepository @Inject constructor(
     private val cacheDao: CacheDao
 ) {
 
-    fun getTotalPriceFromCart(
-        userId: String,
-        context: CoroutineContext
-    ): LiveData<Resource<Double>> = object : NetworkBoundResource<Double>(context) {
-        override suspend fun createCall(): Response<Double> = services.getTotalPriceFromCart(userId)
-    }.asLiveData()
+    suspend fun getTotalPriceFromCart(userId: String) = services.getTotalPriceFromCart(userId)
 
     suspend fun applyPromoCode(orderId: String, userId: String, promoCodeRequest: PromoCodeRequest) = services.applyPromoCode(orderId, userId, promoCodeRequest)
 

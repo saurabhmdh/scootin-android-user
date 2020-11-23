@@ -17,7 +17,9 @@ import com.scootin.extensions.orZero
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
+import com.scootin.network.request.AddToCartRequest
 import com.scootin.network.request.PlaceOrderRequest
+import com.scootin.network.response.cart.CartListResponseItem
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.activity.MainActivity
@@ -46,9 +48,24 @@ class CartListFragment : BaseFragment(R.layout.fragment_cart_list) {
         setListener()
     }
 
+    //Saurabh update data to cart
     private fun setAddCartListAdapter() {
         addCartItemAdapter = AddCartItemAdapter(
-            appExecutors
+            appExecutors, object : AddCartItemAdapter.CartItemClickLister {
+                override fun onIncrementItem(item: CartListResponseItem?, count: Int) {
+                   Timber.i("onIncrementItem ${item}")
+                    showLoading()
+                    val addToCartRequest = AddToCartRequest(AppHeaders.userID.toInt(), item?.inventoryDetails?.id, count)
+                    viewModel.addToCart(addToCartRequest)
+                }
+
+                override fun onDecrementItem(item: CartListResponseItem?, count: Int) {
+                    Timber.i("onDecrementItem ${item}")
+                    showLoading()
+                    val addToCartRequest = AddToCartRequest(AppHeaders.userID.toInt(), item?.inventoryDetails?.id, count)
+                    viewModel.addToCart(addToCartRequest)
+                }
+            }
         )
 
         binding.productList.apply {
@@ -74,12 +91,17 @@ class CartListFragment : BaseFragment(R.layout.fragment_cart_list) {
                 }
             }
         }
+
+        viewModel.addToCartMap.observe(viewLifecycleOwner, {
+            viewModel.userCartList()
+        })
     }
 
     private fun setData() {
         Timber.i("userId = ${AppHeaders.userID}")
         viewModel.userCartList()
         viewModel.getUserCartListLiveData.observe(viewLifecycleOwner, {
+            dismissLoading()
             if (it.isSuccessful) {
                 Timber.i("userCartList = ${it.body()?.size}")
                 val data = it.body()
@@ -88,13 +110,9 @@ class CartListFragment : BaseFragment(R.layout.fragment_cart_list) {
             }
         })
 
-        viewModel.getTotalPrice(AppHeaders.userID).observe(viewLifecycleOwner) {
-            when(it.status) {
-                Status.SUCCESS -> {
-                    binding.price.setPrice(it.data.orDefault(0.0))
-                }
-                Status.LOADING -> {}
-                Status.ERROR -> {}
+        viewModel.totalPrice.observe(viewLifecycleOwner) {
+            if(it.isSuccessful) {
+                binding.price.setPrice(it.body().orDefault(0.0))
             }
         }
 
@@ -116,13 +134,11 @@ class CartListFragment : BaseFragment(R.layout.fragment_cart_list) {
         if (empty) {
             binding.emptyText.visibility = View.VISIBLE
             binding.shopNow.visibility = View.VISIBLE
-
             binding.productList.visibility = View.GONE
             binding.checkoutLayout.visibility = View.GONE
         } else {
             binding.emptyText.visibility = View.GONE
             binding.shopNow.visibility = View.GONE
-
             binding.productList.visibility = View.VISIBLE
             binding.checkoutLayout.visibility = View.VISIBLE
         }
