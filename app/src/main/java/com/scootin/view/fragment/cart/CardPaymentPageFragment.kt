@@ -38,6 +38,8 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
     @Inject
     lateinit var appExecutors: AppExecutors
 
+    var promoCode: String = ""
+
     private val orderId by lazy {
         args.orderId
     }
@@ -57,6 +59,14 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
             when(it.status) {
                 Status.SUCCESS -> {
                     binding.data = it.data
+
+                    if (it.data?.orderDetails?.paymentDetails?.promoCodeApplied == true) {
+                        binding.promoApplied.visibility = View.VISIBLE
+                        binding.discountApplied.text = "Discount Applied (${promoCode})"
+                        //promoCode
+                    } else {
+                        binding.promoApplied.visibility = View.GONE
+                    }
                 }
                 Status.ERROR -> {
                     //Show error and move back
@@ -94,8 +104,11 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
         }
 
         binding.applyPromoButton.setOnClickListener {
+
             viewModel.promCodeRequest(orderId.toString(), binding.couponEdittext.text.toString()).observe(viewLifecycleOwner) {
                 if (it.isSuccessful) {
+                    promoCode = binding.couponEdittext.text.toString()
+                    viewModel.loadOrder(orderId)
                     Toast.makeText(context, "Coupon has been applied.", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(context, "Invalid Coupon code", Toast.LENGTH_SHORT).show()
@@ -144,6 +157,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
             when(it.status) {
                 Status.LOADING -> {}
                 Status.SUCCESS -> {
+                    //Need some direction to move
                     findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage())
                 }
                 Status.ERROR -> {}

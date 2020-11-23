@@ -7,5 +7,8 @@ data class PaymentDetails(
     val totalAmount: Double,
     val id: Long,
     val paymentStatus: String,
-    val paymentMode: String?
+    val paymentMode: String?,
+    val promoDiscount: Double?,
+    val promoCodeApplied: Boolean?,
+    val promoCodeID: Long?
 )

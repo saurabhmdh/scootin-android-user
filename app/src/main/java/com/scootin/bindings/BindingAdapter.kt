@@ -37,9 +37,16 @@ fun getDefaultImage() = RequestOptions().apply {
 fun TextView.setPrice(value: Double) {
     val format: Format = NumberFormat.getCurrencyInstance(Locale("en", "in"))
     val finalValue = format.format(BigDecimal(value))
-
     text = finalValue
 }
+
+@BindingAdapter("setDiscountPrice")
+fun TextView.setDiscountPrice(value: Double) {
+    val format: Format = NumberFormat.getCurrencyInstance(Locale("en", "in"))
+    val finalValue = format.format(BigDecimal(value * -1))
+    text = finalValue
+}
+
 @SuppressLint("SimpleDateFormat")
 @BindingAdapter("setDateFromOrderDate")
 fun TextView.setDateFromOrderDate(orderDate: String?) {
