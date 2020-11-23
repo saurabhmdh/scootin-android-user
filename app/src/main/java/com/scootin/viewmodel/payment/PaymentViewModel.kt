@@ -5,6 +5,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 
 import com.scootin.network.manager.AppHeaders
+import com.scootin.network.request.AddToCartRequest
 import com.scootin.network.request.OrderRequest
 import com.scootin.network.request.PromoCodeRequest
 import com.scootin.network.request.VerifyAmountRequest
@@ -25,7 +26,15 @@ class PaymentViewModel @ViewModelInject internal constructor(
     private val paymentRepository: PaymentRepository
 ) : ObservableViewModel() {
 
+    private val _Order_Id = MutableLiveData<Long>()
 
+    fun loadOrder(orderId: Long) {
+        _Order_Id.postValue(orderId)
+    }
+
+    val orderInfo = _Order_Id.switchMap {
+        orderRepository.getOrder(it.toString(),viewModelScope.coroutineContext + Dispatchers.IO + handler)
+    }
 
     fun promCodeRequest(orderId: String, promoCode: String): LiveData<Response<PlaceOrderResponse>> {
         return liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {

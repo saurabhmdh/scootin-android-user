@@ -42,6 +42,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
         args.orderId
     }
 
+    //We need to load order in-order to get more information about order
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPaymenttStatusBinding.bind(view)
@@ -50,6 +51,19 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
     }
 
     private fun setListener() {
+        viewModel.loadOrder(orderId)
+
+        viewModel.orderInfo.observe(viewLifecycleOwner) {
+            when(it.status) {
+                Status.SUCCESS -> {
+                    binding.data = it.data
+                }
+                Status.ERROR -> {
+                    //Show error and move back
+                }
+            }
+        }
+
         binding.confirmButton.setOnClickListener {
 
             val mode = when(binding.radioGroup.getCheckedRadioButtonPosition()) {
@@ -61,6 +75,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
             viewModel.userConfirmOrder(orderId.toString(), AppHeaders.userID, OrderRequest(mode)).observe(viewLifecycleOwner) {
                 when(it.status) {
                     Status.SUCCESS -> {
+
                         Timber.i(" data ${it.data}")
                         dismissLoading()
                         if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
