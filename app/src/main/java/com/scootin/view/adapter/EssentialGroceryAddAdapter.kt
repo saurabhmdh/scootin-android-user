@@ -9,73 +9,93 @@ import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.scootin.R
 import com.scootin.databinding.AdapterItemAddEssentialGroceryBinding
+import com.scootin.databinding.AdapterItemAddSweetsBinding
+import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
+import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.sweets.SweetsItem
 
 class EssentialGroceryAddAdapter (
     val appExecutors: AppExecutors,
     val imageAdapterClickListener: ImageAdapterClickLister
 
-) : DataBoundListAdapter<SweetsItem, AdapterItemAddEssentialGroceryBinding>(
+) : DataBoundListAdapter<SearchProductsByCategoryResponse, AdapterItemAddEssentialGroceryBinding>(
     appExecutors,
-    diffCallback = object : DiffUtil.ItemCallback<SweetsItem>() {
+    diffCallback = object : DiffUtil.ItemCallback<SearchProductsByCategoryResponse>() {
         override fun areItemsTheSame(
-            oldItem: SweetsItem,
-            newItem: SweetsItem
-        ): Boolean {
-            return oldItem.id == newItem.id
-        }
+            oldItem: SearchProductsByCategoryResponse,
+            newItem: SearchProductsByCategoryResponse
+        ) = oldItem.id == newItem.id
+
 
         @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
-            oldItem: SweetsItem,
-            newItem: SweetsItem
-        ): Boolean {
-            return oldItem == newItem
-        }
+            oldItem: SearchProductsByCategoryResponse,
+            newItem: SearchProductsByCategoryResponse
+        ) = oldItem == newItem
     }
 )
 {
-    override fun createBinding(parent: ViewGroup): AdapterItemAddEssentialGroceryBinding =
-        AdapterItemAddEssentialGroceryBinding.inflate(
+    override fun createBinding(parent: ViewGroup):AdapterItemAddEssentialGroceryBinding {
+        val binding= AdapterItemAddEssentialGroceryBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
+
         )
-
-    override fun bind(
-        binding: AdapterItemAddEssentialGroceryBinding,
-        item: SweetsItem,
-        position: Int,
-        isLast: Boolean
-    ) {
-
-        binding.discountPrice.paintFlags= Paint.STRIKE_THRU_TEXT_FLAG
+        binding.price.paintFlags= Paint.STRIKE_THRU_TEXT_FLAG
 
         binding.increment.setOnClickListener {
             val number = binding.count.text.toString().toInt()
             binding.count.text = number.inc().toString()
-            imageAdapterClickListener.onIncrementItem(it)
+            imageAdapterClickListener.onIncrementItem(it, binding.data, number.inc())
         }
         binding.decrement.setOnClickListener {
             val number = binding.count.text.toString().toInt()
-            if (number > 0)
+            if (number > 0) {
                 binding.count.text = number.dec().toString()
-            imageAdapterClickListener.onDecrementItem(it)
+                imageAdapterClickListener.onDecrementItem(it, binding.data, number.dec())
+            }
+            //Invalid case.. number can't be negative
         }
 
-        val items = arrayOf("500g", "1kg", "2kg")
-        val adapter = ArrayAdapter<String>(
-            binding.count.context,
-            R.layout.spinner_layout_essential,
-            items
-        )
+        //Need to handle case when its again 0..
 
+
+        binding.operation.updateVisibility(false)
+        binding.addItem.updateVisibility(true)
+
+        binding.addItem.setOnClickListener {
+            binding.operation.updateVisibility(true)
+            binding.addItem.updateVisibility(false)
+            imageAdapterClickListener.onIncrementItem(it, binding.data, 1)
+        }
+
+        return binding
+    }
+
+    override fun bind(
+        binding: AdapterItemAddEssentialGroceryBinding,
+        item: SearchProductsByCategoryResponse,
+        position: Int,
+        isLast: Boolean
+    ) {
+        binding.data = item
+
+
+
+//        val items = arrayOf("500g", "1kg", "2kg")
+//        val adapter = ArrayAdapter<String>(
+//            binding.count.context,
+//            R.layout.spinner_layout_essential,
+//            items
+//        )
+//
 //        binding.spinner.setAdapter(adapter)
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+//        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
 
     }
 
     interface ImageAdapterClickLister {
-        fun onIncrementItem(view: View)
-        fun onDecrementItem(view: View)
+        fun onIncrementItem(view: View, item: SearchProductsByCategoryResponse?, count: Int)
+        fun onDecrementItem(view: View, item: SearchProductsByCategoryResponse?, count: Int)
     }
 }

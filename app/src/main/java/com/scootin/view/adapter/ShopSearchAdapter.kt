@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.scootin.R
 import com.scootin.databinding.AdapterItemAddEssentialgroceryStoreBinding
+import com.scootin.databinding.AdapterItemAddSweetsStoreBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.SearchShopsByCategoryResponse
 import timber.log.Timber
@@ -14,7 +15,7 @@ import timber.log.Timber
 class ShopSearchAdapter (
     val appExecutors: AppExecutors,
     val imageAdapterClickLister: StoreImageAdapterClickListener
-): DataBoundListAdapter<SearchShopsByCategoryResponse, AdapterItemAddEssentialgroceryStoreBinding>(
+): DataBoundListAdapter<SearchShopsByCategoryResponse, AdapterItemAddSweetsStoreBinding>(
     appExecutors,
     diffCallback = object : DiffUtil.ItemCallback<SearchShopsByCategoryResponse>(){
         override fun areItemsTheSame(oldItem: SearchShopsByCategoryResponse, newItem: SearchShopsByCategoryResponse) = oldItem.shopID == newItem.shopID
@@ -22,14 +23,14 @@ class ShopSearchAdapter (
 
     }
 ) {
-    override fun createBinding(parent: ViewGroup): AdapterItemAddEssentialgroceryStoreBinding =
-        AdapterItemAddEssentialgroceryStoreBinding.inflate(
+    override fun createBinding(parent: ViewGroup): AdapterItemAddSweetsStoreBinding =
+        AdapterItemAddSweetsStoreBinding.inflate(
             LayoutInflater.from(parent.context),parent,false
         )
 
 
     override fun bind(
-        binding: AdapterItemAddEssentialgroceryStoreBinding,
+        binding: AdapterItemAddSweetsStoreBinding,
         item: SearchShopsByCategoryResponse,
         position: Int,
         isLast: Boolean

@@ -8,23 +8,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.scootin.R
 import com.scootin.databinding.AdapterItemAddEssentialgroceryStoreBinding
+import com.scootin.databinding.AdapterItemAddSweetsStoreBinding
 import com.scootin.network.AppExecutors
+import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.network.response.sweets.SweetsStore
 import timber.log.Timber
 
 class EssentialGroceryStoreAdapter (
     val appExecutors: AppExecutors,
     val imageAdapterClickLister: StoreImageAdapterClickListener
-): DataBoundListAdapter<SweetsStore, AdapterItemAddEssentialgroceryStoreBinding>(
+): DataBoundListAdapter<SearchShopsByCategoryResponse, AdapterItemAddEssentialgroceryStoreBinding>(
     appExecutors,
-    diffCallback = object : DiffUtil.ItemCallback<SweetsStore>(){
-        override fun areItemsTheSame(oldItem: SweetsStore, newItem: SweetsStore): Boolean {
-            return oldItem.id==newItem.id
-        }
-        @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem: SweetsStore, newItem: SweetsStore): Boolean {
-            return oldItem.id==newItem.id
-        }
+    diffCallback = object : DiffUtil.ItemCallback<SearchShopsByCategoryResponse>(){
+        override fun areItemsTheSame(oldItem: SearchShopsByCategoryResponse, newItem: SearchShopsByCategoryResponse) = oldItem.shopID == newItem.shopID
+        override fun areContentsTheSame(oldItem: SearchShopsByCategoryResponse, newItem: SearchShopsByCategoryResponse) = oldItem == newItem
 
     }
 ) {
@@ -36,34 +33,38 @@ class EssentialGroceryStoreAdapter (
 
     override fun bind(
         binding: AdapterItemAddEssentialgroceryStoreBinding,
-        item: SweetsStore,
+        item: SearchShopsByCategoryResponse,
         position: Int,
         isLast: Boolean
     ) {
         Timber.i("item = $item")
         item.apply {
+
+            //TODO: Its should use databinding..
             binding.name.setText(name)
             binding.distance.setText(distance)
-            binding.ratingCount.setRating(rating)
-            if (isOpen){
-                binding.onlinestatusStore.setText("Online")
-                binding.btnSelect.setImageResource(R.drawable.ic_select_button_active)
-                binding.btnSelect.setOnClickListener {
-                    imageAdapterClickLister.onSelectButtonSelected(it)
-                }
-            }
-            else{
-                binding.onlinestatusStore.setText("Offline")
-                binding.onlinestatusStore.setTextColor(Color.parseColor("#990f02"))
-                binding.btnSelect.setImageResource(R.drawable.ic_select_button_inactive)
 
+            binding.ratingCount.setRating(rating.toFloat())
+
+//            if (isOpen){
+            binding.onlinestatusStore.setText("Online")
+            binding.btnSelect.setImageResource(R.drawable.ic_select_button_active)
+            binding.btnSelect.setOnClickListener {
+                imageAdapterClickLister.onSelectButtonSelected(item)
             }
+//            }
+//            else{
+//                binding.onlinestatusStore.setText("Offline")
+//                binding.onlinestatusStore.setTextColor(Color.parseColor("#990f02"))
+//                binding.btnSelect.setImageResource(R.drawable.ic_select_button_inactive)
+//
+//            }
 
         }
 
 
     }
     interface StoreImageAdapterClickListener{
-        fun onSelectButtonSelected(view: View)
+        fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse)
     }
 }

@@ -18,6 +18,8 @@ import com.scootin.network.request.AddToCartRequest
 import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.util.fragment.autoCleared
+import com.scootin.view.adapter.EssentialGroceryAddAdapter
+import com.scootin.view.adapter.EssentialGroceryStoreAdapter
 import com.scootin.view.adapter.ProductSearchAdapter
 import com.scootin.view.adapter.ShopSearchAdapter
 import com.scootin.viewmodel.delivery.CategoriesViewModel
@@ -33,8 +35,8 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
 
     @Inject
     lateinit var appExecutors: AppExecutors
-    private lateinit var productSearchAdapter: ProductSearchAdapter
-    private lateinit var shopSearchAdapter: ShopSearchAdapter
+    private lateinit var productSearchAdapter: EssentialGroceryAddAdapter
+    private lateinit var shopSearchAdapter: EssentialGroceryStoreAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -112,9 +114,9 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
 
 
     private fun setProductAdapter() {
-        productSearchAdapter = ProductSearchAdapter(
+        productSearchAdapter = EssentialGroceryAddAdapter(
             appExecutors,
-            object : ProductSearchAdapter.ImageAdapterClickLister {
+            object : EssentialGroceryAddAdapter.ImageAdapterClickLister {
                 override fun onIncrementItem(
                     view: View,
                     item: SearchProductsByCategoryResponse?,
@@ -152,8 +154,8 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
     }
 
     private fun setStoreAdapter() {
-        shopSearchAdapter = ShopSearchAdapter(
-            appExecutors, object : ShopSearchAdapter.StoreImageAdapterClickListener {
+        shopSearchAdapter = EssentialGroceryStoreAdapter(
+            appExecutors, object : EssentialGroceryStoreAdapter.StoreImageAdapterClickListener {
                 override fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse) {
                     Timber.i("Shop Info $shopInfo")
                     viewModel.updateShop(shopInfo.shopID)

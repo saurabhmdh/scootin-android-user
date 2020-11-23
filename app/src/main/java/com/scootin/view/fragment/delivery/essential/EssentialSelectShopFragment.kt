@@ -10,6 +10,7 @@ import com.scootin.databinding.FragmentGroceryDeliveryShopSelectBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.util.fragment.autoCleared
+import com.scootin.view.adapter.EssentialGroceryStoreAdapter
 import com.scootin.view.adapter.ShopSearchAdapter
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,7 +25,7 @@ class EssentialSelectShopFragment : Fragment(R.layout.fragment_grocery_delivery_
 
     @Inject
     lateinit var appExecutors: AppExecutors
-    private lateinit var shopSearchAdapter: ShopSearchAdapter
+    private lateinit var shopSearchAdapter: EssentialGroceryStoreAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,8 +56,8 @@ class EssentialSelectShopFragment : Fragment(R.layout.fragment_grocery_delivery_
 
 
     private fun setStoreAdapter() {
-        shopSearchAdapter = ShopSearchAdapter(
-            appExecutors, object : ShopSearchAdapter.StoreImageAdapterClickListener {
+        shopSearchAdapter = EssentialGroceryStoreAdapter(
+            appExecutors, object : EssentialGroceryStoreAdapter.StoreImageAdapterClickListener {
                 override fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse) {
                     Timber.i("Shop Info $shopInfo")
                     val direction = EssentialSelectShopFragmentDirections.shopSelectionToHandwritten(shopInfo.shopID, shopInfo.name)

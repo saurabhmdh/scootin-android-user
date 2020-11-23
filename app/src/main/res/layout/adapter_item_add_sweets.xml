@@ -3,7 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="5dp"
     xmlns:card_view="http://schemas.android.com/apk/res-auto">
+    <data>
 
+        <variable
+            name="data"
+            type="com.scootin.network.response.SearchProductsByCategoryResponse"/>
+
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -22,7 +28,7 @@
             android:layout_marginBottom="16dp"
 
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/laddoo"
+            app:setImage="@{data.productImage.url}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -47,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:text="Business name"
+            android:text="@{data.title}"
             android:textColor="#a9a9a9"
             android:textAllCaps="true"
             android:textStyle="bold"
@@ -61,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
-            android:text="Hello"
+            android:text="@{data.description}"
             android:textColor="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name"
@@ -75,7 +81,7 @@
             android:layout_marginEnd="16dp"
 
             android:fontFamily="@font/montserrat_regular"
-            android:text="250$"
+            app:setPrice="@{data.price}"
             android:textStyle="bold"
             android:singleLine="true"
             android:ellipsize="end"
@@ -89,38 +95,47 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/montserrat_regular"
-            android:text="100$"
+            app:setPrice="@{data.discountPrice}"
             android:textStyle="bold"
             android:textColor="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/discountPrice" />
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/spinner"
-            android:layout_width="120dp"
-            android:layout_height="18dp"
-            android:layout_marginTop="4dp"
-            android:padding="2dp"
+<!--        <androidx.appcompat.widget.AppCompatSpinner-->
+<!--            android:id="@+id/spinner"-->
+<!--            android:layout_width="120dp"-->
+<!--            android:layout_height="18dp"-->
+<!--            android:layout_marginTop="4dp"-->
+<!--            android:padding="2dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:background="@drawable/spinner_grad_bg"-->
+<!--            android:paddingStart="5dp"-->
+<!--            android:spinnerMode="dropdown"-->
+<!--            android:theme="@style/ThemeOverlay.AppCompat.Light"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.724" />-->
+        <TextView
+            android:id="@+id/addItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/spinner_grad_bg"
-            android:paddingStart="5dp"
-            android:spinnerMode="dropdown"
-            android:theme="@style/ThemeOverlay.AppCompat.Light"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.724" />
-
+            app:layout_constraintTop_toBottomOf="@+id/price"/>
         <LinearLayout
             android:id="@+id/operation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner">
+            app:layout_constraintTop_toBottomOf="@+id/price">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/decrement"
