@@ -2,6 +2,7 @@ package com.scootin.viewmodel.account
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import com.scootin.network.response.AddressDetails
 import com.scootin.repository.UserRepository
 import com.scootin.viewmodel.base.ObservableViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -13,11 +14,9 @@ internal constructor(
     private val userRepository: UserRepository
 ) : ObservableViewModel() {
 
-//    fun getAllTemples() = templeRepo.getAllTemples(viewModelScope.coroutineContext + Dispatchers.IO)
+    val addNewAddress = MutableLiveData<AddressDetails>()
 
-    val addNewAddress = MutableLiveData<Address>()
-
-    fun addNewAddress(address: Address) {
+    fun addNewAddress(address: AddressDetails) {
         addNewAddress.postValue(address)
     }
 
@@ -25,14 +24,14 @@ internal constructor(
         Timber.i("Caught  $exception")
     }
 
-    val addNewAddressLiveData = addNewAddress.switchMap {
-        Timber.i("addNewAddress in viewmodel")
-        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-            Timber.i("addNewAddress in viewmodel 1")
-            // TODO add new Address
-            emit(userRepository.addNewAddress(it))
-        }
-    }
+//    val addNewAddressLiveData = addNewAddress.switchMap {
+//        Timber.i("addNewAddress in viewmodel")
+//        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+//            Timber.i("addNewAddress in viewmodel 1")
+//            // TODO add new Address
+//            emit(userRepository.addNewAddress(it))
+//        }
+//    }
 
     val updateDefaultAddress = MutableLiveData<String>()
 

@@ -1,5 +1,7 @@
 package com.scootin.network.response.orderdetail
 
+import com.scootin.network.response.AddressDetails
+
 data class OrderDetail(
     val addressDetails: AddressDetails,
     val expressDelivery: Boolean,

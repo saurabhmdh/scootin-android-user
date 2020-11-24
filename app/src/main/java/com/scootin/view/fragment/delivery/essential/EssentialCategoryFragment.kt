@@ -11,6 +11,7 @@ import com.scootin.R
 import com.scootin.databinding.FragmentEssentialCategoryBinding
 import com.scootin.extensions.getCheckedRadioButtonPosition
 import com.scootin.network.AppExecutors
+import com.scootin.network.response.AddressDetails
 import com.scootin.util.fragment.autoCleared
 import com.scootin.viewmodel.account.AddressFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,7 +53,7 @@ class EssentialCategoryFragment : Fragment(R.layout.fragment_essential_category)
 
 
     private fun showAddressList(
-        addressList: List<Address>?
+        addressList: List<AddressDetails>?
     ) {
         Timber.i("showPopupList clicked")
         val listPopupWindow = ListPopupWindow(requireContext())

@@ -13,6 +13,7 @@ import com.scootin.R
 import com.scootin.databinding.FragmentAccountBinding
 import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
+import com.scootin.network.response.AddressDetails
 import com.scootin.network.response.State
 import com.scootin.util.fragment.autoCleared
 import com.scootin.viewmodel.account.AccountFragmentViewModel
@@ -44,9 +45,7 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
 
     private fun initObservers(view: View) {
         viewModel.updateDefaultAddress("")
-        viewModel.addNewAddressLiveData.observe(viewLifecycleOwner, Observer {
 
-        })
 
         viewModel.updateDefaultAddressLiveData.observe(viewLifecycleOwner, Observer {
 
@@ -102,14 +101,6 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
 
         binding.update1.setOnClickListener {
             Timber.i("addressTag = ${binding.enteredStateEditText1.tag}")
-            val address = Address(
-                binding.enteredAddressEditText1.text.toString(),
-                addressType,
-                binding.enteredCityEditText1.text.toString(),
-                binding.enteredPinEditText1.text.toString(),
-                binding.enteredStateEditText1.tag.toString()
-            )
-            viewModel.addNewAddress(address)
         }
 
         binding.enteredStateEditText1.setOnClickListener {

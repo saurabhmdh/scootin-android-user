@@ -4,7 +4,7 @@ import com.scootin.network.response.*
 
 
 data class DirectOrderResponse(
-    val addressDetails: Address,
+    val addressDetails: AddressDetails,
     val expressDelivery: Boolean,
     val id: Int,
     val media: Media,

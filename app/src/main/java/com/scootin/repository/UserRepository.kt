@@ -6,6 +6,7 @@ import com.scootin.network.api.NetworkBoundResource
 import com.scootin.network.api.Resource
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.RequestFCM
+import com.scootin.network.response.AddressDetails
 import com.scootin.network.response.login.ResponseUser
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -38,7 +39,7 @@ class UserRepository @Inject constructor(
 
     suspend fun updateDefaultAddress(addressId: String) = services.updateDefaultAddress(AppHeaders.userID, addressId)
 
-    suspend fun addNewAddress(address: Address) = services.addNewAddress(/*AppHeaders.userID,*/ address)
+    suspend fun addNewAddress(address: AddressDetails) = services.addNewAddress(/*AppHeaders.userID,*/ address)
 
     suspend fun getAllAddress() = services.getAllAdress(AppHeaders.userID)
 
