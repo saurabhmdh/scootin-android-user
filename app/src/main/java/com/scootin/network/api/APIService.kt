@@ -4,6 +4,7 @@ import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.*
 import com.scootin.network.response.*
 import com.scootin.network.response.cart.CartListResponseItem
+import com.scootin.network.response.citywide.CityWideOrderResponse
 import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.network.response.home.ResponseServiceArea
 import com.scootin.network.response.inorder.InOrderDetail
@@ -127,6 +128,14 @@ interface APIService {
         @Path("userId") userId: String,
         @Body request: PlaceOrderRequest
     ): Response<PlaceOrderResponse>
+
+
+    @POST("/order/orders/place-city-wide/{userId}")
+    suspend fun placeCityWideOrder(
+        @Path("userId") userId: String,
+        @Body request: CityWideOrderRequest
+    ): Response<CityWideOrderResponse>
+
 
     @POST("/order/user-confirm-order/{orderId}/{userId}")
     suspend fun userConfirmOrder(

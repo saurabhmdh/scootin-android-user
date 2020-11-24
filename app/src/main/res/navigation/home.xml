@@ -224,7 +224,18 @@
     <fragment
         android:id="@+id/cityDelivery"
         android:name="com.scootin.view.fragment.delivery.city.CityDeliveryFragment"
-        android:label="Home" />
+        android:label="Home" >
+        <action
+            android:id="@+id/citydelivery_to_success"
+            app:destination="@id/successFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/titleScreen"
+            app:popUpToInclusive="false"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
     <fragment
         android:id="@+id/cityCategory"
         android:name="com.scootin.view.fragment.delivery.city.FragmentCityWideCategory"

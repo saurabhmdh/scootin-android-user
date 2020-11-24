@@ -34,14 +34,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_below="@+id/imageView"/>
-
     <LinearLayout
         android:layout_width="228dp"
         android:layout_height="292dp"
@@ -93,6 +85,7 @@
             android:textColor="#000"
             android:layout_marginTop="20dp"
             android:layout_marginStart="16dp"/>
+
         <androidx.appcompat.widget.AppCompatSpinner
             android:layout_width="match_parent"
             android:layout_height="22dp"

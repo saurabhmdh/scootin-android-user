@@ -7,9 +7,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
+import com.scootin.database.dao.CacheDao
+import com.scootin.network.request.CityWideOrderRequest
 import com.scootin.network.request.DirectOrderRequest
 import com.scootin.repository.OrderRepository
 import com.scootin.repository.SearchRepository
+import com.scootin.util.constants.AppConstants
 import com.scootin.util.ui.FileUtils
 import com.scootin.viewmodel.base.ObservableViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -25,7 +28,7 @@ import java.io.File
 class DirectOrderViewModel @ViewModelInject internal constructor(
     private val orderRepository: OrderRepository,
     val searchRepository: SearchRepository,
-    private val application: Application
+    private val cacheDao: CacheDao
 ) : ObservableViewModel() {
 
     private val handler = CoroutineExceptionHandler { _, exception ->
@@ -39,4 +42,16 @@ class DirectOrderViewModel @ViewModelInject internal constructor(
     }
 
     fun placeDirectOrder(userId: String, request: DirectOrderRequest) = orderRepository.placeDirectOrder(userId, request, viewModelScope.coroutineContext + Dispatchers.IO + handler)
+
+
+    fun placeCityWideOrder(
+        userId: String,
+        deliveryAddressDetails: Long,
+        pickupAddressDetails: Long,
+        mediaId: Long) = liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+        val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
+        emit(orderRepository.placeCityWideOrder(userId, CityWideOrderRequest(deliveryAddressDetails, pickupAddressDetails, mediaId, serviceArea?.toLong() ?: 0, null)))
+    }
+
+
 }

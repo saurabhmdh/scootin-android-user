@@ -18,6 +18,7 @@ import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.glide.GlideApp
 import com.scootin.network.manager.AppHeaders
+import com.scootin.network.request.CityWideOrderRequest
 import com.scootin.network.request.DirectOrderRequest
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.fragment.autoCleared
@@ -38,12 +39,6 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
     private var binding by autoCleared<FragmentCitywideDeliveryBinding>()
     private val viewModel: DirectOrderViewModel by viewModels()
 
-    private val args: EssentialHandwrittenFragmentArgs by navArgs()
-
-    private val shopId by lazy {
-        args.shopId
-    }
-
     private var mediaId = -1L
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,36 +53,46 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
         binding.placeOrder.setOnClickListener {
-            //placeDirectOrder()
+            //First we need to check accept the term and conditions
+            if (binding.termAccepted.isChecked.not()) {
+                Toast.makeText(requireContext(), "Please accept term & condition", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            placeCityWideOrder()
         }
     }
 
-//    private fun placeDirectOrder() {
-//        if (mediaId == -1L) {
-//            Toast.makeText(context, "Invalid Media", Toast.LENGTH_SHORT).show()
-//            return
-//        }
-//        showLoading()
-//        viewModel.placeDirectOrder(
-//            AppHeaders.userID,
-//            DirectOrderRequest(AppConstants.defaultAddressId, false, mediaId, shopId)
-//        ).observe(viewLifecycleOwner) {
-//            when(it.status) {
-//                Status.SUCCESS -> {
-//                    dismissLoading()
-//                    Toast.makeText(context, "Your order has been received successfully", Toast.LENGTH_SHORT).show()
-//                    findNavController().navigate(CityDeliveryFragmentDirections.directOrderConfirmation())
-//                }
-//                Status.LOADING -> {}
-//                Status.ERROR -> {
-//                   dismissLoading()
-//                }
-//            }
-//        }
-//    }
+    private fun placeCityWideOrder() {
+        if (mediaId == -1L) {
+            Toast.makeText(context, "Invalid Media", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        showLoading()
+        viewModel.placeCityWideOrder(
+            AppHeaders.userID,
+            AppConstants.defaultAddressId,
+            AppConstants.defaultAddressId,
+            mediaId
+        ).observe(viewLifecycleOwner) {
+            if (it.isSuccessful) {
+                dismissLoading()
+                Toast.makeText(context, "Your order has been received successfully", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(CityDeliveryFragmentDirections.citydeliveryToSuccess())
+            } else {
+                dismissLoading()
+                Toast.makeText(context, it.errorBody()?.string(), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
     private fun updateListener() {
         binding.mobileNo.setText("Mobile number "+ AppHeaders.userMobileNumber)
+
+        binding.warning.setOnClickListener {
+            binding.termAccepted.isChecked = !binding.termAccepted.isChecked
+        }
     }
 
     private fun onClickOfUploadMedia() {
