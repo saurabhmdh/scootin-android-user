@@ -147,8 +147,8 @@
 
     <!-- Lets handle this -->
     <string name="order_has_been_placed">Order has been placed</string>
-    <string name="order_not_confirm">Order has not be confirm by shop</string>
+    <string name="order_not_confirm">Order has not been confirm by shop</string>
     <string name="order_has_been_packed">Order has been packed</string>
     <string name="order_has_been_dispatched">Order has been dispatched</string>
-    <string name="order_has_been_completed">Order has been Completed</string>
+    <string name="order_has_been_completed">Order has been completed</string>
 </resources>

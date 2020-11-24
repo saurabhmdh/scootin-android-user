@@ -93,6 +93,9 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
+                    if (newText.isNullOrEmpty()) {
+                        viewModel.doSearch("")
+                    }
                     return false
                 }
 

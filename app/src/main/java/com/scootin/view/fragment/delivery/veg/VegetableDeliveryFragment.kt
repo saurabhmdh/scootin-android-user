@@ -87,6 +87,9 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
+                    if (newText.isNullOrEmpty()) {
+                        viewModel.doSearch("")
+                    }
                     return false
                 }
 
