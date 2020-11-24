@@ -89,11 +89,14 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
+                    if (newText.isNullOrEmpty()) {
+                        viewModel.doSearch("")
+                    }
                     return false
                 }
-
             }
         )
+
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
         viewModel.shops.observe(viewLifecycleOwner) {

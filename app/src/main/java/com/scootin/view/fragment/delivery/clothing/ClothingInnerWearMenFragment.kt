@@ -89,6 +89,9 @@ class ClothingInnerWearMenFragment : Fragment(R.layout.fragment_clothing_deliver
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
+                    if (newText.isNullOrEmpty()) {
+                        viewModel.doSearch("")
+                    }
                     return false
                 }
 

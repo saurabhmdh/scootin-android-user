@@ -71,6 +71,9 @@ class ExpressDeliveryShopListFragment : Fragment(R.layout.fragment_express_deliv
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
+                    if (newText.isNullOrEmpty()) {
+                        viewModel.doSearch("")
+                    }
                     return false
                 }
 
