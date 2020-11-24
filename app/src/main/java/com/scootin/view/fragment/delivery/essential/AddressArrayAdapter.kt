@@ -11,16 +11,16 @@ import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
-import com.scootin.network.response.Address
+import com.scootin.network.response.AddressDetails
 import timber.log.Timber
 
 class AddressArrayAdapter(
     @param:NonNull private val mContext: Context,
-    @SuppressLint("SupportAnnotationUsage") @LayoutRes val list: List<Address>?
+    @SuppressLint("SupportAnnotationUsage") @LayoutRes val list: List<AddressDetails>?
 ) :
-    ArrayAdapter<Address>(
+    ArrayAdapter<AddressDetails>(
         mContext, 0,
-        list as List<Address>
+        list as List<AddressDetails>
     ) {
     @NonNull
     override fun getView(

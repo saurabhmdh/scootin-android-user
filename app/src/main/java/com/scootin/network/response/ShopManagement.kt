@@ -1,9 +1,7 @@
 package com.scootin.network.response
 
-import com.scootin.network.response.Address
-
 data class ShopManagement(
-    val address: Address,
+    val address: AddressDetails,
     val closeTime: String,
     val createdAt: Long,
     val deleted: Boolean,

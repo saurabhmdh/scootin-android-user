@@ -1,7 +1,9 @@
 package com.scootin.network.response.inorder
 
+import com.scootin.network.response.AddressDetails
+
 data class ShopManagement(
-    val address: Address,
+    val address: AddressDetails,
     val amount: Int,
     val categoryDetails: CategoryDetails,
     val closeTime: String,

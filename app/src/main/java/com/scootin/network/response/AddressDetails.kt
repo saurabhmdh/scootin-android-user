@@ -1,4 +1,4 @@
-package com.scootin.network.response.order
+package com.scootin.network.response
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
@@ -15,4 +15,4 @@ data class AddressDetails(
     val pincode: String,
     val stateDetails: StateDetails,
     val userInfo: UserInfo
-):Parcelable
+): Parcelable
