@@ -108,7 +108,7 @@
     <string name="cancelled">Cancelled</string>
     <string name="placed_on_wed_26_aug_20_04_38_pm">Placed on Wed, 26 Aug 20, 04:38 PM</string>
     <string name="delivery_on">Delivery On</string>
-    <string name="order_has_been_placed">Order has been placed</string>
+
     <string name="placed_on_wed_26_aug_20_08_00_pm_09_00_pm">Placed on Wed, 26 Aug 20, 08:00 PM- 09:00 PM</string>
     <string name="pay_on_delivery">Payment Mode</string>
     <string name="scootin">Scootin</string>
@@ -144,4 +144,11 @@
     <string name="string_clothing">Clothing</string>
 
     <string name="order_update_message">Your order has been updated</string>
+
+    <!-- Lets handle this -->
+    <string name="order_has_been_placed">Order has been placed</string>
+    <string name="order_not_confirm">Order has not be confirm by shop</string>
+    <string name="order_has_been_packed">Order has been packed</string>
+    <string name="order_has_been_dispatched">Order has been dispatched</string>
+    <string name="order_has_been_completed">Order has been Completed</string>
 </resources>

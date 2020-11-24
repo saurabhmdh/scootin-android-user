@@ -102,6 +102,7 @@
             app:layout_constraintTop_toBottomOf="@id/order_date_time" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/order_status_string"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1.5dp"
