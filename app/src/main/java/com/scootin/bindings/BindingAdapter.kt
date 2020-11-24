@@ -9,6 +9,9 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.scootin.R
 import com.scootin.network.glide.GlideApp
+import com.scootin.network.response.Address
+import com.scootin.network.response.orderdetail.AddressDetails
+import java.lang.StringBuilder
 import java.math.BigDecimal
 import java.text.Format
 import java.text.NumberFormat
@@ -64,4 +67,14 @@ fun TextView.setDateFromOrderDate(orderDate: String?) {
 @BindingAdapter("setToIntText")
 fun TextView.setToIntText(value: Long) {
     text = value.toString()
+}
+
+@BindingAdapter("setOneLineAddress")
+fun TextView.setOneLineAddress(address: AddressDetails?) {
+    if(address == null) return
+    val sb = StringBuilder().append(address.addressLine1).append(", ")
+        .append(address.addressLine2).append(", ").append(address.city).append(", ")
+        .append(address.pincode)
+
+    text = sb.toString()
 }

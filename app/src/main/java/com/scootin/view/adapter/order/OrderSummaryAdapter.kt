@@ -45,7 +45,7 @@ class OrderSummaryAdapter (
         Timber.i("item = $item")
         item.apply {
             binding.itemName.text = item.inventoryDetails.title
-            binding.quantity.text = item.quantity.toString()
+            binding.quantity.text = "Quantity ("+item.quantity.toString()+")"
             binding.itemCost.text = item.inventoryDetails.price.toString()
         }
     }
