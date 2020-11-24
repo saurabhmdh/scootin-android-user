@@ -1,33 +1,31 @@
 package com.scootin.view.adapter.order
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.scootin.databinding.AdapterOrderSummaryBinding
 import com.scootin.network.AppExecutors
-import com.scootin.network.response.orders.OrderedItemsList
+import com.scootin.network.response.inorder.OrderInventoryDetails
 import com.scootin.view.adapter.DataBoundListAdapter
 import timber.log.Timber
 
 class OrderSummaryAdapter (
     val appExecutors: AppExecutors,
     val imageAdapterClickListener: ImageAdapterClickLister
-) : DataBoundListAdapter<OrderedItemsList, AdapterOrderSummaryBinding>(
+) : DataBoundListAdapter<OrderInventoryDetails, AdapterOrderSummaryBinding>(
     appExecutors,
-    diffCallback = object : DiffUtil.ItemCallback<OrderedItemsList>() {
+    diffCallback = object : DiffUtil.ItemCallback<OrderInventoryDetails>() {
         override fun areItemsTheSame(
-            oldItem: OrderedItemsList,
-            newItem: OrderedItemsList
+            oldItem: OrderInventoryDetails,
+            newItem: OrderInventoryDetails
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
-        @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
-            oldItem: OrderedItemsList,
-            newItem: OrderedItemsList
+            oldItem: OrderInventoryDetails,
+            newItem: OrderInventoryDetails
         ): Boolean {
             return oldItem == newItem
         }
@@ -40,16 +38,16 @@ class OrderSummaryAdapter (
 
     override fun bind(
         binding: AdapterOrderSummaryBinding,
-        item: OrderedItemsList,
+        item: OrderInventoryDetails,
         position: Int,
         isLast: Boolean
     ) {
         Timber.i("item = $item")
         item.apply {
-           binding.itemName.setText(itemName)
-            binding.itemCost.setText(itemCost)
+            binding.itemName.text = item.inventoryDetails.title
+            binding.quantity.text = item.quantity.toString()
+            binding.itemCost.text = item.inventoryDetails.price.toString()
         }
-
     }
 
     interface ImageAdapterClickLister {

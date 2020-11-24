@@ -51,10 +51,26 @@
                 app:popUpTo="@id/cart"
                 app:popUpToInclusive="false"
                 app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_cart_payment_fragment_to_order_summary"
+            app:destination="@id/orders_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+
 <!--    should have information about payment-->
     <fragment
         android:id="@+id/order_confirmation"
         android:name="com.scootin.view.fragment.orders.OrderConfirmedFragment"
         android:label="OrderConfirmedFragment" />
+
+        <fragment
+            android:id="@+id/orders_fragment"
+            android:name="com.scootin.view.fragment.orders.OrderSummaryFragment">
+            <argument
+                android:name="order_id"
+                app:argType="long" />
+        </fragment>
 </navigation>
