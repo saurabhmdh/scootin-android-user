@@ -1,6 +1,7 @@
 package com.scootin.network.response.order
 
 import android.os.Parcelable
+import com.scootin.network.response.AddressDetails
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

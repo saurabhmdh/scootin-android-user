@@ -9,6 +9,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.scootin.R
 import com.scootin.network.glide.GlideApp
+import com.scootin.network.response.AddressDetails
 import java.lang.StringBuilder
 import java.math.BigDecimal
 import java.text.Format

@@ -2,10 +2,7 @@ package com.scootin.network.api
 
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.*
-import com.scootin.network.response.Media
-import com.scootin.network.response.SearchProductsByCategoryResponse
-import com.scootin.network.response.SearchShopsByCategoryResponse
-import com.scootin.network.response.State
+import com.scootin.network.response.*
 import com.scootin.network.response.cart.CartListResponseItem
 import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.network.response.home.ResponseServiceArea
@@ -108,10 +105,10 @@ interface APIService {
     ): Response<String>
 
     @POST("/address/add-new-address")
-    suspend fun addNewAddress(/*@Path("userID") userId: String,*/ @Body address: Address): Response<String>
+    suspend fun addNewAddress(/*@Path("userID") userId: String,*/ @Body address: AddressDetails): Response<String>
 
     @GET("/address/get-all-address/{userId}")
-    suspend fun getAllAdress(@Path("userID") userId: String): Response<List<Address>>
+    suspend fun getAllAdress(@Path("userID") userId: String): Response<List<AddressDetails>>
 
     @Multipart
     @POST("/media/upload-image-android")
