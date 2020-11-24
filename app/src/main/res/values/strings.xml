@@ -142,4 +142,6 @@
     <string name="string_medicines">Medicines</string>
     <string name="string_stationary">Stationery</string>
     <string name="string_clothing">Clothing</string>
+
+    <string name="order_update_message">Your order has been updated</string>
 </resources>

@@ -11,6 +11,8 @@ import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.scootin.R
+import com.scootin.util.constants.IntentConstants.openDirectOrderDetail
+import com.scootin.util.constants.IntentConstants.openOrderDetail
 import com.scootin.view.activity.MainActivity
 import timber.log.Timber
 
@@ -18,26 +20,25 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
 
-        Timber.i("From: ${remoteMessage.from}")
         if (remoteMessage.data.isNotEmpty()) {
-            Timber.i("Message data payload: ${remoteMessage.data}")
-
-            if (/* Check if data needs to be processed by long running job */ true) {
-                // For long-running tasks (10 seconds or more) use WorkManager.
-                scheduleJob()
-            } else {
-                // Handle message within 10 seconds
-                handleNow()
-                sendNotification(remoteMessage.data.toString())
+            val type = remoteMessage.data["type"]
+            Timber.i("Notification type $type")
+            when (type) {
+                "UPDATED_NORMAL_ORDER_TO_USER" -> {
+                    remoteMessage.data["order_id"]?.let {
+                        addNewOrderNotification(it, true)
+                    }
+                }
+                "UPDATED_DIRECT_ORDER_TO_USER" -> {
+                    remoteMessage.data["order_id"]?.let {
+                        addNewOrderNotification(it, false)
+                    }
+                }
+                "UPDATED_CITY_WIDE_ORDER_TO_USER" -> {
+                    //We need to write code incase of City wide order
+                }
             }
         }
-
-        // Check if message contains a notification payload.
-        remoteMessage.notification?.let {
-            Timber.i("Message Notification Body: ${it.body}")
-            sendNotification(it.body.toString())
-        }
-
     }
 
     override fun onNewToken(token: String) {
@@ -45,20 +46,19 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         sendRegistrationToServer(token)
     }
 
-    private fun scheduleJob() {
-    }
-
-    private fun handleNow() {
-        Timber.i("Short lived task is done.")
-    }
-
     private fun sendRegistrationToServer(token: String?) {
         // TODO: Implement this method to send token to your app server.
         Timber.i("sendRegistrationTokenToServer($token)")
     }
 
-    private fun sendNotification(messageBody: String) {
+    private fun addNewOrderNotification(orderId: String, isNormal: Boolean) {
         val intent = Intent(this, MainActivity::class.java)
+
+        if (isNormal) {
+            intent.data = openOrderDetail(orderId)
+        } else {
+            intent.data = openDirectOrderDetail(orderId)
+        }
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(
             this, 0 /* Request code */, intent,
@@ -68,9 +68,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val channelId = getString(R.string.default_notification_channel_id)
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.ic_stat_ic_notification)
-            .setContentTitle(getString(R.string.fcm_message))
-            .setContentText(messageBody)
+            .setSmallIcon(R.drawable.ic_app)
+            .setContentTitle(getString(R.string.order_update_message))
             .setAutoCancel(true)
             .setSound(defaultSoundUri)
             .setContentIntent(pendingIntent)
