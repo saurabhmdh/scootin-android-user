@@ -13,5 +13,6 @@ data class ShopManagement(
     val openTime: String,
     val shopLandLineNumber: String,
     val shopOwner: ShopOwner,
-    val status: Boolean
+    val status: Boolean,
+    val shopActiveForOrders: Boolean
 )

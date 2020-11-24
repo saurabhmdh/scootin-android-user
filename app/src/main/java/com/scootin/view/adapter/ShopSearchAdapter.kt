@@ -1,5 +1,6 @@
 package com.scootin.view.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,25 +38,27 @@ class ShopSearchAdapter (
         Timber.i("item = $item")
         item.apply {
 
+            binding.data = item
             //TODO: Its should use databinding..
             binding.name.setText(name)
             binding.distance.setText(distance)
 
             binding.ratingCount.setRating(rating.toFloat())
 
-//            if (isOpen){
+            if (online) {
             binding.onlinestatusStore.setText("Online")
             binding.btnSelect.setImageResource(R.drawable.ic_select_button_active)
-            binding.btnSelect.setOnClickListener {
-                imageAdapterClickLister.onSelectButtonSelected(item)
+                binding.btnSelect.setOnClickListener {
+                    imageAdapterClickLister.onSelectButtonSelected(item)
+                }
+            } else {
+                binding.onlinestatusStore.setText("Offline")
+                binding.onlinestatusStore.setTextColor(Color.parseColor("#990f02"))
+                binding.btnSelect.setImageResource(R.drawable.ic_select_button_inactive)
+//                binding.btnSelect.setOnClickListener {
+//                    imageAdapterClickLister.onSelectButtonSelected(null)
+//                }
             }
-//            }
-//            else{
-//                binding.onlinestatusStore.setText("Offline")
-//                binding.onlinestatusStore.setTextColor(Color.parseColor("#990f02"))
-//                binding.btnSelect.setImageResource(R.drawable.ic_select_button_inactive)
-//
-//            }
 
         }
 

@@ -1,5 +1,7 @@
 package com.scootin.network.response.inorder
 
+import com.scootin.network.response.ShopManagement
+
 data class InventoryDetails(
     val active: Boolean,
     val categoryDetails: CategoryDetails,
