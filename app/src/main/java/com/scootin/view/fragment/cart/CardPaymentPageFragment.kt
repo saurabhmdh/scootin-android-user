@@ -76,6 +76,12 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
 
         binding.confirmButton.setOnClickListener {
 
+            //Test code
+            if(true) {
+                findNavController().navigate(CardPaymentPageFragmentDirections.actionCartPaymentFragmentToOrderSummary(orderId))
+                return@setOnClickListener
+            }
+
             val mode = when(binding.radioGroup.getCheckedRadioButtonPosition()) {
                 0 -> {"ONLINE"}
                 1 -> {"CASH"}

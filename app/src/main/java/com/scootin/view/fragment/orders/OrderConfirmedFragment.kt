@@ -16,6 +16,6 @@ class OrderConfirmedFragment : Fragment(R.layout.fragment_order_confirmed) {
 
         Handler().postDelayed({
             findNavController().popBackStack()
-        }, 500)
+        }, 1500)
     }
 }

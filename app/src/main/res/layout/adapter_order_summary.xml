@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:paddingBottom="2dp">
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/item_name"
         android:layout_width="wrap_content"
@@ -13,21 +14,26 @@
         android:textSize="12sp"
         android:textColor="#000"
         android:paddingLeft="2dp"/>
+
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rs."
+        android:text="(7)"
+        android:layout_marginEnd="@dimen/dimen_20"
         android:textSize="12sp"
         android:textColor="#000"
         android:layout_toLeftOf="@id/item_cost"/>
+
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/item_cost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="230"
+        android:text="Rs. 230"
         android:textSize="12sp"
         android:textColor="#000"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:paddingRight="2dp"/>
 </RelativeLayout>
 </layout>
