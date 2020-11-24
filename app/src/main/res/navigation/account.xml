@@ -94,6 +94,8 @@
     <fragment
         android:id="@+id/track_fragment"
         android:name="com.scootin.view.fragment.account.orders.DirectOrderDetailFragment">
+        <!--        adb shell am start -a android.intent.action.VIEW -d "https://user.scootin.com/order-detail-direct/18613"-->
+        <deepLink app:uri="user.scootin.com/order-detail-direct/{orderId}" />
         <argument
             android:name="orderId"
             app:argType="string" />
@@ -109,6 +111,8 @@
     <fragment
         android:id="@+id/inorder_track_fragment"
         android:name="com.scootin.view.fragment.account.orders.OrderDetailFragment">
+        <!--        adb shell am start -a android.intent.action.VIEW -d "https://user.scootin.com/order-detail/18613"-->
+        <deepLink app:uri="user.scootin.com/order-detail/{orderId}" />
         <argument
             android:name="orderId"
             app:argType="string" />

@@ -28,7 +28,18 @@
             android:name="com.scootin.view.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan">
+
+            <nav-graph android:value="@navigation/mobile_navigation" />
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:host="user.scootin.com" android:scheme="https" />
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".view.activity.SplashActivity"
             android:label="@string/app_name"
