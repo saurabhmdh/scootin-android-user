@@ -2,7 +2,6 @@ package com.scootin.network.api
 
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.*
-import com.scootin.network.response.Address
 import com.scootin.network.response.Media
 import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.SearchShopsByCategoryResponse

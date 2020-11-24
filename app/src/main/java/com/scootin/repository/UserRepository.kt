@@ -6,8 +6,6 @@ import com.scootin.network.api.NetworkBoundResource
 import com.scootin.network.api.Resource
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.RequestFCM
-import com.scootin.network.response.Address
-import com.scootin.network.response.cart.CartListResponseItem
 import com.scootin.network.response.login.ResponseUser
 import okhttp3.ResponseBody
 import retrofit2.Response

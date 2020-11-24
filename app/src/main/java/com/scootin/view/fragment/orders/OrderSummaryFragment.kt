@@ -6,19 +6,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.scootin.R
-import com.scootin.databinding.FragmentOrderHistoryBinding
 import com.scootin.databinding.FragmentOrderSummaryBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
-import com.scootin.network.response.orders.OrderHistoryList
-import com.scootin.network.response.orders.OrderedItemsList
+import com.scootin.network.response.AddressDetails
+import com.scootin.network.response.inorder.OrderInventoryDetails
 import com.scootin.util.fragment.autoCleared
-import com.scootin.view.adapter.order.OrderHistoryAdapter
 import com.scootin.view.adapter.order.OrderSummaryAdapter
-import com.scootin.view.fragment.cart.CardPaymentPageFragmentArgs
 import com.scootin.viewmodel.payment.PaymentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import java.lang.StringBuilder
 import javax.inject.Inject
 @AndroidEntryPoint
 class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
@@ -50,7 +48,9 @@ class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
                 Status.SUCCESS -> {
                     binding.data = it.data
                     Timber.i("data working ${it.data}")
+                    //get all shops and there address
 
+                    binding.txtPickupLocation.text = getAllAddress(it.data?.orderInventoryDetailsList)
                     orderSummaryAdapter.submitList(it.data?.orderInventoryDetailsList)
                 }
                 Status.ERROR -> {
@@ -58,6 +58,15 @@ class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
                 }
             }
         }
+    }
+
+    private fun getAllAddress(orderInventoryDetailsList: List<OrderInventoryDetails>?): String {
+        val sb = StringBuffer()
+        orderInventoryDetailsList?.forEach {
+            sb.append(getSingleAddress(it.inventoryDetails.shopManagement.address))
+        }
+
+        return sb.toString()
     }
 
     private fun setAdaper() {
@@ -72,6 +81,14 @@ class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
         binding.listOfItemsRecycler.apply {
             adapter = orderSummaryAdapter
         }
+    }
+
+    fun getSingleAddress(address: AddressDetails?): String {
+        if(address == null) return ""
+        val sb = StringBuilder().append(address.addressLine1).append(", ")
+            .append(address.addressLine2).append(", ").append(address.city).append(", ")
+            .append(address.pincode)
+        return sb.toString()
     }
 
 }

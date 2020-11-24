@@ -13,7 +13,6 @@ import com.scootin.R
 import com.scootin.databinding.FragmentAccountBinding
 import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
-import com.scootin.network.response.Address
 import com.scootin.network.response.State
 import com.scootin.util.fragment.autoCleared
 import com.scootin.viewmodel.account.AccountFragmentViewModel

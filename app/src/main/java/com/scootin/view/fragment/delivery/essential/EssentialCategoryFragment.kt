@@ -11,7 +11,6 @@ import com.scootin.R
 import com.scootin.databinding.FragmentEssentialCategoryBinding
 import com.scootin.extensions.getCheckedRadioButtonPosition
 import com.scootin.network.AppExecutors
-import com.scootin.network.response.Address
 import com.scootin.util.fragment.autoCleared
 import com.scootin.viewmodel.account.AddressFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint

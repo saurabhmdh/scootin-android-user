@@ -2,8 +2,6 @@ package com.scootin.viewmodel.account
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.scootin.network.manager.AppHeaders
-import com.scootin.network.response.Address
 import com.scootin.repository.UserRepository
 import com.scootin.viewmodel.base.ObservableViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler

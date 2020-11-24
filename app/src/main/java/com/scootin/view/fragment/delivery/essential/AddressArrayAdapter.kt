@@ -11,7 +11,6 @@ import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
-import com.scootin.network.response.Address
 import timber.log.Timber
 
 class AddressArrayAdapter(
