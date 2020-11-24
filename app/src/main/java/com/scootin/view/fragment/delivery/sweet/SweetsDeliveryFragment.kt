@@ -20,6 +20,8 @@ import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.ProductSearchAdapter
 import com.scootin.view.adapter.ShopSearchAdapter
+import com.scootin.view.adapter.SweetShopAdapter
+import com.scootin.view.adapter.SweetsAdapter
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -33,8 +35,8 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
     @Inject
     lateinit var appExecutors: AppExecutors
 
-    private lateinit var productSearchAdapter: ProductSearchAdapter
-    private lateinit var shopSearchAdapter: ShopSearchAdapter
+    private lateinit var productSearchAdapter: SweetsAdapter
+    private lateinit var shopSearchAdapter: SweetShopAdapter
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -114,9 +116,9 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
 
 
     private fun setProductAdapter() {
-        productSearchAdapter = ProductSearchAdapter(
+        productSearchAdapter = SweetsAdapter(
             appExecutors,
-            object : ProductSearchAdapter.ImageAdapterClickLister {
+            object : SweetsAdapter.ImageAdapterClickLister {
                 override fun onIncrementItem(
                     view: View,
                     item: SearchProductsByCategoryResponse?,
@@ -143,8 +145,8 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
     }
 
     private fun setStoreAdapter() {
-        shopSearchAdapter = ShopSearchAdapter(
-            appExecutors, object : ShopSearchAdapter.StoreImageAdapterClickListener {
+        shopSearchAdapter = SweetShopAdapter(
+            appExecutors, object : SweetShopAdapter.StoreImageAdapterClickListener {
                 override fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse) {
                     Timber.i("Shop Info $shopInfo")
                     viewModel.updateShop(shopInfo.shopID)
