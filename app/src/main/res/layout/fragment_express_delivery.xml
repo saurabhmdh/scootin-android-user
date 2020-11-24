@@ -125,10 +125,9 @@
                 android:textStyle="bold"
                 android:textSize="13sp" />
         </RadioGroup>
-
-
-
     </LinearLayout>
+
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btn_done"
         android:layout_width="wrap_content"

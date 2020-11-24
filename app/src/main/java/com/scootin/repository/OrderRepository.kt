@@ -5,9 +5,11 @@ import com.scootin.network.api.APIService
 import com.scootin.network.api.NetworkBoundResource
 import com.scootin.network.api.Resource
 import com.scootin.network.manager.AppHeaders
+import com.scootin.network.request.CityWideOrderRequest
 import com.scootin.network.request.DirectOrderRequest
 import com.scootin.network.request.OrderRequest
 import com.scootin.network.request.PlaceOrderRequest
+import com.scootin.network.response.citywide.CityWideOrderResponse
 import com.scootin.network.response.inorder.InOrderDetail
 import com.scootin.network.response.order.OrderHistoryItem
 import com.scootin.network.response.orderdetail.OrderDetail
@@ -81,4 +83,7 @@ class OrderRepository @Inject constructor(
         override suspend fun createCall(): Response<InOrderDetail> =
             services.getOrder(orderId)
     }.asLiveData()
+
+
+    suspend fun placeCityWideOrder(userId: String, request: CityWideOrderRequest) = services.placeCityWideOrder(userId, request)
 }

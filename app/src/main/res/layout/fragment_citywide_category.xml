@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/ic_background">
+
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_citywide_delivery_big"
         android:layout_marginTop="60dp"
         android:layout_centerHorizontal="true"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back_arrow" />
+
     <EditText
         android:id="@+id/address"
         android:layout_width="match_parent"
@@ -35,7 +47,7 @@
             android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
+            android:layout_marginLeft="14dp"
             android:layout_marginTop="48dp"
             android:orientation="vertical">
 
@@ -43,8 +55,9 @@
                 android:id="@+id/materialRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:tag="252"
                 android:fontFamily="@font/montserrat_regular"
-                android:text="Document | Books"
+                android:text="@string/string_essentials"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 android:textColor="#808080"
@@ -60,8 +73,9 @@
                 android:fontFamily="@font/montserrat_regular"
                 android:buttonTint="#808080"
                 android:textColor="#808080"
+                android:tag="253"
                 android:selectAllOnFocus="false"
-                android:text="Food | Edible item"
+                android:text="@string/string_sweet"
                 android:textStyle="bold"
                 android:textSize="13sp" />
             <RadioButton
@@ -72,7 +86,8 @@
                 android:buttonTint="#808080"
                 android:textColor="#808080"
                 android:selectAllOnFocus="false"
-                android:text="Flowers | Cake"
+                android:tag="254"
+                android:text="@string/string_vegitable"
                 android:textStyle="bold"
                 android:textSize="13sp" />
             <RadioButton
@@ -83,7 +98,8 @@
                 android:buttonTint="#808080"
                 android:textColor="#808080"
                 android:selectAllOnFocus="false"
-                android:text="Electronics Items"
+                android:tag="255"
+                android:text="@string/string_medicines"
                 android:textStyle="bold"
                 android:textSize="13sp" />
             <RadioButton
@@ -93,8 +109,9 @@
                 android:fontFamily="@font/montserrat_regular"
                 android:buttonTint="#808080"
                 android:textColor="#808080"
+                android:tag="256"
                 android:selectAllOnFocus="false"
-                android:text="Household Items"
+                android:text="@string/string_stationary"
                 android:textStyle="bold"
                 android:textSize="13sp" />
             <RadioButton
@@ -104,26 +121,14 @@
                 android:fontFamily="@font/montserrat_regular"
                 android:buttonTint="#808080"
                 android:textColor="#808080"
+                android:tag="257"
                 android:selectAllOnFocus="false"
-                android:text="Items for Repairing"
-                android:textStyle="bold"
-                android:textSize="13sp" />
-            <RadioButton
-                android:id="@+id/materialRadioButton7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_regular"
-                android:buttonTint="#808080"
-                android:textColor="#808080"
-                android:selectAllOnFocus="false"
-                android:text="Clothes | Shoes"
+                android:text="@string/string_clothing"
                 android:textStyle="bold"
                 android:textSize="13sp" />
         </RadioGroup>
-
-
-
     </LinearLayout>
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btn_done"
         android:layout_width="wrap_content"

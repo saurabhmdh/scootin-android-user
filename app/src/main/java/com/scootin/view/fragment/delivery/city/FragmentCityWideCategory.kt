@@ -22,8 +22,11 @@ class FragmentCityWideCategory: Fragment(R.layout.fragment_citywide_category) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCitywideCategoryBinding.bind(view)
-            binding.btnDone.setOnClickListener {
-                findNavController().navigate(FragmentCityWideCategoryDirections.citycategoryToCitydelivery())
-            }
+
+        binding.btnDone.setOnClickListener {
+            findNavController().navigate(FragmentCityWideCategoryDirections.citycategoryToCitydelivery())
         }
+
+        binding.back.setOnClickListener { findNavController().popBackStack() }
+    }
 }
