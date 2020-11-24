@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.scootin.databinding.AdapterItemAddEssentialGroceryBinding
-import com.scootin.databinding.AdapterItemAddSweetsBinding
 import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.SearchProductsByCategoryResponse
@@ -17,7 +16,7 @@ class ProductSearchAdapter (
     val appExecutors: AppExecutors,
     val imageAdapterClickListener: ImageAdapterClickLister
 
-) : DataBoundListAdapter<SearchProductsByCategoryResponse, AdapterItemAddSweetsBinding>(
+) : DataBoundListAdapter<SearchProductsByCategoryResponse, AdapterItemAddEssentialGroceryBinding>(
     appExecutors,
     diffCallback = object : DiffUtil.ItemCallback<SearchProductsByCategoryResponse>() {
         override fun areItemsTheSame(
@@ -34,8 +33,8 @@ class ProductSearchAdapter (
     }
 )
 {
-    override fun createBinding(parent: ViewGroup): AdapterItemAddSweetsBinding {
-       val binding= AdapterItemAddSweetsBinding.inflate(
+    override fun createBinding(parent: ViewGroup): AdapterItemAddEssentialGroceryBinding {
+       val binding= AdapterItemAddEssentialGroceryBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
 
         )
@@ -71,7 +70,7 @@ class ProductSearchAdapter (
     }
 
     override fun bind(
-        binding: AdapterItemAddSweetsBinding,
+        binding: AdapterItemAddEssentialGroceryBinding,
         item: SearchProductsByCategoryResponse,
         position: Int,
         isLast: Boolean
