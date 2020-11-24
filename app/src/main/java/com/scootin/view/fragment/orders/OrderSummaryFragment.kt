@@ -41,8 +41,6 @@ class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
         binding = FragmentOrderSummaryBinding.bind(view)
         setAdaper()
         setupListener()
-
-
     }
 
     private fun setupListener() {

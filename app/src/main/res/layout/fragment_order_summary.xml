@@ -215,7 +215,7 @@
                 android:id="@+id/order_total_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:setPrice="@{data.orderDetails.paymentDetails.amount}"
+                app:setPrice="@{data.orderDetails.paymentDetails.totalAmount}"
                 android:layout_alignParentEnd="true"
                 android:textColor="#000"
                 android:textStyle="bold"

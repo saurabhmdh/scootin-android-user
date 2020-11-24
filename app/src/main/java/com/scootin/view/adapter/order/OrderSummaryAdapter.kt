@@ -43,6 +43,7 @@ class OrderSummaryAdapter (
         isLast: Boolean
     ) {
         Timber.i("item = $item")
+        //Get the individual item price
         item.apply {
             binding.itemName.text = item.inventoryDetails.title
             binding.quantity.text = "Quantity ("+item.quantity.toString()+")"
