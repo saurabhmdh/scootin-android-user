@@ -75,13 +75,6 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
         }
 
         binding.confirmButton.setOnClickListener {
-
-            //Test code
-            if(true) {
-                findNavController().navigate(CardPaymentPageFragmentDirections.actionCartPaymentFragmentToOrderSummary(orderId))
-                return@setOnClickListener
-            }
-
             val mode = when(binding.radioGroup.getCheckedRadioButtonPosition()) {
                 0 -> {"ONLINE"}
                 1 -> {"CASH"}
@@ -98,7 +91,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                             val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
                             startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
                         } else {
-                            findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage())
+                            findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
                         }
                     }
                     Status.ERROR -> {
@@ -164,7 +157,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                 Status.LOADING -> {}
                 Status.SUCCESS -> {
                     //Need some direction to move
-                    findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage())
+                    findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
                 }
                 Status.ERROR -> {}
             }

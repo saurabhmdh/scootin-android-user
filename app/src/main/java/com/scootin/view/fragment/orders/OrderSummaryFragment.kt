@@ -48,8 +48,6 @@ class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
                 Status.SUCCESS -> {
                     binding.data = it.data
                     Timber.i("data working ${it.data}")
-                    //get all shops and there address
-
                     binding.txtPickupLocation.text = getAllAddress(it.data?.orderInventoryDetailsList)
                     orderSummaryAdapter.submitList(it.data?.orderInventoryDetailsList)
                 }
@@ -63,9 +61,10 @@ class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
     private fun getAllAddress(orderInventoryDetailsList: List<OrderInventoryDetails>?): String {
         val sb = StringBuffer()
         orderInventoryDetailsList?.forEach {
+            sb.append(it.inventoryDetails.shopManagement.name).append(", ")
             sb.append(getSingleAddress(it.inventoryDetails.shopManagement.address))
+            sb.append("\n")
         }
-
         return sb.toString()
     }
 
@@ -83,7 +82,7 @@ class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
         }
     }
 
-    fun getSingleAddress(address: AddressDetails?): String {
+    private fun getSingleAddress(address: AddressDetails?): String {
         if(address == null) return ""
         val sb = StringBuilder().append(address.addressLine1).append(", ")
             .append(address.addressLine2).append(", ").append(address.city).append(", ")

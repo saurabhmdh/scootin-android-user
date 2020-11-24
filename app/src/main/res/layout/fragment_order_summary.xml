@@ -96,23 +96,9 @@
             android:layout_marginTop="5dp"
             android:drawableStart="@drawable/ic_pickup_location_icon"
             android:drawablePadding="5dp"
-            android:text="pickup Location"
             android:textColor="#000"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/base_line" />
-
-<!--        <androidx.appcompat.widget.AppCompatTextView-->
-<!--            android:id="@+id/pickup_address"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="5dp"-->
-<!--            android:text="Name ZXCV"-->
-<!--            android:textColor="#000"-->
-<!--            android:textStyle="bold"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/txt_pickup_location"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/txt_pickup_location"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/txt_pickup_location" />-->
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_arrow"
