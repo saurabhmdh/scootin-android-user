@@ -1,7 +1,5 @@
 package com.scootin.view.fragment.account.orders
 
-import com.scootin.view.fragment.account.orders.OrderDetailFragmentArgs
-import com.scootin.view.fragment.account.orders.OrderDetailFragmentDirections
 
 import android.os.Bundle
 import android.view.View
@@ -14,7 +12,6 @@ import com.scootin.R
 import com.scootin.databinding.FragmentMyOrderTrackBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
-import com.scootin.network.response.inorder.InOrderDetail
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.order.OrderDetailAdapter
 import com.scootin.viewmodel.account.OrderFragmentViewModel
@@ -69,11 +66,13 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
             when(it) {
                 "PLACED" -> {
                     binding.placeIcon.isSelected = true
+                    binding.orderStatusString.text = getString(R.string.order_has_been_placed)
                 }
                 "PACKED" -> {
                     binding.placeIcon.isSelected = true
                     binding.progressId.isSelected=true
                     binding.packedIcon.isSelected = true
+                    binding.orderStatusString.text = getString(R.string.order_has_been_packed)
                 }
                 "DISPATCHED" -> {
                     binding.placeIcon.isSelected = true
@@ -81,6 +80,7 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
                     binding.packedIcon.isSelected = true
                     binding.progressId2.isSelected=true
                     binding.dispatchedIcon.isSelected = true
+                    binding.orderStatusString.text = getString(R.string.order_has_been_dispatched)
                 }
                 "COMPLETED" -> {
                     binding.placeIcon.isSelected = true
@@ -90,6 +90,7 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
                     binding.dispatchedIcon.isSelected = true
                     binding.progressId3.isSelected=true
                     binding.deliveredIcon.isSelected = true
+                    binding.orderStatusString.text = getString(R.string.order_has_been_completed)
                 }
             }
        }

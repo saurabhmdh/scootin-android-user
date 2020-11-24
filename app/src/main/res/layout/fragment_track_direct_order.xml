@@ -99,11 +99,12 @@
             app:layout_constraintTop_toBottomOf="@id/order_date_time" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/order_status_string"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="1.5dp"
             android:gravity="center"
-            android:text="@string/order_has_been_placed"
+            android:text="@string/order_not_confirm"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/gradient_band"
@@ -172,7 +173,7 @@
             android:layout_width="61dp"
             android:layout_height="@dimen/dimen_10"
             android:layout_marginTop="43dp"
-            android:src="@drawable/ic_progress_bar_grey"
+            android:src="@drawable/selector_band"
             app:layout_constraintStart_toEndOf="@id/packed_icon"
             app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
 
@@ -190,7 +191,7 @@
             android:layout_width="61dp"
             android:layout_height="@dimen/dimen_10"
             android:layout_marginTop="43dp"
-            android:src="@drawable/ic_progress_bar_grey"
+            android:src="@drawable/selector_band"
             app:layout_constraintEnd_toStartOf="@id/delivered_icon"
             app:layout_constraintStart_toEndOf="@id/dispatched_icon"
             app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />

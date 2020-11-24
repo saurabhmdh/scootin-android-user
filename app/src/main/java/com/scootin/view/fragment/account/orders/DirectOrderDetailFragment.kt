@@ -77,11 +77,13 @@ class DirectOrderDetailFragment : Fragment(R.layout.fragment_track_direct_order)
             when(it) {
                 "PLACED" -> {
                     binding.placeIcon.isSelected = true
+                    binding.orderStatusString.text = getString(R.string.order_has_been_placed)
                 }
                 "PACKED" -> {
                     binding.placeIcon.isSelected = true
                     binding.progressId.isSelected=true
                     binding.packedIcon.isSelected = true
+                    binding.orderStatusString.text = getString(R.string.order_has_been_packed)
                 }
                 "DISPATCHED" -> {
                     binding.placeIcon.isSelected = true
@@ -89,6 +91,7 @@ class DirectOrderDetailFragment : Fragment(R.layout.fragment_track_direct_order)
                     binding.packedIcon.isSelected = true
                     binding.progressId2.isSelected=true
                     binding.dispatchedIcon.isSelected = true
+                    binding.orderStatusString.text = getString(R.string.order_has_been_dispatched)
                 }
                 "COMPLETED" -> {
                     binding.placeIcon.isSelected = true
@@ -98,6 +101,7 @@ class DirectOrderDetailFragment : Fragment(R.layout.fragment_track_direct_order)
                     binding.dispatchedIcon.isSelected = true
                     binding.progressId3.isSelected=true
                     binding.deliveredIcon.isSelected = true
+                    binding.orderStatusString.text = getString(R.string.order_has_been_completed)
                 }
             }
         }
