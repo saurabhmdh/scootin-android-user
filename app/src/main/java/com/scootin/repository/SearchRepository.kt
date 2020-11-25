@@ -39,4 +39,6 @@ class SearchRepository @Inject constructor(
 
     suspend fun uploadImage(filePart: MultipartBody.Part) = services.uploadImage(filePart)
 
+    suspend fun getDeliverySlot(currentTime: Long) = services.getDeliverySlot(currentTime)
+
 }
