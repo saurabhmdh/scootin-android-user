@@ -14,6 +14,7 @@ import com.scootin.network.request.AddToCartRequest
 import com.scootin.network.response.AddressDetails
 import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.util.Conversions
+import com.scootin.util.constants.AppConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.AddressAdapter
 import com.scootin.view.adapter.SweetsAdapter
@@ -38,7 +39,9 @@ class AddressFragment : Fragment(R.layout.fragment_address) {
         binding = FragmentAddressBinding.bind(view)
         setAdapter()
         viewModel.addressLiveData.observe(viewLifecycleOwner) {
-
+            if(it.isSuccessful){
+                Timber.i(""+it.body())
+            }
         }
     }
     private fun setAdapter() {

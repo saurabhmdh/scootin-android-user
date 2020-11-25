@@ -43,12 +43,12 @@ internal constructor(
         address.postValue(i)
     }
 
-    val addressLiveData = address.switchMap {
-        Timber.i("filePath in viewmodel")
+    val addressLiveData =
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
             emit(userRepository.getAllAddress())
         }
-    }
+
+
 
 
     val deliverySlot = liveData(viewModelScope.coroutineContext + Dispatchers.IO + handler) {
