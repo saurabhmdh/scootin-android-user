@@ -178,4 +178,7 @@ interface APIService {
 
     @GET("/util/slots/{startTime}")
     suspend fun getDeliverySlot(@Path("startTime") startTime: Long): Response<List<String>>
+
+    @GET("order/orders/check/{id}")
+    suspend fun checkOrder(@Path("id") id: String): Response<String>
 }
