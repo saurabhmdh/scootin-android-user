@@ -42,17 +42,29 @@
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/edit_text_for_order_id"
             android:layout_width="206dp"
-            android:layout_height="18dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:background="@drawable/ic_order_id_field_for_call"
             android:hint="@string/edittxt_orderid_call_support"
+            android:background="@drawable/ic_order_id_field_for_call"
             android:paddingLeft="2dp"
             android:layout_marginTop="20dp"
             android:textColor="#000"
             android:textColorHint="#000"
+            android:inputType="number"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mail_customer_support"  />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/submit"
+            android:text="Submit"
+            android:layout_marginStart="@dimen/dimen_20"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/edit_text_for_order_id"
+            app:layout_constraintTop_toBottomOf="@id/mail_customer_support" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/active_call_support"
@@ -61,12 +73,13 @@
             android:layout_marginStart="20dp"
             android:background="@drawable/ic_call_customer_support_active"
             android:gravity="center_vertical"
+            android:visibility="gone"
             android:paddingLeft="45dp"
             android:layout_marginTop="20dp"
             android:text="+91-0000000000"
             android:textColor="#000"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_text_for_order_id" />
+            app:layout_constraintTop_toBottomOf="@id/submit" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

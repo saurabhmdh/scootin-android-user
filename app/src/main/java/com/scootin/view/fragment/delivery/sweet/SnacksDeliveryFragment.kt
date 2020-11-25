@@ -24,6 +24,7 @@ import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.ProductSearchAdapter
 import com.scootin.view.adapter.ShopSearchAdapter
+import com.scootin.view.adapter.SweetsAdapter
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -35,7 +36,8 @@ class SnacksDeliveryFragment : Fragment(R.layout.fragment_snacks_delivery) {
     private val viewModel: CategoriesViewModel by viewModels()
     @Inject
     lateinit var appExecutors: AppExecutors
-    private lateinit var productSearchAdapter: ProductSearchAdapter
+
+    private lateinit var productSearchAdapter: SweetsAdapter
     private lateinit var shopSearchAdapter: ShopSearchAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -141,9 +143,9 @@ class SnacksDeliveryFragment : Fragment(R.layout.fragment_snacks_delivery) {
 
 
     private fun setProductAdapter() {
-        productSearchAdapter = ProductSearchAdapter(
+        productSearchAdapter = SweetsAdapter(
             appExecutors,
-            object : ProductSearchAdapter.ImageAdapterClickLister {
+            object : SweetsAdapter.ImageAdapterClickLister {
                 override fun onIncrementItem(
                     view: View,
                     item: SearchProductsByCategoryResponse?,

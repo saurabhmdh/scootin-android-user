@@ -86,4 +86,6 @@ class OrderRepository @Inject constructor(
 
 
     suspend fun placeCityWideOrder(userId: String, request: CityWideOrderRequest) = services.placeCityWideOrder(userId, request)
+
+    suspend fun checkOrder(orderId: String) = services.checkOrder(orderId)
 }

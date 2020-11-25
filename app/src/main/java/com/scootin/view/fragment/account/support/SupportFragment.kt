@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -61,5 +62,20 @@ class SupportFragment : Fragment(R.layout.customer_support) {
 
     private fun setupListener() {
         binding.back.setOnClickListener { findNavController().popBackStack() }
+
+        binding.submit.setOnClickListener {
+            val callId = binding.editTextForOrderId.text?.toString()?.toInt() ?: 0
+            if (callId == 0) {
+                Toast.makeText(requireContext(), "Please enter valid order Id", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            viewModel.verifyOrderId(callId.toString()).observe(viewLifecycleOwner) {
+                if (it.isSuccessful) {
+                    binding.activeCallSupport.visibility = View.VISIBLE
+                } else {
+                    Toast.makeText(requireContext(), "Please enter valid order Id", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 }
