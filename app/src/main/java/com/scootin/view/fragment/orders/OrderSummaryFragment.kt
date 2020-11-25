@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.scootin.R
 import com.scootin.databinding.FragmentOrderSummaryBinding
@@ -18,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.lang.StringBuilder
 import javax.inject.Inject
+
 @AndroidEntryPoint
 class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
     private var binding by autoCleared<FragmentOrderSummaryBinding>()
@@ -56,14 +58,23 @@ class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
                 }
             }
         }
+
+        binding.back.setOnClickListener {
+            findNavController().popBackStack(R.id.cart, false)
+        }
     }
 
     private fun getAllAddress(orderInventoryDetailsList: List<OrderInventoryDetails>?): String {
+        val uniqueAddress = mutableSetOf<Long>()
+
         val sb = StringBuffer()
         orderInventoryDetailsList?.forEach {
-            sb.append(it.inventoryDetails.shopManagement.name).append(", ")
-            sb.append(getSingleAddress(it.inventoryDetails.shopManagement.address))
-            sb.append("\n")
+            if(uniqueAddress.contains(it.inventoryDetails.shopManagement.id).not()) {
+                sb.append(it.inventoryDetails.shopManagement.name).append(", ")
+                sb.append(getSingleAddress(it.inventoryDetails.shopManagement.address))
+                sb.append("\n")
+                uniqueAddress.add(it.inventoryDetails.shopManagement.id)
+            }
         }
         return sb.toString()
     }
@@ -82,6 +93,7 @@ class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
         }
     }
 
+    //If same shop then once
     private fun getSingleAddress(address: AddressDetails?): String {
         if(address == null) return ""
         val sb = StringBuilder().append(address.addressLine1).append(", ")
