@@ -103,6 +103,10 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
         }
 
         binding.applyPromoButton.setOnClickListener {
+            if (binding.couponEdittext.text?.toString()?.isEmpty() == true) {
+                Toast.makeText(context, "Please enter valid coupon code", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             viewModel.promCodeRequest(orderId.toString(), binding.couponEdittext.text.toString()).observe(viewLifecycleOwner) {
                 if (it.isSuccessful) {
