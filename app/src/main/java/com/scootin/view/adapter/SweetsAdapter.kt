@@ -53,10 +53,6 @@ class SweetsAdapter (
             }
             //Invalid case.. number can't be negative
         }
-
-        //Need to handle case when its again 0..
-
-
         binding.operation.updateVisibility(false)
         binding.addItem.updateVisibility(true)
 
@@ -76,18 +72,12 @@ class SweetsAdapter (
         isLast: Boolean
     ) {
         binding.data = item
-
-
-
-//        val items = arrayOf("500g", "1kg", "2kg")
-//        val adapter = ArrayAdapter<String>(
-//            binding.count.context,
-//            R.layout.spinner_layout_essential,
-//            items
-//        )
-//
-//        binding.spinner.setAdapter(adapter)
-//        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+        //If shop is close, these add item should be hide
+        if (item.shopManagement.shopActiveForOrders) {
+            binding.addItem.updateVisibility(true)
+        } else {
+            binding.addItem.updateVisibility(false)
+        }
 
     }
 
