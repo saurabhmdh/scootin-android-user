@@ -30,6 +30,7 @@ import com.scootin.viewmodel.order.DirectOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.io.File
+import java.text.FieldPosition
 import javax.inject.Inject
 
 
@@ -37,9 +38,11 @@ import javax.inject.Inject
 class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragment) {
     lateinit var searchItemAddAdapter: SearchitemAdapter
     private var binding by autoCleared<MedicinePrescriptionFragmentBinding>()
-    val filesCantBeUploadedList = mutableListOf<String>()
+
     private val viewModel: DirectOrderViewModel by viewModels()
     private var mediaId = -1L
+
+
     private val shopId by lazy {
         args.shopId
     }
@@ -48,7 +51,6 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
 
     @Inject
     lateinit var appExecutors: AppExecutors
-    val itemAddList = ArrayList<String>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,19 +65,21 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
             when (actionId) {
                 EditorInfo.IME_ACTION_DONE -> {
                     Timber.i("action id = ${actionId}")
-                    searchItemAddAdapter.addList(
-                        ExtraDataItem(
-                            binding.searchSuggestion.text.toString(),
-                            0
-                        )
-                    )
-                    return@OnEditorActionListener true
+
+                    //Need to play here
+                    searchItemAddAdapter.addList(ExtraDataItem(binding.searchSuggestion.text.toString(), 1))
+                    binding.searchSuggestion.setText("")
+                    return@OnEditorActionListener false
                 }
             }
             false
         })
 
         binding.placeOrder.setOnClickListener {
+            if (binding.termAccepted.isChecked.not()) {
+                Toast.makeText(requireContext(), "Please accept term & condition", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             placeDirectOrder()
         }
 
@@ -83,11 +87,14 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
             onClickOfUploadMedia()
         }
         binding.back.setOnClickListener { findNavController().popBackStack() }
+
+        binding.warning.setOnClickListener {
+            binding.termAccepted.isChecked = !binding.termAccepted.isChecked
+        }
     }
 
     private fun setSearchSuggestionList() {
-        searchItemAddAdapter =
-            SearchitemAdapter(appExecutors, object : SearchitemAdapter.OnItemClickListener {
+        searchItemAddAdapter = SearchitemAdapter(appExecutors, object : SearchitemAdapter.OnItemClickListener {
                 override fun onIncrement(count: String) {
                     Timber.i("increment count = $count")
                 }
@@ -105,17 +112,14 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
         binding.medicalStoreName.text = "${args.shopName}"
     }
 
-    fun showMediaGallery() {
-        if (UtilPermission.hasReadWritePermission(requireActivity())) {
-            MediaPicker(requireActivity()).getImagePickerSelectionPanel()
-        } else {
-            UtilPermission.requestForReadWritePermission(requireActivity())
-        }
-    }
-
     private fun placeDirectOrder() {
         if (mediaId == -1L) {
-            Toast.makeText(context, "Invalid Media", Toast.LENGTH_SHORT).show()
+            //TODO: add fake media ->
+            mediaId = 329
+        }
+
+        if (searchItemAddAdapter.list.isEmpty()) {
+            Toast.makeText(context, "Please add medicine name", Toast.LENGTH_SHORT).show()
             return
         }
         showLoading()

@@ -37,6 +37,8 @@ class SearchitemAdapter(
     override fun onBindViewHolder(viewHolder: SearchViewHolder, position: Int) {
         val item = list.get(position)
         viewHolder.editTextView.setText(item.name)
+        viewHolder.count.text = "${item.count}"
+
         viewHolder.editTextView.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -59,6 +61,9 @@ class SearchitemAdapter(
                 item.count = viewHolder.count.text.toString().toInt().dec()
                 viewHolder.count.text = "${item.count}"
                 listener.onDecrement(item.count.toString())
+                if (viewHolder.count.text.toString().toInt() == 0) {
+                    removeItem(position)
+                }
             }
         }
     }
@@ -71,6 +76,11 @@ class SearchitemAdapter(
         list.add(item)
         if(list.isEmpty().not())
         notifyItemInserted(list.size-1)
+    }
+
+    fun removeItem(position: Int) {
+        list.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     interface OnItemClickListener{

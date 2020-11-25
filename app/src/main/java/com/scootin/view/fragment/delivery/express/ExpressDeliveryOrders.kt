@@ -36,7 +36,7 @@ import javax.inject.Inject
 class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_orders) {
     lateinit var searchItemAddAdapter: SearchitemAdapter
     private var binding by autoCleared<FragmentExpressDeliveryOrdersBinding>()
-    val filesCantBeUploadedList = mutableListOf<String>()
+
     private val viewModel: DirectOrderViewModel by viewModels()
     private var mediaId = -1L
     private val shopId by lazy {
@@ -47,7 +47,7 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
 
     @Inject
     lateinit var appExecutors: AppExecutors
-    val itemAddList = ArrayList<String>()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,10 +65,11 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
                     searchItemAddAdapter.addList(
                         ExtraDataItem(
                             binding.searchSuggestion.text.toString(),
-                            0
+                            1
                         )
                     )
-                    return@OnEditorActionListener true
+                    binding.searchSuggestion.setText("")
+                    return@OnEditorActionListener false
                 }
             }
             false
