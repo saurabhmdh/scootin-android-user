@@ -55,13 +55,13 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
 
         })
 
-        binding.addressFragment.setOnClickListener {
-            if (binding.newAddressLayout.visibility == View.VISIBLE) {
-                binding.newAddressLayout.updateVisibility(false)
-            } else {
-                binding.newAddressLayout.updateVisibility(true)
-            }
-        }
+//        binding.addressFragment.setOnClickListener {
+//            if (binding.newAddressLayout.visibility == View.VISIBLE) {
+//                binding.newAddressLayout.updateVisibility(false)
+//            } else {
+//                binding.newAddressLayout.updateVisibility(true)
+//            }
+//        }
 
         /* addressViewModel.state(1)
          addressViewModel.stateLiveData.observe(viewLifecycleOwner, Observer {

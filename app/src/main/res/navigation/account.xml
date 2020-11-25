@@ -61,7 +61,8 @@
     <fragment
         android:id="@+id/address_fragment"
         android:name="com.scootin.view.fragment.account.address.AddressFragment"
-        android:label="Account" />
+        android:label="Account" >
+    </fragment>
 
     <fragment
         android:id="@+id/order_history_fragment"
