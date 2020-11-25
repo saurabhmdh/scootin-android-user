@@ -87,6 +87,7 @@
             android:layout_marginStart="16dp"/>
 
         <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/delivery_slot"
             android:layout_width="match_parent"
             android:layout_height="22dp"
             android:background="@drawable/spinner_grad_bg"

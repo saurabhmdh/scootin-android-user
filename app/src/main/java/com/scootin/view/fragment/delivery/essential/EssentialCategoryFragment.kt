@@ -2,6 +2,8 @@ package com.scootin.view.fragment.delivery.essential
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.widget.ListPopupWindow
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,6 +19,7 @@ import com.scootin.viewmodel.account.AddressFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class EssentialCategoryFragment : Fragment(R.layout.fragment_essential_category) {
@@ -39,6 +42,11 @@ class EssentialCategoryFragment : Fragment(R.layout.fragment_essential_category)
 
     private fun updateListeners() {
         binding.btnDone.setOnClickListener {
+            //If there is no delivery slot it should make error
+            if (binding.deliverySlot.selectedItem?.toString().isNullOrEmpty()) {
+                Toast.makeText(requireContext(), "There is no delivery slot please try some other time", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             when (binding.radioGroup.getCheckedRadioButtonPosition()) {
                 0 -> {
                     findNavController().navigate(EssentialCategoryFragmentDirections.essentialCategoryToGrocerydelivery())
@@ -49,6 +57,19 @@ class EssentialCategoryFragment : Fragment(R.layout.fragment_essential_category)
             }
         }
         binding.back.setOnClickListener { findNavController().popBackStack() }
+
+        addressViewModel.deliverySlot.observe(viewLifecycleOwner) {
+            if (it.isSuccessful) {
+                val list: List<String> = it.body() ?: emptyList()
+                binding.deliverySlot.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, list)
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "There is error on delivery slot",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
 
