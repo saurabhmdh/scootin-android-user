@@ -20,4 +20,7 @@
     <color name="gray_33">#333333</color>
     <color name="grey_EA">#EAEAEA</color>
     <color name="separatorColor">#787878</color>
+
+    <color name="backgroundTint">#ffc0cb</color>
+    <color name="actionTextColor">@color/order_status_delivered_color</color>
 </resources>
