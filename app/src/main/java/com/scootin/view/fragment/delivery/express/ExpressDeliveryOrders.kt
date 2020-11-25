@@ -116,10 +116,14 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
     }
 
     private fun placeDirectOrder() {
-        if (mediaId == -1L) {
-            Toast.makeText(context, "Invalid Media", Toast.LENGTH_SHORT).show()
+        if (mediaId == -1L && searchItemAddAdapter.list.isEmpty()) {
+            Toast.makeText(context, "Please enter either name or photo", Toast.LENGTH_SHORT).show()
             return
         }
+        if (mediaId == -1L) {
+            mediaId = 329
+        }
+
         showLoading()
         Timber.i("Json : ${Gson().toJson(searchItemAddAdapter.list)}")
         viewModel.placeDirectOrder(
