@@ -43,10 +43,6 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
     private fun initObservers() {}
 
     private fun updateListeners() {
-
-        binding.radioGroup.setOnCheckedChangeListener { group, checkId ->
-        }
-
         binding.addressFragment.setOnClickListener {
             findNavController().navigate(AccountFragmentDirections.accountToAddressFragment())
         }

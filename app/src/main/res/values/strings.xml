@@ -68,7 +68,7 @@
     <string name="msg_subscribe_failed">Failed to subscribe to weather topic</string>
     <string name="fcm_message">FCM Message</string>
     <string name="full_name">Full Name</string>
-    <string name="default_delivery_address">Default Delivery Address</string>
+    <string name="default_delivery_address">Add new address</string>
     <string name="name_surname">Name Surname</string>
     <string name="pre_added">Pre Added</string>
     <string name="email_id">Email ID</string>

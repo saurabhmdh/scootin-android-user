@@ -62,13 +62,20 @@
         android:id="@+id/address_fragment"
         android:name="com.scootin.view.fragment.account.address.AddressFragment"
         android:label="Account" >
+        <action
+            android:id="@+id/address_fragment_to_add"
+            app:destination="@id/address_fragment" />
     </fragment>
 
-<!--    <fragment-->
-<!--        android:id="@+id/address_fragment"-->
-<!--        android:name="com.scootin.view.fragment.account.address.AddressFragment"-->
-<!--        android:label="Account" >-->
-<!--    </fragment>-->
+    <fragment
+        android:id="@+id/address_add_new"
+        android:name="com.scootin.view.fragment.account.address.AddorModifyNewAddressFragment"
+        android:label="" >
+        <argument
+            android:name="addressId"
+            android:defaultValue="-1"
+            app:argType="integer" />
+    </fragment>
 
     <fragment
         android:id="@+id/order_history_fragment"
