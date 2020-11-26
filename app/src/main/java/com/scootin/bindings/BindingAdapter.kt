@@ -70,9 +70,9 @@ fun TextView.setToIntText(value: Long) {
 
 @BindingAdapter("setOneLineAddress")
 fun TextView.setOneLineAddress(address: AddressDetails?) {
-    if(address == null) return
+    if (address == null) return
     val sb = StringBuilder().append(address.addressLine1).append(", ")
-        .append(address.addressLine2).append(", ").append(address.city).append(", ")
+         .append(", ").append(address.city).append(", ")
         .append(address.pincode)
     text = sb.toString()
 }

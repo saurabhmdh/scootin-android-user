@@ -8,6 +8,7 @@ import com.scootin.network.response.citywide.CityWideOrderResponse
 import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.network.response.home.ResponseServiceArea
 import com.scootin.network.response.inorder.InOrderDetail
+import com.scootin.network.response.login.ResponseAddAddressSuccess
 import com.scootin.network.response.login.ResponseUser
 import com.scootin.network.response.order.OrderHistoryItem
 import com.scootin.network.response.orderdetail.OrderDetail
@@ -105,8 +106,8 @@ interface APIService {
         @Path("addressId") addressId: String
     ): Response<String>
 
-    @POST("/address/add-new-address")
-    suspend fun addNewAddress(/*@Path("userID") userId: String,*/ @Body address: AddressDetails): Response<String>
+    @POST("/address/add-new-address/{userId}")
+    suspend fun addNewAddress(@Path("userId") userId: String, @Body address: AddAddressRequest): Response<ResponseAddAddressSuccess>
 
     @GET("/address/get-all-address/{userId}")
     suspend fun getAllAdress(@Path("userId") userId: String): Response<List<AddressDetails>>
