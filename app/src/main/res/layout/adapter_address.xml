@@ -5,22 +5,26 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="data"
-            type="com.scootin.network.response.AddressDetails"/>
+            type="com.scootin.view.vo.AddressVo"/>
 
     </data>
 
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:elevation="6dp">
+    android:clipToPadding="false"
+    app:cardCornerRadius="@dimen/dimen_10"
+    android:layout_margin="8dp"
+    app:contentPadding="5dp"
+    android:elevation="10dp">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="16dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="16dp">
 
     <androidx.appcompat.widget.AppCompatRadioButton
         android:id="@+id/radiobutton"
@@ -28,15 +32,17 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:clickable="false"
+        android:checked="@{data.selected}"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/name"
+        android:id="@+id/address_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Home"
+        android:text="@{data.addressType}"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
@@ -45,65 +51,29 @@
         app:layout_constraintTop_toTopOf="@+id/radiobutton" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/addressline_1"
+        android:id="@+id/is_default"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
+        android:text="(Default)"
+        android:layout_marginStart="@dimen/dimen_10"
+        android:layout_marginTop="@dimen/dimen_4"
+        app:visibleGone="@{data.hasDefault}"
+        android:textColor="@android:color/holo_red_dark"
+        app:layout_constraintStart_toEndOf="@+id/address_type"
+        app:layout_constraintTop_toTopOf="@+id/radiobutton"
+        app:srcCompat="@drawable/ic_create_icon" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/full_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Sarvesh padwal"
+        android:maxLines="3"
+        app:setOneLineAddress="@{data.addressDetail}"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/name" />
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/addressline_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="3dp"
-        android:text="Sarvesh padwal"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addressline_1" />
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/addressline_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="3dp"
-        android:text="Sarvesh padwal"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addressline_2" />
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/addressline_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="3dp"
-        android:text="Sarvesh padwal"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addressline_3" />
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/addressline_5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="3dp"
-        android:text="Sarvesh padwal"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addressline_4" />
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/addressline_6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="3dp"
-        android:text="Sarvesh padwal"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addressline_5" />
+        app:layout_constraintTop_toBottomOf="@id/address_type" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/delete_icon"
@@ -116,7 +86,7 @@
         app:srcCompat="@drawable/ic_delete_icon" />
 
     <View
-        android:id="@+id/imageView2"
+        android:id="@+id/seprated"
         android:layout_width="1dp"
         android:layout_height="26dp"
         android:layout_marginTop="16dp"
@@ -131,7 +101,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintEnd_toStartOf="@+id/seprated"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_create_icon" />
 

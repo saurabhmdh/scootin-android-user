@@ -11,7 +11,7 @@ data class AddressDetails(
     val city: String,
     val deleted: Boolean,
     val hasDefault: Boolean,
-    val id: Int,
+    val id: Long,
     val pincode: String,
     val stateDetails: StateDetails,
     val userInfo: UserInfo

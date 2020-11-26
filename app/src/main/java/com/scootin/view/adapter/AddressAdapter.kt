@@ -1,65 +1,61 @@
 package com.scootin.view.adapter
 
-import android.annotation.SuppressLint
-import android.graphics.Paint
+
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.scootin.databinding.AdapterAddressBinding
-import com.scootin.databinding.AdapterItemAddEssentialGroceryBinding
-import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
-import com.scootin.network.response.AddressDetails
-import com.scootin.network.response.SearchProductsByCategoryResponse
+import com.scootin.view.vo.AddressVo
+
 
 class AddressAdapter (
     val appExecutors: AppExecutors,
-    val imageAdapterClickListener: ImageAdapterClickLister
-
-) : DataBoundListAdapter<AddressDetails, AdapterAddressBinding>(
+    val iClickListener: IClickLister
+) : DataBoundListAdapter<AddressVo, AdapterAddressBinding>(
     appExecutors,
-    diffCallback = object : DiffUtil.ItemCallback<AddressDetails>() {
+    diffCallback = object : DiffUtil.ItemCallback<AddressVo>() {
         override fun areItemsTheSame(
-            oldItem: AddressDetails,
-            newItem: AddressDetails
-        ) = oldItem.id == newItem.id
+            oldItem: AddressVo,
+            newItem: AddressVo
+        ) = oldItem == newItem
 
 
-        @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
-            oldItem: AddressDetails,
-            newItem: AddressDetails
+            oldItem: AddressVo,
+            newItem: AddressVo
         ) = oldItem == newItem
     }
 )
 {
     override fun createBinding(parent: ViewGroup): AdapterAddressBinding {
-        val binding= AdapterAddressBinding.inflate(
+        val binding = AdapterAddressBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
-
         )
-
         return binding
     }
 
     override fun bind(
         binding: AdapterAddressBinding,
-        item: AddressDetails,
+        item: AddressVo,
         position: Int,
         isLast: Boolean
     ) {
         binding.data = item
         binding.editIcon.setOnClickListener {
-                imageAdapterClickListener.onCreateIcon(item)
+            iClickListener.onCreateIcon(item, position)
         }
         binding.deleteIcon.setOnClickListener {
-            imageAdapterClickListener.onDeleteIcon(item)
+            iClickListener.onDeleteIcon(item, position)
+        }
+        binding.rootView.setOnClickListener {
+            iClickListener.checkboxSelected(item, position)
         }
     }
 
-    interface ImageAdapterClickLister {
-        fun onCreateIcon(view: AddressDetails)
-        fun onDeleteIcon(view: AddressDetails)
+    interface IClickLister {
+        fun onCreateIcon(address: AddressVo, position: Int)
+        fun onDeleteIcon(address: AddressVo, position: Int)
+        fun checkboxSelected(address: AddressVo, position: Int)
     }
 }
