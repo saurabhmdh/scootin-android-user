@@ -27,8 +27,8 @@ internal constructor(
         Timber.i("Caught  $exception")
     }
 
-    val addressLiveData = liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-            emit(userRepository.getAllAddress())
+    fun getAddressLiveData() = liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+        emit(userRepository.getAllAddress())
     }
 
     val deliverySlot = liveData(viewModelScope.coroutineContext + Dispatchers.IO + handler) {
