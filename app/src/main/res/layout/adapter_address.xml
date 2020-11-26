@@ -20,10 +20,11 @@
     app:contentPadding="5dp"
     android:elevation="10dp">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="16dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="16dp">
 
     <androidx.appcompat.widget.AppCompatRadioButton
         android:id="@+id/radiobutton"
@@ -31,6 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:clickable="false"
+        android:enabled="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -48,12 +51,25 @@
         app:layout_constraintTop_toTopOf="@+id/radiobutton" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/full_address"
+        android:id="@+id/is_default"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
+        android:text="(Default)"
+        android:layout_marginStart="@dimen/dimen_10"
+        android:layout_marginTop="@dimen/dimen_4"
+        app:visibleGone="@{data.hasDefault}"
+        android:textColor="@android:color/holo_red_dark"
+        app:layout_constraintStart_toEndOf="@+id/address_type"
+        app:layout_constraintTop_toTopOf="@+id/radiobutton"
+        app:srcCompat="@drawable/ic_create_icon" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/full_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="some address"
+        android:maxLines="3"
         app:setOneLineAddress="@{data}"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"

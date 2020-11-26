@@ -1,21 +1,17 @@
 package com.scootin.view.adapter
 
-import android.annotation.SuppressLint
-import android.graphics.Paint
+
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.scootin.databinding.AdapterAddressBinding
-import com.scootin.databinding.AdapterItemAddEssentialGroceryBinding
-import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.AddressDetails
-import com.scootin.network.response.SearchProductsByCategoryResponse
+
 
 class AddressAdapter (
     val appExecutors: AppExecutors,
-    val imageAdapterClickListener: ImageAdapterClickLister
+    val iClickListener: IClickLister
 
 ) : DataBoundListAdapter<AddressDetails, AdapterAddressBinding>(
     appExecutors,
@@ -48,15 +44,19 @@ class AddressAdapter (
     ) {
         binding.data = item
         binding.editIcon.setOnClickListener {
-                imageAdapterClickListener.onCreateIcon(item)
+            iClickListener.onCreateIcon(item, position)
         }
         binding.deleteIcon.setOnClickListener {
-            imageAdapterClickListener.onDeleteIcon(item)
+            iClickListener.onDeleteIcon(item, position)
+        }
+        binding.rootView.setOnClickListener {
+            iClickListener.checkboxSelected(item, position)
         }
     }
 
-    interface ImageAdapterClickLister {
-        fun onCreateIcon(view: AddressDetails)
-        fun onDeleteIcon(view: AddressDetails)
+    interface IClickLister {
+        fun onCreateIcon(address: AddressDetails, position: Int)
+        fun onDeleteIcon(address: AddressDetails, position: Int)
+        fun checkboxSelected(address: AddressDetails, position: Int)
     }
 }

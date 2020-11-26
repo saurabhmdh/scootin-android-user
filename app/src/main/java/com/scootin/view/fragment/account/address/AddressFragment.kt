@@ -56,12 +56,19 @@ class AddressFragment : Fragment(R.layout.fragment_address) {
     private fun setAdapter() {
         addressAdapter = AddressAdapter(
             appExecutors,
-            object : AddressAdapter.ImageAdapterClickLister {
-                override fun onCreateIcon(view: AddressDetails) {
-
+            object : AddressAdapter.IClickLister {
+                override fun onCreateIcon(address: AddressDetails, position: Int) {
+                    Timber.i("onCreateIcon item is $address")
                 }
 
-                override fun onDeleteIcon(view: AddressDetails) {
+                override fun onDeleteIcon(address: AddressDetails, position: Int) {
+                    Timber.i("onCreateIcon item is $address")
+                }
+
+                override fun checkboxSelected(address: AddressDetails, position: Int) {
+                    Timber.i("$position -> $address")
+                    //Unset all other option and select this
+
 
                 }
 
