@@ -19,6 +19,7 @@ import com.scootin.util.constants.AppConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.AddressAdapter
 import com.scootin.view.adapter.SweetsAdapter
+import com.scootin.view.vo.AddressVo
 import com.scootin.viewmodel.account.AddressFragmentViewModel
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,7 +47,15 @@ class AddressFragment : Fragment(R.layout.fragment_address) {
     private fun setupListener() {
         viewModel.addressLiveData.observe(viewLifecycleOwner) {
             if (it.isSuccessful) {
-                addressAdapter.submitList(it.body())
+
+                val addressList = mutableListOf<AddressVo>().apply {
+                    it.body()?.forEach { data ->
+                        add(AddressVo(data))
+                    }
+                }
+                addressAdapter.submitList(addressList)
+                Timber.i("Data $addressList")
+                // Need to send data to adapter..
             } else {
                 Toast.makeText(requireContext(), "There is some error while getting address", Toast.LENGTH_SHORT).show()
             }
@@ -57,19 +66,17 @@ class AddressFragment : Fragment(R.layout.fragment_address) {
         addressAdapter = AddressAdapter(
             appExecutors,
             object : AddressAdapter.IClickLister {
-                override fun onCreateIcon(address: AddressDetails, position: Int) {
+                override fun onCreateIcon(address: AddressVo, position: Int) {
                     Timber.i("onCreateIcon item is $address")
                 }
 
-                override fun onDeleteIcon(address: AddressDetails, position: Int) {
+                override fun onDeleteIcon(address: AddressVo, position: Int) {
                     Timber.i("onCreateIcon item is $address")
                 }
 
-                override fun checkboxSelected(address: AddressDetails, position: Int) {
+                override fun checkboxSelected(address: AddressVo, position: Int) {
                     Timber.i("$position -> $address")
                     //Unset all other option and select this
-
-
                 }
 
             })

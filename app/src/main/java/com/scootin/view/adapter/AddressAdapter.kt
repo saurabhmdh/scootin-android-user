@@ -7,24 +7,25 @@ import androidx.recyclerview.widget.DiffUtil
 import com.scootin.databinding.AdapterAddressBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.AddressDetails
+import com.scootin.view.vo.AddressVo
 
 
+//Should use old style as its very difficult to handle selection...
 class AddressAdapter (
     val appExecutors: AppExecutors,
     val iClickListener: IClickLister
-
-) : DataBoundListAdapter<AddressDetails, AdapterAddressBinding>(
+) : DataBoundListAdapter<AddressVo, AdapterAddressBinding>(
     appExecutors,
-    diffCallback = object : DiffUtil.ItemCallback<AddressDetails>() {
+    diffCallback = object : DiffUtil.ItemCallback<AddressVo>() {
         override fun areItemsTheSame(
-            oldItem: AddressDetails,
-            newItem: AddressDetails
+            oldItem: AddressVo,
+            newItem: AddressVo
         ) = oldItem.id == newItem.id
 
 
         override fun areContentsTheSame(
-            oldItem: AddressDetails,
-            newItem: AddressDetails
+            oldItem: AddressVo,
+            newItem: AddressVo
         ) = oldItem == newItem
     }
 )
@@ -38,7 +39,7 @@ class AddressAdapter (
 
     override fun bind(
         binding: AdapterAddressBinding,
-        item: AddressDetails,
+        item: AddressVo,
         position: Int,
         isLast: Boolean
     ) {
@@ -55,8 +56,8 @@ class AddressAdapter (
     }
 
     interface IClickLister {
-        fun onCreateIcon(address: AddressDetails, position: Int)
-        fun onDeleteIcon(address: AddressDetails, position: Int)
-        fun checkboxSelected(address: AddressDetails, position: Int)
+        fun onCreateIcon(address: AddressVo, position: Int)
+        fun onDeleteIcon(address: AddressVo, position: Int)
+        fun checkboxSelected(address: AddressVo, position: Int)
     }
 }

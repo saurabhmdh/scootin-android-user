@@ -7,7 +7,7 @@
     <data>
         <variable
             name="data"
-            type="com.scootin.network.response.AddressDetails"/>
+            type="com.scootin.view.vo.AddressVo"/>
 
     </data>
 
@@ -33,7 +33,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:clickable="false"
-        android:enabled="false"
+        android:checked="@{data.selected}"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -70,7 +70,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:maxLines="3"
-        app:setOneLineAddress="@{data}"
+        app:setOneLineAddress="@{data.addressDetail}"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/address_type" />
