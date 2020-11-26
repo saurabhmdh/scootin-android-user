@@ -29,10 +29,10 @@
         <action
             android:id="@+id/action_cart_fragment_to_card_payment"
             app:destination="@id/card_payment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 
 
@@ -45,12 +45,12 @@
             app:argType="long" />
             <action android:id="@+id/order_confirmation_page"
                 app:destination="@id/order_confirmation"
-                app:enterAnim="@anim/slide_in_right"
-                app:exitAnim="@anim/slide_out_left"
-                app:popEnterAnim="@anim/slide_in_left"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
                 app:popUpTo="@id/cart"
                 app:popUpToInclusive="false"
-                app:popExitAnim="@anim/slide_out_right" />
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     </fragment>
 
@@ -65,12 +65,12 @@
         <action
             android:id="@+id/action_cart_payment_fragment_to_order_summary"
             app:destination="@id/orders_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popUpTo="@id/cart"
             app:popUpToInclusive="false"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 
         <fragment

@@ -20,36 +20,14 @@ internal constructor(
     private val searchRepository: SearchRepository
 ) : ObservableViewModel() {
 
-    val state = MutableLiveData<Int>()
-
-    fun state(i: Int) {
-        state.postValue(i)
-    }
 
     private val handler = CoroutineExceptionHandler { _, exception ->
         Timber.i("Caught  $exception")
     }
 
-    val stateLiveData = state.switchMap {
-        Timber.i("filePath in viewmodel")
-        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-            emit(userRepository.getAllState())
-        }
-    }
-
-    val address = MutableLiveData<Int>()
-
-    fun address(i: Int) {
-        address.postValue(i)
-    }
-
-    val addressLiveData =
-        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+    val addressLiveData = liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
             emit(userRepository.getAllAddress())
-        }
-
-
-
+    }
 
     val deliverySlot = liveData(viewModelScope.coroutineContext + Dispatchers.IO + handler) {
         emit(searchRepository.getDeliverySlot(Date().time))
