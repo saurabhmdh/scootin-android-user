@@ -148,7 +148,11 @@
 
         <action
             android:id="@+id/action_express_delivery_to_express_orders2"
-            app:destination="@id/express_orders" />
+            app:destination="@id/express_orders"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/express_orders"
@@ -340,7 +344,11 @@
         android:label="ExpressDeliveryCategoryFragment">
         <action
             android:id="@+id/action_expressDeliveryCategoryFragment_to_express_delivery"
-            app:destination="@id/express_delivery" />
+            app:destination="@id/express_delivery"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
 

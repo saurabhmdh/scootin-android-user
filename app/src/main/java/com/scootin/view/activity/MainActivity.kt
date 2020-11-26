@@ -103,17 +103,6 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
                 }
             }
         }
-        val navHostFragment = supportFragmentManager.fragments.first() as? NavHostFragment
-        if (navHostFragment != null) {
-            val childFragments = navHostFragment.childFragmentManager.fragments
-            childFragments.forEach { fragment ->
-                if (fragment is MyWalletFragment) {
-                    (fragment).onPaymentSuccess(razorpayPaymentId)
-                } else if (fragment is CardPaymentPageFragment) {
-                    fragment.onPaymentSuccess(razorpayPaymentId)
-                }
-            }
-        }
     }
 
     override fun onPaymentError(errorCode: Int, response: String?) {

@@ -91,9 +91,15 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             } else {
                 viewModel.sendOTP(mobileNumber)
             }
-
         }
-
+        binding.senAgainLoginOtp.setOnClickListener {
+            val mobileNumber = binding.editTextPhnNo.text.toString()
+            if (mobileNumber.isEmpty() || Validation.REGEX_VALID_MOBILE_NUMBER.matcher(mobileNumber).matches().not()) {
+                Toast.makeText(context,  R.string.error_message_invalid_mobile, Toast.LENGTH_SHORT).show()
+            } else {
+                viewModel.sendOTP(mobileNumber)
+            }
+        }
     }
     private fun openHomeScreen() {
         startActivity(Intent(requireContext(), MainActivity::class.java))
