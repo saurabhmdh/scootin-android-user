@@ -12,7 +12,7 @@ import kotlinx.android.parcel.Parcelize
 data class AddressVo (
     val id: Long,
     val addressLine1: String,
-    val addressLine2: String,
+    val addressLine2: String?,
     val addressType: String,
     val city: String,
     val hasDefault: Boolean,

@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class AddressDetails(
     val addressLine1: String,
-    val addressLine2: String,
+    val addressLine2: String?,
     val addressType: String,
     val city: String,
     val deleted: Boolean,
