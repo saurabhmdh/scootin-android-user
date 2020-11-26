@@ -6,11 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.scootin.databinding.AdapterAddressBinding
 import com.scootin.network.AppExecutors
-import com.scootin.network.response.AddressDetails
 import com.scootin.view.vo.AddressVo
 
 
-//Should use old style as its very difficult to handle selection...
 class AddressAdapter (
     val appExecutors: AppExecutors,
     val iClickListener: IClickLister
@@ -20,7 +18,7 @@ class AddressAdapter (
         override fun areItemsTheSame(
             oldItem: AddressVo,
             newItem: AddressVo
-        ) = oldItem.id == newItem.id
+        ) = oldItem == newItem
 
 
         override fun areContentsTheSame(

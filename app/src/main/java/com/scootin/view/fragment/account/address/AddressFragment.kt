@@ -77,6 +77,13 @@ class AddressFragment : Fragment(R.layout.fragment_address) {
                 override fun checkboxSelected(address: AddressVo, position: Int) {
                     Timber.i("$position -> $address")
                     //Unset all other option and select this
+                    val temp = addressAdapter.currentList
+                    temp.forEach {
+                        it.selected = address.id == it.id
+                    }
+                    Timber.i("templist $temp")
+                    addressAdapter.submitList(null)
+                    addressAdapter.submitList(temp)
                 }
 
             })
