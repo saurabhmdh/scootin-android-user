@@ -47,7 +47,6 @@ class AddressFragment : Fragment(R.layout.fragment_address) {
     private fun setupListener() {
         viewModel.addressLiveData.observe(viewLifecycleOwner) {
             if (it.isSuccessful) {
-
                 val addressList = mutableListOf<AddressVo>().apply {
                     it.body()?.forEach { data ->
                         add(AddressVo(data))
@@ -59,6 +58,10 @@ class AddressFragment : Fragment(R.layout.fragment_address) {
             } else {
                 Toast.makeText(requireContext(), "There is some error while getting address", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        binding.addNewAddress.setOnClickListener {
+
         }
     }
 
@@ -75,7 +78,11 @@ class AddressFragment : Fragment(R.layout.fragment_address) {
                 }
 
                 override fun checkboxSelected(address: AddressVo, position: Int) {
+                    //We should finish the fragment and set the result.
+
+
                     Timber.i("$position -> $address")
+                    //TODO: We need to just select this address
                     //Unset all other option and select this
                     val temp = addressAdapter.currentList
                     temp.forEach {
