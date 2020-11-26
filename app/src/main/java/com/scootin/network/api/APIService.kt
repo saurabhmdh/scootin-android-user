@@ -101,7 +101,7 @@ interface APIService {
 
     @GET("/address/update-default-address/{userId}/{addressId}")
     suspend fun updateDefaultAddress(
-        @Path("userID") userId: String,
+        @Path("userId") userId: String,
         @Path("addressId") addressId: String
     ): Response<String>
 
@@ -109,7 +109,7 @@ interface APIService {
     suspend fun addNewAddress(/*@Path("userID") userId: String,*/ @Body address: AddressDetails): Response<String>
 
     @GET("/address/get-all-address/{userId}")
-    suspend fun getAllAdress(@Path("userID") userId: String): Response<List<AddressDetails>>
+    suspend fun getAllAdress(@Path("userId") userId: String): Response<List<AddressDetails>>
 
     @Multipart
     @POST("/media/upload-image-android")

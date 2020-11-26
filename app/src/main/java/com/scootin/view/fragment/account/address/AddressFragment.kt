@@ -3,6 +3,7 @@ package com.scootin.view.fragment.account.address
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.scootin.R
 import com.scootin.databinding.FragmentAddNewAddressBinding
@@ -38,12 +39,20 @@ class AddressFragment : Fragment(R.layout.fragment_address) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAddressBinding.bind(view)
         setAdapter()
+        setupListener()
+
+    }
+
+    private fun setupListener() {
         viewModel.addressLiveData.observe(viewLifecycleOwner) {
-            if(it.isSuccessful){
-                Timber.i(""+it.body())
+            if (it.isSuccessful) {
+                addressAdapter.submitList(it.body())
+            } else {
+                Toast.makeText(requireContext(), "There is some error while getting address", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
     private fun setAdapter() {
         addressAdapter = AddressAdapter(
             appExecutors,

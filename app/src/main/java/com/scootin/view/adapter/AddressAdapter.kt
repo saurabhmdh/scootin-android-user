@@ -26,7 +26,6 @@ class AddressAdapter (
         ) = oldItem.id == newItem.id
 
 
-        @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
             oldItem: AddressDetails,
             newItem: AddressDetails
@@ -35,11 +34,9 @@ class AddressAdapter (
 )
 {
     override fun createBinding(parent: ViewGroup): AdapterAddressBinding {
-        val binding= AdapterAddressBinding.inflate(
+        val binding = AdapterAddressBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
-
         )
-
         return binding
     }
 
