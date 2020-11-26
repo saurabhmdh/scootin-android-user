@@ -46,7 +46,7 @@ class AddressFragment : Fragment(R.layout.fragment_address) {
     }
 
     private fun setupListener() {
-        viewModel.addressLiveData.observe(viewLifecycleOwner) {
+        viewModel.getAddressLiveData().observe(viewLifecycleOwner) {
             if (it.isSuccessful) {
                 val addressList = mutableListOf<AddressVo>().apply {
                     it.body()?.forEach { data ->
