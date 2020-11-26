@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.scootin.R
 import com.scootin.databinding.FragmentAddNewAddressBinding
 import com.scootin.databinding.FragmentAddressBinding
@@ -61,7 +62,7 @@ class AddressFragment : Fragment(R.layout.fragment_address) {
         }
 
         binding.addNewAddress.setOnClickListener {
-
+            findNavController().navigate(AddressFragmentDirections.addressFragmentToAddNew())
         }
     }
 
