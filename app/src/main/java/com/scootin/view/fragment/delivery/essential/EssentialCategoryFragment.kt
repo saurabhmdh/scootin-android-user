@@ -33,11 +33,6 @@ class EssentialCategoryFragment : Fragment(R.layout.fragment_essential_category)
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEssentialCategoryBinding.bind(view)
         updateListeners()
-        addressViewModel.addressLiveData.observe(viewLifecycleOwner, Observer {
-            Timber.i("address = ${it.body()}")
-            val response = it.body()
-            showAddressList(response)
-        })
     }
 
     private fun updateListeners() {
@@ -69,29 +64,6 @@ class EssentialCategoryFragment : Fragment(R.layout.fragment_essential_category)
                     Toast.LENGTH_SHORT
                 ).show()
             }
-        }
-    }
-
-
-    private fun showAddressList(
-        addressList: List<AddressDetails>?
-    ) {
-        Timber.i("showPopupList clicked")
-        val listPopupWindow = ListPopupWindow(requireContext())
-        val adapter = AddressArrayAdapter(
-            requireContext(),
-            addressList
-        )
-        listPopupWindow.apply {
-            setAdapter(adapter)
-            setOnItemClickListener { _, _, position, _ ->
-                when (addressList?.get(position)) {
-
-                }
-                listPopupWindow.dismiss()
-            }
-            anchorView = view
-            show()
         }
     }
 }

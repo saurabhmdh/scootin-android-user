@@ -9,6 +9,10 @@ class State(
     val id: Int,
     val name: String
 ) : Parcelable {
+
+    override fun toString(): String {
+        return name
+    }
     @Parcelize
     data class CountryDetails(
         val id: Int,
