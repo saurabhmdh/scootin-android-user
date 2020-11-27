@@ -76,7 +76,7 @@ class CartListFragment : BaseFragment(R.layout.fragment_cart_list) {
     private fun setListener() {
         binding.checkout.setOnClickListener {
             showLoading()
-            viewModel.generateOrder(AppHeaders.userID, PlaceOrderRequest(AppConstants.defaultAddressId, false)).observe(viewLifecycleOwner) {
+            viewModel.generateOrder(AppHeaders.userID, PlaceOrderRequest( false)).observe(viewLifecycleOwner) {
 
                 when (it.status) {
                     Status.SUCCESS -> {

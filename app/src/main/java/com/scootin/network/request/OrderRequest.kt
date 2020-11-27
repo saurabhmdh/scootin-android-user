@@ -1,5 +1,6 @@
 package com.scootin.network.request
 
-class OrderRequest(
-    val paymentMode: String // paymentMode
+data class OrderRequest(
+    val paymentMode: String, // paymentMode
+    val addressId: Long // addressId
 )

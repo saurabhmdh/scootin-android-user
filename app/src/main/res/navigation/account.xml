@@ -62,6 +62,8 @@
         android:id="@+id/address_fragment"
         android:name="com.scootin.view.fragment.account.address.AddressFragment"
         android:label="Account" >
+        <deepLink app:uri="user.scootin.com/open-address" />
+
         <action
             android:id="@+id/address_fragment_to_add_new"
             app:destination="@id/address_add_new"

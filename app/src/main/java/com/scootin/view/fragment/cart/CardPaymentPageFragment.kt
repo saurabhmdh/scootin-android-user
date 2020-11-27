@@ -9,16 +9,23 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 
 import androidx.navigation.fragment.navArgs
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.razorpay.Checkout
 import com.scootin.R
 import com.scootin.databinding.FragmentPaymenttStatusBinding
 import com.scootin.extensions.getCheckedRadioButtonPosition
+import com.scootin.extensions.getNavigationResult
 import com.scootin.extensions.orDefault
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.OrderRequest
 import com.scootin.network.request.VerifyAmountRequest
+import com.scootin.network.response.AddressDetails
+import com.scootin.util.UtilUIComponent
+import com.scootin.util.constants.AppConstants
+import com.scootin.util.constants.IntentConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.fragment.BaseFragment
 
@@ -43,6 +50,8 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
     private val orderId by lazy {
         args.orderId
     }
+
+    var address: AddressDetails? = null
 
     //We need to load order in-order to get more information about order
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -74,14 +83,40 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
             }
         }
 
+        //Lets load all address if there is no address then ask to add, incase there is
+        viewModel.loadAllAddress().observe(viewLifecycleOwner) {
+            //find defaultAddress..
+            if (it.isSuccessful) {
+
+                if (address != null) {
+                    Timber.i("We have address from previous fragment $address")
+                    return@observe
+                }
+                address = it.body()?.first { it.hasDefault }
+                Timber.i("We found address ${address}")
+                address?.let {
+                    binding.editDropAddress.text = UtilUIComponent.setOneLineAddress(address)
+                }
+
+            } else {
+                //We need to
+            }
+        }
+
+
         binding.confirmButton.setOnClickListener {
+            if (address == null) {
+                Toast.makeText(requireContext(), "Please add a address", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
             val mode = when(binding.radioGroup.getCheckedRadioButtonPosition()) {
                 0 -> {"ONLINE"}
                 1 -> {"CASH"}
                 else -> {""}
             }
             showLoading()
-            viewModel.userConfirmOrder(orderId.toString(), AppHeaders.userID, OrderRequest(mode)).observe(viewLifecycleOwner) {
+
+            viewModel.userConfirmOrder(orderId.toString(), AppHeaders.userID, OrderRequest(mode, address!!.id)).observe(viewLifecycleOwner) {
                 when(it.status) {
                     Status.SUCCESS -> {
 
@@ -120,8 +155,23 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
         }
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
-    }
 
+
+        binding.editDropAddress.setOnClickListener {
+            findNavController().navigate(IntentConstants.openAddressPage())
+        }
+
+        getNavigationResult()?.observe(viewLifecycleOwner) {
+            updateAddressData(it)
+        }
+    }
+    private fun updateAddressData(calendarData: String) {
+        val result =
+            Gson().fromJson<AddressDetails>(calendarData, object : TypeToken<AddressDetails>() {}.type)
+        address = result
+        binding.editDropAddress.text = UtilUIComponent.setOneLineAddress(address)
+        Timber.i("update the address $result")
+    }
 
 
     private fun startPayment(orderReferenceId: String, price: Double) {
