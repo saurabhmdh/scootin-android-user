@@ -114,6 +114,7 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
         }
         binding.dropAddress.setOnClickListener {
             viewModel.list = searchItemAddAdapter.list
+            viewModel.media = media
             findNavController().navigate(IntentConstants.openAddressPage())
         }
         getNavigationResult()?.observe(viewLifecycleOwner) {
