@@ -176,6 +176,9 @@ interface APIService {
     @GET("/order/orders/get-direct-order/{id}")
     suspend fun getDirectOrder(@Path("id") id: String): Response<OrderDetail>
 
+    @GET("/order/orders/get-city-wide-order/{id}")
+    suspend fun getCityWideOrder(@Path("id") id: String): Response<CityWideOrderResponse>
+
     @GET("/order/orders/get-order/{id}")
     suspend fun getOrder(@Path("id") id: String): Response<InOrderDetail>
 

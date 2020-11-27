@@ -75,6 +75,14 @@ class OrderRepository @Inject constructor(
             services.getDirectOrder(orderId)
     }.asLiveData()
 
+    fun getCityWideOrder(
+        orderId: String,
+        context: CoroutineContext
+    ): LiveData<Resource<CityWideOrderResponse>> = object : NetworkBoundResource<CityWideOrderResponse>(context) {
+        override suspend fun createCall(): Response<CityWideOrderResponse> =
+            services.getCityWideOrder(orderId)
+    }.asLiveData()
+
     fun getOrder(
         orderId: String,
         context: CoroutineContext
