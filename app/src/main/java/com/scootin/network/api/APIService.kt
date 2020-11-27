@@ -106,6 +106,13 @@ interface APIService {
         @Path("addressId") addressId: String
     ): Response<String>
 
+    @DELETE("/address/delete-address/{userId}/{addressId}")
+    suspend fun deleteAddress(
+        @Path("userId") userId: String,
+        @Path("addressId") addressId: String
+    ): Response<AddressDetails>
+
+
     @POST("/address/add-new-address/{userId}")
     suspend fun addNewAddress(@Path("userId") userId: String, @Body address: AddAddressRequest): Response<ResponseAddAddressSuccess>
 

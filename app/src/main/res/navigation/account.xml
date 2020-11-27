@@ -78,9 +78,9 @@
         android:name="com.scootin.view.fragment.account.address.AddorModifyNewAddressFragment"
         android:label="" >
         <argument
-            android:name="addressId"
-            android:defaultValue="-1"
-            app:argType="integer" />
+            android:name="addressDetail"
+            app:argType="com.scootin.network.response.AddressDetails"
+            app:nullable="true" />
     </fragment>
 
     <fragment
