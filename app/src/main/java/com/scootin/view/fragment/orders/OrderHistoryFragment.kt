@@ -72,7 +72,11 @@ class OrderHistoryFragment : Fragment(R.layout.fragment_order_history) {
                                 )
                             }
                             "CITYWIDE"->{
-
+                                findNavController().navigate(
+                                    OrderHistoryFragmentDirections.citywideToTrackFragment(
+                                        item.id.toString()
+                                    )
+                                )
                             }
                         }
 

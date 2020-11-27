@@ -43,6 +43,7 @@ class OrderHistoryAdapter(
                 binding.amount.setPrice(totalAmount)
                 binding.date.setDateFromOrderDate(orderDate)
                 binding.orderStatus.setText(orderStatus)
+                binding.orderType.setText(orderType)
 
                 var deliveryType = "Normal"
                 if (item.expressDelivery) {

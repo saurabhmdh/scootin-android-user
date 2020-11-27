@@ -31,6 +31,9 @@ internal constructor(
     fun getDirectOrder(orderId: String) =
         orderRepository.getDirectOrder(orderId,viewModelScope.coroutineContext + Dispatchers.IO + handler)
 
+    fun getCityWideOrder(orderId: String) =
+        orderRepository.getCityWideOrder(orderId,viewModelScope.coroutineContext + Dispatchers.IO + handler)
+
     fun getOrder(orderId: String) =
         orderRepository.getOrder(orderId,viewModelScope.coroutineContext + Dispatchers.IO + handler)
 
