@@ -19,6 +19,9 @@ import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.OrderRequest
 import com.scootin.network.request.VerifyAmountRequest
+import com.scootin.network.response.AddressDetails
+import com.scootin.util.constants.AppConstants
+import com.scootin.util.constants.IntentConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.fragment.BaseFragment
 
@@ -43,6 +46,8 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
     private val orderId by lazy {
         args.orderId
     }
+
+    var address: AddressDetails? = null
 
     //We need to load order in-order to get more information about order
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -74,6 +79,21 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
             }
         }
 
+        //Lets load all address if there is no address then ask to add, incase there is
+        viewModel.loadAllAddress().observe(viewLifecycleOwner) {
+            //find defaultAddress..
+            if (it.isSuccessful) {
+                address = it.body()?.first { it.hasDefault }
+                Timber.i("We found address ${address}")
+                if (address == null) {
+
+                }
+            } else {
+                //We need to
+            }
+        }
+
+
         binding.confirmButton.setOnClickListener {
             val mode = when(binding.radioGroup.getCheckedRadioButtonPosition()) {
                 0 -> {"ONLINE"}
@@ -81,25 +101,26 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                 else -> {""}
             }
             showLoading()
-            viewModel.userConfirmOrder(orderId.toString(), AppHeaders.userID, OrderRequest(mode)).observe(viewLifecycleOwner) {
-                when(it.status) {
-                    Status.SUCCESS -> {
-
-                        Timber.i(" data ${it.data}")
-                        dismissLoading()
-                        if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
-                            val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
-                            startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
-                        } else {
-                            findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
-                        }
-                    }
-                    Status.ERROR -> {
-                        dismissLoading()
-                    }
-                    Status.LOADING -> {}
-                }
-            }
+            //Timber.i
+//            viewModel.userConfirmOrder(orderId.toString(), AppHeaders.userID, OrderRequest(mode, AppConstants.defaultAddressId)).observe(viewLifecycleOwner) {
+//                when(it.status) {
+//                    Status.SUCCESS -> {
+//
+//                        Timber.i(" data ${it.data}")
+//                        dismissLoading()
+//                        if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
+//                            val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
+//                            startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
+//                        } else {
+//                            findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
+//                        }
+//                    }
+//                    Status.ERROR -> {
+//                        dismissLoading()
+//                    }
+//                    Status.LOADING -> {}
+//                }
+//            }
         }
 
         binding.applyPromoButton.setOnClickListener {
@@ -120,6 +141,11 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
         }
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
+
+
+        binding.editDropAddress.setOnClickListener {
+            findNavController().navigate(IntentConstants.openAddressPage())
+        }
     }
 
 

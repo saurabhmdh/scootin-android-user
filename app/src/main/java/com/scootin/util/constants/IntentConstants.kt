@@ -18,4 +18,9 @@ object IntentConstants {
         .appendPath("order-detail-direct")
         .appendPath(orderId)
         .build()
+
+    fun openAddressPage() = Uri.Builder().scheme(HTTPS)
+        .authority(PROJECT_AUTH)
+        .appendPath("open-address")
+        .build()
 }

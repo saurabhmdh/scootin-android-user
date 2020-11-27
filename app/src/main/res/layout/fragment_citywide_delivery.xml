@@ -114,7 +114,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pickupAddress" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/dropAddress"
         style="@style/custom_font_bold_style_black"
         android:layout_width="match_parent"
@@ -125,15 +125,15 @@
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/address" />
 
-    <EditText
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/edit_drop_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_regular"
         android:hint="@string/edittxt_hint_citywide"
         android:inputType="text"
-        android:textSize="12dp"
-        android:drawableLeft="@drawable/ic_location_icon"
+        android:textSize="12sp"
+        android:drawableStart="@drawable/ic_location_icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dropAddress" />
 
