@@ -10,6 +10,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.scootin.R
 import com.scootin.network.glide.GlideApp
 import com.scootin.network.response.AddressDetails
+import com.scootin.util.UtilUIComponent
 import java.lang.StringBuilder
 import java.math.BigDecimal
 import java.text.Format
@@ -71,8 +72,5 @@ fun TextView.setToIntText(value: Long) {
 @BindingAdapter("setOneLineAddress")
 fun TextView.setOneLineAddress(address: AddressDetails?) {
     if (address == null) return
-    val sb = StringBuilder().append(address.addressLine1).append(", ")
-         .append(", ").append(address.city).append(", ")
-        .append(address.pincode)
-    text = sb.toString()
+    text = UtilUIComponent.setOneLineAddress(address)
 }

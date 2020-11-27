@@ -13,6 +13,7 @@ import com.scootin.network.response.placeOrder.PlaceOrderResponse
 import com.scootin.repository.OrderRepository
 import com.scootin.repository.PaymentRepository
 import com.scootin.repository.SearchRepository
+import com.scootin.repository.UserRepository
 import com.scootin.viewmodel.base.ObservableViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +24,9 @@ import timber.log.Timber
 class PaymentViewModel @ViewModelInject internal constructor(
     private val orderRepository: OrderRepository,
     val searchRepository: SearchRepository,
-    private val paymentRepository: PaymentRepository
+    private val paymentRepository: PaymentRepository,
+    private val userRepository: UserRepository
+
 ) : ObservableViewModel() {
 
     private val _Order_Id = MutableLiveData<Long>()
@@ -52,4 +55,9 @@ class PaymentViewModel @ViewModelInject internal constructor(
     private val handler = CoroutineExceptionHandler { _, exception ->
         Timber.i("Caught  $exception")
     }
+
+    fun loadAllAddress() = liveData(viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+        emit(userRepository.getAllAddress())
+    }
+
 }

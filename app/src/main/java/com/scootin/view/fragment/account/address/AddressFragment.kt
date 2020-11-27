@@ -6,9 +6,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.gson.Gson
 import com.scootin.R
 import com.scootin.databinding.FragmentAddNewAddressBinding
 import com.scootin.databinding.FragmentAddressBinding
+import com.scootin.extensions.setNavigationResult
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
@@ -80,18 +82,19 @@ class AddressFragment : Fragment(R.layout.fragment_address) {
 
                 override fun checkboxSelected(address: AddressVo, position: Int) {
                     //We should finish the fragment and set the result.
-
-
-                    Timber.i("$position -> $address")
-                    //TODO: We need to just select this address
-                    //Unset all other option and select this
-                    val temp = addressAdapter.currentList
-                    temp.forEach {
-                        it.selected = address.id == it.id
-                    }
-                    Timber.i("templist $temp")
-                    addressAdapter.submitList(null)
-                    addressAdapter.submitList(temp)
+                    //Set the result and complete
+                    setNavigationResult(Gson().toJson(address.addressDetail))
+                    findNavController().popBackStack()
+//                    Timber.i("$position -> $address")
+//                    //TODO: We need to just select this address
+//                    //Unset all other option and select this
+//                    val temp = addressAdapter.currentList
+//                    temp.forEach {
+//                        it.selected = address.id == it.id
+//                    }
+//                    Timber.i("templist $temp")
+//                    addressAdapter.submitList(null)
+//                    addressAdapter.submitList(temp)
                 }
 
             })
