@@ -2,7 +2,9 @@ package com.scootin.viewmodel.account
 
 
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
+import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import com.scootin.network.request.AddAddressRequest
 import com.scootin.repository.SearchRepository
@@ -26,9 +28,20 @@ internal constructor(
     private val handler = CoroutineExceptionHandler { _, exception ->
         Timber.i("Caught  $exception")
     }
+    val _loadagain = MutableLiveData<Boolean>()
 
-    fun getAddressLiveData() = liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-        emit(userRepository.getAllAddress())
+    fun loadAddress() {
+        _loadagain.postValue(true)
+    }
+
+    fun getAddressLiveData() = _loadagain.switchMap {
+        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+            emit(userRepository.getAllAddress())
+        }
+    }
+
+    fun deleteAddress(userId: String, addressId: String) = liveData(viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+        emit(userRepository.deleteAddress(userId, addressId))
     }
 
     val deliverySlot = liveData(viewModelScope.coroutineContext + Dispatchers.IO + handler) {

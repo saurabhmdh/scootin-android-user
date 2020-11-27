@@ -22,6 +22,7 @@ import com.scootin.util.constants.AppConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.AddressAdapter
 import com.scootin.view.adapter.SweetsAdapter
+import com.scootin.view.fragment.BaseFragment
 import com.scootin.view.vo.AddressVo
 import com.scootin.viewmodel.account.AddressFragmentViewModel
 import com.scootin.viewmodel.delivery.CategoriesViewModel
@@ -30,7 +31,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class AddressFragment : Fragment(R.layout.fragment_address) {
+class AddressFragment : BaseFragment(R.layout.fragment_address) {
 
     private var binding by autoCleared<FragmentAddressBinding>()
     private val viewModel: AddressFragmentViewModel by viewModels()
@@ -48,6 +49,7 @@ class AddressFragment : Fragment(R.layout.fragment_address) {
     }
 
     private fun setupListener() {
+        viewModel.loadAddress()
         viewModel.getAddressLiveData().observe(viewLifecycleOwner) {
             if (it.isSuccessful) {
                 val addressList = mutableListOf<AddressVo>().apply {
@@ -64,7 +66,7 @@ class AddressFragment : Fragment(R.layout.fragment_address) {
         }
 
         binding.addNewAddress.setOnClickListener {
-            findNavController().navigate(AddressFragmentDirections.addressFragmentToAddNew())
+            findNavController().navigate(AddressFragmentDirections.addressFragmentToAddNew(null))
         }
     }
 
@@ -74,27 +76,26 @@ class AddressFragment : Fragment(R.layout.fragment_address) {
             object : AddressAdapter.IClickLister {
                 override fun onCreateIcon(address: AddressVo, position: Int) {
                     Timber.i("onCreateIcon item is $address")
+                    val direction = AddressFragmentDirections.addressFragmentToAddNew(address.addressDetail)
+                    findNavController().navigate(direction)
                 }
 
                 override fun onDeleteIcon(address: AddressVo, position: Int) {
                     Timber.i("onCreateIcon item is $address")
+                    showLoading()
+                    viewModel.deleteAddress(AppHeaders.userID, address.id.toString()).observe(viewLifecycleOwner) {
+                        dismissLoading()
+                        if (it.isSuccessful) {
+                            Timber.i("Its successful deleted")
+                            viewModel.loadAddress()
+                        } else {
+                            Toast.makeText(requireContext(), "There is problem with deletion", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
-
                 override fun checkboxSelected(address: AddressVo, position: Int) {
-                    //We should finish the fragment and set the result.
-                    //Set the result and complete
                     setNavigationResult(Gson().toJson(address.addressDetail))
                     findNavController().popBackStack()
-//                    Timber.i("$position -> $address")
-//                    //TODO: We need to just select this address
-//                    //Unset all other option and select this
-//                    val temp = addressAdapter.currentList
-//                    temp.forEach {
-//                        it.selected = address.id == it.id
-//                    }
-//                    Timber.i("templist $temp")
-//                    addressAdapter.submitList(null)
-//                    addressAdapter.submitList(temp)
                 }
 
             })

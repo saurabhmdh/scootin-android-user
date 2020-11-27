@@ -8,8 +8,10 @@ object UtilUIComponent {
 
     fun setOneLineAddress(address: AddressDetails?): String {
         if (address == null) return ""
-        val sb = StringBuilder().append(address.addressLine1).append(", ")
-            .append(", ").append(address.city).append(", ")
+        val sb = StringBuilder()
+            .append(address.addressLine1).append(", ")
+            .append(address.addressLine2).append(", ")
+            .append(address.city).append(", ")
             .append(address.pincode)
         return sb.toString()
     }

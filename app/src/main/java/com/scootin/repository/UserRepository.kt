@@ -46,6 +46,7 @@ class UserRepository @Inject constructor(
 
     suspend fun updateDefaultAddress(addressId: String) = services.updateDefaultAddress(AppHeaders.userID, addressId)
 
+    suspend fun deleteAddress(userId: String, addressId: String) = services.deleteAddress(userId, addressId)
 
     suspend fun addNewAddress(address: AddAddressRequest) = services.addNewAddress(AppHeaders.userID, address)
 
