@@ -167,7 +167,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
     }
     private fun updateAddressData(calendarData: String) {
         val result =
-            Gson().fromJson<AddressDetails>(calendarData, object : TypeToken<AddressDetails>() {}.type)
+            Gson().fromJson<AddressDetails>(calendarData, object : TypeToken<AddressDetails>() {}.type) ?: return
         address = result
         binding.editDropAddress.text = UtilUIComponent.setOneLineAddress(address)
         Timber.i("update the address $result")
