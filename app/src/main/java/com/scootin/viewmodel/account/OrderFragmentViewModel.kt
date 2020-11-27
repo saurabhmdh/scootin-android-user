@@ -2,7 +2,10 @@ package com.scootin.viewmodel.account
 
 
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
+import com.scootin.network.request.RequestHistory
 import com.scootin.repository.OrderRepository
 import com.scootin.repository.UserRepository
 import com.scootin.viewmodel.base.ObservableViewModel
@@ -21,8 +24,9 @@ internal constructor(
         Timber.i("Caught  $exception")
     }
 
-    fun getAllOrdersForUser() =
-        orderRepository.getAllOrdersForUser(viewModelScope.coroutineContext + Dispatchers.IO + handler)
+    fun getAllOrdersForUser(userId:String) =
+        orderRepository.getAllOrdersForUser(
+            userId).cachedIn(viewModelScope).asLiveData()
 
     fun getDirectOrder(orderId: String) =
         orderRepository.getDirectOrder(orderId,viewModelScope.coroutineContext + Dispatchers.IO + handler)

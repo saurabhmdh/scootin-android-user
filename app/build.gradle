@@ -143,6 +143,9 @@ dependencies {
     implementation deps.image_picker
     implementation deps.inline_activity_result
 
+    
+    implementation deps.paging3_ktx
+
 }
 
 kapt {

@@ -1,20 +1,22 @@
 package com.scootin.repository
 
 import androidx.lifecycle.LiveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.scootin.network.api.APIService
 import com.scootin.network.api.NetworkBoundResource
 import com.scootin.network.api.Resource
 import com.scootin.network.manager.AppHeaders
-import com.scootin.network.request.CityWideOrderRequest
-import com.scootin.network.request.DirectOrderRequest
-import com.scootin.network.request.OrderRequest
-import com.scootin.network.request.PlaceOrderRequest
+import com.scootin.network.request.*
 import com.scootin.network.response.citywide.CityWideOrderResponse
 import com.scootin.network.response.inorder.InOrderDetail
 import com.scootin.network.response.order.OrderHistoryItem
 import com.scootin.network.response.orderdetail.OrderDetail
 import com.scootin.network.response.orders.DirectOrderResponse
 import com.scootin.network.response.placeOrder.PlaceOrderResponse
+import com.scootin.pages.OrderDataSource
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -49,15 +51,12 @@ class OrderRepository @Inject constructor(
         }.asLiveData()
 
 
-    fun getAllOrdersForUser(
-        context: CoroutineContext
-    ): LiveData<Resource<List<OrderHistoryItem>>> =
-        object : NetworkBoundResource<List<OrderHistoryItem>>(context) {
-            override suspend fun createCall(): Response<List<OrderHistoryItem>> =
-                services.getAllOrdersForUser(AppHeaders.userID)
-        }.asLiveData()
 
-
+    fun getAllOrdersForUser(id: String): Flow<PagingData<OrderHistoryItem>> {
+        return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20)) {
+            OrderDataSource(services, id)
+        }.flow
+    }
     fun placeDirectOrder(
         userId: String,
         request: DirectOrderRequest,

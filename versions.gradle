@@ -14,6 +14,7 @@ versions.support_activity_ktx = "1.1.0"
 versions.view_pager2 = "1.0.0"
 versions.fragment_version = "1.2.5"
 versions.paging = "2.1.0"
+versions.paging3 = "3.0.0-alpha07"
 
 versions.arch_core = "2.1.0"
 versions.support = '1.0.0'
@@ -261,7 +262,7 @@ deps.adjust = "com.adjust.sdk:adjust-android:$versions.adjust_android"
 deps.adjust_installreferrer = "com.android.installreferrer:installreferrer:$versions.adjust_installreferrer"
 deps.adjust_google_play_services_ads_identifier = "com.google.android.gms:play-services-ads-identifier:$versions.adjust_ads"
 deps.lottie = "com.airbnb.android:lottie:$versions.lottieVersion"
-
+deps.paging3_ktx = "androidx.paging:paging-runtime-ktx:$versions.paging3"
 deps.razoy_pay = "com.razorpay:checkout:$versions.razoy_pay_checkout"
 deps.image_picker = "com.github.dhaval2404:imagepicker:$versions.image_picker"
 deps.inline_activity_result = 'com.github.florent37:inline-activity-result-kotlin:1.0.4'

@@ -5,16 +5,19 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.scootin.R
 import com.scootin.databinding.FragmentOrderHistoryBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
+import com.scootin.network.manager.AppHeaders
 import com.scootin.network.response.order.OrderHistoryItem
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.order.OrderHistoryAdapter
 import com.scootin.viewmodel.account.OrderFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -36,19 +39,11 @@ class OrderHistoryFragment : Fragment(R.layout.fragment_order_history) {
     }
 
     private fun setViewModel() {
-        viewModel.getAllOrdersForUser().observe(viewLifecycleOwner, Observer {
-            Timber.i("response status = ${it.status}")
-            when (it.status) {
-                Status.SUCCESS -> {
-                    val responseList = it.data
-                    Timber.i("response list size = ${responseList?.size}")
-                    orderHistoryAdapter.submitList(responseList)
-                }
-                else -> {
-                    Timber.e("message = ${it.message}")
-                }
+        viewModel.getAllOrdersForUser(AppHeaders.userID).observe(viewLifecycleOwner) {
+            lifecycleScope.launch {
+                orderHistoryAdapter.submitData(it)
             }
-        })
+        }
     }
 
     private fun setupListener() {
@@ -61,20 +56,26 @@ class OrderHistoryFragment : Fragment(R.layout.fragment_order_history) {
                 appExecutors,
                 object : OrderHistoryAdapter.ImageAdapterClickLister {
                     override fun onViewDetailsSelected(view: View, item: OrderHistoryItem) {
-                        if (item.directOrder) {
-                            findNavController().navigate(
-                                OrderHistoryFragmentDirections.orderToTrackFragment(
-                                    item.id.toString()
+                        when (item.orderType){
+                            "NORMAL"-> {
+                                findNavController().navigate(
+                                    OrderHistoryFragmentDirections.inorderToTrackFragment(
+                                        item.id.toString()
+                                    )
                                 )
-                            )
-                        }
-                        else {
-                            findNavController().navigate(
-                                OrderHistoryFragmentDirections.inorderToTrackFragment(
-                                    item.id.toString()
+                            }
+                            "DIRECT"->{
+                                findNavController().navigate(
+                                    OrderHistoryFragmentDirections.orderToTrackFragment(
+                                        item.id.toString()
+                                    )
                                 )
-                            )
+                            }
+                            "CITYWIDE"->{
+
+                            }
                         }
+
                     }
                 })
 

@@ -168,7 +168,10 @@ interface APIService {
     suspend fun getAllState(): Response<List<State>>
 
     @GET("/order-history/users/{userId}/get-all")
-    suspend fun getAllOrdersForUser(@Path("userId") userId: String): Response<List<OrderHistoryItem>>
+    suspend fun getAllOrdersForUser(@Path("userId") userId: String,
+                                    @Query("page") offset: Int = 0,
+                                    @Query("size") limit: Int = 10,
+                                    @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()): Response<List<OrderHistoryItem>>
 
     @GET("/order/orders/get-direct-order/{id}")
     suspend fun getDirectOrder(@Path("id") id: String): Response<OrderDetail>
