@@ -89,7 +89,7 @@ class AddressFragment : BaseFragment(R.layout.fragment_address) {
                             Timber.i("Its successful deleted")
                             viewModel.loadAddress()
                         } else {
-                            Toast.makeText(requireContext(), "There is problem with deletion", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), it.errorBody()?.string(), Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
