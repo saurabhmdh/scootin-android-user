@@ -2,31 +2,19 @@ package com.scootin.view.fragment.delivery.city
 
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.scootin.R
 import com.scootin.databinding.FragmentCitywideDeliveryBinding
-import com.scootin.databinding.HandWrittenGroceryListBinding
-import com.scootin.network.AppExecutors
-import com.scootin.network.api.Status
 import com.scootin.network.glide.GlideApp
 import com.scootin.network.manager.AppHeaders
-import com.scootin.network.request.CityWideOrderRequest
-import com.scootin.network.request.DirectOrderRequest
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.fragment.BaseFragment
-import com.scootin.util.ui.MediaPicker
-import com.scootin.util.ui.UtilPermission
-import com.scootin.view.fragment.delivery.essential.EssentialHandwrittenFragmentArgs
-import com.scootin.view.fragment.dialogs.CitywideCategoryDialogFragment
 import com.scootin.viewmodel.order.DirectOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber

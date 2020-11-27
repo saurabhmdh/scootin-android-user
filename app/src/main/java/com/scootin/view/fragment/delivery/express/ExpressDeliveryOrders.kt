@@ -11,15 +11,20 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.scootin.R
 import com.scootin.databinding.FragmentExpressDeliveryOrdersBinding
+import com.scootin.extensions.getNavigationResult
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.glide.GlideApp
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.DirectOrderRequest
+import com.scootin.network.response.AddressDetails
 import com.scootin.network.response.ExtraDataItem
+import com.scootin.util.UtilUIComponent
 import com.scootin.util.constants.AppConstants
+import com.scootin.util.constants.IntentConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.util.ui.MediaPicker
 import com.scootin.util.ui.UtilPermission
@@ -34,7 +39,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_orders) {
-    lateinit var searchItemAddAdapter: SearchitemAdapter
+    private var searchItemAddAdapter by autoCleared<SearchitemAdapter>()
     private var binding by autoCleared<FragmentExpressDeliveryOrdersBinding>()
 
     private val viewModel: DirectOrderViewModel by viewModels()
@@ -48,6 +53,7 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
     @Inject
     lateinit var appExecutors: AppExecutors
 
+    var address: AddressDetails? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -84,6 +90,32 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
         }
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
+
+        //Lets load all address if there is no address then ask to add, incase there is
+        viewModel.loadAllAddress().observe(viewLifecycleOwner) {
+            //find defaultAddress..
+            if (it.isSuccessful) {
+                if (address != null) {
+                    Timber.i("We have address from previous fragment $address")
+                    return@observe
+                }
+                address = it.body()?.first { it.hasDefault }
+                Timber.i("We found address ${address}")
+                address?.let {
+                    binding.dropAddress.text = UtilUIComponent.setOneLineAddress(address)
+                }
+
+            } else {
+                //We need to
+            }
+        }
+        binding.dropAddress.setOnClickListener {
+            viewModel.list = searchItemAddAdapter.list
+            findNavController().navigate(IntentConstants.openAddressPage())
+        }
+        getNavigationResult()?.observe(viewLifecycleOwner) {
+            updateAddressData(it)
+        }
     }
 
     private fun setSearchSuggestionList() {
@@ -96,23 +128,18 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
                 override fun onDecrement(count: String) {
                     Timber.i("decrement count = $count")
                 }
-
             })
 
         binding.searchList.apply {
             adapter = searchItemAddAdapter
         }
 
+        if (viewModel.list.isEmpty().not()) {
+            searchItemAddAdapter.addAdd(viewModel.list)
+        }
+
         binding.mobileNo.setText("Mobile number " + AppHeaders.userMobileNumber)
         binding.storeName.text = "${args.shopName}"
-    }
-
-    fun showMediaGallery() {
-        if (UtilPermission.hasReadWritePermission(requireActivity())) {
-            MediaPicker(requireActivity()).getImagePickerSelectionPanel()
-        } else {
-            UtilPermission.requestForReadWritePermission(requireActivity())
-        }
     }
 
     private fun placeDirectOrder() {
@@ -120,8 +147,9 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
             Toast.makeText(context, "Please enter either name or photo", Toast.LENGTH_SHORT).show()
             return
         }
-        if (mediaId == -1L) {
-            mediaId = 329
+        if (address == null) {
+            Toast.makeText(requireContext(), "Please add a address", Toast.LENGTH_LONG).show()
+            return
         }
 
         showLoading()
@@ -185,5 +213,14 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
                 }
             }
         }
+    }
+
+    private fun updateAddressData(calendarData: String) {
+        val result =
+            Gson().fromJson<AddressDetails>(calendarData, object : TypeToken<AddressDetails>() {}.type)
+                ?: return
+        address = result
+        binding.dropAddress.text = UtilUIComponent.setOneLineAddress(address)
+        Timber.i("update the address $result")
     }
 }
