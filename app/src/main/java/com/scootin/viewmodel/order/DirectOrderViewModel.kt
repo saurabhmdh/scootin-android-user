@@ -6,7 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.scootin.database.dao.CacheDao
 import com.scootin.network.request.CityWideOrderRequest
 import com.scootin.network.request.DirectOrderRequest
+import com.scootin.network.response.AddressDetails
 import com.scootin.network.response.ExtraDataItem
+import com.scootin.network.response.Media
 import com.scootin.repository.OrderRepository
 import com.scootin.repository.SearchRepository
 import com.scootin.repository.UserRepository
@@ -29,6 +31,10 @@ class DirectOrderViewModel @ViewModelInject internal constructor(
 
     //Save the value..
     var list = ArrayList<ExtraDataItem>()
+
+    var pickupAddress: AddressDetails? = null
+    var dropAddress: AddressDetails? = null
+    var media: Media? = null
 
     private val handler = CoroutineExceptionHandler { _, exception ->
         Timber.i("Caught  $exception")

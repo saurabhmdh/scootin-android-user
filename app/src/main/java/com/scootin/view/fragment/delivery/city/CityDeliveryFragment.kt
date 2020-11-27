@@ -16,6 +16,7 @@ import com.scootin.extensions.getNavigationResult
 import com.scootin.network.glide.GlideApp
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.response.AddressDetails
+import com.scootin.network.response.Media
 import com.scootin.util.UtilUIComponent
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.constants.IntentConstants
@@ -33,7 +34,7 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
     private var binding by autoCleared<FragmentCitywideDeliveryBinding>()
     private val viewModel: DirectOrderViewModel by viewModels()
 
-    private var mediaId = -1L
+    private var media: Media? = null
 
     var pickupAddress: AddressDetails? = null
     var dropAddress: AddressDetails? = null
@@ -63,7 +64,7 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
             return
         }
 
-        if (mediaId == -1L) {
+        if (media == null) {
             Toast.makeText(context, "Invalid Media", Toast.LENGTH_SHORT).show()
             return
         }
@@ -83,7 +84,7 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
             AppHeaders.userID,
             dropAddress!!.id,
             pickupAddress!!.id,
-            mediaId
+            media!!.id
         ).observe(viewLifecycleOwner) {
             if (it.isSuccessful) {
                 dismissLoading()
@@ -105,11 +106,15 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
 
         binding.pickupAddress.setOnClickListener {
             click = 0
+            viewModel.media = media
+            viewModel.dropAddress = dropAddress
             findNavController().navigate(IntentConstants.openAddressPage())
         }
 
         binding.dropAddress.setOnClickListener {
             click = 1
+            viewModel.media = media
+            viewModel.pickupAddress = pickupAddress
             findNavController().navigate(IntentConstants.openAddressPage())
         }
 
@@ -125,16 +130,23 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
         when(click) {
             0 -> {
                 pickupAddress = result
+                dropAddress = viewModel.dropAddress
+                if (dropAddress != null) {
+                    binding.dropAddress.text = UtilUIComponent.setOneLineAddress(dropAddress)
+                }
                 binding.pickupAddress.text = UtilUIComponent.setOneLineAddress(pickupAddress)
             }
-
             1-> {
                 dropAddress = result
+                pickupAddress = viewModel.pickupAddress
+                if (pickupAddress != null) {
+                    binding.pickupAddress.text = UtilUIComponent.setOneLineAddress(pickupAddress)
+                }
                 binding.dropAddress.text = UtilUIComponent.setOneLineAddress(dropAddress)
             }
         }
-
-
+        this.media = viewModel.media
+        loadMedia()
         Timber.i("update the address $result")
     }
 
@@ -162,13 +174,17 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
                 if(response.isSuccessful) {
                     dismissLoading()
                     val media = response.body() ?: return@observe
-                    GlideApp.with(requireContext()).load(media.url).into(binding.receiverPhotoBox)
-                    mediaId = media.id
+                    this.media = media
+                    loadMedia()
                 } else {
                     Toast.makeText(context, "There is some error media", Toast.LENGTH_SHORT).show()
                 }
             }
         }
+    }
+
+    private fun loadMedia() {
+        GlideApp.with(requireContext()).load(media?.url).into(binding.receiverPhotoBox)
     }
 }
 

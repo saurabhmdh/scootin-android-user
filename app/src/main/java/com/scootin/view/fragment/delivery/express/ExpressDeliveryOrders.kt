@@ -22,6 +22,7 @@ import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.DirectOrderRequest
 import com.scootin.network.response.AddressDetails
 import com.scootin.network.response.ExtraDataItem
+import com.scootin.network.response.Media
 import com.scootin.util.UtilUIComponent
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.constants.IntentConstants
@@ -43,7 +44,9 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
     private var binding by autoCleared<FragmentExpressDeliveryOrdersBinding>()
 
     private val viewModel: DirectOrderViewModel by viewModels()
-    private var mediaId = -1L
+
+    private var media: Media? = null
+
     private val shopId by lazy {
         args.shopId
     }
@@ -143,7 +146,7 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
     }
 
     private fun placeDirectOrder() {
-        if (mediaId == -1L && searchItemAddAdapter.list.isEmpty()) {
+        if (media == null && searchItemAddAdapter.list.isEmpty()) {
             Toast.makeText(context, "Please enter either name or photo", Toast.LENGTH_SHORT).show()
             return
         }
@@ -151,6 +154,7 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
             Toast.makeText(requireContext(), "Please add a address", Toast.LENGTH_LONG).show()
             return
         }
+        val mediaId = media?.id ?: -1
 
         showLoading()
         Timber.i("Json : ${Gson().toJson(searchItemAddAdapter.list)}")
@@ -206,8 +210,8 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
                 if(response.isSuccessful) {
                     dismissLoading()
                     val media = response.body() ?: return@observe
-                    GlideApp.with(requireContext()).load(media.url).into(binding.appCompatImageView7)
-                    mediaId = media.id
+                    this.media = media
+                    loadMedia()
                 } else {
                     Toast.makeText(context, "There is some error media", Toast.LENGTH_SHORT).show()
                 }
@@ -221,6 +225,12 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
                 ?: return
         address = result
         binding.dropAddress.text = UtilUIComponent.setOneLineAddress(address)
+        this.media = viewModel.media
+        loadMedia()
         Timber.i("update the address $result")
+    }
+
+    private fun loadMedia() {
+        GlideApp.with(requireContext()).load(media?.url).into(binding.appCompatImageView7)
     }
 }
