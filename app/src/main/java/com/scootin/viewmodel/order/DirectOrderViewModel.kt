@@ -1,25 +1,20 @@
 package com.scootin.viewmodel.order
 
-import android.app.Application
-import android.net.Uri
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
-import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import com.scootin.database.dao.CacheDao
 import com.scootin.network.request.CityWideOrderRequest
 import com.scootin.network.request.DirectOrderRequest
+import com.scootin.network.response.ExtraDataItem
 import com.scootin.repository.OrderRepository
 import com.scootin.repository.SearchRepository
+import com.scootin.repository.UserRepository
 import com.scootin.util.constants.AppConstants
-import com.scootin.util.ui.FileUtils
 import com.scootin.viewmodel.base.ObservableViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import timber.log.Timber
 import java.io.File
@@ -28,8 +23,12 @@ import java.io.File
 class DirectOrderViewModel @ViewModelInject internal constructor(
     private val orderRepository: OrderRepository,
     val searchRepository: SearchRepository,
-    private val cacheDao: CacheDao
+    private val cacheDao: CacheDao,
+    private val userRepository: UserRepository
 ) : ObservableViewModel() {
+
+    //Save the value..
+    var list = ArrayList<ExtraDataItem>()
 
     private val handler = CoroutineExceptionHandler { _, exception ->
         Timber.i("Caught  $exception")
@@ -51,6 +50,10 @@ class DirectOrderViewModel @ViewModelInject internal constructor(
         mediaId: Long) = liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
         val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
         emit(orderRepository.placeCityWideOrder(userId, CityWideOrderRequest(deliveryAddressDetails, pickupAddressDetails, mediaId, serviceArea?.toLong() ?: 0, null)))
+    }
+
+    fun loadAllAddress() = liveData(viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+        emit(userRepository.getAllAddress())
     }
 
 

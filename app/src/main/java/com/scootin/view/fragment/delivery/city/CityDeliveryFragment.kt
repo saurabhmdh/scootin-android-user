@@ -2,31 +2,25 @@ package com.scootin.view.fragment.delivery.city
 
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.scootin.R
 import com.scootin.databinding.FragmentCitywideDeliveryBinding
-import com.scootin.databinding.HandWrittenGroceryListBinding
-import com.scootin.network.AppExecutors
-import com.scootin.network.api.Status
+import com.scootin.extensions.getNavigationResult
 import com.scootin.network.glide.GlideApp
 import com.scootin.network.manager.AppHeaders
-import com.scootin.network.request.CityWideOrderRequest
-import com.scootin.network.request.DirectOrderRequest
+import com.scootin.network.response.AddressDetails
+import com.scootin.util.UtilUIComponent
 import com.scootin.util.constants.AppConstants
+import com.scootin.util.constants.IntentConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.fragment.BaseFragment
-import com.scootin.util.ui.MediaPicker
-import com.scootin.util.ui.UtilPermission
-import com.scootin.view.fragment.delivery.essential.EssentialHandwrittenFragmentArgs
-import com.scootin.view.fragment.dialogs.CitywideCategoryDialogFragment
 import com.scootin.viewmodel.order.DirectOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -41,6 +35,11 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
 
     private var mediaId = -1L
 
+    var pickupAddress: AddressDetails? = null
+    var dropAddress: AddressDetails? = null
+
+    private var click = 0 //Pick up address if its 1 means drop
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCitywideDeliveryBinding.bind(view)
@@ -53,27 +52,37 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
         binding.placeOrder.setOnClickListener {
-            //First we need to check accept the term and conditions
-            if (binding.termAccepted.isChecked.not()) {
-                Toast.makeText(requireContext(), "Please accept term & condition", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
             placeCityWideOrder()
         }
     }
 
     private fun placeCityWideOrder() {
+        //First we need to check accept the term and conditions
+        if (binding.termAccepted.isChecked.not()) {
+            Toast.makeText(requireContext(), "Please accept term & condition", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         if (mediaId == -1L) {
             Toast.makeText(context, "Invalid Media", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (pickupAddress == null) {
+            Toast.makeText(context, "Pickup address is not valid", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (dropAddress == null) {
+            Toast.makeText(context, "Drop address is not valid", Toast.LENGTH_SHORT).show()
             return
         }
 
         showLoading()
         viewModel.placeCityWideOrder(
             AppHeaders.userID,
-            AppConstants.defaultAddressId,
-            AppConstants.defaultAddressId,
+            dropAddress!!.id,
+            pickupAddress!!.id,
             mediaId
         ).observe(viewLifecycleOwner) {
             if (it.isSuccessful) {
@@ -93,7 +102,42 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
         binding.warning.setOnClickListener {
             binding.termAccepted.isChecked = !binding.termAccepted.isChecked
         }
+
+        binding.pickupAddress.setOnClickListener {
+            click = 0
+            findNavController().navigate(IntentConstants.openAddressPage())
+        }
+
+        binding.dropAddress.setOnClickListener {
+            click = 1
+            findNavController().navigate(IntentConstants.openAddressPage())
+        }
+
+        getNavigationResult()?.observe(viewLifecycleOwner) {
+            updateAddressData(it, click)
+        }
     }
+    private fun updateAddressData(calendarData: String, click: Int) {
+        val result =
+            Gson().fromJson<AddressDetails>(calendarData, object : TypeToken<AddressDetails>() {}.type)
+                ?: return
+
+        when(click) {
+            0 -> {
+                pickupAddress = result
+                binding.pickupAddress.text = UtilUIComponent.setOneLineAddress(pickupAddress)
+            }
+
+            1-> {
+                dropAddress = result
+                binding.dropAddress.text = UtilUIComponent.setOneLineAddress(dropAddress)
+            }
+        }
+
+
+        Timber.i("update the address $result")
+    }
+
 
     private fun onClickOfUploadMedia() {
         ImagePicker.with(this)

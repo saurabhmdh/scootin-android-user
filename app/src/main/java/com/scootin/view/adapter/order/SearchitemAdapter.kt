@@ -72,6 +72,10 @@ class SearchitemAdapter(
         return list.size
     }
 
+    fun addAdd(items: ArrayList<ExtraDataItem>) {
+        list.addAll(items)
+        notifyDataSetChanged()
+    }
     fun addList(item: ExtraDataItem) {
         list.add(item)
         if(list.isEmpty().not())
