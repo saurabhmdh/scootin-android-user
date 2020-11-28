@@ -23,6 +23,6 @@ class OrderConfirmedFragment : Fragment(R.layout.fragment_order_confirmed) {
 
         Handler().postDelayed({
             findNavController().navigate(OrderConfirmedFragmentDirections.actionCartPaymentFragmentToOrderSummary(orderId))
-        }, 1500)
+        }, 3000)
     }
 }
