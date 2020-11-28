@@ -56,9 +56,6 @@ class CartViewModel @ViewModelInject internal constructor(
         }
     }
 
-    fun generateOrder(userId: String, placeOrderRequest: PlaceOrderRequest,) = orderRepository.placeOrder(userId, placeOrderRequest, viewModelScope.coroutineContext + Dispatchers.IO + handler)
-
-
     val addToCartLiveData = MutableLiveData<AddToCartRequest>()
 
     fun addToCart(addToCartRequest: AddToCartRequest) {

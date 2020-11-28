@@ -10,6 +10,7 @@ import com.scootin.network.response.home.ResponseServiceArea
 import com.scootin.network.response.inorder.InOrderDetail
 import com.scootin.network.response.login.ResponseAddAddressSuccess
 import com.scootin.network.response.login.ResponseUser
+import com.scootin.network.response.order.CheckOutResponse
 import com.scootin.network.response.order.OrderHistoryItem
 import com.scootin.network.response.orderdetail.OrderDetail
 import com.scootin.network.response.orders.DirectOrderResponse
@@ -130,12 +131,11 @@ interface APIService {
         @Body request: DirectOrderRequest
     ): Response<DirectOrderResponse>
 
-
-    @POST("/order/place-order/{userId}")
-    suspend fun placeOrder(
+    @POST("/order/checkout-order/{userId}")
+    suspend fun checkOutOrder(
         @Path("userId") userId: String,
-        @Body request: PlaceOrderRequest
-    ): Response<PlaceOrderResponse>
+        @Body request: PromoCodeRequest
+    ): Response<CheckOutResponse>
 
 
     @POST("/order/orders/place-city-wide/{userId}")

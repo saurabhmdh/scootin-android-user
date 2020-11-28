@@ -28,16 +28,7 @@ class OrderRepository @Inject constructor(
     private val services: APIService
 ) {
 
-    fun placeOrder(
-        userId: String,
-        placeOrderRequest: PlaceOrderRequest,
-        context: CoroutineContext
-    ): LiveData<Resource<PlaceOrderResponse>> =
-        object : NetworkBoundResource<PlaceOrderResponse>(context) {
-            override suspend fun createCall(): Response<PlaceOrderResponse> =
-                services.placeOrder(userId, placeOrderRequest)
-        }.asLiveData()
-
+    suspend fun checkOutOrder(userId: String, request: PromoCodeRequest) = services.checkOutOrder(userId, request)
 
     fun userConfirmOrder(
         orderId: String,
