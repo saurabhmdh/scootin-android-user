@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.scootin.network.response.inorder.InOrderDetail" />
+            type="com.scootin.network.response.order.CheckOutResponse" />
 
     </data>
 
@@ -102,7 +102,7 @@
                     android:paddingStart="0dp"
                     android:paddingEnd="5dp"
                     android:textColor="#000"
-                    app:setPrice="@{data.orderDetails.paymentDetails.amount}" />
+                    app:setPrice="@{data.amount}" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -122,7 +122,7 @@
                     android:paddingStart="0dp"
                     android:paddingEnd="5dp"
                     android:textColor="#000"
-                    app:setPrice="@{data.orderDetails.paymentDetails.deliveryFreeAmount}" />
+                    app:setPrice="@{data.deliveryFreeAmount}" />
             </RelativeLayout>
 
 
@@ -146,7 +146,7 @@
                     android:paddingStart="0dp"
                     android:paddingEnd="5dp"
                     android:textColor="#000"
-                    app:setDiscountPrice="@{data.orderDetails.paymentDetails.promoDiscount}" />
+                    app:setDiscountPrice="@{data.totalSaving}" />
             </RelativeLayout>
 
 
@@ -167,7 +167,7 @@
                     android:paddingStart="0dp"
                     android:paddingEnd="5dp"
                     android:textColor="#000"
-                    app:setPrice="@{data.orderDetails.paymentDetails.totalGSTAmount}" />
+                    app:setPrice="@{data.totalGSTAmount}" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -192,7 +192,7 @@
                     android:paddingEnd="5dp"
                     android:textColor="#000"
                     android:textStyle="bold"
-                    app:setPrice="@{data.orderDetails.paymentDetails.totalAmount}" />
+                    app:setPrice="@{data.totalAmount}" />
             </RelativeLayout>
         </LinearLayout>
 

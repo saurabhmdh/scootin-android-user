@@ -40,16 +40,12 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
     private var binding by autoCleared<FragmentPaymenttStatusBinding>()
     private val viewModel: PaymentViewModel by viewModels()
 
-    private val args: CardPaymentPageFragmentArgs by navArgs()
 
     @Inject
     lateinit var appExecutors: AppExecutors
 
     var promoCode: String = ""
 
-    private val orderId by lazy {
-        args.orderId
-    }
 
     var address: AddressDetails? = null
 
@@ -62,24 +58,23 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
     }
 
     private fun setListener() {
-        viewModel.loadOrder(orderId)
+        viewModel.loadPaymentInfo("")
 
-        viewModel.orderInfo.observe(viewLifecycleOwner) {
-            when(it.status) {
-                Status.SUCCESS -> {
-                    binding.data = it.data
+        viewModel.paymentInfo.observe(viewLifecycleOwner) {
+            dismissLoading()
+            if (it.isSuccessful) {
+                val data = it.body()
+                binding.data = data
+                if (data?.couponDiscount != 0.0) {
 
-                    if (it.data?.orderDetails?.paymentDetails?.promoCodeApplied == true) {
-                        binding.promoApplied.visibility = View.VISIBLE
-                        binding.discountApplied.text = "Discount Applied (${promoCode})"
-                        //promoCode
-                    } else {
-                        binding.promoApplied.visibility = View.GONE
-                    }
+                    binding.promoApplied.visibility = View.VISIBLE
+                    binding.discountApplied.text = "Discount Applied (${promoCode})"
+                } else {
+                    binding.promoApplied.visibility = View.GONE
                 }
-                Status.ERROR -> {
-                    //Show error and move back
-                }
+
+            } else {
+                Toast.makeText(context, "Invalid Coupon code", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -114,27 +109,27 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                 1 -> {"CASH"}
                 else -> {""}
             }
-            showLoading()
+//            showLoading()
 
-            viewModel.userConfirmOrder(orderId.toString(), AppHeaders.userID, OrderRequest(mode, address!!.id)).observe(viewLifecycleOwner) {
-                when(it.status) {
-                    Status.SUCCESS -> {
-
-                        Timber.i(" data ${it.data}")
-                        dismissLoading()
-                        if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
-                            val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
-                            startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
-                        } else {
-                            findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
-                        }
-                    }
-                    Status.ERROR -> {
-                        dismissLoading()
-                    }
-                    Status.LOADING -> {}
-                }
-            }
+//            viewModel.userConfirmOrder(orderId.toString(), AppHeaders.userID, OrderRequest(mode, address!!.id)).observe(viewLifecycleOwner) {
+//                when(it.status) {
+//                    Status.SUCCESS -> {
+//
+//                        Timber.i(" data ${it.data}")
+//                        dismissLoading()
+//                        if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
+//                            val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
+//                            startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
+//                        } else {
+//                            findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
+//                        }
+//                    }
+//                    Status.ERROR -> {
+//                        dismissLoading()
+//                    }
+//                    Status.LOADING -> {}
+//                }
+//            }
         }
 
         binding.applyPromoButton.setOnClickListener {
@@ -142,16 +137,9 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                 Toast.makeText(context, "Please enter valid coupon code", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-
-            viewModel.promCodeRequest(orderId.toString(), binding.couponEdittext.text.toString()).observe(viewLifecycleOwner) {
-                if (it.isSuccessful) {
-                    promoCode = binding.couponEdittext.text.toString()
-                    viewModel.loadOrder(orderId)
-                    Toast.makeText(context, "Coupon has been applied.", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(context, "Invalid Coupon code", Toast.LENGTH_SHORT).show()
-                }
-            }
+            promoCode = binding.couponEdittext.text!!.toString()
+            showLoading()
+            viewModel.loadPaymentInfo(promoCode)
         }
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
@@ -211,7 +199,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                 Status.LOADING -> {}
                 Status.SUCCESS -> {
                     //Need some direction to move
-                    findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
+//                    findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
                 }
                 Status.ERROR -> {}
             }

@@ -40,9 +40,6 @@
         android:id="@+id/card_payment"
         android:name="com.scootin.view.fragment.cart.CardPaymentPageFragment"
         android:label="" >
-        <argument
-            android:name="order_id"
-            app:argType="long" />
             <action android:id="@+id/order_confirmation_page"
                 app:destination="@id/order_confirmation"
                 app:enterAnim="@anim/default_enter_anim"

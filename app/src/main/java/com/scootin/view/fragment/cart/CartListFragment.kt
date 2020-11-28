@@ -75,21 +75,7 @@ class CartListFragment : BaseFragment(R.layout.fragment_cart_list) {
 
     private fun setListener() {
         binding.checkout.setOnClickListener {
-            showLoading()
-            viewModel.generateOrder(AppHeaders.userID, PlaceOrderRequest( false)).observe(viewLifecycleOwner) {
-
-                when (it.status) {
-                    Status.SUCCESS -> {
-                        dismissLoading()
-                        findNavController().navigate(CartListFragmentDirections.actionCartFragmentToCardPayment(it.data?.id.orZero()))
-                    }
-                    Status.LOADING -> {}
-                    Status.ERROR -> {
-                        dismissLoading()
-                        Toast.makeText(context, "Unable to place order", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
+            findNavController().navigate(CartListFragmentDirections.actionCartFragmentToCardPayment())
         }
 
         viewModel.addToCartMap.observe(viewLifecycleOwner, {

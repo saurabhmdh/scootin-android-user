@@ -14,11 +14,14 @@ import com.scootin.repository.OrderRepository
 import com.scootin.repository.PaymentRepository
 import com.scootin.repository.SearchRepository
 import com.scootin.repository.UserRepository
+import com.scootin.util.constants.AppConstants
 import com.scootin.viewmodel.base.ObservableViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import retrofit2.Response
 import timber.log.Timber
+import kotlin.coroutines.CoroutineContext
 
 
 class PaymentViewModel @ViewModelInject internal constructor(
@@ -27,16 +30,18 @@ class PaymentViewModel @ViewModelInject internal constructor(
     private val paymentRepository: PaymentRepository,
     private val userRepository: UserRepository
 
-) : ObservableViewModel() {
+) : ObservableViewModel(), CoroutineScope {
 
-    private val _Order_Id = MutableLiveData<Long>()
+    private val _promo_code = MutableLiveData<String>()
 
-    fun loadOrder(orderId: Long) {
-        _Order_Id.postValue(orderId)
+    fun loadPaymentInfo(promoCode: String) {
+        _promo_code.postValue(promoCode)
     }
 
-    val orderInfo = _Order_Id.switchMap {
-        orderRepository.getOrder(it.toString(),viewModelScope.coroutineContext + Dispatchers.IO + handler)
+    val paymentInfo = _promo_code.switchMap {
+        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+            emit(orderRepository.checkOutOrder(AppHeaders.userID, PromoCodeRequest(it)))
+        }
     }
 
     fun promCodeRequest(orderId: String, promoCode: String): LiveData<Response<PlaceOrderResponse>> {
@@ -60,4 +65,6 @@ class PaymentViewModel @ViewModelInject internal constructor(
         emit(userRepository.getAllAddress())
     }
 
+    override val coroutineContext: CoroutineContext
+        get() = viewModelScope.coroutineContext + Dispatchers.IO
 }
