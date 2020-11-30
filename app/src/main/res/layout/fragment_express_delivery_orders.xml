@@ -162,6 +162,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_deliveringto" />
 
+    <View
+        android:id="@+id/imageView2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/text_color_primary"
+        app:layout_constraintEnd_toStartOf="@+id/media_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dropAddress" />
+
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/mobile_no"
