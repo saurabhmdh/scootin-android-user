@@ -284,6 +284,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
             Timber.i("Already has location..")
             return
         }
+
         Timber.i("We need to find location of user.")
         val request: FindCurrentPlaceRequest = FindCurrentPlaceRequest.newInstance(fields)
 

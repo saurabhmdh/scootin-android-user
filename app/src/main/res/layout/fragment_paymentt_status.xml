@@ -202,9 +202,8 @@
             android:layout_margin="16dp"
             android:text="Payment Mode"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/txt_total_amt_payable"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <RadioGroup
             android:id="@+id/radioGroup"
@@ -279,11 +278,11 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/confirm_button"
-            android:layout_height="25dp"
-            android:layout_width="95dp"
-            android:layout_marginBottom="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_20"
+            android:layout_width="wrap_content"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/applyPromoButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:background="@drawable/ic_pay_now_button"/>

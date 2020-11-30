@@ -46,8 +46,16 @@ class CartViewModel @ViewModelInject internal constructor(
         Timber.i("Caught  $exception")
     }
 
-    fun getCartCount(userId: String) = liveData(coroutineContext + handler) {
-        emit(cartRepository.getCartCount(userId))
+    fun loadCount() {
+        countUserCartListTotal.postValue(true)
+    }
+    private val countUserCartListTotal = MutableLiveData<Boolean>()
+
+
+    val getCartCount = countUserCartListTotal.switchMap {
+        liveData(coroutineContext + handler) {
+            emit(cartRepository.getCartCount(AppHeaders.userID))
+        }
     }
 
     val totalPrice = getUserCartList.switchMap {
