@@ -124,7 +124,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         })
 
         viewModel.serviceAreaError.observe(viewLifecycleOwner, {
-            Toast.makeText(context, "Sorry!! Our services are not allowed in this area..\n Please change the location..", Toast.LENGTH_LONG).show()
+//            Toast.makeText(context, "Sorry!! Our services are not allowed in this area..\n Please change the location..", Toast.LENGTH_LONG).show()
         })
     }
 
