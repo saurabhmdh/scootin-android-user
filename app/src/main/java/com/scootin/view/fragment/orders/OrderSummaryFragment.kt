@@ -44,20 +44,20 @@ class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
     }
 
     private fun setupListener() {
-//        viewModel.loadOrder(orderId)
-//        viewModel.orderInfo.observe(viewLifecycleOwner) {
-//            when(it.status) {
-//                Status.SUCCESS -> {
-//                    binding.data = it.data
-//                    Timber.i("data working ${it.data}")
-//                    binding.txtPickupLocation.text = getAllAddress(it.data?.orderInventoryDetailsList)
-//                    orderSummaryAdapter.submitList(it.data?.orderInventoryDetailsList)
-//                }
-//                Status.ERROR -> {
-//                    //Show error and move back
-//                }
-//            }
-//        }
+        viewModel.loadOrder(orderId)
+        viewModel.orderInfo.observe(viewLifecycleOwner) {
+            when(it.status) {
+                Status.SUCCESS -> {
+                    binding.data = it.data
+                    Timber.i("data working ${it.data}")
+                    binding.txtPickupLocation.text = getAllAddress(it.data?.orderInventoryDetailsList)
+                    orderSummaryAdapter.submitList(it.data?.orderInventoryDetailsList)
+                }
+                Status.ERROR -> {
+                    //Show error and move back
+                }
+            }
+        }
 
         binding.back.setOnClickListener {
             findNavController().popBackStack(R.id.cart, false)
