@@ -28,8 +28,7 @@
             android:layout_width="wrap_content"
             android:id="@+id/back"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:padding="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_back_arrow" />
@@ -98,6 +97,8 @@
             android:drawableStart="@drawable/ic_pickup_location_icon"
             android:drawablePadding="5dp"
             android:textColor="#000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/base_line" />
 

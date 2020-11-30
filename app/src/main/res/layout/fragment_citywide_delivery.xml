@@ -4,9 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_background"
-    android:paddingStart="20dp"
-    android:paddingEnd="20dp">
+    android:background="@drawable/ic_background">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/express_delivery"
@@ -22,7 +20,7 @@
         android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:padding="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_back_arrow" />
@@ -31,7 +29,9 @@
         android:id="@+id/empty"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="178dp"
+        android:layout_marginEnd="20dp"
         android:background="@color/text_color_primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +41,7 @@
         android:id="@+id/uploadPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="195dp"
         android:src="@drawable/ic_camera_button_citywide"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +51,7 @@
         android:id="@+id/sender_photo_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="232dp"
         android:src="@drawable/ic_text_grp"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,6 +62,7 @@
         android:layout_width="157dp"
         android:layout_height="121dp"
         android:layout_marginTop="230dp"
+        android:layout_marginEnd="20dp"
         android:src="@drawable/ic_sender_photo_box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -68,7 +71,9 @@
         android:id="@+id/warning"
         android:layout_width="match_parent"
         android:layout_height="18dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="390dp"
+        android:layout_marginEnd="20dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,8 +82,8 @@
         <CheckBox
             android:id="@+id/term_accepted"
             android:layout_width="wrap_content"
-            android:clickable="false"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:clickable="false" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -95,10 +100,11 @@
         style="@style/custom_font_bold_style_black"
         android:layout_width="wrap_content"
         android:layout_height="13dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:text="Pick Up Location:"
-        android:textStyle="bold"
         android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/warning" />
 
@@ -106,37 +112,44 @@
         android:id="@+id/pickup_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_regular"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:drawableStart="@drawable/ic_location_icon"
+        android:fontFamily="@font/montserrat_regular"
         android:inputType="text"
         android:text="@string/edittxt_hint_citywide"
         android:textSize="12sp"
-        android:drawableStart="@drawable/ic_location_icon"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pickup_address_text" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/drop_address_text"
         style="@style/custom_font_bold_style_black"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="13dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:text="Delivery Location:"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
         android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pickup_address" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/drop_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_regular"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
-        android:text="@string/edittxt_hint_citywide"
-        android:inputType="text"
-        android:textSize="12sp"
+        android:layout_marginEnd="20dp"
         android:drawableStart="@drawable/ic_location_icon"
+        android:fontFamily="@font/montserrat_regular"
+        android:inputType="text"
+        android:text="@string/edittxt_hint_citywide"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/drop_address_text" />
 
@@ -144,8 +157,9 @@
         android:id="@+id/mobile_no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_regular"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserrat_regular"
         android:hint="@string/edittxt_hint_eng_mobno"
         android:textColor="@android:color/black"
         android:textSize="12sp"
@@ -156,6 +170,7 @@
         android:id="@+id/appCompatImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="2dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mobile_no"
@@ -165,8 +180,9 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="2dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mobile_no"
         app:srcCompat="@drawable/ic_charges_text" />
 
@@ -174,6 +190,7 @@
         android:id="@+id/placeOrder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="65dp"
         android:padding="5dp"
         android:src="@drawable/ic_place_order"
