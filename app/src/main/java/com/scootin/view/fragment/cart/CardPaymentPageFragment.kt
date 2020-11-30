@@ -17,6 +17,7 @@ import com.scootin.databinding.FragmentPaymenttStatusBinding
 import com.scootin.extensions.getCheckedRadioButtonPosition
 import com.scootin.extensions.getNavigationResult
 import com.scootin.extensions.orDefault
+import com.scootin.extensions.orZero
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
@@ -46,7 +47,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
 
     var promoCode: String = ""
 
-
+    var orderId: Long = -1
     var address: AddressDetails? = null
 
     //We need to load order in-order to get more information about order
@@ -66,7 +67,6 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                 val data = it.body()
                 binding.data = data
                 if (data?.couponDiscount != 0.0) {
-
                     binding.promoApplied.visibility = View.VISIBLE
                     binding.discountApplied.text = "Discount Applied (${promoCode})"
                 } else {
@@ -109,27 +109,29 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                 1 -> {"CASH"}
                 else -> {""}
             }
-//            showLoading()
+            showLoading()
 
-//            viewModel.userConfirmOrder(orderId.toString(), AppHeaders.userID, OrderRequest(mode, address!!.id)).observe(viewLifecycleOwner) {
-//                when(it.status) {
-//                    Status.SUCCESS -> {
-//
-//                        Timber.i(" data ${it.data}")
-//                        dismissLoading()
-//                        if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
-//                            val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
-//                            startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
-//                        } else {
-//                            findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
-//                        }
-//                    }
-//                    Status.ERROR -> {
-//                        dismissLoading()
-//                    }
-//                    Status.LOADING -> {}
-//                }
-//            }
+            viewModel.userConfirmOrder(AppHeaders.userID, OrderRequest(mode, address!!.id, promoCode)).observe(viewLifecycleOwner) {
+                when(it.status) {
+                    Status.SUCCESS -> {
+                        Timber.i(" data ${it.data}")
+                        orderId = it.data?.id ?: -1
+
+                        Timber.i("order id $orderId")
+                        dismissLoading()
+                        if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
+                            val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
+                            startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
+                        } else {
+                            findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
+                        }
+                    }
+                    Status.ERROR -> {
+                        dismissLoading()
+                    }
+                    Status.LOADING -> {}
+                }
+            }
         }
 
         binding.applyPromoButton.setOnClickListener {
@@ -193,13 +195,13 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
     }
 
     fun onPaymentSuccess(razorpayPaymentId: String?){
-        Timber.i("onPaymentSuccess = ${razorpayPaymentId}")
+        Timber.i("onPaymentSuccess = ${razorpayPaymentId} $orderId")
         viewModel.verifyPayment(VerifyAmountRequest(razorpayPaymentId)).observe(viewLifecycleOwner) {
             when(it.status) {
                 Status.LOADING -> {}
                 Status.SUCCESS -> {
                     //Need some direction to move
-//                    findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
+                    findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
                 }
                 Status.ERROR -> {}
             }

@@ -31,14 +31,13 @@ class OrderRepository @Inject constructor(
     suspend fun checkOutOrder(userId: String, request: PromoCodeRequest) = services.checkOutOrder(userId, request)
 
     fun userConfirmOrder(
-        orderId: String,
         userId: String,
         orderRequest: OrderRequest,
         context: CoroutineContext
-    ): LiveData<Resource<PlaceOrderResponse>> =
-        object : NetworkBoundResource<PlaceOrderResponse>(context) {
-            override suspend fun createCall(): Response<PlaceOrderResponse> =
-                services.userConfirmOrder(orderId, userId, orderRequest)
+    ): LiveData<Resource<OrderDetail>> =
+        object : NetworkBoundResource<OrderDetail>(context) {
+            override suspend fun createCall(): Response<OrderDetail> =
+                services.userConfirmOrder(userId, orderRequest)
         }.asLiveData()
 
 

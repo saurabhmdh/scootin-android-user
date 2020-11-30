@@ -145,12 +145,11 @@ interface APIService {
     ): Response<CityWideOrderResponse>
 
 
-    @POST("/order/user-confirm-order/{orderId}/{userId}")
+    @POST("/order/user-confirm-order/{userId}")
     suspend fun userConfirmOrder(
-        @Path("orderId") orderId: String,
         @Path("userId") userId: String,
         @Body orderRequest: OrderRequest
-    ): Response<PlaceOrderResponse>
+    ): Response<OrderDetail>
 
     @POST("/payment/apply-promocode/{orderId}/{userId}")
     suspend fun applyPromoCode(

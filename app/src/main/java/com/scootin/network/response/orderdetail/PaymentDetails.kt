@@ -9,6 +9,9 @@ data class PaymentDetails(
     val paymentStatus: String,
     val paymentMode: String?,
     val promoDiscount: Double?,
+    val orderReference: String?,
     val promoCodeApplied: Boolean?,
-    val promoCodeID: Long?
+    val totalSaving: Double,
+    val promoCodeID: Long?,
+    val mrp: Double?
 )

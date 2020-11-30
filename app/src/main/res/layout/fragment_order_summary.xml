@@ -312,7 +312,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:paddingEnd="2dp"
-                app:setDiscountPrice="@{data.orderDetails.paymentDetails.promoDiscount}"
+                app:setDiscountPrice="@{data.orderDetails.paymentDetails.totalSaving}"
                 android:textColor="#000"
                 android:textStyle="bold" />
         </RelativeLayout>
