@@ -11,6 +11,7 @@ data class PaymentDetails(
     val promoDiscount: Double?,
     val orderReference: String?,
     val promoCodeApplied: Boolean?,
+    val totalSaving: Double,
     val promoCodeID: Long?,
     val mrp: Double?
 )
