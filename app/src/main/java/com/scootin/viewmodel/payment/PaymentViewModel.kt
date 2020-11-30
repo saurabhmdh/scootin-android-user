@@ -33,6 +33,7 @@ class PaymentViewModel @ViewModelInject internal constructor(
 ) : ObservableViewModel(), CoroutineScope {
 
     private val _promo_code = MutableLiveData<String>()
+    private val _Order_Id = MutableLiveData<Long>()
 
     fun loadPaymentInfo(promoCode: String) {
         _promo_code.postValue(promoCode)
@@ -44,14 +45,17 @@ class PaymentViewModel @ViewModelInject internal constructor(
         }
     }
 
-    fun promCodeRequest(orderId: String, promoCode: String): LiveData<Response<PlaceOrderResponse>> {
-        return liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-            val promoCodeRequest = PromoCodeRequest(promoCode)
-            emit(paymentRepository.applyPromoCode(orderId, AppHeaders.userID, promoCodeRequest))
-        }
+    fun loadOrder(orderId: Long) {
+        _Order_Id.postValue(orderId)
     }
 
-    fun userConfirmOrder(orderId: String, userId: String, orderRequest: OrderRequest) = orderRepository.userConfirmOrder(orderId, userId, orderRequest, viewModelScope.coroutineContext + Dispatchers.IO + handler)
+    val orderInfo = _Order_Id.switchMap {
+        orderRepository.getOrder(
+            it.toString(),
+            viewModelScope.coroutineContext + Dispatchers.IO + handler
+        )
+    }
+    fun userConfirmOrder(userId: String, orderRequest: OrderRequest) = orderRepository.userConfirmOrder(userId, orderRequest, viewModelScope.coroutineContext + Dispatchers.IO + handler)
 
 
     fun verifyPayment(request: VerifyAmountRequest) = paymentRepository.verifyPayment(request, viewModelScope.coroutineContext + Dispatchers.IO + handler)
@@ -64,6 +68,8 @@ class PaymentViewModel @ViewModelInject internal constructor(
     fun loadAllAddress() = liveData(viewModelScope.coroutineContext + Dispatchers.IO + handler) {
         emit(userRepository.getAllAddress())
     }
+
+
 
     override val coroutineContext: CoroutineContext
         get() = viewModelScope.coroutineContext + Dispatchers.IO
