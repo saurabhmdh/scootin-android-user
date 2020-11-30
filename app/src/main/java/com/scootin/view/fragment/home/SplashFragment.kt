@@ -27,14 +27,18 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Timber.i("onViewCreated..")
+
         viewModel.firstLaunch().observe(viewLifecycleOwner, {
             dataLoaded = true
             firstTime = it
+            Timber.i("firstLaunch() $timeout $firstTime")
         })
 
         Handler().postDelayed({
             timeout = true
             tryToGoNext()
+            Timber.i("Handler() $timeout $firstTime")
         }, 3000)
     }
 

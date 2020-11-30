@@ -80,12 +80,15 @@ class CartListFragment : BaseFragment(R.layout.fragment_cart_list) {
 
         viewModel.addToCartMap.observe(viewLifecycleOwner, {
             viewModel.userCartList()
+            viewModel.loadCount()
         })
     }
 
     private fun setData() {
         Timber.i("userId = ${AppHeaders.userID}")
         viewModel.userCartList()
+        viewModel.loadCount()
+
         viewModel.getUserCartListLiveData.observe(viewLifecycleOwner, {
             dismissLoading()
             if (it.isSuccessful) {
@@ -107,7 +110,7 @@ class CartListFragment : BaseFragment(R.layout.fragment_cart_list) {
             activity?.moveToAnotherTab(R.id.home)
         }
 
-        viewModel.getCartCount(AppHeaders.userID).observe(viewLifecycleOwner) {
+        viewModel.getCartCount.observe(viewLifecycleOwner) {
             if (it.isSuccessful) {
                 val result = it.body()?.toInt()
                 val activity = activity as MainActivity?
