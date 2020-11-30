@@ -184,7 +184,9 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
     }
 
     private fun loadMedia() {
-        GlideApp.with(requireContext()).load(media?.url).into(binding.receiverPhotoBox)
+        if (media?.url != null) {
+            GlideApp.with(requireContext()).load(media?.url).into(binding.receiverPhotoBox)
+        }
     }
 }
 

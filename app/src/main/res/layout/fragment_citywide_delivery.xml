@@ -57,8 +57,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/receiver_photo_box"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="157dp"
+        android:layout_height="121dp"
         android:layout_marginTop="230dp"
         android:src="@drawable/ic_sender_photo_box"
         app:layout_constraintEnd_toEndOf="parent"
