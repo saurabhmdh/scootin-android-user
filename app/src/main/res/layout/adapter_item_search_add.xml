@@ -33,8 +33,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/decrement2"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 app:srcCompat="@drawable/ic_minus_bttn" />
 
@@ -43,16 +43,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_regular"
-                android:paddingStart="4dp"
-                android:paddingEnd="4dp"
+                android:paddingStart="2dp"
+                android:paddingEnd="2dp"
+                android:layout_gravity="center_vertical"
                 android:text="0"
                 android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:textSize="20sp" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/increment2"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 app:srcCompat="@drawable/ic_plus_bttn" />
         </LinearLayout>
