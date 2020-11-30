@@ -302,6 +302,7 @@
             android:layout_height="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="26dp"
+            android:padding="5dp"
             android:src="@drawable/ic_cancel_order_button_active"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pay_on_delivery_header" />
