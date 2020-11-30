@@ -232,6 +232,8 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
     }
 
     private fun loadMedia() {
-        GlideApp.with(requireContext()).load(media?.url).into(binding.appCompatImageView7)
+        if(media?.url != null) {
+            GlideApp.with(requireContext()).load(media?.url).into(binding.mediaImage)
+        }
     }
 }
