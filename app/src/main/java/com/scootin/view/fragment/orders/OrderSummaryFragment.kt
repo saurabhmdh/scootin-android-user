@@ -56,7 +56,7 @@ class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
                         binding.paymentStatus.setText("Payment Done")
                     }
                     else{
-                        binding.paymentStatus.setText("Pay on Delivery via Cash")
+                        binding.paymentStatus.setText("Pay on Delivery")
                     }
                 }
                 Status.ERROR -> {

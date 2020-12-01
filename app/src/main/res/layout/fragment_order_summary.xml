@@ -90,7 +90,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_pickup_location"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
@@ -110,7 +110,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_pickup_location"
             app:srcCompat="@drawable/ic_directional_arrow" />
@@ -320,6 +319,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:paddingEnd="2dp"
+                android:layout_marginEnd="16dp"
                 app:setDiscountPrice="@{data.orderDetails.paymentDetails.totalSaving}"
                 android:textColor="#000"
                 android:textStyle="bold" />
