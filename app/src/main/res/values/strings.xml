@@ -15,6 +15,7 @@
 
     <!-- Error messages -->
     <string name="error_message_invalid_mobile">Please provide a valid mobile number</string>
+    <string name="error_message_invalid_email">Please provide a email address</string>
     <string name="error_message_invalid_otp">Please provide a valid OTP</string>
     <string name="server_error">Server error, try again later !!</string>
 

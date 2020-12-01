@@ -14,9 +14,11 @@ import com.scootin.extensions.getCheckedRadioButtonPosition
 import com.scootin.extensions.orZero
 import com.scootin.network.api.Resource
 import com.scootin.network.api.Status
+import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.AddAddressRequest
 import com.scootin.network.response.AddressDetails
 import com.scootin.network.response.State
+import com.scootin.util.constants.Validation
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.fragment.BaseFragment
 import com.scootin.view.fragment.delivery.medicines.MedicineDeliveryOrdersArgs
@@ -57,6 +59,9 @@ class AddorModifyNewAddressFragment : BaseFragment(R.layout.fragment_add_new_add
         }
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
+        //Prefilled
+        binding.mobileEditText.setText(AppHeaders.userMobileNumber)
+
         receivedAddress?.let {
             //Update address with previous data
             preFilledAddressData(it)
@@ -75,6 +80,10 @@ class AddorModifyNewAddressFragment : BaseFragment(R.layout.fragment_add_new_add
             "OTHERS" -> {binding.radioGroup.other_radio_button.isChecked = true}
         }
         binding.setAsDefault.isChecked = addressDetails.hasDefault
+
+        binding.emailEditText.setText(addressDetails.email ?: "")
+        binding.mobileEditText.setText(addressDetails.mobileNumber)
+        binding.nameEditText.setText(addressDetails.name)
     }
 
 
@@ -112,6 +121,25 @@ class AddorModifyNewAddressFragment : BaseFragment(R.layout.fragment_add_new_add
     }
 
     private fun saveAddress() {
+        val name = binding.nameEditText.text?.toString()
+        if (name.isNullOrEmpty()) {
+            Toast.makeText(requireContext(), "Please provide a name", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val mobileNumber = binding.mobileEditText.text?.toString()
+        if (mobileNumber.isNullOrEmpty() || Validation.REGEX_VALID_MOBILE_NUMBER.matcher(mobileNumber).matches().not()) {
+            Toast.makeText(context, R.string.error_message_invalid_mobile, Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val email = binding.emailEditText.text?.toString()
+        if (email.isNullOrEmpty().not()  && Validation.REGEX_VALID_EMAIL.matcher(email).matches().not()) {
+            Toast.makeText(context, R.string.error_message_invalid_email, Toast.LENGTH_SHORT).show()
+            return
+        }
+
+
         val address = binding.enteredAddressEditText.text?.toString()
         if (address.isNullOrEmpty()) {
             Toast.makeText(requireContext(), "Please enter address", Toast.LENGTH_SHORT).show()
@@ -169,6 +197,9 @@ class AddorModifyNewAddressFragment : BaseFragment(R.layout.fragment_add_new_add
         showLoading()
         viewModel.saveAddress(
             AddAddressRequest(
+                name,
+                email,
+                mobileNumber,
                 addressType,
                 address,
                 area,
