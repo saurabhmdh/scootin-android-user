@@ -9,12 +9,14 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.scootin.R
 import com.scootin.databinding.FragmentExpressDeliveryOrdersBinding
 import com.scootin.extensions.getNavigationResult
+import com.scootin.extensions.orZero
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.glide.GlideApp
@@ -70,13 +72,20 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
             Timber.i("action id = ${actionId}")
             when (actionId) {
                 EditorInfo.IME_ACTION_DONE -> {
-                    Timber.i("action id = ${actionId}")
+                    val count = binding.searchList.adapter?.itemCount.orZero()
+                    Timber.i("count = $count")
+                    if (count > 10) {
+                        Toast.makeText(requireContext(), "Max 10 items supported", Toast.LENGTH_SHORT).show()
+                        return@OnEditorActionListener false
+                    }
                     searchItemAddAdapter.addList(
                         ExtraDataItem(
                             binding.searchSuggestion.text.toString(),
                             1
                         )
                     )
+
+                    binding.searchList.scrollToPosition(count - 1)
                     binding.searchSuggestion.setText("")
                     return@OnEditorActionListener false
                 }
@@ -135,6 +144,9 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
             })
 
         binding.searchList.apply {
+            layoutManager = LinearLayoutManager(requireContext()).apply {
+                reverseLayout = true
+            }
             adapter = searchItemAddAdapter
         }
 
