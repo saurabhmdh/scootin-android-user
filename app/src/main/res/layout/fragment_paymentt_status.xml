@@ -277,9 +277,9 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/confirm_button"
-            android:layout_height="wrap_content"
+            android:layout_height="38dp"
             android:layout_marginTop="@dimen/dimen_20"
-            android:layout_width="wrap_content"
+            android:layout_width="110dp"
             android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@+id/applyPromoButton"
             app:layout_constraintEnd_toEndOf="parent"
