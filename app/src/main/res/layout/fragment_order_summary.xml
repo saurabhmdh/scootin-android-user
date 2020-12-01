@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginBottom="5dp">
     <data>
         <variable
@@ -94,6 +95,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
+            android:gravity="center_vertical"
             android:drawableStart="@drawable/ic_pickup_location_icon"
             android:drawablePadding="5dp"
             android:textColor="#000"
@@ -108,7 +110,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_pickup_location"
             app:srcCompat="@drawable/ic_directional_arrow" />
@@ -120,6 +122,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:lines="2"
+            android:gravity="center_vertical"
             android:drawablePadding="5dp"
             android:drawableStart="@drawable/ic_delivery_location_icon"
             app:setOneLineAddress="@{data.orderDetails.addressDetails}"
@@ -207,7 +210,7 @@
                 android:id="@+id/order_total_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:setPrice="@{data.orderDetails.paymentDetails.totalAmount}"
+                app:setPrice="@{data.orderDetails.paymentDetails.amount}"
                 android:layout_alignParentEnd="true"
                 android:textColor="#000"
                 android:textStyle="bold"
@@ -243,6 +246,7 @@
                 android:layout_alignParentEnd="true"
                 android:textColor="#000"
                 android:paddingEnd="2dp"/>
+
         </RelativeLayout>
 
 
@@ -277,16 +281,17 @@
                 android:paddingEnd="2dp"/>
         </RelativeLayout>
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <View
             android:id="@+id/base_line4"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/total_saving_tab"
+            android:background="@color/text_color_primary"
+            app:layout_constraintTop_toBottomOf="@+id/total_saving_tab"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/ic_saparator_line" />
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <RelativeLayout
             android:id="@+id/total_saving_tab"
@@ -294,7 +299,8 @@
             android:layout_height="26dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="15dp"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="100dp"
+            android:background="@drawable/ic_total_savings_tab"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -318,5 +324,32 @@
                 android:textColor="#000"
                 android:textStyle="bold" />
         </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/payment_status"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="8dp"
+
+            android:text="pay on delivery"
+            android:textColor="@color/text_color"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/appCompatTextView"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/base_line4" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView"
+            setPrice="@{data.orderDetails.paymentDetails.totalAmount}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/text_color"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/base_line4" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
