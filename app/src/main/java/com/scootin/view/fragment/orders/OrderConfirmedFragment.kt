@@ -12,17 +12,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class OrderConfirmedFragment : Fragment(R.layout.fragment_order_confirmed) {
 
-    private val args: OrderConfirmedFragmentArgs by navArgs()
-
-    private val orderId by lazy {
-        args.orderId
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Handler().postDelayed({
-            findNavController().navigate(OrderConfirmedFragmentDirections.actionCartPaymentFragmentToOrderSummary(orderId))
-        }, 3000)
     }
+
+    //
 }

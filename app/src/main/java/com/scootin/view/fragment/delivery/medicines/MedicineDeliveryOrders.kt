@@ -19,7 +19,9 @@ import com.scootin.network.api.Status
 import com.scootin.network.glide.GlideApp
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.DirectOrderRequest
+import com.scootin.network.response.AddressDetails
 import com.scootin.network.response.ExtraDataItem
+import com.scootin.util.UtilUIComponent
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.util.ui.MediaPicker
@@ -48,6 +50,8 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
     }
 
     private val args: MedicineDeliveryOrdersArgs by navArgs()
+
+    var address: AddressDetails? = null
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -91,6 +95,25 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
         binding.warning.setOnClickListener {
             binding.termAccepted.isChecked = !binding.termAccepted.isChecked
         }
+
+        //Lets load all address if there is no address then ask to add, incase there is
+        viewModel.loadAllAddress().observe(viewLifecycleOwner) {
+            //find defaultAddress..
+            if (it.isSuccessful) {
+                if (address != null) {
+                    Timber.i("We have address from previous fragment $address")
+                    return@observe
+                }
+                address = it.body()?.first { it.hasDefault }
+                Timber.i("We found address ${address}")
+                address?.let {
+                    binding.dropAddress.text = UtilUIComponent.setOneLineAddress(address)
+                }
+
+            } else {
+                //We need to
+            }
+        }
     }
 
     private fun setSearchSuggestionList() {
@@ -113,10 +136,6 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
     }
 
     private fun placeDirectOrder() {
-        if (mediaId == -1L) {
-            //TODO: add fake media ->
-            mediaId = 329
-        }
 
         if (searchItemAddAdapter.list.isEmpty()) {
             Toast.makeText(context, "Please add medicine name", Toast.LENGTH_SHORT).show()
@@ -127,7 +146,7 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
         viewModel.placeDirectOrder(
             AppHeaders.userID,
             DirectOrderRequest(
-                AppConstants.defaultAddressId,
+                7553,
                 false,
                 mediaId,
                 shopId,

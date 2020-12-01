@@ -88,7 +88,7 @@ class EssentialHandwrittenFragment : BaseFragment(R.layout.hand_written_grocery_
         showLoading()
         viewModel.placeDirectOrder(
             AppHeaders.userID,
-            DirectOrderRequest(AppConstants.defaultAddressId, false, mediaId, shopId)).observe(viewLifecycleOwner) {
+            DirectOrderRequest(address!!.id, false, mediaId, shopId)).observe(viewLifecycleOwner) {
             when(it.status) {
                 Status.SUCCESS -> {
                     dismissLoading()

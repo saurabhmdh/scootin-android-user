@@ -33,8 +33,5 @@ object AppConstants {
         Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
-
-    const val defaultAddressId = 7553L
-
     const val DEBOUNCE_TIME = 200L
 }
