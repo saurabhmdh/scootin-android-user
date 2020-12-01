@@ -4,6 +4,7 @@ import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.*
 import com.scootin.network.response.*
 import com.scootin.network.response.cart.CartListResponseItem
+import com.scootin.network.response.cart.UserCartResponse
 import com.scootin.network.response.citywide.CityWideOrderResponse
 import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.network.response.home.ResponseServiceArea
@@ -90,7 +91,7 @@ interface APIService {
     suspend fun getCartCount(@Path("userId") userId: String): Response<String>
 
     @GET("/cart/get-cart/{userID}")
-    suspend fun getUserCartList(@Path("userID") userId: String): Response<List<CartListResponseItem>>
+    suspend fun getUserCartList(@Path("userID") userId: String): Response<UserCartResponse>
 
     @POST("/wallet/add-money/{userId}")
     suspend fun addMoney(@Path("userId") userId: String, @Body addMoneyWallet: AddMoneyWallet): Response<AddWalletResponse>

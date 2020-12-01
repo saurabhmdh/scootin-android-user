@@ -39,167 +39,283 @@
 
 
     <View
+        android:id="@+id/line_new_address"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#595959"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="20dp"
-
+        android:layout_marginTop="@dimen/dimen_10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/default_delivery_text_view"/>
 
+    <!-- name, email and mobile number support -->
+    <LinearLayout
+        android:id="@+id/root_name"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:layout_marginTop="@dimen/dimen_10"
+        app:layout_constraintTop_toBottomOf="@id/line_new_address"
+        android:layout_height="wrap_content">
+
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/default_address_text_view"
+        android:id="@+id/name_text_view"
         style="@style/custom_font_style_black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="12dp"
-        android:padding="3dp"
-        android:text="@string/address"
+        android:layout_width="@dimen/address_width"
+        android:layout_height="30dp"
+        android:text="@string/name"
         android:textColor="#616161"
         android:textSize="15sp"
-        android:textStyle="bold"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/default_delivery_text_view" />
+        android:textStyle="bold" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/entered_address_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="20dp"
+        android:id="@+id/name_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="@dimen/dimen_10"
         android:background="@null"
-        android:hint="@string/edittxt_user_address"
+        android:hint="@string/edittxt_user_name"
         android:maxLines="1"
-        android:padding="2dp"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/full_name_text_view"
-        app:layout_constraintTop_toBottomOf="@id/default_delivery_text_view" />
+        android:layout_weight="1"
+        android:textSize="15sp" />
+    </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#595959"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@id/root_name"/>
+
+    <LinearLayout
+        android:id="@+id/root_mobile"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/root_name"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/mobile_text_view"
+            style="@style/custom_font_style_black"
+            android:layout_width="@dimen/address_width"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:text="@string/edittxt_user_mob_no"
+            android:textColor="#616161"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/mobile_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:background="@null"
+            android:hint="@string/edittxt_user_mob_no"
+            android:maxLines="1"
+            android:padding="2dp"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#595959"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@id/root_mobile"/>
+
+    <LinearLayout
+        android:id="@+id/root_email"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/root_mobile"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/email_text_view"
+            style="@style/custom_font_style_black"
+            android:layout_width="@dimen/address_width"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:text="@string/edittxt_user_email"
+            android:textColor="#616161"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/email_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:hint="@string/edittxt_user_email"
+            android:maxLines="1"
+            android:padding="2dp"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+    </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#595959"
         android:layout_marginStart="27dp"
         android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toBottomOf="@id/default_address_text_view"/>
+        app:layout_constraintTop_toBottomOf="@id/root_email"/>
+    <!-- completed -->
 
-
-    <!--TODO Default Delivery Address Layout-->
-
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/default_area_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="5dp"
-        android:padding="3dp"
-        android:text="@string/area"
-        style="@style/custom_font_style_black"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:textColor="#616161"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/default_address_text_view" />
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/entered_area_edit_text"
+    <LinearLayout
+        android:id="@+id/root_address"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="20dp"
-        android:textSize="15sp"
-        android:padding="2dp"
-        android:maxLines="1"
-        android:background="@null"
-        android:hint="@string/edittxt_user_area"
-        app:layout_constraintStart_toStartOf="@+id/full_name_text_view"
-        app:layout_constraintTop_toBottomOf="@id/default_address_text_view"/>
+        android:orientation="horizontal"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/root_email"
+        android:layout_height="wrap_content">
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/default_address_text_view"
+            style="@style/custom_font_style_black"
+            android:layout_width="@dimen/address_width"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:text="@string/address"
+            android:textColor="#616161"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/entered_address_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:hint="@string/edittxt_user_address"
+            android:maxLines="1"
+            android:padding="2dp"
+            android:textSize="15sp"
+            android:layout_weight="1" />
+    </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#595959"
         android:layout_marginStart="27dp"
         android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toBottomOf="@id/default_area_text_view"/>
-
-    <!--TODO Default City Address Layout-->
+        app:layout_constraintTop_toBottomOf="@id/root_address"/>
 
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/default_city_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="5dp"
-        android:padding="3dp"
-        android:text="@string/city"
-        style="@style/custom_font_style_black"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:textColor="#616161"
-
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/default_area_text_view" />
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/entered_city_edit_text"
+    <LinearLayout
+        android:id="@+id/root_area"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="200dp"
-        android:textSize="15sp"
-        android:maxLines="1"
-        android:padding="2dp"
-        android:background="@null"
-        android:hint="@string/edittxt_user_city"
-        app:layout_constraintStart_toStartOf="@+id/default_pin_text_view"
-        app:layout_constraintTop_toBottomOf="@id/default_area_text_view"/>
+        android:orientation="horizontal"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/root_address"
+        android:layout_height="wrap_content">
 
-    <!--TODO Default Pin Address Layout-->
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/default_area_text_view"
+            android:layout_width="@dimen/address_width"
+            android:layout_height="wrap_content"
+            android:text="@string/area"
+            style="@style/custom_font_style_black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#616161" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/default_pin_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/pin"
-        style="@style/custom_font_style_black"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="5dp"
-        android:padding="3dp"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:textColor="#616161"
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/entered_area_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:textSize="15sp"
+            android:padding="2dp"
+            android:maxLines="1"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="@string/edittxt_user_area" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#595959"
+        android:layout_marginStart="27dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@id/root_area"/>
 
-        app:layout_constraintStart_toEndOf="@+id/entered_city_edit_text"
-        app:layout_constraintTop_toBottomOf="@id/default_area_text_view"/>
+    <LinearLayout
+        android:id="@+id/root_city"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/root_area"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/default_city_text_view"
+            android:layout_width="@dimen/address_width"
+            android:layout_height="wrap_content"
+            android:text="@string/city"
+            style="@style/custom_font_style_black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#616161"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/root_area" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/entered_city_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:textSize="15sp"
+            android:maxLines="1"
+            android:padding="2dp"
+            android:background="@null"
+            android:layout_weight="1"
+            android:hint="@string/edittxt_user_city" />
+
+        <!--TODO Default Pin Address Layout-->
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/default_pin_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pin"
+            style="@style/custom_font_style_black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#616161" />
 
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/entered_pin_edit_text"
-        android:layout_width="114dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:background="@null"
-        android:hint="@string/edittxt_user_pin"
-        android:maxLines="1"
-        android:maxLength="6"
-        android:inputType="number"
-        android:padding="2dp"
-        android:textSize="15sp"
-        app:layout_constraintStart_toEndOf="@+id/default_pin_text_view"
-        app:layout_constraintTop_toBottomOf="@id/default_area_text_view" />
-
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/entered_pin_edit_text"
+            android:layout_width="114dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:layout_marginStart="@dimen/dimen_10"
+            android:hint="@string/edittxt_user_pin"
+            android:maxLines="1"
+            android:maxLength="6"
+            android:inputType="number"
+            android:padding="2dp"
+            android:textSize="15sp" />
+    </LinearLayout>
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
@@ -209,35 +325,39 @@
         android:background="#595959"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/default_city_text_view" />
+        app:layout_constraintTop_toBottomOf="@id/root_city" />
 
     <!--TODO Default Delivery State Layout-->
 
-
+    <LinearLayout
+        android:id="@+id/root_state"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/root_city"
+        android:layout_height="wrap_content">
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/default_state_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/address_width"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="5dp"
-        android:padding="3dp"
         android:text="@string/state"
         style="@style/custom_font_style_black"
         android:textSize="15sp"
         android:textStyle="bold"
         android:textColor="#616161"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/default_city_text_view" />
+        app:layout_constraintTop_toBottomOf="@id/root_city" />
 
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/state_adapter"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="24dp"
         app:layout_constraintStart_toEndOf="@+id/default_state_text_view"
-        app:layout_constraintTop_toBottomOf="@id/default_city_text_view"/>
+        app:layout_constraintTop_toBottomOf="@id/root_city"/>
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"
@@ -245,7 +365,7 @@
         android:background="#595959"
         android:layout_marginStart="27dp"
         android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toBottomOf="@id/default_state_text_view"/>
+        app:layout_constraintTop_toBottomOf="@id/root_state"/>
 
     <!--TODO Default Radio Button Home Layout-->
     <RadioGroup
@@ -256,7 +376,7 @@
         android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/default_state_text_view">
+        app:layout_constraintTop_toBottomOf="@id/root_state">
 
         <androidx.appcompat.widget.AppCompatRadioButton
             android:id="@+id/home_radio_button"
@@ -319,8 +439,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/dimen_20"
-        android:padding="5dp"
-        android:text="Save"
+        android:layout_marginTop="@dimen/dimen_20"
+        android:background="@drawable/ic_save_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/radio_group"/>
 
