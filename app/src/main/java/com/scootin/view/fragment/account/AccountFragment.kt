@@ -51,10 +51,6 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
             findNavController().navigate(AccountFragmentDirections.accountToOrdersFragment())
         }
 
-        binding.cardsFragment.setOnClickListener {
-            findNavController().navigate(AccountFragmentDirections.accountToCartFragment())
-        }
-
         binding.supportFragment.setOnClickListener {
             findNavController().navigate(AccountFragmentDirections.accountToSupportFragment())
         }
