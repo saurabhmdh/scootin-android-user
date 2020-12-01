@@ -43,7 +43,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment :  Fragment(R.layout.fragment_home) {
-    private var binding by autoCleared<FragmentHomeBinding>()
+    private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeFragmentViewModel by viewModels()
 
 

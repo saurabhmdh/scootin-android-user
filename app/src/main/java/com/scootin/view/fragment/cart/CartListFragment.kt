@@ -92,18 +92,13 @@ class CartListFragment : BaseFragment(R.layout.fragment_cart_list) {
         viewModel.getUserCartListLiveData.observe(viewLifecycleOwner, {
             dismissLoading()
             if (it.isSuccessful) {
-                Timber.i("userCartList = ${it.body()?.size}")
+                Timber.i("userCartList = ${it.body()?.data?.size}")
                 val data = it.body()
-                enableDisableVisibility(data.isNullOrEmpty())
-                addCartItemAdapter.submitList(data)
+                enableDisableVisibility(data?.data.isNullOrEmpty())
+                addCartItemAdapter.submitList(data?.data)
+                binding.price.setPrice(data?.price.orDefault(0.0))
             }
         })
-
-        viewModel.totalPrice.observe(viewLifecycleOwner) {
-            if(it.isSuccessful) {
-                binding.price.setPrice(it.body().orDefault(0.0))
-            }
-        }
 
         binding.shopNow.setOnClickListener {
             val activity = activity as MainActivity?

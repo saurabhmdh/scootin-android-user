@@ -13,4 +13,5 @@
     <dimen name="dimen_10">10dp</dimen>
     <dimen name="dimen_20">20dp</dimen>
 
+    <dimen name="address_width">90dp</dimen>
 </resources>

@@ -32,6 +32,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
         viewModel.firstLaunch().observe(viewLifecycleOwner, {
             dataLoaded = true
             firstTime = it
+            tryToGoNext()
             Timber.i("firstLaunch() $timeout $firstTime")
         })
 

@@ -45,7 +45,7 @@
     <string name="edittxt_security_code">Security Code</string>
 
     <string name="edittxt_user_name"><font size="15" fontfamily="@font/montserrat_bold">Name</font></string>
-    <string name="edittxt_user_mob_no"><font size="15" fontfamily="@font/montserrat_bold">Phone Number</font></string>
+    <string name="edittxt_user_mob_no"><font size="15" fontfamily="@font/montserrat_bold">Phone No</font></string>
     <string name="edittxt_user_address"><font size="15" fontfamily="@font/montserrat_bold">Address</font></string>
     <string name="edittxt_user_area"><font size="15" fontfamily="@font/montserrat_bold">Area</font></string>
     <string name="edittxt_user_email"><font size="15" fontfamily="@font/montserrat_bold">Email</font></string>
@@ -129,6 +129,10 @@
     <string name="item_06">item 06</string>
     <string name="rs_128_00">Rs. 128.00</string>
     <string name="item_07">item 07</string>
+
+    <string name="name">Name</string>
+
+
     <string name="address">Address</string>
     <string name="area">Area</string>
     <string name="pin">Pin</string>
