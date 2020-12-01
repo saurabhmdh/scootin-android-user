@@ -1,6 +1,9 @@
 package com.scootin.network.request
 
 data class AddAddressRequest(
+    val name: String,
+    val email: String?,
+    val mobileNumber: String,
     val addressType: String,
     val address_line_1: String,
     val address_line_2: String,
