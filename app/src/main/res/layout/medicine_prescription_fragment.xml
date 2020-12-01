@@ -37,48 +37,67 @@
         android:layout_marginBottom="2dp"
         android:fontFamily="@font/montserrat_regular"
         tools:text="Gayatri Medical"
-        app:layout_constraintBottom_toTopOf="@id/empty"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txt_store"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="2dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="| Store"
-        app:layout_constraintBottom_toTopOf="@id/empty"
-        app:layout_constraintLeft_toRightOf="@id/medical_store_name" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/express_delivery" />
 
     <View
         android:id="@+id/empty"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="178dp"
         android:background="@color/text_color_primary"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/medical_store_name" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/txt_deliveringto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/empty"
+        app:srcCompat="@drawable/ic_delivering_to" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/dropAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="8dp"
+        android:drawablePadding="5dp"
+        android:drawableStart="@drawable/ic_location_icon"
+        android:text="@string/edittxt_hint_citywide"
+        android:fontFamily="@font/montserrat_regular"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"
+        android:maxLines="2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_deliveringto" />
+
+    <View
+        android:id="@+id/imageView2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/text_color_primary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dropAddress" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/uploadPhoto"
+        android:layout_marginTop="@dimen/dimen_10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="197dp"
         android:src="@drawable/ic_medical_camera_botton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/imageView2" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/txt_instruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="236dp"
-        app:layout_constraintEnd_toStartOf="@+id/receiver_photo_box"
-        app:layout_constraintHorizontal_bias="0.02"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/uploadPhoto"
         app:srcCompat="@drawable/ic_terms_conditions_text" />
 
     <LinearLayout
@@ -113,8 +132,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="2dp"
-        app:layout_constraintEnd_toEndOf="@+id/warning"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/warning"
         app:srcCompat="@drawable/ic_selective_medicine_text" />
@@ -163,17 +180,16 @@
         android:id="@+id/receiver_photo_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="236dp"
-        android:src="@drawable/ic_image_preview_box_grocerylist"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@+id/uploadPhoto"
+        android:src="@drawable/ic_image_preview_box_grocerylist" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/placeOrder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="75dp"
+        android:layout_marginTop="@dimen/dimen_4"
+        android:layout_marginBottom="60dp"
         android:padding="5dp"
         android:src="@drawable/ic_place_order"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -162,7 +162,7 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
         viewModel.placeDirectOrder(
             AppHeaders.userID,
             DirectOrderRequest(
-                AppConstants.defaultAddressId,
+                address!!.id,
                 true,
                 mediaId,
                 shopId,

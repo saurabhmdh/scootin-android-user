@@ -12,6 +12,7 @@ import com.scootin.network.manager.AppHeaders
 import com.scootin.network.response.login.ResponseUser
 import com.scootin.util.constants.AppConstants
 import com.scootin.viewmodel.base.ObservableViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
 
@@ -42,5 +43,9 @@ class SplashViewModel @ViewModelInject internal constructor(
             Timber.i("Saurabh user value $userInfo")
             emit(false)
         }
+    }
+
+    private val handler = CoroutineExceptionHandler { _, exception ->
+        Timber.i("Caught  $exception")
     }
 }
