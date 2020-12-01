@@ -9,11 +9,15 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.scootin.R
 import com.scootin.databinding.FragmentExpressDeliveryOrdersBinding
 import com.scootin.databinding.MedicinePrescriptionFragmentBinding
+import com.scootin.extensions.getNavigationResult
+import com.scootin.extensions.orZero
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.glide.GlideApp
@@ -21,8 +25,10 @@ import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.DirectOrderRequest
 import com.scootin.network.response.AddressDetails
 import com.scootin.network.response.ExtraDataItem
+import com.scootin.network.response.Media
 import com.scootin.util.UtilUIComponent
 import com.scootin.util.constants.AppConstants
+import com.scootin.util.constants.IntentConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.util.ui.MediaPicker
 import com.scootin.util.ui.UtilPermission
@@ -42,7 +48,8 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
     private var binding by autoCleared<MedicinePrescriptionFragmentBinding>()
 
     private val viewModel: DirectOrderViewModel by viewModels()
-    private var mediaId = -1L
+
+    private var media: Media? = null
 
 
     private val shopId by lazy {
@@ -69,9 +76,9 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
             when (actionId) {
                 EditorInfo.IME_ACTION_DONE -> {
                     Timber.i("action id = ${actionId}")
-
-                    //Need to play here
+                    val count = binding.searchList.adapter?.itemCount.orZero()
                     searchItemAddAdapter.addList(ExtraDataItem(binding.searchSuggestion.text.toString(), 1))
+                    binding.searchList.scrollToPosition(count - 1)
                     binding.searchSuggestion.setText("")
                     return@OnEditorActionListener false
                 }
@@ -114,6 +121,16 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
                 //We need to
             }
         }
+
+        binding.dropAddress.setOnClickListener {
+            viewModel.list = searchItemAddAdapter.list
+            viewModel.media = media
+            findNavController().navigate(IntentConstants.openAddressPage())
+        }
+
+        getNavigationResult()?.observe(viewLifecycleOwner) {
+            updateAddressData(it)
+        }
     }
 
     private fun setSearchSuggestionList() {
@@ -129,24 +146,38 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
             })
 
         binding.searchList.apply {
+            layoutManager = LinearLayoutManager(requireContext()).apply {
+                reverseLayout = true
+            }
             adapter = searchItemAddAdapter
+        }
+
+        if (viewModel.list.isEmpty().not()) {
+            searchItemAddAdapter.addAdd(viewModel.list)
         }
 
         binding.medicalStoreName.text = "${args.shopName}"
     }
 
     private fun placeDirectOrder() {
-
         if (searchItemAddAdapter.list.isEmpty()) {
             Toast.makeText(context, "Please add medicine name", Toast.LENGTH_SHORT).show()
             return
         }
+
+        if (address == null) {
+            Toast.makeText(requireContext(), "Please add a address", Toast.LENGTH_LONG).show()
+            return
+        }
+
         showLoading()
+        val mediaId = media?.id ?: -1
+
         Timber.i("Json : ${Gson().toJson(searchItemAddAdapter.list)}")
         viewModel.placeDirectOrder(
             AppHeaders.userID,
             DirectOrderRequest(
-                7553,
+                address!!.id,
                 false,
                 mediaId,
                 shopId,
@@ -195,12 +226,30 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
                 if(response.isSuccessful) {
                     dismissLoading()
                     val media = response.body() ?: return@observe
-                    GlideApp.with(requireContext()).load(media.url).into(binding.receiverPhotoBox)
-                    mediaId = media.id
+                    this.media = media
+                    loadMedia()
                 } else {
                     Toast.makeText(context, "There is some error media", Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+    }
+
+
+    private fun updateAddressData(calendarData: String) {
+        val result =
+            Gson().fromJson<AddressDetails>(calendarData, object : TypeToken<AddressDetails>() {}.type)
+                ?: return
+        address = result
+        binding.dropAddress.text = UtilUIComponent.setOneLineAddress(address)
+        this.media = viewModel.media
+        loadMedia()
+        Timber.i("update the address $result")
+    }
+
+    private fun loadMedia() {
+        if(media?.url != null) {
+            GlideApp.with(requireContext()).load(media?.url).into(binding.receiverPhotoBox)
         }
     }
 }
