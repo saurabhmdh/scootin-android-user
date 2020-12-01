@@ -121,12 +121,16 @@
             android:theme="@style/ThemeOverlay.AppCompat.Light"
             app:layout_constraintStart_toEndOf="@+id/space"
             app:layout_constraintTop_toBottomOf="@+id/detail" /> -->
-
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/addItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="83dp"
+            android:layout_height="26dp"
             android:text="Add"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingBottom="5dp"
+            android:background="@drawable/button_background"
             android:textSize="16sp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
