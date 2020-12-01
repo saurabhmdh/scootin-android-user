@@ -35,6 +35,8 @@ class AddorModifyNewAddressFragment : BaseFragment(R.layout.fragment_add_new_add
 
     private val args: AddorModifyNewAddressFragmentArgs by navArgs()
 
+    private var savingOnGoing = false
+
     private val receivedAddress by lazy {
         args.addressDetail
     }
@@ -121,6 +123,10 @@ class AddorModifyNewAddressFragment : BaseFragment(R.layout.fragment_add_new_add
     }
 
     private fun saveAddress() {
+        if (savingOnGoing) {
+            return
+        }
+
         val name = binding.nameEditText.text?.toString()
         if (name.isNullOrEmpty()) {
             Toast.makeText(requireContext(), "Please provide a name", Toast.LENGTH_SHORT).show()
@@ -195,6 +201,7 @@ class AddorModifyNewAddressFragment : BaseFragment(R.layout.fragment_add_new_add
         val hasDefault = binding.setAsDefault.isChecked
 
         showLoading()
+        savingOnGoing = true
         viewModel.saveAddress(
             AddAddressRequest(
                 name,
@@ -210,6 +217,7 @@ class AddorModifyNewAddressFragment : BaseFragment(R.layout.fragment_add_new_add
                 id
             )
         ).observe(viewLifecycleOwner) {
+            savingOnGoing = false
             dismissLoading()
             if (it.isSuccessful) {
                 Toast.makeText(requireContext(), "Address added successfully", Toast.LENGTH_SHORT)
