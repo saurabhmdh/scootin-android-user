@@ -55,6 +55,9 @@ class DirectOrderDetailFragment : Fragment(R.layout.fragment_track_direct_order)
                         Timber.i("Extra $extra")
                         itemsAdapter.submitList(extra)
                     }
+                    if(it.data?.media==null){
+                        binding.orderList.visibility=View.GONE
+                    }
                 }
             }
         })
