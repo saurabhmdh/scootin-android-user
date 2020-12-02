@@ -41,12 +41,15 @@ class OrderDetailAdapter(
         isLast: Boolean
     ) {
         if (position % 2 == 0) {
-            binding.layout.setBackgroundColor(Color.parseColor("#D6DDFF"))
+            binding.rootView.setBackgroundColor(Color.parseColor("#D6DDFF"))
         } else {
-            binding.layout.background = null
+            binding.rootView.background = null
         }
 
-        binding.name.text = "${item.inventoryDetails.title}"
-        binding.amount.text = "${item.totalAmount}"
+        item.apply {
+            binding.itemName.text = item.inventoryDetails.title + " ("+ item.inventoryDetails.description +")"
+            binding.quantity.text = "X "+item.quantity.toString()
+            binding.itemCost.text = item.totalAmount.toString()
+        }
     }
 }
