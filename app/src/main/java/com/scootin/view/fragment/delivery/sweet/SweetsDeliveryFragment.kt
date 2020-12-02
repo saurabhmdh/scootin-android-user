@@ -3,17 +3,15 @@ package com.scootin.view.fragment.delivery.sweet
 import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.scootin.R
 import com.scootin.databinding.FragmentSweetsDeliveryBinding
 import com.scootin.extensions.getCheckedRadioButtonPosition
+import com.scootin.extensions.orZero
 import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
 import com.scootin.network.manager.AppHeaders
@@ -69,6 +67,7 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
     private fun updateListeners() {
         //When the screen load lets load the data for empty screen
         viewModel.doSearch("")
+        viewModel.loadCount()
 
         binding.searchBox.setOnQueryTextListener(
             object : SearchView.OnQueryTextListener {
@@ -115,30 +114,21 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
 
         viewModel.addToCartMap.observe(viewLifecycleOwner, {
             Timber.i("Status addToCartLiveData = ${it?.isSuccessful} ")
-
-            if (it?.isSuccessful == true) {
-                val snack = Snackbar.make(requireView(), "Item added in cart", Snackbar.LENGTH_LONG)
-                snack.setAction("VIEW") {
-                    val navOptions =
-                        NavOptions.Builder().setPopUpTo(R.id.titleScreen, false).build()
-                    findNavController().navigate(R.id.cart, null, navOptions)
-                }.setBackgroundTint(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.backgroundTint
-                    )
-                ).setActionTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.actionTextColor
-                    )
-                )
-                snack.show()
-            } else {
-                Toast.makeText(requireContext(), it?.errorBody()?.string(), Toast.LENGTH_SHORT)
-                    .show()
-            }
+            viewModel.loadCount()
         })
+
+        binding.fabCart.setOnClickListener {
+            val navOptions =
+                NavOptions.Builder().setPopUpTo(R.id.titleScreen, false).build()
+            findNavController().navigate(R.id.cart, null, navOptions)
+        }
+
+        viewModel.getCartCount.observe(viewLifecycleOwner) {
+            if (it.isSuccessful) {
+                val result = it.body()?.toInt().orZero()
+                setupBadge(result)
+            }
+        }
     }
 
 
@@ -184,6 +174,15 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
             })
         binding.storeList.apply {
             adapter = shopSearchAdapter
+        }
+    }
+
+    private fun setupBadge(result: Int) {
+        if (result == 0) {
+            binding.textCount.visibility = View.GONE
+        } else {
+            binding.textCount.visibility = View.VISIBLE
+            binding.textCount.text = result.toString()
         }
     }
 
