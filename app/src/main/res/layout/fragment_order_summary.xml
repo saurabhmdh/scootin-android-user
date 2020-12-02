@@ -331,7 +331,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="8dp"
-
+            android:textSize="15sp"
             android:text="pay on delivery"
             android:textColor="@color/text_color"
             android:textStyle="bold"
@@ -346,6 +346,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
+            android:textSize="15sp"
             android:textColor="@color/text_color"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
