@@ -45,9 +45,9 @@ class OrderSummaryAdapter (
         Timber.i("item = $item")
         //Get the individual item price
         item.apply {
-            binding.itemName.text = item.inventoryDetails.title
-            binding.quantity.text = "Quantity ("+item.quantity.toString()+")"
-            binding.itemCost.text = item.inventoryDetails.price.toString()
+            binding.itemName.text = item.inventoryDetails.title + " ("+ item.inventoryDetails.description +")"
+            binding.quantity.text = "X "+item.quantity.toString()
+            binding.itemCost.text = item.totalAmount.toString()
         }
     }
 
