@@ -52,6 +52,12 @@ class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
                     Timber.i("data working ${it.data}")
                     binding.txtPickupLocation.text = getAllAddress(it.data?.orderInventoryDetailsList)
                     orderSummaryAdapter.submitList(it.data?.orderInventoryDetailsList)
+                    if(it.data?.orderDetails?.paymentDetails?.paymentStatus=="COMPLETED"){
+                        binding.paymentStatus.setText("Payment Done")
+                    }
+                    else{
+                        binding.paymentStatus.setText("Pay on Delivery")
+                    }
                 }
                 Status.ERROR -> {
                     //Show error and move back

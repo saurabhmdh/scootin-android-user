@@ -34,7 +34,7 @@
     <string name="edittxt_hint">Phone No. (10 Digits)</string>
     <string name="edittxt_hint_citywide">Current Location(Home) | Type a new Address</string>
     <string name="edittxt_hint_express_mobile">Mobile No.(Incase something is unclear or unavailable from the list)</string>
-
+    <string name="customer_support_number">+919557667996</string>
 
     <string name="edittxt_hint_payment">Delivery Location(Home) | Type a new Address</string>
 
