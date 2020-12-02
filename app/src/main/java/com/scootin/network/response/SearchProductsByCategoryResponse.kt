@@ -1,6 +1,6 @@
 package com.scootin.network.response
 
-class SearchProductsByCategoryResponse(
+data class SearchProductsByCategoryResponse(
     val active: Boolean,
     val categoryDetails: CategoryDetails,
     val description: String?,

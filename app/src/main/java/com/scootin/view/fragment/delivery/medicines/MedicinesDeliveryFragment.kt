@@ -2,15 +2,10 @@ package com.scootin.view.fragment.delivery.medicines
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.scootin.R
 import com.scootin.databinding.FragmentMedicinesDeliveryBinding
 import com.scootin.extensions.updateVisibility
@@ -80,29 +75,6 @@ class MedicinesDeliveryFragment : Fragment(R.layout.fragment_medicines_delivery)
 
         viewModel.addToCartMap.observe(viewLifecycleOwner, {
             Timber.i("Status addToCartLiveData = ${it?.isSuccessful} ")
-
-            if (it?.isSuccessful == true) {
-                val snack = Snackbar.make(requireView(), "Item added in cart", Snackbar.LENGTH_LONG)
-                snack.setAction("VIEW") {
-                    val navOptions =
-                        NavOptions.Builder().setPopUpTo(R.id.titleScreen, false).build()
-                    findNavController().navigate(R.id.cart, null, navOptions)
-                }.setBackgroundTint(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.backgroundTint
-                    )
-                ).setActionTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.actionTextColor
-                    )
-                )
-                snack.show()
-            } else {
-                Toast.makeText(requireContext(), it?.errorBody()?.string(), Toast.LENGTH_SHORT)
-                    .show()
-            }
         })
     }
 

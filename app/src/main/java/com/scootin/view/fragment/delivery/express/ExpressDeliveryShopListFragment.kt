@@ -2,28 +2,17 @@ package com.scootin.view.fragment.delivery.express
 
 import android.os.Bundle
 import android.view.View
-import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.scootin.R
 import com.scootin.databinding.FragmentExpressDeliveryShoplistBinding
-import com.scootin.databinding.FragmentGroceryDeliveryBinding
-import com.scootin.extensions.getCheckedRadioButtonPosition
 import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
-import com.scootin.network.manager.AppHeaders
-import com.scootin.network.request.AddToCartRequest
-import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.util.fragment.autoCleared
-import com.scootin.view.adapter.ProductSearchAdapter
 import com.scootin.view.adapter.ShopSearchAdapter
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,7 +27,6 @@ class ExpressDeliveryShopListFragment : Fragment(R.layout.fragment_express_deliv
 
     @Inject
     lateinit var appExecutors: AppExecutors
-    private lateinit var productSearchAdapter: ProductSearchAdapter
     private lateinit var shopSearchAdapter: ShopSearchAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,7 +38,6 @@ class ExpressDeliveryShopListFragment : Fragment(R.layout.fragment_express_deliv
 
     private fun updateUI() {
         setStoreAdapter()
-//        setProductAdapter()
     }
 
     private fun updateListeners() {
@@ -86,39 +73,6 @@ class ExpressDeliveryShopListFragment : Fragment(R.layout.fragment_express_deliv
             }
             Timber.i("Search result for shop ${it.body()}")
         }
-
-        viewModel.product.observe(viewLifecycleOwner) {
-            if (it.isSuccessful) {
-                productSearchAdapter.submitList(it.body())
-            }
-        }
-
-        viewModel.addToCartMap.observe(viewLifecycleOwner, {
-            Timber.i("Status addToCartLiveData = ${it?.isSuccessful} ")
-
-            if (it?.isSuccessful == true) {
-                val snack = Snackbar.make(requireView(), "Item added in cart", Snackbar.LENGTH_LONG)
-                snack.setAction("VIEW") {
-                    val navOptions =
-                        NavOptions.Builder().setPopUpTo(R.id.titleScreen, false).build()
-                    findNavController().navigate(R.id.cart, null, navOptions)
-                }.setBackgroundTint(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.backgroundTint
-                    )
-                ).setActionTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.actionTextColor
-                    )
-                )
-                snack.show()
-            } else {
-                Toast.makeText(requireContext(), it?.errorBody()?.string(), Toast.LENGTH_SHORT)
-                    .show()
-            }
-        })
     }
 
 
