@@ -82,17 +82,16 @@
                     android:backgroundTint="#269603"
                     app:srcCompat="@drawable/ic_shopping_cart_24"
                     app:backgroundTint="@color/colorPrimaryDark" />
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/text_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:padding="2dp"
                     android:elevation="7dp"
                     android:gravity="center"
                     android:textColor="@color/white"
                     android:layout_alignParentEnd="true"
                     android:textSize="14sp"
-                    android:text="10"
                     android:background="@drawable/bg_fab" />
         </RelativeLayout>
 

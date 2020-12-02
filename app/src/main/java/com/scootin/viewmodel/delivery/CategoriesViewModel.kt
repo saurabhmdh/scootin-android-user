@@ -29,6 +29,8 @@ import okhttp3.RequestBody
 import retrofit2.Response
 import timber.log.Timber
 import java.io.File
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.coroutineContext
 
 
 class CategoriesViewModel @ViewModelInject internal constructor(
@@ -37,7 +39,7 @@ class CategoriesViewModel @ViewModelInject internal constructor(
     val searchRepository: SearchRepository,
     private val application: Application,
     private val cartRepository: CartRepository
-) : ObservableViewModel() {
+) : ObservableViewModel(), CoroutineScope {
 
     private val _search = MutableLiveData<SearchShopsByCategory>()
 
@@ -116,4 +118,18 @@ class CategoriesViewModel @ViewModelInject internal constructor(
         }
     }
 
+    fun loadCount() {
+        countUserCartListTotal.postValue(true)
+    }
+    private val countUserCartListTotal = MutableLiveData<Boolean>()
+
+
+    val getCartCount = countUserCartListTotal.switchMap {
+        liveData(coroutineContext + handler) {
+            emit(cartRepository.getCartCount(AppHeaders.userID))
+        }
+    }
+
+    override val coroutineContext: CoroutineContext
+        get() = viewModelScope.coroutineContext + Dispatchers.IO
 }

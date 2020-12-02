@@ -1,6 +1,6 @@
 package com.scootin.view.adapter
 
-import android.annotation.SuppressLint
+
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
@@ -25,7 +25,6 @@ class ProductSearchAdapter (
         ) = oldItem.id == newItem.id
 
 
-        @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(
             oldItem: SearchProductsByCategoryResponse,
             newItem: SearchProductsByCategoryResponse
