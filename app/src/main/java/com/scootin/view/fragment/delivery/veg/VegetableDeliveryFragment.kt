@@ -72,7 +72,6 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
 
         binding.productList.apply {
             adapter = productSearchAdapter
-            recycledViewPool.setMaxRecycledViews(0, 0)
         }
     }
 
