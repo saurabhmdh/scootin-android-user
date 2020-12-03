@@ -225,15 +225,17 @@
             tools:ignore="RtlSymmetry" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/pay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="152dp"
+            android:layout_marginStart="182dp"
             android:layout_marginTop="25dp"
             android:text="@string/scootin"
             android:textColor="#E60000"
             android:textStyle="bold|italic"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/packed_icon" />
+
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/total_amount_base"

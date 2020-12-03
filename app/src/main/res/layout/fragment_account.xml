@@ -63,6 +63,18 @@
             app:layout_constraintTop_toBottomOf="@id/orders_fragment"
             android:contentDescription="@string/feedback" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/logout_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="40dp"
+            android:padding="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/support_fragment"
+            app:srcCompat="@drawable/ic_logout" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

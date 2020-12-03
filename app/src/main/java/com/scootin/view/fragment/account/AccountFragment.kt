@@ -1,5 +1,6 @@
 package com.scootin.view.fragment.account
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
@@ -16,6 +17,7 @@ import com.scootin.network.AppExecutors
 import com.scootin.network.response.AddressDetails
 import com.scootin.network.response.State
 import com.scootin.util.fragment.autoCleared
+import com.scootin.view.activity.SplashActivity
 import com.scootin.viewmodel.account.AccountFragmentViewModel
 import com.scootin.viewmodel.account.AddressFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,6 +40,8 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
         updateListeners()
 
         initObservers()
+
+        handleLogOut()
     }
 
     private fun initObservers() {}
@@ -55,6 +59,21 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
             findNavController().navigate(AccountFragmentDirections.accountToSupportFragment())
         }
 
+        binding.logoutBtn.setOnClickListener {
+            viewModel.doLogout()
+        }
+
+    }
+    private fun handleLogOut() {
+        viewModel.logoutComplete.observe(viewLifecycleOwner) {
+            gotoStart()
+        }
+    }
+
+    private fun gotoStart() {
+        startActivity(Intent(requireContext(), SplashActivity::class.java))
+        activity?.overridePendingTransition(R.anim.enter, R.anim.exit)
+        activity?.finish()
     }
 
 }

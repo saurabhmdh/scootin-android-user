@@ -2,22 +2,27 @@ package com.scootin.view.fragment.account.orders
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.razorpay.Checkout
 import com.scootin.R
 import com.scootin.databinding.FragmentMyOrderTrackBinding
 import com.scootin.databinding.FragmentTrackDirectOrderBinding
+import com.scootin.extensions.orDefault
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
+import com.scootin.network.manager.AppHeaders
 import com.scootin.network.response.orderdetail.OrderDetail
 import com.scootin.util.Conversions
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.order.ExtraDataAdapter
 import com.scootin.viewmodel.account.OrderFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONObject
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -55,9 +60,25 @@ class DirectOrderDetailFragment : Fragment(R.layout.fragment_track_direct_order)
                         Timber.i("Extra $extra")
                         itemsAdapter.submitList(extra)
                     }
-                    if(it.data?.media==null){
-                        binding.orderList.visibility=View.GONE
+                    if (it.data?.media == null) {
+                        binding.orderList.visibility = View.GONE
                     }
+                    if (it.data?.orderStatus == "PACKED"){
+                        if (it.data?.paymentDetails?.paymentStatus == "COMPLETED") {
+                            binding.payOnDeliveryHeader.setText("Payment Completed")
+                        } else {
+                            binding.payOnDeliveryHeader.setText("Payment Pending")
+                            binding.pay.setText("Pay Now")
+                            val total =
+                                it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
+
+                            val start = it.data?.paymentDetails?.orderReference.orEmpty()
+                            binding.pay.setOnClickListener {
+                                startPayment(start, total)
+                            }
+
+                        }
+                }
                 }
             }
         })
@@ -113,5 +134,29 @@ class DirectOrderDetailFragment : Fragment(R.layout.fragment_track_direct_order)
     private fun initUI() {
         itemsAdapter = ExtraDataAdapter(appExecutors)
         binding.recycler.adapter=itemsAdapter
+    }
+    private fun startPayment(orderReferenceId: String, price: Double) {
+        val co = Checkout()
+
+        try {
+            val options = JSONObject()
+            options.put("name", "Scootin Inc")
+            //You can omit the image option to fetch the image from dashboard
+            options.put("image", "https://image-res.s3.ap-south-1.amazonaws.com/scootin-logo.png")
+            options.put("theme.color", "#E90000")
+            options.put("currency", "INR")
+            options.put("amount", price)
+            options.put("order_id", orderReferenceId)
+            val prefill = JSONObject()
+            prefill.put("email","support@scootin.co.in")
+            prefill.put("contact", AppHeaders.userMobileNumber)
+
+            options.put("prefill", prefill)
+            co.open(activity, options)
+
+        } catch (e: Exception) {
+            Toast.makeText(activity, "Error in payment: " + e.message, Toast.LENGTH_LONG).show()
+            e.printStackTrace()
+        }
     }
 }
