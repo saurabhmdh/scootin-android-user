@@ -77,9 +77,9 @@ class ProductSearchAdapter (
         binding.data = item
         //If shop is close, these add item should be hide
         if (item.shopManagement.shopActiveForOrders) {
-            binding.addItem.updateVisibility(true)
+            binding.parentCount.updateVisibility(true)
         } else {
-            binding.addItem.updateVisibility(false)
+            binding.parentCount.updateVisibility(false)
         }
 
     }

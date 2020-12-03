@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.scootin.R
@@ -14,11 +15,12 @@ import com.scootin.extensions.orZero
 import com.scootin.network.AppExecutors
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.AddToCartRequest
-import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.util.fragment.autoCleared
-import com.scootin.view.adapter.ProductSearchAdapter
+import com.scootin.view.adapter.ProductSearchPagingAdapter
+import com.scootin.view.vo.ProductSearchVO
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -29,7 +31,8 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
 
     @Inject
     lateinit var appExecutors: AppExecutors
-    private lateinit var productSearchAdapter: ProductSearchAdapter
+
+    private var productSearchAdapter by autoCleared<ProductSearchPagingAdapter>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,12 +46,11 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
     }
 
     private fun setProductAdapter() {
-        productSearchAdapter = ProductSearchAdapter(
-            appExecutors,
-            object : ProductSearchAdapter.ImageAdapterClickLister {
+        productSearchAdapter = ProductSearchPagingAdapter(
+            object : ProductSearchPagingAdapter.ImageAdapterClickLister {
                 override fun onIncrementItem(
                     view: View,
-                    item: SearchProductsByCategoryResponse?,
+                    item: ProductSearchVO?,
                     count: Int
                 ) {
                     val addToCartRequest = AddToCartRequest(AppHeaders.userID.toInt(), item?.id, count)
@@ -57,7 +59,7 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
 
                 override fun onDecrementItem(
                     view: View,
-                    item: SearchProductsByCategoryResponse?,
+                    item: ProductSearchVO?,
                     count: Int
                 ) {
                     val addToCartRequest = AddToCartRequest(AppHeaders.userID.toInt(), item?.id, count)
@@ -96,9 +98,9 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
         )
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
-        viewModel.product.observe(viewLifecycleOwner) {
-            if (it.isSuccessful) {
-                productSearchAdapter.submitList(it.body())
+        viewModel.allProduct.observe(viewLifecycleOwner) {response->
+            lifecycleScope.launch {
+                productSearchAdapter.submitData(response)
             }
         }
 

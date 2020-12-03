@@ -1,14 +1,12 @@
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginBottom="5dp"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+    android:layout_marginBottom="5dp">
 
     <data>
 
         <variable
             name="data"
-            type="com.scootin.network.response.SearchProductsByCategoryResponse"/>
+            type="com.scootin.view.vo.ProductSearchVO"/>
 
     </data>
 
@@ -27,7 +25,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="12dp"
-            app:setImage="@{data.productImage.url}"
+            app:setImage="@{data.productImage}"
             android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -109,28 +107,28 @@
             app:layout_constraintTop_toBottomOf="@+id/price"
             app:layout_constraintStart_toEndOf="@+id/space" />
 
-    <RelativeLayout
-        android:id="@+id/parent_count"
-        android:layout_width="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/parent_count"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
 
-            android:id="@+id/addItem"
-            android:layout_width="83dp"
-            android:layout_height="26dp"
-            android:text="Add"
-            android:textColor="#fff"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:paddingBottom="5dp"
-            android:background="@drawable/button_background"
-            android:textSize="16sp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp" />
+                android:id="@+id/addItem"
+                android:layout_width="83dp"
+                android:layout_height="26dp"
+                android:text="Add"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:paddingBottom="5dp"
+                android:background="@drawable/button_background"
+                android:textSize="16sp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp" />
 
             <LinearLayout
                 android:id="@+id/operation"
@@ -168,10 +166,6 @@
                     android:layout_marginTop="3dp"
                     app:srcCompat="@drawable/ic_plus_bttn" />
             </LinearLayout>
-    </RelativeLayout>
+        </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
 </layout>
