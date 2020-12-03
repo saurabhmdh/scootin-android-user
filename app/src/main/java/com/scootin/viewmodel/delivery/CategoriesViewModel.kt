@@ -132,13 +132,17 @@ class CategoriesViewModel @ViewModelInject internal constructor(
         }
     }
 
-    val allProduct: LiveData<PagingData<SearchProductsByCategoryResponse>> =
+    val allProduct: LiveData<PagingData<SearchProductsByCategoryResponse>> = _search.switchMap {
+        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler)  {
+            val mainCategory = cacheDao.getCacheData(AppConstants.MAIN_CATEGORY)?.value
+            val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
+            emitSource(searchRepository.findProductsWithPaging(it.query,  serviceArea.orEmpty(), mainCategory.orEmpty()).cachedIn(viewModelScope).asLiveData())
+        }
+    }
 //            val mainCategory = cacheDao.getCacheData(AppConstants.MAIN_CATEGORY)?.value
 //            val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
 
 //            Timber.i("Saurabh $mainCategory $serviceArea")
-           searchRepository.findProductsWithPaging("", "254", "15805").cachedIn(viewModelScope).asLiveData()
-
 
 //        DoubleTrigger<SearchShopsByCategory, Long>(_search, _selectedShop).switchMap {pair ->
 //            liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {

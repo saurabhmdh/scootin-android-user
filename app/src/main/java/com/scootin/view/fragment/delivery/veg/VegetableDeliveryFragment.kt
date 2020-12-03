@@ -104,9 +104,7 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
         viewModel.allProduct.observe(viewLifecycleOwner) {response->
             lifecycleScope.launch {
                 productSearchAdapter.submitData(response)
-
             }
-
         }
 
         binding.fabCart.setOnClickListener {
