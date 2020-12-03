@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import com.scootin.network.api.APIService
 import com.scootin.network.request.RequestSearch
 import com.scootin.network.response.SearchProductsByCategoryResponse
+import com.scootin.view.vo.ProductSearchVO
 import retrofit2.Response
 import timber.log.Timber
 import java.lang.RuntimeException
@@ -13,12 +14,12 @@ class SearchDataSource (
     private val serviceAreaId: String,
     private val categoryId: String,
     private val requestSearch: RequestSearch
-) : PagingSource<Int, SearchProductsByCategoryResponse>() {
+) : PagingSource<Int, ProductSearchVO>() {
 
     var initialOffset: Int = 0
     var count: Int = 0
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, SearchProductsByCategoryResponse> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ProductSearchVO> {
         return try {
 
             val offset = params.key ?: initialOffset
@@ -42,9 +43,14 @@ class SearchDataSource (
                 } else {
                     offset + 1
                 }
-
+                //Convert data to VO
+                val productList = mutableListOf<ProductSearchVO>().apply {
+                    data.forEach { product ->
+                        add(ProductSearchVO(product))
+                    }
+                }
                 LoadResult.Page(
-                    data = data,
+                    data = productList,
                     prevKey = null,
                     nextKey = nextOffset
                 )

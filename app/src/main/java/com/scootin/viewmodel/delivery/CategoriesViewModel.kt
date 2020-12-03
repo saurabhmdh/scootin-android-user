@@ -20,6 +20,7 @@ import com.scootin.repository.PaymentRepository
 import com.scootin.repository.SearchRepository
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.ui.FileUtils
+import com.scootin.view.vo.ProductSearchVO
 import com.scootin.viewmodel.base.ObservableViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.catch
@@ -123,6 +124,7 @@ class CategoriesViewModel @ViewModelInject internal constructor(
     fun loadCount() {
         countUserCartListTotal.postValue(true)
     }
+
     private val countUserCartListTotal = MutableLiveData<Boolean>()
 
 
@@ -132,7 +134,7 @@ class CategoriesViewModel @ViewModelInject internal constructor(
         }
     }
 
-    val allProduct: LiveData<PagingData<SearchProductsByCategoryResponse>> = _search.switchMap {
+    val allProduct: LiveData<PagingData<ProductSearchVO>> = _search.switchMap {
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler)  {
             val mainCategory = cacheDao.getCacheData(AppConstants.MAIN_CATEGORY)?.value
             val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value

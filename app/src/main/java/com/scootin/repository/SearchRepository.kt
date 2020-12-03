@@ -10,6 +10,7 @@ import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.order.OrderHistoryItem
 import com.scootin.pages.OrderDataSource
 import com.scootin.pages.SearchDataSource
+import com.scootin.view.vo.ProductSearchVO
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
 import timber.log.Timber
@@ -50,9 +51,9 @@ class SearchRepository @Inject constructor(
 
     suspend fun getDeliverySlot(currentTime: Long) = services.getDeliverySlot(currentTime)
 
-    fun findProductsWithPaging(query: String, serviceAreaId: String, categoryId: String): Flow<PagingData<SearchProductsByCategoryResponse>> {
+    fun findProductsWithPaging(query: String, serviceAreaId: String, categoryId: String): Flow<PagingData<ProductSearchVO>> {
         Timber.i("trying to find data with $query, $serviceAreaId, $categoryId")
-        return Pager(config = PagingConfig(pageSize = 1, initialLoadSize = 1)) {
+        return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20)) {
             Timber.i("trying to find data with $query, $serviceAreaId, $categoryId")
             SearchDataSource(services, serviceAreaId, categoryId, RequestSearch(query = query))
         }.flow

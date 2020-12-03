@@ -15,10 +15,9 @@ import com.scootin.extensions.orZero
 import com.scootin.network.AppExecutors
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.AddToCartRequest
-import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.util.fragment.autoCleared
-import com.scootin.view.adapter.ProductSearchAdapter
 import com.scootin.view.adapter.ProductSearchPagingAdapter
+import com.scootin.view.vo.ProductSearchVO
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -32,7 +31,6 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
 
     @Inject
     lateinit var appExecutors: AppExecutors
-//    private lateinit var productSearchAdapter: ProductSearchAdapter
 
     private var productSearchAdapter by autoCleared<ProductSearchPagingAdapter>()
 
@@ -52,20 +50,20 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
             object : ProductSearchPagingAdapter.ImageAdapterClickLister {
                 override fun onIncrementItem(
                     view: View,
-                    item: SearchProductsByCategoryResponse?,
+                    item: ProductSearchVO?,
                     count: Int
                 ) {
-//                    val addToCartRequest = AddToCartRequest(AppHeaders.userID.toInt(), item?.id, count)
-//                    viewModel.addToCart(addToCartRequest)
+                    val addToCartRequest = AddToCartRequest(AppHeaders.userID.toInt(), item?.id, count)
+                    viewModel.addToCart(addToCartRequest)
                 }
 
                 override fun onDecrementItem(
                     view: View,
-                    item: SearchProductsByCategoryResponse?,
+                    item: ProductSearchVO?,
                     count: Int
                 ) {
-//                    val addToCartRequest = AddToCartRequest(AppHeaders.userID.toInt(), item?.id, count)
-//                    viewModel.addToCart(addToCartRequest)
+                    val addToCartRequest = AddToCartRequest(AppHeaders.userID.toInt(), item?.id, count)
+                    viewModel.addToCart(addToCartRequest)
                 }
 
             })
@@ -77,7 +75,7 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
 
     private fun updateListeners() {
         //When the screen load lets load the data for empty screen
-        viewModel.doSearch("a")
+        viewModel.doSearch("")
 
         binding.searchBox.setOnQueryTextListener(
             object : SearchView.OnQueryTextListener {
