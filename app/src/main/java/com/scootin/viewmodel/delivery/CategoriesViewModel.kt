@@ -4,6 +4,8 @@ import android.app.Application
 import android.net.Uri
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.scootin.database.dao.CacheDao
 import com.scootin.database.dao.LocationDao
 import com.scootin.extensions.DoubleTrigger
@@ -129,6 +131,29 @@ class CategoriesViewModel @ViewModelInject internal constructor(
             emit(cartRepository.getCartCount(AppHeaders.userID))
         }
     }
+
+    val allProduct: LiveData<PagingData<SearchProductsByCategoryResponse>> =
+//            val mainCategory = cacheDao.getCacheData(AppConstants.MAIN_CATEGORY)?.value
+//            val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
+
+//            Timber.i("Saurabh $mainCategory $serviceArea")
+           searchRepository.findProductsWithPaging("", "254", "15805").cachedIn(viewModelScope).asLiveData()
+
+
+//        DoubleTrigger<SearchShopsByCategory, Long>(_search, _selectedShop).switchMap {pair ->
+//            liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+//                Timber.i("Search Detail ${pair.first?.query}  second ${pair.second.orZero()}")
+//                val mainCategory = cacheDao.getCacheData(AppConstants.MAIN_CATEGORY)?.value
+//                val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
+//                val k = pair.second.orZero()
+//                if (k == 0L) {
+//                    emit(searchRepository.searchProducts(pair.first?.query.orEmpty(), serviceArea.orEmpty(), mainCategory.orEmpty()))
+//                } else {
+//                    // -- When user select a shop
+//                    emit(searchRepository.findProductFromShop(pair.second.orZero() , pair.first?.query.orEmpty()))
+//                }
+//            }
+//        }
 
     override val coroutineContext: CoroutineContext
         get() = viewModelScope.coroutineContext + Dispatchers.IO

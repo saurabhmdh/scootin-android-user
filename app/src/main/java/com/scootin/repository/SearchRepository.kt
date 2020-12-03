@@ -1,9 +1,18 @@
 package com.scootin.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.scootin.network.api.APIService
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.*
+import com.scootin.network.response.SearchProductsByCategoryResponse
+import com.scootin.network.response.order.OrderHistoryItem
+import com.scootin.pages.OrderDataSource
+import com.scootin.pages.SearchDataSource
+import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -41,4 +50,11 @@ class SearchRepository @Inject constructor(
 
     suspend fun getDeliverySlot(currentTime: Long) = services.getDeliverySlot(currentTime)
 
+    fun findProductsWithPaging(query: String, serviceAreaId: String, categoryId: String): Flow<PagingData<SearchProductsByCategoryResponse>> {
+        Timber.i("trying to find data with $query, $serviceAreaId, $categoryId")
+        return Pager(config = PagingConfig(pageSize = 1, initialLoadSize = 1)) {
+            Timber.i("trying to find data with $query, $serviceAreaId, $categoryId")
+            SearchDataSource(services, serviceAreaId, categoryId, RequestSearch(query = query))
+        }.flow
+    }
 }
