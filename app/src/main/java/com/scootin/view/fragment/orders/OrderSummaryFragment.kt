@@ -68,6 +68,9 @@ class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
         binding.back.setOnClickListener {
             findNavController().popBackStack(R.id.cart, false)
         }
+        binding.helpBtn.setOnClickListener {
+            findNavController().navigate(OrderSummaryFragmentDirections.orderToCustomerSupport())
+        }
     }
 
     private fun getAllAddress(orderInventoryDetailsList: List<OrderInventoryDetails>?): String {
