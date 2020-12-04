@@ -5,6 +5,8 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
+import com.scootin.network.request.CancelOrderRequest
+import com.scootin.network.request.DirectOrderRequest
 import com.scootin.network.request.RequestHistory
 import com.scootin.repository.OrderRepository
 import com.scootin.repository.UserRepository
@@ -23,6 +25,9 @@ internal constructor(
     private val handler = CoroutineExceptionHandler { _, exception ->
         Timber.i("Caught  $exception")
     }
+
+    fun cancelOrder(orderId: String,request: CancelOrderRequest) = orderRepository.userCancelOrder(orderId, request,viewModelScope.coroutineContext + Dispatchers.IO + handler)
+
 
     fun getAllOrdersForUser(userId:String) =
         orderRepository.getAllOrdersForUser(

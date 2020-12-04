@@ -100,9 +100,7 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
                         } else if (fragment is CardPaymentPageFragment) {
                             fragment.onPaymentSuccess(razorpayPaymentId)
                         }
-                        else if(fragment is OrderDetailFragment){
-                            fragment.onPaymentSuccess(razorpayPaymentId)
-                        }
+
                     }
                 }
             }

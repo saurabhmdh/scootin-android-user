@@ -13,9 +13,11 @@ import com.razorpay.Checkout
 import com.scootin.R
 import com.scootin.databinding.FragmentMyOrderTrackBinding
 import com.scootin.extensions.orDefault
+import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
+import com.scootin.network.request.CancelOrderRequest
 import com.scootin.network.request.VerifyAmountRequest
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.order.OrderDetailAdapter
@@ -52,6 +54,22 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
         if(binding.pay.text=="Pay Now"){
 
         }
+      cancelOrder()
+    }
+
+    private fun cancelOrder(){
+
+        binding.cancelButton.setOnClickListener {
+            viewModel.cancelOrder(args.orderId, CancelOrderRequest("NORMAL")).observe(viewLifecycleOwner, Observer {
+                Timber.i("orderId = ${it.status} : ${it.data}")
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        binding.orderStatusString.setText("Order has been Cancelled")
+                    }
+                }
+            })
+        }
+
     }
 
     private fun updateListeners() {
@@ -70,20 +88,10 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
                     orderId = it.data?.orderDetails?.id ?: -1
                     orderDetailAdapter.submitList(it.data?.orderInventoryDetailsList)
                     updateSelectors(it.data?.orderDetails?.orderStatus)
-                    if(it.data?.orderDetails?.paymentDetails?.paymentStatus=="COMPLETED"){
-                        binding.payOnDeliveryHeader.setText("Payment Completed")
-                    }
-                    else {
-                        binding.payOnDeliveryHeader.setText("Payment Pending")
-                        binding.pay.setText("Pay Now")
-                        val total = it.data?.orderDetails?.paymentDetails?.totalAmount.orDefault(0.0) * 100
+                    val cancelBtnVisibility=it.data?.orderDetails?.orderStatus=="DISPATCHED"||it.data?.orderDetails?.orderStatus=="COMPLETED"
+                    binding.cancelButton.updateVisibility(cancelBtnVisibility.not())
 
-                         val start=   it.data?.orderDetails?.paymentDetails?.orderReference.orEmpty()
-                        binding.pay.setOnClickListener {
-                            startPayment(start,total)
-                        }
 
-                    }
                 }
             }
         })
@@ -131,43 +139,8 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
             adapter = orderDetailAdapter
         }
     }
-    private fun startPayment(orderReferenceId: String, price: Double) {
-        val co = Checkout()
 
-        try {
-            val options = JSONObject()
-            options.put("name", "Scootin Inc")
-            //You can omit the image option to fetch the image from dashboard
-            options.put("image", "https://image-res.s3.ap-south-1.amazonaws.com/scootin-logo.png")
-            options.put("theme.color", "#E90000")
-            options.put("currency", "INR")
-            options.put("amount", price)
-            options.put("order_id", orderReferenceId)
-            val prefill = JSONObject()
-            prefill.put("email","support@scootin.co.in")
-            prefill.put("contact", AppHeaders.userMobileNumber)
 
-            options.put("prefill", prefill)
-            co.open(activity, options)
-
-        } catch (e: Exception) {
-            Toast.makeText(activity, "Error in payment: " + e.message, Toast.LENGTH_LONG).show()
-            e.printStackTrace()
-        }
-    }
-    fun onPaymentSuccess(razorpayPaymentId: String?){
-        Timber.i("onPaymentSuccess = ${razorpayPaymentId} $orderId")
-        viewModel2.verifyPayment(VerifyAmountRequest(razorpayPaymentId)).observe(viewLifecycleOwner) {
-            when(it.status) {
-                Status.LOADING -> {}
-                Status.SUCCESS -> {
-                    //Need some direction to move
-
-                }
-                Status.ERROR -> {}
-            }
-        }
-    }
 
 
 }
