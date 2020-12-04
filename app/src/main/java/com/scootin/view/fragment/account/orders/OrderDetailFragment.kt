@@ -36,8 +36,8 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
     @Inject
     lateinit var appExecutors: AppExecutors
     private val viewModel: OrderFragmentViewModel by viewModels()
-    private val viewModel2: PaymentViewModel by viewModels()
-    var orderId: Long = -1
+
+
     private lateinit var orderDetailAdapter: OrderDetailAdapter
     private val args: OrderDetailFragmentArgs by navArgs()
 
@@ -49,9 +49,6 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
         setInorderAdapter()
         updateViewModel()
         updateListeners()
-        if(binding.pay.text=="Pay Now"){
-
-        }
     }
 
     private fun updateListeners() {
@@ -67,23 +64,8 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
             when (it.status) {
                 Status.SUCCESS -> {
                     binding.data = it.data
-                    orderId = it.data?.orderDetails?.id ?: -1
                     orderDetailAdapter.submitList(it.data?.orderInventoryDetailsList)
                     updateSelectors(it.data?.orderDetails?.orderStatus)
-                    if(it.data?.orderDetails?.paymentDetails?.paymentStatus=="COMPLETED"){
-                        binding.payOnDeliveryHeader.setText("Payment Completed")
-                    }
-                    else {
-                        binding.payOnDeliveryHeader.setText("Payment Pending")
-                        binding.pay.setText("Pay Now")
-                        val total = it.data?.orderDetails?.paymentDetails?.totalAmount.orDefault(0.0) * 100
-
-                         val start=   it.data?.orderDetails?.paymentDetails?.orderReference.orEmpty()
-                        binding.pay.setOnClickListener {
-                            startPayment(start,total)
-                        }
-
-                    }
                 }
             }
         })
@@ -131,43 +113,4 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
             adapter = orderDetailAdapter
         }
     }
-    private fun startPayment(orderReferenceId: String, price: Double) {
-        val co = Checkout()
-
-        try {
-            val options = JSONObject()
-            options.put("name", "Scootin Inc")
-            //You can omit the image option to fetch the image from dashboard
-            options.put("image", "https://image-res.s3.ap-south-1.amazonaws.com/scootin-logo.png")
-            options.put("theme.color", "#E90000")
-            options.put("currency", "INR")
-            options.put("amount", price)
-            options.put("order_id", orderReferenceId)
-            val prefill = JSONObject()
-            prefill.put("email","support@scootin.co.in")
-            prefill.put("contact", AppHeaders.userMobileNumber)
-
-            options.put("prefill", prefill)
-            co.open(activity, options)
-
-        } catch (e: Exception) {
-            Toast.makeText(activity, "Error in payment: " + e.message, Toast.LENGTH_LONG).show()
-            e.printStackTrace()
-        }
-    }
-    fun onPaymentSuccess(razorpayPaymentId: String?){
-        Timber.i("onPaymentSuccess = ${razorpayPaymentId} $orderId")
-        viewModel2.verifyPayment(VerifyAmountRequest(razorpayPaymentId)).observe(viewLifecycleOwner) {
-            when(it.status) {
-                Status.LOADING -> {}
-                Status.SUCCESS -> {
-                    //Need some direction to move
-
-                }
-                Status.ERROR -> {}
-            }
-        }
-    }
-
-
 }
