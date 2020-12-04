@@ -40,6 +40,16 @@ class OrderRepository @Inject constructor(
                 services.userConfirmOrder(userId, orderRequest)
         }.asLiveData()
 
+    fun userCancelOrder(
+        orderId: String,
+        request: CancelOrderRequest,
+        context: CoroutineContext
+    ): LiveData<Resource<String>> =
+        object : NetworkBoundResource<String>(context){
+            override suspend fun createCall(): Response<String> =
+                services.userCancelOrder(orderId,request)
+        }.asLiveData()
+
 
 
     fun getAllOrdersForUser(id: String): Flow<PagingData<OrderHistoryItem>> {

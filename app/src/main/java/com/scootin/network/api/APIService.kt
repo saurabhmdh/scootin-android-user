@@ -207,4 +207,10 @@ interface APIService {
 
     @GET("order/orders/check/{id}")
     suspend fun checkOrder(@Path("id") id: String): Response<String>
+
+    @POST("/order/cancel-order/{orderId}")
+    suspend fun userCancelOrder(
+        @Path("orderId") orderId: String,
+        @Body cancelRequest: CancelOrderRequest
+    ): Response<String>
 }

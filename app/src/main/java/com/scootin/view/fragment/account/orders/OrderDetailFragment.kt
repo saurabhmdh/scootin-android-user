@@ -13,9 +13,11 @@ import com.razorpay.Checkout
 import com.scootin.R
 import com.scootin.databinding.FragmentMyOrderTrackBinding
 import com.scootin.extensions.orDefault
+import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
+import com.scootin.network.request.CancelOrderRequest
 import com.scootin.network.request.VerifyAmountRequest
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.order.OrderDetailAdapter
@@ -49,6 +51,21 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
         setInorderAdapter()
         updateViewModel()
         updateListeners()
+       cancelOrder()
+    }
+
+    private fun cancelOrder(){
+
+        binding.cancelButton.setOnClickListener {
+            viewModel.cancelOrder(args.orderId, CancelOrderRequest("NORMAL")).observe(viewLifecycleOwner, Observer {
+                Timber.i("orderId = ${it.status} : ${it.data}")
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        binding.orderStatusString.setText("Order has been Cancelled")
+                    }
+                }
+            })
+        }
     }
 
     private fun updateListeners() {
@@ -66,6 +83,9 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
                     binding.data = it.data
                     orderDetailAdapter.submitList(it.data?.orderInventoryDetailsList)
                     updateSelectors(it.data?.orderDetails?.orderStatus)
+                    val cancelBtnVisibility=it.data?.orderDetails?.orderStatus=="DISPATCHED"||it.data?.orderDetails?.orderStatus=="COMPLETED"
+                    binding.cancelButton.updateVisibility(cancelBtnVisibility.not())
+
                 }
             }
         })
