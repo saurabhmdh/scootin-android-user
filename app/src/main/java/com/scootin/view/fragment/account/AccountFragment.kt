@@ -1,5 +1,6 @@
 package com.scootin.view.fragment.account
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -14,6 +15,8 @@ import com.scootin.R
 import com.scootin.databinding.FragmentAccountBinding
 import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
+import com.scootin.network.api.Status
+import com.scootin.network.request.CancelOrderRequest
 import com.scootin.network.response.AddressDetails
 import com.scootin.network.response.State
 import com.scootin.util.fragment.autoCleared
@@ -60,7 +63,27 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
         }
 
         binding.logoutBtn.setOnClickListener {
-            viewModel.doLogout()
+            val builder = AlertDialog.Builder(context)
+
+            builder.setTitle(R.string.logOutDialogTitle)
+            //set message for alert dialog
+            builder.setMessage(R.string.logoutDialogMessage)
+            builder.setIcon(android.R.drawable.ic_dialog_alert)
+
+            //performing positive action
+            builder.setPositiveButton("Yes") { dialogInterface, which ->
+                viewModel.doLogout()
+            }
+            //performing cancel action
+            builder.setNeutralButton("No") { dialogInterface, which ->
+
+            }
+            // Create the AlertDialog
+            val alertDialog: AlertDialog = builder.create()
+            // Set other dialog properties
+            alertDialog.setCancelable(false)
+            alertDialog.show()
+
         }
 
     }
