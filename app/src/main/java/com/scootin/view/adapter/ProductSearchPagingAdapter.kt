@@ -61,13 +61,19 @@ class ProductSearchPagingAdapter (
 
             binding.increment.setOnClickListener {
                 item.displayQuantity +=1
-                imageAdapterClickListener.onIncrementItem(it, binding.data, item.displayQuantity)
+                val number = binding.count.text.toString().toInt()
+                binding.count.text = number.inc().toString()
+                imageAdapterClickListener.onIncrementItem(it, binding.data, number.inc())
             }
 
             binding.decrement.setOnClickListener {
                 if (item.displayQuantity  > 1) {
                     item.displayQuantity -=1
-                    imageAdapterClickListener.onDecrementItem(it, binding.data, item.displayQuantity)
+                    val number = binding.count.text.toString().toInt()
+                    if (number > 0) {
+                        binding.count.text = number.dec().toString()
+                        imageAdapterClickListener.onDecrementItem(it, binding.data, number.dec())
+                    }
                 } else {
                     item.displayQuantity = 0
                     binding.addItem.updateVisibility(true)
