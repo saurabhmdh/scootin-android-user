@@ -2,7 +2,9 @@ package com.scootin.viewmodel.account
 
 
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.scootin.network.request.CancelOrderRequest
@@ -25,7 +27,18 @@ internal constructor(
     private val handler = CoroutineExceptionHandler { _, exception ->
         Timber.i("Caught  $exception")
     }
+    private val _Order_Id = MutableLiveData<String>()
 
+    fun loadOrder(orderId: String) {
+        _Order_Id.postValue(orderId)
+    }
+
+    val orderInfo = _Order_Id.switchMap {
+        orderRepository.getOrder(
+            it.toString(),
+            viewModelScope.coroutineContext + Dispatchers.IO + handler
+        )
+    }
     fun cancelOrder(orderId: String,request: CancelOrderRequest) = orderRepository.userCancelOrder(orderId, request,viewModelScope.coroutineContext + Dispatchers.IO + handler)
 
 
