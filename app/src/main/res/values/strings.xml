@@ -156,4 +156,5 @@
     <string name="order_has_been_packed">Order has been packed</string>
     <string name="order_has_been_dispatched">Order has been dispatched</string>
     <string name="order_has_been_completed">Order has been completed</string>
+    <string name="order_has_been_cancelled">Order has been cancelled</string>
 </resources>

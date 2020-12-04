@@ -21,6 +21,7 @@ import com.scootin.network.request.CancelOrderRequest
 import com.scootin.network.request.VerifyAmountRequest
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.order.OrderDetailAdapter
+import com.scootin.view.fragment.BaseFragment
 import com.scootin.view.fragment.cart.CardPaymentPageFragmentDirections
 import com.scootin.viewmodel.account.OrderFragmentViewModel
 import com.scootin.viewmodel.payment.PaymentViewModel
@@ -31,15 +32,15 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
+class OrderDetailFragment : BaseFragment(R.layout.fragment_my_order_track) {
 
     private var binding by autoCleared<FragmentMyOrderTrackBinding>()
 
     @Inject
     lateinit var appExecutors: AppExecutors
     private val viewModel: OrderFragmentViewModel by viewModels()
-    private val viewModel2: PaymentViewModel by viewModels()
-    var orderId: Long = -1
+
+
     private lateinit var orderDetailAdapter: OrderDetailAdapter
     private val args: OrderDetailFragmentArgs by navArgs()
 
@@ -51,25 +52,22 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
         setInorderAdapter()
         updateViewModel()
         updateListeners()
-        if(binding.pay.text=="Pay Now"){
-
-        }
-      cancelOrder()
+        cancelOrder()
     }
 
-    private fun cancelOrder(){
+    private fun cancelOrder() {
 
         binding.cancelButton.setOnClickListener {
-            viewModel.cancelOrder(args.orderId, CancelOrderRequest("NORMAL")).observe(viewLifecycleOwner, Observer {
-                Timber.i("orderId = ${it.status} : ${it.data}")
-                when (it.status) {
-                    Status.SUCCESS -> {
-                        binding.orderStatusString.setText("Order has been Cancelled")
+            showLoading()
+            viewModel.cancelOrder(args.orderId, CancelOrderRequest("NORMAL")).observe(viewLifecycleOwner, {
+                    Timber.i("orderId = ${it.status} : ${it.data}")
+                    when (it.status) {
+                        Status.SUCCESS -> {
+                            viewModel.loadOrder(args.orderId)
+                        }
                     }
-                }
-            })
+                })
         }
-
     }
 
     private fun updateListeners() {
@@ -80,17 +78,17 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
     }
 
     private fun updateViewModel() {
-        viewModel.getOrder(args.orderId).observe(viewLifecycleOwner, Observer {
+        viewModel.loadOrder(args.orderId)
+        viewModel.orderInfo.observe(viewLifecycleOwner, {
             Timber.i("orderId = ${it.status} : ${it.data}")
             when (it.status) {
                 Status.SUCCESS -> {
+                    dismissLoading()
                     binding.data = it.data
-                    orderId = it.data?.orderDetails?.id ?: -1
                     orderDetailAdapter.submitList(it.data?.orderInventoryDetailsList)
                     updateSelectors(it.data?.orderDetails?.orderStatus)
-                    val cancelBtnVisibility=it.data?.orderDetails?.orderStatus=="DISPATCHED"||it.data?.orderDetails?.orderStatus=="COMPLETED"
+                    val cancelBtnVisibility = it.data?.orderDetails?.orderStatus == "DISPATCHED" || it.data?.orderDetails?.orderStatus=="COMPLETED" || it.data?.orderDetails?.orderStatus == "CANCEL"
                     binding.cancelButton.updateVisibility(cancelBtnVisibility.not())
-
 
                 }
             }
@@ -129,6 +127,17 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
                     binding.deliveredIcon.isSelected = true
                     binding.orderStatusString.text = getString(R.string.order_has_been_completed)
                 }
+                "CANCEL" -> {
+                    binding.orderStatusString.text = getString(R.string.order_has_been_cancelled)
+                    binding.placeIcon.isSelected = false
+                    binding.progressId.isSelected = false
+                    binding.packedIcon.isSelected = false
+                    binding.progressId2.isSelected = false
+                    binding.dispatchedIcon.isSelected = false
+                    binding.progressId3.isSelected = false
+                    binding.deliveredIcon.isSelected = false
+                }
+
             }
        }
 
@@ -139,8 +148,4 @@ class OrderDetailFragment : Fragment(R.layout.fragment_my_order_track) {
             adapter = orderDetailAdapter
         }
     }
-
-
-
-
 }
