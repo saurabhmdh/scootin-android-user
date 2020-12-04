@@ -45,7 +45,7 @@ class EssentialHandwrittenFragment : BaseFragment(R.layout.hand_written_grocery_
     private val shopId by lazy {
         args.shopId
     }
-
+    var orderId: Long = -1
     private var mediaId = -1L
 
     private var media: Media? = null
@@ -87,13 +87,18 @@ class EssentialHandwrittenFragment : BaseFragment(R.layout.hand_written_grocery_
 
         showLoading()
         viewModel.placeDirectOrder(
+
             AppHeaders.userID,
             DirectOrderRequest(address!!.id, false, mediaId, shopId)).observe(viewLifecycleOwner) {
             when(it.status) {
                 Status.SUCCESS -> {
+
+                    Timber.i("order id $orderId")
                     dismissLoading()
+                    orderId = (it.data?.id ?: -1).toLong()
+
                     Toast.makeText(context, "Your order has been received successfully", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(EssentialHandwrittenFragmentDirections.directOrderConfirmation())
+                    findNavController().navigate(EssentialHandwrittenFragmentDirections.directOrderConfirmation(orderId))
                 }
                 Status.LOADING -> {}
                 Status.ERROR -> {
