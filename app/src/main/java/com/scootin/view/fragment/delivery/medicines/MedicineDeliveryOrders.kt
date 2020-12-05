@@ -59,6 +59,7 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
     private val args: MedicineDeliveryOrdersArgs by navArgs()
 
     var address: AddressDetails? = null
+    var orderId: Long = -1
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -186,13 +187,14 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
         ).observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
+                    Timber.i("order id $orderId")
                     dismissLoading()
                     Toast.makeText(
                         context,
                         "Your order has been received successfully",
                         Toast.LENGTH_SHORT
                     ).show()
-                    findNavController().navigate(MedicineDeliveryOrdersDirections.directOrderConfirmation())
+                    findNavController().navigate(MedicineDeliveryOrdersDirections.directOrderConfirmation(orderId))
                 }
                 Status.LOADING -> {
                 }

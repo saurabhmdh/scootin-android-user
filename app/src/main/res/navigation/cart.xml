@@ -62,7 +62,7 @@
             app:argType="long" />
         <action
             android:id="@+id/action_cart_payment_fragment_to_order_summary"
-            app:destination="@id/orders_fragment"
+            app:destination="@id/order_summary_fragment"
             app:enterAnim="@anim/default_enter_anim"
             app:exitAnim="@anim/default_exit_anim"
             app:popEnterAnim="@anim/default_pop_enter_anim"
@@ -74,11 +74,13 @@
 
 
         <fragment
-            android:id="@+id/orders_fragment"
-            android:name="com.scootin.view.fragment.orders.OrderSummaryFragment">
+            android:id="@+id/order_summary_fragment"
+            android:name="com.scootin.view.fragment.orders.DirectOrderSummaryFragment">
+
             <argument
                 android:name="order_id"
                 app:argType="long" />
+
             <action
                 android:id="@+id/order_to_customerSupport"
                 app:destination="@id/support_fragment"

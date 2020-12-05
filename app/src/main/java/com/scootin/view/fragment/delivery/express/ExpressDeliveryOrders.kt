@@ -52,7 +52,7 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
     private val shopId by lazy {
         args.shopId
     }
-
+    var orderId: Long = -1
     private val args: ExpressDeliveryOrdersArgs by navArgs()
 
     @Inject
@@ -183,13 +183,14 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
         ).observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
+                    Timber.i("order id $orderId")
                     dismissLoading()
                     Toast.makeText(
                         context,
                         "Your order has been received successfully",
                         Toast.LENGTH_SHORT
                     ).show()
-                    findNavController().navigate(ExpressDeliveryOrdersDirections.directOrderConfirmation())
+                    findNavController().navigate(ExpressDeliveryOrdersDirections.directOrderConfirmation(orderId))
                 }
                 Status.LOADING -> {
                 }

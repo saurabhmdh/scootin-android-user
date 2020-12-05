@@ -157,4 +157,9 @@
     <string name="order_has_been_dispatched">Order has been dispatched</string>
     <string name="order_has_been_completed">Order has been completed</string>
     <string name="order_has_been_cancelled">Order has been cancelled</string>
+    <string name="dialogTitle">Cancel Order</string>
+    <string name="logOutDialogTitle">Logout</string>
+    <string name="dialogMessage">Are you sure you want to cancel this order?</string>
+    <string name="logoutDialogMessage">Are you sure you want to Logout?</string>
+
 </resources>

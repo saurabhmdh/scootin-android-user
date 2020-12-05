@@ -55,6 +55,12 @@ class PaymentViewModel @ViewModelInject internal constructor(
             viewModelScope.coroutineContext + Dispatchers.IO + handler
         )
     }
+    val directOrderInfo = _Order_Id.switchMap {
+        orderRepository.getDirectOrder(
+            it.toString(),
+            viewModelScope.coroutineContext + Dispatchers.IO + handler
+        )
+    }
     fun userConfirmOrder(userId: String, orderRequest: OrderRequest) = orderRepository.userConfirmOrder(userId, orderRequest, viewModelScope.coroutineContext + Dispatchers.IO + handler)
 
 

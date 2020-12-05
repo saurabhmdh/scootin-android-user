@@ -1,5 +1,6 @@
 package com.scootin.view.fragment.account.orders
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -138,15 +139,35 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
     private fun cancelOrder() {
 
         binding.cancelButton.setOnClickListener {
-            showLoading()
-            viewModel.cancelOrder(args.orderId, CancelOrderRequest("DIRECT")).observe(viewLifecycleOwner, {
-                Timber.i("orderId = ${it.status} : ${it.data}")
-                when (it.status) {
-                    Status.SUCCESS -> {
-                        viewModel.loadOrder(args.orderId)
+            val builder = AlertDialog.Builder(context)
+
+            builder.setTitle(R.string.dialogTitle)
+            //set message for alert dialog
+            builder.setMessage(R.string.dialogMessage)
+            builder.setIcon(android.R.drawable.ic_dialog_alert)
+
+            //performing positive action
+            builder.setPositiveButton("Yes") { dialogInterface, which ->
+                showLoading()
+                viewModel.cancelOrder(args.orderId, CancelOrderRequest("DIRECT")).observe(viewLifecycleOwner, {
+                    Timber.i("orderId = ${it.status} : ${it.data}")
+                    when (it.status) {
+                        Status.SUCCESS -> {
+                            viewModel.loadOrder(args.orderId)
+                        }
                     }
-                }
-            })
+                })
+            }
+            //performing cancel action
+            builder.setNeutralButton("No") { dialogInterface, which ->
+
+            }
+            // Create the AlertDialog
+            val alertDialog: AlertDialog = builder.create()
+            // Set other dialog properties
+            alertDialog.setCancelable(false)
+            alertDialog.show()
+
         }
     }
 
