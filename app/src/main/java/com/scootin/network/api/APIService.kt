@@ -121,6 +121,13 @@ interface APIService {
     @GET("/address/get-all-address/{userId}")
     suspend fun getAllAdress(@Path("userId") userId: String): Response<List<AddressDetails>>
 
+
+    @POST("/util/find-distance")
+    suspend fun findDistance(
+        @Body request: DistanceMeasure
+    ): Response<DistanceResponse>
+
+
     @Multipart
     @POST("/media/upload-image-android")
     suspend fun uploadImage(@Part multipartFile: MultipartBody.Part): Response<Media>
