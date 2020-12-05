@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.scootin.database.dao.CacheDao
 import com.scootin.network.request.CityWideOrderRequest
 import com.scootin.network.request.DirectOrderRequest
+import com.scootin.network.request.DistanceMeasure
 import com.scootin.network.response.AddressDetails
 import com.scootin.network.response.ExtraDataItem
 import com.scootin.network.response.Media
@@ -62,5 +63,8 @@ class DirectOrderViewModel @ViewModelInject internal constructor(
         emit(userRepository.getAllAddress())
     }
 
+    fun findDistance(request: DistanceMeasure) = liveData(viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+        emit(userRepository.findDistance(request))
+    }
 
 }

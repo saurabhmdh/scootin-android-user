@@ -15,6 +15,7 @@ import com.scootin.databinding.FragmentCitywideDeliveryBinding
 import com.scootin.extensions.getNavigationResult
 import com.scootin.network.glide.GlideApp
 import com.scootin.network.manager.AppHeaders
+import com.scootin.network.request.DistanceMeasure
 import com.scootin.network.response.AddressDetails
 import com.scootin.network.response.Media
 import com.scootin.util.UtilUIComponent
@@ -120,6 +121,14 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
 
         getNavigationResult()?.observe(viewLifecycleOwner) {
             updateAddressData(it, click)
+        }
+
+        if (pickupAddress != null && dropAddress != null) {
+            viewModel.findDistance(DistanceMeasure(pickupAddress!!.id, dropAddress!!.id)).observe(viewLifecycleOwner) {
+                if (it.isSuccessful) {
+                    binding.totalDistance.text = "Distance: " + it.body()?.elements?.firstOrNull()?.distance?.text
+                }
+            }
         }
     }
     private fun updateAddressData(calendarData: String, click: Int) {

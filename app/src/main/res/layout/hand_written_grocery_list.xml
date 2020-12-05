@@ -124,14 +124,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/address" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/appCompatImageView"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/total_distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:textStyle="bold"
+                android:textColor="@color/dark_blue"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/mobile_no"
-                app:srcCompat="@drawable/ic_total_distance" />
+                app:layout_constraintTop_toBottomOf="@id/mobile_no" />
 
 
             <androidx.appcompat.widget.AppCompatImageView
