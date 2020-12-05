@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.scootin.R
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class OrderConfirmedFragment : Fragment(R.layout.fragment_order_confirmed) {
@@ -21,6 +22,7 @@ class OrderConfirmedFragment : Fragment(R.layout.fragment_order_confirmed) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Timber.i("We received this order id $orderId")
         Handler().postDelayed({
             findNavController().navigate(OrderConfirmedFragmentDirections.actionConfirmationFragmentToOrderSummary(orderId))
         }, 3000)
