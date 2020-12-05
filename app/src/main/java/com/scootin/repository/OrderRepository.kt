@@ -7,14 +7,12 @@ import androidx.paging.PagingData
 import com.scootin.network.api.APIService
 import com.scootin.network.api.NetworkBoundResource
 import com.scootin.network.api.Resource
-import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.*
 import com.scootin.network.response.citywide.CityWideOrderResponse
 import com.scootin.network.response.inorder.InOrderDetail
 import com.scootin.network.response.order.OrderHistoryItem
 import com.scootin.network.response.orderdetail.OrderDetail
 import com.scootin.network.response.orders.DirectOrderResponse
-import com.scootin.network.response.placeOrder.PlaceOrderResponse
 import com.scootin.pages.OrderDataSource
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response

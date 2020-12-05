@@ -58,15 +58,6 @@ class DirectOrderSummaryFragment: Fragment(R.layout.fragment_direct_order_summar
                         Timber.i("Extra $extra")
                         orderSummaryAdapter.submitList(extra)
                     }
-                    if (it.data?.media == null) {
-                        binding.listOfItemsRecycler.visibility = View.GONE
-                    }
-                    if(it.data?.paymentDetails?.paymentStatus=="COMPLETED"){
-                        binding.paymentStatus.setText("Payment Done")
-                    }
-                    else{
-                        binding.paymentStatus.setText("Pay on Delivery")
-                    }
                 }
                 Status.ERROR -> {
                     //Show error and move back
@@ -98,6 +89,20 @@ class DirectOrderSummaryFragment: Fragment(R.layout.fragment_direct_order_summar
         val sb = StringBuilder().append(address.addressLine1).append(", ")
             .append(address.addressLine2).append(", ").append(address.city).append(", ")
             .append(address.pincode)
+        return sb.toString()
+    }
+    private fun getAllAddress(orderInventoryDetailsList: List<OrderInventoryDetails>?): String {
+        val uniqueAddress = mutableSetOf<Long>()
+
+        val sb = StringBuffer()
+        orderInventoryDetailsList?.forEach {
+            if(uniqueAddress.contains(it.inventoryDetails.shopManagement.id).not()) {
+                sb.append(it.inventoryDetails.shopManagement.name).append(", ")
+                sb.append(getSingleAddress(it.inventoryDetails.shopManagement.address))
+                sb.append("\n")
+                uniqueAddress.add(it.inventoryDetails.shopManagement.id)
+            }
+        }
         return sb.toString()
     }
 
