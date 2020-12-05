@@ -8,6 +8,7 @@ import com.scootin.database.table.Cache
 import com.scootin.network.api.*
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.AddAddressRequest
+import com.scootin.network.request.DistanceMeasure
 import com.scootin.network.request.RequestFCM
 import com.scootin.network.response.AddressDetails
 import com.scootin.network.response.State
@@ -83,4 +84,7 @@ class UserRepository @Inject constructor(
         val listType = object : TypeToken<List<State>>() {}.type
         return  Gson().fromJson<List<State>>(data, listType)
     }
+
+
+    suspend fun findDistance(request: DistanceMeasure) = services.findDistance(request)
 }
