@@ -75,7 +75,7 @@
 
         <fragment
             android:id="@+id/order_summary_fragment"
-            android:name="com.scootin.view.fragment.orders.DirectOrderSummaryFragment">
+            android:name="com.scootin.view.fragment.orders.OrderSummaryFragment">
 
             <argument
                 android:name="order_id"

@@ -64,7 +64,7 @@ class SupportFragment : Fragment(R.layout.customer_support) {
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
         binding.submit.setOnClickListener {
-            val callId = binding.editTextForOrderId.text?.toString()?.toInt() ?: 0
+            val callId = binding.editTextForOrderId.text?.toString()?.toIntOrNull() ?: 0
             if (callId == 0) {
                 Toast.makeText(requireContext(), "Please enter valid order Id", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
