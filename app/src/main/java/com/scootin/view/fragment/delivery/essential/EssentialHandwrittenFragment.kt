@@ -46,7 +46,6 @@ class EssentialHandwrittenFragment : BaseFragment(R.layout.hand_written_grocery_
         args.shopId
     }
     var orderId: Long = -1
-    private var mediaId = -1L
 
     private var media: Media? = null
 
@@ -76,7 +75,7 @@ class EssentialHandwrittenFragment : BaseFragment(R.layout.hand_written_grocery_
     }
 
     private fun placeDirectOrder() {
-        if (mediaId == -1L) {
+        if (media == null) {
             Toast.makeText(context, "Invalid Media", Toast.LENGTH_SHORT).show()
             return
         }
@@ -89,7 +88,7 @@ class EssentialHandwrittenFragment : BaseFragment(R.layout.hand_written_grocery_
         viewModel.placeDirectOrder(
 
             AppHeaders.userID,
-            DirectOrderRequest(address!!.id, false, mediaId, shopId)).observe(viewLifecycleOwner) {
+            DirectOrderRequest(address!!.id, false, media!!.id, shopId)).observe(viewLifecycleOwner) {
             when(it.status) {
                 Status.SUCCESS -> {
 
@@ -145,8 +144,8 @@ class EssentialHandwrittenFragment : BaseFragment(R.layout.hand_written_grocery_
                 if(response.isSuccessful) {
                     dismissLoading()
                     val media = response.body() ?: return@observe
-                    GlideApp.with(requireContext()).load(media.url).into(binding.receiverPhotoBox)
-                    mediaId = media.id
+                    this.media = media
+                    loadMedia()
                 } else {
                     Toast.makeText(context, "There is some error media", Toast.LENGTH_SHORT).show()
                 }
