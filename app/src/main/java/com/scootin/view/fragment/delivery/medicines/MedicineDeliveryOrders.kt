@@ -59,7 +59,7 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
     private val args: MedicineDeliveryOrdersArgs by navArgs()
 
     var address: AddressDetails? = null
-    var orderId: Long = -1
+
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -173,7 +173,7 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
 
         showLoading()
         val mediaId = media?.id ?: -1
-
+        var orderId: Long = -1
         Timber.i("Json : ${Gson().toJson(searchItemAddAdapter.list)}")
         viewModel.placeDirectOrder(
             AppHeaders.userID,
@@ -188,6 +188,7 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
             when (it.status) {
                 Status.SUCCESS -> {
                     Timber.i("order id $orderId")
+                    orderId = (it.data?.id ?: -1).toLong()
                     dismissLoading()
                     Toast.makeText(
                         context,

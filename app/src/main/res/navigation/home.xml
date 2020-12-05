@@ -126,6 +126,23 @@
             app:popExitAnim="@anim/default_pop_exit_anim" />
 
     </fragment>
+
+    <fragment
+        android:id="@+id/citywide_order_summary_fragment"
+        android:name="com.scootin.view.fragment.orders.CityWideOrderSummaryFragment">
+        <argument
+            android:name="order_id"
+            app:argType="long" />
+        <action
+            android:id="@+id/order_to_customerSupport"
+            app:destination="@id/support_fragment"
+            app:enterAnim="@anim/default_enter_anim"
+            app:exitAnim="@anim/default_exit_anim"
+            app:popEnterAnim="@anim/default_pop_enter_anim"
+            app:popExitAnim="@anim/default_pop_exit_anim" />
+
+    </fragment>
+
     <fragment
         android:id="@+id/support_fragment"
         android:name="com.scootin.view.fragment.account.support.SupportFragment"
@@ -264,7 +281,7 @@
         android:label="Home" >
         <action
             android:id="@+id/citydelivery_to_success"
-            app:destination="@id/successFragment"
+            app:destination="@id/citywide_order_confirmation"
             app:enterAnim="@anim/default_enter_anim"
             app:exitAnim="@anim/default_exit_anim"
             app:popUpTo="@id/titleScreen"
@@ -390,6 +407,24 @@
         <action
             android:id="@+id/action_confirmation_fragment_to_order_summary"
             app:destination="@id/direct_order_summary_fragment"
+            app:enterAnim="@anim/default_enter_anim"
+            app:exitAnim="@anim/default_exit_anim"
+            app:popEnterAnim="@anim/default_pop_enter_anim"
+            app:popUpTo="@id/titleScreen"
+            app:popUpToInclusive="false"
+            app:popExitAnim="@anim/default_pop_exit_anim" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/citywide_order_confirmation"
+        android:name="com.scootin.view.fragment.orders.CitywideOrderConfirmedFragment"
+        android:label="OrderConfirmedFragment" >
+        <argument
+            android:name="order_id"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_confirmation_fragment_to_order_summary"
+            app:destination="@id/citywide_order_summary_fragment"
             app:enterAnim="@anim/default_enter_anim"
             app:exitAnim="@anim/default_exit_anim"
             app:popEnterAnim="@anim/default_pop_enter_anim"

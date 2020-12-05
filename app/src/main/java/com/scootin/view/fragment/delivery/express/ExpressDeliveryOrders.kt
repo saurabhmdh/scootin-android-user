@@ -52,7 +52,7 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
     private val shopId by lazy {
         args.shopId
     }
-    var orderId: Long = -1
+
     private val args: ExpressDeliveryOrdersArgs by navArgs()
 
     @Inject
@@ -168,6 +168,7 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
             return
         }
         val mediaId = media?.id ?: -1
+        var orderId: Long = -1
 
         showLoading()
         Timber.i("Json : ${Gson().toJson(searchItemAddAdapter.list)}")
@@ -184,6 +185,7 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
             when (it.status) {
                 Status.SUCCESS -> {
                     Timber.i("order id $orderId")
+                    orderId = (it.data?.id ?: -1).toLong()
                     dismissLoading()
                     Toast.makeText(
                         context,

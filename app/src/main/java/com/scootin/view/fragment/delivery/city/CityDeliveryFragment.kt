@@ -80,6 +80,7 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
             return
         }
 
+        var orderId: Long = -1
         showLoading()
         viewModel.placeCityWideOrder(
             AppHeaders.userID,
@@ -89,8 +90,9 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
         ).observe(viewLifecycleOwner) {
             if (it.isSuccessful) {
                 dismissLoading()
+                orderId= it.body()?.id?.toLong()!!
                 Toast.makeText(context, "Your order has been received successfully", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(CityDeliveryFragmentDirections.citydeliveryToSuccess())
+                findNavController().navigate(CityDeliveryFragmentDirections.citydeliveryToSuccess(orderId))
             } else {
                 dismissLoading()
                 Toast.makeText(context, it.errorBody()?.string(), Toast.LENGTH_SHORT).show()
