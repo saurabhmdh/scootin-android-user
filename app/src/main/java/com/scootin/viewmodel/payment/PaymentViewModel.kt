@@ -61,6 +61,12 @@ class PaymentViewModel @ViewModelInject internal constructor(
             viewModelScope.coroutineContext + Dispatchers.IO + handler
         )
     }
+    val citywideOrderInfo = _Order_Id.switchMap {
+        orderRepository.getCityWideOrder(
+            it.toString(),
+            viewModelScope.coroutineContext + Dispatchers.IO + handler
+        )
+    }
     fun userConfirmOrder(userId: String, orderRequest: OrderRequest) = orderRepository.userConfirmOrder(userId, orderRequest, viewModelScope.coroutineContext + Dispatchers.IO + handler)
 
 

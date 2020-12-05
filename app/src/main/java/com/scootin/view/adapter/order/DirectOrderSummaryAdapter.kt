@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.scootin.databinding.AdapterExtraDataBinding
 import com.scootin.databinding.AdapterOrderSummaryBinding
+import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.ExtraDataItem
 import com.scootin.network.response.inorder.OrderInventoryDetails
@@ -50,7 +51,8 @@ class DirectOrderSummaryAdapter (
             //Get the individual item price
             item.apply {
                 binding.itemName.text = item.name
-                binding.quantity.text = item.count.toString()
+                binding.itemCost.text = "X "+item.count.toString()
+                binding.quantity.updateVisibility(false)
 
             }
         }
