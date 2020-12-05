@@ -4,8 +4,8 @@ data class DistanceResponse(
     val elements: List<Element>
 ) {
     data class Element(
-        val distance: Distance,
-        val duration: Duration,
+        val distance: Distance?,
+        val duration: Duration?,
         val status: String
     ) {
         data class Distance(

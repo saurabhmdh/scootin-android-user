@@ -121,8 +121,13 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
 
         getNavigationResult()?.observe(viewLifecycleOwner) {
             updateAddressData(it, click)
+            checkforDistance()
         }
 
+
+    }
+
+    private fun checkforDistance() {
         if (pickupAddress != null && dropAddress != null) {
             viewModel.findDistance(DistanceMeasure(pickupAddress!!.id, dropAddress!!.id)).observe(viewLifecycleOwner) {
                 if (it.isSuccessful) {
