@@ -42,9 +42,8 @@ class CategoriesViewModel @ViewModelInject internal constructor(
         _search.postValue(SearchShopsByCategory(query))
     }
 
-    val shops: LiveData<Response<List<SearchShopsByCategoryResponse>>> =
+    val shops: LiveData<PagingData<SearchShopsByCategoryResponse>> =
         _search.switchMap { search ->
-
             liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
                 Timber.i("Search Detail ${search.query}")
                 val locationInfo = locationDao.getEntityLocation()
@@ -53,12 +52,12 @@ class CategoriesViewModel @ViewModelInject internal constructor(
 
                 val request =
                     RequestSearch(locationInfo.latitude, locationInfo.longitude, search.query)
-                emit(
+                emitSource(
                     searchRepository.searchShops(
                         request,
                         serviceArea.orEmpty(),
                         mainCategory.orEmpty()
-                    )
+                    ).cachedIn(viewModelScope).asLiveData()
                 )
             }
         }

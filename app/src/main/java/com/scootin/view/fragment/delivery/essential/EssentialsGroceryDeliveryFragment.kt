@@ -39,9 +39,7 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
     @Inject
     lateinit var appExecutors: AppExecutors
     private var productSearchAdapter by autoCleared<ProductSearchPagingAdapter>()
-
-
-    private lateinit var shopSearchAdapter: ShopSearchAdapter
+    private var shopSearchAdapter by autoCleared<ShopSearchAdapter>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -103,11 +101,10 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
-        viewModel.shops.observe(viewLifecycleOwner) {
-            if (it.isSuccessful) {
-                shopSearchAdapter.submitList(it.body())
+        viewModel.shops.observe(viewLifecycleOwner) {response->
+            lifecycleScope.launch {
+                shopSearchAdapter.submitData(response)
             }
-            Timber.i("Search result for shop ${it.body()}")
         }
 
         viewModel.allProduct.observe(viewLifecycleOwner) {response->
@@ -176,8 +173,7 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
     }
 
     private fun setStoreAdapter() {
-        shopSearchAdapter = ShopSearchAdapter(
-            appExecutors, object : ShopSearchAdapter.StoreImageAdapterClickListener {
+        shopSearchAdapter = ShopSearchAdapter(object : ShopSearchAdapter.StoreImageAdapterClickListener {
                 override fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse) {
                     Timber.i("Shop Info $shopInfo")
                     viewModel.updateShop(shopInfo.shopID)
