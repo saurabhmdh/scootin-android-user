@@ -106,11 +106,11 @@ class ClothingInnerWearWomen : Fragment(R.layout.fragment_clothing_delivery) {
             Timber.i("Search result for shop ${it.body()}")
         }
 
-        viewModel.product.observe(viewLifecycleOwner) {
-            if (it.isSuccessful) {
-                productSearchAdapter.submitList(it.body())
-            }
-        }
+//        viewModel.product.observe(viewLifecycleOwner) {
+//            if (it.isSuccessful) {
+//                productSearchAdapter.submitList(it.body())
+//            }
+//        }
 
         viewModel.addToCartMap.observe(viewLifecycleOwner, {
             Timber.i("Status addToCartLiveData = ${it?.isSuccessful} ")

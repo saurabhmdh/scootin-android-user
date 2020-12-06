@@ -120,11 +120,11 @@ class ClothingInnerWearMenFragment : Fragment(R.layout.fragment_clothing_deliver
             Timber.i("Search result for shop ${it.body()}")
         }
 
-        viewModel.product.observe(viewLifecycleOwner) {
-            if (it.isSuccessful) {
-                productSearchAdapter.submitList(it.body())
-            }
-        }
+//        viewModel.product.observe(viewLifecycleOwner) {
+//            if (it.isSuccessful) {
+//                productSearchAdapter.submitList(it.body())
+//            }
+//        }
     }
 
 
