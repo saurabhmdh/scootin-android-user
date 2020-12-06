@@ -6,6 +6,7 @@ import android.widget.RadioButton
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.scootin.R
@@ -23,6 +24,7 @@ import com.scootin.view.adapter.ShopSearchAdapter
 import com.scootin.view.adapter.SweetsAdapter
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -35,7 +37,7 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
     lateinit var appExecutors: AppExecutors
 
     private lateinit var productSearchAdapter: SweetsAdapter
-    private lateinit var shopSearchAdapter: ShopSearchAdapter
+    private var shopSearchAdapter by autoCleared<ShopSearchAdapter>()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -99,18 +101,17 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
         )
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
-        viewModel.shops.observe(viewLifecycleOwner) {
-            if (it.isSuccessful) {
-                shopSearchAdapter.submitList(it.body())
+        viewModel.shops.observe(viewLifecycleOwner) {response->
+            lifecycleScope.launch {
+                shopSearchAdapter.submitData(response)
             }
-            Timber.i("Search result for shop ${it.body()}")
         }
 
-        viewModel.product.observe(viewLifecycleOwner) {
-            if (it.isSuccessful) {
-                productSearchAdapter.submitList(it.body())
-            }
-        }
+//        viewModel.product.observe(viewLifecycleOwner) {
+//            if (it.isSuccessful) {
+//                productSearchAdapter.submitList(it.body())
+//            }
+//        }
 
         viewModel.addToCartMap.observe(viewLifecycleOwner, {
             Timber.i("Status addToCartLiveData = ${it?.isSuccessful} ")
@@ -162,8 +163,7 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
     }
 
     private fun setStoreAdapter() {
-        shopSearchAdapter = ShopSearchAdapter(
-            appExecutors, object : ShopSearchAdapter.StoreImageAdapterClickListener {
+        shopSearchAdapter = ShopSearchAdapter(object : ShopSearchAdapter.StoreImageAdapterClickListener {
                 override fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse) {
                     Timber.i("Shop Info $shopInfo")
                     viewModel.updateShop(shopInfo.shopID)

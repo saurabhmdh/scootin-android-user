@@ -58,7 +58,9 @@ interface APIService {
     suspend fun findShops(
         @Path("serviceAreaId") serviceAreaId: String,
         @Path("categoryId") categoryId: String,
-        @Body requestSearch: RequestSearch
+        @Body requestSearch: RequestSearch,
+        @Query("page") offset: Int = 0,
+        @Query("size") limit: Int = 10
     ): Response<List<SearchShopsByCategoryResponse>>
 
 

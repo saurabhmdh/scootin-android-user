@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.NavHostFragment.findNavController
@@ -25,6 +26,7 @@ import com.scootin.view.fragment.home.HomeFragmentDirections
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import com.scootin.viewmodel.home.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -33,7 +35,7 @@ class ExpressDeliveryFragment : Fragment(R.layout.fragment_express_delivery_shop
     private var binding by autoCleared<FragmentExpressDeliveryShopSelectBinding>()
     @Inject
     lateinit var appExecutors: AppExecutors
-    private lateinit var shopSearchAdapter: ShopSearchAdapter
+    private var shopSearchAdapter by autoCleared<ShopSearchAdapter>()
     private val viewModel: CategoriesViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,17 +56,15 @@ class ExpressDeliveryFragment : Fragment(R.layout.fragment_express_delivery_shop
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
-        viewModel.shops.observe(viewLifecycleOwner) {
-            if (it.isSuccessful) {
-                shopSearchAdapter.submitList(it.body())
+        viewModel.shops.observe(viewLifecycleOwner) {response->
+            lifecycleScope.launch {
+                shopSearchAdapter.submitData(response)
             }
-            Timber.i("Search result for shop ${it.body()}")
         }
     }
 
     private fun setStoreAdapter() {
-        shopSearchAdapter = ShopSearchAdapter(
-            appExecutors, object : ShopSearchAdapter.StoreImageAdapterClickListener {
+        shopSearchAdapter = ShopSearchAdapter(object : ShopSearchAdapter.StoreImageAdapterClickListener {
                 override fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse) {
                     Timber.i("Shop Info $shopInfo")
                     val direction = ExpressDeliveryFragmentDirections.actionExpressDeliveryToExpressOrders2(shopInfo.shopID, shopInfo.name)
