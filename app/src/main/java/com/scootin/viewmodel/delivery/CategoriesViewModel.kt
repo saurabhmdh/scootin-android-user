@@ -70,6 +70,27 @@ class CategoriesViewModel @ViewModelInject internal constructor(
             }
         }
 
+
+    val shopsBySubcategory: LiveData<PagingData<SearchShopsByCategoryResponse>> =
+        _search.switchMap { search ->
+            liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+                Timber.i("Search Detail ${search.query}")
+                val locationInfo = locationDao.getEntityLocation()
+                val mainCategory = cacheDao.getCacheData(AppConstants.SUB_CATEGORY)?.value
+                val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
+
+                val request = RequestSearch(locationInfo.latitude, locationInfo.longitude, search.query)
+                emitSource(
+                    searchRepository.searchShopsBySubCategory(
+                        request,
+                        serviceArea.orEmpty(),
+                        mainCategory.orEmpty()
+                    ).cachedIn(viewModelScope).asLiveData()
+                )
+            }
+        }
+
+
     private val handler = CoroutineExceptionHandler { _, exception ->
         Timber.i("Caught  $exception")
     }

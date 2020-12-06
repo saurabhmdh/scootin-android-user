@@ -9,10 +9,7 @@ import com.scootin.network.request.*
 import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.network.response.order.OrderHistoryItem
-import com.scootin.pages.OrderDataSource
-import com.scootin.pages.SearchDataSource
-import com.scootin.pages.SearchProductByShop
-import com.scootin.pages.SearchShopDataSource
+import com.scootin.pages.*
 import com.scootin.view.vo.ProductSearchVO
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
@@ -29,6 +26,12 @@ class SearchRepository @Inject constructor(
     fun searchShops(requestSearch: RequestSearch, serviceAreaId: String, categoryId: String): Flow<PagingData<SearchShopsByCategoryResponse>> {
         return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20)) {
             SearchShopDataSource(services, serviceAreaId, categoryId, requestSearch)
+        }.flow
+    }
+
+    fun searchShopsBySubCategory(requestSearch: RequestSearch, serviceAreaId: String, categoryId: String): Flow<PagingData<SearchShopsByCategoryResponse>> {
+        return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20)) {
+            SearchShopBySubCategoryDataSource(services, serviceAreaId, categoryId, requestSearch)
         }.flow
     }
 

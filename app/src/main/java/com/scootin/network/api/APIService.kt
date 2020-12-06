@@ -54,6 +54,15 @@ interface APIService {
     ): Response<ResponseServiceArea>
 
 
+    @POST("/search/{serviceAreaId}/{categoryId}/get-all-shops-by-subcategory")
+    suspend fun findShopsBySubCategory(
+        @Path("serviceAreaId") serviceAreaId: String,
+        @Path("categoryId") categoryId: String,
+        @Body requestSearch: RequestSearch,
+        @Query("page") offset: Int = 0,
+        @Query("size") limit: Int = 10
+    ): Response<List<SearchShopsByCategoryResponse>>
+
     @POST("/search/{serviceAreaId}/{categoryId}/get-all-shops")
     suspend fun findShops(
         @Path("serviceAreaId") serviceAreaId: String,

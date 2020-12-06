@@ -24,17 +24,17 @@ class ClothingCategoryFragment : Fragment(R.layout.fragment_clothing_page) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentClothingPageBinding.bind(view)
-
-        Timber.i("height =  ${binding.express.height} Width = ${binding.express.width}")
         updateListeners()
     }
 
     private fun updateListeners() {
         binding.menInnerWear.setOnClickListener {
+            viewModel.updateSubCategory(it.tag as String?)
             findNavController().navigate(ClothingCategoryFragmentDirections.homeToMeninnerwear())
         }
 
         binding.womenInnerWear.setOnClickListener {
+            viewModel.updateSubCategory(it.tag as String?)
             findNavController().navigate(ClothingCategoryFragmentDirections.homeToWomeninnerwear())
         }
 

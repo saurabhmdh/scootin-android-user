@@ -99,7 +99,7 @@ class CakeDeliveryFragment : Fragment(R.layout.fragment_cake_delivery) {
         )
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
-        viewModel.shops.observe(viewLifecycleOwner) {response->
+        viewModel.shopsBySubcategory.observe(viewLifecycleOwner) {response->
             lifecycleScope.launch {
                 shopSearchAdapter.submitData(response)
             }
