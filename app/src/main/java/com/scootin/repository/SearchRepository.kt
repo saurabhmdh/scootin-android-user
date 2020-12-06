@@ -26,8 +26,7 @@ class SearchRepository @Inject constructor(
 ) {
 
     fun searchShops(requestSearch: RequestSearch, serviceAreaId: String, categoryId: String): Flow<PagingData<SearchShopsByCategoryResponse>> {
-        Timber.i("trying to find data with ${requestSearch.query}, $serviceAreaId, $categoryId")
-        return Pager(config = PagingConfig(pageSize = 1, initialLoadSize = 1)) {
+        return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20)) {
             SearchShopDataSource(services, serviceAreaId, categoryId, requestSearch)
         }.flow
     }
@@ -46,9 +45,7 @@ class SearchRepository @Inject constructor(
     suspend fun getDeliverySlot(currentTime: Long) = services.getDeliverySlot(currentTime)
 
     fun findProductsWithPaging(query: String, serviceAreaId: String, categoryId: String): Flow<PagingData<ProductSearchVO>> {
-        Timber.i("trying to find data with $query, $serviceAreaId, $categoryId")
         return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20)) {
-            Timber.i("trying to find data with $query, $serviceAreaId, $categoryId")
             SearchDataSource(services, serviceAreaId, categoryId, RequestSearch(query = query))
         }.flow
     }

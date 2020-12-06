@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.scootin.R
 import com.scootin.databinding.FragmentExpressDeliveryShoplistBinding
@@ -16,6 +17,7 @@ import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.ShopSearchAdapter
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -27,7 +29,7 @@ class ExpressDeliveryShopListFragment : Fragment(R.layout.fragment_express_deliv
 
     @Inject
     lateinit var appExecutors: AppExecutors
-    private lateinit var shopSearchAdapter: ShopSearchAdapter
+    private var shopSearchAdapter by autoCleared<ShopSearchAdapter>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -67,18 +69,16 @@ class ExpressDeliveryShopListFragment : Fragment(R.layout.fragment_express_deliv
         )
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
-        viewModel.shops.observe(viewLifecycleOwner) {
-            if (it.isSuccessful) {
-                shopSearchAdapter.submitList(it.body())
+        viewModel.shops.observe(viewLifecycleOwner) {response->
+            lifecycleScope.launch {
+                shopSearchAdapter.submitData(response)
             }
-            Timber.i("Search result for shop ${it.body()}")
         }
     }
 
 
     private fun setStoreAdapter() {
-        shopSearchAdapter = ShopSearchAdapter(
-            appExecutors, object : ShopSearchAdapter.StoreImageAdapterClickListener {
+        shopSearchAdapter = ShopSearchAdapter(object : ShopSearchAdapter.StoreImageAdapterClickListener {
                 override fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse) {
                     Timber.i("Shop Info $shopInfo")
                     viewModel.updateShop(shopInfo.shopID)
