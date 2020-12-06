@@ -92,6 +92,14 @@ internal constructor(
         }
     }
 
+    fun updateSubCategory(selectedCategoryID: String?) {
+        launch {
+            selectedCategoryID?.let {
+                cacheDao.insert(Cache(AppConstants.SUB_CATEGORY, it))
+            }
+        }
+    }
+
     fun updateFCMID (token: String?) {
         //get current FCM ID and its not same as current, We will send to server..
         launch {

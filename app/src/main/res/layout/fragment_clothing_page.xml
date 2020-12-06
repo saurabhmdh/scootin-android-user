@@ -59,6 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="200dp"
+            android:tag="270"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_innerwear_men" />
@@ -69,6 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="269dp"
             android:layout_marginEnd="20dp"
+            android:tag="271"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_innerwear_women" />

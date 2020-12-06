@@ -17,6 +17,8 @@ object AppConstants {
     const val AUTHORIZATION = "Authorization"
     const val MAIN_CATEGORY = "main-category"
 
+    const val SUB_CATEGORY = "sub-category"
+
     const val SERVICE_AREA = "service-area"
 
     const val FCM_ID = "fcm-id"

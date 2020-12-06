@@ -36,20 +36,24 @@ class SweetsCategoryFragment : Fragment(R.layout.fragment_sweets_category) {
 
     private fun updateListeners() {
         binding.sweets.setOnClickListener {
+            viewModel.updateSubCategory(it.tag as String?)
             findNavController().navigate(SweetsCategoryFragmentDirections.homeToSweets())
         }
 
         binding.bakery.setOnClickListener {
+            viewModel.updateSubCategory(it.tag as String?)
             findNavController().navigate(SweetsCategoryFragmentDirections.homeToCake())
         }
 
         binding.snacks.setOnClickListener {
+            viewModel.updateSubCategory(it.tag as String?)
             findNavController().navigate(SweetsCategoryFragmentDirections.homeToSnacks())
         }
 
-//        binding.cakenbouquet.setOnClickListener {
-//            findNavController().navigate(SweetsCategoryFragmentDirections.homeToCakenbouqet())
-//        }
+        binding.cakenbouquet.setOnClickListener {
+            viewModel.updateSubCategory(it.tag as String?)
+            findNavController().navigate(SweetsCategoryFragmentDirections.homeToCakenbouqet())
+        }
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
     }
