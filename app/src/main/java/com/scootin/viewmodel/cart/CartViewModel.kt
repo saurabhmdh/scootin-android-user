@@ -28,15 +28,13 @@ class CartViewModel @ViewModelInject internal constructor(
     private val cartRepository: CartRepository,
 ) : ObservableViewModel(), CoroutineScope {
 
-    val getUserCartList = MutableLiveData<String>()
+    private val getUserCartList = MutableLiveData<String>()
 
     fun userCartList() {
-        Timber.i("userCartList()... ")
         getUserCartList.postValue(AppHeaders.userID)
     }
 
     val getUserCartListLiveData = getUserCartList.switchMap {
-        Timber.i("Its changed..")
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
             emit(searchRepository.getUserCartList(it))
         }
@@ -55,12 +53,6 @@ class CartViewModel @ViewModelInject internal constructor(
     val getCartCount = countUserCartListTotal.switchMap {
         liveData(coroutineContext + handler) {
             emit(cartRepository.getCartCount(AppHeaders.userID))
-        }
-    }
-
-    val totalPrice = getUserCartList.switchMap {
-        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-            emit(paymentRepository.getTotalPriceFromCart(AppHeaders.userID))
         }
     }
 

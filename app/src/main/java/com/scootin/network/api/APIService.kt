@@ -71,11 +71,14 @@ interface APIService {
         @Body requestSearch: RequestSearch
     ): Response<List<SearchProductsByCategoryResponse>>
 
-    @GET("/search/{shopId}/get-all-products")
+    @POST("/search/{shopId}/get-all-products")
     suspend fun findProductFromShop(
         @Path("shopId") shopId: Long,
-        @Body requestSearch: RequestSearch
+        @Body requestSearch: RequestSearch,
+        @Query("page") offset: Int = 0,
+        @Query("size") limit: Int = 10
     ): Response<List<SearchProductsByCategoryResponse>>
+
 
     @POST("notification/user/{id}/update-fcm")
     suspend fun updateFCMID(

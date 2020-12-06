@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
 
+    <!-- If we change this we can reuse this -->
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/express"
         android:layout_width="wrap_content"
@@ -30,7 +31,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:fontFamily="@font/montserrat_regular"
-        android:text="Store Name"
         android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/imageView"

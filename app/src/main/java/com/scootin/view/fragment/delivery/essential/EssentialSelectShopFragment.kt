@@ -12,6 +12,7 @@ import com.scootin.network.AppExecutors
 import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.ShopSearchAdapter
+import com.scootin.view.fragment.BaseFragment
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -20,12 +21,10 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class EssentialSelectShopFragment : Fragment(R.layout.fragment_grocery_delivery_shop_select) {
+class EssentialSelectShopFragment : BaseFragment(R.layout.fragment_grocery_delivery_shop_select) {
     private var binding by autoCleared<FragmentGroceryDeliveryShopSelectBinding>()
     private val viewModel: CategoriesViewModel by viewModels()
 
-    @Inject
-    lateinit var appExecutors: AppExecutors
     private var shopSearchAdapter by autoCleared<ShopSearchAdapter>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

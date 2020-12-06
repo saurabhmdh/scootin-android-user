@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.scootin.R
 import com.scootin.databinding.FragmentEssentialShopItemListBinding
 import com.scootin.databinding.FragmentVegetableDeliveryBinding
@@ -17,20 +18,33 @@ import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.AddToCartRequest
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.ProductSearchPagingAdapter
+import com.scootin.view.fragment.orders.DirectOrderSummaryFragmentArgs
 import com.scootin.view.vo.ProductSearchVO
 import com.scootin.viewmodel.delivery.CategoriesViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
-class EssentialGroceryShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_list) {
+
+@AndroidEntryPoint
+class ShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_list) {
+
+
     private var binding by autoCleared<FragmentEssentialShopItemListBinding>()
     private val viewModel: CategoriesViewModel by viewModels()
 
-    @Inject
-    lateinit var appExecutors: AppExecutors
-
     private var productSearchAdapter by autoCleared<ProductSearchPagingAdapter>()
+
+    private val args: ShopItemListFragmentArgs by navArgs()
+
+    private val shopId by lazy {
+        args.shopId
+    }
+
+    private val name by lazy {
+        args.name
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,6 +55,7 @@ class EssentialGroceryShopItemListFragment: Fragment(R.layout.fragment_essential
     }
     private fun updateUI() {
         setProductAdapter()
+        binding.storeName.text = name
     }
 
     private fun setProductAdapter() {
@@ -73,13 +88,13 @@ class EssentialGroceryShopItemListFragment: Fragment(R.layout.fragment_essential
 
     private fun updateListeners() {
         //When the screen load lets load the data for empty screen
-        viewModel.doSearch("")
+        viewModel.doSearchByShop("", shopId)
 
         binding.searchBox.setOnQueryTextListener(
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     query?.let {
-                        viewModel.doSearch(it)
+                        viewModel.doSearchByShop(it, shopId)
                     }
                     Timber.i("onQueryTextSubmit $query ")
                     return false
@@ -87,7 +102,7 @@ class EssentialGroceryShopItemListFragment: Fragment(R.layout.fragment_essential
 
                 override fun onQueryTextChange(newText: String?): Boolean {
                     if (newText.isNullOrEmpty()) {
-                        viewModel.doSearch("")
+                        viewModel.doSearchByShop("", shopId)
                     }
                     return false
                 }
@@ -96,7 +111,7 @@ class EssentialGroceryShopItemListFragment: Fragment(R.layout.fragment_essential
         )
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
-        viewModel.allProduct.observe(viewLifecycleOwner) {response->
+        viewModel.allProductByShop.observe(viewLifecycleOwner) {response->
             lifecycleScope.launch {
                 productSearchAdapter.submitData(response)
             }
