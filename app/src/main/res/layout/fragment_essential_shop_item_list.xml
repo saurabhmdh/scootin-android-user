@@ -7,16 +7,25 @@
     android:layout_height="match_parent">
 
     <!-- If we change this we can reuse this -->
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/express"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:layout_width="150dp"
+        android:layout_height="94dp"
+        android:clipToPadding="true"
+        android:elevation="10dp"
+        app:cardCornerRadius="@dimen/dimen_10"
+        app:contentPadding="5dp"
         android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_eng_card" />
+        app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/express"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </androidx.cardview.widget.CardView>
+
+    
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/back"
         android:layout_width="wrap_content"

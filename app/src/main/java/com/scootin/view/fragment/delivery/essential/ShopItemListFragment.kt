@@ -14,6 +14,7 @@ import com.scootin.databinding.FragmentEssentialShopItemListBinding
 import com.scootin.databinding.FragmentVegetableDeliveryBinding
 import com.scootin.extensions.orZero
 import com.scootin.network.AppExecutors
+import com.scootin.network.glide.GlideApp
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.AddToCartRequest
 import com.scootin.util.fragment.autoCleared
@@ -46,6 +47,10 @@ class ShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_list)
         args.name
     }
 
+    private val imageUrl by lazy {
+        args.url
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEssentialShopItemListBinding.bind(view)
@@ -53,9 +58,16 @@ class ShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_list)
         updateListeners()
         viewModel.loadCount()
     }
+
+
     private fun updateUI() {
         setProductAdapter()
+        loadMedia()
+    }
+
+    private fun loadMedia() {
         binding.storeName.text = name
+        GlideApp.with(requireContext()).load(imageUrl).into(binding.express)
     }
 
     private fun setProductAdapter() {

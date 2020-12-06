@@ -120,6 +120,9 @@
         <argument
             android:name="shop_id"
             app:argType="long" />
+        <argument
+            android:name="url"
+            app:argType="string" />
     </fragment>
 
 
