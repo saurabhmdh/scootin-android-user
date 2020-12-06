@@ -32,6 +32,8 @@ class CategoriesViewModel @ViewModelInject internal constructor(
 
     private val _selectedShop = MutableLiveData<Long>()
 
+    private val _search_by_shop = MutableLiveData<SearchShopsItem>()
+
     fun updateShop(shopId: Long) {
         _selectedShop.postValue(shopId)
     }
@@ -41,6 +43,12 @@ class CategoriesViewModel @ViewModelInject internal constructor(
     fun doSearch(query: String) {
         _search.postValue(SearchShopsByCategory(query))
     }
+
+    fun doSearchByShop(query: String, shopId: Long) {
+        _search_by_shop.postValue(SearchShopsItem(query, shopId))
+    }
+
+    data class SearchShopsItem(val query: String, val shopId: Long)
 
     val shops: LiveData<PagingData<SearchShopsByCategoryResponse>> =
         _search.switchMap { search ->
@@ -66,21 +74,12 @@ class CategoriesViewModel @ViewModelInject internal constructor(
         Timber.i("Caught  $exception")
     }
 
-//    val product: LiveData<Response<List<SearchProductsByCategoryResponse>>> =
-//        DoubleTrigger<SearchShopsByCategory, Long>(_search, _selectedShop).switchMap {pair ->
-//            liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-//                Timber.i("Search Detail ${pair.first?.query}  second ${pair.second.orZero()}")
-//                val mainCategory = cacheDao.getCacheData(AppConstants.MAIN_CATEGORY)?.value
-//                val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
-//                val k = pair.second.orZero()
-//                if (k == 0L) {
-//                    emit(searchRepository.searchProducts(pair.first?.query.orEmpty(), serviceArea.orEmpty(), mainCategory.orEmpty()))
-//                } else {
-//                    // -- When user select a shop
-//                    emit(searchRepository.findProductFromShop(pair.second.orZero() , pair.first?.query.orEmpty()))
-//                }
-//            }
-//        }
+    val allProductByShop: LiveData<PagingData<ProductSearchVO>> = _search_by_shop.switchMap {
+        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler)  {
+            Timber.i("Saurabh ${it.query} for shop ${it.shopId}")
+            emitSource(searchRepository.findProductFromShop(it.query,  it.shopId).cachedIn(viewModelScope).asLiveData())
+        }
+    }
 
     val addToCartLiveData = MutableLiveData<AddToCartRequest>()
 

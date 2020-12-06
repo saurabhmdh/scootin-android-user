@@ -11,6 +11,7 @@ import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.network.response.order.OrderHistoryItem
 import com.scootin.pages.OrderDataSource
 import com.scootin.pages.SearchDataSource
+import com.scootin.pages.SearchProductByShop
 import com.scootin.pages.SearchShopDataSource
 import com.scootin.view.vo.ProductSearchVO
 import kotlinx.coroutines.flow.Flow
@@ -31,14 +32,13 @@ class SearchRepository @Inject constructor(
         }.flow
     }
 
-    suspend fun searchProducts(query: String, serviceAreaId: String, categoryId: String) =
-        services.findProducts(serviceAreaId, categoryId, RequestSearch(query = query))
-
-
     suspend fun getUserCartList(userId: String) = services.getUserCartList(userId)
 
-
-    suspend fun findProductFromShop(shopId: Long, query: String) = services.findProductFromShop(shopId, RequestSearch(query = query))
+    fun findProductFromShop(query: String, shopId: Long): Flow<PagingData<ProductSearchVO>> {
+        return Pager(config = PagingConfig(pageSize = 1, initialLoadSize = 1)) {
+            SearchProductByShop(services, shopId, RequestSearch(query = query))
+        }.flow
+    }
 
     suspend fun uploadImage(filePart: MultipartBody.Part) = services.uploadImage(filePart)
 

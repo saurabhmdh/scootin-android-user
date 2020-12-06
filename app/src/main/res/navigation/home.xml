@@ -110,6 +110,18 @@
             app:popExitAnim="@anim/default_pop_exit_anim" />
     </fragment>
 
+    <fragment
+        android:id="@+id/shop_tem_list"
+        android:name="com.scootin.view.fragment.delivery.essential.ShopItemListFragment"
+        android:label="">
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="shop_id"
+            app:argType="long" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/direct_order_summary_fragment"
@@ -180,9 +192,9 @@
             app:exitAnim="@anim/default_exit_anim"
             app:popEnterAnim="@anim/default_pop_enter_anim"
             app:popExitAnim="@anim/default_pop_exit_anim" />
-
-
     </fragment>
+
+
     <fragment
         android:id="@+id/express_delivery"
         android:name="com.scootin.view.fragment.delivery.express.ExpressDeliveryFragment"
@@ -196,6 +208,8 @@
             app:popEnterAnim="@anim/default_pop_enter_anim"
             app:popExitAnim="@anim/default_pop_exit_anim"/>
     </fragment>
+
+
     <fragment
         android:id="@+id/express_orders"
         android:name="com.scootin.view.fragment.delivery.express.ExpressDeliveryOrders"
@@ -307,7 +321,15 @@
     <fragment
         android:id="@+id/grocery"
         android:name="com.scootin.view.fragment.delivery.essential.EssentialsGroceryDeliveryFragment"
-        android:label="Home" />
+        android:label="Home" >
+        <action
+            android:id="@+id/grossary_to_shop_list"
+            app:destination="@id/shop_tem_list"
+            app:enterAnim="@anim/default_enter_anim"
+            app:exitAnim="@anim/default_exit_anim"
+            app:popEnterAnim="@anim/default_pop_enter_anim"
+            app:popExitAnim="@anim/default_pop_exit_anim" />
+    </fragment>
 
     <fragment
         android:id="@+id/wallet_fragment_grocery"
