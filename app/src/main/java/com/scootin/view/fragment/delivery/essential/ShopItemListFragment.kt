@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.request.RequestOptions
 import com.scootin.R
 import com.scootin.databinding.FragmentEssentialShopItemListBinding
 import com.scootin.databinding.FragmentVegetableDeliveryBinding
@@ -67,7 +68,7 @@ class ShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_list)
 
     private fun loadMedia() {
         binding.storeName.text = name
-        GlideApp.with(requireContext()).load(imageUrl).into(binding.express)
+        GlideApp.with(requireContext()).load(imageUrl).apply(RequestOptions().fitCenter()).into(binding.express)
     }
 
     private fun setProductAdapter() {
