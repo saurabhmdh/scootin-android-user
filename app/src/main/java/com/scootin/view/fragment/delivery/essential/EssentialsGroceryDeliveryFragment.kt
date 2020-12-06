@@ -170,7 +170,7 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
                 override fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse) {
                     Timber.i("Shop Info $shopInfo")
                     //We need to move another screen
-                    findNavController().navigate(EssentialsGroceryDeliveryFragmentDirections.grossaryToShopList(shopInfo.name, shopInfo.shopID))
+                    findNavController().navigate(EssentialsGroceryDeliveryFragmentDirections.grossaryToShopList(shopInfo.name, shopInfo.shopID, shopInfo.imageUrl))
                 }
             })
         binding.storeList.apply {
