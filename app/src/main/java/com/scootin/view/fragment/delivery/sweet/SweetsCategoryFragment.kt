@@ -50,10 +50,10 @@ class SweetsCategoryFragment : Fragment(R.layout.fragment_sweets_category) {
             findNavController().navigate(SweetsCategoryFragmentDirections.homeToSnacks())
         }
 
-        binding.cakenbouquet.setOnClickListener {
-            viewModel.updateSubCategory(it.tag as String?)
-            findNavController().navigate(SweetsCategoryFragmentDirections.homeToCakenbouqet())
-        }
+//        binding.cakenbouquet.setOnClickListener {
+//            viewModel.updateSubCategory(it.tag as String?)
+//            findNavController().navigate(SweetsCategoryFragmentDirections.homeToCakenbouqet())
+//        }
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
     }

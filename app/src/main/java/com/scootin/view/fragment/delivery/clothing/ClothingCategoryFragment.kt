@@ -10,9 +10,12 @@ import com.scootin.databinding.FragmentClothingPageBinding
 import com.scootin.network.AppExecutors
 import com.scootin.util.fragment.autoCleared
 import com.scootin.viewmodel.home.HomeFragmentViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
 
+
+@AndroidEntryPoint
 class ClothingCategoryFragment : Fragment(R.layout.fragment_clothing_page) {
     private var binding by autoCleared<FragmentClothingPageBinding>()
 

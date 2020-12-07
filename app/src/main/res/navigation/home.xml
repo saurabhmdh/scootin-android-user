@@ -355,11 +355,27 @@
     <fragment
         android:id="@+id/innerwearmen"
         android:name="com.scootin.view.fragment.delivery.clothing.ClothingInnerWearMenFragment"
-        android:label="Home" />
+        android:label="Home" >
+        <action
+            android:id="@+id/men_inner_wear_to_shop_list"
+            app:destination="@id/shop_item_list"
+            app:enterAnim="@anim/default_enter_anim"
+            app:exitAnim="@anim/default_exit_anim"
+            app:popEnterAnim="@anim/default_pop_enter_anim"
+            app:popExitAnim="@anim/default_pop_exit_anim" />
+    </fragment>
     <fragment
         android:id="@+id/innerwearwomen"
         android:name="com.scootin.view.fragment.delivery.clothing.ClothingInnerWearWomen"
-        android:label="Home" />
+        android:label="Home" >
+        <action
+            android:id="@+id/women_inner_wear_to_shop_list"
+            app:destination="@id/shop_item_list"
+            app:enterAnim="@anim/default_enter_anim"
+            app:exitAnim="@anim/default_exit_anim"
+            app:popEnterAnim="@anim/default_pop_enter_anim"
+            app:popExitAnim="@anim/default_pop_exit_anim" />
+    </fragment>
 
     <fragment
         android:id="@+id/sweetsCategory"
