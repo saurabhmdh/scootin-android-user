@@ -1,8 +1,10 @@
 package com.scootin.view.fragment.delivery.sweet
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -65,7 +67,14 @@ class SweetShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_
 
     private fun loadMedia() {
         binding.storeName.text = name
-        GlideApp.with(requireContext()).load(imageUrl).apply(RequestOptions().fitCenter()).into(binding.express)
+
+        GlideApp.with(requireContext()).load(imageUrl).apply(
+            RequestOptions().override(dpToPx(R.dimen.image_width), dpToPx(R.dimen.image_height))
+        ).into(binding.express)
+    }
+
+    fun dpToPx(resource: Int): Int {
+        return resources.getDimensionPixelOffset(resource)
     }
 
     private fun setProductAdapter() {
@@ -76,7 +85,11 @@ class SweetShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_
                     item: ProductSearchVO?,
                     count: Int
                 ) {
-                    val addToCartRequest = AddToCartRequest(AppHeaders.userID.toInt(), item?.id, count)
+                    val addToCartRequest = AddToCartRequest(
+                        AppHeaders.userID.toInt(),
+                        item?.id,
+                        count
+                    )
                     viewModel.addToCart(addToCartRequest)
                 }
 
@@ -85,7 +98,11 @@ class SweetShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_
                     item: ProductSearchVO?,
                     count: Int
                 ) {
-                    val addToCartRequest = AddToCartRequest(AppHeaders.userID.toInt(), item?.id, count)
+                    val addToCartRequest = AddToCartRequest(
+                        AppHeaders.userID.toInt(),
+                        item?.id,
+                        count
+                    )
                     viewModel.addToCart(addToCartRequest)
                 }
 
@@ -121,7 +138,7 @@ class SweetShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_
         )
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
-        viewModel.allProductByShop.observe(viewLifecycleOwner) {response->
+        viewModel.allProductByShop.observe(viewLifecycleOwner) { response->
             lifecycleScope.launch {
                 productSearchAdapter.submitData(response)
             }
