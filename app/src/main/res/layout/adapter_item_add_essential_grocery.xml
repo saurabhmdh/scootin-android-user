@@ -93,21 +93,29 @@
             app:layout_constraintStart_toEndOf="@+id/space"
             app:layout_constraintTop_toBottomOf="@+id/detail" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/scootin_logo"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/price"
+            app:layout_constraintStart_toEndOf="@+id/space"
+            app:srcCompat="@drawable/ic_scootin_logo_only"/>
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/discountPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="11dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="5dp"
             android:ellipsize="end"
             android:fontFamily="@font/montserrat_regular"
             android:singleLine="true"
-            app:setPrice="@{data.discountPrice}"
             android:textColor="@android:color/black"
             android:textSize="12sp"
             android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/scootin_logo"
             app:layout_constraintTop_toBottomOf="@+id/price"
-            app:layout_constraintStart_toEndOf="@+id/space" />
+            app:setPrice="@{data.discountPrice}" />
 
     <RelativeLayout
         android:id="@+id/parent_count"
