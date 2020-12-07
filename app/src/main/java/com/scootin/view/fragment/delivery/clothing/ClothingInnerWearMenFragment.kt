@@ -21,7 +21,10 @@ import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.ProductSearchAdapter
+import com.scootin.view.adapter.ProductSearchPagingAdapter
 import com.scootin.view.adapter.ShopSearchAdapter
+import com.scootin.view.fragment.delivery.essential.EssentialsGroceryDeliveryFragmentDirections
+import com.scootin.view.vo.ProductSearchVO
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -33,9 +36,8 @@ import javax.inject.Inject
 class ClothingInnerWearMenFragment : Fragment(R.layout.fragment_clothing_delivery) {
     private var binding by autoCleared<FragmentClothingDeliveryBinding>()
     private val viewModel: CategoriesViewModel by viewModels()
-    @Inject
-    lateinit var appExecutors: AppExecutors
-    private lateinit var productSearchAdapter: ProductSearchAdapter
+
+    private var productSearchAdapter by autoCleared<ProductSearchPagingAdapter>()
     private var shopSearchAdapter by autoCleared<ShopSearchAdapter>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -121,22 +123,20 @@ class ClothingInnerWearMenFragment : Fragment(R.layout.fragment_clothing_deliver
             }
         }
 
-
-//        viewModel.product.observe(viewLifecycleOwner) {
-//            if (it.isSuccessful) {
-//                productSearchAdapter.submitList(it.body())
-//            }
-//        }
+        viewModel.allProductBySubCategory.observe(viewLifecycleOwner) {response->
+            lifecycleScope.launch {
+                productSearchAdapter.submitData(response)
+            }
+        }
     }
 
 
     private fun setProductAdapter() {
-        productSearchAdapter = ProductSearchAdapter(
-            appExecutors,
-            object : ProductSearchAdapter.ImageAdapterClickLister {
+        productSearchAdapter = ProductSearchPagingAdapter(
+            object : ProductSearchPagingAdapter.ImageAdapterClickLister {
                 override fun onIncrementItem(
                     view: View,
-                    item: SearchProductsByCategoryResponse?,
+                    item: ProductSearchVO?,
                     count: Int
                 ) {
                     val addToCartRequest = AddToCartRequest(AppHeaders.userID.toInt(), item?.id, count)
@@ -145,7 +145,7 @@ class ClothingInnerWearMenFragment : Fragment(R.layout.fragment_clothing_deliver
 
                 override fun onDecrementItem(
                     view: View,
-                    item: SearchProductsByCategoryResponse?,
+                    item: ProductSearchVO?,
                     count: Int
                 ) {
                     val addToCartRequest = AddToCartRequest(AppHeaders.userID.toInt(), item?.id, count)
@@ -163,10 +163,7 @@ class ClothingInnerWearMenFragment : Fragment(R.layout.fragment_clothing_deliver
         shopSearchAdapter = ShopSearchAdapter(object : ShopSearchAdapter.StoreImageAdapterClickListener {
                 override fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse) {
                     Timber.i("Shop Info $shopInfo")
-                    viewModel.updateShop(shopInfo.shopID)
-                    binding.productList.updateVisibility(true)
-                    binding.storeList.updateVisibility(false)
-                    (binding.radioGroup.getChildAt(0) as RadioButton).isChecked = true
+                    findNavController().navigate(ClothingInnerWearMenFragmentDirections.menInnerWearToShopList(shopInfo.name, shopInfo.shopID, shopInfo.imageUrl))
                 }
             })
         binding.storeList.apply {

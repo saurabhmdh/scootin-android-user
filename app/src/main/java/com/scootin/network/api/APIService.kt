@@ -73,13 +73,6 @@ interface APIService {
     ): Response<List<SearchShopsByCategoryResponse>>
 
 
-    @POST("/search/{serviceAreaId}/{categoryId}/get-all-products")
-    suspend fun findProducts(
-        @Path("serviceAreaId") serviceAreaId: String,
-        @Path("categoryId") categoryId: String,
-        @Body requestSearch: RequestSearch
-    ): Response<List<SearchProductsByCategoryResponse>>
-
     @POST("/search/{shopId}/get-all-products")
     suspend fun findProductFromShop(
         @Path("shopId") shopId: Long,
@@ -88,6 +81,16 @@ interface APIService {
         @Query("size") limit: Int = 10
     ): Response<List<SearchProductsByCategoryResponse>>
 
+
+
+    @POST("/search/{serviceAreaId}/{subCategoryId}/get-all-products-with-subcategory")
+    suspend fun searchProductBySubCategories(
+        @Path("serviceAreaId") serviceAreaId: String,
+        @Path("subCategoryId") subCategoryId: String,
+        @Query("page") offset: Int = 0,
+        @Query("size") limit: Int = 10,
+        @Body requestSearch: RequestSearch
+    ): Response<List<SearchProductsByCategoryResponse>>
 
     @POST("notification/user/{id}/update-fcm")
     suspend fun updateFCMID(

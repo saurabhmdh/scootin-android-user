@@ -52,4 +52,10 @@ class SearchRepository @Inject constructor(
             SearchDataSource(services, serviceAreaId, categoryId, RequestSearch(query = query))
         }.flow
     }
+
+    fun searchProductBySubCategories(query: String, serviceAreaId: String, subCategoryId: String): Flow<PagingData<ProductSearchVO>> {
+        return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20)) {
+            SearchProductBySubcategory(services, serviceAreaId, subCategoryId, RequestSearch(query = query))
+        }.flow
+    }
 }
