@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.RadioButton
+import android.widget.Toast
 import androidx.appcompat.widget.ListPopupWindow
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,11 +17,13 @@ import com.scootin.databinding.FragmentAccountBinding
 import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
+import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.CancelOrderRequest
 import com.scootin.network.response.AddressDetails
 import com.scootin.network.response.State
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.activity.SplashActivity
+import com.scootin.view.vo.AddressVo
 import com.scootin.viewmodel.account.AccountFragmentViewModel
 import com.scootin.viewmodel.account.AddressFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,6 +35,7 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
 
     private var binding by autoCleared<FragmentAccountBinding>()
     private val viewModel: AccountFragmentViewModel by viewModels()
+    private val addressViewModel:AddressFragmentViewModel by viewModels()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -45,9 +49,28 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
         initObservers()
 
         handleLogOut()
+
+
     }
 
-    private fun initObservers() {}
+    private fun initObservers() {
+        addressViewModel.loadAddress()
+        addressViewModel.getAddressLiveData().observe(viewLifecycleOwner) {
+            if (it.isSuccessful) {
+
+                it.body()?.forEach { item ->
+                    if(item.hasDefault){
+                        binding.nameEditText.setText(item.name)
+                        binding.emailEditText.setText(item.email)
+                        binding.mobileEditText.setText(AppHeaders.userMobileNumber)
+                    }
+                }
+
+            } else {
+                Toast.makeText(requireContext(), "There is some error while getting address", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
     private fun updateListeners() {
         binding.addressFragment.setOnClickListener {

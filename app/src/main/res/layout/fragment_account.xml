@@ -3,6 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="data"
+            type="com.scootin.network.response.AddressDetails"/>
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:background="@drawable/ic_background"
@@ -30,16 +38,140 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/user_profile" />
 
+        <LinearLayout
+            android:id="@+id/root_name"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
+            android:layout_marginTop="@dimen/dimen_10"
+            app:layout_constraintTop_toBottomOf="@id/logout_btn"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/name_text_view"
+                style="@style/custom_font_style_black"
+                android:layout_width="@dimen/address_width"
+                android:layout_height="30dp"
+                android:text="@string/name"
+                android:textColor="#616161"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/name_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/dimen_10"
+                android:background="@null"
+                android:text="@{data.name}"
+                android:maxLines="1"
+                android:layout_weight="1"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#595959"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintTop_toBottomOf="@id/root_name"/>
+
+        <LinearLayout
+            android:id="@+id/root_mobile"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/root_name"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mobile_text_view"
+                style="@style/custom_font_style_black"
+                android:layout_width="@dimen/address_width"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:text="@string/edittxt_user_mob_no"
+                android:textColor="#616161"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mobile_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_10"
+                android:background="@null"
+
+                android:maxLines="1"
+                android:padding="2dp"
+                android:textSize="15sp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#595959"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintTop_toBottomOf="@id/root_mobile"/>
+
+        <LinearLayout
+            android:id="@+id/root_email"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/root_mobile"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/email_text_view"
+                style="@style/custom_font_style_black"
+                android:layout_width="@dimen/address_width"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:text="@string/edittxt_user_email"
+                android:textColor="#616161"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/email_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:layout_marginStart="@dimen/dimen_10"
+                android:text="@{data.email}"
+                android:maxLines="1"
+                android:padding="2dp"
+                android:textSize="15sp"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#595959"
+            android:layout_marginStart="27dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintTop_toBottomOf="@id/root_email"/>
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/address_fragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:background="?attr/selectableItemBackground"
             android:contentDescription="@string/home_radio_button"
             android:src="@drawable/ic_add_new_address_tab_account"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logout_btn" />
+            app:layout_constraintTop_toBottomOf="@+id/root_email" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/orders_fragment"
@@ -69,7 +201,7 @@
             android:id="@+id/logout_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
+            android:padding="10dp"
             android:layout_marginRight="40dp"
             android:paddingBottom="10dp"
             app:layout_constraintEnd_toEndOf="parent"
