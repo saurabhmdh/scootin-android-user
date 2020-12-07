@@ -436,8 +436,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="22dp"
         android:layout_marginEnd="@dimen/dimen_20"
         android:layout_marginTop="@dimen/dimen_20"
         android:background="@drawable/ic_save_button"
