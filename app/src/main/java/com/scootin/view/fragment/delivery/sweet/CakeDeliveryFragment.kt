@@ -22,6 +22,7 @@ import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.ShopSearchAdapter
 import com.scootin.view.adapter.SweetsAdapter
+import com.scootin.view.vo.ProductSearchVO
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -33,10 +34,8 @@ class CakeDeliveryFragment : Fragment(R.layout.fragment_cake_delivery) {
     private var binding by autoCleared<FragmentCakeDeliveryBinding>()
     private val viewModel: CategoriesViewModel by viewModels()
 
-    @Inject
-    lateinit var appExecutors: AppExecutors
 
-    private lateinit var productSearchAdapter: SweetsAdapter
+    private var productSearchAdapter by autoCleared<SweetsAdapter>()
     private var shopSearchAdapter by autoCleared<ShopSearchAdapter>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -105,11 +104,11 @@ class CakeDeliveryFragment : Fragment(R.layout.fragment_cake_delivery) {
             }
         }
 
-//        viewModel.product.observe(viewLifecycleOwner) {
-//            if (it.isSuccessful) {
-//                productSearchAdapter.submitList(it.body())
-//            }
-//        }
+        viewModel.allProductBySubCategoryWithFilter.observe(viewLifecycleOwner) {response->
+            lifecycleScope.launch {
+                productSearchAdapter.submitData(response)
+            }
+        }
 
         viewModel.addToCartMap.observe(viewLifecycleOwner, {
             Timber.i("Status addToCartLiveData = ${it?.isSuccessful} ")
@@ -133,11 +132,10 @@ class CakeDeliveryFragment : Fragment(R.layout.fragment_cake_delivery) {
 
     private fun setProductAdapter() {
         productSearchAdapter = SweetsAdapter(
-            appExecutors,
             object : SweetsAdapter.ImageAdapterClickLister {
                 override fun onIncrementItem(
                     view: View,
-                    item: SearchProductsByCategoryResponse?,
+                    item: ProductSearchVO?,
                     count: Int
                 ) {
                     val addToCartRequest = AddToCartRequest(AppHeaders.userID.toInt(), item?.id, count)
@@ -146,7 +144,7 @@ class CakeDeliveryFragment : Fragment(R.layout.fragment_cake_delivery) {
 
                 override fun onDecrementItem(
                     view: View,
-                    item: SearchProductsByCategoryResponse?,
+                    item: ProductSearchVO?,
                     count: Int
                 ) {
                     val addToCartRequest = AddToCartRequest(AppHeaders.userID.toInt(), item?.id, count)

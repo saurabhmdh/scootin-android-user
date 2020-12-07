@@ -153,6 +153,16 @@ class CategoriesViewModel @ViewModelInject internal constructor(
         }
     }
 
+    //for now lets not imagine the filter
+    val allProductBySubCategoryWithFilter: LiveData<PagingData<ProductSearchVO>> = _search.switchMap {
+        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler)  {
+            val subCategory = cacheDao.getCacheData(AppConstants.SUB_CATEGORY)?.value
+            val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
+
+            emitSource(searchRepository.findProductsBySubCategoryWithFilters(serviceArea.orEmpty(), subCategory.orEmpty(),
+                RequestSearchWithFilter(query = it.query)).cachedIn(viewModelScope).asLiveData())
+        }
+    }
 
     override val coroutineContext: CoroutineContext
         get() = viewModelScope.coroutineContext + Dispatchers.IO
