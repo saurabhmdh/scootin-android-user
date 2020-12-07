@@ -22,6 +22,7 @@ import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.ShopSearchAdapter
 import com.scootin.view.adapter.SweetsAdapter
+import com.scootin.view.fragment.delivery.essential.EssentialsGroceryDeliveryFragmentDirections
 import com.scootin.view.vo.ProductSearchVO
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -166,10 +167,7 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
         shopSearchAdapter = ShopSearchAdapter(object : ShopSearchAdapter.StoreImageAdapterClickListener {
                 override fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse) {
                     Timber.i("Shop Info $shopInfo")
-                    viewModel.updateShop(shopInfo.shopID)
-                    binding.productList.updateVisibility(true)
-                    binding.storeList.updateVisibility(false)
-                    (binding.radioGroup.getChildAt(0) as RadioButton).isChecked = true
+                    findNavController().navigate(SweetsDeliveryFragmentDirections.sweetToShopList(shopInfo.name, shopInfo.shopID, shopInfo.imageUrl))
                 }
             })
         binding.storeList.apply {

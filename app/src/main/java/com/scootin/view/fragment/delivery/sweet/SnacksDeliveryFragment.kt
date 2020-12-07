@@ -164,10 +164,7 @@ class SnacksDeliveryFragment : Fragment(R.layout.fragment_snacks_delivery) {
         shopSearchAdapter = ShopSearchAdapter(object : ShopSearchAdapter.StoreImageAdapterClickListener {
                 override fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse) {
                     Timber.i("Shop Info $shopInfo")
-                    viewModel.updateShop(shopInfo.shopID)
-                    binding.productList.updateVisibility(true)
-                    binding.storeList.updateVisibility(false)
-                    (binding.radioGroup.getChildAt(0) as RadioButton).isChecked = true
+                    findNavController().navigate(SnacksDeliveryFragmentDirections.snackToShopList(shopInfo.name, shopInfo.shopID, shopInfo.imageUrl))
                 }
             })
         binding.storeList.apply {

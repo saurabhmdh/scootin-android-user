@@ -14,4 +14,7 @@
     <dimen name="dimen_20">20dp</dimen>
 
     <dimen name="address_width">90dp</dimen>
+
+    <dimen name="image_width">150dp</dimen>
+    <dimen name="image_height">94dp</dimen>
 </resources>
