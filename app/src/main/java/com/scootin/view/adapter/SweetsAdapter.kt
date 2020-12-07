@@ -75,11 +75,8 @@ class SweetsAdapter (
                 }
 
             }
-
             Timber.i("Saurabh ${item.inventoryTypes}")
         }
-
-
 
     }
 
