@@ -64,6 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
+            android:maxLength="15"
             android:text="@{data.description}"
             android:textColor="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
@@ -91,7 +92,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
-
             android:fontFamily="@font/montserrat_regular"
             app:setPrice="@{data.discountPrice}"
             android:textStyle="bold"
@@ -123,8 +123,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="8dp"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-/>
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <LinearLayout
             android:id="@+id/operation"
             android:layout_width="wrap_content"

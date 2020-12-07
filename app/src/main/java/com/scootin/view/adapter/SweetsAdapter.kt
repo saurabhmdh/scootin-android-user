@@ -10,6 +10,7 @@ import com.scootin.databinding.AdapterItemAddSweetsBinding
 import com.scootin.extensions.updateVisibility
 import com.scootin.view.holders.DataBoundViewHolder
 import com.scootin.view.vo.ProductSearchVO
+import timber.log.Timber
 
 class SweetsAdapter (
     val imageAdapterClickListener: ImageAdapterClickLister
@@ -74,7 +75,11 @@ class SweetsAdapter (
                 }
 
             }
+
+            Timber.i("Saurabh ${item.inventoryTypes}")
         }
+
+
 
     }
 
