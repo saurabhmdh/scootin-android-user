@@ -81,8 +81,6 @@ interface APIService {
         @Query("size") limit: Int = 10
     ): Response<List<SearchProductsByCategoryResponse>>
 
-
-
     @POST("/search/{serviceAreaId}/{subCategoryId}/get-all-products-with-subcategory")
     suspend fun searchProductBySubCategories(
         @Path("serviceAreaId") serviceAreaId: String,
@@ -91,6 +89,8 @@ interface APIService {
         @Query("size") limit: Int = 10,
         @Body requestSearch: RequestSearch
     ): Response<List<SearchProductsByCategoryResponse>>
+
+
 
     @POST("notification/user/{id}/update-fcm")
     suspend fun updateFCMID(
@@ -214,6 +214,18 @@ interface APIService {
         @Query("size") limit: Int = 10,
         @Body requestSearch: RequestSearch
     ): Response<List<SearchProductsByCategoryResponse>>
+
+
+    //Case of sweet & bakery
+    @POST("/search/{serviceAreaId}/{subCategoryId}/get-all-products-with-filter")
+    suspend fun findProductsWithFilters(
+        @Path("serviceAreaId") serviceAreaId: String,
+        @Path("subCategoryId") subCategoryId: String,
+        @Query("page") offset: Int = 0,
+        @Query("size") limit: Int = 10,
+        @Body requestSearch: RequestSearchWithFilter
+    ): Response<List<SearchProductsByCategoryResponse>>
+
 
 
     @GET("/order/orders/get-direct-order/{id}")

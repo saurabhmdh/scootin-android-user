@@ -58,4 +58,13 @@ class SearchRepository @Inject constructor(
             SearchProductBySubcategory(services, serviceAreaId, subCategoryId, RequestSearch(query = query))
         }.flow
     }
+
+
+    fun findProductsBySubCategoryWithFilters(serviceAreaId: String, subCategoryId: String, request: RequestSearchWithFilter): Flow<PagingData<ProductSearchVO>> {
+        return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20)) {
+            SearchProductBySubcategoryWithFilters(services, serviceAreaId, subCategoryId, request)
+        }.flow
+    }
+
+
 }
