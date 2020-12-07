@@ -2,11 +2,14 @@
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_background">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:background="@drawable/ic_background"
-    android:layout_height="match_parent">
+
+    android:layout_height="wrap_content">
 
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -117,4 +120,5 @@
         app:srcCompat="@drawable/bg_clothing"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
 </layout>
