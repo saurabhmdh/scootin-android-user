@@ -85,11 +85,10 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
             }
             showLoading()
 
-            viewModel.userConfirmOrderDirect(AppHeaders.userID, OrderRequest(mode)).observe(viewLifecycleOwner) {
+            viewModel.userConfirmOrderDirect(orderId, OrderRequest(mode)).observe(viewLifecycleOwner) {
                 when(it.status) {
                     Status.SUCCESS -> {
                         Timber.i(" data ${it.data}")
-
                         Timber.i("order id $orderId")
                         dismissLoading()
                         if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
