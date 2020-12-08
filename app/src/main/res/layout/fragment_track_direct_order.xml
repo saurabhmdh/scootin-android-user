@@ -208,7 +208,19 @@
             app:layout_constraintStart_toEndOf="@id/progressId3"
             app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/pay_now"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/packed_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/ic_pay_now_button"/>
 
+        <!-- Write proper payment mode -->
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/pay_on_delivery_header"
             android:layout_width="match_parent"
@@ -224,7 +236,7 @@
             android:textSize="13sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/packed_icon"
+            app:layout_constraintTop_toBottomOf="@id/pay_now"
             tools:ignore="RtlSymmetry" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -237,7 +249,7 @@
             android:textColor="#E60000"
             android:textStyle="bold|italic"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/packed_icon" />
+            app:layout_constraintTop_toBottomOf="@id/pay_now" />
 
 
         <androidx.appcompat.widget.AppCompatImageView

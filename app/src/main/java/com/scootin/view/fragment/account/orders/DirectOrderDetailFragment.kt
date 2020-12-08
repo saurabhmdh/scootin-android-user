@@ -3,30 +3,23 @@ package com.scootin.view.fragment.account.orders
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.razorpay.Checkout
 import com.scootin.R
-import com.scootin.databinding.FragmentMyOrderTrackBinding
 import com.scootin.databinding.FragmentTrackDirectOrderBinding
-import com.scootin.extensions.orDefault
 import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
-import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.CancelOrderRequest
-import com.scootin.network.response.orderdetail.OrderDetail
+import com.scootin.network.response.PaymentDetails
 import com.scootin.util.Conversions
+import com.scootin.util.UtilUIComponent
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.order.ExtraDataAdapter
 import com.scootin.view.fragment.BaseFragment
 import com.scootin.viewmodel.account.OrderFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import org.json.JSONObject
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -38,6 +31,8 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
     private val viewModel: OrderFragmentViewModel by viewModels()
     private var itemsAdapter by autoCleared<ExtraDataAdapter>()
     private val args: DirectOrderDetailFragmentArgs by navArgs()
+
+    private var express: Boolean = false
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -61,7 +56,16 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
                 Status.SUCCESS -> {
                     dismissLoading()
                     binding.data = it.data
+
+                    Timber.i("Check for order status and payment status ${it.data?.orderStatus}, ${it.data?.paymentDetails?.paymentStatus}")
+                    express = it.data?.expressDelivery == true
+
+                    val canPay = (it.data?.orderStatus == "PACKED" || it.data?.orderStatus == "DISPATCHED") && it.data.paymentDetails.paymentStatus == "CREATED"
+                    updatePaymentMode(it.data?.paymentDetails, canPay)
+
+
                     updateSelectors(it.data?.orderStatus)
+
                     if (it.data?.extraData.isNullOrEmpty().not()) {
                         val extra = Conversions.convertExtraData(it.data?.extraData)
                         Timber.i("Extra $extra")
@@ -73,11 +77,22 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
 
                     val cancelBtnVisibility = it.data?.orderStatus == "DISPATCHED" || it.data?.orderStatus=="COMPLETED" || it.data?.orderStatus == "CANCEL"
                     binding.cancelButton.updateVisibility(cancelBtnVisibility.not())
+
+                    //Display payment mode.. If payment is not done then we can ask user to pay now..
+
+
                 }
             }
         })
     }
 
+    private fun updatePaymentMode(paymentDetails: PaymentDetails?, canPay: Boolean) {
+        binding.payNow.updateVisibility(canPay)
+        binding.payOnDeliveryHeader.updateVisibility(canPay.not())
+        binding.pay.updateVisibility(canPay.not())
+
+        binding.pay.text = UtilUIComponent.getPaymentStatusText(paymentDetails)
+    }
 
 
     private fun updateListeners() {
@@ -88,6 +103,9 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
+        binding.payNow.setOnClickListener {
+            findNavController().navigate(DirectOrderDetailFragmentDirections.directOrderToPayment(args.orderId, "DIRECT", express))
+        }
     }
 
     private fun updateSelectors(orderStatus: String?) {

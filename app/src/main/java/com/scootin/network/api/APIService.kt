@@ -176,6 +176,15 @@ interface APIService {
         @Body orderRequest: OrderRequest
     ): Response<OrderDetail>
 
+
+    @POST("/order/user-confirm-order-direct/{orderId}")
+    suspend fun userConfirmOrderDirect(
+        @Path("orderId") orderId: String,
+        @Body orderRequest: OrderRequest
+    ): Response<DirectOrderResponse>
+
+
+
     @POST("/payment/apply-promocode/{orderId}/{userId}")
     suspend fun applyPromoCode(
         @Path("orderId") orderId: String,
@@ -249,4 +258,10 @@ interface APIService {
         @Path("orderId") orderId: String,
         @Body cancelRequest: CancelOrderRequest
     ): Response<String>
+
+
+    @POST("/payment/payment-verified-direct")
+    suspend fun verifyPaymentDirect(
+        @Body verifyAmountRequest: VerifyAmountRequest
+    ): Response<DirectOrderResponse>
 }

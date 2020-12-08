@@ -1,109 +1,83 @@
-package com.scootin.view.fragment.cart
+package com.scootin.view.fragment.account.payment
 
 import android.content.Intent
 import android.os.Bundle
-
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-
 import androidx.navigation.fragment.navArgs
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.razorpay.Checkout
 import com.scootin.R
-import com.scootin.databinding.FragmentPaymenttStatusBinding
+import com.scootin.databinding.FragmentPaymentBinding
 import com.scootin.extensions.getCheckedRadioButtonPosition
-import com.scootin.extensions.getNavigationResult
 import com.scootin.extensions.orDefault
-import com.scootin.extensions.orZero
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.OrderRequest
+import com.scootin.network.request.PromoCodeRequest
 import com.scootin.network.request.VerifyAmountRequest
-import com.scootin.network.response.AddressDetails
-import com.scootin.util.UtilUIComponent
-import com.scootin.util.constants.AppConstants
-import com.scootin.util.constants.IntentConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.fragment.BaseFragment
-
+import com.scootin.view.fragment.cart.CardPaymentPageFragmentDirections
 import com.scootin.viewmodel.payment.PaymentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
 import timber.log.Timber
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
-class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) {
-    private var binding by autoCleared<FragmentPaymenttStatusBinding>()
+class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
+    private var binding by autoCleared<FragmentPaymentBinding>()
     private val viewModel: PaymentViewModel by viewModels()
 
+    private val args: PaymentFragmentArgs by navArgs()
 
     @Inject
     lateinit var appExecutors: AppExecutors
 
-    var promoCode: String = ""
+    private val orderId by lazy {
+        args.orderId
+    }
 
-    var orderId: Long = -1
-    var address: AddressDetails? = null
+    //We can use same fragment to make payment of citywide case..
+    private val orderType by lazy {
+        args.orderType
+    }
+
+    private val express by lazy {
+        args.express
+    }
 
     //We need to load order in-order to get more information about order
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentPaymenttStatusBinding.bind(view)
+        binding = FragmentPaymentBinding.bind(view)
 
         setListener()
     }
 
     private fun setListener() {
-        viewModel.loadPaymentInfo("")
+        viewModel.loadOrder(orderId.toLong())
 
-        viewModel.paymentInfo.observe(viewLifecycleOwner) {
-            dismissLoading()
-            if (it.isSuccessful) {
-                val data = it.body()
-                binding.data = data
-                if (data?.couponDiscount != 0.0) {
-                    binding.promoApplied.visibility = View.VISIBLE
-                    binding.discountApplied.text = "Discount Applied (${promoCode})"
-                } else {
-                    binding.promoApplied.visibility = View.GONE
+        //Let me load new order
+        viewModel.directOrderInfo.observe(viewLifecycleOwner) {
+            when (it.status) {
+                Status.SUCCESS -> {
+                    Timber.i("${it.data}")
+                    it.data?.let { orderDetail ->
+                        binding.data = orderDetail.paymentDetails
+                    }
                 }
-
-            } else {
-                Toast.makeText(context, "Invalid Coupon code", Toast.LENGTH_SHORT).show()
             }
-        }
 
-        //Lets load all address if there is no address then ask to add, incase there is
-        viewModel.loadAllAddress().observe(viewLifecycleOwner) {
-            //find defaultAddress..
-            if (it.isSuccessful) {
-
-                if (address != null) {
-                    Timber.i("We have address from previous fragment $address")
-                    return@observe
-                }
-                address = it.body()?.first { it.hasDefault }
-                Timber.i("We found address ${address}")
-                address?.let {
-                    binding.editDropAddress.text = UtilUIComponent.setOneLineAddress(address)
-                }
-
-            } else {
-                //We need to
-            }
         }
 
 
         binding.confirmButton.setOnClickListener {
-            if (address == null) {
-                Toast.makeText(requireContext(), "Please add a address", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
+
             val mode = when(binding.radioGroup.getCheckedRadioButtonPosition()) {
                 0 -> {"ONLINE"}
                 1 -> {"CASH"}
@@ -111,19 +85,17 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
             }
             showLoading()
 
-            viewModel.userConfirmOrder(AppHeaders.userID, OrderRequest(mode, address!!.id, promoCode)).observe(viewLifecycleOwner) {
+            viewModel.userConfirmOrderDirect(orderId, OrderRequest(mode)).observe(viewLifecycleOwner) {
                 when(it.status) {
                     Status.SUCCESS -> {
                         Timber.i(" data ${it.data}")
-                        orderId = it.data?.id ?: -1
-
                         Timber.i("order id $orderId")
                         dismissLoading()
                         if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
                             val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
                             startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
                         } else {
-                            findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
+                            findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId.toLong()))
                         }
                     }
                     Status.ERROR -> {
@@ -136,31 +108,28 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
 
         binding.applyPromoButton.setOnClickListener {
             if (binding.couponEdittext.text?.toString()?.isEmpty() == true) {
-                Toast.makeText(context, "Please enter a valid coupon code", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Please enter valid coupon code", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            promoCode = binding.couponEdittext.text!!.toString()
+            val promoCode = binding.couponEdittext.text.toString()
             showLoading()
-            viewModel.loadPaymentInfo(promoCode)
+            viewModel.applyPromo(orderId, AppHeaders.userID, PromoCodeRequest(promoCode, orderType)).observe(viewLifecycleOwner) {
+                if (it.isSuccessful) {
+                    dismissLoading()
+                    binding.discountApplied.text = "Discount Applied (${promoCode})"
+                    binding.promoApplied.visibility = View.VISIBLE
+                    viewModel.loadOrder(orderId.toLong())
+                } else {
+                    dismissLoading()
+                    Toast.makeText(requireContext(), "Invalid promocode!!", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
 
-        binding.editDropAddress.setOnClickListener {
-            findNavController().navigate(IntentConstants.openAddressPage())
-        }
 
-        getNavigationResult()?.observe(viewLifecycleOwner) {
-            updateAddressData(it)
-        }
-    }
-    private fun updateAddressData(calendarData: String) {
-        val result =
-            Gson().fromJson<AddressDetails>(calendarData, object : TypeToken<AddressDetails>() {}.type) ?: return
-        address = result
-        binding.editDropAddress.text = UtilUIComponent.setOneLineAddress(address)
-        Timber.i("update the address $result")
     }
 
 
@@ -194,14 +163,15 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
         Timber.i("data := ${data}")
     }
 
-    fun onPaymentSuccess(razorpayPaymentId: String?){
+    fun onPaymentSuccess(razorpayPaymentId: String?) {
         Timber.i("onPaymentSuccess = ${razorpayPaymentId} $orderId")
-        viewModel.verifyPayment(VerifyAmountRequest(razorpayPaymentId)).observe(viewLifecycleOwner) {
+
+        viewModel.verifyPaymentDirect(VerifyAmountRequest(razorpayPaymentId)).observe(viewLifecycleOwner) {
             when(it.status) {
                 Status.LOADING -> {}
                 Status.SUCCESS -> {
-                    //Need some direction to move
-                    findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
+                    Toast.makeText(requireContext(), "Payment successful", Toast.LENGTH_SHORT).show()
+                    findNavController().popBackStack()
                 }
                 Status.ERROR -> {}
             }

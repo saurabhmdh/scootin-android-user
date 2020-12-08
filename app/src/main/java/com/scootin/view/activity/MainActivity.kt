@@ -15,6 +15,7 @@ import com.razorpay.PaymentResultListener
 import com.scootin.R
 import com.scootin.databinding.ActivityMainBinding
 import com.scootin.view.fragment.account.orders.OrderDetailFragment
+import com.scootin.view.fragment.account.payment.PaymentFragment
 import com.scootin.view.fragment.cart.CardPaymentPageFragment
 import com.scootin.view.fragment.wallet.MyWalletFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -98,6 +99,8 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
                         if (fragment is MyWalletFragment) {
                             (fragment).onPaymentSuccess(razorpayPaymentId)
                         } else if (fragment is CardPaymentPageFragment) {
+                            fragment.onPaymentSuccess(razorpayPaymentId)
+                        } else if (fragment is PaymentFragment) {
                             fragment.onPaymentSuccess(razorpayPaymentId)
                         }
                     }

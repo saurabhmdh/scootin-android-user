@@ -38,6 +38,18 @@ class OrderRepository @Inject constructor(
                 services.userConfirmOrder(userId, orderRequest)
         }.asLiveData()
 
+
+    fun userConfirmOrderDirect(
+        orderId: String,
+        orderRequest: OrderRequest,
+        context: CoroutineContext
+    ): LiveData<Resource<DirectOrderResponse>> =
+        object : NetworkBoundResource<DirectOrderResponse>(context) {
+            override suspend fun createCall(): Response<DirectOrderResponse> =
+                services.userConfirmOrderDirect(orderId, orderRequest)
+        }.asLiveData()
+
+
     fun userCancelOrder(
         orderId: String,
         request: CancelOrderRequest,

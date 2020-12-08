@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="5dp">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.scootin.network.response.PaymentDetails" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_background">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/express"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_sopping_bag_card" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_back_arrow" />
+
+
+        <View
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/text_color_primary"
+            app:layout_constraintTop_toBottomOf="@id/express"/>
+
+        <LinearLayout
+            android:id="@+id/txt_total_amt_payable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/express">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="25dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Bag Value"
+                    android:textColor="#000" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="5dp"
+                    android:textColor="#000"
+                    app:setPrice="@{data.amount}" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="25dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Delivery Charges"
+                    android:textColor="#000" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="5dp"
+                    android:textColor="#000"
+                    app:setPrice="@{data.deliveryFreeAmount}" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/promo_applied"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:visibility="gone">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/discount_applied"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Discount Applied (VERY FIRST)"
+                    android:textColor="#000" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="5dp"
+                    android:textColor="#000"
+                    app:setDiscountPrice="@{data.totalSaving}" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="25dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Taxes"
+                    android:textColor="#000" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="5dp"
+                    android:textColor="#000"
+                    app:setPrice="@{data.totalGSTAmount}" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:background="@drawable/ic_total_savings_tab"
+                android:paddingStart="@dimen/dimen_4"
+                android:paddingEnd="@dimen/dimen_4">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Amount Payable"
+                    android:textColor="#000"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="5dp"
+                    android:textColor="#000"
+                    android:textStyle="bold"
+                    app:setPrice="@{data.totalAmount}" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/paymentMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Payment Mode"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/txt_total_amt_payable"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/paymentMode">
+
+            <RadioButton
+                android:id="@+id/by_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#808080"
+                android:checked="true"
+                android:fontFamily="@font/montserrat_regular"
+                android:tag="ONLINE"
+                android:text="Online Mode"
+                android:textColor="#808080"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RadioButton
+                android:id="@+id/by_store"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#808080"
+                android:fontFamily="@font/montserrat_regular"
+                android:selectAllOnFocus="false"
+                android:tag="CASH"
+                android:text="Cash On Delivery"
+                android:textColor="#808080"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </RadioGroup>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/applyCoupon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Promo code"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/couponEdittext"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_margin="12dp"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:paddingStart="@dimen/dimen_10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/applyCoupon" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/applyPromoButton"
+            android:layout_width="140dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="@dimen/dimen_20"
+            android:background="@drawable/button_background"
+            android:gravity="center"
+            android:paddingBottom="6dp"
+            android:paddingEnd="6dp"
+            android:textStyle="bold"
+            android:text="Apply Coupon"
+            android:textColor="#FFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/couponEdittext" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/confirm_button"
+            android:layout_height="38dp"
+            android:layout_marginTop="40dp"
+            android:layout_width="110dp"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/applyPromoButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/ic_pay_now_button"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
