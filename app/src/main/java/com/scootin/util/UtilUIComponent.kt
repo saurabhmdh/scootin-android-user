@@ -2,7 +2,8 @@ package com.scootin.util
 
 
 import com.scootin.network.response.AddressDetails
-import java.lang.StringBuilder
+import com.scootin.network.response.PaymentDetails
+import timber.log.Timber
 
 object UtilUIComponent {
 
@@ -24,4 +25,21 @@ object UtilUIComponent {
         sb.append(address.pincode)
         return sb.toString()
     }
+
+    fun getPaymentStatusText(paymentDetail: PaymentDetails?): String {
+        if (paymentDetail?.paymentMode == null) {
+            return "PENDING"
+        }
+
+        Timber.i("updatePaymentStatus -> ${paymentDetail.paymentStatus}")
+
+        val paymentStatus = if (paymentDetail.paymentStatus == "COMPLETED") {
+            "COMPLETED"
+        } else {
+            "PENDING"
+        }
+
+        return paymentStatus + " { ${paymentDetail.paymentMode} }"
+    }
+
 }
