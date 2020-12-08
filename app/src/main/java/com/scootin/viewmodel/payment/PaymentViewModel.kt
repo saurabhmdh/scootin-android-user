@@ -71,7 +71,7 @@ class PaymentViewModel @ViewModelInject internal constructor(
 
 
     fun verifyPayment(request: VerifyAmountRequest) = paymentRepository.verifyPayment(request, viewModelScope.coroutineContext + Dispatchers.IO + handler)
-
+    fun verifyPaymentDirect(request: VerifyAmountRequest) = paymentRepository.verifyPaymentDirect(request, viewModelScope.coroutineContext + Dispatchers.IO + handler)
 
     private val handler = CoroutineExceptionHandler { _, exception ->
         Timber.i("Caught  $exception")
@@ -85,6 +85,10 @@ class PaymentViewModel @ViewModelInject internal constructor(
     fun applyPromo(orderId: String, userId: String, promoCodeRequest: PromoCodeRequest) = liveData(viewModelScope.coroutineContext + Dispatchers.IO + handler) {
         emit(paymentRepository.applyPromoCode(orderId, userId, promoCodeRequest))
     }
+
+
+    fun userConfirmOrderDirect(userId: String, orderRequest: OrderRequest) = orderRepository.userConfirmOrderDirect(userId, orderRequest, viewModelScope.coroutineContext + Dispatchers.IO + handler)
+
 
     override val coroutineContext: CoroutineContext
         get() = viewModelScope.coroutineContext + Dispatchers.IO

@@ -7,6 +7,7 @@ import com.scootin.network.api.NetworkBoundResource
 import com.scootin.network.api.Resource
 import com.scootin.network.request.PromoCodeRequest
 import com.scootin.network.request.VerifyAmountRequest
+import com.scootin.network.response.orders.DirectOrderResponse
 import com.scootin.network.response.placeOrder.PlaceOrderResponse
 import retrofit2.Response
 import javax.inject.Inject
@@ -31,5 +32,13 @@ class PaymentRepository @Inject constructor(
         context: CoroutineContext
     ): LiveData<Resource<PlaceOrderResponse>> = object : NetworkBoundResource<PlaceOrderResponse>(context) {
         override suspend fun createCall(): Response<PlaceOrderResponse> = services.verifyPayment(verifyAmountRequest)
+    }.asLiveData()
+
+
+    fun verifyPaymentDirect(
+        verifyAmountRequest: VerifyAmountRequest,
+        context: CoroutineContext
+    ): LiveData<Resource<DirectOrderResponse>> = object : NetworkBoundResource<DirectOrderResponse>(context) {
+        override suspend fun createCall(): Response<DirectOrderResponse> = services.verifyPaymentDirect(verifyAmountRequest)
     }.asLiveData()
 }

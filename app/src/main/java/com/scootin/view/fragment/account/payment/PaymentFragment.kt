@@ -20,7 +20,6 @@ import com.scootin.network.request.PromoCodeRequest
 import com.scootin.network.request.VerifyAmountRequest
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.fragment.BaseFragment
-import com.scootin.view.fragment.account.orders.DirectOrderDetailFragmentArgs
 import com.scootin.view.fragment.cart.CardPaymentPageFragmentDirections
 import com.scootin.viewmodel.payment.PaymentViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -86,27 +85,26 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
             }
             showLoading()
 
-//            viewModel.userConfirmOrder(AppHeaders.userID, OrderRequest(mode, address!!.id, promoCode)).observe(viewLifecycleOwner) {
-//                when(it.status) {
-//                    Status.SUCCESS -> {
-//                        Timber.i(" data ${it.data}")
-//                        orderId = it.data?.id ?: -1
-//
-//                        Timber.i("order id $orderId")
-//                        dismissLoading()
-//                        if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
-//                            val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
-//                            startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
-//                        } else {
-//                            findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
-//                        }
-//                    }
-//                    Status.ERROR -> {
-//                        dismissLoading()
-//                    }
-//                    Status.LOADING -> {}
-//                }
-//            }
+            viewModel.userConfirmOrderDirect(AppHeaders.userID, OrderRequest(mode)).observe(viewLifecycleOwner) {
+                when(it.status) {
+                    Status.SUCCESS -> {
+                        Timber.i(" data ${it.data}")
+
+                        Timber.i("order id $orderId")
+                        dismissLoading()
+                        if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
+                            val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
+                            startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
+                        } else {
+                            findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId.toLong()))
+                        }
+                    }
+                    Status.ERROR -> {
+                        dismissLoading()
+                    }
+                    Status.LOADING -> {}
+                }
+            }
         }
 
         binding.applyPromoButton.setOnClickListener {
@@ -119,7 +117,12 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
             viewModel.applyPromo(orderId, AppHeaders.userID, PromoCodeRequest(promoCode, orderType)).observe(viewLifecycleOwner) {
                 if (it.isSuccessful) {
                     dismissLoading()
-                    viewModel.loadOrder(orderId.toLong()) //Again load the order
+                    binding.discountApplied.text = "Discount Applied (${promoCode})"
+                    binding.promoApplied.visibility = View.VISIBLE
+                    viewModel.loadOrder(orderId.toLong())
+                } else {
+                    dismissLoading()
+                    Toast.makeText(requireContext(), "Invalid promocode!!", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -163,12 +166,13 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
 
     fun onPaymentSuccess(razorpayPaymentId: String?) {
         Timber.i("onPaymentSuccess = ${razorpayPaymentId} $orderId")
-        viewModel.verifyPayment(VerifyAmountRequest(razorpayPaymentId)).observe(viewLifecycleOwner) {
+
+        viewModel.verifyPaymentDirect(VerifyAmountRequest(razorpayPaymentId)).observe(viewLifecycleOwner) {
             when(it.status) {
                 Status.LOADING -> {}
                 Status.SUCCESS -> {
-                    //Need some direction to move
-                    findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId.toLong()))
+                    Toast.makeText(requireContext(), "Payment successful", Toast.LENGTH_SHORT).show()
+                    findNavController().popBackStack()
                 }
                 Status.ERROR -> {}
             }
