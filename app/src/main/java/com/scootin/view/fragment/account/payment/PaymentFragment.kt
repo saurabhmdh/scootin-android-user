@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.razorpay.Checkout
 import com.scootin.R
 import com.scootin.databinding.FragmentPaymentBinding
@@ -15,9 +16,11 @@ import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.OrderRequest
+import com.scootin.network.request.PromoCodeRequest
 import com.scootin.network.request.VerifyAmountRequest
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.fragment.BaseFragment
+import com.scootin.view.fragment.account.orders.DirectOrderDetailFragmentArgs
 import com.scootin.view.fragment.cart.CardPaymentPageFragmentDirections
 import com.scootin.viewmodel.payment.PaymentViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,14 +34,23 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
     private var binding by autoCleared<FragmentPaymentBinding>()
     private val viewModel: PaymentViewModel by viewModels()
 
+    private val args: PaymentFragmentArgs by navArgs()
 
     @Inject
     lateinit var appExecutors: AppExecutors
 
-    var promoCode: String = ""
+    private val orderId by lazy {
+        args.orderId
+    }
 
-    var orderId: Long = -1
+    //We can use same fragment to make payment of citywide case..
+    private val orderType by lazy {
+        args.orderType
+    }
 
+    private val express by lazy {
+        args.express
+    }
 
     //We need to load order in-order to get more information about order
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,24 +61,21 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
     }
 
     private fun setListener() {
-        viewModel.loadPaymentInfo("")
+        viewModel.loadOrder(orderId.toLong())
 
-        viewModel.paymentInfo.observe(viewLifecycleOwner) {
-            dismissLoading()
-            if (it.isSuccessful) {
-                val data = it.body()
-                binding.data = data
-                if (data?.couponDiscount != 0.0) {
-                    binding.promoApplied.visibility = View.VISIBLE
-                    binding.discountApplied.text = "Discount Applied (${promoCode})"
-                } else {
-                    binding.promoApplied.visibility = View.GONE
+        //Let me load new order
+        viewModel.directOrderInfo.observe(viewLifecycleOwner) {
+            when (it.status) {
+                Status.SUCCESS -> {
+                    Timber.i("${it.data}")
+                    it.data?.let { orderDetail ->
+                        binding.data = orderDetail.paymentDetails
+                    }
                 }
-
-            } else {
-                Toast.makeText(context, "Invalid Coupon code", Toast.LENGTH_SHORT).show()
             }
+
         }
+
 
         binding.confirmButton.setOnClickListener {
 
@@ -105,9 +114,14 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
                 Toast.makeText(context, "Please enter valid coupon code", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            promoCode = binding.couponEdittext.text!!.toString()
+            val promoCode = binding.couponEdittext.text.toString()
             showLoading()
-            viewModel.loadPaymentInfo(promoCode)
+            viewModel.applyPromo(orderId, AppHeaders.userID, PromoCodeRequest(promoCode, orderType)).observe(viewLifecycleOwner) {
+                if (it.isSuccessful) {
+                    dismissLoading()
+                    viewModel.loadOrder(orderId.toLong()) //Again load the order
+                }
+            }
         }
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
@@ -154,7 +168,7 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
                 Status.LOADING -> {}
                 Status.SUCCESS -> {
                     //Need some direction to move
-                    findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
+                    findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId.toLong()))
                 }
                 Status.ERROR -> {}
             }

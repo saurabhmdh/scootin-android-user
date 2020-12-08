@@ -41,7 +41,7 @@ class PaymentViewModel @ViewModelInject internal constructor(
 
     val paymentInfo = _promo_code.switchMap {
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-            emit(orderRepository.checkOutOrder(AppHeaders.userID, PromoCodeRequest(it)))
+            emit(orderRepository.checkOutOrder(AppHeaders.userID, PromoCodeRequest(it, "NORMAL")))
         }
     }
 
@@ -82,6 +82,9 @@ class PaymentViewModel @ViewModelInject internal constructor(
     }
 
 
+    fun applyPromo(orderId: String, userId: String, promoCodeRequest: PromoCodeRequest) = liveData(viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+        emit(paymentRepository.applyPromoCode(orderId, userId, promoCodeRequest))
+    }
 
     override val coroutineContext: CoroutineContext
         get() = viewModelScope.coroutineContext + Dispatchers.IO

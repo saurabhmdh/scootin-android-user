@@ -32,6 +32,8 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
     private var itemsAdapter by autoCleared<ExtraDataAdapter>()
     private val args: DirectOrderDetailFragmentArgs by navArgs()
 
+    private var express: Boolean = false
+
     @Inject
     lateinit var appExecutors: AppExecutors
 
@@ -56,6 +58,7 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
                     binding.data = it.data
 
                     Timber.i("Check for order status and payment status ${it.data?.orderStatus}, ${it.data?.paymentDetails?.paymentStatus}")
+                    express = it.data?.expressDelivery == true
 
                     val canPay = (it.data?.orderStatus == "PACKED" || it.data?.orderStatus == "DISPATCHED") && it.data.paymentDetails.paymentStatus == "CREATED"
                     updatePaymentMode(it.data?.paymentDetails, canPay)
@@ -100,6 +103,9 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
+        binding.payNow.setOnClickListener {
+            findNavController().navigate(DirectOrderDetailFragmentDirections.directOrderToPayment(args.orderId, "DIRECT", express))
+        }
     }
 
     private fun updateSelectors(orderStatus: String?) {
