@@ -6,7 +6,7 @@ import com.scootin.network.response.PaymentDetails
 import com.scootin.network.response.UserInfo
 
 data class CityWideOrderResponse(
-    val PaymentDetails: PaymentDetails,
+    val paymentDetails: PaymentDetails,
     val deliveryAddressDetails: AddressDetails,
     val id: Int,
     val media: Media,
