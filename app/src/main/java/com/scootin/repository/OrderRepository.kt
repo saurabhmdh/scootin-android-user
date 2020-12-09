@@ -50,6 +50,17 @@ class OrderRepository @Inject constructor(
         }.asLiveData()
 
 
+    fun userConfirmOrderCityWide(
+        orderId: String,
+        orderRequest: OrderRequest,
+        context: CoroutineContext
+    ): LiveData<Resource<CityWideOrderResponse>> =
+        object : NetworkBoundResource<CityWideOrderResponse>(context) {
+            override suspend fun createCall(): Response<CityWideOrderResponse> =
+                services.userConfirmOrderCityWide(orderId, orderRequest)
+        }.asLiveData()
+
+
     fun userCancelOrder(
         orderId: String,
         request: CancelOrderRequest,

@@ -184,6 +184,16 @@ interface APIService {
     ): Response<DirectOrderResponse>
 
 
+    @POST("/order/user-confirm-order-citywide/{orderId}")
+    suspend fun userConfirmOrderCityWide(
+        @Path("orderId") orderId: String,
+        @Body orderRequest: OrderRequest
+    ): Response<CityWideOrderResponse>
+
+    @POST("/payment/payment-verified-citywide")
+    suspend fun verifyPaymentCityWide(
+        @Body verifyAmountRequest: VerifyAmountRequest
+    ): Response<CityWideOrderResponse>
 
     @POST("/payment/apply-promocode/{orderId}/{userId}")
     suspend fun applyPromoCode(

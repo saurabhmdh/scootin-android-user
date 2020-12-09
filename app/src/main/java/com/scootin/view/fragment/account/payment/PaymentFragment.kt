@@ -87,7 +87,7 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
                     addUserConfirmOrderDirectListener(mode)
                 }
                 "CITYWIDE" -> {
-                    //addUserConfirmOrderDirectListener(mode)
+                    addUserConfirmOrderCityWideListener(mode)
                 }
             }
 
@@ -115,6 +115,28 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
         }
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
+    }
+
+    private fun addUserConfirmOrderCityWideListener(mode: String) {
+        viewModel.userConfirmOrderCityWide(orderId, OrderRequest(mode)).observe(viewLifecycleOwner) {
+            when(it.status) {
+                Status.SUCCESS -> {
+                    Timber.i(" data ${it.data}")
+                    Timber.i("order id $orderId")
+                    dismissLoading()
+                    if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
+                        val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
+                        startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
+                    } else {
+                        findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId.toLong()))
+                    }
+                }
+                Status.ERROR -> {
+                    dismissLoading()
+                }
+                Status.LOADING -> {}
+            }
+        }
     }
 
     private fun addDirectOrderListener() {
@@ -204,7 +226,7 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
                 verifyPaymentDirectListener(razorpayPaymentId)
             }
             "CITYWIDE" -> {
-                //addCityWideOrderListener()
+                verifyPaymentCityWideListener(razorpayPaymentId)
             }
         }
 
@@ -212,6 +234,19 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
 
     private fun verifyPaymentDirectListener(razorpayPaymentId: String?) {
         viewModel.verifyPaymentDirect(VerifyAmountRequest(razorpayPaymentId)).observe(viewLifecycleOwner) {
+            when(it.status) {
+                Status.LOADING -> {}
+                Status.SUCCESS -> {
+                    Toast.makeText(requireContext(), "Payment successful", Toast.LENGTH_SHORT).show()
+                    findNavController().popBackStack()
+                }
+                Status.ERROR -> {}
+            }
+        }
+    }
+
+    private fun verifyPaymentCityWideListener(razorpayPaymentId: String?) {
+        viewModel.verifyPaymentCityWide(VerifyAmountRequest(razorpayPaymentId)).observe(viewLifecycleOwner) {
             when(it.status) {
                 Status.LOADING -> {}
                 Status.SUCCESS -> {
