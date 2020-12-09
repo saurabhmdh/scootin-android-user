@@ -164,4 +164,6 @@
 
     <string name="order_not_confirm_by_rider">Order has not been confirm by Rider</string>
     <string name="order_not_pay">Please pay the amount</string>
+
+    <string name="city_wide_order_pay">Order will be delivered soon</string>
 </resources>

@@ -13,8 +13,6 @@ import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.request.CancelOrderRequest
-import com.scootin.network.response.PaymentDetails
-import com.scootin.util.UtilUIComponent
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.fragment.BaseFragment
 import com.scootin.viewmodel.account.OrderFragmentViewModel
@@ -55,6 +53,12 @@ class CityWideOrderDetailFragment : BaseFragment(R.layout.fragment_track_citywid
                     val canPay = (it.data?.orderStatus == "PACKED" && it.data.paymentDetails.paymentStatus == "CREATED")
                     updatePaymentMode(canPay)
 
+                    val onDelivery = ((it.data?.orderStatus == "PACKED" || it.data?.orderStatus == "DISPATCHED") && it.data.paymentDetails.paymentStatus == "COMPLETED")
+                    updatePaymentText(onDelivery)
+
+                    if (it.data?.orderStatus == "COMPLETED") {
+                        binding.orderStatusString.text = getString(R.string.order_has_been_completed)
+                    }
 
                     val cancelBtnVisibility = it.data?.orderStatus == "DISPATCHED" || it.data?.orderStatus=="COMPLETED" || it.data?.orderStatus == "CANCEL"
                     binding.cancelButton.updateVisibility(cancelBtnVisibility.not())
@@ -63,6 +67,11 @@ class CityWideOrderDetailFragment : BaseFragment(R.layout.fragment_track_citywid
         })
     }
 
+    private fun updatePaymentText(onDelivery: Boolean) {
+        if (onDelivery) {
+            binding.orderStatusString.text = getString(R.string.city_wide_order_pay)
+        }
+    }
 
 
     private fun updateListeners() {
