@@ -17,6 +17,7 @@ import com.scootin.network.glide.GlideApp
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.DistanceMeasure
 import com.scootin.network.response.AddressDetails
+import com.scootin.network.response.DistanceResponse
 import com.scootin.network.response.Media
 import com.scootin.util.UtilUIComponent
 import com.scootin.util.constants.AppConstants
@@ -40,6 +41,8 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
     var pickupAddress: AddressDetails? = null
     var dropAddress: AddressDetails? = null
 
+    var distance: DistanceResponse.Element.Distance? = null
+
     private var click = 0 //Pick up address if its 1 means drop
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,6 +55,8 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
         }
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
+
+        binding.placeOrder.isEnabled = false
 
         binding.placeOrder.setOnClickListener {
             placeCityWideOrder()
@@ -80,13 +85,24 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
             return
         }
 
+        if (dropAddress!!.id == pickupAddress!!.id) {
+            Toast.makeText(context, "Both addresses can't be same", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (distance == null || distance?.value == 0) {
+            Toast.makeText(context, "Sorry we can't measure the distance between addresses", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         var orderId: Long = -1
         showLoading()
         viewModel.placeCityWideOrder(
             AppHeaders.userID,
             dropAddress!!.id,
             pickupAddress!!.id,
-            media!!.id
+            media!!.id,
+            distance!!.value
         ).observe(viewLifecycleOwner) {
             if (it.isSuccessful) {
                 dismissLoading()
@@ -133,7 +149,20 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
         if (pickupAddress != null && dropAddress != null) {
             viewModel.findDistance(DistanceMeasure(pickupAddress!!.id, dropAddress!!.id)).observe(viewLifecycleOwner) {
                 if (it.isSuccessful) {
-                    binding.totalDistance.text = "Distance: " + it.body()?.elements?.firstOrNull()?.distance?.text
+
+                    if (it.body()?.elements?.firstOrNull()?.distance == null) {
+                        Toast.makeText(requireContext(), "Sorry we can't measure the distance between addresses", Toast.LENGTH_SHORT).show()
+                        binding.placeOrder.isEnabled = false
+                        return@observe
+                    }
+
+                    distance = it.body()?.elements?.firstOrNull()?.distance
+                    binding.placeOrder.isEnabled = true
+
+                    Timber.i("Saurabh distance = ${distance}")
+                    binding.totalDistance.text = "Distance: " + distance?.text
+                } else {
+                    binding.placeOrder.isEnabled = false
                 }
             }
         }

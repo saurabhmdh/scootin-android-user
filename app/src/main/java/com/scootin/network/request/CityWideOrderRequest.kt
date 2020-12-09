@@ -5,5 +5,5 @@ data class CityWideOrderRequest(
     val pickupAddressDetails: Long,
     val mediaId: Long,
     val serviceAreaId: Long,
-    val extraData: String?
+    val distance: Int
 )

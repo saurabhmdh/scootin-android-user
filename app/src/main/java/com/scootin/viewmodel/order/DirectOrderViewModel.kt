@@ -54,9 +54,11 @@ class DirectOrderViewModel @ViewModelInject internal constructor(
         userId: String,
         deliveryAddressDetails: Long,
         pickupAddressDetails: Long,
-        mediaId: Long) = liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+        mediaId: Long,
+        distance: Int
+    ) = liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
         val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
-        emit(orderRepository.placeCityWideOrder(userId, CityWideOrderRequest(deliveryAddressDetails, pickupAddressDetails, mediaId, serviceArea?.toLong() ?: 0, null)))
+        emit(orderRepository.placeCityWideOrder(userId, CityWideOrderRequest(deliveryAddressDetails, pickupAddressDetails, mediaId, serviceArea?.toLong() ?: 0, distance)))
     }
 
     fun loadAllAddress() = liveData(viewModelScope.coroutineContext + Dispatchers.IO + handler) {
