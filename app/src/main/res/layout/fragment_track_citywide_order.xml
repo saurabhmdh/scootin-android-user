@@ -103,39 +103,24 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="1.5dp"
             android:gravity="center"
-            android:text="@string/order_not_confirm"
+            android:text="@string/order_not_confirm_by_rider"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/gradient_band"
             app:layout_constraintTop_toTopOf="@id/gradient_band" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/delivery_on_header"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/pay_now"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_20"
-            android:layout_marginTop="5dp"
-            android:text="@string/delivery_on"
-            android:textColor="#525252"
-            android:textSize="11.6sp"
-            android:textStyle="bold"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/order_status_string"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/gradient_band"
-            tools:ignore="SmallSp" />
+            android:background="@drawable/ic_pay_now_button"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/order_date_time_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_20"
-            android:layout_marginTop="5dp"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            app:setDateFromOrderDate="@{data.orderDate}"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/delivery_on_header"
-            tools:ignore="SmallSp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_pickup_location"
@@ -149,7 +134,7 @@
             android:drawablePadding="5dp"
             android:textColor="#000"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
+            app:layout_constraintTop_toBottomOf="@id/pay_now" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_arrow"

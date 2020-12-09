@@ -11,6 +11,7 @@ import com.scootin.databinding.FragmentCitywideOrderSummaryBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.util.fragment.autoCleared
+import com.scootin.view.fragment.account.orders.DirectOrderDetailFragmentDirections
 import com.scootin.viewmodel.payment.PaymentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber

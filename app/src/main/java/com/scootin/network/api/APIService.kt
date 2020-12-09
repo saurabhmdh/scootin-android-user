@@ -190,7 +190,7 @@ interface APIService {
         @Path("orderId") orderId: String,
         @Path("userId") userId: String,
         @Body promoCodeRequest: PromoCodeRequest
-    ): Response<PlaceOrderResponse>
+    ): Response<String>
 
 
     @POST("/payment/payment-verified")
