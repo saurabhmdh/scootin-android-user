@@ -8,19 +8,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.scootin.R
 import com.scootin.databinding.FragmentCitywideOrderSummaryBinding
-import com.scootin.databinding.FragmentDirectOrderSummaryBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
-import com.scootin.network.response.AddressDetails
-import com.scootin.network.response.inorder.OrderInventoryDetails
-import com.scootin.util.Conversions
 import com.scootin.util.fragment.autoCleared
-import com.scootin.view.adapter.order.DirectOrderSummaryAdapter
 import com.scootin.viewmodel.payment.PaymentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
-import java.lang.StringBuilder
 import javax.inject.Inject
+
+
 @AndroidEntryPoint
 class CityWideOrderSummaryFragment : Fragment(R.layout.fragment_citywide_order_summary) {
     private var binding by autoCleared<FragmentCitywideOrderSummaryBinding>()
@@ -62,7 +58,7 @@ class CityWideOrderSummaryFragment : Fragment(R.layout.fragment_citywide_order_s
         }
 
         binding.back.setOnClickListener {
-            findNavController().popBackStack(R.id.cart, false)
+            findNavController().popBackStack(R.id.titleScreen, false)
         }
         binding.helpBtn.setOnClickListener {
             findNavController().navigate(CityWideOrderSummaryFragmentDirections.orderToCustomerSupport())
