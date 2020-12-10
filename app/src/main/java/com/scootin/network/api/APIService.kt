@@ -32,7 +32,9 @@ interface APIService {
     ): Response<ResponseUser>
 
     @GET("category/get-all-shop-category")
-    suspend fun getHomeCategory(@HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()): Response<List<HomeResponseCategory>>
+    suspend fun getHomeCategory(
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<List<HomeResponseCategory>>
 
     @POST("auth/generate-otp")
     suspend fun requestOTP(
@@ -60,7 +62,8 @@ interface APIService {
         @Path("categoryId") categoryId: String,
         @Body requestSearch: RequestSearch,
         @Query("page") offset: Int = 0,
-        @Query("size") limit: Int = 10
+        @Query("size") limit: Int = 10,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<List<SearchShopsByCategoryResponse>>
 
     @POST("/search/{serviceAreaId}/{categoryId}/get-all-shops")
@@ -69,7 +72,8 @@ interface APIService {
         @Path("categoryId") categoryId: String,
         @Body requestSearch: RequestSearch,
         @Query("page") offset: Int = 0,
-        @Query("size") limit: Int = 10
+        @Query("size") limit: Int = 10,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<List<SearchShopsByCategoryResponse>>
 
 
@@ -78,7 +82,8 @@ interface APIService {
         @Path("shopId") shopId: Long,
         @Body requestSearch: RequestSearch,
         @Query("page") offset: Int = 0,
-        @Query("size") limit: Int = 10
+        @Query("size") limit: Int = 10,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<List<SearchProductsByCategoryResponse>>
 
     @POST("/search/{serviceAreaId}/{subCategoryId}/get-all-products-with-subcategory")
@@ -87,142 +92,192 @@ interface APIService {
         @Path("subCategoryId") subCategoryId: String,
         @Query("page") offset: Int = 0,
         @Query("size") limit: Int = 10,
-        @Body requestSearch: RequestSearch
+        @Body requestSearch: RequestSearch,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<List<SearchProductsByCategoryResponse>>
-
 
 
     @POST("notification/user/{id}/update-fcm")
     suspend fun updateFCMID(
         @Path("id") userMobileNumber: String,
-        @Body requestFCM: RequestFCM
+        @Body requestFCM: RequestFCM,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<ResponseUser>
 
     @DELETE("/cart/clear-cart/{userId}")
-    suspend fun deleteCart(@Path("userId") userId: String): Response<String>
+    suspend fun deleteCart(
+        @Path("userId") userId: String,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<String>
 
     @POST("/cart/update-cart")
-    suspend fun updateCart(@Body request: AddToCartRequest): Response<CartListResponseItem>
+    suspend fun updateCart(
+        @Body request: AddToCartRequest,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<CartListResponseItem>
 
     @GET("/cart/get-cart-count/{userId}")
-    suspend fun getCartCount(@Path("userId") userId: String): Response<String>
+    suspend fun getCartCount(
+        @Path("userId") userId: String,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<String>
 
     @GET("/cart/get-cart/{userID}")
-    suspend fun getUserCartList(@Path("userID") userId: String): Response<UserCartResponse>
+    suspend fun getUserCartList(
+        @Path("userID") userId: String,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<UserCartResponse>
 
     @POST("/wallet/add-money/{userId}")
-    suspend fun addMoney(@Path("userId") userId: String, @Body addMoneyWallet: AddMoneyWallet): Response<AddWalletResponse>
+    suspend fun addMoney(
+        @Path("userId") userId: String,
+        @Body addMoneyWallet: AddMoneyWallet,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<AddWalletResponse>
 
     @GET("/wallet/list-transaction/{userId}")
-    suspend fun listTransaction(@Path("userId") userId: String): Response<List<WalletTransactionResponse>>
+    suspend fun listTransaction(
+        @Path("userId") userId: String,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<List<WalletTransactionResponse>>
 
     @POST("/wallet/verifyPayment/{userId}")
-    suspend fun verifyWalletPayment(@Path("userId") userId: String, @Body verify: VerifyAmountRequest): Response<String>
+    suspend fun verifyWalletPayment(
+        @Path("userId") userId: String,
+        @Body verify: VerifyAmountRequest,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<String>
 
     @GET("/address/update-default-address/{userId}/{addressId}")
     suspend fun updateDefaultAddress(
         @Path("userId") userId: String,
-        @Path("addressId") addressId: String
+        @Path("addressId") addressId: String,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<String>
 
     @DELETE("/address/delete-address/{userId}/{addressId}")
     suspend fun deleteAddress(
         @Path("userId") userId: String,
-        @Path("addressId") addressId: String
+        @Path("addressId") addressId: String,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<AddressDetails>
 
 
     @POST("/address/add-new-address/{userId}")
-    suspend fun addNewAddress(@Path("userId") userId: String, @Body address: AddAddressRequest): Response<ResponseAddAddressSuccess>
+    suspend fun addNewAddress(
+        @Path("userId") userId: String,
+        @Body address: AddAddressRequest,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<ResponseAddAddressSuccess>
 
     @GET("/address/get-all-address/{userId}")
-    suspend fun getAllAdress(@Path("userId") userId: String): Response<List<AddressDetails>>
+    suspend fun getAllAdress(
+        @Path("userId") userId: String,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<List<AddressDetails>>
 
 
     @POST("/util/find-distance")
     suspend fun findDistance(
-        @Body request: DistanceMeasure
+        @Body request: DistanceMeasure,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<DistanceResponse>
 
 
     @Multipart
     @POST("/media/upload-image-android")
-    suspend fun uploadImage(@Part multipartFile: MultipartBody.Part): Response<Media>
+    suspend fun uploadImage(
+        @Part multipartFile: MultipartBody.Part,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<Media>
 
 
     @POST("/order/place-order-direct/{userId}")
     suspend fun placeDirectOrder(
         @Path("userId") userId: String,
-        @Body request: DirectOrderRequest
+        @Body request: DirectOrderRequest,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<DirectOrderResponse>
 
     @POST("/order/checkout-order/{userId}")
     suspend fun checkOutOrder(
         @Path("userId") userId: String,
-        @Body request: PromoCodeRequest
+        @Body request: PromoCodeRequest,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<CheckOutResponse>
 
 
     @POST("/order/orders/place-city-wide/{userId}")
     suspend fun placeCityWideOrder(
         @Path("userId") userId: String,
-        @Body request: CityWideOrderRequest
+        @Body request: CityWideOrderRequest,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<CityWideOrderResponse>
 
 
     @POST("/order/user-confirm-order/{userId}")
     suspend fun userConfirmOrder(
         @Path("userId") userId: String,
-        @Body orderRequest: OrderRequest
+        @Body orderRequest: OrderRequest,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<OrderDetail>
 
 
     @POST("/order/user-confirm-order-direct/{orderId}")
     suspend fun userConfirmOrderDirect(
         @Path("orderId") orderId: String,
-        @Body orderRequest: OrderRequest
+        @Body orderRequest: OrderRequest,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<DirectOrderResponse>
 
 
     @POST("/order/user-confirm-order-citywide/{orderId}")
     suspend fun userConfirmOrderCityWide(
         @Path("orderId") orderId: String,
-        @Body orderRequest: OrderRequest
+        @Body orderRequest: OrderRequest,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<CityWideOrderResponse>
 
     @POST("/payment/payment-verified-citywide")
     suspend fun verifyPaymentCityWide(
-        @Body verifyAmountRequest: VerifyAmountRequest
+        @Body verifyAmountRequest: VerifyAmountRequest,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<CityWideOrderResponse>
 
     @POST("/payment/apply-promocode/{orderId}/{userId}")
     suspend fun applyPromoCode(
         @Path("orderId") orderId: String,
         @Path("userId") userId: String,
-        @Body promoCodeRequest: PromoCodeRequest
+        @Body promoCodeRequest: PromoCodeRequest,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<String>
 
 
     @POST("/payment/payment-verified")
     suspend fun verifyPayment(
-        @Body verifyAmountRequest: VerifyAmountRequest
+        @Body verifyAmountRequest: VerifyAmountRequest,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<PlaceOrderResponse>
 
 
     @GET("/cart/get-cart-price/{userId}")
     suspend fun getTotalPriceFromCart(
-        @Path("userId") userId: String
+        @Path("userId") userId: String,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<Double>
 
     @GET("/register/get-all-states")
-    suspend fun getAllState(): Response<List<State>>
+    suspend fun getAllState(
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<List<State>>
 
     @GET("/order-history/users/{userId}/get-all")
     suspend fun getAllOrdersForUser(
         @Path("userId") userId: String,
         @Query("page") offset: Int = 0,
         @Query("size") limit: Int = 10,
-        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()): Response<List<OrderHistoryItem>>
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<List<OrderHistoryItem>>
 
 
     @POST("/search/{serviceAreaId}/{categoryId}/get-all-products")
@@ -231,7 +286,8 @@ interface APIService {
         @Path("categoryId") categoryId: String,
         @Query("page") offset: Int = 0,
         @Query("size") limit: Int = 10,
-        @Body requestSearch: RequestSearch
+        @Body requestSearch: RequestSearch,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<List<SearchProductsByCategoryResponse>>
 
 
@@ -242,36 +298,53 @@ interface APIService {
         @Path("subCategoryId") subCategoryId: String,
         @Query("page") offset: Int = 0,
         @Query("size") limit: Int = 10,
-        @Body requestSearch: RequestSearchWithFilter
+        @Body requestSearch: RequestSearchWithFilter,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<List<SearchProductsByCategoryResponse>>
 
 
-
     @GET("/order/orders/get-direct-order/{id}")
-    suspend fun getDirectOrder(@Path("id") id: String): Response<OrderDetail>
+    suspend fun getDirectOrder(
+        @Path("id") id: String,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<OrderDetail>
 
     @GET("/order/orders/get-city-wide-order/{id}")
-    suspend fun getCityWideOrder(@Path("id") id: String): Response<CityWideOrderResponse>
+    suspend fun getCityWideOrder(
+        @Path("id") id: String,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<CityWideOrderResponse>
 
     @GET("/order/orders/get-order/{id}")
-    suspend fun getOrder(@Path("id") id: String): Response<InOrderDetail>
+    suspend fun getOrder(
+        @Path("id") id: String,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<InOrderDetail>
 
 
     @GET("/util/slots/{startTime}")
-    suspend fun getDeliverySlot(@Path("startTime") startTime: Long): Response<List<String>>
+    suspend fun getDeliverySlot(
+        @Path("startTime") startTime: Long,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<List<String>>
 
     @GET("order/orders/check/{id}")
-    suspend fun checkOrder(@Path("id") id: String): Response<String>
+    suspend fun checkOrder(
+        @Path("id") id: String,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<String>
 
     @POST("/order/cancel-order/{orderId}")
     suspend fun userCancelOrder(
         @Path("orderId") orderId: String,
-        @Body cancelRequest: CancelOrderRequest
+        @Body cancelRequest: CancelOrderRequest,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<String>
 
 
     @POST("/payment/payment-verified-direct")
     suspend fun verifyPaymentDirect(
-        @Body verifyAmountRequest: VerifyAmountRequest
+        @Body verifyAmountRequest: VerifyAmountRequest,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<DirectOrderResponse>
 }
