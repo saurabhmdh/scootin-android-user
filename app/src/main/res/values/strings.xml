@@ -163,4 +163,8 @@
     <string name="dialogMessage">Are you sure you want to cancel this order?</string>
     <string name="logoutDialogMessage">Are you sure you want to Logout?</string>
 
+    <string name="order_not_confirm_by_rider">Order has not been confirm by Rider</string>
+    <string name="order_not_pay">Please pay the amount</string>
+
+    <string name="city_wide_order_pay">Order will be delivered soon</string>
 </resources>

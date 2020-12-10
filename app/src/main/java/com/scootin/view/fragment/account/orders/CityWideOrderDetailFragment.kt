@@ -47,7 +47,19 @@ class CityWideOrderDetailFragment : BaseFragment(R.layout.fragment_track_citywid
             when (it.status) {
                 Status.SUCCESS -> {
                     binding.data = it.data
-                    updateSelectors(it.data?.orderStatus)
+
+                    Timber.i("Saurabh ${it.data?.paymentDetails}")
+
+                    val canPay = (it.data?.orderStatus == "PACKED" && it.data.paymentDetails.paymentStatus == "CREATED")
+                    updatePaymentMode(canPay)
+
+                    val onDelivery = ((it.data?.orderStatus == "PACKED" || it.data?.orderStatus == "DISPATCHED") && it.data.paymentDetails.paymentStatus == "COMPLETED")
+                    updatePaymentText(onDelivery)
+
+                    if (it.data?.orderStatus == "COMPLETED") {
+                        binding.orderStatusString.text = getString(R.string.order_has_been_completed)
+                    }
+
                     val cancelBtnVisibility = it.data?.orderStatus == "DISPATCHED" || it.data?.orderStatus=="COMPLETED" || it.data?.orderStatus == "CANCEL"
                     binding.cancelButton.updateVisibility(cancelBtnVisibility.not())
                 }
@@ -55,6 +67,11 @@ class CityWideOrderDetailFragment : BaseFragment(R.layout.fragment_track_citywid
         })
     }
 
+    private fun updatePaymentText(onDelivery: Boolean) {
+        if (onDelivery) {
+            binding.orderStatusString.text = getString(R.string.city_wide_order_pay)
+        }
+    }
 
 
     private fun updateListeners() {
@@ -65,6 +82,9 @@ class CityWideOrderDetailFragment : BaseFragment(R.layout.fragment_track_citywid
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
+        binding.payNow.setOnClickListener {
+            findNavController().navigate(CityWideOrderDetailFragmentDirections.cityWideOrderToPayment(args.orderId, "CITYWIDE", false))
+        }
     }
 
     private fun cancelOrder() {
@@ -101,25 +121,12 @@ class CityWideOrderDetailFragment : BaseFragment(R.layout.fragment_track_citywid
 
         }
     }
-    private fun updateSelectors(orderStatus: String?) {
-        orderStatus?.let {
-            when(it) {
-                "PLACED" -> {
-                    binding.orderStatusString.text = getString(R.string.order_has_been_placed)
-                }
-                "PACKED" -> {
-                    binding.orderStatusString.text = getString(R.string.order_has_been_received)
-                }
-                "COMPLETED" -> {
-                    binding.orderStatusString.text = getString(R.string.order_has_been_completed)
-                }
-                "CANCEL" -> {
-                    binding.orderStatusString.text = getString(R.string.order_has_been_cancelled)
-                }
-            }
+
+    private fun updatePaymentMode(canPay: Boolean) {
+        binding.payNow.updateVisibility(canPay)
+        if (canPay) {
+            binding.orderStatusString.text = getString(R.string.order_not_pay)
         }
-
     }
-
 
 }
