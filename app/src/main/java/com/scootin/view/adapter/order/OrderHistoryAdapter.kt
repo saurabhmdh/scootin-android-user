@@ -44,11 +44,24 @@ class OrderHistoryAdapter(
                 binding.date.setDateFromOrderDate(orderDate)
                 binding.orderStatus.setText(orderStatus)
                 binding.orderType.setText(orderType)
-
                 var deliveryType = "Normal"
-                if (item.expressDelivery) {
-                    deliveryType = "Express"
+                when(item.orderType){
+                    "DIRECT"->{
+                        if (item.expressDelivery) {
+                            deliveryType = "Express"
+                        }
+                        else{
+                            deliveryType = "Normal"
+                        }
+                    }
+                    "CITYWIDE"->{
+                        deliveryType = "Citywide"
+                    }
+                    "NORMAL"->{
+                        deliveryType = "Normal"
+                    }
                 }
+
 
                 binding.orderType.setText(deliveryType)
 

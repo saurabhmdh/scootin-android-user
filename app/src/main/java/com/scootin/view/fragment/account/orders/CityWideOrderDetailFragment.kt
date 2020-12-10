@@ -47,7 +47,7 @@ class CityWideOrderDetailFragment : BaseFragment(R.layout.fragment_track_citywid
             when (it.status) {
                 Status.SUCCESS -> {
                     binding.data = it.data
-
+                    updateSelectors(it.data?.orderStatus)
                     val cancelBtnVisibility = it.data?.orderStatus == "DISPATCHED" || it.data?.orderStatus=="COMPLETED" || it.data?.orderStatus == "CANCEL"
                     binding.cancelButton.updateVisibility(cancelBtnVisibility.not())
                 }
@@ -101,5 +101,25 @@ class CityWideOrderDetailFragment : BaseFragment(R.layout.fragment_track_citywid
 
         }
     }
+    private fun updateSelectors(orderStatus: String?) {
+        orderStatus?.let {
+            when(it) {
+                "PLACED" -> {
+                    binding.orderStatusString.text = getString(R.string.order_has_been_placed)
+                }
+                "PACKED" -> {
+                    binding.orderStatusString.text = getString(R.string.order_has_been_received)
+                }
+                "COMPLETED" -> {
+                    binding.orderStatusString.text = getString(R.string.order_has_been_completed)
+                }
+                "CANCEL" -> {
+                    binding.orderStatusString.text = getString(R.string.order_has_been_cancelled)
+                }
+            }
+        }
+
+    }
+
 
 }
