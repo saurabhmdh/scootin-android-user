@@ -77,18 +77,19 @@
             android:id="@+id/order_date_time"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_marginStart="@dimen/dimen_20"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="7dp"
             android:layout_marginEnd="@dimen/dimen_20"
             android:background="#D6DDFF"
-            app:setDateFromOrderDate="@{data.orderDetails.orderDate}"
             android:gravity="center|start"
             android:paddingStart="5dp"
             android:textColor="#4E4E4E"
             android:textSize="13sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/order_id"
+            app:setDateFromOrderDate="@{data.orderDetails.orderDate}"
             tools:ignore="RtlSymmetry" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -112,6 +113,7 @@
             android:text="@string/order_has_been_placed"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/gradient_band"
             app:layout_constraintTop_toTopOf="@id/gradient_band" />
 
@@ -156,10 +158,11 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/progressId"
-            android:layout_width="61dp"
+            android:layout_width="0dp"
             android:layout_height="@dimen/dimen_10"
             android:layout_marginTop="43dp"
             android:src="@drawable/selector_band"
+            app:layout_constraintEnd_toStartOf="@+id/packed_icon"
             app:layout_constraintStart_toEndOf="@id/place_icon"
             app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
 
@@ -168,17 +171,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_30"
+            android:layout_marginEnd="1dp"
             android:src="@drawable/selector_packed_order"
+            app:layout_constraintEnd_toStartOf="@+id/progressId2"
             app:layout_constraintStart_toEndOf="@id/progressId"
             app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
 
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/progressId2"
-            android:layout_width="61dp"
+            android:layout_width="0dp"
             android:layout_height="@dimen/dimen_10"
             android:layout_marginTop="43dp"
             android:src="@drawable/selector_band"
+            app:layout_constraintEnd_toStartOf="@+id/dispatched_icon"
             app:layout_constraintStart_toEndOf="@id/packed_icon"
             app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
 
@@ -188,12 +194,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:src="@drawable/selector_dispatched_order"
+            app:layout_constraintEnd_toStartOf="@+id/progressId3"
             app:layout_constraintStart_toEndOf="@id/progressId2"
             app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/progressId3"
-            android:layout_width="61dp"
+            android:layout_width="0dp"
             android:layout_height="@dimen/dimen_10"
             android:layout_marginTop="43dp"
             android:src="@drawable/selector_band"
@@ -206,8 +213,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_30"
-            android:layout_marginEnd="@dimen/dimen_20"
+            android:layout_marginEnd="20dp"
             android:src="@drawable/selector_delivered_order"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/progressId3"
             app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
 
