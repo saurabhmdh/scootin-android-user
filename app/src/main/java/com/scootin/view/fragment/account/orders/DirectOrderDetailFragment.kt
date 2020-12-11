@@ -106,6 +106,11 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
         binding.payNow.setOnClickListener {
             findNavController().navigate(DirectOrderDetailFragmentDirections.directOrderToPayment(args.orderId, "DIRECT", express))
         }
+
+        binding.swiperefresh.setOnRefreshListener {
+            viewModel.loadOrder(args.orderId)
+            binding.swiperefresh.setRefreshing(false)
+        }
     }
 
     private fun updateSelectors(orderStatus: String?) {

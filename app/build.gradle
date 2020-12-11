@@ -85,6 +85,9 @@ dependencies {
     implementation deps.support.viewpager2
     implementation deps.support.annotations
     implementation deps.support.activity_ktx
+    implementation deps.support.swiperefreshlayout
+
+
     implementation deps.room.runtime
     implementation deps.play.firebase
     implementation deps.play.map
