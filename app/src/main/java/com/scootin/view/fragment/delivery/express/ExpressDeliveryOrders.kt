@@ -102,7 +102,7 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
         }
 
         binding.back.setOnClickListener {
-            findNavController().popBackStack(R.id.cart, false)
+            findNavController().popBackStack(R.id.titleScreen, false)
         }
 
         //Lets load all address if there is no address then ask to add, incase there is
