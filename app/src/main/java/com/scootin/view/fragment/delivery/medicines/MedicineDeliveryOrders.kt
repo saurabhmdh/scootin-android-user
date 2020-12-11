@@ -195,7 +195,7 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
                         "Your order has been received successfully",
                         Toast.LENGTH_SHORT
                     ).show()
-                    findNavController().navigate(MedicineDeliveryOrdersDirections.directOrderConfirmation(orderId))
+                    findNavController().navigate(MedicineDeliveryOrdersDirections.medicineToDirectOrderConfirmation(orderId))
                 }
                 Status.LOADING -> {
                 }

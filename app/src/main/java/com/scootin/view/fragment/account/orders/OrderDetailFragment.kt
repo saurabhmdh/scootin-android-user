@@ -96,6 +96,11 @@ class OrderDetailFragment : BaseFragment(R.layout.fragment_my_order_track) {
             findNavController().navigate(OrderDetailFragmentDirections.inorderToCustomerSupport())
         }
         binding.back.setOnClickListener { findNavController().popBackStack() }
+
+        binding.swiperefresh.setOnRefreshListener {
+            viewModel.loadOrder(args.orderId)
+            binding.swiperefresh.setRefreshing(false)
+        }
     }
 
     private fun updateViewModel() {

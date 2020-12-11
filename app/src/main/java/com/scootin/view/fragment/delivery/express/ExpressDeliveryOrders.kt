@@ -101,7 +101,9 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
             onClickOfUploadMedia()
         }
 
-        binding.back.setOnClickListener { findNavController().popBackStack() }
+        binding.back.setOnClickListener {
+            findNavController().popBackStack(R.id.cart, false)
+        }
 
         //Lets load all address if there is no address then ask to add, incase there is
         viewModel.loadAllAddress().observe(viewLifecycleOwner) {
@@ -192,7 +194,7 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
                         "Your order has been received successfully",
                         Toast.LENGTH_SHORT
                     ).show()
-                    findNavController().navigate(ExpressDeliveryOrdersDirections.directOrderConfirmation(orderId))
+                    findNavController().navigate(ExpressDeliveryOrdersDirections.expressdeliveryToOrderConfirmation(orderId))
                 }
                 Status.LOADING -> {
                 }

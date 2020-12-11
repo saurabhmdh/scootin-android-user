@@ -224,7 +224,7 @@
             android:name="shop_name"
             app:argType="string" />
         <action
-            android:id="@+id/direct_order_confirmation"
+            android:id="@+id/expressdelivery_to_order_confirmation"
             app:destination="@id/direct_order_confirmation"
             app:popUpTo="@id/titleScreen"
             app:popUpToInclusive="false"
@@ -334,7 +334,7 @@
             android:name="shop_name"
             app:argType="string" />
         <action
-            android:id="@+id/direct_order_confirmation"
+            android:id="@+id/medicine_to_direct_order_confirmation"
             app:destination="@id/direct_order_confirmation"
             app:popUpTo="@id/titleScreen"
             app:popUpToInclusive="false"

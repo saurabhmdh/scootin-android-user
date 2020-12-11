@@ -72,6 +72,7 @@ class DirectOrderSummaryFragment: Fragment(R.layout.fragment_direct_order_summar
         binding.back.setOnClickListener {
             findNavController().popBackStack(R.id.cart, false)
         }
+
         binding.helpBtn.setOnClickListener {
             findNavController().navigate(OrderSummaryFragmentDirections.orderToCustomerSupport())
         }

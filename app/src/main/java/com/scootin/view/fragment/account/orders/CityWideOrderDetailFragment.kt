@@ -85,6 +85,11 @@ class CityWideOrderDetailFragment : BaseFragment(R.layout.fragment_track_citywid
         binding.payNow.setOnClickListener {
             findNavController().navigate(CityWideOrderDetailFragmentDirections.cityWideOrderToPayment(args.orderId, "CITYWIDE", false))
         }
+
+        binding.swiperefresh.setOnRefreshListener {
+            viewModel.loadOrder(args.orderId)
+            binding.swiperefresh.setRefreshing(false)
+        }
     }
 
     private fun cancelOrder() {
