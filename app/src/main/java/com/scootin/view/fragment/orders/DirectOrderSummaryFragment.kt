@@ -70,7 +70,7 @@ class DirectOrderSummaryFragment: Fragment(R.layout.fragment_direct_order_summar
         }
 
         binding.back.setOnClickListener {
-            findNavController().popBackStack(R.id.cart, false)
+            findNavController().popBackStack(R.id.titleScreen, false)
         }
 
         binding.helpBtn.setOnClickListener {
