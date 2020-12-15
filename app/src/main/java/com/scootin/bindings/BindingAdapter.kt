@@ -46,7 +46,7 @@ fun TextView.setPrice(value: Double) {
 @BindingAdapter("setDiscountPrice")
 fun TextView.setDiscountPrice(value: Double) {
     val format: Format = NumberFormat.getCurrencyInstance(Locale("en", "in"))
-    val finalValue = format.format(BigDecimal(value * -1))
+    val finalValue = format.format(BigDecimal(value))
     text = finalValue
 }
 
