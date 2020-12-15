@@ -2,6 +2,7 @@ package com.scootin.view.fragment.account.orders
 
 
 import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -20,6 +21,8 @@ import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.CancelOrderRequest
 import com.scootin.network.request.VerifyAmountRequest
+import com.scootin.network.response.PaymentDetails
+import com.scootin.util.UtilUIComponent
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.order.OrderDetailAdapter
 import com.scootin.view.fragment.BaseFragment
@@ -111,6 +114,7 @@ class OrderDetailFragment : BaseFragment(R.layout.fragment_my_order_track) {
                 Status.SUCCESS -> {
                     dismissLoading()
                     binding.data = it.data
+                    updatePaymentMode(it.data?.orderDetails?.paymentDetails)
                     orderDetailAdapter.submitList(it.data?.orderInventoryDetailsList)
                     updateSelectors(it.data?.orderDetails?.orderStatus)
                     val cancelBtnVisibility = it.data?.orderDetails?.orderStatus == "DISPATCHED" || it.data?.orderDetails?.orderStatus=="COMPLETED" || it.data?.orderDetails?.orderStatus == "CANCEL"
@@ -119,6 +123,13 @@ class OrderDetailFragment : BaseFragment(R.layout.fragment_my_order_track) {
                 }
             }
         })
+    }
+
+    private fun updatePaymentMode(paymentDetails: PaymentDetails?) {
+        binding.pay.text = UtilUIComponent.getPaymentStatusText(paymentDetails)
+        if(paymentDetails?.paymentStatus=="COMPLETED"){
+            binding.pay.setTextColor(Color.parseColor("#3cb043"))
+        }
     }
 
 

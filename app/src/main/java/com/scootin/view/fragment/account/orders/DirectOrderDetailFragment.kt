@@ -1,6 +1,7 @@
 package com.scootin.view.fragment.account.orders
 
 import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -90,8 +91,10 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
         binding.payNow.updateVisibility(canPay)
         binding.payOnDeliveryHeader.updateVisibility(canPay.not())
         binding.pay.updateVisibility(canPay.not())
-
         binding.pay.text = UtilUIComponent.getPaymentStatusText(paymentDetails)
+        if(paymentDetails?.paymentStatus=="COMPLETED"){
+            binding.pay.setTextColor(Color.parseColor("#3cb043"))
+        }
     }
 
 

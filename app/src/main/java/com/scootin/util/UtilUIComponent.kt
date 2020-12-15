@@ -1,6 +1,7 @@
 package com.scootin.util
 
 
+import android.graphics.Color
 import com.scootin.network.response.AddressDetails
 import com.scootin.network.response.PaymentDetails
 import timber.log.Timber
@@ -34,6 +35,7 @@ object UtilUIComponent {
         Timber.i("updatePaymentStatus -> ${paymentDetail.paymentStatus}")
 
         val paymentStatus = if (paymentDetail.paymentStatus == "COMPLETED") {
+            (Color.parseColor("#3cb043"))
             "COMPLETED"
         } else {
             "PENDING"
