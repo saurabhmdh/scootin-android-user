@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:tag="252"
                 android:fontFamily="@font/montserrat_regular"
-                android:text="@string/string_essentials"
+                android:text="Documents | Books"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 android:textColor="#808080"
@@ -61,7 +61,7 @@
                 android:textColor="#808080"
                 android:tag="253"
                 android:selectAllOnFocus="false"
-                android:text="@string/string_sweet"
+                android:text="Food | Edible Item"
                 android:textStyle="bold"
                 android:textSize="13sp" />
             <RadioButton
@@ -73,7 +73,7 @@
                 android:textColor="#808080"
                 android:selectAllOnFocus="false"
                 android:tag="254"
-                android:text="@string/string_vegitable"
+                android:text="Flowers | Cake"
                 android:textStyle="bold"
                 android:textSize="13sp" />
             <RadioButton
@@ -85,7 +85,7 @@
                 android:textColor="#808080"
                 android:selectAllOnFocus="false"
                 android:tag="255"
-                android:text="@string/string_medicines"
+                android:text="Electronics Item"
                 android:textStyle="bold"
                 android:textSize="13sp" />
             <RadioButton
@@ -97,7 +97,7 @@
                 android:textColor="#808080"
                 android:tag="256"
                 android:selectAllOnFocus="false"
-                android:text="@string/string_stationary"
+                android:text="Household Items"
                 android:textStyle="bold"
                 android:textSize="13sp" />
             <RadioButton
@@ -109,7 +109,19 @@
                 android:textColor="#808080"
                 android:tag="257"
                 android:selectAllOnFocus="false"
-                android:text="@string/string_clothing"
+                android:text="Items for Repairing"
+                android:textStyle="bold"
+                android:textSize="13sp" />
+            <RadioButton
+                android:id="@+id/materialRadioButton7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:buttonTint="#808080"
+                android:textColor="#808080"
+                android:tag="257"
+                android:selectAllOnFocus="false"
+                android:text="Clothes | Shoes"
                 android:textStyle="bold"
                 android:textSize="13sp" />
         </RadioGroup>
