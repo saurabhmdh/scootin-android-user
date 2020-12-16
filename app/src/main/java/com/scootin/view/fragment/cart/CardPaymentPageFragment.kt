@@ -2,13 +2,10 @@ package com.scootin.view.fragment.cart
 
 import android.content.Intent
 import android.os.Bundle
-
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-
-import androidx.navigation.fragment.navArgs
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.razorpay.Checkout
@@ -17,7 +14,6 @@ import com.scootin.databinding.FragmentPaymenttStatusBinding
 import com.scootin.extensions.getCheckedRadioButtonPosition
 import com.scootin.extensions.getNavigationResult
 import com.scootin.extensions.orDefault
-import com.scootin.extensions.orZero
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
@@ -25,11 +21,9 @@ import com.scootin.network.request.OrderRequest
 import com.scootin.network.request.VerifyAmountRequest
 import com.scootin.network.response.AddressDetails
 import com.scootin.util.UtilUIComponent
-import com.scootin.util.constants.AppConstants
 import com.scootin.util.constants.IntentConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.fragment.BaseFragment
-
 import com.scootin.viewmodel.payment.PaymentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
