@@ -77,6 +77,9 @@ class OrderDetailFragment : BaseFragment(R.layout.fragment_my_order_track) {
                     when (it.status) {
                         Status.SUCCESS -> {
                             viewModel.loadOrder(args.orderId)
+                            dismissLoading()
+                            findNavController().navigate(OrderDetailFragmentDirections.orderToCancelOrder())
+
                         }
                     }
                 })

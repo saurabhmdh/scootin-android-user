@@ -146,7 +146,20 @@
             app:exitAnim="@anim/default_exit_anim"
             app:popEnterAnim="@anim/default_pop_enter_anim"
             app:popExitAnim="@anim/default_pop_exit_anim" />
+
+        <action
+            android:id="@+id/direct_order_to_cancel_order"
+            app:destination="@id/cancel_order_fragment"
+            app:enterAnim="@anim/default_enter_anim"
+            app:exitAnim="@anim/default_exit_anim"
+            app:popEnterAnim="@anim/default_pop_enter_anim"
+            app:popExitAnim="@anim/default_pop_exit_anim" />
+
     </fragment>
+
+    <fragment
+        android:id="@+id/cancel_order_fragment"
+        android:name="com.scootin.view.fragment.orders.CancelOrderFragment"/>
 
     <fragment
         android:id="@+id/inorder_track_fragment"
@@ -159,6 +172,14 @@
         <action
             android:id="@+id/inorder_to_customerSupport"
             app:destination="@id/support_fragment"
+            app:enterAnim="@anim/default_enter_anim"
+            app:exitAnim="@anim/default_exit_anim"
+            app:popEnterAnim="@anim/default_pop_enter_anim"
+            app:popExitAnim="@anim/default_pop_exit_anim" />
+
+        <action
+            android:id="@+id/order_to_cancel_order"
+            app:destination="@id/cancel_order_fragment"
             app:enterAnim="@anim/default_enter_anim"
             app:exitAnim="@anim/default_exit_anim"
             app:popEnterAnim="@anim/default_pop_enter_anim"

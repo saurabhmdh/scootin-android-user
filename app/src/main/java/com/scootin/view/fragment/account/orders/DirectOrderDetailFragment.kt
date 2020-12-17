@@ -180,6 +180,9 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
                     when (it.status) {
                         Status.SUCCESS -> {
                             viewModel.loadOrder(args.orderId)
+                            dismissLoading()
+                            findNavController().navigate(DirectOrderDetailFragmentDirections.directOrderToCancelOrder())
+
                         }
                     }
                 })
