@@ -192,7 +192,7 @@
             app:layout_constraintTop_toBottomOf="@id/delivery_address" />
 
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <RelativeLayout
             android:id="@+id/total_amount_base"
             android:layout_width="match_parent"
             android:layout_height="30dp"
@@ -200,49 +200,47 @@
             android:layout_marginTop="@dimen/dimen_20"
             android:layout_marginEnd="@dimen/dimen_20"
             android:background="#D6DDFF"
-            app:layout_constraintEnd_toStartOf="@+id/cancel_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/delivery_address"
-            tools:ignore="RtlSymmetry" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txt_total_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_20"
-            android:layout_marginTop="26dp"
-            android:paddingStart="5dp"
-            android:text="@string/amount_rs_3250"
-            android:textColor="#2A2A2A"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/delivery_address"
-            tools:ignore="RtlSymmetry" />
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/total_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="26dp"
-            android:paddingStart="5dp"
-            app:setPrice="@{data.paymentDetails.totalAmount}"
-            android:textColor="#2A2A2A"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/txt_total_amount"
-            app:layout_constraintTop_toBottomOf="@+id/delivery_address"
-            tools:ignore="RtlSymmetry" />
-        <!-- Write apis to send this information -->
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/cancel_button"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="26dp"
-            android:src="@drawable/ic_cancel_order_button_active"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/delivery_address" />
+            tools:ignore="RtlSymmetry" >
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_total_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_centerVertical="true"
+                android:paddingStart="5dp"
+                android:text="@string/amount_rs_3250"
+                android:textColor="#2A2A2A"
+                android:textSize="13sp"
+                android:textStyle="bold"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/total_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_centerVertical="true"
+                android:paddingStart="5dp"
+                app:setPrice="@{data.paymentDetails.totalAmount}"
+                android:textColor="#2A2A2A"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/txt_total_amount" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/cancel_button"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="end"
+                android:layout_marginRight="2dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:src="@drawable/ic_cancel_order_button_active"/>
+        </RelativeLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/orderList"
