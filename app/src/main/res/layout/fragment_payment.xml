@@ -254,14 +254,14 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/confirm_button"
-            android:layout_height="38dp"
+            android:layout_height="25dp"
             android:layout_marginTop="40dp"
-            android:layout_width="110dp"
+            android:layout_width="144dp"
             android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@+id/applyPromoButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/ic_pay_now_button"/>
+            android:background="@drawable/ic_confirm___proceed"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

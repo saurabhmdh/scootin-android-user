@@ -119,34 +119,6 @@
             app:layout_constraintStart_toStartOf="@id/gradient_band"
             app:layout_constraintTop_toTopOf="@id/gradient_band" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/delivery_on_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_20"
-            android:layout_marginTop="5dp"
-            android:text="@string/delivery_on"
-            android:textColor="#525252"
-            android:textSize="11.6sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/gradient_band"
-            tools:ignore="SmallSp" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/order_date_time_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_20"
-            android:layout_marginTop="5dp"
-            android:textColor="#000000"
-            android:textSize="11sp"
-            app:setDateFromOrderDate="@{data.orderDate}"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/delivery_on_header"
-            tools:ignore="SmallSp" />
-
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/place_icon"
             android:layout_width="wrap_content"
@@ -155,7 +127,7 @@
             android:layout_marginTop="@dimen/dimen_30"
             android:src="@drawable/selector_placed_order"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
+            app:layout_constraintTop_toBottomOf="@id/gradient_band" />
 
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -166,7 +138,7 @@
             android:src="@drawable/selector_band"
             app:layout_constraintEnd_toStartOf="@+id/packed_icon"
             app:layout_constraintStart_toEndOf="@id/place_icon"
-            app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
+            app:layout_constraintTop_toBottomOf="@id/gradient_band" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/packed_icon"
@@ -176,7 +148,7 @@
             android:src="@drawable/selector_packed_order"
             app:layout_constraintEnd_toStartOf="@+id/progressId2"
             app:layout_constraintStart_toEndOf="@id/progressId"
-            app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
+            app:layout_constraintTop_toBottomOf="@id/gradient_band" />
 
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -187,7 +159,7 @@
             android:src="@drawable/selector_band"
             app:layout_constraintEnd_toStartOf="@+id/dispatched_icon"
             app:layout_constraintStart_toEndOf="@id/packed_icon"
-            app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
+            app:layout_constraintTop_toBottomOf="@id/gradient_band" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/dispatched_icon"
@@ -197,7 +169,7 @@
             android:src="@drawable/selector_dispatched_order"
             app:layout_constraintEnd_toStartOf="@+id/progressId3"
             app:layout_constraintStart_toEndOf="@id/progressId2"
-            app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
+            app:layout_constraintTop_toBottomOf="@id/gradient_band" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/progressId3"
@@ -207,7 +179,7 @@
             android:src="@drawable/selector_band"
             app:layout_constraintEnd_toStartOf="@id/delivered_icon"
             app:layout_constraintStart_toEndOf="@id/dispatched_icon"
-            app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
+            app:layout_constraintTop_toBottomOf="@id/gradient_band" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/delivered_icon"
@@ -218,7 +190,7 @@
             android:src="@drawable/selector_delivered_order"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/progressId3"
-            app:layout_constraintTop_toBottomOf="@id/order_date_time_header" />
+            app:layout_constraintTop_toBottomOf="@id/gradient_band" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/pay_now"
@@ -317,6 +289,7 @@
             app:layout_constraintTop_toBottomOf="@+id/pay_on_delivery_header" />
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -325,6 +298,7 @@
             app:layout_constraintTop_toBottomOf="@id/total_amount_base">
 
             <LinearLayout
+                android:id="@+id/linear_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
