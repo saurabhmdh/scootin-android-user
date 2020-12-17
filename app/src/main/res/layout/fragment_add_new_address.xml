@@ -148,7 +148,7 @@
             android:layout_width="@dimen/address_width"
             android:layout_height="wrap_content"
             android:padding="3dp"
-            android:text="Email"
+            android:text="Email ID"
             android:textColor="#616161"
             android:textSize="15sp"
             android:textStyle="bold" />
