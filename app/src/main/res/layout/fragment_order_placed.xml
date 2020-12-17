@@ -9,7 +9,7 @@
         android:id="@+id/cancel_action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:lottie_rawRes="@raw/order_placed"
+        app:lottie_rawRes="@raw/order_confirmed"
         app:lottie_loop="true"
         app:lottie_autoPlay="true" />
 
