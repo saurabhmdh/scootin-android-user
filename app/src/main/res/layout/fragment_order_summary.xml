@@ -332,7 +332,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="8dp"
             android:textSize="15sp"
-            android:text="pay on delivery"
+            android:text="Paid Online"
             android:textColor="@color/text_color"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/appCompatTextView"
