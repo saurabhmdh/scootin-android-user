@@ -39,8 +39,10 @@ class SweetsAdapter (
             //If shop is close, these add item should be hide
             if (item.activeForOrder) {
                 binding.parentCount.updateVisibility(true)
+                binding.inactiveAdd.updateVisibility(false)
             } else {
                 binding.parentCount.updateVisibility(false)
+                binding.inactiveAdd.updateVisibility(true)
             }
 
             val addVisible = item.displayQuantity == 0
