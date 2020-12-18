@@ -3,10 +3,12 @@ package com.scootin.view.fragment.account.orders
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.scootin.R
 import com.scootin.databinding.FragmentTrackCitywideOrderBinding
 import com.scootin.extensions.updateVisibility
@@ -95,34 +97,36 @@ class CityWideOrderDetailFragment : BaseFragment(R.layout.fragment_track_citywid
     private fun cancelOrder() {
 
         binding.cancelButton.setOnClickListener {
-            val builder = AlertDialog.Builder(context)
+            val alertDialog = context?.let { it1 -> MaterialAlertDialogBuilder(it1) }
 
-            builder.setTitle(R.string.dialogTitle)
-            //set message for alert dialog
-            builder.setMessage(R.string.dialogMessage)
-            builder.setIcon(android.R.drawable.ic_dialog_alert)
+            alertDialog?.setMessage(R.string.dialogMessage)
+            alertDialog?.setIcon(android.R.drawable.ic_dialog_alert)
 
-            //performing positive action
-            builder.setPositiveButton("Yes") { dialogInterface, which ->
+
+            alertDialog?.setPositiveButton("Yes") { dialogInterface, which ->
                 showLoading()
                 viewModel.cancelOrder(args.orderId, CancelOrderRequest("CITYWIDE")).observe(viewLifecycleOwner, {
                     Timber.i("orderId = ${it.status} : ${it.data}")
                     when (it.status) {
                         Status.SUCCESS -> {
                             viewModel.loadOrder(args.orderId)
+                            dismissLoading()
+                            findNavController().navigate(OrderDetailFragmentDirections.orderToCancelOrder())
+
                         }
                     }
                 })
             }
-            //performing cancel action
-            builder.setNeutralButton("No") { dialogInterface, which ->
 
+            alertDialog?.setNegativeButton("No") { dialogInterface, which ->
+                Toast.makeText(context,"Please collect cash from customer", Toast.LENGTH_LONG).show()
             }
-            // Create the AlertDialog
-            val alertDialog: AlertDialog = builder.create()
-            // Set other dialog properties
-            alertDialog.setCancelable(false)
-            alertDialog.show()
+
+
+
+            alertDialog?.setCancelable(false)
+
+            alertDialog?.show()
 
         }
     }

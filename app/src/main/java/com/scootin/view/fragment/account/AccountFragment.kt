@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.scootin.R
 import com.scootin.databinding.FragmentAccountBinding
 import com.scootin.extensions.updateVisibility
@@ -86,26 +87,25 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
         }
 
         binding.logoutBtn.setOnClickListener {
-            val builder = AlertDialog.Builder(context)
+            val alertDialog = context?.let { it1 -> MaterialAlertDialogBuilder(it1) }
 
-            builder.setTitle(R.string.logOutDialogTitle)
-            //set message for alert dialog
-            builder.setMessage(R.string.logoutDialogMessage)
-            builder.setIcon(android.R.drawable.ic_dialog_alert)
+            alertDialog?.setMessage(R.string.logoutDialogMessage)
+            alertDialog?.setIcon(android.R.drawable.ic_dialog_alert)
 
-            //performing positive action
-            builder.setPositiveButton("Yes") { dialogInterface, which ->
+
+            alertDialog?.setPositiveButton("Yes") { dialogInterface, which ->
                 viewModel.doLogout()
             }
-            //performing cancel action
-            builder.setNeutralButton("No") { dialogInterface, which ->
+
+            alertDialog?.setNegativeButton("No") { dialogInterface, which ->
 
             }
-            // Create the AlertDialog
-            val alertDialog: AlertDialog = builder.create()
-            // Set other dialog properties
-            alertDialog.setCancelable(false)
-            alertDialog.show()
+
+
+
+            alertDialog?.setCancelable(false)
+
+            alertDialog?.show()
 
         }
 
