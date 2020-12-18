@@ -8,9 +8,13 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.scootin.R
+import com.scootin.util.constants.AppConstants
 import com.scootin.util.constants.IntentConstants.openDirectOrderDetail
 import com.scootin.util.constants.IntentConstants.openOrderDetail
 import com.scootin.view.activity.MainActivity
@@ -36,6 +40,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
                 }
                 "UPDATED_CITY_WIDE_ORDER_TO_USER" -> {
                     //We need to write code incase of City wide order
+                }
+                "USER_DISABLED" -> {
+                    WorkManager.getInstance().enqueue(OneTimeWorkRequestBuilder<DisableWorker>().build())
+                    val localIntent = Intent(AppConstants.INTENT_ACTION_USER_DISABLED)
+                    LocalBroadcastManager.getInstance(baseContext).sendBroadcast(localIntent)
                 }
             }
         }

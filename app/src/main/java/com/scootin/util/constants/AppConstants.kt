@@ -36,4 +36,6 @@ object AppConstants {
     )
 
     const val DEBOUNCE_TIME = 200L
+
+    const val INTENT_ACTION_USER_DISABLED = "USER_DISABLED"
 }
