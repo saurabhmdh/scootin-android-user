@@ -151,6 +151,7 @@
     <string name="order_update_message">Your order has been updated</string>
 
     <!-- Lets handle this -->
+
     <string name="order_has_been_placed">Order has been placed</string>
     <string name="order_has_been_received">Order has been Picked up by rider</string>
     <string name="order_not_confirm">Order has not been confirm by shop</string>
@@ -161,6 +162,7 @@
     <string name="dialogTitle">Cancel Order</string>
     <string name="logOutDialogTitle">Logout</string>
     <string name="dialogMessage">Are you sure you want to cancel this order?</string>
+    <string name="addressCheck">Please confirm your address before placing order</string>
     <string name="logoutDialogMessage">Are you sure you want to Logout?</string>
 
     <string name="order_not_confirm_by_rider">Order has not been confirm by Rider</string>

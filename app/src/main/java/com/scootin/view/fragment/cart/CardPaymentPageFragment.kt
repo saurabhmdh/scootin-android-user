@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.razorpay.Checkout
@@ -94,10 +95,49 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
 
 
         binding.confirmButton.setOnClickListener {
+//            if (address == null) {
+//                Toast.makeText(requireContext(), "Please add a address", Toast.LENGTH_LONG).show()
+//                return@setOnClickListener
+//            }
+//            val mode = when(binding.radioGroup.getCheckedRadioButtonPosition()) {
+//                0 -> {"ONLINE"}
+//                1 -> {"CASH"}
+//                else -> {""}
+//            }
+//            showLoading()
+//
+//            viewModel.userConfirmOrder(AppHeaders.userID, OrderRequest(mode, address!!.id, promoCode)).observe(viewLifecycleOwner) {
+//                when(it.status) {
+//                    Status.SUCCESS -> {
+//                        Timber.i(" data ${it.data}")
+//                        orderId = it.data?.id ?: -1
+//
+//                        Timber.i("order id $orderId")
+//                        dismissLoading()
+//                        if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
+//                            val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
+//                            startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
+//                        } else {
+//                            findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
+//                        }
+//                    }
+//                    Status.ERROR -> {
+//                        dismissLoading()
+//                    }
+//                    Status.LOADING -> {}
+//                }
+//            }
             if (address == null) {
                 Toast.makeText(requireContext(), "Please add a address", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
+            val alertDialog = context?.let { it1 -> MaterialAlertDialogBuilder(it1) }
+
+            alertDialog?.setMessage(R.string.addressCheck)
+
+
+            alertDialog?.setPositiveButton("Confirm") { dialogInterface, which ->
+
             val mode = when(binding.radioGroup.getCheckedRadioButtonPosition()) {
                 0 -> {"ONLINE"}
                 1 -> {"CASH"}
@@ -126,6 +166,17 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                     Status.LOADING -> {}
                 }
             }
+            }
+
+            alertDialog?.setNegativeButton("Cancel") { dialogInterface, which ->
+
+            }
+
+
+
+            alertDialog?.setCancelable(false)
+
+            alertDialog?.show()
         }
 
         binding.applyPromoButton.setOnClickListener {
