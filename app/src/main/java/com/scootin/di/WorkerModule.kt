@@ -1,6 +1,7 @@
 package com.scootin.di
 
 import androidx.work.ListenableWorker
+import com.scootin.services.DisableWorker
 import com.scootin.services.StartupDataBaseWorker
 import dagger.Binds
 import dagger.Module
@@ -17,4 +18,8 @@ interface WorkerModule {
     @WorkerKey(StartupDataBaseWorker::class)
     fun bindDatabaseWorker(factory: StartupDataBaseWorker.Factory): IWorkerFactory<out ListenableWorker>
 
+    @Binds
+    @IntoMap
+    @WorkerKey(DisableWorker::class)
+    fun bindDisableWorker(factory: DisableWorker.Factory): IWorkerFactory<out ListenableWorker>
 }

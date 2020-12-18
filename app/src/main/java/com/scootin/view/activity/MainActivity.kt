@@ -1,12 +1,17 @@
 package com.scootin.view.activity
 
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.forEachIndexed
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -14,6 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.razorpay.PaymentResultListener
 import com.scootin.R
 import com.scootin.databinding.ActivityMainBinding
+import com.scootin.util.constants.AppConstants
 import com.scootin.view.fragment.account.orders.OrderDetailFragment
 import com.scootin.view.fragment.account.payment.PaymentFragment
 import com.scootin.view.fragment.cart.CardPaymentPageFragment
@@ -39,9 +45,14 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         } // Else, need to wait for onRestoreInstanceState
-
+        val localBroadcastManager = LocalBroadcastManager.getInstance(this)
+        localBroadcastManager.registerReceiver(listener, IntentFilter(AppConstants.INTENT_ACTION_USER_DISABLED))
     }
-
+    
+    override fun onDestroy() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(listener)
+        super.onDestroy()
+    }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
@@ -128,6 +139,21 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
             badgeDrawable.number = count
             badgeDrawable.backgroundColor = Color.BLUE
             badgeDrawable.setVisible(true, true)
+        }
+    }
+
+    private val listener = MyBroadcastReceiver()
+
+    inner class MyBroadcastReceiver : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent){
+            when (intent.action) {
+                AppConstants.INTENT_ACTION_USER_DISABLED -> {
+                    Toast.makeText(context, "Account has been disabled by admin", Toast.LENGTH_LONG).show()
+                    finish()
+                }
+                else -> Toast.makeText(context, "Action Not Found", Toast.LENGTH_LONG).show()
+            }
+
         }
     }
 }
