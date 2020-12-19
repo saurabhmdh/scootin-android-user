@@ -152,10 +152,10 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                         orderId = it.data?.id ?: -1
 
                         Timber.i("order id $orderId")
-                        dismissLoading()
                         if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
                             val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
                             startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
+                            dismissLoading()
                         } else {
                             findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
                         }
@@ -245,6 +245,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
             when(it.status) {
                 Status.LOADING -> {}
                 Status.SUCCESS -> {
+                    dismissLoading()
                     //Need some direction to move
                     findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
                 }

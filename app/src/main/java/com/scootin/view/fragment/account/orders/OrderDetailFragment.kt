@@ -86,7 +86,6 @@ class OrderDetailFragment : BaseFragment(R.layout.fragment_my_order_track) {
             }
 
             alertDialog?.setNegativeButton("No") { dialogInterface, which ->
-                Toast.makeText(context,"Please collect cash from customer", Toast.LENGTH_LONG).show()
             }
 
 

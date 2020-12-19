@@ -119,7 +119,6 @@ class CityWideOrderDetailFragment : BaseFragment(R.layout.fragment_track_citywid
             }
 
             alertDialog?.setNegativeButton("No") { dialogInterface, which ->
-                Toast.makeText(context,"Please collect cash from customer", Toast.LENGTH_LONG).show()
             }
 
 

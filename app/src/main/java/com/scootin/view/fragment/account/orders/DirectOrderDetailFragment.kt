@@ -190,7 +190,6 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
             }
 
             alertDialog?.setNegativeButton("No") { dialogInterface, which ->
-                Toast.makeText(context,"Please collect cash from customer", Toast.LENGTH_LONG).show()
             }
 
 
