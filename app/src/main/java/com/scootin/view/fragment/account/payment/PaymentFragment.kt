@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.razorpay.Checkout
 import com.scootin.R
 import com.scootin.databinding.FragmentPaymentBinding
@@ -75,7 +76,13 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
 
         binding.confirmButton.setOnClickListener {
 
-            val mode = when(binding.radioGroup.getCheckedRadioButtonPosition()) {
+            val alertDialog = context?.let { it1 -> MaterialAlertDialogBuilder(it1) }
+
+            alertDialog?.setMessage(R.string.addressCheck)
+
+
+            alertDialog?.setPositiveButton("Confirm") { dialogInterface, which ->
+                val mode = when(binding.radioGroup.getCheckedRadioButtonPosition()) {
                 0 -> {"ONLINE"}
                 1 -> {"CASH"}
                 else -> {""}
@@ -90,6 +97,18 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
                     addUserConfirmOrderCityWideListener(mode)
                 }
             }
+            }
+
+            alertDialog?.setNegativeButton("Cancel") { dialogInterface, which ->
+
+            }
+
+
+
+            alertDialog?.setCancelable(false)
+
+            alertDialog?.show()
+
 
 
         }

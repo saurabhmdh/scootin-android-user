@@ -116,11 +116,27 @@
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/price"
             app:layout_constraintStart_toEndOf="@+id/scootin_logo" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/inactive_add"
+            android:layout_width="83dp"
 
+            android:layout_height="26dp"
+            android:text="Add"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingBottom="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/inactive_button_background"
+            android:textSize="16sp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp" />
         <RelativeLayout
             android:id="@+id/parent_count"
             android:layout_width="wrap_content"
             android:orientation="horizontal"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_height="wrap_content">
@@ -139,6 +155,7 @@
                 android:textSize="16sp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp" />
+
 
             <LinearLayout
                 android:id="@+id/operation"

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.scootin.databinding.AdapterVegetablesListBinding
+import com.scootin.extensions.updateInVisibility
 import com.scootin.extensions.updateVisibility
 import com.scootin.view.holders.DataBoundViewHolder
 import com.scootin.view.vo.ProductSearchVO
@@ -42,13 +43,16 @@ class ProductSearchPagingAdapter (
             //If shop is close, these add item should be hide
             if (item.activeForOrder) {
                 binding.parentCount.updateVisibility(true)
+                binding.inactiveAdd.updateVisibility(false)
             } else {
                 binding.parentCount.updateVisibility(false)
+                binding.inactiveAdd.updateVisibility(true)
             }
 
             val addVisible = item.displayQuantity == 0
 
             binding.addItem.updateVisibility(addVisible)
+
             binding.operation.updateVisibility(addVisible.not())
 
 
