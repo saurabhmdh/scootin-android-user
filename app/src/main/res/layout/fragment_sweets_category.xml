@@ -94,17 +94,17 @@
             app:layout_constraintTop_toBottomOf="@id/bakery"
             app:srcCompat="@drawable/ic_snacks" />
 
-<!--       <androidx.appcompat.widget.AppCompatImageView-->
-<!--            android:id="@+id/cakenbouquet"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="35dp"-->
-<!--            android:tag="261"-->
-<!--            android:layout_marginEnd="@dimen/home_screen_margin_start"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/snacks"-->
-<!--            app:srcCompat="@drawable/ic_cake_bouquet_combo" />-->
+       <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cakenbouquet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:tag="261"
+            android:layout_marginEnd="@dimen/home_screen_margin_start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/snacks"
+            app:srcCompat="@drawable/ic_cake_bouquet_combo" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
