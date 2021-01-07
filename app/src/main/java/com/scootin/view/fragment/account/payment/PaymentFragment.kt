@@ -75,20 +75,18 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
         }
 
         binding.confirmButton.setOnClickListener {
-
-            val alertDialog = context?.let { it1 -> MaterialAlertDialogBuilder(it1) }
-
-            alertDialog?.setMessage(R.string.addressCheck)
-
-
-            alertDialog?.setPositiveButton("Confirm") { dialogInterface, which ->
-                val mode = when(binding.radioGroup.getCheckedRadioButtonPosition()) {
-                0 -> {"ONLINE"}
-                1 -> {"CASH"}
-                else -> {""}
-            }
+            val mode = when(binding.radioGroup.getCheckedRadioButtonPosition()) {
+                    0 -> {
+                        "ONLINE"
+                    }
+                    1 -> {
+                        "CASH"
+                    }
+                    else -> {
+                        ""
+                    }
+                }
             showLoading()
-
             when (orderType) {
                 "DIRECT" -> {
                     addUserConfirmOrderDirectListener(mode)
@@ -97,20 +95,6 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
                     addUserConfirmOrderCityWideListener(mode)
                 }
             }
-            }
-
-            alertDialog?.setNegativeButton("Cancel") { dialogInterface, which ->
-
-            }
-
-
-
-            alertDialog?.setCancelable(false)
-
-            alertDialog?.show()
-
-
-
         }
 
         binding.applyPromoButton.setOnClickListener {
@@ -147,7 +131,8 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
                         val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
                         startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
                     } else {
-                        findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId.toLong()))
+                        Toast.makeText(requireContext(), "Payment successful", Toast.LENGTH_SHORT).show()
+                        findNavController().popBackStack()
                     }
                 }
                 Status.ERROR -> {
@@ -183,7 +168,8 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
                         val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
                         startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
                     } else {
-                        findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId.toLong()))
+                        Toast.makeText(requireContext(), "Payment successful", Toast.LENGTH_SHORT).show()
+                        findNavController().popBackStack()
                     }
                 }
                 Status.ERROR -> {
