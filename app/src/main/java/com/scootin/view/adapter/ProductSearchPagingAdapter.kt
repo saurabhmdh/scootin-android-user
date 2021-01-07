@@ -12,6 +12,7 @@ import com.scootin.extensions.updateInVisibility
 import com.scootin.extensions.updateVisibility
 import com.scootin.view.holders.DataBoundViewHolder
 import com.scootin.view.vo.ProductSearchVO
+import timber.log.Timber
 
 class ProductSearchPagingAdapter (
     val imageAdapterClickListener: ImageAdapterClickLister
@@ -41,7 +42,8 @@ class ProductSearchPagingAdapter (
         getItem(position)?.let {item->
             binding.data = item
             //If shop is close, these add item should be hide
-            if (item.activeForOrder) {
+
+            if (item.activeForOrder && item.quantity != 0) {
                 binding.parentCount.updateVisibility(true)
                 binding.inactiveAdd.updateVisibility(false)
             } else {
