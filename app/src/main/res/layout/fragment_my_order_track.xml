@@ -133,7 +133,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/dimen_10"
             android:layout_marginTop="43dp"
-            android:src="@drawable/selector_band"
+
             app:layout_constraintEnd_toStartOf="@+id/packed_icon"
             app:layout_constraintStart_toEndOf="@id/place_icon"
             app:layout_constraintTop_toBottomOf="@id/gradient_band" />
@@ -155,7 +155,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/dimen_10"
             android:layout_marginTop="43dp"
-            android:src="@drawable/selector_band"
+
             app:layout_constraintEnd_toStartOf="@+id/dispatched_icon"
             app:layout_constraintStart_toEndOf="@id/packed_icon"
             app:layout_constraintTop_toBottomOf="@id/gradient_band" />
@@ -175,7 +175,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/dimen_10"
             android:layout_marginTop="43dp"
-            android:src="@drawable/selector_band"
+
             app:layout_constraintEnd_toStartOf="@id/delivered_icon"
             app:layout_constraintStart_toEndOf="@id/dispatched_icon"
             app:layout_constraintTop_toBottomOf="@id/gradient_band" />
