@@ -174,11 +174,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="285dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf=""
+            app:layout_constraintTop_toBottomOf="@id/default_delivery_text_view"
             app:srcCompat="@drawable/ic_name_field_bse_line" />
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_area"
@@ -212,7 +212,7 @@
             android:layout_marginEnd="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/default_delivery_text_view"
+            app:layout_constraintTop_toBottomOf="@id/address_baseline"
             app:srcCompat="@drawable/ic_name_field_bse_line" />
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_city"
