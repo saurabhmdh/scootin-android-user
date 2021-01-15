@@ -7,6 +7,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.observe
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.scootin.R
@@ -115,7 +116,7 @@ class CakeDeliveryFragment : Fragment(R.layout.fragment_cake_delivery) {
             viewModel.loadCount()
         })
 
-        binding.fabCart.setOnClickListener {
+        binding.goToBag.setOnClickListener {
             val navOptions =
                 NavOptions.Builder().setPopUpTo(R.id.titleScreen, false).build()
             findNavController().navigate(R.id.cart, null, navOptions)
