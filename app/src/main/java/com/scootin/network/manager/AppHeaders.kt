@@ -9,11 +9,13 @@ object AppHeaders {
 
     var userID: String = ""
     var userMobileNumber: String = ""
-    var token:String = ""
+    var token: String = ""
 
     var role: ROLE = ROLE.USER
 
     const val PREFIX = "Bearer "
+
+    var serviceAreaId: Long = 0L
 
     fun getHeaderMap() = hashMapOf(AppConstants.AUTHORIZATION to PREFIX + token)
 

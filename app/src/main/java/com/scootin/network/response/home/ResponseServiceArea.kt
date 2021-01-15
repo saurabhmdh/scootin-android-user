@@ -2,7 +2,7 @@ package com.scootin.network.response.home
 
 data class ResponseServiceArea(
     val deleted: Boolean,
-    val id: Int,
+    val id: Long,
     val latitude: Double,
     val longitude: Double,
     val name: String,

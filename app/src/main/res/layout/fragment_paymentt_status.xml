@@ -149,7 +149,7 @@
                     android:paddingStart="0dp"
                     android:paddingEnd="5dp"
                     android:textColor="#000"
-                    app:setDiscountPrice="@{data.totalSaving}" />
+                    app:setDiscountPrice="@{data.couponDiscount}" />
             </RelativeLayout>
 
 
