@@ -93,7 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="4dp"
                     android:layout_marginEnd="20dp"
                     android:background="@color/text_color_primary"
                     app:layout_constraintEnd_toEndOf="parent"
