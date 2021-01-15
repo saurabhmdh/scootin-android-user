@@ -34,6 +34,16 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_back_arrow" />
 
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/order_summary_logo">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
         <RelativeLayout
             android:id="@+id/order_and_help_tab"
             android:layout_width="match_parent"
@@ -44,7 +54,7 @@
             android:background="@drawable/ic_order_and_help_button_tab"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/order_summary_logo">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txt_orders"
@@ -199,6 +209,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/list_of_items_recycler"
             app:srcCompat="@drawable/ic_saparator_line" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
 
 <!--        <RelativeLayout-->
 <!--            android:id="@+id/order_total_tab"-->

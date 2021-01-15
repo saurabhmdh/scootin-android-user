@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/bg_screen"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/ic_background">
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/bg_screen"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/ic_background">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/express"
@@ -29,7 +28,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_back_arrow" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/express"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_fullName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="190dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -86,11 +96,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="211dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fullName_baseline"
             app:srcCompat="@drawable/ic_name_field_bse_line" />
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_email"
@@ -117,14 +127,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="232dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phNo_baseline"
             app:srcCompat="@drawable/ic_name_field_bse_line" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/default_delivery_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -167,7 +178,7 @@
             android:layout_marginEnd="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf=""
             app:srcCompat="@drawable/ic_name_field_bse_line" />
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_area"
@@ -197,11 +208,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="306dp"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/default_delivery_text_view"
             app:srcCompat="@drawable/ic_name_field_bse_line" />
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_city"
@@ -231,11 +242,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="327dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/area_baseline"
             app:srcCompat="@drawable/ic_name_field_bse_line" />
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_state"
@@ -265,11 +276,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="348dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/city_baseline"
             app:srcCompat="@drawable/ic_name_field_bse_line" />
 
         <RadioGroup
@@ -325,37 +336,41 @@
         </RadioGroup>
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/add_new_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="390dp"
+            android:layout_marginTop="30dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/radioGroup"
             app:srcCompat="@drawable/ic_add_new_address_tab" />
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/myOrder_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="433dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_new_address"
             app:srcCompat="@drawable/ic_my_orders_tab" />
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/saved_cards"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="476dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/myOrder_header"
             app:srcCompat="@drawable/ic_saved_cards_tab" />
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="519dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/saved_cards"
             app:srcCompat="@drawable/ic_customer_suppoty_tab" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</LinearLayout>
