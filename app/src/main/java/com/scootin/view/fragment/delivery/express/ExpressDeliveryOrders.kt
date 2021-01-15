@@ -179,6 +179,7 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
             DirectOrderRequest(
                 address!!.id,
                 true,
+                AppHeaders.serviceAreaId,
                 mediaId,
                 shopId,
                 Gson().toJson(searchItemAddAdapter.list).toString()

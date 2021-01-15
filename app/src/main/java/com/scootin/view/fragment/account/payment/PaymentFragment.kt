@@ -121,7 +121,7 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
     }
 
     private fun addUserConfirmOrderCityWideListener(mode: String) {
-        viewModel.userConfirmOrderCityWide(orderId, OrderRequest(mode)).observe(viewLifecycleOwner) {
+        viewModel.userConfirmOrderCityWide(orderId, OrderRequest(mode, AppHeaders.serviceAreaId)).observe(viewLifecycleOwner) {
             when(it.status) {
                 Status.SUCCESS -> {
                     Timber.i(" data ${it.data}")
@@ -158,7 +158,7 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
     }
 
     private fun addUserConfirmOrderDirectListener(mode: String) {
-        viewModel.userConfirmOrderDirect(orderId, OrderRequest(mode)).observe(viewLifecycleOwner) {
+        viewModel.userConfirmOrderDirect(orderId, OrderRequest(mode, AppHeaders.serviceAreaId)).observe(viewLifecycleOwner) {
             when(it.status) {
                 Status.SUCCESS -> {
                     Timber.i(" data ${it.data}")
