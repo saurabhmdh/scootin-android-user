@@ -112,7 +112,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
             }
             showLoading()
 
-            viewModel.userConfirmOrder(AppHeaders.userID, OrderRequest(mode, address!!.id, promoCode)).observe(viewLifecycleOwner) {
+            viewModel.userConfirmOrder(AppHeaders.userID, OrderRequest(mode, AppHeaders.serviceAreaId, address!!.id, promoCode)).observe(viewLifecycleOwner) {
                 when(it.status) {
                     Status.SUCCESS -> {
                         Timber.i(" data ${it.data}")

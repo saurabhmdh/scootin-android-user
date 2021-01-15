@@ -180,6 +180,7 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
             DirectOrderRequest(
                 address!!.id,
                 false,
+                AppHeaders.serviceAreaId,
                 mediaId,
                 shopId,
                 Gson().toJson(searchItemAddAdapter.list).toString()

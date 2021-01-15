@@ -63,6 +63,7 @@ internal constructor(
                        Timber.i("User change his location..")
                         cartRepository.deleteCart(AppHeaders.userID)
                     }
+                    AppHeaders.serviceAreaId = result.id
                     cacheDao.insert(Cache(AppConstants.SERVICE_AREA, result.id.toString()))
                     serviceArea.postValue(ServiceArea(result.id, result.name))
                 }
