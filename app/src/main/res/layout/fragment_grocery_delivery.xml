@@ -122,21 +122,14 @@
         android:id="@+id/fab_cart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/ic_botton_band_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <!--                <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-        <!--                    android:id="@+id/fab_cart"-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="match_parent"-->
-        <!--                    android:layout_alignParentEnd="true"-->
-        <!--                    />-->
-
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txt_items"
+            style="@style/custom_font_style_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -147,12 +140,13 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text_count"
+            style="@style/custom_font_style_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="3dp"
             android:layout_marginTop="4dp"
-            android:layout_toRightOf="@id/txt_items"
+            android:layout_toEndOf="@id/txt_items"
             android:textColor="@color/white" />
 
 
@@ -160,17 +154,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:scaleType="fitXY"
             app:srcCompat="@drawable/ic_saperator" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/go_to_bag"
+            style="@style/custom_font_style_white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="12dp"
             app:srcCompat="@drawable/ic_go_to_bag_button" />
-
-
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
