@@ -62,13 +62,24 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/sender_photo_box"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_marginStart="20dp"
                 android:src="@drawable/ic_text_grp"
                 app:layout_constraintBottom_toBottomOf="@+id/receiver_photo_box"
+                app:layout_constraintEnd_toStartOf="@+id/receiver_photo_box"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/receiver_photo_box" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/txt_prohibited_items"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/sender_photo_box"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sender_photo_box"
+                app:srcCompat="@drawable/prohibited" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/receiver_photo_box"
@@ -81,32 +92,32 @@
                 app:layout_constraintStart_toEndOf="@+id/sender_photo_box"
                 app:layout_constraintTop_toBottomOf="@id/uploadPhoto" />
 
-    <LinearLayout
-        android:id="@+id/warning"
-        android:layout_width="match_parent"
-        android:layout_height="18dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sender_photo_box">
+            <LinearLayout
+                android:id="@+id/warning"
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_prohibited_items">
 
-        <CheckBox
-            android:id="@+id/term_accepted"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="false" />
+                <CheckBox
+                    android:id="@+id/term_accepted"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="I have read and agree to the terms and conditions."
-            android:textSize="12sp"
-            app:layout_constraintTop_toBottomOf="@id/sender_photo_box" />
-    </LinearLayout>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="I have read and agree to the terms and conditions."
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@id/sender_photo_box" />
+            </LinearLayout>
 
 
     <androidx.appcompat.widget.AppCompatTextView
