@@ -121,7 +121,7 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
             viewModel.loadCount()
         })
 
-        binding.goToBag.setOnClickListener {
+        binding.layoutBag.goToBag.setOnClickListener {
             val navOptions =
                 NavOptions.Builder().setPopUpTo(R.id.titleScreen, false).build()
             findNavController().navigate(R.id.cart, null, navOptions)
@@ -178,10 +178,10 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
 
     private fun setupBadge(result: Int) {
         if (result == 0) {
-            binding.textCount.visibility = View.GONE
+            binding.layoutBag.textCount.visibility = View.GONE
         } else {
-            binding.textCount.visibility = View.VISIBLE
-            binding.textCount.text = result.toString()
+            binding.layoutBag.textCount.visibility = View.VISIBLE
+            binding.layoutBag.textCount.text = result.toString()
         }
     }
 

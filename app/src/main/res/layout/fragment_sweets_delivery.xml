@@ -115,61 +115,10 @@
         android:layout_marginEnd="15dp"
         android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_box" />
-    <RelativeLayout
-        android:id="@+id/fab_cart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/ic_botton_band_background"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/fab_cart"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_box" />
 
-        <!--                <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-        <!--                    android:id="@+id/fab_cart"-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="match_parent"-->
-        <!--                    android:layout_alignParentEnd="true"-->
-        <!--                    />-->
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txt_items"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:text="ITEMS :"
-            android:textColor="@color/white" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="3dp"
-            android:layout_marginTop="4dp"
-            android:layout_toRightOf="@id/txt_items"
-            android:textColor="@color/white" />
-
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            app:srcCompat="@drawable/ic_saperator" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/go_to_bag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="12dp"
-            app:srcCompat="@drawable/ic_go_to_bag_button" />
-
-
-    </RelativeLayout>
+    <include layout="@layout/layout_bag" android:id="@+id/layout_bag"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
