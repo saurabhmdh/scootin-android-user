@@ -49,12 +49,13 @@
         android:id="@+id/send_otp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
-        android:layout_marginEnd="24dp"
         android:layout_marginStart="20dp"
-        app:srcCompat="@drawable/ic_send_otp_button"
+        android:layout_marginTop="75dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/editText_PhnNo"
         app:layout_constraintTop_toBottomOf="@id/txt_getStartedwithScootin"
-        app:layout_constraintStart_toEndOf="@id/editText_PhnNo" />
+        app:srcCompat="@drawable/ic_send_otp_button" />
 
     <View
         android:id="@+id/baseline_PhnNo"
@@ -117,15 +118,43 @@
         app:layout_constraintStart_toEndOf="@+id/txt_didnt_get_OTP"
         app:layout_constraintTop_toTopOf="@+id/txt_didnt_get_OTP" />
 
+    <LinearLayout
+        android:id="@+id/warning"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/senAgain_LoginOtp">
+
+        <CheckBox
+            android:id="@+id/term_accepted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:gravity="center"
+            android:text="I agree to the terms and conditions."
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@id/sender_photo_box" />
+    </LinearLayout>
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/signIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="53dp"
+        android:layout_marginTop="30dp"
         app:srcCompat="@drawable/ic_sign_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_didnt_get_OTP" />
+        app:layout_constraintTop_toBottomOf="@+id/warning" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
