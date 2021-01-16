@@ -143,7 +143,7 @@
                     app:layout_constraintTop_toBottomOf="@id/img_arrow"
                     app:setOneLineAddress="@{data.deliveryAddressDetails}" />
 
-                <view
+                <View
                     android:id="@+id/base_line2"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
