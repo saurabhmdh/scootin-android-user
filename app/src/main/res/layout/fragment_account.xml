@@ -38,6 +38,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/user_profile" />
 
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/logout_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <LinearLayout
             android:id="@+id/root_name"
             android:layout_width="match_parent"
@@ -45,7 +54,7 @@
             android:paddingStart="25dp"
             android:paddingEnd="25dp"
             android:layout_marginTop="@dimen/dimen_10"
-            app:layout_constraintTop_toBottomOf="@id/logout_btn"
+            app:layout_constraintTop_toTopOf="parent"
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -197,6 +206,9 @@
             app:layout_constraintTop_toBottomOf="@id/orders_fragment"
             android:contentDescription="@string/feedback" />
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/logout_btn"
             android:layout_width="wrap_content"
@@ -210,4 +222,5 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
