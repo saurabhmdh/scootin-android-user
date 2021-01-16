@@ -142,7 +142,7 @@
                     app:layout_constraintTop_toBottomOf="@id/img_arrow"
                     app:setOneLineAddress="@{data.orderDetails.addressDetails}" />
 
-                <view
+                <View
                     android:id="@+id/base_line2"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -187,7 +187,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/order_summary_tab" />
 
-                <view
+                <View
                     android:id="@+id/base_line3"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
