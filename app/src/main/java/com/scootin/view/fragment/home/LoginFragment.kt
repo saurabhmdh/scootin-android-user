@@ -94,7 +94,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                 Toast.makeText(context, R.string.error_message_invalid_otp, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            
+
             if(binding.termAccepted.isChecked.not()) {
                 Toast.makeText(context, R.string.error_message_select_terms, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener

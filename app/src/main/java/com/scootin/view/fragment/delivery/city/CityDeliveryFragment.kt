@@ -142,7 +142,9 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
             checkforDistance()
         }
 
-
+        binding.txtProhibitedItems.setOnClickListener {
+            findNavController().navigate(CityDeliveryFragmentDirections.actionCitywideToWebview(AppConstants.PROHIBITED_ITEMS))
+        }
     }
 
     private fun checkforDistance() {
