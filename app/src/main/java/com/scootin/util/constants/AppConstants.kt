@@ -38,4 +38,6 @@ object AppConstants {
     const val DEBOUNCE_TIME = 200L
 
     const val INTENT_ACTION_USER_DISABLED = "USER_DISABLED"
+
+    const val TERMS_AND_CONDITION = "https://scootin.in/terms-and-conditions"
 }
