@@ -133,15 +133,14 @@
         <CheckBox
             android:id="@+id/term_accepted"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="false" />
+            android:layout_height="wrap_content" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/term_accepted_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#000"
             android:gravity="center"
-            android:text="I agree to the terms and conditions."
             android:textSize="15sp"
             app:layout_constraintTop_toBottomOf="@id/sender_photo_box" />
     </LinearLayout>

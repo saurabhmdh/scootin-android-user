@@ -17,6 +17,7 @@
     <string name="error_message_invalid_mobile">Please provide a valid mobile number</string>
     <string name="error_message_invalid_email">Please provide a email address</string>
     <string name="error_message_invalid_otp">Please provide a valid OTP</string>
+    <string name="error_message_select_terms">Please accept Terms &amp; Conditions</string>
     <string name="server_error">Server error, try again later !!</string>
 
 
@@ -169,4 +170,6 @@
     <string name="order_not_pay">Please pay the amount</string>
 
     <string name="city_wide_order_pay">Order will be delivered soon</string>
+
+    <string name="login_terms_and_condition">I agree to the Terms &amp; Conditions</string>
 </resources>
