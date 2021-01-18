@@ -283,6 +283,19 @@
                         android:layout_marginRight="2dp"
                         android:padding="5dp"
                         android:src="@drawable/ic_cancel_order_button_active" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/change_payment_mode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="end"
+                        android:textColor="#E60000"
+                        android:textStyle="bold|italic"
+                        android:visibility="gone"
+                        android:layout_marginRight="2dp"
+                        android:padding="5dp"
+                        android:text="Change Payment Mode?" />
                 </RelativeLayout>
 
 
