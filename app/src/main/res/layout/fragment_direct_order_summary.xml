@@ -44,7 +44,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingBottom="60dp">
 
                 <RelativeLayout
                     android:id="@+id/order_and_help_tab"

@@ -75,7 +75,7 @@ class ChangePaymentMethodFragment: BaseFragment(R.layout.fragment_change_payment
                 addDirectOrderListener()
             }
             "NORMAL" -> {
-                addDirectOrderListener()
+                addNormalOrderListener()
             }
             "CITYWIDE" -> {
                 addCityWideOrderListener()
@@ -156,6 +156,20 @@ class ChangePaymentMethodFragment: BaseFragment(R.layout.fragment_change_payment
                     Timber.i("${it.data}")
                     it.data?.let { orderDetail ->
                         binding.data = orderDetail.paymentDetails
+                    }
+                }
+            }
+
+        }
+    }
+
+    private fun addNormalOrderListener() {
+        viewModel.normalOrderInfo.observe(viewLifecycleOwner) {
+            when (it.status) {
+                Status.SUCCESS -> {
+                    Timber.i("${it.data}")
+                    it.data?.let { orderDetail ->
+                        binding.data = orderDetail.orderDetails.paymentDetails
                     }
                 }
             }
