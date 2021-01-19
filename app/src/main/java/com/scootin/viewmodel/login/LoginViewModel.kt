@@ -35,13 +35,15 @@ class LoginViewModel @ViewModelInject internal constructor(
         if (request.userName.isEmpty() || request.password.isEmpty()) {
             AbsentLiveData.create()
         } else {
-            userRepo.doLogin(mapOf("user" to request.userName, "pwd" to request.password),
+            userRepo.doLogin(mapOf(
+                "user" to request.userName,
+                "pwd" to request.password),
                 viewModelScope.coroutineContext + Dispatchers.IO)
         }
     }
 
     val requestOTPComplete = Transformations.switchMap(_sendOTP) {
-        userRepo.sendOTP(mapOf("mobileNo" to it), viewModelScope.coroutineContext + Dispatchers.IO)
+        userRepo.sendOTP(mapOf("mobileNo" to it, "otpType" to "USER"), viewModelScope.coroutineContext + Dispatchers.IO)
     }
 
 
