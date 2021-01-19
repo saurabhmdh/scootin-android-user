@@ -291,7 +291,7 @@
                 android:visibility="gone"
                 android:layout_marginRight="2dp"
                 android:padding="5dp"
-                app:srcCompat="@id/btn_change_payment_mode" />
+                app:srcCompat="@drawable/ic_change_payment_mode" />
         </RelativeLayout>
 
         <androidx.core.widget.NestedScrollView

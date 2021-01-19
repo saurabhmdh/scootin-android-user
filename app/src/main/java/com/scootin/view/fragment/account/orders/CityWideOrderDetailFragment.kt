@@ -37,6 +37,9 @@ class CityWideOrderDetailFragment : BaseFragment(R.layout.fragment_track_citywid
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentTrackCitywideOrderBinding.bind(view)
         binding.back.setOnClickListener { findNavController().popBackStack() }
+        binding.btnChangePaymentMode.setOnClickListener {
+            findNavController().navigate(CityWideOrderDetailFragmentDirections.cityWideOrderToChangePayment(args.orderId,"CITYWIDE"))
+        }
         updateViewModel()
         updateListeners()
         cancelOrder()

@@ -55,6 +55,9 @@ class OrderDetailFragment : BaseFragment(R.layout.fragment_my_order_track) {
         binding = FragmentMyOrderTrackBinding.bind(view)
         binding.back.setOnClickListener { findNavController().popBackStack() }
         binding.lifecycleOwner = this
+        binding.btnChangePaymentMode.setOnClickListener {
+            findNavController().navigate(OrderDetailFragmentDirections.orderToChangePaymentMode(args.orderId,"NORMAL"))
+        }
         setInorderAdapter()
         updateViewModel()
         updateListeners()

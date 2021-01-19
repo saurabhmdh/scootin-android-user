@@ -122,7 +122,19 @@
                 app:argType="string" />
         </action>
     </fragment>
+    <fragment
+        android:id="@+id/change_payment_mode"
+        android:name="com.scootin.view.fragment.account.payment.ChangePaymentMethodFragment">
+    <!--        adb shell am start -a android.intent.action.VIEW -d "https://user.scootin.com/order-detail-direct/18613"-->
 
+    <argument
+        android:name="orderId"
+        app:argType="string" />
+
+        <argument
+            android:name="orderType"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/track_fragment"
         android:name="com.scootin.view.fragment.account.orders.DirectOrderDetailFragment">
@@ -142,6 +154,14 @@
         <action
             android:id="@+id/direct_order_to_payment"
             app:destination="@id/payment_fragment"
+            app:enterAnim="@anim/default_enter_anim"
+            app:exitAnim="@anim/default_exit_anim"
+            app:popEnterAnim="@anim/default_pop_enter_anim"
+            app:popExitAnim="@anim/default_pop_exit_anim" />
+
+        <action
+            android:id="@+id/direct_order_to_change_payment_mode"
+            app:destination="@id/change_payment_mode"
             app:enterAnim="@anim/default_enter_anim"
             app:exitAnim="@anim/default_exit_anim"
             app:popEnterAnim="@anim/default_pop_enter_anim"
@@ -184,6 +204,14 @@
             app:exitAnim="@anim/default_exit_anim"
             app:popEnterAnim="@anim/default_pop_enter_anim"
             app:popExitAnim="@anim/default_pop_exit_anim" />
+
+        <action
+            android:id="@+id/order_to_change_payment_mode"
+            app:destination="@id/change_payment_mode"
+            app:enterAnim="@anim/default_enter_anim"
+            app:exitAnim="@anim/default_exit_anim"
+            app:popEnterAnim="@anim/default_pop_enter_anim"
+            app:popExitAnim="@anim/default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/citywide_track_fragment"
@@ -203,6 +231,14 @@
         <action
             android:id="@+id/city_wide_order_to_payment"
             app:destination="@id/payment_fragment"
+            app:enterAnim="@anim/default_enter_anim"
+            app:exitAnim="@anim/default_exit_anim"
+            app:popEnterAnim="@anim/default_pop_enter_anim"
+            app:popExitAnim="@anim/default_pop_exit_anim" />
+
+        <action
+            android:id="@+id/city_wide_order_to_change_payment"
+            app:destination="@id/change_payment_mode"
             app:enterAnim="@anim/default_enter_anim"
             app:exitAnim="@anim/default_exit_anim"
             app:popEnterAnim="@anim/default_pop_enter_anim"

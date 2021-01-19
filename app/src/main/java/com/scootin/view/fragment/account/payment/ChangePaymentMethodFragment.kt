@@ -4,15 +4,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.razorpay.Checkout
 import com.scootin.R
+import com.scootin.databinding.FragmentChangePaymentMethodBinding
 import com.scootin.databinding.FragmentPaymentBinding
+import com.scootin.databinding.FragmentPaymenttStatusBinding
 import com.scootin.extensions.getCheckedRadioButtonPosition
+import com.scootin.extensions.getNavigationResult
 import com.scootin.extensions.orDefault
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
@@ -20,6 +26,9 @@ import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.OrderRequest
 import com.scootin.network.request.PromoCodeRequest
 import com.scootin.network.request.VerifyAmountRequest
+import com.scootin.network.response.AddressDetails
+import com.scootin.util.UtilUIComponent
+import com.scootin.util.constants.IntentConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.fragment.BaseFragment
 import com.scootin.view.fragment.cart.CardPaymentPageFragmentDirections
@@ -28,14 +37,12 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
 import timber.log.Timber
 import javax.inject.Inject
-
-
 @AndroidEntryPoint
-class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
-    private var binding by autoCleared<FragmentPaymentBinding>()
+class ChangePaymentMethodFragment: BaseFragment(R.layout.fragment_change_payment_method) {
+    private var binding by autoCleared<FragmentChangePaymentMethodBinding>()
     private val viewModel: PaymentViewModel by viewModels()
 
-    private val args: PaymentFragmentArgs by navArgs()
+    private val args: ChangePaymentMethodFragmentArgs by navArgs()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -49,14 +56,11 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
         args.orderType
     }
 
-    private val express by lazy {
-        args.express
-    }
 
     //We need to load order in-order to get more information about order
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentPaymentBinding.bind(view)
+        binding = FragmentChangePaymentMethodBinding.bind(view)
 
         setListener()
     }
@@ -70,23 +74,23 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
             "DIRECT" -> {
                 addDirectOrderListener()
             }
+            "NORMAL" -> {
+                addDirectOrderListener()
+            }
             "CITYWIDE" -> {
                 addCityWideOrderListener()
             }
         }
 
         binding.confirmButton.setOnClickListener {
-            val mode = when(binding.radioGroup.getCheckedRadioButtonPosition()) {
-                    0 -> {
-                        "ONLINE"
-                    }
-                    1 -> {
-                        "CASH"
-                    }
-                    else -> {
-                        ""
-                    }
+            val mode = when (binding.radioGroup.getCheckedRadioButtonPosition()) {
+                0 -> {
+                    "ONLINE"
                 }
+                else -> {
+                    ""
+                }
+            }
             showLoading()
             when (orderType) {
                 "DIRECT" -> {
@@ -105,43 +109,44 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
             }
             val promoCode = binding.couponEdittext.text.toString()
             showLoading()
-            viewModel.applyPromo(orderId, AppHeaders.userID, PromoCodeRequest(promoCode, orderType)).observe(viewLifecycleOwner) {
-                if (it.isSuccessful) {
-                    dismissLoading()
-                    binding.discountApplied.text = "Discount Applied (${promoCode})"
-                    binding.promoApplied.visibility = View.VISIBLE
-                    viewModel.loadOrder(orderId.toLong())
-                } else {
-                    dismissLoading()
-                    Toast.makeText(requireContext(), "Invalid promocode!!", Toast.LENGTH_SHORT).show()
+            viewModel.applyPromo(orderId, AppHeaders.userID, PromoCodeRequest(promoCode, orderType))
+                .observe(viewLifecycleOwner) {
+                    if (it.isSuccessful) {
+                        dismissLoading()
+                        binding.discountApplied.text = "Discount Applied (${promoCode})"
+                        binding.promoApplied.visibility = View.VISIBLE
+                        viewModel.loadOrder(orderId.toLong())
+                    } else {
+                        dismissLoading()
+                        Toast.makeText(requireContext(), "Invalid promocode!!", Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
-            }
         }
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
     }
 
     private fun addUserConfirmOrderCityWideListener(mode: String) {
-        viewModel.userConfirmOrderCityWide(orderId, OrderRequest(mode, AppHeaders.serviceAreaId)).observe(viewLifecycleOwner) {
-            when(it.status) {
-                Status.SUCCESS -> {
-                    Timber.i(" data ${it.data}")
-                    Timber.i("order id $orderId")
-                    dismissLoading()
-                    if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
-                        val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
-                        startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
-                    } else {
-                        Toast.makeText(requireContext(), "Payment successful", Toast.LENGTH_SHORT).show()
-                        findNavController().popBackStack()
+        viewModel.userConfirmOrderCityWide(orderId, OrderRequest(mode, AppHeaders.serviceAreaId))
+            .observe(viewLifecycleOwner) {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        Timber.i(" data ${it.data}")
+                        Timber.i("order id $orderId")
+                        dismissLoading()
+                        if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
+                            val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
+                            startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
+                        }
+                    }
+                    Status.ERROR -> {
+                        dismissLoading()
+                    }
+                    Status.LOADING -> {
                     }
                 }
-                Status.ERROR -> {
-                    dismissLoading()
-                }
-                Status.LOADING -> {}
             }
-        }
     }
 
     private fun addDirectOrderListener() {
@@ -159,26 +164,25 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
     }
 
     private fun addUserConfirmOrderDirectListener(mode: String) {
-        viewModel.userConfirmOrderDirect(orderId, OrderRequest(mode, AppHeaders.serviceAreaId)).observe(viewLifecycleOwner) {
-            when(it.status) {
-                Status.SUCCESS -> {
-                    Timber.i(" data ${it.data}")
-                    Timber.i("order id $orderId")
-                    dismissLoading()
-                    if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
-                        val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
-                        startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
-                    } else {
-                        Toast.makeText(requireContext(), "Payment successful", Toast.LENGTH_SHORT).show()
-                        findNavController().popBackStack()
+        viewModel.userConfirmOrderDirect(orderId, OrderRequest(mode, AppHeaders.serviceAreaId))
+            .observe(viewLifecycleOwner) {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        Timber.i(" data ${it.data}")
+                        Timber.i("order id $orderId")
+                        dismissLoading()
+                        if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
+                            val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
+                            startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
+                        }
+                    }
+                    Status.ERROR -> {
+                        dismissLoading()
+                    }
+                    Status.LOADING -> {
                     }
                 }
-                Status.ERROR -> {
-                    dismissLoading()
-                }
-                Status.LOADING -> {}
             }
-        }
     }
 
     private fun addCityWideOrderListener() {
@@ -208,7 +212,7 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
             options.put("amount", price)
             options.put("order_id", orderReferenceId)
             val prefill = JSONObject()
-            prefill.put("email","support@scootin.co.in")
+            prefill.put("email", "support@scootin.co.in")
             prefill.put("contact", AppHeaders.userMobileNumber)
 
             options.put("prefill", prefill)
@@ -239,28 +243,36 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
     }
 
     private fun verifyPaymentDirectListener(razorpayPaymentId: String?) {
-        viewModel.verifyPaymentDirect(VerifyAmountRequest(razorpayPaymentId)).observe(viewLifecycleOwner) {
-            when(it.status) {
-                Status.LOADING -> {}
-                Status.SUCCESS -> {
-                    Toast.makeText(requireContext(), "Payment successful", Toast.LENGTH_SHORT).show()
-                    findNavController().popBackStack()
+        viewModel.verifyPaymentDirect(VerifyAmountRequest(razorpayPaymentId))
+            .observe(viewLifecycleOwner) {
+                when (it.status) {
+                    Status.LOADING -> {
+                    }
+                    Status.SUCCESS -> {
+                        Toast.makeText(requireContext(), "Payment successful", Toast.LENGTH_SHORT)
+                            .show()
+                        findNavController().popBackStack()
+                    }
+                    Status.ERROR -> {
+                    }
                 }
-                Status.ERROR -> {}
             }
-        }
     }
 
     private fun verifyPaymentCityWideListener(razorpayPaymentId: String?) {
-        viewModel.verifyPaymentCityWide(VerifyAmountRequest(razorpayPaymentId)).observe(viewLifecycleOwner) {
-            when(it.status) {
-                Status.LOADING -> {}
-                Status.SUCCESS -> {
-                    Toast.makeText(requireContext(), "Payment successful", Toast.LENGTH_SHORT).show()
-                    findNavController().popBackStack()
+        viewModel.verifyPaymentCityWide(VerifyAmountRequest(razorpayPaymentId))
+            .observe(viewLifecycleOwner) {
+                when (it.status) {
+                    Status.LOADING -> {
+                    }
+                    Status.SUCCESS -> {
+                        Toast.makeText(requireContext(), "Payment successful", Toast.LENGTH_SHORT)
+                            .show()
+                        findNavController().popBackStack()
+                    }
+                    Status.ERROR -> {
+                    }
                 }
-                Status.ERROR -> {}
             }
-        }
     }
 }
