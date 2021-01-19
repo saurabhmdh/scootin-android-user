@@ -55,10 +55,12 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
                 R.id.by_product -> {
                     binding.productList.updateVisibility(true)
                     binding.storeList.updateVisibility(false)
+                    binding.layoutBag.fabCart.updateVisibility(true)
                 }
                 R.id.by_store -> {
                     binding.productList.updateVisibility(false)
                     binding.storeList.updateVisibility(true)
+                    binding.layoutBag.fabCart.updateVisibility(false)
                 }
             }
         }
@@ -168,7 +170,11 @@ class SweetsDeliveryFragment : Fragment(R.layout.fragment_sweets_delivery) {
         shopSearchAdapter = ShopSearchAdapter(object : ShopSearchAdapter.StoreImageAdapterClickListener {
                 override fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse) {
                     Timber.i("Shop Info $shopInfo")
-                    findNavController().navigate(SweetsDeliveryFragmentDirections.sweetToShopList(shopInfo.name, shopInfo.shopID, shopInfo.imageUrl))
+                    findNavController().navigate(SweetsDeliveryFragmentDirections.sweetToShopList(
+                        shopInfo.name,
+                        shopInfo.shopID,
+                        shopInfo.imageUrl
+                    ))
                 }
             })
         binding.storeList.apply {

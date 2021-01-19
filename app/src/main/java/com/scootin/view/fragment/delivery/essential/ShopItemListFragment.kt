@@ -6,6 +6,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.observe
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -134,7 +135,7 @@ class ShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_list)
             }
         }
 
-        binding.fabCart.setOnClickListener {
+        binding.layoutBag.goToBag.setOnClickListener {
             val navOptions =
                 NavOptions.Builder().setPopUpTo(R.id.titleScreen, false).build()
             findNavController().navigate(R.id.cart, null, navOptions)
@@ -154,10 +155,10 @@ class ShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_list)
 
     private fun setupBadge(result: Int) {
         if (result == 0) {
-            binding.textCount.visibility = View.GONE
+            binding.layoutBag.textCount.visibility = View.GONE
         } else {
-            binding.textCount.visibility = View.VISIBLE
-            binding.textCount.text = result.toString()
+            binding.layoutBag.textCount.visibility = View.VISIBLE
+            binding.layoutBag.textCount.text = result.toString()
         }
     }
 

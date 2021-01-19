@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -122,6 +123,7 @@ class OrderDetailFragment : BaseFragment(R.layout.fragment_my_order_track) {
                     updateSelectors(it.data?.orderDetails?.orderStatus)
                     val cancelBtnVisibility = it.data?.orderDetails?.orderStatus == "DISPATCHED" || it.data?.orderDetails?.orderStatus=="COMPLETED" || it.data?.orderDetails?.orderStatus == "CANCEL"
                     binding.cancelButton.updateVisibility(cancelBtnVisibility.not())
+                    binding.changePaymentMode.updateVisibility(cancelBtnVisibility&&it.data?.orderDetails?.paymentDetails?.paymentMode=="CASH"&&it.data?.orderDetails?.paymentDetails?.paymentStatus!="COMPLETED")
 
                 }
             }
@@ -145,36 +147,27 @@ class OrderDetailFragment : BaseFragment(R.layout.fragment_my_order_track) {
                 }
                 "PACKED" -> {
                     binding.placeIcon.isSelected = true
-                    binding.progressId.isSelected=true
                     binding.packedIcon.isSelected = true
                     binding.orderStatusString.text = getString(R.string.order_has_been_packed)
                 }
                 "DISPATCHED" -> {
                     binding.placeIcon.isSelected = true
-                    binding.progressId.isSelected=true
                     binding.packedIcon.isSelected = true
-                    binding.progressId2.isSelected=true
                     binding.dispatchedIcon.isSelected = true
                     binding.orderStatusString.text = getString(R.string.order_has_been_dispatched)
                 }
                 "COMPLETED" -> {
                     binding.placeIcon.isSelected = true
-                    binding.progressId.isSelected=true
                     binding.packedIcon.isSelected = true
-                    binding.progressId2.isSelected=true
                     binding.dispatchedIcon.isSelected = true
-                    binding.progressId3.isSelected=true
                     binding.deliveredIcon.isSelected = true
                     binding.orderStatusString.text = getString(R.string.order_has_been_completed)
                 }
                 "CANCEL" -> {
                     binding.orderStatusString.text = getString(R.string.order_has_been_cancelled)
                     binding.placeIcon.isSelected = false
-                    binding.progressId.isSelected = false
                     binding.packedIcon.isSelected = false
-                    binding.progressId2.isSelected = false
                     binding.dispatchedIcon.isSelected = false
-                    binding.progressId3.isSelected = false
                     binding.deliveredIcon.isSelected = false
                 }
 

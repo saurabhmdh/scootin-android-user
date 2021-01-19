@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -80,6 +81,7 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
 
                     val cancelBtnVisibility = it.data?.orderStatus == "DISPATCHED" || it.data?.orderStatus=="COMPLETED" || it.data?.orderStatus == "CANCEL"
                     binding.cancelButton.updateVisibility(cancelBtnVisibility.not())
+                    binding.changePaymentMode.updateVisibility(cancelBtnVisibility&&it.data?.paymentDetails?.paymentMode=="CASH"&&it.data?.paymentDetails?.paymentStatus!="COMPLETED")
 
                     //Display payment mode.. If payment is not done then we can ask user to pay now..
 
@@ -90,7 +92,7 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
     }
 
     private fun updatePaymentMode(paymentDetails: PaymentDetails?, canPay: Boolean) {
-        binding.payNow.updateVisibility(canPay)
+        binding.payNow.updateVisibility(canPay&&paymentDetails?.paymentMode==null)
         binding.payOnDeliveryHeader.updateVisibility(canPay.not())
         binding.pay.updateVisibility(canPay.not())
         binding.pay.text = UtilUIComponent.getPaymentStatusText(paymentDetails)
