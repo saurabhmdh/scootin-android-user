@@ -213,41 +213,41 @@
                         app:layout_constraintTop_toTopOf="parent" />
                 </RadioGroup>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/applyCoupon"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:text="Promo code"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+<!--                <androidx.appcompat.widget.AppCompatTextView-->
+<!--                    android:id="@+id/applyCoupon"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="16dp"-->
+<!--                    android:text="Promo code"-->
+<!--                    android:textStyle="bold"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/radioGroup" />-->
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/couponEdittext"
-                    android:layout_width="match_parent"
-                    android:layout_height="52dp"
-                    android:layout_margin="12dp"
-                    android:imeOptions="actionDone"
-                    android:inputType="text"
-                    android:paddingStart="@dimen/dimen_10"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/applyCoupon" />
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/couponEdittext"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="52dp"-->
+<!--                    android:layout_margin="12dp"-->
+<!--                    android:imeOptions="actionDone"-->
+<!--                    android:inputType="text"-->
+<!--                    android:paddingStart="@dimen/dimen_10"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/applyCoupon" />-->
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/applyPromoButton"
-                    android:layout_width="140dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="@dimen/dimen_20"
-                    android:background="@drawable/button_background"
-                    android:gravity="center"
-                    android:paddingBottom="6dp"
-                    android:paddingEnd="6dp"
-                    android:textStyle="bold"
-                    android:text="Apply Coupon"
-                    android:textColor="#FFF"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/couponEdittext" />
+<!--                <androidx.appcompat.widget.AppCompatButton-->
+<!--                    android:id="@+id/applyPromoButton"-->
+<!--                    android:layout_width="140dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:layout_marginEnd="@dimen/dimen_20"-->
+<!--                    android:background="@drawable/button_background"-->
+<!--                    android:gravity="center"-->
+<!--                    android:paddingBottom="6dp"-->
+<!--                    android:paddingEnd="6dp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:text="Apply Coupon"-->
+<!--                    android:textColor="#FFF"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/couponEdittext" />-->
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/confirm_button"
@@ -255,7 +255,7 @@
                     android:layout_marginTop="40dp"
                     android:layout_width="144dp"
                     android:textColor="@color/white"
-                    app:layout_constraintTop_toBottomOf="@+id/applyPromoButton"
+                    app:layout_constraintTop_toBottomOf="@+id/radioGroup"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:background="@drawable/ic_confirm___proceed"/>

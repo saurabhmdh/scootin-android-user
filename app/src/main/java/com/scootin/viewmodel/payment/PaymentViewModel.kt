@@ -100,6 +100,9 @@ class PaymentViewModel @ViewModelInject internal constructor(
     fun userConfirmOrderDirect(userId: String, orderRequest: OrderRequest) = orderRepository.userConfirmOrderDirect(userId, orderRequest, viewModelScope.coroutineContext + Dispatchers.IO + handler)
     fun userConfirmOrderCityWide(userId: String, orderRequest: OrderRequest) = orderRepository.userConfirmOrderCityWide(userId, orderRequest, viewModelScope.coroutineContext + Dispatchers.IO + handler)
 
+
+    fun changePaymentMethod(orderId: String) = orderRepository.changePaymentMethod(orderId, viewModelScope.coroutineContext + Dispatchers.IO + handler)
+
     override val coroutineContext: CoroutineContext
         get() = viewModelScope.coroutineContext + Dispatchers.IO
 }

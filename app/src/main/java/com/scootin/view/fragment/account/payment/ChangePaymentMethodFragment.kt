@@ -3,6 +3,7 @@ package com.scootin.view.fragment.account.payment
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -67,6 +68,7 @@ class ChangePaymentMethodFragment: BaseFragment(R.layout.fragment_change_payment
         setListener()
     }
 
+
     private fun setListener() {
         viewModel.loadOrder(orderId.toLong())
 
@@ -101,33 +103,61 @@ class ChangePaymentMethodFragment: BaseFragment(R.layout.fragment_change_payment
                 "CITYWIDE" -> {
                     addUserConfirmOrderCityWideListener(mode)
                 }
+                "NORMAL" -> {
+                    addUserConfirmOrderListener(mode)
+                }
             }
         }
 
-        binding.applyPromoButton.setOnClickListener {
-            if (binding.couponEdittext.text?.toString()?.isEmpty() == true) {
-                Toast.makeText(context, "Please enter valid coupon code", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-            val promoCode = binding.couponEdittext.text.toString()
-            showLoading()
-            viewModel.applyPromo(orderId, AppHeaders.userID, PromoCodeRequest(promoCode, orderType))
-                .observe(viewLifecycleOwner) {
-                    if (it.isSuccessful) {
-                        dismissLoading()
-                        binding.discountApplied.text = "Discount Applied (${promoCode})"
-                        binding.promoApplied.visibility = View.VISIBLE
-                        viewModel.loadOrder(orderId.toLong())
-                    } else {
-                        dismissLoading()
-                        Toast.makeText(requireContext(), "Invalid promocode!!", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                }
-        }
+//        binding.applyPromoButton.setOnClickListener {
+//            if (binding.couponEdittext.text?.toString()?.isEmpty() == true) {
+//                Toast.makeText(context, "Please enter valid coupon code", Toast.LENGTH_SHORT).show()
+//                return@setOnClickListener
+//            }
+//            val promoCode = binding.couponEdittext.text.toString()
+//            showLoading()
+//            viewModel.applyPromo(orderId, AppHeaders.userID, PromoCodeRequest(promoCode, orderType))
+//                .observe(viewLifecycleOwner) {
+//                    if (it.isSuccessful) {
+//                        dismissLoading()
+//                        binding.discountApplied.text = "Discount Applied (${promoCode})"
+//                        binding.promoApplied.visibility = View.VISIBLE
+//                        viewModel.loadOrder(orderId.toLong())
+//                    } else {
+//                        dismissLoading()
+//                        Toast.makeText(requireContext(), "Invalid promocode!!", Toast.LENGTH_SHORT)
+//                            .show()
+//                    }
+//                }
+//        }
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
     }
+
+    private fun addUserConfirmOrderListener(mode: String) {
+        viewModel.changePaymentMethod(orderId).observe(viewLifecycleOwner) {
+            when(it.status) {
+                Status.SUCCESS -> {
+
+                    Timber.i("order id $orderId")
+                    if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
+                        val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
+                        startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
+                        dismissLoading()
+                    } else {
+                        dismissLoading()
+                        findNavController().popBackStack()
+                    }
+                }
+                Status.ERROR -> {
+                    dismissLoading()
+                    Toast.makeText(requireContext(), "There is network issue, please try after some time", Toast.LENGTH_SHORT).show()
+                }
+                Status.LOADING -> {}
+                }
+            }
+    }
+
 
     private fun addUserConfirmOrderCityWideListener(mode: String) {
         viewModel.userConfirmOrderCityWide(orderId, OrderRequest(mode, AppHeaders.serviceAreaId))

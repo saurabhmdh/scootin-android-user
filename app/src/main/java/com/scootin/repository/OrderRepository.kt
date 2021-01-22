@@ -39,6 +39,15 @@ class OrderRepository @Inject constructor(
         }.asLiveData()
 
 
+    fun changePaymentMethod(
+        orderId: String,
+        context: CoroutineContext
+    ): LiveData<Resource<OrderDetail>> =
+        object : NetworkBoundResource<OrderDetail>(context) {
+            override suspend fun createCall(): Response<OrderDetail> =
+                services.changePaymentMethod(orderId)
+        }.asLiveData()
+
     fun userConfirmOrderDirect(
         orderId: String,
         orderRequest: OrderRequest,
