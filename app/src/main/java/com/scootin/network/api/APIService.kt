@@ -347,4 +347,11 @@ interface APIService {
         @Body verifyAmountRequest: VerifyAmountRequest,
         @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<DirectOrderResponse>
+
+
+    @POST("/order/user-change-payment/{orderId}")
+    suspend fun changePaymentMethod(
+        @Path("orderId") orderId: String,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<OrderDetail>
 }
