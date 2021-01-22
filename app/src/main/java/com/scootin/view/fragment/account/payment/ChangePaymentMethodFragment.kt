@@ -3,6 +3,7 @@ package com.scootin.view.fragment.account.payment
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -67,6 +68,7 @@ class ChangePaymentMethodFragment: BaseFragment(R.layout.fragment_change_payment
         setListener()
     }
 
+
     private fun setListener() {
         viewModel.loadOrder(orderId.toLong())
 
@@ -101,6 +103,9 @@ class ChangePaymentMethodFragment: BaseFragment(R.layout.fragment_change_payment
                 "CITYWIDE" -> {
                     addUserConfirmOrderCityWideListener(mode)
                 }
+                "NORMAL" -> {
+                    addUserConfirmOrderListener(mode)
+                }
             }
         }
 
@@ -127,6 +132,33 @@ class ChangePaymentMethodFragment: BaseFragment(R.layout.fragment_change_payment
         }
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
+    }
+
+    private fun addUserConfirmOrderListener(mode: String) {
+//        viewModel.userConfirmOrder(AppHeaders.userID, OrderRequest(mode, AppHeaders.serviceAreaId, address!!.id, promoCode)).observe(viewLifecycleOwner) {
+//            when(it.status) {
+//                Status.SUCCESS -> {
+//                    Timber.i(" data ${it.data}")
+//                    orderId = it.data?.id ?: -1
+//
+//                    Timber.i("order id $orderId")
+//                    if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
+//                        val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
+//                        startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
+//                        dismissLoading()
+//                    } else {
+//                        dismissLoading()
+//                        findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
+//                    }
+//                }
+//                Status.ERROR -> {
+//                    dismissLoading()
+//                    Toast.makeText(requireContext(), "There is network issue, please try after some time", Toast.LENGTH_SHORT).show()
+//                }
+//                Status.LOADING -> {}
+//                }
+//            }
+//        }
     }
 
     private fun addUserConfirmOrderCityWideListener(mode: String) {
