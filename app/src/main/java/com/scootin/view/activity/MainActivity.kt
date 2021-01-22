@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.forEachIndexed
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -20,7 +19,7 @@ import com.razorpay.PaymentResultListener
 import com.scootin.R
 import com.scootin.databinding.ActivityMainBinding
 import com.scootin.util.constants.AppConstants
-import com.scootin.view.fragment.account.orders.OrderDetailFragment
+import com.scootin.view.fragment.account.payment.ChangePaymentMethodFragment
 import com.scootin.view.fragment.account.payment.PaymentFragment
 import com.scootin.view.fragment.cart.CardPaymentPageFragment
 import com.scootin.view.fragment.wallet.MyWalletFragment
@@ -112,6 +111,8 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
                         } else if (fragment is CardPaymentPageFragment) {
                             fragment.onPaymentSuccess(razorpayPaymentId)
                         } else if (fragment is PaymentFragment) {
+                            fragment.onPaymentSuccess(razorpayPaymentId)
+                        } else if (fragment is ChangePaymentMethodFragment) {
                             fragment.onPaymentSuccess(razorpayPaymentId)
                         }
                     }

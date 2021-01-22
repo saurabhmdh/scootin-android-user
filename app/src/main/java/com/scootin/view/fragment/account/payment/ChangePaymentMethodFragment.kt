@@ -37,6 +37,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
 import timber.log.Timber
 import javax.inject.Inject
+
+
 @AndroidEntryPoint
 class ChangePaymentMethodFragment: BaseFragment(R.layout.fragment_change_payment_method) {
     private var binding by autoCleared<FragmentChangePaymentMethodBinding>()
@@ -252,8 +254,28 @@ class ChangePaymentMethodFragment: BaseFragment(R.layout.fragment_change_payment
             "CITYWIDE" -> {
                 verifyPaymentCityWideListener(razorpayPaymentId)
             }
+            "NORMAL" -> {
+                verifyPaymentNormalListener(razorpayPaymentId)
+            }
         }
 
+    }
+
+    fun verifyPaymentNormalListener(razorpayPaymentId: String?){
+        Timber.i("onPaymentSuccess = ${razorpayPaymentId} $orderId")
+        viewModel.verifyPayment(VerifyAmountRequest(razorpayPaymentId)).observe(viewLifecycleOwner) {
+            when(it.status) {
+                Status.LOADING -> {}
+                Status.SUCCESS -> {
+                    Toast.makeText(requireContext(), "Payment successful", Toast.LENGTH_SHORT)
+                        .show()
+                    findNavController().popBackStack()
+                }
+                Status.ERROR -> {
+                    Toast.makeText(activity, "There is network issue, please try after some time", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 
     private fun verifyPaymentDirectListener(razorpayPaymentId: String?) {
