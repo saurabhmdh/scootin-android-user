@@ -2,6 +2,7 @@ package com.scootin.network.response.orderdetail
 
 import com.scootin.network.response.AddressDetails
 import com.scootin.network.response.PaymentDetails
+import com.scootin.network.response.UserInfo
 
 data class OrderDetail(
     val addressDetails: AddressDetails,
