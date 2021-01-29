@@ -84,7 +84,10 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
 
                     val cancelBtnVisibility = it.data?.orderStatus == "DISPATCHED" || it.data?.orderStatus=="COMPLETED" || it.data?.orderStatus == "CANCEL"
                     binding.cancelButton.updateVisibility(cancelBtnVisibility.not())
-                    binding.btnChangePaymentMode.updateVisibility(cancelBtnVisibility&&it.data?.paymentDetails?.paymentMode=="CASH"&&it.data?.orderStatus!="COMPLETED")
+                    binding.btnChangePaymentMode.updateVisibility(
+                        cancelBtnVisibility&&it.data?.paymentDetails?.paymentMode=="CASH"&&
+                                it.data?.orderStatus!="COMPLETED"&&
+                                it.data?.orderStatus!="CANCEL")
 
                     //Display payment mode.. If payment is not done then we can ask user to pay now..
 

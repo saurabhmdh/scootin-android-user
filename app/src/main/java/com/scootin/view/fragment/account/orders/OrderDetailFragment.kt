@@ -126,8 +126,11 @@ class OrderDetailFragment : BaseFragment(R.layout.fragment_my_order_track) {
                     updateSelectors(it.data?.orderDetails?.orderStatus)
                     val cancelBtnVisibility = it.data?.orderDetails?.orderStatus == "DISPATCHED" || it.data?.orderDetails?.orderStatus=="COMPLETED" || it.data?.orderDetails?.orderStatus == "CANCEL"
                     binding.cancelButton.updateVisibility(cancelBtnVisibility.not())
-                    binding.btnChangePaymentMode.updateVisibility(cancelBtnVisibility&&it.data?.orderDetails?.paymentDetails?.paymentMode=="CASH"&&it.data?.orderDetails?.orderStatus!="COMPLETED")
-
+                    binding.btnChangePaymentMode.updateVisibility(
+                        cancelBtnVisibility&&
+                                it.data?.orderDetails?.paymentDetails?.paymentMode=="CASH"&&
+                                it.data?.orderDetails?.orderStatus!="COMPLETED"&&
+                                it.data?.orderDetails?.orderStatus!="CANCEL")
                 }
             }
         })
