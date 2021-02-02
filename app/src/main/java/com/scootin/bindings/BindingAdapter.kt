@@ -60,7 +60,7 @@ fun TextView.setDateFromOrderDate(orderDate: String?) {
             val simpleDateFormat = SimpleDateFormat("dd-MMM-yyyy")
             text = simpleDateFormat.format(data)
         } else {
-            text = orderDate.substring(0, 12)
+            text = orderDate
         }
     }
 }
