@@ -9,6 +9,7 @@ import com.scootin.network.response.citywide.CityWideOrderResponse
 import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.network.response.home.ResponseServiceArea
 import com.scootin.network.response.inorder.InOrderDetail
+import com.scootin.network.response.inorder.MultipleOrdersDetails
 import com.scootin.network.response.login.ResponseAddAddressSuccess
 import com.scootin.network.response.login.ResponseUser
 import com.scootin.network.response.order.CheckOutResponse
@@ -321,6 +322,11 @@ interface APIService {
         @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<InOrderDetail>
 
+    @POST("/order/orders/get-multiples-order")
+    suspend fun getMultipleOrders(
+        multipleOrdersRequest: MultipleOrdersRequest,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<MultipleOrdersDetails>
 
     @GET("/util/slots/{startTime}")
     suspend fun getDeliverySlot(

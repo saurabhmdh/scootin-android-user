@@ -45,21 +45,25 @@ class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
     }
 
     private fun setupListener() {
-        //TODO: SAMRIDHI write for multiples orders
-        viewModel.loadOrder(orderId.first())
-        viewModel.orderInfo.observe(viewLifecycleOwner) {
+
+        viewModel.loadMultipleOrders(orderId)
+
+
+        viewModel.multipleOrderInfo.observe(viewLifecycleOwner) {
             when(it.status) {
                 Status.SUCCESS -> {
-                    binding.data = it.data
+                    //TODO: SAMRIDHI to correct this code
+
+//                    binding.data = it.data
                     Timber.i("data working ${it.data}")
                     binding.txtPickupLocation.text = getAllAddress(it.data?.orderInventoryDetailsList)
                     orderSummaryAdapter.submitList(it.data?.orderInventoryDetailsList)
-                    if(it.data?.orderDetails?.paymentDetails?.paymentStatus=="COMPLETED"){
-                        binding.paymentStatus.setText("Paid Online")
-                    }
-                    else{
-                        binding.paymentStatus.setText("Pay on Delivery")
-                    }
+//                    if(it.data?.orderDetails?.paymentDetails?.paymentStatus=="COMPLETED"){
+//                        binding.paymentStatus.setText("Paid Online")
+//                    }
+//                    else{
+//                        binding.paymentStatus.setText("Pay on Delivery")
+//                    }
                 }
                 Status.ERROR -> {
                     //Show error and move back

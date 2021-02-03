@@ -11,6 +11,7 @@ import com.scootin.network.request.*
 import com.scootin.network.response.MultiOrderResponse
 import com.scootin.network.response.citywide.CityWideOrderResponse
 import com.scootin.network.response.inorder.InOrderDetail
+import com.scootin.network.response.inorder.MultipleOrdersDetails
 import com.scootin.network.response.order.OrderHistoryItem
 import com.scootin.network.response.orderdetail.OrderDetail
 import com.scootin.network.response.orders.DirectOrderResponse
@@ -124,6 +125,14 @@ class OrderRepository @Inject constructor(
             services.getOrder(orderId)
     }.asLiveData()
 
+
+    fun getMultipleOrders(
+        multipleOrdersRequest: MultipleOrdersRequest,
+        context: CoroutineContext
+    ): LiveData<Resource<MultipleOrdersDetails>> = object : NetworkBoundResource<MultipleOrdersDetails>(context) {
+        override suspend fun createCall(): Response<MultipleOrdersDetails> =
+            services.getMultipleOrders(multipleOrdersRequest)
+    }.asLiveData()
 
     suspend fun placeCityWideOrder(userId: String, request: CityWideOrderRequest) = services.placeCityWideOrder(userId, request)
 
