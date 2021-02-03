@@ -2,6 +2,7 @@ package com.scootin.view.fragment.orders
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
@@ -9,12 +10,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.scootin.R
 import com.scootin.databinding.FragmentOrderSummaryBinding
+import com.scootin.extensions.orDefault
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.response.AddressDetails
+import com.scootin.network.response.inorder.MultipleOrdersDetails
 import com.scootin.network.response.inorder.OrderInventoryDetails
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.order.OrderSummaryAdapter
+import com.scootin.view.vo.MultiOrderVo
 import com.scootin.viewmodel.payment.PaymentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -52,18 +56,22 @@ class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
         viewModel.multipleOrderInfo.observe(viewLifecycleOwner) {
             when(it.status) {
                 Status.SUCCESS -> {
-                    //TODO: SAMRIDHI to correct this code
-
-//                    binding.data = it.data
                     Timber.i("data working ${it.data}")
-                    binding.txtPickupLocation.text = getAllAddress(it.data?.orderInventoryDetailsList)
-                    orderSummaryAdapter.submitList(it.data?.orderInventoryDetailsList)
-//                    if(it.data?.orderDetails?.paymentDetails?.paymentStatus=="COMPLETED"){
-//                        binding.paymentStatus.setText("Paid Online")
-//                    }
-//                    else{
-//                        binding.paymentStatus.setText("Pay on Delivery")
-//                    }
+                    if (it.data == null) {
+                       Toast.makeText(requireContext(), "There is server error", Toast.LENGTH_SHORT).show()
+                       return@observe
+                    }
+
+                    binding.data = convertToVo(it.data)
+
+                    binding.txtPickupLocation.text = getAllAddress(it.data.orderInventoryDetailsList)
+                    orderSummaryAdapter.submitList(it.data.orderInventoryDetailsList)
+
+                    if (it.data.orderDetails.first().paymentDetails.paymentStatus=="COMPLETED"){
+                        binding.paymentStatus.setText("Paid Online")
+                    } else{
+                        binding.paymentStatus.setText("Pay on Delivery")
+                    }
                 }
                 Status.ERROR -> {
                     //Show error and move back
@@ -79,6 +87,17 @@ class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
         }
     }
 
+    private fun convertToVo(data: MultipleOrdersDetails): MultiOrderVo {
+        val multiOrders = data.orderDetails.joinToString { it.id.toString() }
+        val deliveryAddress = data.orderDetails.first().addressDetails
+        val amount = data.orderDetails.sumByDouble { it.paymentDetails.amount.orDefault(0.0) }
+        val deliveryFreeAmount = data.orderDetails.first().paymentDetails.deliveryFreeAmount.orDefault(0.0)
+        val totalGSTAmount = data.orderDetails.sumByDouble { it.paymentDetails.totalGSTAmount.orDefault(0.0) }
+        val totalSaving = data.orderDetails.sumByDouble { it.paymentDetails.totalSaving.orDefault(0.0) }
+        val totalAmount = data.orderDetails.sumByDouble { it.paymentDetails.totalAmount.orDefault(0.0) }
+
+        return MultiOrderVo(multiOrders, deliveryAddress, amount, deliveryFreeAmount, totalGSTAmount, totalSaving, totalAmount)
+    }
     private fun getAllAddress(orderInventoryDetailsList: List<OrderInventoryDetails>?): String {
         val uniqueAddress = mutableSetOf<Long>()
 

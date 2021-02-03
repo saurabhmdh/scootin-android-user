@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginBottom="5dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="data"
-            type="com.scootin.network.response.inorder.InOrderDetail"/>
+            type="com.scootin.view.vo.MultiOrderVo"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -75,7 +73,7 @@
                         android:layout_toRightOf="@id/txt_orders"
                         android:textColor="#fff"
                         android:textStyle="bold"
-                        app:setToIntText="@{data.orderDetails.id}" />
+                        android:text="@{data.multiOrders}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/help_btn"
@@ -140,7 +138,7 @@
                     android:textColor="#000"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/img_arrow"
-                    app:setOneLineAddress="@{data.orderDetails.addressDetails}" />
+                    app:setOneLineAddress="@{data.deliveryAddress}" />
 
                 <View
                     android:id="@+id/base_line2"
@@ -227,7 +225,7 @@
                         android:paddingEnd="2dp"
                         android:textColor="#000"
                         android:textStyle="bold"
-                        app:setPrice="@{data.orderDetails.paymentDetails.amount}" />
+                        app:setPrice="@{data.amount}" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -258,7 +256,7 @@
                         android:paddingEnd="2dp"
                         android:textColor="#000"
                         android:textSize="12sp"
-                        app:setPrice="@{data.orderDetails.paymentDetails.deliveryFreeAmount}" />
+                        app:setPrice="@{data.deliveryFreeAmount}" />
 
                 </RelativeLayout>
 
@@ -291,7 +289,7 @@
                         android:paddingEnd="2dp"
                         android:textColor="#000"
                         android:textSize="12sp"
-                        app:setPrice="@{data.orderDetails.paymentDetails.totalGSTAmount}" />
+                        app:setPrice="@{data.totalGSTAmount}" />
                 </RelativeLayout>
 
                 <View
@@ -336,7 +334,7 @@
                         android:paddingEnd="2dp"
                         android:textColor="#000"
                         android:textStyle="bold"
-                        app:setDiscountPrice="@{data.orderDetails.paymentDetails.totalSaving}" />
+                        app:setDiscountPrice="@{data.totalSaving}" />
                 </RelativeLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -356,7 +354,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/appCompatTextView"
-                    setPrice="@{data.orderDetails.paymentDetails.totalAmount}"
+                    setPrice="@{data.totalAmount}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="20dp"
