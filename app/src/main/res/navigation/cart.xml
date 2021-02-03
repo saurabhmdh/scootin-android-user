@@ -59,7 +59,7 @@
         android:label="OrderPlacedFragment" >
         <argument
             android:name="order_id"
-            app:argType="long" />
+            app:argType="long[]" />
         <action
             android:id="@+id/action_cart_payment_fragment_to_order_summary"
             app:destination="@id/order_summary_fragment"
@@ -79,7 +79,7 @@
 
             <argument
                 android:name="order_id"
-                app:argType="long" />
+                app:argType="long[]" />
 
             <action
                 android:id="@+id/order_to_customerSupport"

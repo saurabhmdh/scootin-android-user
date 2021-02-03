@@ -43,7 +43,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
 
     var promoCode: String = ""
 
-    var orderId: Long = -1
+    var orderId: List<Long>? = emptyList()
     var address: AddressDetails? = null
 
     //We need to load order in-order to get more information about order
@@ -117,7 +117,9 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                 when(it.status) {
                     Status.SUCCESS -> {
                         Timber.i(" data ${it.data}")
-                        orderId = it.data?.id ?: -1
+
+
+                        orderId = it.data?.orderLists?.map { it.id }
 
                         Timber.i("order id $orderId")
                         if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
@@ -126,7 +128,9 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                             dismissLoading()
                         } else {
                             dismissLoading()
-                            findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
+                            orderId?.toLongArray()?.let { orders->
+                                findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orders))
+                            }
                         }
                     }
                     Status.ERROR -> {
@@ -217,7 +221,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                 Status.SUCCESS -> {
                     dismissLoading()
                     //Need some direction to move
-                    findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
+//                    findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
                 }
                 Status.ERROR -> {
                     Toast.makeText(activity, "There is network issue, please try after some time", Toast.LENGTH_LONG).show()

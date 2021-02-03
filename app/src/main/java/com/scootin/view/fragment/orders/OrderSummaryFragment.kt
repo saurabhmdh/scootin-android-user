@@ -33,7 +33,7 @@ class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
     private val args: OrderSummaryFragmentArgs by navArgs()
 
     private val orderId by lazy {
-        args.orderId
+        args.orderId.asList()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,7 +44,8 @@ class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
     }
 
     private fun setupListener() {
-        viewModel.loadOrder(orderId)
+        //TODO: SAMRIDHI write for multiples orders
+        viewModel.loadOrder(orderId.first())
         viewModel.orderInfo.observe(viewLifecycleOwner) {
             when(it.status) {
                 Status.SUCCESS -> {

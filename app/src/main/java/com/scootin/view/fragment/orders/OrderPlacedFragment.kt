@@ -17,14 +17,14 @@ class OrderPlacedFragment : Fragment(R.layout.fragment_order_placed) {
     private val args: OrderPlacedFragmentArgs by navArgs()
 
     private val orderId by lazy {
-        args.orderId
+        args.orderId.asList()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         Handler().postDelayed({
-            findNavController().navigate(OrderPlacedFragmentDirections.actionCartPaymentFragmentToOrderSummary(orderId))
+            findNavController().navigate(OrderPlacedFragmentDirections.actionCartPaymentFragmentToOrderSummary(orderId.toLongArray()))
         }, 3000)
     }
 }

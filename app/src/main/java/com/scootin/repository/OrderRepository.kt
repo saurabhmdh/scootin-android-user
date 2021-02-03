@@ -8,6 +8,7 @@ import com.scootin.network.api.APIService
 import com.scootin.network.api.NetworkBoundResource
 import com.scootin.network.api.Resource
 import com.scootin.network.request.*
+import com.scootin.network.response.MultiOrderResponse
 import com.scootin.network.response.citywide.CityWideOrderResponse
 import com.scootin.network.response.inorder.InOrderDetail
 import com.scootin.network.response.order.OrderHistoryItem
@@ -32,9 +33,9 @@ class OrderRepository @Inject constructor(
         userId: String,
         orderRequest: OrderRequest,
         context: CoroutineContext
-    ): LiveData<Resource<OrderDetail>> =
-        object : NetworkBoundResource<OrderDetail>(context) {
-            override suspend fun createCall(): Response<OrderDetail> =
+    ): LiveData<Resource<MultiOrderResponse>> =
+        object : NetworkBoundResource<MultiOrderResponse>(context) {
+            override suspend fun createCall(): Response<MultiOrderResponse> =
                 services.userConfirmOrder(userId, orderRequest)
         }.asLiveData()
 
