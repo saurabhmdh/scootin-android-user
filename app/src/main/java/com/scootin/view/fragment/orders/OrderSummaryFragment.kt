@@ -91,7 +91,7 @@ class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
         val multiOrders = data.orderDetails.joinToString { it.id.toString() }
         val deliveryAddress = data.orderDetails.first().addressDetails
         val amount = data.orderDetails.sumByDouble { it.paymentDetails.amount.orDefault(0.0) }
-        val deliveryFreeAmount = data.orderDetails.first().paymentDetails.deliveryFreeAmount.orDefault(0.0)
+        val deliveryFreeAmount = data.orderDetails.sumByDouble { it.paymentDetails.deliveryFreeAmount.orDefault(0.0) }
         val totalGSTAmount = data.orderDetails.sumByDouble { it.paymentDetails.totalGSTAmount.orDefault(0.0) }
         val totalSaving = data.orderDetails.sumByDouble { it.paymentDetails.totalSaving.orDefault(0.0) }
         val totalAmount = data.orderDetails.sumByDouble { it.paymentDetails.totalAmount.orDefault(0.0) }
