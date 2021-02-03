@@ -55,6 +55,7 @@
             android:layout_marginTop="4dp"
             android:fontFamily="@font/montserrat_regular"
             android:text="28.07.2020"
+            android:maxLength="12"
             android:textColor="#000"
             android:textSize="12sp"
             android:textStyle="bold"

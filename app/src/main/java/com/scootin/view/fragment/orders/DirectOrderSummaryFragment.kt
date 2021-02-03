@@ -4,20 +4,18 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.scootin.R
 import com.scootin.databinding.FragmentDirectOrderSummaryBinding
-import com.scootin.databinding.FragmentOrderSummaryBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.response.AddressDetails
-import com.scootin.network.response.inorder.OrderInventoryDetails
-import com.scootin.network.response.orderdetail.OrderDetail
+import com.scootin.network.response.orderdetail.ShopManagement
 import com.scootin.util.Conversions
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.order.DirectOrderSummaryAdapter
-import com.scootin.view.adapter.order.OrderSummaryAdapter
 import com.scootin.viewmodel.payment.PaymentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -46,6 +44,21 @@ class DirectOrderSummaryFragment: Fragment(R.layout.fragment_direct_order_summar
         setupListener()
     }
 
+    private fun getAllAddress(shopManagement: ShopManagement): String {
+        val uniqueAddress = mutableSetOf<Long>()
+
+        val sb = StringBuffer()
+
+
+                sb.append(shopManagement.name).append(", ")
+                sb.append(getSingleAddress(shopManagement.address))
+                sb.append("\n")
+                uniqueAddress.add(shopManagement.id.toLong())
+
+
+        return sb.toString()
+    }
+
     private fun setupListener() {
         viewModel.loadOrder(orderId)
         viewModel.directOrderInfo.observe(viewLifecycleOwner) {
@@ -61,6 +74,11 @@ class DirectOrderSummaryFragment: Fragment(R.layout.fragment_direct_order_summar
 
                     if (it.data?.media == null) {
                         binding.media.visibility = View.GONE
+                    }
+                    binding.txtPickupLocation.text= it.data?.shopManagement?.let { it1 ->
+                        getAllAddress(
+                            it1
+                        )
                     }
                 }
                 Status.ERROR -> {
@@ -89,7 +107,13 @@ class DirectOrderSummaryFragment: Fragment(R.layout.fragment_direct_order_summar
     }
 
     //If same shop then once
-
+    private fun getSingleAddress(address: AddressDetails?): String {
+        if(address == null) return ""
+        val sb = StringBuilder().append(address.addressLine1).append(", ")
+            .append(address.addressLine2).append(", ").append(address.city).append(", ")
+            .append(address.pincode)
+        return sb.toString()
+    }
 
 
 }
