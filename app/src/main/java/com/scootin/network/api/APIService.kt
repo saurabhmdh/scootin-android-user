@@ -324,7 +324,7 @@ interface APIService {
 
     @POST("/order/orders/get-multiples-order")
     suspend fun getMultipleOrders(
-        multipleOrdersRequest: MultipleOrdersRequest,
+        @Body multipleOrdersRequest: MultipleOrdersRequest,
         @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<MultipleOrdersDetails>
 
