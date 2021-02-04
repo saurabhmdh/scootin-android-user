@@ -8,6 +8,7 @@ import com.scootin.network.api.Resource
 import com.scootin.network.request.PromoCodeRequest
 import com.scootin.network.request.VerifyAmountRequest
 import com.scootin.network.response.citywide.CityWideOrderResponse
+import com.scootin.network.response.orderdetail.OrderDetail
 import com.scootin.network.response.orders.DirectOrderResponse
 import com.scootin.network.response.placeOrder.PlaceOrderResponse
 import retrofit2.Response
@@ -31,8 +32,8 @@ class PaymentRepository @Inject constructor(
     fun verifyPayment(
         verifyAmountRequest: VerifyAmountRequest,
         context: CoroutineContext
-    ): LiveData<Resource<PlaceOrderResponse>> = object : NetworkBoundResource<PlaceOrderResponse>(context) {
-        override suspend fun createCall(): Response<PlaceOrderResponse> = services.verifyPayment(verifyAmountRequest)
+    ): LiveData<Resource<List<PlaceOrderResponse>>> = object : NetworkBoundResource<List<PlaceOrderResponse>>(context) {
+        override suspend fun createCall(): Response<List<PlaceOrderResponse>> = services.verifyPayment(verifyAmountRequest)
     }.asLiveData()
 
 

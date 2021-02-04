@@ -258,7 +258,7 @@ interface APIService {
     suspend fun verifyPayment(
         @Body verifyAmountRequest: VerifyAmountRequest,
         @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
-    ): Response<PlaceOrderResponse>
+    ): Response<List<PlaceOrderResponse>>
 
 
     @GET("/cart/get-cart-price/{userId}")
