@@ -107,7 +107,7 @@ class CakeDeliveryFragment : Fragment(R.layout.fragment_cake_delivery) {
             }
         }
 
-        viewModel.allProductBySubCategoryWithFilter.observe(viewLifecycleOwner) {response->
+        viewModel.allProductBySubCategory.observe(viewLifecycleOwner) {response->
             lifecycleScope.launch {
                 productSearchAdapter.submitData(response)
             }

@@ -213,15 +213,16 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
         Timber.i("data := ${data}")
     }
 
-    fun onPaymentSuccess(razorpayPaymentId: String?){
+    fun onPaymentSuccess(razorpayPaymentId: String?) {
         Timber.i("onPaymentSuccess = ${razorpayPaymentId} $orderId")
         viewModel.verifyPayment(VerifyAmountRequest(razorpayPaymentId)).observe(viewLifecycleOwner) {
             when(it.status) {
                 Status.LOADING -> {}
                 Status.SUCCESS -> {
                     dismissLoading()
-                    //Need some direction to move
-//                    findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orderId))
+                    orderId?.toLongArray()?.let { orders->
+                        findNavController().navigate(CardPaymentPageFragmentDirections.orderConfirmationPage(orders))
+                    }
                 }
                 Status.ERROR -> {
                     Toast.makeText(activity, "There is network issue, please try after some time", Toast.LENGTH_LONG).show()
