@@ -221,7 +221,7 @@ interface APIService {
         @Path("userId") userId: String,
         @Body orderRequest: OrderRequest,
         @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
-    ): Response<MultiOrderResponse>
+    ): Response<List<OrderDetail>>
 
 
     @POST("/order/user-confirm-order-direct/{orderId}")

@@ -34,9 +34,9 @@ class OrderRepository @Inject constructor(
         userId: String,
         orderRequest: OrderRequest,
         context: CoroutineContext
-    ): LiveData<Resource<MultiOrderResponse>> =
-        object : NetworkBoundResource<MultiOrderResponse>(context) {
-            override suspend fun createCall(): Response<MultiOrderResponse> =
+    ): LiveData<Resource<List<OrderDetail>>> =
+        object : NetworkBoundResource<List<OrderDetail>>(context) {
+            override suspend fun createCall(): Response<List<OrderDetail>> =
                 services.userConfirmOrder(userId, orderRequest)
         }.asLiveData()
 

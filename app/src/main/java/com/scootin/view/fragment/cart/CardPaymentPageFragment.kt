@@ -117,14 +117,18 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                 when(it.status) {
                     Status.SUCCESS -> {
                         Timber.i(" data ${it.data}")
+                        if (it.data.isNullOrEmpty()) {
+                            Toast.makeText(requireContext(), "Network Error", Toast.LENGTH_SHORT).show()
+                            return@observe
+                        }
 
-
-                        orderId = it.data?.orderLists?.map { it.id }
+                        orderId = it.data.map { it.id }
+                        val totalAmount = it.data.sumByDouble { it.paymentDetails.totalAmount.orDefault(0.0) }
 
                         Timber.i("order id $orderId")
-                        if (it.data?.paymentDetails?.paymentMode.equals("ONLINE")) {
-                            val total = it.data?.paymentDetails?.totalAmount.orDefault(0.0) * 100
-                            startPayment(it.data?.paymentDetails?.orderReference.orEmpty(), total)
+                        if (it.data.first().paymentDetails.paymentMode.equals("ONLINE")) {
+                            val total = totalAmount.times(100)
+                            startPayment(it.data.first().paymentDetails.orderReference.orEmpty(), total)
                             dismissLoading()
                         } else {
                             dismissLoading()
