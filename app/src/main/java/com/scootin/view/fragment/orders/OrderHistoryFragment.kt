@@ -60,21 +60,21 @@ class OrderHistoryFragment : Fragment(R.layout.fragment_order_history) {
                             "NORMAL"-> {
                                 findNavController().navigate(
                                     OrderHistoryFragmentDirections.inorderToTrackFragment(
-                                        item.id.toString()
+                                        item.orderId.toString()
                                     )
                                 )
                             }
                             "DIRECT"->{
                                 findNavController().navigate(
                                     OrderHistoryFragmentDirections.orderToTrackFragment(
-                                        item.id.toString()
+                                        item.orderId.toString()
                                     )
                                 )
                             }
                             "CITYWIDE"->{
                                 findNavController().navigate(
                                     OrderHistoryFragmentDirections.citywideToTrackFragment(
-                                        item.id.toString()
+                                        item.orderId.toString()
                                     )
                                 )
                             }

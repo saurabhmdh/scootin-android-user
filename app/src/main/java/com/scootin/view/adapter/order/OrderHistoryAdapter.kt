@@ -37,7 +37,7 @@ class OrderHistoryAdapter(
             Timber.i("item = $item ${item.id}")
             item.apply {
 
-                binding.orderId.setText(id.toString())
+                binding.orderId.setText(orderId.toString())
                 binding.amount.setPrice(totalAmount)
                 binding.date.setText(orderDate)
 
