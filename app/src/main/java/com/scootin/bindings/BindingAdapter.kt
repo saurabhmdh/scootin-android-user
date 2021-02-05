@@ -53,17 +53,10 @@ fun TextView.setDiscountPrice(value: Double) {
 @SuppressLint("SimpleDateFormat")
 @BindingAdapter("setDateFromOrderDate")
 fun TextView.setDateFromOrderDate(orderDate: String?) {
-    orderDate?.let {
-        val k = orderDate.toLongOrNull()
-        if (k != null) {
-            val data = Date(k)
-            val simpleDateFormat = SimpleDateFormat("dd-MMM-yyyy")
-            text = simpleDateFormat.format(data)
-        } else {
-            text = orderDate
-        }
-    }
+    text = orderDate
 }
+
+
 @BindingAdapter("setToIntText")
 fun TextView.setToIntText(value: Long) {
     text = value.toString()
