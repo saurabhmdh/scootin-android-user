@@ -13,5 +13,6 @@ data class DirectOrderResponse(
     val paymentDetails: PaymentDetails,
     val reviewDoneIndicator: Boolean,
     val shopManagement: ShopManagement,
-    val userInfo: UserInfo
+    val userInfo: UserInfo,
+    val deliveryDetails: DeliveryDetail?
 )

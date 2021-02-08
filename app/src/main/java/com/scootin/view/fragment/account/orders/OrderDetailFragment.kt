@@ -1,39 +1,28 @@
 package com.scootin.view.fragment.account.orders
 
 
-import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.razorpay.Checkout
 import com.scootin.R
 import com.scootin.databinding.FragmentMyOrderTrackBinding
-import com.scootin.extensions.orDefault
 import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
-import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.CancelOrderRequest
-import com.scootin.network.request.VerifyAmountRequest
 import com.scootin.network.response.PaymentDetails
+import com.scootin.network.response.inorder.InOrderDetail
 import com.scootin.util.UtilUIComponent
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.order.OrderDetailAdapter
 import com.scootin.view.fragment.BaseFragment
-import com.scootin.view.fragment.cart.CardPaymentPageFragmentDirections
 import com.scootin.viewmodel.account.OrderFragmentViewModel
-import com.scootin.viewmodel.payment.PaymentViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_my_orders.view.*
-import org.json.JSONObject
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -117,23 +106,42 @@ class OrderDetailFragment : BaseFragment(R.layout.fragment_my_order_track) {
         viewModel.loadOrder(args.orderId)
         viewModel.orderInfo.observe(viewLifecycleOwner, {
             Timber.i("orderId = ${it.status} : ${it.data}")
+
             when (it.status) {
                 Status.SUCCESS -> {
                     dismissLoading()
                     binding.data = it.data
                     updatePaymentMode(it.data?.orderDetails?.paymentDetails)
                     orderDetailAdapter.submitList(it.data?.orderInventoryDetailsList)
+
+                    updateDate(it.data)
+
                     updateSelectors(it.data?.orderDetails?.orderStatus)
                     val cancelBtnVisibility = it.data?.orderDetails?.orderStatus == "DISPATCHED" || it.data?.orderDetails?.orderStatus=="COMPLETED" || it.data?.orderDetails?.orderStatus == "CANCEL"
+
                     binding.cancelButton.updateVisibility(cancelBtnVisibility.not())
+
                     binding.btnChangePaymentMode.updateVisibility(
                         cancelBtnVisibility&&
                                 it.data?.orderDetails?.paymentDetails?.paymentMode=="CASH"&&
-                                it.data?.orderDetails?.orderStatus!="COMPLETED"&&
-                                it.data?.orderDetails?.orderStatus!="CANCEL")
+                                it.data.orderDetails.orderStatus !="COMPLETED"&&
+                                it.data.orderDetails.orderStatus !="CANCEL")
                 }
             }
         })
+    }
+
+    private fun updateDate(data: InOrderDetail?) {
+        data?.let {
+            val orderText = if (it.orderDetails.deliveryDetails?.deliveredDateTime == null) {
+                "Order Date: "
+            } else {
+                "Delivery Date: "
+            }
+            val latestDate = it.orderDetails.deliveryDetails?.deliveredDateTime ?: it.orderDetails.orderDate
+            binding.orderDateTime.text = orderText + latestDate
+        }
+
     }
 
     private fun updatePaymentMode(paymentDetails: PaymentDetails?) {

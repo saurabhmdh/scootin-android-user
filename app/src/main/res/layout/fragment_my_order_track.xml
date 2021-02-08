@@ -101,7 +101,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/order_id"
-                    app:setDateFromOrderDate="@{data.orderDetails.orderDate}"
                     tools:ignore="RtlSymmetry" />
 
                 <androidx.appcompat.widget.AppCompatImageView

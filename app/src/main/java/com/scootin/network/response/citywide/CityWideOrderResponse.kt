@@ -1,9 +1,6 @@
 package com.scootin.network.response.citywide
 
-import com.scootin.network.response.AddressDetails
-import com.scootin.network.response.Media
-import com.scootin.network.response.PaymentDetails
-import com.scootin.network.response.UserInfo
+import com.scootin.network.response.*
 
 data class CityWideOrderResponse(
     val paymentDetails: PaymentDetails,
@@ -14,7 +11,8 @@ data class CityWideOrderResponse(
     val orderStatus: String,
     val pickupAddressDetails: AddressDetails,
     val serviceArea: ServiceArea,
-    val userInfo: UserInfo
+    val userInfo: UserInfo,
+    val deliveryDetails: DeliveryDetail?
 ) {
     data class ServiceArea(
         val deleted: Boolean,
