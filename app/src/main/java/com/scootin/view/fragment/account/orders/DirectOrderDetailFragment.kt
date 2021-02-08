@@ -1,10 +1,8 @@
 package com.scootin.view.fragment.account.orders
 
-import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
@@ -17,6 +15,7 @@ import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.request.CancelOrderRequest
 import com.scootin.network.response.PaymentDetails
+import com.scootin.network.response.orderdetail.OrderDetail
 import com.scootin.util.Conversions
 import com.scootin.util.UtilUIComponent
 import com.scootin.util.fragment.autoCleared
@@ -81,6 +80,7 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
                     if (it.data?.media == null) {
                         binding.orderList.visibility = View.GONE
                     }
+                    updateDate(it.data)
 
                     val cancelBtnVisibility = it.data?.orderStatus == "DISPATCHED" || it.data?.orderStatus=="COMPLETED" || it.data?.orderStatus == "CANCEL"
                     binding.cancelButton.updateVisibility(cancelBtnVisibility.not())
@@ -95,6 +95,18 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
                 }
             }
         })
+    }
+
+    private fun updateDate(data: OrderDetail?) {
+        data?.let {
+            val orderText = if (it.deliveryDetails?.deliveredDateTime == null) {
+                "Order Date: "
+            } else {
+                "Delivery Date: "
+            }
+            val latestDate = it.deliveryDetails?.deliveredDateTime ?: it.orderDate
+            binding.orderDateTime.text = orderText + latestDate
+        }
     }
 
     private fun updatePaymentMode(paymentDetails: PaymentDetails?, canPay: Boolean) {

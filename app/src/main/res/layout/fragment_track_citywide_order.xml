@@ -91,7 +91,6 @@
             android:layout_marginTop="7dp"
             android:layout_marginEnd="@dimen/dimen_20"
             android:background="#D6DDFF"
-            app:setDateFromOrderDate="@{data.orderDate}"
             android:gravity="center|start"
             android:paddingStart="5dp"
             android:textColor="#4E4E4E"

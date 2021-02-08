@@ -1,9 +1,7 @@
 package com.scootin.view.fragment.account.orders
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
@@ -16,6 +14,7 @@ import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.request.CancelOrderRequest
+import com.scootin.network.response.citywide.CityWideOrderResponse
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.fragment.BaseFragment
 import com.scootin.viewmodel.account.OrderFragmentViewModel
@@ -65,7 +64,7 @@ class CityWideOrderDetailFragment : BaseFragment(R.layout.fragment_track_citywid
                     if (it.data?.orderStatus == "COMPLETED") {
                         binding.orderStatusString.text = getString(R.string.order_has_been_completed)
                     }
-
+                    updateDate(it.data)
                     val cancelBtnVisibility = it.data?.orderStatus == "DISPATCHED" || it.data?.orderStatus=="COMPLETED" || it.data?.orderStatus == "CANCEL"
                     binding.cancelButton.updateVisibility(cancelBtnVisibility.not())
                     binding.btnChangePaymentMode.updateVisibility(cancelBtnVisibility&&it.data?.paymentDetails?.paymentMode=="CASH"&&it.data?.orderStatus!="COMPLETED")
@@ -73,6 +72,18 @@ class CityWideOrderDetailFragment : BaseFragment(R.layout.fragment_track_citywid
                 }
             }
         })
+    }
+
+    private fun updateDate(data: CityWideOrderResponse?) {
+        data?.let {
+            val orderText = if (it.deliveryDetails?.deliveredDateTime == null) {
+                "Order Date: "
+            } else {
+                "Delivery Date: "
+            }
+            val latestDate = it.deliveryDetails?.deliveredDateTime ?: it.orderDate
+            binding.orderDateTime.text = orderText + latestDate
+        }
     }
 
     private fun updatePaymentText(onDelivery: Boolean) {
