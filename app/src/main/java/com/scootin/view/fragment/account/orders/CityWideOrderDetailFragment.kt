@@ -55,10 +55,10 @@ class CityWideOrderDetailFragment : BaseFragment(R.layout.fragment_track_citywid
 
                     Timber.i("Saurabh ${it.data?.paymentDetails}")
 
-                    val canPay = ((it.data?.orderStatus == "PACKED" || it.data?.orderStatus == "DISPATCHED") && it.data.paymentDetails.paymentMode == null)
+                    val canPay = ((it.data?.orderStatus == "PACKED" || it.data?.orderStatus == "DISPATCHED") && it.data.paymentDetails.paymentStatus == "CREATED")
                     updatePaymentMode(canPay)
 
-                    val onDelivery = ((it.data?.orderStatus == "PACKED" || it.data?.orderStatus == "DISPATCHED"))
+                    val onDelivery = ((it.data?.orderStatus == "PACKED" || it.data?.orderStatus == "DISPATCHED") && it.data.paymentDetails.paymentStatus == "COMPLETED")
                     updatePaymentText(onDelivery)
 
                     if (it.data?.orderStatus == "COMPLETED") {
