@@ -95,6 +95,9 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
 
 
                 }
+                Status.LOADING->{
+                    showLoading()
+                }
             }
         })
     }

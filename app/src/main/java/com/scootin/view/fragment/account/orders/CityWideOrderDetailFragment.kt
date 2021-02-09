@@ -72,6 +72,9 @@ class CityWideOrderDetailFragment : BaseFragment(R.layout.fragment_track_citywid
                     binding.btnChangePaymentMode.updateVisibility(cancelBtnVisibility&&it.data?.paymentDetails?.paymentMode=="CASH"&&it.data?.orderStatus!="COMPLETED")
 
                 }
+                Status.LOADING->{
+                    showLoading()
+                }
             }
         })
     }

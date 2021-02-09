@@ -132,7 +132,11 @@ class OrderDetailFragment : BaseFragment(R.layout.fragment_my_order_track) {
                                 it.data.orderDetails.orderStatus !="COMPLETED"&&
                                 it.data.orderDetails.orderStatus !="CANCEL")
                 }
+                Status.LOADING->{
+                    showLoading()
+                }
             }
+
         })
     }
 
