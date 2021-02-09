@@ -53,6 +53,7 @@ class CityWideOrderDetailFragment : BaseFragment(R.layout.fragment_track_citywid
             Timber.i("orderId = ${it.status} : ${it.data}")
             when (it.status) {
                 Status.SUCCESS -> {
+                    dismissLoading()
                     binding.data = it.data
 
                     Timber.i("Saurabh ${it.data?.paymentDetails}")
