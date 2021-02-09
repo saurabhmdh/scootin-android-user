@@ -3,6 +3,7 @@ package com.scootin.view.fragment.account.orders
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
@@ -10,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.scootin.R
 import com.scootin.databinding.FragmentTrackDirectOrderBinding
+import com.scootin.extensions.getNetworkError
 import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
@@ -204,6 +206,10 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
                             dismissLoading()
                             findNavController().navigate(OrderDetailFragmentDirections.orderToCancelOrder())
 
+                        }
+                        Status.ERROR -> {
+                            dismissLoading()
+                            Toast.makeText(requireContext(), getNetworkError(it.message), Toast.LENGTH_SHORT).show()
                         }
                     }
                 })

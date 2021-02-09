@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.core.view.children
+import org.json.JSONObject
 
 
 fun RadioGroup.getCheckedRadioButtonPosition(): Int {
@@ -14,4 +15,11 @@ fun RadioGroup.getCheckedRadioButtonPosition(): Int {
         }.firstOrNull {
             it.second.id == radioButtonId
         }?.first ?: -1
+}
+
+fun getNetworkError(message: String?): String {
+    message?.let {
+        val obj = JSONObject(message)
+        return obj.getString("error")
+    } ?: return "Server error"
 }
