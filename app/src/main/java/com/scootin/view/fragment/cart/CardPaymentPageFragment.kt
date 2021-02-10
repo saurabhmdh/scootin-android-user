@@ -56,10 +56,11 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
 
     private fun setListener() {
         viewModel.loadPaymentInfo("")
-
+        showLoading()
         viewModel.paymentInfo.observe(viewLifecycleOwner) {
             dismissLoading()
             if (it.isSuccessful) {
+                dismissLoading()
                 val data = it.body()
                 binding.data = data
                 if (data?.couponDiscount != 0.0) {
@@ -70,6 +71,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                 }
 
             } else {
+                dismissLoading()
                 Toast.makeText(context, "Invalid Coupon code", Toast.LENGTH_SHORT).show()
             }
         }

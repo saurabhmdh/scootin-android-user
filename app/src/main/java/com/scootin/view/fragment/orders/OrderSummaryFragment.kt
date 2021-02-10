@@ -18,6 +18,7 @@ import com.scootin.network.response.inorder.MultipleOrdersDetails
 import com.scootin.network.response.inorder.OrderInventoryDetails
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.order.OrderSummaryAdapter
+import com.scootin.view.fragment.BaseFragment
 import com.scootin.view.vo.MultiOrderVo
 import com.scootin.viewmodel.payment.PaymentViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,7 +27,7 @@ import java.lang.StringBuilder
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
+class OrderSummaryFragment : BaseFragment (R.layout.fragment_order_summary) {
     private var binding by autoCleared<FragmentOrderSummaryBinding>()
 
     @Inject
@@ -52,10 +53,11 @@ class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
 
         viewModel.loadMultipleOrders(orderId)
 
-
+        showLoading()
         viewModel.multipleOrderInfo.observe(viewLifecycleOwner) {
             when(it.status) {
                 Status.SUCCESS -> {
+                    dismissLoading()
                     Timber.i("data working ${it.data}")
                     if (it.data == null) {
                        Toast.makeText(requireContext(), "There is server error", Toast.LENGTH_SHORT).show()
@@ -74,7 +76,10 @@ class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
                     }
                 }
                 Status.ERROR -> {
-                    //Show error and move back
+                    viewModel.loadMultipleOrders(orderId)
+                }
+                Status.LOADING -> {
+
                 }
             }
         }
@@ -98,14 +103,17 @@ class OrderSummaryFragment :Fragment(R.layout.fragment_order_summary) {
 
         return MultiOrderVo(multiOrders, deliveryAddress, amount, deliveryFreeAmount, totalGSTAmount, totalSaving, totalAmount)
     }
+
+
     private fun getAllAddress(orderInventoryDetailsList: List<OrderInventoryDetails>?): String {
         val uniqueAddress = mutableSetOf<Long>()
 
         val sb = StringBuffer()
         orderInventoryDetailsList?.forEach {
             if(uniqueAddress.contains(it.inventoryDetails.shopManagement.id).not()) {
-                sb.append(it.inventoryDetails.shopManagement.name).append(", ")
-                sb.append(getSingleAddress(it.inventoryDetails.shopManagement.address))
+                sb.append(it.inventoryDetails.shopManagement.name)
+                    //.append(", ")
+//                sb.append(getSingleAddress(it.inventoryDetails.shopManagement.address))
                 sb.append("\n")
                 uniqueAddress.add(it.inventoryDetails.shopManagement.id)
             }
