@@ -6,5 +6,5 @@ data class DeliveryDetail(
     val id: Long,
     val orderId: Long,
     val orderType: String,
-    val rejectReason: String
+    val rejectReason: String?
 )
