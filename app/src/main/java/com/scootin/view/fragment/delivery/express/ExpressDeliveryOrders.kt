@@ -73,6 +73,10 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
             Timber.i("action id = ${actionId}")
             when (actionId) {
                 EditorInfo.IME_ACTION_DONE -> {
+                    if (binding.searchSuggestion.text.isNullOrEmpty()) {
+                        return@OnEditorActionListener false
+                    }
+
                     val count = binding.searchList.adapter?.itemCount.orZero()
                     Timber.i("count = $count")
                     if (count > 10) {

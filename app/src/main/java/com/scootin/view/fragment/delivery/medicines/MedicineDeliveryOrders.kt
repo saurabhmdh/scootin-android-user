@@ -76,6 +76,10 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
             Timber.i("action id = ${actionId}")
             when (actionId) {
                 EditorInfo.IME_ACTION_DONE -> {
+                    if (binding.searchSuggestion.text.isNullOrEmpty()) {
+                        return@OnEditorActionListener false
+                    }
+
                     Timber.i("action id = ${actionId}")
                     val count = binding.searchList.adapter?.itemCount.orZero()
                     searchItemAddAdapter.addList(ExtraDataItem(binding.searchSuggestion.text.toString(), 1))
