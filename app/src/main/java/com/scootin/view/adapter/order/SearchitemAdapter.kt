@@ -68,8 +68,10 @@ class SearchitemAdapter(
     }
 
     fun removeItem(position: Int) {
-        list.removeAt(position)
-        notifyItemRemoved(position)
+        if (list.isEmpty().not()) {
+            list.removeAt(position)
+            notifyItemRemoved(position)
+        }
     }
 
     interface OnItemClickListener{

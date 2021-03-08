@@ -7,6 +7,7 @@ import android.os.Handler
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.scootin.R
@@ -68,8 +69,10 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     private fun canGoNextStep() = timeout && dataLoaded
 
     private fun openHomeScreen() {
-        startActivity(Intent(requireContext(), MainActivity::class.java))
-        activity?.overridePendingTransition(R.anim.enter, R.anim.exit)
-        activity?.finish()
+        lifecycleScope.launchWhenResumed {
+            startActivity(Intent(requireContext(), MainActivity::class.java))
+            activity?.overridePendingTransition(R.anim.enter, R.anim.exit)
+            activity?.finish()
+        }
     }
 }

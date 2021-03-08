@@ -9,8 +9,11 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.ResponseBody.Companion.toResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import timber.log.Timber
+import java.net.ConnectException
+import java.net.ProtocolException
 import java.net.UnknownHostException
 import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeoutException
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -43,7 +46,12 @@ class NetworkManager @Inject constructor(
                 val request: Request = chain.request()
                 return try {
                     chain.proceed(request)
-                } catch (e: UnknownHostException) {
+                } catch (e: Exception) {
+                    when(e) {
+                        is ProtocolException, is UnknownHostException, is TimeoutException, is ConnectException -> {
+                            Timber.i("There is network exception ${e.message}")
+                        }
+                    }
                     Response.Builder().code(404).body("".toResponseBody("application/json".toMediaTypeOrNull()))
                         .message("")
                         .protocol(Protocol.HTTP_1_1)
