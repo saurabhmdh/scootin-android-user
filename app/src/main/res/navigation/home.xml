@@ -329,6 +329,9 @@
         android:id="@+id/medicine_order"
         android:name="com.scootin.view.fragment.delivery.medicines.MedicineDeliveryOrders"
         android:label="Express">
+        <!--        adb shell am start -a android.intent.action.VIEW -d "https://user.scootin.com/medical/95952/testshop"-->
+        <deepLink app:uri="user.scootin.com/medical/{shop_id}/{shop_name}" />
+
         <argument
             android:name="shop_id"
             app:argType="long" />
@@ -340,6 +343,14 @@
             app:destination="@id/direct_order_confirmation"
             app:popUpTo="@id/titleScreen"
             app:popUpToInclusive="false"
+            app:enterAnim="@anim/default_enter_anim"
+            app:exitAnim="@anim/default_exit_anim"
+            app:popEnterAnim="@anim/default_pop_enter_anim"
+            app:popExitAnim="@anim/default_pop_exit_anim" />
+
+        <action
+            android:id="@+id/action_login_to_webview"
+            app:destination="@id/webview"
             app:enterAnim="@anim/default_enter_anim"
             app:exitAnim="@anim/default_exit_anim"
             app:popEnterAnim="@anim/default_pop_enter_anim"

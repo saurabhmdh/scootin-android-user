@@ -1,7 +1,13 @@
 package com.scootin.view.fragment.delivery.medicines
 
 import android.app.Activity
+import android.graphics.Color
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView.OnEditorActionListener
@@ -34,6 +40,7 @@ import com.scootin.util.ui.MediaPicker
 import com.scootin.util.ui.UtilPermission
 import com.scootin.view.adapter.order.SearchitemAdapter
 import com.scootin.view.fragment.BaseFragment
+import com.scootin.view.fragment.home.LoginFragmentDirections
 import com.scootin.viewmodel.order.DirectOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -68,6 +75,7 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
         super.onViewCreated(view, savedInstanceState)
         binding = MedicinePrescriptionFragmentBinding.bind(view)
         initListener()
+        updateUI()
         setSearchSuggestionList()
     }
 
@@ -259,5 +267,37 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
         if(media?.url != null) {
             GlideApp.with(requireContext()).load(media?.url).into(binding.receiverPhotoBox)
         }
+    }
+
+    private fun updateUI() {
+        val stringData = getString(R.string.login_terms_and_condition)
+        val wordtoSpan = SpannableString(stringData)
+
+        val clickableSpan: ClickableSpan = object : ClickableSpan() {
+            override fun onClick(textView: View) {
+                findNavController().navigate(LoginFragmentDirections.actionLoginToWebview(AppConstants.TERMS_AND_CONDITION))
+            }
+
+            override fun updateDrawState(ds: TextPaint) {
+                super.updateDrawState(ds)
+                ds.color = Color.BLUE
+            }
+        }
+
+        val remainingText : ClickableSpan = object : ClickableSpan() {
+            override fun onClick(textView: View) {
+                binding.termAccepted.isChecked = !binding.termAccepted.isChecked
+            }
+            override fun updateDrawState(ds: TextPaint) {
+                super.updateDrawState(ds)
+                ds.isUnderlineText = false
+            }
+        }
+
+        wordtoSpan.setSpan(remainingText, 0, 14, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        wordtoSpan.setSpan(clickableSpan, 15, stringData.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        binding.termAcceptedText.movementMethod = LinkMovementMethod.getInstance()
+
+        binding.termAcceptedText.text = wordtoSpan
     }
 }
