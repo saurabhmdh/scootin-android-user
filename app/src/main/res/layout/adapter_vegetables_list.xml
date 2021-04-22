@@ -51,7 +51,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/montserrat_regular"
-            android:maxLength="20"
             android:text="@{data.title}"
             android:textAllCaps="true"
             android:textColor="#a9a9a9"
@@ -67,7 +66,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/montserrat_regular"
-            android:maxLength="30"
             android:layout_marginTop="4dp"
             android:text="@{data.description}"
             android:textColor="@android:color/black"
@@ -105,7 +103,6 @@
             android:id="@+id/discountPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_marginTop="4dp"
             android:ellipsize="end"
             android:fontFamily="@font/montserrat_regular"

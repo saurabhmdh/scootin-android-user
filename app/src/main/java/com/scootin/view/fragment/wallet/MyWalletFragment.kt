@@ -14,6 +14,7 @@ import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.AddMoneyWallet
 import com.scootin.network.request.VerifyAmountRequest
+import com.scootin.util.constants.AppConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.WalletAdapter
 import com.scootin.viewmodel.delivery.CategoriesViewModel
@@ -88,15 +89,15 @@ class MyWalletFragment : Fragment(R.layout.fragment_wallet_my) {
 
         try {
             val options = JSONObject()
-            options.put("name","Scootin Inc")
-            options.put("image","https://image-res.s3.ap-south-1.amazonaws.com/scootin-logo.png")
-            options.put("theme.color", "#E90000")
-            options.put("currency","INR")
+            options.put("name", AppConstants.APPLICATION_NAME)
+            options.put("image", AppConstants.RAZORPAY_APP_IMAGE)
+            options.put("theme.color", AppConstants.RAZORPAY_THEME_COLOR)
+            options.put("currency", AppConstants.RAZORPAY_CURRENCY)
             options.put("order_id", orderId)
             options.put("amount", price)
 
             val prefill = JSONObject()
-            prefill.put("email","support@scootin.co.in")
+            prefill.put("email",AppConstants.RAZORPAY_EMAIL)
             prefill.put("contact", AppHeaders.userMobileNumber)
 
             options.put("prefill", prefill)
