@@ -11,6 +11,7 @@ import com.scootin.R
 import com.scootin.databinding.FragmentHomeBinding
 import com.scootin.databinding.FragmentWalletBinding
 import com.scootin.network.manager.AppHeaders
+import com.scootin.util.constants.AppConstants
 import com.scootin.util.fragment.autoCleared
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
@@ -39,12 +40,10 @@ class WalletFragment: Fragment(R.layout.fragment_wallet){
 
        try {
            val options = JSONObject()
-           options.put("name","Scootin Inc")
-           options.put("description","Demoing Charges")
-           //You can omit the image option to fetch the image from dashboard
-           options.put("image","https://image-res.s3.ap-south-1.amazonaws.com/scootin-logo.png")
-           options.put("theme.color", "#E90000")
-           options.put("currency","INR");
+           options.put("name", AppConstants.APPLICATION_NAME)
+           options.put("image", AppConstants.RAZORPAY_APP_IMAGE)
+           options.put("theme.color", AppConstants.RAZORPAY_THEME_COLOR)
+           options.put("currency", AppConstants.RAZORPAY_CURRENCY)
           // options.put("order_id", "order_DBJOWzybf0sJbb");
 
            options.put("amount","50000")//pass amount in currency subunits

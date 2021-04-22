@@ -42,4 +42,10 @@ object AppConstants {
     const val TERMS_AND_CONDITION = "https://scootin.in/user-terms"
 
     const val PROHIBITED_ITEMS = "https://scootin.in/prohibited-items"
+
+    const val APPLICATION_NAME = "Scootin"
+    const val RAZORPAY_APP_IMAGE = "https://image-res.s3.ap-south-1.amazonaws.com/scootin-logo.png"
+    const val RAZORPAY_THEME_COLOR = "#E90000"
+    const val RAZORPAY_CURRENCY = "INR"
+    const val RAZORPAY_EMAIL = "support@scootin.co.in"
 }

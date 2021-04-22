@@ -22,6 +22,7 @@ import com.scootin.network.request.OrderRequest
 import com.scootin.network.request.VerifyAmountRequest
 import com.scootin.network.response.AddressDetails
 import com.scootin.util.UtilUIComponent
+import com.scootin.util.constants.AppConstants
 import com.scootin.util.constants.IntentConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.fragment.BaseFragment
@@ -193,15 +194,14 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
 
         try {
             val options = JSONObject()
-            options.put("name", "Scootin Inc")
-            //You can omit the image option to fetch the image from dashboard
-            options.put("image", "https://image-res.s3.ap-south-1.amazonaws.com/scootin-logo.png")
-            options.put("theme.color", "#E90000")
-            options.put("currency", "INR")
+            options.put("name", AppConstants.APPLICATION_NAME)
+            options.put("image", AppConstants.RAZORPAY_APP_IMAGE)
+            options.put("theme.color", AppConstants.RAZORPAY_THEME_COLOR)
+            options.put("currency", AppConstants.RAZORPAY_CURRENCY)
             options.put("amount", price)
             options.put("order_id", orderReferenceId)
             val prefill = JSONObject()
-            prefill.put("email","support@scootin.co.in")
+            prefill.put("email",AppConstants.RAZORPAY_EMAIL)
             prefill.put("contact", AppHeaders.userMobileNumber)
 
             options.put("prefill", prefill)

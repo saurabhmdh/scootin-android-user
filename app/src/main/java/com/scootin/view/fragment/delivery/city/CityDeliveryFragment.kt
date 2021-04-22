@@ -2,7 +2,13 @@ package com.scootin.view.fragment.delivery.city
 
 
 import android.app.Activity
+import android.graphics.Color
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -24,6 +30,7 @@ import com.scootin.util.constants.AppConstants
 import com.scootin.util.constants.IntentConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.fragment.BaseFragment
+import com.scootin.view.fragment.home.LoginFragmentDirections
 import com.scootin.viewmodel.order.DirectOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -48,6 +55,7 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCitywideDeliveryBinding.bind(view)
+        updateUI()
 
         updateListener()
         binding.uploadPhoto.setOnClickListener {
@@ -234,6 +242,38 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
         if (media?.url != null) {
             GlideApp.with(requireContext()).load(media?.url).into(binding.receiverPhotoBox)
         }
+    }
+
+    private fun updateUI() {
+        val stringData = getString(R.string.login_terms_and_condition)
+        val wordtoSpan = SpannableString(stringData)
+
+        val clickableSpan: ClickableSpan = object : ClickableSpan() {
+            override fun onClick(textView: View) {
+                findNavController().navigate(CityDeliveryFragmentDirections.actionCitywideToWebview(AppConstants.PROHIBITED_ITEMS))
+            }
+
+            override fun updateDrawState(ds: TextPaint) {
+                super.updateDrawState(ds)
+                ds.color = Color.BLUE
+            }
+        }
+
+        val remainingText : ClickableSpan = object : ClickableSpan() {
+            override fun onClick(textView: View) {
+                binding.termAccepted.isChecked = !binding.termAccepted.isChecked
+            }
+            override fun updateDrawState(ds: TextPaint) {
+                super.updateDrawState(ds)
+                ds.isUnderlineText = false
+            }
+        }
+
+        wordtoSpan.setSpan(remainingText, 0, 14, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        wordtoSpan.setSpan(clickableSpan, 15, stringData.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        binding.termAcceptedText.movementMethod = LinkMovementMethod.getInstance()
+
+        binding.termAcceptedText.text = wordtoSpan
     }
 }
 
