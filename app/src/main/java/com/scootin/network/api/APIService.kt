@@ -78,14 +78,15 @@ interface APIService {
     ): Response<List<SearchShopsByCategoryResponse>>
 
 
-    @POST("/search/{shopId}/get-all-products")
-    suspend fun findProductFromShop(
+    @POST("/search/{shopId}/get-all-shop-products")
+    suspend fun findProductFromShopWithCategoryAndSubCategory(
         @Path("shopId") shopId: Long,
-        @Body requestSearch: RequestSearch,
+        @Body requestSearch: RequestSearchWithCategoryAndSubCategory,
         @Query("page") offset: Int = 0,
         @Query("size") limit: Int = 10,
         @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<List<SearchProductsByCategoryResponse>>
+
 
     @POST("/search/{serviceAreaId}/{subCategoryId}/get-all-products-with-subcategory")
     suspend fun searchProductBySubCategories(

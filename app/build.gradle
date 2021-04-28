@@ -95,7 +95,7 @@ dependencies {
     implementation deps.play.core
     implementation deps.play.places
 
-    implementation deps.map_utils
+//    implementation deps.map_utils
 
     kapt deps.room.compiler
     implementation deps.room.ktx

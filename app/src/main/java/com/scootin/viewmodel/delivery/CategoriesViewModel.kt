@@ -98,7 +98,9 @@ class CategoriesViewModel @ViewModelInject internal constructor(
     val allProductByShop: LiveData<PagingData<ProductSearchVO>> = _search_by_shop.switchMap {
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler)  {
             Timber.i("Saurabh ${it.query} for shop ${it.shopId}")
-            emitSource(searchRepository.findProductFromShop(it.query,  it.shopId).cachedIn(viewModelScope).asLiveData())
+            val mainCategory = cacheDao.getCacheData(AppConstants.MAIN_CATEGORY)?.value?.toLongOrNull() ?: -1
+            val subCategory = cacheDao.getCacheData(AppConstants.SUB_CATEGORY)?.value?.toLongOrNull() ?: -1
+            emitSource(searchRepository.findProductFromShopWithCategoryAndSubCategory(it.query,  it.shopId, mainCategory, subCategory).cachedIn(viewModelScope).asLiveData())
         }
     }
 

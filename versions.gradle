@@ -187,7 +187,7 @@ play.places = "com.google.android.libraries.places:places:$versions.places"
 
 deps.play = play
 
-deps.map_utils = "com.google.maps.android:android-maps-utils:$versions.map_utils"
+//deps.map_utils = "com.google.maps.android:android-maps-utils:$versions.map_utils"
 
 def idSdk = [:]
 idSdk.core = "r10.one.auth:core:$versions.idSdk"
@@ -235,7 +235,7 @@ chunk.runtime_no_op = "com.github.ChuckerTeam.Chucker:library-no-op:$versions.ch
 deps.chunk = chunk
 
 deps.gson = "com.google.code.gson:gson:$versions.gson"
-deps.map_utils = "com.google.maps.android:android-maps-utils:$versions.map_utils"
+//deps.map_utils = "com.google.maps.android:android-maps-utils:$versions.map_utils"
 
 deps.timber = "com.jakewharton.timber:timber:$versions.timber"
 

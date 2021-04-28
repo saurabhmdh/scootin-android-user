@@ -2,17 +2,16 @@ package com.scootin.pages
 
 import androidx.paging.PagingSource
 import com.scootin.network.api.APIService
-import com.scootin.network.request.RequestSearch
+import com.scootin.network.request.RequestSearchWithCategoryAndSubCategory
 import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.view.vo.ProductSearchVO
 import retrofit2.Response
 import timber.log.Timber
-import java.lang.RuntimeException
 
 class SearchProductByShop (
     private val apiService: APIService,
     private val shopId: Long,
-    private val requestSearch: RequestSearch
+    private val requestSearch: RequestSearchWithCategoryAndSubCategory
 ) : PagingSource<Int, ProductSearchVO>() {
 
     var initialOffset: Int = 0
@@ -33,7 +32,7 @@ class SearchProductByShop (
             Timber.i("offset $offset alrerady loaded $alreadyLoaded loadsize = ${loadsize}" )
             Timber.i("shopId $shopId requestSearch $requestSearch")
 
-            val response: Response<List<SearchProductsByCategoryResponse>> = apiService.findProductFromShop(shopId, requestSearch, offset, loadsize)
+            val response: Response<List<SearchProductsByCategoryResponse>> = apiService.findProductFromShopWithCategoryAndSubCategory(shopId, requestSearch, offset, loadsize)
             val data = response.body()
             if (response.isSuccessful && data != null) {
                 count = response.headers().get("x-total-count")?.toInt() ?: 0

@@ -37,9 +37,9 @@ class SearchRepository @Inject constructor(
 
     suspend fun getUserCartList(userId: String) = services.getUserCartList(userId)
 
-    fun findProductFromShop(query: String, shopId: Long): Flow<PagingData<ProductSearchVO>> {
+    fun findProductFromShopWithCategoryAndSubCategory(query: String, shopId: Long, categoryId: Long, subCategoryId: Long): Flow<PagingData<ProductSearchVO>> {
         return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20)) {
-            SearchProductByShop(services, shopId, RequestSearch(query = query))
+            SearchProductByShop(services, shopId, RequestSearchWithCategoryAndSubCategory(query = query, categoryId = categoryId, subCategoryId = subCategoryId))
         }.flow
     }
 
