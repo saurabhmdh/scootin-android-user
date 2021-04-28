@@ -89,6 +89,7 @@ internal constructor(
         launch {
             selectedCategoryID?.let {
                 cacheDao.insert(Cache(AppConstants.MAIN_CATEGORY, it))
+                cacheDao.insert(Cache(AppConstants.SUB_CATEGORY, "-1"))
             }
         }
     }
