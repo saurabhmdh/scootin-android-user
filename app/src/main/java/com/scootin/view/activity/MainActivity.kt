@@ -1,11 +1,13 @@
 package com.scootin.view.activity
 
 
+import android.app.Dialog
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Color
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -40,9 +42,11 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
             setContentView(it.root)
         }
 
+        isOnline()
 
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
+
         } // Else, need to wait for onRestoreInstanceState
         val localBroadcastManager = LocalBroadcastManager.getInstance(this)
         localBroadcastManager.registerReceiver(listener, IntentFilter(AppConstants.INTENT_ACTION_USER_DISABLED))
@@ -97,7 +101,16 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
         }
 
     }
+   private fun isOnline(){
+        val manager=applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo=manager.activeNetworkInfo
+        if(networkInfo==null){
 
+            Toast.makeText(this,"No Internet Connection",Toast.LENGTH_LONG).show()
+
+        }
+
+    }
 
     override fun onPaymentSuccess(razorpayPaymentId: String?) {
         Timber.i("Payment $razorpayPaymentId")
