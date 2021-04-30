@@ -293,6 +293,47 @@
                 app:srcCompat="@drawable/ic_change_payment_mode" />
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/store_name_base"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginStart="@dimen/dimen_20"
+            android:layout_marginTop="@dimen/dimen_20"
+            android:layout_marginEnd="@dimen/dimen_20"
+            android:background="#D6DDFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/total_amount_base"
+            tools:ignore="RtlSymmetry">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_store_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:paddingStart="5dp"
+                android:drawablePadding="8dp"
+                android:drawableLeft="@drawable/ic_pickup_location_icon"
+                android:text="@string/store_name"
+                android:textColor="#2A2A2A"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/store_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/txt_store_name"
+                android:textColor="#2A2A2A"
+                android:textSize="13sp"
+                android:text="@{data.shopManagement.name}"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
@@ -300,7 +341,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/total_amount_base">
+            app:layout_constraintTop_toBottomOf="@id/store_name_base">
 
             <LinearLayout
                 android:id="@+id/linear_layout"

@@ -328,7 +328,6 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="8dp"
                         android:layout_toRightOf="@id/txt_store_name"
-                        android:text="@{data.orderDetails.shopManagement.name}"
                         android:textColor="#2A2A2A"
                         android:textSize="13sp"
                         android:textStyle="bold" />

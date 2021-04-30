@@ -118,7 +118,7 @@ class OrderDetailFragment : BaseFragment(R.layout.fragment_my_order_track) {
                     binding.data = it.data
                     updatePaymentMode(it.data?.orderDetails?.paymentDetails)
                     orderDetailAdapter.submitList(it.data?.orderInventoryDetailsList)
-
+                    binding.storeName.setText(it.data?.orderInventoryDetailsList?.get(0)?.inventoryDetails?.shopManagement?.name)
                     updateDate(it.data)
 
                     updateSelectors(it.data?.orderDetails?.orderStatus)
