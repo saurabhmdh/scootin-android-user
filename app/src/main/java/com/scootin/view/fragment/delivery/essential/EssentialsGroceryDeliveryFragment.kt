@@ -58,6 +58,7 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
     }
 
     private fun updateUI() {
+        binding.grocery.isSelected = true
         setStoreAdapter()
         setProductAdapter()
     }
@@ -125,6 +126,37 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
                 val result = it.body()?.toInt().orZero()
                 setupBadge(result)
             }
+        }
+
+        setupSubCategoryListener()
+    }
+
+    private fun setupSubCategoryListener() {
+        binding.grocery.setOnClickListener {
+            binding.grocery.isSelected = true
+            binding.breakfast.isSelected = false
+            binding.household.isSelected = false
+            binding.hygiene.isSelected = false
+        }
+
+        binding.breakfast.setOnClickListener {
+            binding.grocery.isSelected = false
+            binding.breakfast.isSelected = true
+            binding.household.isSelected = false
+            binding.hygiene.isSelected = false
+        }
+        binding.household.setOnClickListener {
+            binding.grocery.isSelected = false
+            binding.breakfast.isSelected = false
+            binding.household.isSelected = true
+            binding.hygiene.isSelected = false
+        }
+
+        binding.hygiene.setOnClickListener {
+            binding.grocery.isSelected = false
+            binding.breakfast.isSelected = false
+            binding.household.isSelected = false
+            binding.hygiene.isSelected = true
         }
     }
 
