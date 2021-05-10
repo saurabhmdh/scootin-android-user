@@ -59,6 +59,8 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
 
     private fun updateUI() {
         binding.grocery.isSelected = true
+        viewModel.updateSubCategory("300") //Default item..
+
         setStoreAdapter()
         setProductAdapter()
     }
@@ -98,13 +100,13 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
-        viewModel.shops.observe(viewLifecycleOwner) {response->
+        viewModel.shopsBySubcategory.observe(viewLifecycleOwner) {response->
             lifecycleScope.launch {
                 shopSearchAdapter.submitData(response)
             }
         }
 
-        viewModel.allProduct.observe(viewLifecycleOwner) {response->
+        viewModel.allProductBySubCategory.observe(viewLifecycleOwner) {response->
             lifecycleScope.launch {
                 productSearchAdapter.submitData(response)
             }
@@ -133,6 +135,8 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
 
     private fun setupSubCategoryListener() {
         binding.grocery.setOnClickListener {
+            viewModel.updateSubCategory(it.tag as String?)
+            viewModel.doSearch(binding.searchBox.query?.toString().orEmpty())
             binding.grocery.isSelected = true
             binding.breakfast.isSelected = false
             binding.household.isSelected = false
@@ -140,12 +144,16 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
         }
 
         binding.breakfast.setOnClickListener {
+            viewModel.updateSubCategory(it.tag as String?)
+            viewModel.doSearch(binding.searchBox.query?.toString().orEmpty())
             binding.grocery.isSelected = false
             binding.breakfast.isSelected = true
             binding.household.isSelected = false
             binding.hygiene.isSelected = false
         }
         binding.household.setOnClickListener {
+            viewModel.updateSubCategory(it.tag as String?)
+            viewModel.doSearch(binding.searchBox.query?.toString().orEmpty())
             binding.grocery.isSelected = false
             binding.breakfast.isSelected = false
             binding.household.isSelected = true
@@ -153,6 +161,8 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
         }
 
         binding.hygiene.setOnClickListener {
+            viewModel.updateSubCategory(it.tag as String?)
+            viewModel.doSearch(binding.searchBox.query?.toString().orEmpty())
             binding.grocery.isSelected = false
             binding.breakfast.isSelected = false
             binding.household.isSelected = false

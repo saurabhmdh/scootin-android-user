@@ -6,6 +6,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.scootin.database.dao.CacheDao
 import com.scootin.database.dao.LocationDao
+import com.scootin.database.table.Cache
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.*
 import com.scootin.network.response.SearchShopsByCategoryResponse
@@ -46,6 +47,14 @@ class CategoriesViewModel @ViewModelInject internal constructor(
 
     fun doSearchByShop(query: String, shopId: Long) {
         _search_by_shop.postValue(SearchShopsItem(query, shopId))
+    }
+
+    fun updateSubCategory(selectedCategoryID: String?) {
+        launch {
+            selectedCategoryID?.let {
+                cacheDao.insert(Cache(AppConstants.SUB_CATEGORY, it))
+            }
+        }
     }
 
     data class SearchShopsItem(val query: String, val shopId: Long)
