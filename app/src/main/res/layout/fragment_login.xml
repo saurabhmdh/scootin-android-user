@@ -4,156 +4,156 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ic_background">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/login_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="125dp"
-        app:srcCompat="@drawable/ic_scootin_logo_no_shadow"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/txt_getStartedwithScootin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:srcCompat="@drawable/ic_get_started_with_scootin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_logo" />
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/editText_PhnNo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="70dp"
-        android:background="@null"
-        android:fontFamily="@font/montserrat_regular"
-        android:hint="@string/edittxt_hint"
-        android:inputType="phone"
-        android:maxLength="10"
-        android:maxLines="1"
-        android:textColorHint="#696969"
-        app:layout_constraintEnd_toStartOf="@id/send_otp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_getStartedwithScootin" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/send_otp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="75dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/editText_PhnNo"
-        app:layout_constraintTop_toBottomOf="@id/txt_getStartedwithScootin"
-        app:srcCompat="@drawable/ic_send_otp_button" />
-
-    <View
-        android:id="@+id/baseline_PhnNo"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@color/text_color_primary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editText_PhnNo" />
+        android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/editTextOTP"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:maxLength="6"
-        android:background="@null"
-        android:fontFamily="@font/montserrat_regular"
-        android:hint="@string/edittxt_hint_OTP"
-        android:textColorHint="#696969"
-        app:layout_constraintBottom_toTopOf="@+id/baseline_OTP"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:inputType="number"
-        android:maxLines="1"/>
-
-    <View
-        android:id="@+id/baseline_OTP"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        android:background="@color/text_color_primary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_PhnNo" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/txt_didnt_get_OTP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="66dp"
-        android:layout_marginTop="38dp"
-        app:srcCompat="@drawable/ic_didnt_receive_otp_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/baseline_OTP" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/senAgain_LoginOtp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        app:srcCompat="@drawable/ic_send_again_button"
-        app:layout_constraintBottom_toBottomOf="@+id/txt_didnt_get_OTP"
-        app:layout_constraintStart_toEndOf="@+id/txt_didnt_get_OTP"
-        app:layout_constraintTop_toTopOf="@+id/txt_didnt_get_OTP" />
-
-    <LinearLayout
-        android:id="@+id/warning"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/senAgain_LoginOtp">
-
-        <CheckBox
-            android:id="@+id/term_accepted"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/term_accepted_text"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/login_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:gravity="center"
-            android:textSize="15sp"
-            app:layout_constraintTop_toBottomOf="@id/sender_photo_box" />
-    </LinearLayout>
+            android:layout_marginTop="125dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_scootin_logo_no_shadow" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/signIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        app:srcCompat="@drawable/ic_sign_in"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/warning" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/txt_getStartedwithScootin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/login_logo"
+            app:srcCompat="@drawable/ic_get_started_with_scootin" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/editText_PhnNo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="70dp"
+            android:background="@null"
+            android:fontFamily="@font/montserrat_regular"
+            android:hint="@string/edittxt_hint"
+            android:inputType="phone"
+            android:maxLength="10"
+            android:maxLines="1"
+            android:textColorHint="#696969"
+            app:layout_constraintEnd_toStartOf="@id/send_otp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_getStartedwithScootin" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/send_otp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="75dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/editText_PhnNo"
+            app:layout_constraintTop_toBottomOf="@id/txt_getStartedwithScootin"
+            app:srcCompat="@drawable/ic_send_otp_button" />
+
+        <View
+            android:id="@+id/baseline_PhnNo"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/text_color_primary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editText_PhnNo" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/editTextOTP"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@null"
+            android:fontFamily="@font/montserrat_regular"
+            android:hint="@string/edittxt_hint_OTP"
+            android:inputType="number"
+            android:maxLength="6"
+            android:maxLines="1"
+            android:textColorHint="#696969"
+            app:layout_constraintBottom_toTopOf="@+id/baseline_OTP"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:id="@+id/baseline_OTP"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/text_color_primary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText_PhnNo" />
+
+        <LinearLayout
+            android:id="@+id/warning"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/baseline_OTP">
+
+            <CheckBox
+                android:id="@+id/term_accepted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/term_accepted_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#000"
+                android:textSize="15sp"
+                app:layout_constraintTop_toBottomOf="@id/sender_photo_box" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/signIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/warning"
+            app:srcCompat="@drawable/ic_sign_in" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/txt_didnt_get_OTP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="66dp"
+            android:layout_marginTop="38dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signIn"
+            app:srcCompat="@drawable/ic_didnt_receive_otp_text" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/senAgain_LoginOtp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_didnt_get_OTP"
+            app:layout_constraintStart_toEndOf="@+id/txt_didnt_get_OTP"
+            app:layout_constraintTop_toTopOf="@+id/txt_didnt_get_OTP"
+            app:srcCompat="@drawable/ic_send_again_button" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

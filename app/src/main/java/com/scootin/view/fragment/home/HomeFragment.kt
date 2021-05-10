@@ -299,9 +299,13 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
 
                     place?.let {
                         //Lets try geo coder
-                        val listOfAddress = Geocoder(context).getFromLocation(it.latLng!!.latitude, it.latLng!!.longitude, 1)
-                        val address = listOfAddress.firstOrNull()
-                        handlePlaceSuccessResponse(place, address?.subAdminArea)
+                        try {
+                            val listOfAddress = Geocoder(context).getFromLocation(it.latLng!!.latitude, it.latLng!!.longitude, 1)
+                            val address = listOfAddress.firstOrNull()
+                            handlePlaceSuccessResponse(place, address?.subAdminArea)
+                        } catch (e: Exception) {
+                            //Do nothing...
+                        }
                     }
                 } else {
                     val exception = task.exception
