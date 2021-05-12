@@ -146,14 +146,27 @@
             app:layout_constraintTop_toBottomOf="@+id/signIn"
             app:srcCompat="@drawable/ic_didnt_receive_otp_text" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/senAgain_LoginOtp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
+            android:layout_marginStart="13dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
             app:layout_constraintBottom_toBottomOf="@+id/txt_didnt_get_OTP"
             app:layout_constraintStart_toEndOf="@+id/txt_didnt_get_OTP"
             app:layout_constraintTop_toTopOf="@+id/txt_didnt_get_OTP"
-            app:srcCompat="@drawable/ic_send_again_button" />
+            app:srcCompat="@drawable/selector_send_again" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/timer_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@android:color/black"
+            android:layout_marginStart="13dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_didnt_get_OTP"
+            app:layout_constraintStart_toEndOf="@+id/senAgain_LoginOtp"
+            app:layout_constraintTop_toTopOf="@+id/txt_didnt_get_OTP" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
