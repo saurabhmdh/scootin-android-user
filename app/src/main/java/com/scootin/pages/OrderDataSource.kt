@@ -1,6 +1,7 @@
 package com.scootin.pages
 
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.scootin.network.api.APIService
 import com.scootin.network.request.RequestHistory
 import com.scootin.network.response.order.OrderHistoryItem
@@ -54,4 +55,6 @@ class OrderDataSource (
             LoadResult.Error(e)
         }
     }
+
+    override fun getRefreshKey(state: PagingState<Int, OrderHistoryItem>) = state.anchorPosition
 }
