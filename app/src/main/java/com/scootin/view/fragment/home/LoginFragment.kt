@@ -3,6 +3,7 @@ package com.scootin.view.fragment.home
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextPaint
@@ -101,12 +102,16 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             }
             viewModel.doLogin(mobileNumber, otp)
         }
+        binding.senAgainLoginOtp.isEnabled = false
 
         binding.sendOtp.setOnClickListener {
+
             val mobileNumber = binding.editTextPhnNo.text.toString()
             if (mobileNumber.isEmpty() || Validation.REGEX_VALID_MOBILE_NUMBER.matcher(mobileNumber).matches().not()) {
                 Toast.makeText(context, R.string.error_message_invalid_mobile, Toast.LENGTH_SHORT).show()
             } else {
+                binding.sendOtp.visibility = View.GONE
+                timer.start()
                 viewModel.sendOTP(mobileNumber)
             }
         }
@@ -115,6 +120,8 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             if (mobileNumber.isEmpty() || Validation.REGEX_VALID_MOBILE_NUMBER.matcher(mobileNumber).matches().not()) {
                 Toast.makeText(context, R.string.error_message_invalid_mobile, Toast.LENGTH_SHORT).show()
             } else {
+                binding.senAgainLoginOtp.isEnabled = false
+                timer.start()
                 viewModel.sendOTP(mobileNumber)
             }
         }
@@ -158,5 +165,19 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         activity?.finish()
     }
 
+    private val timer = object : CountDownTimer(30000, 1000) {
+        override fun onTick(millisUntilFinished: Long) {
+            val time = millisUntilFinished / 1000
+            if (time == 0L) {
+                binding.timerText.text = ""
+            } else {
+                binding.timerText.text = "In ${time} sec."
+            }
+        }
 
+        override fun onFinish() {
+            binding.senAgainLoginOtp.isEnabled = true
+            binding.timerText.text = ""
+        }
+    }
 }
