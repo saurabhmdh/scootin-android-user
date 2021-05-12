@@ -47,7 +47,7 @@ class EssentialCategoryFragment : Fragment(R.layout.fragment_essential_category)
                     findNavController().navigate(EssentialCategoryFragmentDirections.essentialCategoryToGrocerydelivery())
                 }
                 1 -> {
-                    findNavController().navigate(EssentialCategoryFragmentDirections.essentialCategoryToHandwritten())
+                    findNavController().navigate(EssentialCategoryFragmentDirections.essentialCategoryToHandwritten(binding.deliverySlot.selectedItem?.toString().orEmpty()))
                 }
             }
         }
