@@ -110,6 +110,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             if (mobileNumber.isEmpty() || Validation.REGEX_VALID_MOBILE_NUMBER.matcher(mobileNumber).matches().not()) {
                 Toast.makeText(context, R.string.error_message_invalid_mobile, Toast.LENGTH_SHORT).show()
             } else {
+                binding.sendOtp.visibility = View.GONE
                 timer.start()
                 viewModel.sendOTP(mobileNumber)
             }
