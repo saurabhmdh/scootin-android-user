@@ -174,4 +174,6 @@
 
     <string name="login_terms_and_condition">I agree to the Terms &amp; Conditions</string>
     <string name="store_name">Store Name</string>
+
+    <string name="error_no_internet">No internet connection.</string>
 </resources>

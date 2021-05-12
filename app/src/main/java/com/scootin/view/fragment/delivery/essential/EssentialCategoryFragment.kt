@@ -60,7 +60,7 @@ class EssentialCategoryFragment : Fragment(R.layout.fragment_essential_category)
             } else {
                 Toast.makeText(
                     requireContext(),
-                    "There is error on delivery slot",
+                    R.string.error_no_internet,
                     Toast.LENGTH_SHORT
                 ).show()
             }
