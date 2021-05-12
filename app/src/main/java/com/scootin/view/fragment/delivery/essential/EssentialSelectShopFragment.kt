@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.scootin.R
 import com.scootin.databinding.FragmentGroceryDeliveryShopSelectBinding
 import com.scootin.network.AppExecutors
@@ -27,6 +28,11 @@ class EssentialSelectShopFragment : BaseFragment(R.layout.fragment_grocery_deliv
     private val viewModel: CategoriesViewModel by viewModels()
 
     private var shopSearchAdapter by autoCleared<ShopSearchAdapter>()
+    private val args: EssentialSelectShopFragmentArgs by navArgs()
+
+    private val deliverySlot by lazy {
+        args.deliverySlot
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,7 +65,7 @@ class EssentialSelectShopFragment : BaseFragment(R.layout.fragment_grocery_deliv
         shopSearchAdapter = ShopSearchAdapter(object : ShopSearchAdapter.StoreImageAdapterClickListener {
                 override fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse) {
                     Timber.i("Shop Info $shopInfo")
-                    val direction = EssentialSelectShopFragmentDirections.shopSelectionToHandwritten(shopInfo.shopID, shopInfo.name)
+                    val direction = EssentialSelectShopFragmentDirections.shopSelectionToHandwritten(shopInfo.shopID, shopInfo.name, deliverySlot)
                     findNavController().navigate(direction)
                 }
             })
