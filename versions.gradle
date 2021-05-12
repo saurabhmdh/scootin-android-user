@@ -13,8 +13,8 @@ versions.support_activity_ktx = "1.1.0"
 
 versions.view_pager2 = "1.0.0"
 versions.fragment_version = "1.2.5"
-versions.paging = "2.1.0"
-versions.paging3 = "3.0.0-alpha07"
+
+versions.paging3 = "3.0.0"
 
 versions.arch_core = "2.1.0"
 versions.support = '1.0.0'
@@ -48,7 +48,7 @@ versions.license_tools_plugin = '1.7.0'
 versions.work = '2.0.1'
 versions.retrofit_interceptor = '4.2.2'
 versions.navigation = '2.3.0'
-versions.paging = "2.1.0"
+
 
 versions.retrofit_url_manager = '1.4.0'
 
@@ -134,7 +134,7 @@ support.support_preference_fragment = "androidx.preference:preference-ktx:$versi
 support.palette = "androidx.palette:palette-ktx:$versions.support_palette"
 support.viewpager2 = "androidx.viewpager2:viewpager2:$versions.view_pager2"
 support.fragment_ktx = "androidx.fragment:fragment-ktx:$versions.fragment_version"
-support.paging = "androidx.paging:paging-runtime:$versions.paging"
+
 support.activity_ktx = "androidx.activity:activity-ktx:$versions.support_activity_ktx"
 
 support.swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:$versions.version_swiperefreshlayout"
@@ -170,7 +170,7 @@ navigation.safe_args = "androidx.navigation:navigation-safe-args-gradle-plugin:$
 deps.navigation = navigation
 ext.deps = deps
 
-deps.paging_ktx = "androidx.paging:paging-runtime-ktx:$versions.paging"
+deps.paging3_ktx = "androidx.paging:paging-runtime-ktx:$versions.paging3"
 
 def slice = [:]
 slice.builder = "androidx.slice:slice-builders-ktx:$versions.jetpack_slices_ktx"
@@ -265,7 +265,7 @@ deps.adjust = "com.adjust.sdk:adjust-android:$versions.adjust_android"
 deps.adjust_installreferrer = "com.android.installreferrer:installreferrer:$versions.adjust_installreferrer"
 deps.adjust_google_play_services_ads_identifier = "com.google.android.gms:play-services-ads-identifier:$versions.adjust_ads"
 deps.lottie = "com.airbnb.android:lottie:$versions.lottieVersion"
-deps.paging3_ktx = "androidx.paging:paging-runtime-ktx:$versions.paging3"
+
 deps.razoy_pay = "com.razorpay:checkout:$versions.razoy_pay_checkout"
 deps.image_picker = "com.github.dhaval2404:imagepicker:$versions.image_picker"
 deps.inline_activity_result = 'com.github.florent37:inline-activity-result-kotlin:1.0.4'

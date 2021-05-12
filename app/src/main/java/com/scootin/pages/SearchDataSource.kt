@@ -1,9 +1,11 @@
 package com.scootin.pages
 
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.scootin.network.api.APIService
 import com.scootin.network.request.RequestSearch
 import com.scootin.network.response.SearchProductsByCategoryResponse
+import com.scootin.network.response.order.OrderHistoryItem
 import com.scootin.view.vo.ProductSearchVO
 import retrofit2.Response
 import timber.log.Timber
@@ -61,4 +63,5 @@ class SearchDataSource (
             LoadResult.Error(e)
         }
     }
+    override fun getRefreshKey(state: PagingState<Int, ProductSearchVO>) = state.anchorPosition
 }

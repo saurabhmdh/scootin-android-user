@@ -24,13 +24,13 @@ class SearchRepository @Inject constructor(
 ) {
 
     fun searchShops(requestSearch: RequestSearch, serviceAreaId: String, categoryId: String): Flow<PagingData<SearchShopsByCategoryResponse>> {
-        return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20)) {
+        return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20, enablePlaceholders = false)) {
             SearchShopDataSource(services, serviceAreaId, categoryId, requestSearch)
         }.flow
     }
 
     fun searchShopsBySubCategory(requestSearch: RequestSearch, serviceAreaId: String, categoryId: String): Flow<PagingData<SearchShopsByCategoryResponse>> {
-        return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20)) {
+        return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20, enablePlaceholders = false)) {
             SearchShopBySubCategoryDataSource(services, serviceAreaId, categoryId, requestSearch)
         }.flow
     }
@@ -38,7 +38,7 @@ class SearchRepository @Inject constructor(
     suspend fun getUserCartList(userId: String) = services.getUserCartList(userId)
 
     fun findProductFromShopWithCategoryAndSubCategory(query: String, shopId: Long, categoryId: Long, subCategoryId: Long): Flow<PagingData<ProductSearchVO>> {
-        return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20)) {
+        return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20, enablePlaceholders = false)) {
             SearchProductByShop(services, shopId, RequestSearchWithCategoryAndSubCategory(query = query, categoryId = categoryId, subCategoryId = subCategoryId))
         }.flow
     }
@@ -48,20 +48,20 @@ class SearchRepository @Inject constructor(
     suspend fun getDeliverySlot(currentTime: Long) = services.getDeliverySlot(currentTime)
 
     fun findProductsWithPaging(query: String, serviceAreaId: String, categoryId: String): Flow<PagingData<ProductSearchVO>> {
-        return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20)) {
+        return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20, enablePlaceholders = false)) {
             SearchDataSource(services, serviceAreaId, categoryId, RequestSearch(query = query))
         }.flow
     }
 
     fun searchProductBySubCategories(query: String, serviceAreaId: String, subCategoryId: String): Flow<PagingData<ProductSearchVO>> {
-        return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20)) {
+        return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20, enablePlaceholders = false)) {
             SearchProductBySubcategory(services, serviceAreaId, subCategoryId, RequestSearch(query = query))
         }.flow
     }
 
 
     fun findProductsBySubCategoryWithFilters(serviceAreaId: String, subCategoryId: String, request: RequestSearchWithFilter): Flow<PagingData<ProductSearchVO>> {
-        return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20)) {
+        return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20, enablePlaceholders = false)) {
             SearchProductBySubcategoryWithFilters(services, serviceAreaId, subCategoryId, request)
         }.flow
     }

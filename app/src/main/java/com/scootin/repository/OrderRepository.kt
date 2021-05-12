@@ -85,7 +85,7 @@ class OrderRepository @Inject constructor(
 
 
     fun getAllOrdersForUser(id: String): Flow<PagingData<OrderHistoryItem>> {
-        return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20)) {
+        return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20, enablePlaceholders = false)) {
             OrderDataSource(services, id)
         }.flow
     }

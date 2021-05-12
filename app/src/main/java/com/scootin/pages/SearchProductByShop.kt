@@ -1,6 +1,7 @@
 package com.scootin.pages
 
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.scootin.network.api.APIService
 import com.scootin.network.request.RequestSearchWithCategoryAndSubCategory
 import com.scootin.network.response.SearchProductsByCategoryResponse
@@ -61,4 +62,6 @@ class SearchProductByShop (
             LoadResult.Error(e)
         }
     }
+
+    override fun getRefreshKey(state: PagingState<Int, ProductSearchVO>) = state.anchorPosition
 }
