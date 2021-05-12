@@ -1,6 +1,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginBottom="5dp">
+    android:layout_marginBottom="8dp">
 
     <data>
 
@@ -10,10 +10,17 @@
 
     </data>
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="12dp"
+        android:outlineAmbientShadowColor="#d3d3d3"
+        app:cardCornerRadius="8dp">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:background="@drawable/ic_item_bg"
+        android:layout_height="wrap_content"
+        android:background="@drawable/stroke_rectangle"
         android:orientation="horizontal">
 
 
@@ -192,4 +199,5 @@
             </LinearLayout>
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </layout>
