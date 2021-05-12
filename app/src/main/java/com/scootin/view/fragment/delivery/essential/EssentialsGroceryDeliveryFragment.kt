@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import androidx.paging.PagingData
 import com.scootin.R
 import com.scootin.databinding.FragmentGroceryDeliveryBinding
 import com.scootin.extensions.getCheckedRadioButtonPosition
@@ -134,7 +135,12 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
     }
 
     private fun setupSubCategoryListener() {
+
         binding.grocery.setOnClickListener {
+            if (binding.grocery.isSelected) {
+                return@setOnClickListener
+            }
+            clearPagingData()
             viewModel.updateSubCategory(it.tag as String?)
             viewModel.doSearch(binding.searchBox.query?.toString().orEmpty())
             binding.grocery.isSelected = true
@@ -144,6 +150,10 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
         }
 
         binding.breakfast.setOnClickListener {
+            if (binding.breakfast.isSelected) {
+                return@setOnClickListener
+            }
+            clearPagingData()
             viewModel.updateSubCategory(it.tag as String?)
             viewModel.doSearch(binding.searchBox.query?.toString().orEmpty())
             binding.grocery.isSelected = false
@@ -152,6 +162,10 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
             binding.hygiene.isSelected = false
         }
         binding.household.setOnClickListener {
+            if (binding.household.isSelected) {
+                return@setOnClickListener
+            }
+            clearPagingData()
             viewModel.updateSubCategory(it.tag as String?)
             viewModel.doSearch(binding.searchBox.query?.toString().orEmpty())
             binding.grocery.isSelected = false
@@ -161,12 +175,23 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
         }
 
         binding.hygiene.setOnClickListener {
+            if (binding.hygiene.isSelected) {
+                return@setOnClickListener
+            }
+            clearPagingData()
             viewModel.updateSubCategory(it.tag as String?)
             viewModel.doSearch(binding.searchBox.query?.toString().orEmpty())
             binding.grocery.isSelected = false
             binding.breakfast.isSelected = false
             binding.household.isSelected = false
             binding.hygiene.isSelected = true
+        }
+    }
+
+    private fun clearPagingData() {
+        lifecycleScope.launch {
+            shopSearchAdapter.submitData(PagingData.empty())
+            productSearchAdapter.submitData(PagingData.empty())
         }
     }
 
