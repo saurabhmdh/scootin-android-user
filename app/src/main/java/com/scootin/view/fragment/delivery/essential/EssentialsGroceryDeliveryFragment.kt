@@ -28,6 +28,7 @@ import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.lang.Exception
 
 
 @AndroidEntryPoint
@@ -212,12 +213,14 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
                 ) {
                     Timber.i("Saurabh onIncrementItem $count")
                     //Increment and decrement will be done one by one
-                    val addToCartRequest = AddToCartRequest(
-                        AppHeaders.userID.toInt(),
-                        item?.id,
-                        count
-                    )
-                    viewModel.addToCart(addToCartRequest)
+                    try {
+                        val addToCartRequest = AddToCartRequest(
+                            AppHeaders.userID.toInt(),
+                            item?.id,
+                            count
+                        )
+                        viewModel.addToCart(addToCartRequest)
+                    } catch (e: Exception) {}
                 }
 
                 override fun onDecrementItem(
@@ -226,12 +229,14 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
                     count: Int
                 ) {
                     Timber.i("Saurabh onDecrementItem $count")
-                    val addToCartRequest = AddToCartRequest(
-                        AppHeaders.userID.toInt(),
-                        item?.id,
-                        count
-                    )
-                    viewModel.addToCart(addToCartRequest)
+                    try {
+                        val addToCartRequest = AddToCartRequest(
+                            AppHeaders.userID.toInt(),
+                            item?.id,
+                            count
+                        )
+                        viewModel.addToCart(addToCartRequest)
+                    } catch (e: Exception) {}
                 }
 
             })
