@@ -28,7 +28,7 @@ class EssentialSelectShopFragment : BaseFragment(R.layout.fragment_grocery_deliv
     private val viewModel: CategoriesViewModel by viewModels()
 
     private var shopSearchAdapter by autoCleared<ShopSearchAdapter>()
-    private val args: EssentialSelectShopFragmentArgs by navArgs()
+//    private val args: EssentialSelectShopFragmentArgs by navArgs()
 
 //    private val deliverySlot by lazy {
 //        args.deliverySlot
