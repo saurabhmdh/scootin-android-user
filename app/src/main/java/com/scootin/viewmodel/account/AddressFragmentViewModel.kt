@@ -44,9 +44,9 @@ internal constructor(
         emit(userRepository.deleteAddress(userId, addressId))
     }
 
-    val deliverySlot = liveData(viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-        emit(searchRepository.getDeliverySlot(Date().time))
-    }
+//    val deliverySlot = liveData(viewModelScope.coroutineContext + Dispatchers.IO + handler) {
+//        emit(searchRepository.getDeliverySlot(Date().time))
+//    }
 
     val stateInfo = userRepository.getAllState(viewModelScope.coroutineContext + Dispatchers.IO + handler)
 

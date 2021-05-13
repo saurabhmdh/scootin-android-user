@@ -167,6 +167,9 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
     private val timer = object : CountDownTimer(30000, 1000) {
         override fun onTick(millisUntilFinished: Long) {
+            if(!isVisible) {
+                return
+            }
             val time = millisUntilFinished / 1000
             if (time == 0L) {
                 binding.timerText.text = ""
@@ -176,6 +179,9 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         }
 
         override fun onFinish() {
+            if(!isVisible) {
+                return
+            }
             binding.senAgainLoginOtp.isEnabled = true
             binding.timerText.text = ""
         }
