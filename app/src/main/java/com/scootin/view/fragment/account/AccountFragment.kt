@@ -56,6 +56,8 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
 
     private fun initObservers() {
         addressViewModel.loadAddress()
+        binding.mobileEditText.setText(AppHeaders.userMobileNumber)
+
         addressViewModel.getAddressLiveData().observe(viewLifecycleOwner) {
             if (it.isSuccessful) {
 
@@ -63,7 +65,6 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
                     if(item.hasDefault){
                         binding.nameEditText.setText(item.name)
                         binding.emailEditText.setText(item.email)
-                        binding.mobileEditText.setText(AppHeaders.userMobileNumber)
                     }
                 }
 
