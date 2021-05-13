@@ -39,7 +39,7 @@ class EssentialCategoryFragment : Fragment(R.layout.fragment_essential_category)
         binding.btnDone.setOnClickListener {
             //If there is no delivery slot it should make error
             if (binding.deliverySlot.selectedItem?.toString().isNullOrEmpty()) {
-                Toast.makeText(requireContext(), "There is no delivery slot please try some other time", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.error_no_internet, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             when (binding.radioGroup.getCheckedRadioButtonPosition()) {
@@ -58,6 +58,7 @@ class EssentialCategoryFragment : Fragment(R.layout.fragment_essential_category)
                 val list: List<String> = it.body() ?: emptyList()
                 binding.deliverySlot.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, list)
             } else {
+                //Let me try again 3 times...
                 Toast.makeText(
                     requireContext(),
                     R.string.error_no_internet,
