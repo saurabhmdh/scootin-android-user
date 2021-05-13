@@ -30,9 +30,9 @@ class EssentialSelectShopFragment : BaseFragment(R.layout.fragment_grocery_deliv
     private var shopSearchAdapter by autoCleared<ShopSearchAdapter>()
     private val args: EssentialSelectShopFragmentArgs by navArgs()
 
-    private val deliverySlot by lazy {
-        args.deliverySlot
-    }
+//    private val deliverySlot by lazy {
+//        args.deliverySlot
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,7 +65,7 @@ class EssentialSelectShopFragment : BaseFragment(R.layout.fragment_grocery_deliv
         shopSearchAdapter = ShopSearchAdapter(object : ShopSearchAdapter.StoreImageAdapterClickListener {
                 override fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse) {
                     Timber.i("Shop Info $shopInfo")
-                    val direction = EssentialSelectShopFragmentDirections.shopSelectionToHandwritten(shopInfo.shopID, shopInfo.name, deliverySlot)
+                    val direction = EssentialSelectShopFragmentDirections.shopSelectionToHandwritten(shopInfo.shopID, shopInfo.name)
                     findNavController().navigate(direction)
                 }
             })

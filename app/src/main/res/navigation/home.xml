@@ -169,10 +169,6 @@
         android:name="com.scootin.view.fragment.delivery.essential.EssentialSelectShopFragment"
         android:label="">
 
-        <argument
-            android:name="delivery_slot"
-            app:argType="string" />
-
         <action
             android:id="@+id/shop_selection_to_handwritten"
             app:destination="@id/essential_handwritten_list"
@@ -191,9 +187,6 @@
             app:argType="long" />
         <argument
             android:name="shop_name"
-            app:argType="string" />
-        <argument
-            android:name="delivery_slot"
             app:argType="string" />
         <action
             android:id="@+id/direct_order_confirmation"
