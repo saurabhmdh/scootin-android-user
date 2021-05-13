@@ -28,12 +28,12 @@ class SearchDataSource (
 
             val alreadyLoaded = offset * params.loadSize
 
-            val loadsize = if (count != 0 && alreadyLoaded > count) {
-                count - (alreadyLoaded - params.loadSize)
+            val loadsize = if (count != 0 && (alreadyLoaded + params.loadSize) > count) {
+                count - alreadyLoaded
             } else {
                 params.loadSize
             }
-            Timber.i("offset $offset alrerady loaded $alreadyLoaded loadsize = ${loadsize}" )
+            Timber.i("offset $offset alrerady loaded $alreadyLoaded loadsize = ${loadsize} count = ${count}" )
 
             val response: Response<List<SearchProductsByCategoryResponse>> = apiService.findProductsWithPaging(serviceAreaId, categoryId, offset, loadsize, requestSearch)
             val data = response.body()

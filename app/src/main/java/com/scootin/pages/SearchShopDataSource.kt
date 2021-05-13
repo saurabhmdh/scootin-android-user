@@ -25,8 +25,8 @@ class SearchShopDataSource (
 
             val alreadyLoaded = offset * params.loadSize
 
-            val loadsize = if (count != 0 && alreadyLoaded > count) {
-                count - (alreadyLoaded - params.loadSize)
+            val loadsize = if (count != 0 && (alreadyLoaded + params.loadSize) > count) {
+                count - alreadyLoaded
             } else {
                 params.loadSize
             }
