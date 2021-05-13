@@ -1,6 +1,7 @@
 package com.scootin.view.fragment.delivery.essential
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -21,6 +22,7 @@ import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.ProductSearchPagingAdapter
 import com.scootin.view.adapter.ShopSearchAdapter
+import com.scootin.view.fragment.BaseFragment
 import com.scootin.view.vo.ProductSearchVO
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,7 +31,7 @@ import timber.log.Timber
 
 
 @AndroidEntryPoint
-class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_delivery) {
+class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery_delivery) {
     private var binding by autoCleared<FragmentGroceryDeliveryBinding>()
     private val viewModel: CategoriesViewModel by viewModels()
 
@@ -70,7 +72,7 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
         //When the screen load lets load the data for empty screen
         viewModel.doSearch("")
         viewModel.loadCount()
-
+        showLoading()
         binding.searchBox.setOnQueryTextListener(
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
@@ -102,12 +104,15 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
         viewModel.shopsBySubcategory.observe(viewLifecycleOwner) {response->
+            dismissLoading()
             lifecycleScope.launch {
                 shopSearchAdapter.submitData(response)
             }
         }
 
+        //We need to check which sub category has been selected..
         viewModel.allProductBySubCategory.observe(viewLifecycleOwner) {response->
+            dismissLoading()
             lifecycleScope.launch {
                 productSearchAdapter.submitData(response)
             }
@@ -141,8 +146,8 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
                 return@setOnClickListener
             }
             clearPagingData()
-            viewModel.updateSubCategory(it.tag as String?)
-            viewModel.doSearch(binding.searchBox.query?.toString().orEmpty())
+            Timber.i("Selected.. ${it.tag as String?}")
+            viewModel.executeNewRequest(it.tag as String?, binding.searchBox.query?.toString().orEmpty())
             binding.grocery.isSelected = true
             binding.breakfast.isSelected = false
             binding.household.isSelected = false
@@ -154,20 +159,21 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
                 return@setOnClickListener
             }
             clearPagingData()
-            viewModel.updateSubCategory(it.tag as String?)
-            viewModel.doSearch(binding.searchBox.query?.toString().orEmpty())
+            Timber.i("Selected.. ${it.tag as String?}")
+            viewModel.executeNewRequest(it.tag as String?, binding.searchBox.query?.toString().orEmpty())
             binding.grocery.isSelected = false
             binding.breakfast.isSelected = true
             binding.household.isSelected = false
             binding.hygiene.isSelected = false
+
         }
         binding.household.setOnClickListener {
             if (binding.household.isSelected) {
                 return@setOnClickListener
             }
             clearPagingData()
-            viewModel.updateSubCategory(it.tag as String?)
-            viewModel.doSearch(binding.searchBox.query?.toString().orEmpty())
+            Timber.i("Selected.. ${it.tag as String?}")
+            viewModel.executeNewRequest(it.tag as String?, binding.searchBox.query?.toString().orEmpty())
             binding.grocery.isSelected = false
             binding.breakfast.isSelected = false
             binding.household.isSelected = true
@@ -179,8 +185,8 @@ class EssentialsGroceryDeliveryFragment : Fragment(R.layout.fragment_grocery_del
                 return@setOnClickListener
             }
             clearPagingData()
-            viewModel.updateSubCategory(it.tag as String?)
-            viewModel.doSearch(binding.searchBox.query?.toString().orEmpty())
+            Timber.i("Selected.. ${it.tag as String?}")
+            viewModel.executeNewRequest(it.tag as String?, binding.searchBox.query?.toString().orEmpty())
             binding.grocery.isSelected = false
             binding.breakfast.isSelected = false
             binding.household.isSelected = false
