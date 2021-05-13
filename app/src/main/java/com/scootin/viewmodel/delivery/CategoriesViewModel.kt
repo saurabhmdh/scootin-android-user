@@ -57,6 +57,19 @@ class CategoriesViewModel @ViewModelInject internal constructor(
         }
     }
 
+    fun executeNewRequest(selectedCategoryID: String?, query: String) {
+        launch {
+            updateSubCategoryAndMakeRequest(selectedCategoryID, query)
+        }
+    }
+
+    suspend fun updateSubCategoryAndMakeRequest(selectedCategoryID: String?, query: String) {
+        selectedCategoryID?.let {
+            cacheDao.insertCache(Cache(AppConstants.SUB_CATEGORY, it))
+            _search.postValue(SearchShopsByCategory(query))
+        }
+    }
+
     data class SearchShopsItem(val query: String, val shopId: Long)
 
     val shops: LiveData<PagingData<SearchShopsByCategoryResponse>> =
@@ -83,7 +96,7 @@ class CategoriesViewModel @ViewModelInject internal constructor(
     val shopsBySubcategory: LiveData<PagingData<SearchShopsByCategoryResponse>> =
         _search.switchMap { search ->
             liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-                Timber.i("Search Detail ${search.query}")
+                Timber.i("zSearch Detail ${search.query}")
                 val locationInfo = locationDao.getEntityLocation()
                 val mainCategory = cacheDao.getCacheData(AppConstants.SUB_CATEGORY)?.value
                 val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
@@ -160,6 +173,8 @@ class CategoriesViewModel @ViewModelInject internal constructor(
         liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler)  {
             val subCategory = cacheDao.getCacheData(AppConstants.SUB_CATEGORY)?.value
             val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
+
+            Timber.i("EssentialsGrocer All products subCategory = ${subCategory}")
             emitSource(searchRepository.searchProductBySubCategories(it.query,  serviceArea.orEmpty(), subCategory.orEmpty()).cachedIn(viewModelScope).asLiveData())
         }
     }
