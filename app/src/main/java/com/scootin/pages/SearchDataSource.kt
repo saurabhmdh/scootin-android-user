@@ -18,38 +18,22 @@ class SearchDataSource (
     private val requestSearch: RequestSearch
 ) : PagingSource<Int, ProductSearchVO>() {
 
-    var initialOffset: Int = 0
-    var count: Int = 0
-
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ProductSearchVO> {
         return try {
-
-            val offset = params.key ?: initialOffset
-
-            val alreadyLoaded = offset * params.loadSize
-
-            val loadsize = if (count != 0 && (alreadyLoaded + params.loadSize) > count) {
-                count - alreadyLoaded
-            } else {
-                params.loadSize
-            }
-            Timber.i("offset $offset alrerady loaded $alreadyLoaded loadsize = ${loadsize} count = ${count}" )
-
-            val response: Response<List<SearchProductsByCategoryResponse>> = apiService.findProductsWithPaging(serviceAreaId, categoryId, offset, loadsize, requestSearch)
+            val nextPageNumber = params.key ?: 0
+            val response: Response<List<SearchProductsByCategoryResponse>> = apiService.findProductsWithPaging(serviceAreaId, categoryId, nextPageNumber, params.loadSize, requestSearch)
             val data = response.body()
             if (response.isSuccessful && data != null) {
-                count = response.headers().get("x-total-count")?.toInt() ?: 0
-
-                val nextOffset = if (alreadyLoaded >= count) {
-                    null
-                } else {
-                    offset + 1
-                }
-                //Convert data to VO
+                val totalPages = response.headers().get("x-total-pages")?.toInt() ?: 0
                 val productList = mutableListOf<ProductSearchVO>().apply {
                     data.forEach { product ->
                         add(ProductSearchVO(product))
                     }
+                }
+                val nextOffset = if (totalPages == nextPageNumber) {
+                    null
+                } else {
+                    nextPageNumber + 1
                 }
                 LoadResult.Page(
                     data = productList,
