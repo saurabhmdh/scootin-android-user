@@ -15,32 +15,19 @@ class OrderDataSource (
     private val id: String
 ) : PagingSource<Int, OrderHistoryItem>() {
 
-    var initialOffset: Int = 0
-    var count: Int = 0
-
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, OrderHistoryItem> {
         return try {
+            val nextPageNumber = params.key ?: 0
 
-            val offset = params.key ?: initialOffset
-
-            val alreadyLoaded = offset * params.loadSize
-
-            val loadsize = if (count != 0 && alreadyLoaded > count) {
-                count - (alreadyLoaded - params.loadSize)
-            } else {
-                params.loadSize
-            }
-            Timber.i("offset $offset alrerady loaded $alreadyLoaded loadsize = ${loadsize}" )
-
-            val response: Response<List<OrderHistoryItem>> = apiService.getAllOrdersForUser(id, offset, loadsize)
+            val response: Response<List<OrderHistoryItem>> = apiService.getAllOrdersForUser(id, nextPageNumber, params.loadSize)
             val data = response.body()
             if (response.isSuccessful && data != null) {
-                count = response.headers().get("x-total-count")?.toInt() ?: 0
+                val totalPages = response.headers().get("x-total-pages")?.toInt() ?: 0
 
-                val nextOffset = if (alreadyLoaded >= count) {
+                val nextOffset = if (totalPages == nextPageNumber) {
                     null
                 } else {
-                    offset + 1
+                    nextPageNumber + 1
                 }
 
                 LoadResult.Page(

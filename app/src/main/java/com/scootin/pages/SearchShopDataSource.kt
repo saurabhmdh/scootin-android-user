@@ -15,32 +15,19 @@ class SearchShopDataSource (
     private val requestSearch: RequestSearch
 ) : PagingSource<Int, SearchShopsByCategoryResponse>() {
 
-    var initialOffset: Int = 0
-    var count: Int = 0
-
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, SearchShopsByCategoryResponse> {
         return try {
+            val nextPageNumber = params.key ?: 0
 
-            val offset = params.key ?: initialOffset
-
-            val alreadyLoaded = offset * params.loadSize
-
-            val loadsize = if (count != 0 && (alreadyLoaded + params.loadSize) > count) {
-                count - alreadyLoaded
-            } else {
-                params.loadSize
-            }
-            Timber.i("offset $offset alrerady loaded $alreadyLoaded loadsize = ${loadsize}" )
-
-            val response: Response<List<SearchShopsByCategoryResponse>> = apiService.findShops(serviceAreaId, categoryId, requestSearch, offset, loadsize)
+            val response: Response<List<SearchShopsByCategoryResponse>> = apiService.findShops(serviceAreaId, categoryId, requestSearch, nextPageNumber, params.loadSize)
             val data = response.body()
             if (response.isSuccessful && data != null) {
-                count = response.headers().get("x-total-count")?.toInt() ?: 0
+                val totalPages = response.headers().get("x-total-pages")?.toInt() ?: 0
 
-                val nextOffset = if (alreadyLoaded >= count) {
+                val nextOffset = if (totalPages == nextPageNumber) {
                     null
                 } else {
-                    offset + 1
+                    nextPageNumber + 1
                 }
 
                 LoadResult.Page(
