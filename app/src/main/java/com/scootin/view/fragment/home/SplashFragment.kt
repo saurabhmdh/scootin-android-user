@@ -12,6 +12,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.scootin.R
 import com.scootin.view.activity.MainActivity
+import com.scootin.view.activity.SplashActivity
 import com.scootin.viewmodel.home.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -58,6 +59,13 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     private fun tryToGoNext() {
         Timber.i("tryToGoNext lets check the status ${canGoNextStep()}")
         if (canGoNextStep()) {
+
+            val isRunning = activity as SplashActivity?
+            if (isRunning?.isRunning() == true) {
+                Timber.i("Update is going on hence no action..")
+                return
+            }
+
             if (firstTime) {
                 gotoLoginFragment()
             } else {
