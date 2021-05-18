@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.scootin.R
@@ -99,7 +100,20 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
         })
 
         binding.placeOrder.setOnClickListener {
-            placeDirectOrder()
+            val alertDialog = context?.let { it1 -> MaterialAlertDialogBuilder(it1) }
+
+            alertDialog?.setMessage(R.string.addressCheck)
+
+
+            alertDialog?.setPositiveButton("Confirm") { dialogInterface, which ->
+                placeDirectOrder()
+            }
+            alertDialog?.setNegativeButton("Cancel") { dialogInterface, which ->
+
+            }
+            alertDialog?.setCancelable(false)
+
+            alertDialog?.show()
         }
 
         binding.appCompatImageView6.setOnClickListener {
@@ -177,38 +191,45 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
         val mediaId = media?.id ?: -1
         var orderId: Long = -1
 
-        showLoading()
+
         Timber.i("Json : ${Gson().toJson(searchItemAddAdapter.list)}")
-        viewModel.placeDirectOrder(
-            AppHeaders.userID,
-            DirectOrderRequest(
-                address!!.id,
-                true,
-                AppHeaders.serviceAreaId,
-                mediaId,
-                shopId,
-                Gson().toJson(searchItemAddAdapter.list).toString()
-            )
-        ).observe(viewLifecycleOwner) {
-            when (it.status) {
-                Status.SUCCESS -> {
-                    Timber.i("order id $orderId")
-                    orderId = (it.data?.id ?: -1).toLong()
-                    dismissLoading()
-                    Toast.makeText(
-                        context,
-                        "Your order has been received successfully",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    findNavController().navigate(ExpressDeliveryOrdersDirections.expressdeliveryToOrderConfirmation(orderId))
-                }
-                Status.LOADING -> {
-                }
-                Status.ERROR -> {
-                    dismissLoading()
+
+            showLoading()
+            viewModel.placeDirectOrder(
+                AppHeaders.userID,
+                DirectOrderRequest(
+                    address!!.id,
+                    true,
+                    AppHeaders.serviceAreaId,
+                    mediaId,
+                    shopId,
+                    Gson().toJson(searchItemAddAdapter.list).toString()
+                )
+            ).observe(viewLifecycleOwner) {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        Timber.i("order id $orderId")
+                        orderId = (it.data?.id ?: -1).toLong()
+                        dismissLoading()
+                        Toast.makeText(
+                            context,
+                            "Your order has been received successfully",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        findNavController().navigate(
+                            ExpressDeliveryOrdersDirections.expressdeliveryToOrderConfirmation(
+                                orderId
+                            )
+                        )
+                    }
+                    Status.LOADING -> {
+                    }
+                    Status.ERROR -> {
+                        dismissLoading()
+                    }
                 }
             }
-        }
+
     }
 
     private fun onClickOfUploadMedia() {
