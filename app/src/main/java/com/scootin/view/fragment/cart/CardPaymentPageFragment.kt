@@ -160,13 +160,26 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
         }
 
         binding.applyPromoButton.setOnClickListener {
+
             if (binding.couponEdittext.text?.toString()?.isEmpty() == true) {
                 Toast.makeText(context, "Please enter a valid coupon code", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            else{
+                binding.applyPromoButton.visibility=View.INVISIBLE
+                binding.removePromoButton.visibility=View.VISIBLE
+            }
             promoCode = binding.couponEdittext.text!!.toString()
             showLoading()
             viewModel.loadPaymentInfo(promoCode)
+        }
+
+        binding.removePromoButton.setOnClickListener {
+            viewModel.loadPaymentInfo("")
+            binding.promoApplied.visibility = View.GONE
+            binding.applyPromoButton.visibility=View.VISIBLE
+            binding.removePromoButton.visibility=View.GONE
+            binding.couponEdittext.getText()?.clear()
         }
 
         binding.back.setOnClickListener { findNavController().popBackStack() }

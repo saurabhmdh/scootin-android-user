@@ -285,6 +285,23 @@
             app:layout_constraintTop_toBottomOf="@+id/couponEdittext" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/removePromoButton"
+            android:layout_width="105dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="@dimen/dimen_20"
+            android:background="@drawable/button_background"
+            android:gravity="center"
+            android:paddingBottom="4dp"
+            android:paddingEnd="6dp"
+            android:textStyle="bold"
+            android:textSize="11sp"
+            android:text="Remove Coupon"
+            android:visibility="gone"
+            android:textColor="#FFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/couponEdittext" />
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/confirm_button"
             android:layout_height="25dp"
             android:layout_marginTop="40dp"
