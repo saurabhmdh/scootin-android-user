@@ -11,6 +11,8 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.github.dhaval2404.imagepicker.ImagePicker
@@ -30,12 +32,10 @@ import com.scootin.util.constants.AppConstants
 import com.scootin.util.constants.IntentConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.fragment.BaseFragment
-import com.scootin.view.fragment.home.LoginFragmentDirections
 import com.scootin.viewmodel.order.DirectOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.io.File
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -205,22 +205,27 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
         Timber.i("update the address $result")
     }
 
+    private val startForProfileImageResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result: ActivityResult ->
+        val resultCode = result.resultCode
+        val data = result.data
+
+        if (resultCode == Activity.RESULT_OK) {
+            data?.data?.path?.let {fileUri->
+                uploadMedia(File(fileUri))
+            }
+        } else if (resultCode == ImagePicker.RESULT_ERROR) {
+            Toast.makeText(requireContext(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+        }
+    }
 
     private fun onClickOfUploadMedia() {
         ImagePicker.with(this)
             .compress(1024)
             .maxResultSize(1080, 1080)
-            .start { resultCode, data ->
-                if (resultCode == Activity.RESULT_OK) {
-                    uploadMedia(ImagePicker.getFile(data))
-                } else if (resultCode == ImagePicker.RESULT_ERROR) {
-                    Toast.makeText(context, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(context, "Task Cancelled", Toast.LENGTH_SHORT).show()
-                }
+            .createIntent { intent ->
+                startForProfileImageResult.launch(intent)
             }
     }
-
     private fun uploadMedia(file: File?) {
         showLoading()
         file?.let {

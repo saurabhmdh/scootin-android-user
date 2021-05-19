@@ -12,6 +12,8 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView.OnEditorActionListener
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -20,7 +22,6 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.scootin.R
-import com.scootin.databinding.FragmentExpressDeliveryOrdersBinding
 import com.scootin.databinding.MedicinePrescriptionFragmentBinding
 import com.scootin.extensions.getNavigationResult
 import com.scootin.extensions.orZero
@@ -36,8 +37,6 @@ import com.scootin.util.UtilUIComponent
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.constants.IntentConstants
 import com.scootin.util.fragment.autoCleared
-import com.scootin.util.ui.MediaPicker
-import com.scootin.util.ui.UtilPermission
 import com.scootin.view.adapter.order.SearchitemAdapter
 import com.scootin.view.fragment.BaseFragment
 import com.scootin.view.fragment.home.LoginFragmentDirections
@@ -45,7 +44,6 @@ import com.scootin.viewmodel.order.DirectOrderViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.io.File
-import java.text.FieldPosition
 import javax.inject.Inject
 
 
@@ -219,18 +217,25 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
         }
     }
 
+    private val startForProfileImageResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result: ActivityResult ->
+        val resultCode = result.resultCode
+        val data = result.data
+
+        if (resultCode == Activity.RESULT_OK) {
+            data?.data?.path?.let {fileUri->
+                uploadMedia(File(fileUri))
+            }
+        } else if (resultCode == ImagePicker.RESULT_ERROR) {
+            Toast.makeText(requireContext(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun onClickOfUploadMedia() {
         ImagePicker.with(this)
             .compress(1024)
             .maxResultSize(1080, 1080)
-            .start { resultCode, data ->
-                if (resultCode == Activity.RESULT_OK) {
-                    uploadMedia(ImagePicker.getFile(data))
-                } else if (resultCode == ImagePicker.RESULT_ERROR) {
-                    Toast.makeText(context, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(context, "Task Cancelled", Toast.LENGTH_SHORT).show()
-                }
+            .createIntent { intent ->
+                startForProfileImageResult.launch(intent)
             }
     }
 
