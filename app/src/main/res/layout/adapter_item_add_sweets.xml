@@ -44,8 +44,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             app:srcCompat="@drawable/product_bg_band"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image"
@@ -120,7 +119,7 @@
             app:layout_constraintTop_toBottomOf="@+id/price"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/inactive_add"
-            android:layout_width="wrap_content"
+            android:layout_width="83dp"
             android:layout_height="wrap_content"
             android:visibility="gone"
             android:text="Add"
@@ -147,7 +146,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/addItem"
-            android:layout_width="wrap_content"
+            android:layout_width="83dp"
             android:layout_height="wrap_content"
             android:text="Add"
             android:textColor="#fff"

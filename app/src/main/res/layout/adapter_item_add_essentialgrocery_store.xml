@@ -18,7 +18,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="match_parent"
         android:background="@drawable/stroke_rectangle"
         android:orientation="horizontal">
 
@@ -73,9 +73,9 @@
             android:layout_marginStart="8dp"
             android:fontFamily="@font/montserrat_regular"
             android:maxLength="30"
-            android:text="Hello"
+            tools:text="Hello"
             android:textColor="@android:color/black"
-            android:textSize="11sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/space"
             app:layout_constraintTop_toBottomOf="@+id/name" />
@@ -83,15 +83,16 @@
 
         <TextView
             android:id="@+id/onlinestatus_store"
-            android:layout_width="60dp"
-            android:layout_height="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
             android:background="@drawable/spinner_grad_bg"
             android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:text="Online"
             android:textColor="#50c878"
-            android:textSize="12dp"
+            android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/space"
             app:layout_constraintTop_toBottomOf="@+id/distance" />
 
@@ -100,6 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:paddingBottom="5dp"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="Rating:"
@@ -114,6 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:rating="3"
+            android:paddingBottom="5dp"
             android:progressTint="@color/colorPrimaryDark"
             android:secondaryProgressTint="@color/colorPrimaryDark"
             android:stepSize="1"
