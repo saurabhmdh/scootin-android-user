@@ -1,7 +1,11 @@
 package com.scootin.view.fragment.delivery.essential
 
 import android.app.Activity
+import android.content.ContentResolver
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -137,13 +141,40 @@ class EssentialHandwrittenFragment : BaseFragment(R.layout.hand_written_grocery_
         val data = result.data
 
         if (resultCode == Activity.RESULT_OK) {
-            data?.data?.path?.let {fileUri->
-                uploadMedia(File(fileUri))
-            }
+            if (data?.data?.scheme == "file") {
+                data.data?.path?.let {fileUri->
+                    uploadMedia(File(fileUri))
+                }
+            } /*else if(data?.data?.scheme == "content") {
+                data.data?.let {
+                    val fileUri = getCursorContent(it)
+                    if(fileUri != null) {
+                        uploadMedia(fileUri)
+                    }
+                }
+            }*/
         } else if (resultCode == ImagePicker.RESULT_ERROR) {
             Toast.makeText(requireContext(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
         }
     }
+    private fun getCursorContent(selectedImage: Uri): File? =
+        kotlin.runCatching {
+            val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+             val cursor = requireContext().contentResolver.query(
+                    selectedImage,
+                    filePathColumn, null, null, null
+                )
+
+                if (cursor != null) {
+                    cursor.moveToFirst()
+                    val columnIndex: Int = cursor.getColumnIndex(filePathColumn[0])
+                    val picturePath: String = cursor.getString(columnIndex)
+                    cursor.close()
+                    File(picturePath)
+                }
+            null
+
+        }.getOrNull()
 
     private fun uploadMedia(file: File?) {
         showLoading()

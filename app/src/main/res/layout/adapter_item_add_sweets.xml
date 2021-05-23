@@ -18,7 +18,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="157dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/stroke_rectangle"
         android:orientation="horizontal">
 
@@ -44,8 +44,7 @@
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             app:srcCompat="@drawable/product_bg_band"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image"
@@ -60,6 +59,7 @@
             android:fontFamily="@font/montserrat_bold"
             android:text="@{data.title}"
             android:gravity="end"
+            android:textSize="12sp"
             android:textAllCaps="true"
             android:textColor="#a9a9a9"
             android:textStyle="bold"
@@ -120,7 +120,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/inactive_add"
             android:layout_width="83dp"
-            android:layout_height="26dp"
+            android:layout_height="wrap_content"
             android:visibility="gone"
             android:text="Add"
             android:textColor="#fff"
@@ -147,7 +147,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/addItem"
             android:layout_width="83dp"
-            android:layout_height="26dp"
+            android:layout_height="wrap_content"
             android:text="Add"
             android:textColor="#fff"
             android:textStyle="bold"

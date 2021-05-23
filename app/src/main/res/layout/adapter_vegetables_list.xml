@@ -19,7 +19,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/stroke_rectangle"
         android:orientation="horizontal">
 
@@ -41,29 +41,30 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/space"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="8dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/ic_item_bg_band" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:fontFamily="@font/montserrat_regular"
             android:text="@{data.title}"
             android:textAllCaps="true"
             android:textColor="#a9a9a9"
-            android:textSize="11sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/space"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -134,7 +135,7 @@
             android:background="@drawable/inactive_button_background"
             android:textSize="16sp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginTop="10dp" />
         <RelativeLayout
             android:id="@+id/parent_count"
             android:layout_width="wrap_content"
@@ -145,7 +146,6 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatTextView
-
                 android:id="@+id/addItem"
                 android:layout_width="83dp"
                 android:layout_height="wrap_content"
