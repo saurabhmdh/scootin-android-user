@@ -7,7 +7,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="157dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/ic_product_bg"
         android:orientation="horizontal">
 
