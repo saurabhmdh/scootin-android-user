@@ -62,7 +62,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
 
         Timber.i("height =  ${binding.express.height} Width = ${binding.express.width}")
         updateListeners()
-        //binding.userLocation.setText(viewModel.getServiceArea())
+
         //checkForMap()
 
         //Let me try firebase integration..
@@ -208,11 +208,9 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         }
 
 
-//        binding.userLocation.setOnClickListener {
-//            val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
-//                .build(requireContext())
-//            startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)
-//        }
+        binding.userLocation.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.homeToServiceArea())
+        }
 
 
         viewModel.getCartCount(AppHeaders.userID).observe(viewLifecycleOwner) {

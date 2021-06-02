@@ -26,6 +26,13 @@
         android:name="com.scootin.view.fragment.home.HomeFragment"
         android:label="Home">
         <action
+            android:id="@+id/home_to_service_area"
+            app:destination="@id/selectServiceArea"
+            app:enterAnim="@anim/default_enter_anim"
+            app:exitAnim="@anim/default_exit_anim"
+            app:popEnterAnim="@anim/default_pop_enter_anim"
+            app:popExitAnim="@anim/default_pop_exit_anim" />
+        <action
             android:id="@+id/home_to_express_delivery"
             app:destination="@id/expressDeliveryCategoryFragment"
             app:enterAnim="@anim/default_enter_anim"
@@ -401,6 +408,10 @@
             app:popExitAnim="@anim/default_pop_exit_anim" />
     </fragment>
 
+    <fragment
+        android:id="@+id/selectServiceArea"
+        android:name="com.scootin.view.fragment.home.SelectServiceAreaFragment"
+        android:label="Service Area"/>
 
     <fragment
         android:id="@+id/grocery"
