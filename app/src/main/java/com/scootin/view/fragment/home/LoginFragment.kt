@@ -55,7 +55,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                     networkResponse.data?.let {
                         viewModel.saveUserInfo(it)
                         AppHeaders.updateUserData(it)
-                        openHomeScreen()
+                        findNavController().navigate(LoginFragmentDirections.actionLoginToServiceArea())
                     }
                 }
             }
@@ -159,11 +159,11 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         binding.termAcceptedText.text = wordtoSpan
     }
 
-    private fun openHomeScreen() {
-        startActivity(Intent(requireContext(), MainActivity::class.java))
-        activity?.overridePendingTransition(R.anim.enter, R.anim.exit)
-        activity?.finish()
-    }
+//    private fun openHomeScreen() {
+//        startActivity(Intent(requireContext(), MainActivity::class.java))
+//        activity?.overridePendingTransition(R.anim.enter, R.anim.exit)
+//        activity?.finish()
+//    }
 
     private val timer = object : CountDownTimer(30000, 1000) {
         override fun onTick(millisUntilFinished: Long) {

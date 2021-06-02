@@ -4,17 +4,16 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.scootin.databinding.FragmentHomeBinding
 import com.scootin.network.AppExecutors
-import com.scootin.util.fragment.autoCleared
 import com.scootin.viewmodel.home.HomeFragmentViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -27,9 +26,9 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
 import com.google.android.libraries.places.widget.Autocomplete
 import com.google.android.libraries.places.widget.AutocompleteActivity
-import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.google.firebase.iid.FirebaseInstanceId
 import com.scootin.R
+import com.scootin.database.table.Cache
 import com.scootin.extensions.orZero
 import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
@@ -46,6 +45,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeFragmentViewModel by viewModels()
 
+    private val serviceArea:String=AppConstants.SERVICE_AREA
 
     private lateinit var homeCategoryList: List<HomeResponseCategory>
 
@@ -62,8 +62,8 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
 
         Timber.i("height =  ${binding.express.height} Width = ${binding.express.width}")
         updateListeners()
-
-        checkForMap()
+        //binding.userLocation.setText(viewModel.getServiceArea())
+        //checkForMap()
 
         //Let me try firebase integration..
         FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener {
@@ -208,18 +208,12 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         }
 
 
-        binding.userLocation.setOnClickListener {
-            val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
-                .build(requireContext())
-            startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)
-        }
+//        binding.userLocation.setOnClickListener {
+//            val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
+//                .build(requireContext())
+//            startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE)
+//        }
 
-        viewModel.presentLocation.observe(viewLifecycleOwner, {
-            Timber.i("We have got below location $it")
-            if(it != null) {
-                updateAddress(it.address)
-            }
-        })
 
         viewModel.getCartCount(AppHeaders.userID).observe(viewLifecycleOwner) {
             if (it.isSuccessful) {
@@ -237,7 +231,6 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
             Timber.i("Place: ${adminArea},  ${it.address} final address $address")
             Timber.i("Place: ${it.latLng?.latitude}, ${it.latLng?.longitude}")
             viewModel.updateLocation(place, adminArea)
-            updateAddress(address)
             updateServiceArea(it.latLng)
         }
     }
@@ -250,11 +243,13 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
 
     }
 
-    private fun updateAddress(address : String?) {
-        address?.let {
-            binding.userLocation.text = it
-        }
-    }
+//    private fun updateAddress(address: Cache) {
+//        address?.let {
+//            binding.userLocation.text = it.toString()
+//        }
+//    }
+
+
 
     private fun checkForMap() {
         if (!UtilPermission.hasMapPermission(requireContext())) {

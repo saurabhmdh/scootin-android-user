@@ -190,6 +190,8 @@ class CategoriesViewModel @ViewModelInject internal constructor(
         }
     }
 
+
+
     override val coroutineContext: CoroutineContext
         get() = viewModelScope.coroutineContext + Dispatchers.IO
 }

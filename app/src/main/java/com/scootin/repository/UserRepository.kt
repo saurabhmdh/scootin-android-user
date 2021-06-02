@@ -53,6 +53,8 @@ class UserRepository @Inject constructor(
 
     suspend fun getAllAddress() = services.getAllAdress(AppHeaders.userID)
 
+    suspend fun getAllServiceArea() = services.getAllServiceArea()
+
 
     private val repoListRateLimit = RateLimiter<String>(10, TimeUnit.HOURS)
 

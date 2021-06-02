@@ -19,6 +19,7 @@ import com.scootin.network.response.orders.DirectOrderResponse
 import com.scootin.network.response.placeOrder.PlaceOrderResponse
 import com.scootin.network.response.wallet.AddWalletResponse
 import com.scootin.network.response.wallet.WalletTransactionResponse
+import com.scootin.view.vo.ServiceArea
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -55,6 +56,11 @@ interface APIService {
         @Body options: Map<String, String>,
         @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<ResponseServiceArea>
+
+    @GET("/service-area/get-all")
+    suspend fun getAllServiceArea(
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<List<ServiceArea>>
 
 
     @POST("/search/{serviceAreaId}/{categoryId}/get-all-shops-by-subcategory")

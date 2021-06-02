@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.google.android.libraries.places.api.model.Place
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.scootin.database.dao.CacheDao
 import com.scootin.database.dao.LocationDao
 import com.scootin.database.table.Cache
@@ -14,7 +12,6 @@ import com.scootin.database.table.EntityLocation
 import com.scootin.network.api.APIService
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.RequestFCM
-import com.scootin.network.response.login.ResponseUser
 import com.scootin.repository.CartRepository
 import com.scootin.repository.CategoryRepository
 import com.scootin.repository.UserRepository
@@ -45,6 +42,14 @@ internal constructor(
     val serviceAreaError = MutableLiveData<Boolean>()
 
     fun getHomeCategory()= categoryRepository.getHomeCategory(viewModelScope.coroutineContext + Dispatchers.IO)
+
+    fun getAllServiceArea() = liveData(coroutineContext + handler) {
+        emit(userRepository.getAllServiceArea())
+    }
+
+    fun saveServiceArea(id: Long) = liveData(coroutineContext + handler) {
+        emit(cacheDao.insert(Cache(AppConstants.SERVICE_AREA, id.toString())))
+    }
 
     fun findServiceArea(latitude: Double, longitude: Double) {
         launch(coroutineContext) {
