@@ -21,6 +21,8 @@ object AppConstants {
 
     const val SERVICE_AREA = "service-area"
 
+    const val USER_SERVICE_AREA = "user-service-area"
+
     const val FCM_ID = "fcm-id"
     const val CATEGORY_INFO = "category-info"
 

@@ -4,11 +4,9 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
-import com.google.android.libraries.places.api.model.Place
 import com.scootin.database.dao.CacheDao
 import com.scootin.database.dao.LocationDao
 import com.scootin.database.table.Cache
-import com.scootin.database.table.EntityLocation
 import com.scootin.network.api.APIService
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.RequestFCM
@@ -35,11 +33,7 @@ internal constructor(
     private val userRepository: UserRepository
 ) : ObservableViewModel(), CoroutineScope {
 
-    val presentLocation = locationDao.getCurrentLocation()
-
     val serviceArea = MutableLiveData<ServiceArea>()
-
-    val serviceAreaError = MutableLiveData<Boolean>()
 
     fun getHomeCategory()= categoryRepository.getHomeCategory(viewModelScope.coroutineContext + Dispatchers.IO)
 
@@ -48,46 +42,38 @@ internal constructor(
     }
 
     fun saveServiceArea(id: Long) = liveData(coroutineContext + handler) {
-        emit(cacheDao.insert(Cache(AppConstants.SERVICE_AREA, id.toString())))
+        emit(cacheDao.insert(Cache(AppConstants.USER_SERVICE_AREA, id.toString())))
     }
+
+    fun getServiceArea() = cacheDao.getData(AppConstants.USER_SERVICE_AREA)
+
 
     fun findServiceArea(latitude: Double, longitude: Double) {
-        launch(coroutineContext) {
-            Timber.i("Now finding the location $latitude, $longitude")
-            val response = apiService.findServiceArea(mapOf("latitude" to latitude.toString(), "longitude" to longitude.toString()))
-            if (response.isSuccessful) {
-                val result = response.body()
-                Timber.i("We find decide your service area = ${result}")
-                if (result == null) {
-                    cacheDao.deleteCache(AppConstants.SERVICE_AREA)
-                    serviceAreaError.postValue(true)
-                } else {
-                    //Check for previous selected area if its different then remove item from cart...
-                    val previousServiceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)
-                    if (previousServiceArea?.value != result.id.toString()) {
-                       Timber.i("User change his location..")
-                        cartRepository.deleteCart(AppHeaders.userID)
-                    }
-                    AppHeaders.serviceAreaId = result.id
-                    cacheDao.insert(Cache(AppConstants.SERVICE_AREA, result.id.toString()))
-                    serviceArea.postValue(ServiceArea(result.id, result.name))
-                }
-            } else {
-                cacheDao.deleteCache(AppConstants.SERVICE_AREA)
-                serviceAreaError.postValue(true)
-            }
-        }
-    }
-
-    fun updateLocation(place: Place, adminArea: String? = null) {
-        launch {
-            val addressComponent = EntityLocation(place).apply {
-                adminArea?.let {
-                    address = it
-                }
-            }
-            locationDao.insert(addressComponent)
-        }
+//        launch(coroutineContext) {
+//            Timber.i("Now finding the location $latitude, $longitude")
+//            val response = apiService.findServiceArea(mapOf("latitude" to latitude.toString(), "longitude" to longitude.toString()))
+//            if (response.isSuccessful) {
+//                val result = response.body()
+//                Timber.i("We find decide your service area = ${result}")
+//                if (result == null) {
+//                    cacheDao.deleteCache(AppConstants.SERVICE_AREA)
+//                    serviceAreaError.postValue(true)
+//                } else {
+//                    //Check for previous selected area if its different then remove item from cart...
+//                    val previousServiceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)
+//                    if (previousServiceArea?.value != result.id.toString()) {
+//                       Timber.i("User change his location..")
+//                        cartRepository.deleteCart(AppHeaders.userID)
+//                    }
+//                    AppHeaders.serviceAreaId = result.id
+//                    cacheDao.insert(Cache(AppConstants.SERVICE_AREA, result.id.toString()))
+//                    serviceArea.postValue(ServiceArea(result.id, result.name))
+//                }
+//            } else {
+//                cacheDao.deleteCache(AppConstants.SERVICE_AREA)
+//                serviceAreaError.postValue(true)
+//            }
+//        }
     }
 
     fun updateMainCategory(selectedCategoryID: String?) {

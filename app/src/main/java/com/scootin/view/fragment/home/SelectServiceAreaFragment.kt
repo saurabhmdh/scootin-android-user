@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.scootin.R
@@ -26,6 +27,7 @@ class SelectServiceAreaFragment: BaseFragment(R.layout.fragment_service_area) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentServiceAreaBinding.bind(view)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
         setAdapter()
         setupListener()
 
@@ -63,5 +65,14 @@ class SelectServiceAreaFragment: BaseFragment(R.layout.fragment_service_area) {
         startActivity(Intent(requireContext(), MainActivity::class.java))
         activity?.overridePendingTransition(R.anim.enter, R.anim.exit)
         activity?.finish()
+    }
+
+    val callback = object : OnBackPressedCallback(
+        true
+        /** true means that the callback is enabled */
+    ) {
+        override fun handleOnBackPressed() {
+            Toast.makeText(requireContext(), "Can't go back", Toast.LENGTH_SHORT).show()
+        }
     }
 }
