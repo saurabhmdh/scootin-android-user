@@ -80,6 +80,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
             } else {
                 val listType = object : TypeToken<ServiceArea>() {}.type
                 val serviceAreaInfo = Gson().fromJson<ServiceArea>(cache.value, listType)
+                viewModel.updateServiceAreaDetail(serviceAreaInfo)
                 binding.userLocation.text = serviceAreaInfo?.name
             }
         })
