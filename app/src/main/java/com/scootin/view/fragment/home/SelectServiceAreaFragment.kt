@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.BaseAdapter
 import android.widget.ListView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -14,13 +13,13 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.scootin.R
 import com.scootin.databinding.FragmentServiceAreaBinding
-import com.scootin.network.response.State
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.activity.MainActivity
 import com.scootin.view.fragment.BaseFragment
 import com.scootin.view.vo.ServiceArea
 import com.scootin.viewmodel.home.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class SelectServiceAreaFragment: BaseFragment(R.layout.fragment_service_area) {
@@ -43,8 +42,14 @@ class SelectServiceAreaFragment: BaseFragment(R.layout.fragment_service_area) {
         viewModel.getAllServiceArea().observe(viewLifecycleOwner) {
             if(it.isSuccessful) {
                 val list = it.body() ?: emptyList()
+
+                val previous = viewModel.getPreviousSelection() ?: -1
+                val selection = list.indexOfFirst { it.id == previous}
+                Timber.i("Selection $selection and previous value = $previous")
+
                 val adapter =  ArrayAdapter(requireContext(), android.R.layout.simple_list_item_single_choice, list)
                 binding.recycler.adapter = adapter
+                binding.recycler.setItemChecked(selection, true)
             }
         }
 
@@ -61,7 +66,11 @@ class SelectServiceAreaFragment: BaseFragment(R.layout.fragment_service_area) {
                 val data = binding.recycler.getItemAtPosition(position) as ServiceArea?
                 data?.let {
                     viewModel.saveServiceArea(it).observe(viewLifecycleOwner) {
-                        findNavController().popBackStack()
+                        if(activity is MainActivity) {
+                            findNavController().popBackStack()
+                        } else {
+                            openHomeScreen()
+                        }
                     }
                 }
             } else {
@@ -69,7 +78,11 @@ class SelectServiceAreaFragment: BaseFragment(R.layout.fragment_service_area) {
             }
         }
     }
-
+    private fun openHomeScreen() {
+        startActivity(Intent(requireContext(), MainActivity::class.java))
+        activity?.overridePendingTransition(R.anim.enter, R.anim.exit)
+        activity?.finish()
+    }
     private fun setAdapter() {
         binding.recycler.choiceMode = ListView.CHOICE_MODE_SINGLE
     }

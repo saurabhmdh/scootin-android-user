@@ -16,10 +16,7 @@ import com.scootin.repository.UserRepository
 import com.scootin.util.constants.AppConstants
 import com.scootin.view.vo.ServiceArea
 import com.scootin.viewmodel.base.ObservableViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import timber.log.Timber
 import kotlin.coroutines.CoroutineContext
 
@@ -39,6 +36,9 @@ internal constructor(
         emit(userRepository.getAllServiceArea())
     }
 
+    fun getPreviousSelection() = runBlocking {
+        cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value?.toLongOrNull()
+    }
     fun saveServiceArea(id: ServiceArea) = liveData(coroutineContext + handler) {
         val previousServiceArea = cacheDao.getCacheData(AppConstants.USER_SERVICE_AREA)
 
