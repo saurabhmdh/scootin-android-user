@@ -8,7 +8,12 @@
         android:id="@+id/select_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Choose a service area"
+        android:minHeight="?android:attr/listPreferredItemHeight"
+        android:gravity="center"
+        android:textColor="#000"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginBottom="@dimen/dimen_20"
+        android:text="Service area"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 

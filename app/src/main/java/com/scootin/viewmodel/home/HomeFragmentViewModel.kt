@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
 import com.scootin.database.dao.CacheDao
 import com.scootin.database.dao.LocationDao
 import com.scootin.database.table.Cache
@@ -41,8 +42,8 @@ internal constructor(
         emit(userRepository.getAllServiceArea())
     }
 
-    fun saveServiceArea(id: Long) = liveData(coroutineContext + handler) {
-        emit(cacheDao.insert(Cache(AppConstants.USER_SERVICE_AREA, id.toString())))
+    fun saveServiceArea(id: ServiceArea) = liveData(coroutineContext + handler) {
+        emit(cacheDao.insert(Cache(AppConstants.USER_SERVICE_AREA, Gson().toJson(id))))
     }
 
     fun getServiceArea() = cacheDao.getData(AppConstants.USER_SERVICE_AREA)

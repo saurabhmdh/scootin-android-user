@@ -8,6 +8,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.libraries.places.api.model.Place
 import com.google.firebase.iid.FirebaseInstanceId
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.scootin.R
 import com.scootin.databinding.FragmentHomeBinding
 import com.scootin.extensions.orZero
@@ -15,8 +17,8 @@ import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.response.home.HomeResponseCategory
-import com.scootin.util.constants.AppConstants
 import com.scootin.view.activity.MainActivity
+import com.scootin.view.vo.ServiceArea
 import com.scootin.viewmodel.home.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -72,13 +74,14 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
             }
         })
 
-        viewModel.getServiceArea().observe(viewLifecycleOwner, {
-            if (it == null) {
+        viewModel.getServiceArea().observe(viewLifecycleOwner, {cache->
+            if (cache == null) {
                 findNavController().navigate(HomeFragmentDirections.homeToServiceArea())
             } else {
-                //Set servive area globally
+                val listType = object : TypeToken<ServiceArea>() {}.type
+                val serviceAreaInfo = Gson().fromJson<ServiceArea>(cache.value, listType)
+                binding.userLocation.text = serviceAreaInfo?.name
             }
-//            Toast.makeText(context, "Congratulation!! We are serving in area = " +it.value, Toast.LENGTH_LONG).show()
         })
     }
 
