@@ -4,10 +4,13 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
+import com.google.android.libraries.places.api.model.Place
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.scootin.database.dao.CacheDao
+import com.scootin.database.dao.LocationDao
 import com.scootin.database.table.Cache
+import com.scootin.database.table.EntityLocation
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.RequestFCM
 import com.scootin.repository.CartRepository
@@ -25,7 +28,8 @@ internal constructor(
     private val categoryRepository: CategoryRepository,
     private val cacheDao: CacheDao,
     private val cartRepository: CartRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val locationDao: LocationDao,
 ) : ObservableViewModel(), CoroutineScope {
 
     val serviceArea = MutableLiveData<ServiceArea>()
@@ -104,6 +108,17 @@ internal constructor(
 
     private val handler = CoroutineExceptionHandler { _, exception ->
         Timber.i("Caught  $exception")
+    }
+
+    fun updateLocation(place: Place, adminArea: String? = null) {
+        launch {
+            val addressComponent = EntityLocation(place).apply {
+                adminArea?.let {
+                    address = it
+                }
+            }
+            locationDao.insert(addressComponent)
+        }
     }
 
     override val coroutineContext: CoroutineContext
