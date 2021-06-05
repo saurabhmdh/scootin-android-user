@@ -1,12 +1,20 @@
 package com.scootin.view.fragment.home
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -17,6 +25,8 @@ import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.response.home.HomeResponseCategory
+import com.scootin.util.constants.AppConstants
+import com.scootin.util.ui.UtilPermission
 import com.scootin.view.activity.MainActivity
 import com.scootin.view.vo.ServiceArea
 import com.scootin.viewmodel.home.HomeFragmentViewModel
@@ -44,7 +54,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
 
         Timber.i("height =  ${binding.express.height} Width = ${binding.express.width}")
         updateListeners()
-
+        checkForMap()
 
         //Let me try firebase integration..
         FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener {
@@ -180,4 +190,73 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         }
     }
 
+
+    private fun handlePlaceSuccessResponse(place: Place?, adminArea: String? = null) {
+        place?.let {
+            Timber.i("Place: ${it.name}, ${it.id} ")
+            val address = adminArea ?: it.address
+            Timber.i("Place: ${adminArea},  ${it.address} final address $address")
+            Timber.i("Place: ${it.latLng?.latitude}, ${it.latLng?.longitude}")
+            viewModel.updateLocation(place, adminArea)
+        }
+    }
+
+    private fun checkForMap() {
+        if (!UtilPermission.hasMapPermission(requireContext())) {
+            UtilPermission.requestMapPermission(this)
+        } else {
+            getAddressFromPlaces()
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            AppConstants.RC_LOCATION_PERMISSIONS -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    getAddressFromPlaces()
+                }
+            }
+            else -> {}
+        }
+    }
+
+    private fun getAddressFromPlaces() {
+
+        Timber.i("We need to find location of user.")
+        val request: FindCurrentPlaceRequest = FindCurrentPlaceRequest.newInstance(fields)
+
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
+            PackageManager.PERMISSION_GRANTED) {
+            val placesClient = Places.createClient(requireContext())
+            val placeResponse = placesClient.findCurrentPlace(request)
+            placeResponse.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val response = task.result
+                    val place = response?.placeLikelihoods?.first()?.place
+
+                    place?.let {
+                        //Lets try geo coder
+                        try {
+                            val listOfAddress = Geocoder(context).getFromLocation(it.latLng!!.latitude, it.latLng!!.longitude, 1)
+                            val address = listOfAddress.firstOrNull()
+                            handlePlaceSuccessResponse(place, address?.subAdminArea)
+                        } catch (e: Exception) {
+                            //Do nothing...
+                        }
+                    }
+                } else {
+                    val exception = task.exception
+                    if (exception is ApiException) {
+                        Timber.e( "Place not found: ${exception.statusCode}")
+                    }
+                }
+            }
+        } else {
+            UtilPermission.requestMapPermission(this)
+        }
+    }
 }
