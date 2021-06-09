@@ -15,9 +15,13 @@ import com.scootin.databinding.FragmentExpressDeliveryBinding
 import com.scootin.extensions.getCheckedRadioButtonPosition
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
+import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.fragment.autoCleared
+import com.scootin.view.adapter.ExpressCategoryAdapter
+import com.scootin.view.adapter.ShopSearchAdapter
+import com.scootin.view.adapter.order.DirectOrderSummaryAdapter
 import com.scootin.viewmodel.home.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -31,27 +35,52 @@ class ExpressDeliveryCategoryFragment : Fragment(R.layout.fragment_express_deliv
     @Inject
     lateinit var appExecutors: AppExecutors
     private val viewModel: HomeFragmentViewModel by viewModels()
+    private lateinit var expressCategoryAdapter : ExpressCategoryAdapter
+    private lateinit var expressCategoryList: List<HomeResponseCategory>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentExpressDeliveryBinding.bind(view)
-        setupListener()
+        //setupListener()
+        setAdaper()
+        viewModel.getExpressCategory().observe(viewLifecycleOwner, {
+            when (it.status) {
+                Status.ERROR -> {
+                }
+                Status.SUCCESS -> {
+                    Timber.i("Category Response ${it.data}")
+                    expressCategoryAdapter.submitList(it.data)
+                }
+                Status.LOADING -> {
+                }
+            }
+        })
     }
 
-    private fun setupListener() {
-        binding.back.setOnClickListener { findNavController().popBackStack() }
+//    private fun setupListener() {
+//        binding.back.setOnClickListener { findNavController().popBackStack() }
+//
+//        binding.btnDone.setOnClickListener {
+//            val position = binding.radioGroup.getCheckedRadioButtonPosition()
+//            val selectedView = binding.radioGroup.get(position)
+//
+//            Timber.i("selected view ${selectedView.tag}")
+//            viewModel.updateMainCategory(selectedView.tag as String?)
+//
+//
+//            //Move to next screen
+//            findNavController().navigate(ExpressDeliveryCategoryFragmentDirections.actionExpressDeliveryCategoryFragmentToExpressDelivery())
+//        }
+//}
+private fun setAdaper() {
+    expressCategoryAdapter =
+        ExpressCategoryAdapter(
+            appExecutors)
 
-        binding.btnDone.setOnClickListener {
-            val position = binding.radioGroup.getCheckedRadioButtonPosition()
-            val selectedView = binding.radioGroup.get(position)
-
-            Timber.i("selected view ${selectedView.tag}")
-            viewModel.updateMainCategory(selectedView.tag as String?)
-
-            //Move to next screen
-            findNavController().navigate(ExpressDeliveryCategoryFragmentDirections.actionExpressDeliveryCategoryFragmentToExpressDelivery())
-        }
+    binding.categoryListRecycler.apply {
+        adapter = expressCategoryAdapter
     }
+}
 
 
 }

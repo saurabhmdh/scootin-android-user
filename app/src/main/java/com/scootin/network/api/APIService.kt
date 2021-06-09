@@ -38,6 +38,13 @@ interface APIService {
         @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<List<HomeResponseCategory>>
 
+    @GET("/category/get-all-active-shop-category")
+    suspend fun getActiveShopCategory(
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<List<HomeResponseCategory>>
+
+
+
     @POST("auth/generate-otp")
     suspend fun requestOTP(
         @Body options: Map<String, String>,

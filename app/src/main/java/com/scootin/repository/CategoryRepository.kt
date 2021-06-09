@@ -46,6 +46,28 @@ class CategoryRepository @Inject constructor(
         override suspend fun createCall(): Response<List<HomeResponseCategory>> = services.getHomeCategory()
     }.asLiveData()
 
+    fun getExpressCategory(coroutineContext: CoroutineContext): LiveData<out Resource<List<HomeResponseCategory>>> = object : CacheNetworkBoundResource<List<HomeResponseCategory>>(coroutineContext) {
+        override suspend fun saveCallResult(item: List<HomeResponseCategory>) {
+            cacheDao.insert(Cache(AppConstants.SHOP_CATEGORY_INFO,  Gson().toJson(item)))
+        }
+
+        override fun shouldFetch(data: List<HomeResponseCategory>?): Boolean {
+            val timeout = repoListRateLimit.shouldFetch(KEY)
+            return data == null || timeout
+        }
+
+        override suspend fun loadFromDb(): List<HomeResponseCategory>? {
+            val data = cacheDao.getCacheData(AppConstants.SHOP_CATEGORY_INFO)
+
+            return if (data == null) null else {
+                val decode = decode(data.value)
+                decode
+            }
+        }
+
+        override suspend fun createCall(): Response<List<HomeResponseCategory>> = services.getActiveShopCategory()
+    }.asLiveData()
+
     fun decode(data: String): List<HomeResponseCategory>? {
         val listType = object : TypeToken<List<HomeResponseCategory>>() {}.type
         return  Gson().fromJson<List<HomeResponseCategory>>(data, listType)

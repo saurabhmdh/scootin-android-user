@@ -36,6 +36,8 @@ internal constructor(
 
     fun getHomeCategory()= categoryRepository.getHomeCategory(viewModelScope.coroutineContext + Dispatchers.IO)
 
+    fun getExpressCategory()= categoryRepository.getExpressCategory(viewModelScope.coroutineContext + Dispatchers.IO)
+
     fun getAllServiceArea() = liveData(coroutineContext + handler) {
         emit(userRepository.getAllServiceArea())
     }

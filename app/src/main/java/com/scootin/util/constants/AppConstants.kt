@@ -26,6 +26,8 @@ object AppConstants {
     const val FCM_ID = "fcm-id"
     const val CATEGORY_INFO = "category-info"
 
+    const val SHOP_CATEGORY_INFO = "shop-category-info"
+
     const val STATE_INFO = "state-info"
 
     /* Constant value for Write Review Screen */
@@ -41,9 +43,9 @@ object AppConstants {
 
     const val INTENT_ACTION_USER_DISABLED = "USER_DISABLED"
 
-    const val TERMS_AND_CONDITION = "https://scootin.in/user-terms"
+    const val TERMS_AND_CONDITION = "https://scootin.co.in/user-terms"
 
-    const val PROHIBITED_ITEMS = "https://scootin.in/prohibited-items"
+    const val PROHIBITED_ITEMS = " https://scootin.co.in/prohibited-items"
 
     const val APPLICATION_NAME = "Scootin"
     const val RAZORPAY_APP_IMAGE = "https://image-res.s3.ap-south-1.amazonaws.com/scootin-logo.png"
