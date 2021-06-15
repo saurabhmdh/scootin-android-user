@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/ic_background">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
             android:id="@+id/login_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="125dp"
+            android:layout_marginTop="52dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -32,70 +32,37 @@
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/editText_PhnNo"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="60dp"
             android:layout_marginTop="70dp"
-            android:background="@null"
+            android:layout_marginEnd="60dp"
+            android:background="#E7F3FB"
             android:fontFamily="@font/montserrat_regular"
             android:hint="@string/edittxt_hint"
             android:inputType="phone"
             android:maxLength="10"
             android:maxLines="1"
+            android:padding="@dimen/dimen_10dp"
             android:textColorHint="#696969"
-            app:layout_constraintEnd_toStartOf="@id/send_otp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_getStartedwithScootin" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/send_otp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="75dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/editText_PhnNo"
-            app:layout_constraintTop_toBottomOf="@id/txt_getStartedwithScootin"
-            app:srcCompat="@drawable/ic_send_otp_button" />
 
-        <View
-            android:id="@+id/baseline_PhnNo"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@color/text_color_primary"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_continue"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginEnd="60dp"
+            android:background="@drawable/bg_rectangle"
+            android:backgroundTint="#E90000"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/continue_btn"
+            android:textColor="@color/white"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editText_PhnNo" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/editTextOTP"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@null"
-            android:fontFamily="@font/montserrat_regular"
-            android:hint="@string/edittxt_hint_OTP"
-            android:inputType="number"
-            android:maxLength="6"
-            android:maxLines="1"
-            android:textColorHint="#696969"
-            app:layout_constraintBottom_toTopOf="@+id/baseline_OTP"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <View
-            android:id="@+id/baseline_OTP"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="20dp"
-            android:background="@color/text_color_primary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText_PhnNo" />
 
@@ -109,12 +76,7 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/baseline_OTP">
-
-            <CheckBox
-                android:id="@+id/term_accepted"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            app:layout_constraintTop_toBottomOf="@id/btn_continue">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/term_accepted_text"
@@ -122,51 +84,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="#000"
-                android:textSize="15sp"
-                app:layout_constraintTop_toBottomOf="@id/sender_photo_box" />
+                android:textSize="14sp"
+                android:fontFamily="@font/montserrat_medium"/>
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/signIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/warning"
-            app:srcCompat="@drawable/ic_sign_in" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/txt_didnt_get_OTP"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="66dp"
-            android:layout_marginTop="38dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signIn"
-            app:srcCompat="@drawable/ic_didnt_receive_otp_text" />
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/senAgain_LoginOtp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="13dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            app:layout_constraintBottom_toBottomOf="@+id/txt_didnt_get_OTP"
-            app:layout_constraintStart_toEndOf="@+id/txt_didnt_get_OTP"
-            app:layout_constraintTop_toTopOf="@+id/txt_didnt_get_OTP"
-            app:srcCompat="@drawable/selector_send_again" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/timer_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:fontFamily="@font/montserrat_bold"
-            android:textColor="@android:color/black"
-            android:layout_marginStart="13dp"
-            app:layout_constraintBottom_toBottomOf="@+id/txt_didnt_get_OTP"
-            app:layout_constraintStart_toEndOf="@+id/senAgain_LoginOtp"
-            app:layout_constraintTop_toTopOf="@+id/txt_didnt_get_OTP" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

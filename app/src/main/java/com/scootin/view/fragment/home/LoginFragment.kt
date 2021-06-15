@@ -39,27 +39,27 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
         binding = FragmentLoginBinding.bind(view)
 
         updateUI()
-        viewModel.loginComplete.observe(viewLifecycleOwner) { networkResponse ->
-            when (networkResponse?.status) {
-                Status.LOADING -> {
-                    showLoading()
-                }
-                Status.ERROR -> {
-                    dismissLoading()
-                    Toast.makeText(context, R.string.error_message_invalid_otp, Toast.LENGTH_SHORT)
-                        .show()
-                }
-                Status.SUCCESS -> {
-                    dismissLoading()
-                    Timber.i("Successful response ${networkResponse.data}")
-                    networkResponse.data?.let {
-                        viewModel.saveUserInfo(it)
-                        AppHeaders.updateUserData(it)
-                        findNavController().navigate(LoginFragmentDirections.actionLoginToServiceArea())
-                    }
-                }
-            }
-        }
+//        viewModel.loginComplete.observe(viewLifecycleOwner) { networkResponse ->
+//            when (networkResponse?.status) {
+//                Status.LOADING -> {
+//                    showLoading()
+//                }
+//                Status.ERROR -> {
+//                    dismissLoading()
+//                    Toast.makeText(context, R.string.error_message_invalid_otp, Toast.LENGTH_SHORT)
+//                        .show()
+//                }
+//                Status.SUCCESS -> {
+//                    dismissLoading()
+//                    Timber.i("Successful response ${networkResponse.data}")
+//                    networkResponse.data?.let {
+//                        viewModel.saveUserInfo(it)
+//                        AppHeaders.updateUserData(it)
+//                        findNavController().navigate(LoginFragmentDirections.actionLoginToServiceArea())
+//                    }
+//                }
+//            }
+//        }
 
         viewModel.requestOTPComplete.observe(viewLifecycleOwner){ networkResponse ->
             when (networkResponse?.status) {
@@ -77,54 +77,35 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                         binding.editTextPhnNo.text.toString()
                     )
                     Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
-                    binding.sendOtp.isEnabled = false
+
                 }
             }
         }
 
-        binding.signIn.setOnClickListener {
+        binding.btnContinue.setOnClickListener {
             val mobileNumber = binding.editTextPhnNo.text.toString()
-            val otp = binding.editTextOTP.text.toString()
+
 
             if (mobileNumber.isEmpty() || Validation.REGEX_VALID_MOBILE_NUMBER.matcher(mobileNumber).matches().not()) {
                 Toast.makeText(context, R.string.error_message_invalid_mobile, Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if (otp.isEmpty() || Validation.REGEX_VALID_OTP.matcher(otp).matches().not()) {
-                Toast.makeText(context, R.string.error_message_invalid_otp, Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            if(binding.termAccepted.isChecked.not()) {
-                Toast.makeText(context, R.string.error_message_select_terms, Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-            viewModel.doLogin(mobileNumber, otp)
+            findNavController().navigate(LoginFragmentDirections.actionLoginToOtp(mobileNumber))
         }
-        binding.senAgainLoginOtp.isEnabled = false
+//        binding.senAgainLoginOtp.isEnabled = false
+//
 
-        binding.sendOtp.setOnClickListener {
-
-            val mobileNumber = binding.editTextPhnNo.text.toString()
-            if (mobileNumber.isEmpty() || Validation.REGEX_VALID_MOBILE_NUMBER.matcher(mobileNumber).matches().not()) {
-                Toast.makeText(context, R.string.error_message_invalid_mobile, Toast.LENGTH_SHORT).show()
-            } else {
-                binding.sendOtp.visibility = View.GONE
-                timer.start()
-                viewModel.sendOTP(mobileNumber)
-            }
-        }
-        binding.senAgainLoginOtp.setOnClickListener {
-            val mobileNumber = binding.editTextPhnNo.text.toString()
-            if (mobileNumber.isEmpty() || Validation.REGEX_VALID_MOBILE_NUMBER.matcher(mobileNumber).matches().not()) {
-                Toast.makeText(context, R.string.error_message_invalid_mobile, Toast.LENGTH_SHORT).show()
-            } else {
-                binding.senAgainLoginOtp.isEnabled = false
-                timer.start()
-                viewModel.sendOTP(mobileNumber)
-            }
-        }
+//        binding.senAgainLoginOtp.setOnClickListener {
+//            val mobileNumber = binding.editTextPhnNo.text.toString()
+//            if (mobileNumber.isEmpty() || Validation.REGEX_VALID_MOBILE_NUMBER.matcher(mobileNumber).matches().not()) {
+//                Toast.makeText(context, R.string.error_message_invalid_mobile, Toast.LENGTH_SHORT).show()
+//            } else {
+//                binding.senAgainLoginOtp.isEnabled = false
+//                timer.start()
+//                viewModel.sendOTP(mobileNumber)
+//            }
+//        }
     }
 
     private fun updateUI() {
@@ -144,7 +125,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 
         val remainingText : ClickableSpan = object : ClickableSpan() {
             override fun onClick(textView: View) {
-                binding.termAccepted.isChecked = !binding.termAccepted.isChecked
+               // binding.termAccepted.isChecked = !binding.termAccepted.isChecked
             }
             override fun updateDrawState(ds: TextPaint) {
                 super.updateDrawState(ds)
@@ -152,8 +133,8 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
             }
         }
 
-        wordtoSpan.setSpan(remainingText, 0, 14, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        wordtoSpan.setSpan(clickableSpan, 15, stringData.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        wordtoSpan.setSpan(remainingText, 0, 25, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        wordtoSpan.setSpan(clickableSpan, 26, stringData.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding.termAcceptedText.movementMethod = LinkMovementMethod.getInstance()
 
         binding.termAcceptedText.text = wordtoSpan
@@ -165,25 +146,25 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
 //        activity?.finish()
 //    }
 
-    private val timer = object : CountDownTimer(30000, 1000) {
-        override fun onTick(millisUntilFinished: Long) {
-            if(!isVisible) {
-                return
-            }
-            val time = millisUntilFinished / 1000
-            if (time == 0L) {
-                binding.timerText.text = ""
-            } else {
-                binding.timerText.text = "In ${time} sec."
-            }
-        }
-
-        override fun onFinish() {
-            if(!isVisible) {
-                return
-            }
-            binding.senAgainLoginOtp.isEnabled = true
-            binding.timerText.text = ""
-        }
-    }
+//    private val timer = object : CountDownTimer(30000, 1000) {
+//        override fun onTick(millisUntilFinished: Long) {
+//            if(!isVisible) {
+//                return
+//            }
+//            val time = millisUntilFinished / 1000
+//            if (time == 0L) {
+//                binding.timerText.text = ""
+//            } else {
+//                binding.timerText.text = "In ${time} sec."
+//            }
+//        }
+//
+//        override fun onFinish() {
+//            if(!isVisible) {
+//                return
+//            }
+//            binding.senAgainLoginOtp.isEnabled = true
+//            binding.timerText.text = ""
+//        }
+//    }
 }
