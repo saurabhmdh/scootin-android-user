@@ -91,7 +91,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login) {
                 return@setOnClickListener
             }
 
-            findNavController().navigate(LoginFragmentDirections.actionLoginToOtp(mobileNumber))
+            findNavController().navigate(LoginFragmentDirections.actionLoginToUserDetail(mobileNumber))
         }
 //        binding.senAgainLoginOtp.isEnabled = false
 //

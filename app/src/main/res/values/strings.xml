@@ -179,4 +179,16 @@
     <string name="service_area_not_selected">Please select a service area</string>
 
     <string name="continue_btn">Continue</string>
+    <string name="otp_message">OTP will be sent to your number for verification</string>
+    <string name="prefilled">Pre-Filled from previous page</string>
+    <string name="expires_in">Expires in</string>
+    <string name="please_enter_otp_text">Please enter OTP text</string>
+    <string name="mobile_verification">Mobile Verification</string>
+    <string name="full_name_">Full Name*</string>
+    <string name="date_of_birth_dd_mm_yyyy">Date of Birth* DD/MM/YYYY</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="city_">City*</string>
 </resources>

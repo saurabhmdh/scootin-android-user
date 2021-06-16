@@ -1,11 +1,17 @@
 package com.scootin.view.fragment.home
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -51,7 +57,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
-
+        setHasOptionsMenu(true)
         Timber.i("height =  ${binding.express.height} Width = ${binding.express.width}")
         updateListeners()
         checkForMap()
@@ -66,6 +72,36 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
             viewModel.updateFCMID(token)
         }
         doNetworkCall()
+    }
+    override fun onDestroyView() {
+        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+        imm?.hideSoftInputFromWindow(view?.windowToken, 0)
+        super.onDestroyView()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_home_fragment, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        val textBox = menu.findItem(R.id.action_search).actionView.findViewById<TextView>(
+            R.id.search_box
+        )
+        viewModel.getServiceArea().observe(viewLifecycleOwner, {cache->
+            if (cache == null) {
+                findNavController().navigate(HomeFragmentDirections.homeToServiceArea())
+            } else {
+                val listType = object : TypeToken<ServiceArea>() {}.type
+                val serviceAreaInfo = Gson().fromJson<ServiceArea>(cache.value, listType)
+                viewModel.updateServiceAreaDetail(serviceAreaInfo)
+                textBox.text = serviceAreaInfo?.name
+            }
+        })
+        textBox.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.homeToServiceArea())
+        }
+
     }
 
     private fun doNetworkCall() {
@@ -84,16 +120,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
             }
         })
 
-        viewModel.getServiceArea().observe(viewLifecycleOwner, {cache->
-            if (cache == null) {
-                findNavController().navigate(HomeFragmentDirections.homeToServiceArea())
-            } else {
-                val listType = object : TypeToken<ServiceArea>() {}.type
-                val serviceAreaInfo = Gson().fromJson<ServiceArea>(cache.value, listType)
-                viewModel.updateServiceAreaDetail(serviceAreaInfo)
-                binding.userLocation.text = serviceAreaInfo?.name
-            }
-        })
+
     }
 
 
@@ -176,9 +203,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         }
 
 
-        binding.userLocation.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.homeToServiceArea())
-        }
+
 
 
         viewModel.getCartCount(AppHeaders.userID).observe(viewLifecycleOwner) {
