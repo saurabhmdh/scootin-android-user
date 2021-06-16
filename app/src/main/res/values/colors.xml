@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#ed1b24</color>
     <color name="colorAccent">@color/text_color_primary</color>
 
+    <color name="base_bg">#E7F3FB</color>
     <color name="text_color">#EA0800</color>
     <color name="text_input_hint_color">#959aa6</color>
     <color name="order_status_ongoing_color">#FF834A</color>

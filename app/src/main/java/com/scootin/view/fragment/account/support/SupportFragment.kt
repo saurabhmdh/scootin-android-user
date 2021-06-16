@@ -36,7 +36,7 @@ class SupportFragment : Fragment(R.layout.customer_support) {
         setupListener()
 
         binding.activeCallSupport.setOnClickListener {
-            val mobileNumber = binding.activeCallSupport.text
+            val mobileNumber = binding.phn.text
             val intent = Intent()
             intent.action = Intent.ACTION_DIAL // Action for what intent called for
             intent.data = Uri.parse("tel: $mobileNumber") // Data with intent respective action on intent
@@ -61,7 +61,7 @@ class SupportFragment : Fragment(R.layout.customer_support) {
     }
 
     private fun setupListener() {
-        binding.back.setOnClickListener { findNavController().popBackStack() }
+
 
         binding.submit.setOnClickListener {
             val callId = binding.editTextForOrderId.text?.toString()?.toIntOrNull() ?: 0

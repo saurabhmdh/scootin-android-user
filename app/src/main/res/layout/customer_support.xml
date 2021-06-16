@@ -5,81 +5,190 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@drawable/ic_background"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/customer_support_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_customer_support_card" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:id="@+id/order_id_base"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_back_arrow" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/mail_customer_support"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="300dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_mail_customer_support" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/edit_text_for_order_id"
-            android:layout_width="206dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:hint="@string/edittxt_orderid_call_support"
-            android:background="@drawable/ic_order_id_field_for_call"
-            android:paddingLeft="2dp"
-            android:layout_marginTop="20dp"
-            android:textColor="#000"
-            android:textColorHint="#000"
-            android:inputType="number"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mail_customer_support"  />
-
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/submit"
-            android:text="Submit"
-            android:layout_marginStart="@dimen/dimen_20"
             android:layout_marginTop="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@id/edit_text_for_order_id"
-            app:layout_constraintTop_toBottomOf="@id/mail_customer_support" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/active_call_support"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:background="@drawable/ic_call_customer_support_active"
-            android:gravity="center_vertical"
-            android:visibility="gone"
-            android:paddingLeft="45dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/customer_support_number"
-            android:textColor="#000"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/bg_rectangle"
+            android:backgroundTint="#008194"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/submit" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_order_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Support For Order ID"
+                android:textColor="@color/white" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/order_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_toRightOf="@id/txt_order_id"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="@color/white"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/mail_customer_support"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/bg_rectangle"
+            android:backgroundTint="@color/base_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/order_id_base">
+
+            <RelativeLayout
+                android:layout_width="48dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bg_rectangle"
+                android:backgroundTint="#E90000">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_email"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_centerInParent="true"
+                android:text="suppoort@scootin.co.in"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="#000"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="8dp"
+                app:srcCompat="@drawable/ic_account_arrow" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/active_call_support"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/bg_rectangle"
+            android:backgroundTint="@color/base_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mail_customer_support">
+
+            <RelativeLayout
+                android:layout_width="48dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bg_rectangle"
+                android:backgroundTint="#E90000">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_phn"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/phn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_centerInParent="true"
+                android:text="955-766-7996"
+                android:fontFamily="@font/montserrat_medium"
+                android:textColor="#000"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="8dp"
+                app:srcCompat="@drawable/ic_account_arrow" />
+
+        </RelativeLayout>
+
+<!--        <androidx.appcompat.widget.AppCompatImageView-->
+<!--            android:id="@+id/mail_customer_support"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="20dp"-->
+<!--            android:layout_marginTop="300dp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:srcCompat="@drawable/ic_mail_customer_support" />-->
+
+<!--        <androidx.appcompat.widget.AppCompatEditText-->
+<!--            android:id="@+id/edit_text_for_order_id"-->
+<!--            android:layout_width="206dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="20dp"-->
+<!--            android:hint="@string/edittxt_orderid_call_support"-->
+<!--            android:background="@drawable/ic_order_id_field_for_call"-->
+<!--            android:paddingLeft="2dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:textColor="#000"-->
+<!--            android:textColorHint="#000"-->
+<!--            android:inputType="number"-->
+<!--            android:textSize="12sp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/mail_customer_support"  />-->
+
+
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:id="@+id/submit"-->
+<!--            android:text="Submit"-->
+<!--            android:layout_marginStart="@dimen/dimen_20"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintStart_toEndOf="@id/edit_text_for_order_id"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/mail_customer_support" />-->
+
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/active_call_support"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="20dp"-->
+<!--            android:background="@drawable/ic_call_customer_support_active"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:visibility="gone"-->
+<!--            android:paddingLeft="45dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:text="@string/customer_support_number"-->
+<!--            android:textColor="#000"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/submit" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

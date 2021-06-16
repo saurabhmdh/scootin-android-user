@@ -64,7 +64,6 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
                 it.body()?.forEach { item ->
                     if(item.hasDefault){
                         binding.nameEditText.setText(item.name)
-                        binding.emailEditText.setText(item.email)
                     }
                 }
 
