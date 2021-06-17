@@ -66,7 +66,6 @@ class OrderHistoryAdapter(
                 binding.orderType.setText(deliveryType)
 
                 if (orderStatus == "PLACED" || orderStatus == "UNCONFIRMED" || orderStatus == "PACKED") {
-                    binding.imgTrack.setImageResource(R.drawable.ic_track_text_button)
                     binding.orderStatus.setText("Ongoing")
                     binding.orderStatus.setTextColor(Color.parseColor("#FF834A"))
                 } else if (orderStatus == "COMPLETED") {
@@ -77,7 +76,7 @@ class OrderHistoryAdapter(
                     binding.orderStatus.setTextColor(Color.parseColor("#D10000"))
                 }
             }
-            binding.rootView.setOnClickListener {
+            binding.imgTrack.setOnClickListener {
                 imageAdapterClickListener.onViewDetailsSelected(it, item)
             }
         }

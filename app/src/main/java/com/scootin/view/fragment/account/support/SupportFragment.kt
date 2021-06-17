@@ -30,7 +30,7 @@ class SupportFragment : Fragment(R.layout.customer_support) {
         super.onViewCreated(view, savedInstanceState)
         binding = CustomerSupportBinding.bind(view)
         binding.mailCustomerSupport.setOnClickListener {
-            sendEmail("support@scootin.co.in", "Regarding order ID ${binding.editTextForOrderId.text.toString()}", "");
+            sendEmail("support@scootin.co.in", "Regarding order", "");
         }
 
         setupListener()
@@ -63,19 +63,19 @@ class SupportFragment : Fragment(R.layout.customer_support) {
     private fun setupListener() {
 
 
-        binding.submit.setOnClickListener {
-            val callId = binding.editTextForOrderId.text?.toString()?.toIntOrNull() ?: 0
-            if (callId == 0) {
-                Toast.makeText(requireContext(), "Please enter valid order Id", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-            viewModel.verifyOrderId(callId.toString()).observe(viewLifecycleOwner) {
-                if (it.isSuccessful) {
-                    binding.activeCallSupport.visibility = View.VISIBLE
-                } else {
-                    Toast.makeText(requireContext(), "Please enter valid order Id", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
+//        binding.submit.setOnClickListener {
+//            val callId = binding.editTextForOrderId.text?.toString()?.toIntOrNull() ?: 0
+//            if (callId == 0) {
+//                Toast.makeText(requireContext(), "Please enter valid order Id", Toast.LENGTH_SHORT).show()
+//                return@setOnClickListener
+//            }
+//            viewModel.verifyOrderId(callId.toString()).observe(viewLifecycleOwner) {
+//                if (it.isSuccessful) {
+//                    binding.activeCallSupport.visibility = View.VISIBLE
+//                } else {
+//                    Toast.makeText(requireContext(), "Please enter valid order Id", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//        }
     }
 }

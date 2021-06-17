@@ -35,7 +35,7 @@ class OrderHistoryFragment : Fragment(R.layout.fragment_order_history) {
         binding = FragmentOrderHistoryBinding.bind(view)
         setAdaper()
         setViewModel()
-        setupListener()
+        //setupListener()
     }
 
     private fun setViewModel() {
@@ -46,9 +46,9 @@ class OrderHistoryFragment : Fragment(R.layout.fragment_order_history) {
         }
     }
 
-    private fun setupListener() {
-        binding.back.setOnClickListener { findNavController().popBackStack() }
-    }
+//    private fun setupListener() {
+//        binding.back.setOnClickListener { findNavController().popBackStack() }
+//    }
 
     private fun setAdaper() {
         orderHistoryAdapter =
