@@ -45,7 +45,7 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentTrackDirectOrderBinding.bind(view)
-        binding.back.setOnClickListener { findNavController().popBackStack() }
+        //binding.back.setOnClickListener { findNavController().popBackStack() }
         binding.btnChangePaymentMode.setOnClickListener {
             findNavController().navigate(DirectOrderDetailFragmentDirections.directOrderToChangePaymentMode(args.orderId,"DIRECT"))
         }
@@ -116,7 +116,7 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
 
     private fun updatePaymentMode(paymentDetails: PaymentDetails?, canPay: Boolean) {
         binding.payNow.updateVisibility(canPay&&paymentDetails?.paymentMode==null)
-        binding.payOnDeliveryHeader.updateVisibility(canPay.not())
+        //binding.payOnDeliveryHeader.updateVisibility(canPay.not())
         binding.pay.updateVisibility(canPay.not())
         binding.pay.text = UtilUIComponent.getPaymentStatusText(paymentDetails)
         if(paymentDetails?.paymentStatus=="COMPLETED"){
@@ -131,7 +131,7 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
             findNavController().navigate(DirectOrderDetailFragmentDirections.orderToCustomerSupport())
         }
 
-        binding.back.setOnClickListener { findNavController().popBackStack() }
+        //binding.back.setOnClickListener { findNavController().popBackStack() }
 
         binding.payNow.setOnClickListener {
             findNavController().navigate(DirectOrderDetailFragmentDirections.directOrderToPayment(args.orderId, "DIRECT", express))

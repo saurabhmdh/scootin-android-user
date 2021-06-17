@@ -39,11 +39,6 @@ class ExtraDataAdapter (
         position: Int,
         isLast: Boolean
     ) {
-        if (position % 2 == 0) {
-            binding.layout.setBackgroundColor(Color.parseColor("#D6DDFF"))
-        } else {
-            binding.layout.background = null
-        }
         binding.data=item
     }
 }
