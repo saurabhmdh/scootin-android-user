@@ -44,7 +44,7 @@ class OrderDetailFragment : BaseFragment(R.layout.fragment_my_order_track) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMyOrderTrackBinding.bind(view)
-        binding.back.setOnClickListener { findNavController().popBackStack() }
+        //binding.back.setOnClickListener { findNavController().popBackStack() }
         binding.lifecycleOwner = this
         binding.btnChangePaymentMode.setOnClickListener {
             findNavController().navigate(OrderDetailFragmentDirections.orderToChangePaymentMode(args.orderId,"NORMAL"))
@@ -99,7 +99,7 @@ class OrderDetailFragment : BaseFragment(R.layout.fragment_my_order_track) {
         binding.helpKey.setOnClickListener {
             findNavController().navigate(OrderDetailFragmentDirections.inorderToCustomerSupport())
         }
-        binding.back.setOnClickListener { findNavController().popBackStack() }
+       // binding.back.setOnClickListener { findNavController().popBackStack() }
 
         binding.swiperefresh.setOnRefreshListener {
             viewModel.loadOrder(args.orderId)
@@ -118,7 +118,11 @@ class OrderDetailFragment : BaseFragment(R.layout.fragment_my_order_track) {
                     binding.data = it.data
                     updatePaymentMode(it.data?.orderDetails?.paymentDetails)
                     orderDetailAdapter.submitList(it.data?.orderInventoryDetailsList)
+                    binding.deliveryAddress.setText(it.data?.orderDetails?.addressDetails?.addressLine1)
                     binding.storeName.setText(it.data?.orderInventoryDetailsList?.get(0)?.inventoryDetails?.shopManagement?.name)
+                    if(it.data?.orderDetails?.paymentDetails?.promoCodeApplied == true){
+                        binding.promoApplied.visibility=View.VISIBLE
+                    }
                     updateDate(it.data)
 
                     updateSelectors(it.data?.orderDetails?.orderStatus)

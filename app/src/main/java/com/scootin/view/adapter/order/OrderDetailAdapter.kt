@@ -40,11 +40,6 @@ class OrderDetailAdapter(
         position: Int,
         isLast: Boolean
     ) {
-        if (position % 2 == 0) {
-            binding.rootView.setBackgroundColor(Color.parseColor("#D6DDFF"))
-        } else {
-            binding.rootView.background = null
-        }
 
         item.apply {
             binding.itemName.text = item.inventoryDetails.title + " ("+ item.inventoryDetails.description +")"
