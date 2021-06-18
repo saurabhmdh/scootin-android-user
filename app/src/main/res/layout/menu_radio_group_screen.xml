@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_alignParentEnd="true">
+
+        <RadioButton
+            android:id="@+id/by_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="By Product"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#808080"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:buttonTint="#808080"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/by_store"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_regular"
+            android:buttonTint="#808080"
+            android:textColor="#808080"
+            android:selectAllOnFocus="false"
+            android:text="By Store"
+            android:textStyle="bold"
+            android:textSize="12sp" />
+    </RadioGroup>
+
+</RelativeLayout>

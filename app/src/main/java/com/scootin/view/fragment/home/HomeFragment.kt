@@ -85,8 +85,8 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
-        val textBox = menu.findItem(R.id.action_search).actionView.findViewById<TextView>(
-            R.id.search_box
+        val textBox = menu.findItem(R.id.action_text).actionView.findViewById<TextView>(
+            R.id.text_box
         )
         viewModel.getServiceArea().observe(viewLifecycleOwner, {cache->
             if (cache == null) {

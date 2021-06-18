@@ -139,8 +139,8 @@
     <string name="address">Address</string>
     <string name="area">Area</string>
     <string name="pin">Pin</string>
-    <string name="shop_by_product_or_store">Shop by Product or \nStore</string>
-    <string name="upload_a_photo_of_hand_written_list">Upload a Photo of Hand \nWritten List</string>
+    <string name="shop_by_product_or_store">Explore and shop by product or store</string>
+    <string name="upload_a_photo_of_hand_written_list">Upload a hand written list of items</string>
     <string name="grocery_order_instruction">Please provide a clear and readable photo.\n\nPlease provide your mobile number also so that we can call you incase something is unclear or unnavailable from the list</string>
 
     <string name="string_essentials">Essentials &amp; Grocery</string>

@@ -100,7 +100,7 @@
     <fragment
         android:id="@+id/essential_category"
         android:name="com.scootin.view.fragment.delivery.essential.EssentialCategoryFragment"
-        android:label="Home">
+        android:label="Essential &amp; Grocery">
         <action
             android:id="@+id/essential_category_to_grocerydelivery"
             app:destination="@id/grocery"

@@ -1,8 +1,14 @@
 package com.scootin.view.fragment.delivery.essential
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.RadioGroup
+import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -11,6 +17,9 @@ import androidx.lifecycle.observe
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
+import androidx.recyclerview.widget.GridLayoutManager
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.scootin.R
 import com.scootin.databinding.FragmentGroceryDeliveryBinding
 import com.scootin.extensions.getCheckedRadioButtonPosition
@@ -22,8 +31,11 @@ import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.ProductSearchPagingAdapter
 import com.scootin.view.adapter.ShopSearchAdapter
+import com.scootin.view.custom.CustomSearchView
 import com.scootin.view.fragment.BaseFragment
+import com.scootin.view.fragment.home.HomeFragmentDirections
 import com.scootin.view.vo.ProductSearchVO
+import com.scootin.view.vo.ServiceArea
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -43,9 +55,36 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentGroceryDeliveryBinding.bind(view)
         updateUI()
-        updateListeners()
+        setHasOptionsMenu(true)
+        //updateListeners()
 
-        binding.radioGroup.setOnCheckedChangeListener { radioGroup, optionId ->
+
+    }
+
+    override fun onDestroyView() {
+        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+        imm?.hideSoftInputFromWindow(view?.windowToken, 0)
+        super.onDestroyView()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_search_fragment, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        val searchBox = menu.findItem(R.id.action_search).actionView.findViewById<CustomSearchView>(
+            R.id.search_box
+        )
+
+
+        val radioGroup = menu.findItem(R.id.action_search).actionView.findViewById<RadioGroup>(
+            R.id.radioGroup
+        )
+
+        updateListeners(searchBox,radioGroup)
+
+        radioGroup.setOnCheckedChangeListener { radioGroup, optionId ->
             when (optionId) {
                 R.id.by_product -> {
                     binding.productList.updateVisibility(true)
@@ -59,6 +98,7 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
                 }
             }
         }
+
     }
 
     private fun updateUI() {
@@ -69,15 +109,16 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
         setProductAdapter()
     }
 
-    private fun updateListeners() {
+    private fun updateListeners(searchBox:CustomSearchView, radioGroup:RadioGroup) {
         //When the screen load lets load the data for empty screen
+        binding.productList.layoutManager = GridLayoutManager(context,2)
         viewModel.doSearch("")
         viewModel.loadCount()
         showLoading()
-        binding.searchBox.setOnQueryTextListener(
+        searchBox.setOnQueryTextListener(
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    when (binding.radioGroup.getCheckedRadioButtonPosition()) {
+                    when (radioGroup.getCheckedRadioButtonPosition()) {
                         0 -> {
                             query?.let {
                                 viewModel.doSearch(it)
@@ -102,7 +143,7 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
             }
         )
 
-        binding.back.setOnClickListener { findNavController().popBackStack() }
+        //binding.back.setOnClickListener { findNavController().popBackStack() }
 
         viewModel.shopsBySubcategory.observe(viewLifecycleOwner) {response->
             dismissLoading()
@@ -137,10 +178,10 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
             }
         }
 
-        setupSubCategoryListener()
+        setupSubCategoryListener(searchBox)
     }
 
-    private fun setupSubCategoryListener() {
+    private fun setupSubCategoryListener(searchBox: CustomSearchView) {
 
         binding.grocery.setOnClickListener {
             if (binding.grocery.isSelected) {
@@ -148,7 +189,7 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
             }
             clearPagingData()
             Timber.i("Selected.. ${it.tag as String?}")
-            viewModel.executeNewRequest(it.tag as String?, binding.searchBox.query?.toString().orEmpty())
+            viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
             binding.grocery.isSelected = true
             binding.breakfast.isSelected = false
             binding.household.isSelected = false
@@ -161,7 +202,7 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
             }
             clearPagingData()
             Timber.i("Selected.. ${it.tag as String?}")
-            viewModel.executeNewRequest(it.tag as String?, binding.searchBox.query?.toString().orEmpty())
+            viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
             binding.grocery.isSelected = false
             binding.breakfast.isSelected = true
             binding.household.isSelected = false
@@ -174,7 +215,7 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
             }
             clearPagingData()
             Timber.i("Selected.. ${it.tag as String?}")
-            viewModel.executeNewRequest(it.tag as String?, binding.searchBox.query?.toString().orEmpty())
+            viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
             binding.grocery.isSelected = false
             binding.breakfast.isSelected = false
             binding.household.isSelected = true
@@ -187,7 +228,7 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
             }
             clearPagingData()
             Timber.i("Selected.. ${it.tag as String?}")
-            viewModel.executeNewRequest(it.tag as String?, binding.searchBox.query?.toString().orEmpty())
+            viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
             binding.grocery.isSelected = false
             binding.breakfast.isSelected = false
             binding.household.isSelected = false

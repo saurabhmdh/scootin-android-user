@@ -3,124 +3,102 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/ic_background">
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_eng_card"
-        android:layout_marginTop="60dp"
-        android:layout_centerHorizontal="true"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_back_arrow" />
-
-    <View
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="178dp"
-        android:layout_marginEnd="20dp"
-        android:background="@color/text_color_primary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/category_list"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
         android:elevation="12dp"
         android:layout_marginTop="208dp"
         android:layout_centerHorizontal="true">
 
-    <LinearLayout
-        android:layout_width="228dp"
-        android:layout_height="222dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/stroke_rectangle"
-        android:orientation="vertical">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_select_an_option"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="25dp"/>
-
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/stroke_rectangle"
             android:orientation="vertical">
 
-            <RadioButton
-                android:id="@+id/materialRadioButton"
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_regular"
-                android:text="@string/shop_by_product_or_store"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                android:textColor="#808080"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:buttonTint="#808080"
-                android:checked="true"/>
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dp"
+                app:srcCompat="@drawable/ic_select_an_option" />
 
-            <RadioButton
-                android:id="@+id/materialRadioButton2"
+            <RadioGroup
+                android:id="@+id/radioGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_regular"
-                android:buttonTint="#808080"
-                android:textColor="#808080"
-                android:selectAllOnFocus="false"
-                android:text="@string/upload_a_photo_of_hand_written_list"
-                android:textStyle="bold"
-                android:textSize="13sp"
-                android:layout_marginTop="15dp"/>
-        </RadioGroup>
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
 
-<!--        <androidx.appcompat.widget.AppCompatTextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Select Delivery Slot"-->
-<!--            android:fontFamily="@font/montserrat_regular"-->
-<!--            android:textColor="#000"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:layout_marginStart="16dp"/>-->
+                <RadioButton
+                    android:id="@+id/materialRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="#000"
+                    android:checked="true"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/shop_by_product_or_store"
+                    android:textColor="#000"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-<!--        <androidx.appcompat.widget.AppCompatSpinner-->
-<!--            android:id="@+id/delivery_slot"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="22dp"-->
-<!--            android:background="@drawable/spinner_grad_bg"-->
-<!--            android:layout_marginTop="16dp"-->
-<!--            android:layout_marginStart="16dp"-->
-<!--            android:layout_marginEnd="24dp"/>-->
+                <RadioButton
+                    android:id="@+id/materialRadioButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:buttonTint="#000"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:selectAllOnFocus="false"
+                    android:text="@string/upload_a_photo_of_hand_written_list"
+                    android:textColor="#000"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </RadioGroup>
 
-    </LinearLayout>
+            <!--        <androidx.appcompat.widget.AppCompatTextView-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:text="Select Delivery Slot"-->
+            <!--            android:fontFamily="@font/montserrat_regular"-->
+            <!--            android:textColor="#000"-->
+            <!--            android:layout_marginTop="20dp"-->
+            <!--            android:layout_marginStart="16dp"/>-->
+
+            <!--        <androidx.appcompat.widget.AppCompatSpinner-->
+            <!--            android:id="@+id/delivery_slot"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="22dp"-->
+            <!--            android:background="@drawable/spinner_grad_bg"-->
+            <!--            android:layout_marginTop="16dp"-->
+            <!--            android:layout_marginStart="16dp"-->
+            <!--            android:layout_marginEnd="24dp"/>-->
+
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
-    <androidx.appcompat.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_done"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="55dp"
-        android:padding="20dp"
+        android:layout_width="128dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="5dp"
+        android:text="Continue"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_rectangle"
         android:layout_marginRight="16dp"
-        android:src="@drawable/ic_done_button"
+        android:backgroundTint="#E90000"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"/>
 </RelativeLayout>

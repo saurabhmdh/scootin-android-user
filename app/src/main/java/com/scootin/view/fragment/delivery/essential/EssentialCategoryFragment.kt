@@ -51,7 +51,7 @@ class EssentialCategoryFragment : Fragment(R.layout.fragment_essential_category)
                 }
             }
         }
-        binding.back.setOnClickListener { findNavController().popBackStack() }
+        //binding.back.setOnClickListener { findNavController().popBackStack() }
 
 //        addressViewModel.deliverySlot.observe(viewLifecycleOwner) {
 //            if (it.isSuccessful) {
