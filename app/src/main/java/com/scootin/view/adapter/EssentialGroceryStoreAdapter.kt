@@ -44,10 +44,10 @@ class EssentialGroceryStoreAdapter (
         item.apply {
             binding.name.setText(name)
             binding.distance.setText(distance)
-            binding.ratingCount.setRating(rating)
+            //binding.ratingCount.setRating(rating)
             if (isOpen){
                 binding.onlinestatusStore.setText("Online")
-                binding.btnSelect.setImageResource(R.drawable.ic_select_button_active)
+                binding.btnSelect.setBackgroundResource(R.drawable.ic_ellipse)
                 binding.btnSelect.setOnClickListener {
                     imageAdapterClickLister.onSelectButtonSelected(it)
                 }
@@ -55,7 +55,7 @@ class EssentialGroceryStoreAdapter (
             else{
                 binding.onlinestatusStore.setText("Offline")
                 binding.onlinestatusStore.setTextColor(Color.parseColor("#990f02"))
-                binding.btnSelect.setImageResource(R.drawable.ic_select_button_inactive)
+                binding.btnSelect.setBackgroundResource(R.drawable.grey_ellipse)
 
             }
 

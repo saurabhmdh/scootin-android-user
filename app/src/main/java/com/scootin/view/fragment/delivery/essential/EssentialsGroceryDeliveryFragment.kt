@@ -78,7 +78,7 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
         )
 
 
-        val radioGroup = menu.findItem(R.id.action_search).actionView.findViewById<RadioGroup>(
+        val radioGroup = menu.findItem(R.id.action_radio_group).actionView.findViewById<RadioGroup>(
             R.id.radioGroup
         )
 
@@ -112,6 +112,7 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
     private fun updateListeners(searchBox:CustomSearchView, radioGroup:RadioGroup) {
         //When the screen load lets load the data for empty screen
         binding.productList.layoutManager = GridLayoutManager(context,2)
+        binding.storeList.layoutManager = GridLayoutManager(context,2)
         viewModel.doSearch("")
         viewModel.loadCount()
         showLoading()

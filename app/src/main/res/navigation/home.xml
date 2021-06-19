@@ -58,7 +58,7 @@
 
         <action
             android:id="@+id/home_to_sweets"
-            app:destination="@id/sweetsCategory"
+            app:destination="@id/sweets"
             app:enterAnim="@anim/default_enter_anim"
             app:exitAnim="@anim/default_exit_anim"
             app:popEnterAnim="@anim/default_pop_enter_anim"

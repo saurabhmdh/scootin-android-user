@@ -41,18 +41,17 @@ class ShopSearchAdapter (
                 binding.name.setText(name)
                 binding.distance.setText(distance)
 
-                binding.ratingCount.setRating(rating.toFloat())
 
                 if (online) {
                     binding.onlinestatusStore.setText("Online")
-                    binding.btnSelect.setImageResource(R.drawable.ic_select_button_active)
+                    binding.btnSelect.setBackgroundResource(R.drawable.ic_ellipse)
                     binding.btnSelect.setOnClickListener {
                         imageAdapterClickLister.onSelectButtonSelected(item)
                     }
                 } else {
                     binding.onlinestatusStore.setText("Offline")
                     binding.onlinestatusStore.setTextColor(Color.parseColor("#990f02"))
-                    binding.btnSelect.setImageResource(R.drawable.ic_select_button_inactive)
+                    binding.btnSelect.setBackgroundResource(R.drawable.grey_ellipse)
                 }
 
             }

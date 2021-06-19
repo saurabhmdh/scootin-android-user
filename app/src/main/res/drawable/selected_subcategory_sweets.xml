@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:drawable="@drawable/grey_ellipse"
+        android:drawable="@drawable/ic_sweets_selected"
         android:state_selected="true"/>
-
-    <!-- drawable for unselected tab -->
     <item
-        android:drawable="@drawable/ic_ellipse"
+        android:drawable="@drawable/ic_sweets_inactive"
         android:state_selected="false"/>
 </selector>

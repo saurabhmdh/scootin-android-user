@@ -3,9 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_radio_group"
+        app:actionLayout="@layout/menu_radio_group_screen"
+        app:showAsAction="always"
+        android:title="radio" />
+
+
+    <item
         android:id="@+id/action_search"
         app:actionLayout="@layout/menu_search_screen"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         android:title="location" />
+
 
 </menu>
