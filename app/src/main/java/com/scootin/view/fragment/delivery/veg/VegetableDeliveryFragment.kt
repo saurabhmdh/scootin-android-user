@@ -1,8 +1,13 @@
 package com.scootin.view.fragment.delivery.veg
 
 
+import android.content.Context
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.RadioGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -10,14 +15,18 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import androidx.paging.PagingData
+import androidx.recyclerview.widget.GridLayoutManager
 import com.scootin.R
 import com.scootin.databinding.FragmentVegetableDeliveryBinding
 import com.scootin.extensions.orZero
+import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.AddToCartRequest
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.ProductSearchPagingAdapter
+import com.scootin.view.custom.CustomSearchView
 import com.scootin.view.vo.ProductSearchVO
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,10 +48,35 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentVegetableDeliveryBinding.bind(view)
         updateUI()
-        updateListeners()
+        setHasOptionsMenu(true)
+        binding.productList.layoutManager = GridLayoutManager(context,2)
+        //updateListeners()
         viewModel.loadCount()
     }
+    override fun onDestroyView() {
+        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+        imm?.hideSoftInputFromWindow(view?.windowToken, 0)
+        super.onDestroyView()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_veg_fragment, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        val searchBox = menu.findItem(R.id.action_search).actionView.findViewById<CustomSearchView>(
+            R.id.search_box
+        )
+
+        updateListeners(searchBox)
+
+
+    }
+
     private fun updateUI() {
+        binding.veg.isSelected = true
+        viewModel.updateSubCategory("252")
         setProductAdapter()
     }
 
@@ -74,11 +108,11 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
         }
     }
 
-    private fun updateListeners() {
+    private fun updateListeners(searchBox:CustomSearchView) {
         //When the screen load lets load the data for empty screen
         viewModel.doSearch("")
 
-        binding.searchBox.setOnQueryTextListener(
+        searchBox.setOnQueryTextListener(
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     query?.let {
@@ -97,7 +131,7 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
 
             }
         )
-        binding.back.setOnClickListener { findNavController().popBackStack() }
+        //binding.back.setOnClickListener { findNavController().popBackStack() }
 
         viewModel.allProduct.observe(viewLifecycleOwner) {response->
             lifecycleScope.launch {
@@ -121,6 +155,43 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
             Timber.i("Status addToCartLiveData = ${it?.isSuccessful} ")
             viewModel.loadCount()
         })
+
+        setupSubCategoryListener(searchBox)
+    }
+
+    private fun setupSubCategoryListener(searchBox: CustomSearchView) {
+
+        binding.veg.setOnClickListener {
+            if (binding.veg.isSelected) {
+                return@setOnClickListener
+            }
+            clearPagingData()
+            Timber.i("Selected.. ${it.tag as String?}")
+            viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
+            binding.veg.isSelected = true
+            binding.fruits.isSelected = false
+
+        }
+
+        binding.fruits.setOnClickListener {
+            if (binding.veg.isSelected) {
+                return@setOnClickListener
+            }
+            clearPagingData()
+            Timber.i("Selected.. ${it.tag as String?}")
+            viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
+            binding.veg.isSelected = false
+            binding.fruits.isSelected = true
+
+
+        }
+
+    }
+
+    private fun clearPagingData() {
+        lifecycleScope.launch {
+            productSearchAdapter.submitData(PagingData.empty())
+        }
     }
 
     private fun setupBadge(result: Int) {
