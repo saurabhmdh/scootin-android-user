@@ -250,7 +250,7 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
     }
 
     private fun updateUI() {
-        val stringData = getString(R.string.login_terms_and_condition)
+        val stringData = getString(R.string.citywide_terms_and_condition)
         val wordtoSpan = SpannableString(stringData)
 
         val clickableSpan: ClickableSpan = object : ClickableSpan() {
@@ -274,8 +274,8 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
             }
         }
 
-        wordtoSpan.setSpan(remainingText, 0, 14, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        wordtoSpan.setSpan(clickableSpan, 15, stringData.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        wordtoSpan.setSpan(clickableSpan, 0, stringData.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding.termAcceptedText.movementMethod = LinkMovementMethod.getInstance()
 
         binding.termAcceptedText.text = wordtoSpan

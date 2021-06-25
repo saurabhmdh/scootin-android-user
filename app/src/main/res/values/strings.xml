@@ -173,6 +173,7 @@
     <string name="city_wide_order_pay">Order will be delivered soon</string>
 
     <string name="login_terms_and_condition">By Signing In, I agree to Terms &amp; Conditions</string>
+    <string name="citywide_terms_and_condition">I agree to Terms &amp; Conditions</string>
     <string name="store_name">Store Name</string>
 
     <string name="error_no_internet">No internet connection.</string>
