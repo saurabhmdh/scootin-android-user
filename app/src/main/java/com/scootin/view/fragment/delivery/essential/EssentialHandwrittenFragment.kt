@@ -65,7 +65,7 @@ class EssentialHandwrittenFragment : BaseFragment(R.layout.hand_written_grocery_
             onClickOfUploadMedia()
         }
 
-        binding.back.setOnClickListener { findNavController().popBackStack() }
+       // binding.back.setOnClickListener { findNavController().popBackStack() }
 
         binding.placeOrder.setOnClickListener {
             placeDirectOrder()
