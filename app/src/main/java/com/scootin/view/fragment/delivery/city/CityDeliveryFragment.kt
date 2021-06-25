@@ -62,7 +62,7 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
             onClickOfUploadMedia()
         }
 
-        binding.back.setOnClickListener { findNavController().popBackStack() }
+        //binding.back.setOnClickListener { findNavController().popBackStack() }
 
         binding.placeOrder.isEnabled = false
 

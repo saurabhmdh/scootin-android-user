@@ -21,7 +21,6 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class EssentialSelectShopFragment : BaseFragment(R.layout.fragment_grocery_delivery_shop_select) {
     private var binding by autoCleared<FragmentGroceryDeliveryShopSelectBinding>()
@@ -50,7 +49,7 @@ class EssentialSelectShopFragment : BaseFragment(R.layout.fragment_grocery_deliv
         //When the screen load lets load the data for empty screen
         viewModel.doSearch("")
 
-        binding.back.setOnClickListener { findNavController().popBackStack() }
+        //binding.back.setOnClickListener { findNavController().popBackStack() }
 
         viewModel.shops.observe(viewLifecycleOwner) {response->
             lifecycleScope.launch {
