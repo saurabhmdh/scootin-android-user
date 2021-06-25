@@ -1,71 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bg_screen"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/ic_background">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/express"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_sopping_bag_card" />
-
-        <View
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@color/text_color_primary"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/express" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/empty_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
             android:fontFamily="@font/montserrat_regular"
             android:text="Your shopping bag is empty"
-            app:layout_constraintTop_toBottomOf="@id/imageView"/>
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/shop_now"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="40dp"
-
+            android:text="Shop Now"
+            android:textColor="@color/white"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:background="@drawable/bg_rectangle"
+            android:backgroundTint="#E90000"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/empty_text"
-            app:srcCompat="@drawable/ic_shopnow_button" />
+            app:layout_constraintTop_toBottomOf="@id/empty_text" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/product_list"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:visibility="gone"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="@dimen/dimen_10"
-            android:layout_marginEnd="15dp"
-            app:layout_constraintBottom_toTopOf="@id/checkout_layout"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/imageView" />
+            app:layout_constraintBottom_toTopOf="@id/checkout_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/checkout_layout"
@@ -74,7 +62,7 @@
             android:background="#d1d1d1"
             android:padding="4dp"
             android:visibility="gone"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="20dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toBottomOf="parent"

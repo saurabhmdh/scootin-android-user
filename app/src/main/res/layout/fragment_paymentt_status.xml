@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginBottom="5dp">
 
     <data>
@@ -13,46 +14,31 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/ic_background">
+        android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/express"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_sopping_bag_card" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_back_arrow" />
-
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/dropAddress"
-            style="@style/custom_font_bold_style_black"
+            android:id="@+id/express"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="44dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:text="Delivery Location:"
-            android:textSize="12sp"
+            android:background="@drawable/bg_rectangle"
+            android:backgroundTint="#008194"
+            android:fontFamily="@font/montserrat_bold"
+            android:gravity="center"
+            android:text="Order Summary"
+            android:textColor="@color/white"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/express" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/edit_drop_address"
@@ -60,21 +46,62 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:drawableStart="@drawable/ic_location_icon"
             android:fontFamily="@font/montserrat_regular"
-            android:text="@string/edittxt_hint_citywide"
             android:paddingTop="@dimen/dimen_4"
+            android:text="@string/edittxt_hint_citywide"
             android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dropAddress" />
-        <View
-            android:id="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/express" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/dropAddress"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Delivery Address"
+            android:padding="4dp"
+            android:background="@drawable/bg_rectangle"
+            android:backgroundTint="@color/base_bg"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_drop_address" />
+
+        <RelativeLayout
+            android:id="@+id/available_offers_tab"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="20dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_rectancle_2dp"
+            android:backgroundTint="@color/base_bg"
             android:layout_marginEnd="20dp"
-            android:background="@color/text_color_primary"
-            app:layout_constraintTop_toBottomOf="@id/edit_drop_address"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dropAddress">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Available Offers"
+                android:layout_marginStart="5dp"
+                app:fontFamily="@font/montserrat_bold"
+                android:layout_centerVertical="true"
+                android:textColor="#000" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="12dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:paddingStart="0dp"
+                android:paddingEnd="5dp"
+                app:srcCompat="@drawable/ic_account_arrow"/>
+        </RelativeLayout>
+
 
         <LinearLayout
             android:id="@+id/txt_total_amt_payable"
@@ -86,7 +113,7 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_drop_address">
+            app:layout_constraintTop_toBottomOf="@id/available_offers_tab">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -96,6 +123,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Total Bag Value"
+                    app:fontFamily="@font/montserrat_medium"
                     android:textColor="#000" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -103,6 +131,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:paddingStart="0dp"
+                    app:fontFamily="@font/montserrat_medium"
                     android:paddingEnd="5dp"
                     android:textColor="#000"
                     app:setPrice="@{data.amount}" />
@@ -116,6 +145,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Delivery Charges"
+                    app:fontFamily="@font/montserrat_medium"
                     android:textColor="#000" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -123,6 +153,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:paddingStart="0dp"
+                    app:fontFamily="@font/montserrat_medium"
                     android:paddingEnd="5dp"
                     android:textColor="#000"
                     app:setPrice="@{data.deliveryFreeAmount}" />
@@ -138,6 +169,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/discount_applied"
                     android:layout_width="wrap_content"
+                    app:fontFamily="@font/montserrat_medium"
                     android:layout_height="wrap_content"
                     android:text="Discount Applied (VERY FIRST)"
                     android:textColor="#000" />
@@ -146,6 +178,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
+                    app:fontFamily="@font/montserrat_medium"
                     android:paddingStart="0dp"
                     android:paddingEnd="5dp"
                     android:textColor="#000"
@@ -161,12 +194,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Taxes"
+                    app:fontFamily="@font/montserrat_medium"
                     android:textColor="#000" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
+                    app:fontFamily="@font/montserrat_medium"
                     android:paddingStart="0dp"
                     android:paddingEnd="5dp"
                     android:textColor="#000"
@@ -176,7 +211,6 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
-                android:background="@drawable/ic_total_savings_tab"
                 android:paddingStart="@dimen/dimen_4"
                 android:paddingEnd="@dimen/dimen_4">
 
@@ -184,7 +218,36 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Total Amount Payable"
+                    app:fontFamily="@font/montserrat_bold"
                     android:textColor="#000"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    app:fontFamily="@font/montserrat_bold"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="5dp"
+                    android:textColor="#000"
+                    android:textStyle="bold"
+                    app:setPrice="@{data.totalAmount}" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:background="@drawable/rounded_rectancle_2dp"
+                android:backgroundTint="#008194"
+                android:padding="4dp"
+                android:paddingStart="@dimen/dimen_4"
+                android:paddingEnd="@dimen/dimen_4">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Saving"
+                    app:fontFamily="@font/montserrat_medium"
+                    android:textColor="#fff"
                     android:textStyle="bold" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -193,124 +256,197 @@
                     android:layout_alignParentEnd="true"
                     android:paddingStart="0dp"
                     android:paddingEnd="5dp"
-                    android:textColor="#000"
+                    app:fontFamily="@font/montserrat_bold"
+                    android:textColor="#fff"
                     android:textStyle="bold"
-                    app:setPrice="@{data.totalAmount}" />
+                    app:setPrice="@{data.totalSaving}" />
             </RelativeLayout>
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/paymentMode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="Payment Mode"
-            android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/txt_total_amt_payable"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:orientation="horizontal"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_rectangle"
+            android:backgroundTint="@color/base_bg"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/paymentMode">
+            app:layout_constraintTop_toBottomOf="@id/txt_total_amt_payable">
 
-            <RadioButton
-                android:id="@+id/by_product"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="#808080"
-                android:checked="true"
-                android:fontFamily="@font/montserrat_regular"
-                android:tag="ONLINE"
-                android:text="Online Mode"
-                android:textColor="#808080"
-                android:textSize="12sp"
-                android:textStyle="bold"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:text="Select Payment Mode"
+                android:textColor="#000"
+                app:fontFamily="@font/montserrat_bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <RadioButton
-                android:id="@+id/by_store"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/pay_by_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="#808080"
-                android:fontFamily="@font/montserrat_regular"
-                android:selectAllOnFocus="false"
-                android:tag="CASH"
-                android:text="Cash On Delivery"
-                android:textColor="#808080"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </RadioGroup>
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/net_banking"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5"
+                app:srcCompat="@drawable/ic_pay_by_card_tile" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/applyCoupon"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/net_banking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/upi"
+                app:layout_constraintStart_toEndOf="@+id/pay_by_card"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/ic_net_banking" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/upi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/cod"
+                app:layout_constraintStart_toEndOf="@+id/net_banking"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/ic_upi_tile" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/cod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/upi"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/ic_cod" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/promo_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="Promo code"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/couponEdittext"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_margin="12dp"
-            android:imeOptions="actionDone"
-            android:inputType="text"
-            android:paddingStart="@dimen/dimen_10"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/applyCoupon" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/applyPromoButton"
-            android:layout_width="105dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="@dimen/dimen_20"
-            android:background="@drawable/button_background"
-            android:gravity="center"
-            android:paddingBottom="4dp"
-            android:paddingEnd="6dp"
-            android:textStyle="bold"
-            android:textSize="11sp"
-            android:text="Apply Coupon"
-            android:textColor="#FFF"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_rectangle"
+            android:backgroundTint="@color/base_bg"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/couponEdittext" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/paymentMode">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/removePromoButton"
-            android:layout_width="105dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="@dimen/dimen_20"
-            android:background="@drawable/button_background"
-            android:gravity="center"
-            android:paddingBottom="4dp"
-            android:paddingEnd="6dp"
-            android:textStyle="bold"
-            android:textSize="11sp"
-            android:text="Remove Coupon"
-            android:visibility="gone"
-            android:textColor="#FFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/couponEdittext" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:text="Apply Promocode"
+                android:textColor="#000"
+                app:fontFamily="@font/montserrat_bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/couponEdittext"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/rounded_rectancle_2dp"
+                android:gravity="center"
+                android:hint="PROMOCODE"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:paddingStart="@dimen/dimen_10"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/removePromoButton"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/applyPromoButton"
+                android:layout_width="73dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/bg_rectangle"
+                android:backgroundTint="#000000"
+                android:gravity="center"
+                android:paddingEnd="6dp"
+                android:paddingBottom="4dp"
+                android:text="Apply"
+                android:textColor="#FFF"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/montserrat_bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/couponEdittext"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/removePromoButton"
+                android:layout_width="73dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/bg_rectangle"
+                android:backgroundTint="#E90000"
+                android:gravity="center"
+                android:paddingEnd="6dp"
+                android:paddingBottom="4dp"
+                android:text="Remove"
+                android:textColor="#FFF"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/montserrat_bold"
+                app:layout_constraintBottom_toBottomOf="@+id/applyPromoButton"
+                app:layout_constraintEnd_toStartOf="@+id/applyPromoButton"
+                app:layout_constraintTop_toTopOf="@+id/applyPromoButton" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/confirm_button"
-            android:layout_height="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:layout_width="144dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_rectangle"
+            android:backgroundTint="#E90000"
+            android:fontFamily="@font/montserrat_bold"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="Confirm &amp; Proceed"
             android:textColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@+id/applyPromoButton"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/ic_confirm___proceed"/>
+            app:layout_constraintTop_toBottomOf="@+id/promo_code" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
