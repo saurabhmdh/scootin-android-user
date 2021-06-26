@@ -108,11 +108,12 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
 
             alertDialog?.setPositiveButton("Confirm") { dialogInterface, which ->
 
-            val mode = when(binding.radioGroup.getCheckedRadioButtonPosition()) {
-                0 -> {"ONLINE"}
-                1 -> {"CASH"}
-                else -> {""}
-            }
+//            val mode = when(binding.radioGroup.getCheckedRadioButtonPosition()) {
+//                0 -> {"ONLINE"}
+//                1 -> {"CASH"}
+//                else -> {""}
+//            }
+                val mode = "ONLINE"
             showLoading()
 
             viewModel.userConfirmOrder(AppHeaders.userID, OrderRequest(mode, AppHeaders.serviceAreaId, address!!.id, promoCode)).observe(viewLifecycleOwner) {
@@ -182,7 +183,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
             binding.couponEdittext.getText()?.clear()
         }
 
-        binding.back.setOnClickListener { findNavController().popBackStack() }
+//        binding.back.setOnClickListener { findNavController().popBackStack() }
 
 
         binding.editDropAddress.setOnClickListener {
