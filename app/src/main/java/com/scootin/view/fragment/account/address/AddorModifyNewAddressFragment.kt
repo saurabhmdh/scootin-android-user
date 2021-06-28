@@ -59,7 +59,7 @@ class AddorModifyNewAddressFragment : BaseFragment(R.layout.fragment_add_new_add
         binding.save.setOnClickListener {
             saveAddress()
         }
-        binding.back.setOnClickListener { findNavController().popBackStack() }
+       // binding.back.setOnClickListener { findNavController().popBackStack() }
 
         //Prefilled
         binding.mobileEditText.setText(AppHeaders.userMobileNumber)

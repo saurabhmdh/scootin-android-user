@@ -115,7 +115,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
 //            }
 //            showLoading()
 
-                val mode="ONLINE"
+                val mode="CASH"
 
             viewModel.userConfirmOrder(AppHeaders.userID, OrderRequest(mode, AppHeaders.serviceAreaId, address!!.id, promoCode)).observe(viewLifecycleOwner) {
                 when(it.status) {
