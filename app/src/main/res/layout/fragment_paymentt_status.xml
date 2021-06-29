@@ -235,6 +235,7 @@
                     app:setPrice="@{data.totalAmount}" />
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/total_saving_tab"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@drawable/rounded_rectancle_2dp"
