@@ -75,7 +75,7 @@ class DirectOrderSummaryFragment: Fragment(R.layout.fragment_direct_order_summar
                     if (it.data?.media == null) {
                         binding.media.visibility = View.GONE
                     }
-                    binding.txtPickupLocation.text= it.data?.shopManagement?.let { it1 ->
+                    binding.storeName.text= it.data?.shopManagement?.let { it1 ->
                         getAllAddress(
                             it1
                         )
@@ -87,13 +87,13 @@ class DirectOrderSummaryFragment: Fragment(R.layout.fragment_direct_order_summar
             }
         }
 
-        binding.back.setOnClickListener {
-            findNavController().popBackStack(R.id.titleScreen, false)
-        }
-
-        binding.helpBtn.setOnClickListener {
-            findNavController().navigate(OrderSummaryFragmentDirections.orderToCustomerSupport())
-        }
+//        binding.back.setOnClickListener {
+//            findNavController().popBackStack(R.id.titleScreen, false)
+//        }
+//
+//        binding.helpBtn.setOnClickListener {
+//            findNavController().navigate(OrderSummaryFragmentDirections.orderToCustomerSupport())
+//        }
     }
 
     private fun setAdaper() {
