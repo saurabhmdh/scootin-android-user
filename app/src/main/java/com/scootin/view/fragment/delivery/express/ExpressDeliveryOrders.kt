@@ -114,13 +114,13 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
             alertDialog?.show()
         }
 
-        binding.appCompatImageView6.setOnClickListener {
+        binding.mediaImage.setOnClickListener {
             onClickOfUploadMedia()
         }
 
-        binding.back.setOnClickListener {
-            findNavController().popBackStack(R.id.titleScreen, false)
-        }
+//        binding.back.setOnClickListener {
+//            findNavController().popBackStack(R.id.titleScreen, false)
+//        }
 
         //Lets load all address if there is no address then ask to add, incase there is
         viewModel.loadAllAddress().observe(viewLifecycleOwner) {

@@ -57,21 +57,21 @@ class ExpressDeliveryCategoryFragment : Fragment(R.layout.fragment_express_deliv
         })
     }
 
-//    private fun setupListener() {
-//        binding.back.setOnClickListener { findNavController().popBackStack() }
-//
-//        binding.btnDone.setOnClickListener {
-//            val position = binding.radioGroup.getCheckedRadioButtonPosition()
-//            val selectedView = binding.radioGroup.get(position)
-//
+    private fun setupListener() {
+       // binding.back.setOnClickListener { findNavController().popBackStack() }
+
+        binding.btnDone.setOnClickListener {
+
+            val selectedView = "252"
+
 //            Timber.i("selected view ${selectedView.tag}")
-//            viewModel.updateMainCategory(selectedView.tag as String?)
-//
-//
-//            //Move to next screen
-//            findNavController().navigate(ExpressDeliveryCategoryFragmentDirections.actionExpressDeliveryCategoryFragmentToExpressDelivery())
-//        }
-//}
+            viewModel.updateMainCategory(selectedView as String?)
+
+
+            //Move to next screen
+            findNavController().navigate(ExpressDeliveryCategoryFragmentDirections.actionExpressDeliveryCategoryFragmentToExpressDelivery())
+        }
+}
 private fun setAdaper() {
     expressCategoryAdapter =
         ExpressCategoryAdapter(

@@ -78,7 +78,7 @@
                         android:textColor="#000"
                         android:layout_marginStart="5dp"
                         android:textStyle="bold"
-                        android:text="@{data.id}" />
+                        setToIntText="@{data.id}" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txt_order_date"

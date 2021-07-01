@@ -12,7 +12,6 @@ import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
 import com.scootin.R
 import com.scootin.databinding.FragmentExpressDeliveryBinding
-import com.scootin.databinding.FragmentExpressDeliveryCategoryBinding
 import com.scootin.databinding.FragmentExpressDeliveryShopSelectBinding
 import com.scootin.databinding.FragmentGroceryDeliveryShopSelectBinding
 import com.scootin.network.AppExecutors
