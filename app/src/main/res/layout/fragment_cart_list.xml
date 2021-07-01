@@ -89,15 +89,21 @@
                 app:layout_constraintStart_toEndOf="@+id/total"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/checkout"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="25dp"
                 android:gravity="center"
+                android:text="Checkout"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montserrat_bold"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/ic_checkout" />
+                android:background="@drawable/rounded_rectancle_2dp"
+                android:backgroundTint="#E90000"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

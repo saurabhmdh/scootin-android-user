@@ -66,13 +66,13 @@ class OrderSummaryFragment : BaseFragment (R.layout.fragment_order_summary) {
 
                     binding.data = convertToVo(it.data)
 
-                    binding.txtPickupLocation.text = getAllAddress(it.data.orderInventoryDetailsList)
+                    binding.storeName.text = getAllAddress(it.data.orderInventoryDetailsList)
                     orderSummaryAdapter.submitList(it.data.orderInventoryDetailsList)
 
                     if (it.data.orderDetails.first().paymentDetails.paymentStatus=="COMPLETED"){
-                        binding.paymentStatus.setText("Paid Online")
+                        binding.paymentMode.setText("Paid Online")
                     } else{
-                        binding.paymentStatus.setText("Pay on Delivery")
+                        binding.paymentMode.setText("Pay on Delivery")
                     }
                 }
                 Status.ERROR -> {
@@ -84,12 +84,12 @@ class OrderSummaryFragment : BaseFragment (R.layout.fragment_order_summary) {
             }
         }
 
-        binding.back.setOnClickListener {
-            findNavController().popBackStack(R.id.cart, false)
-        }
-        binding.helpBtn.setOnClickListener {
-            findNavController().navigate(OrderSummaryFragmentDirections.orderToCustomerSupport())
-        }
+//        binding.back.setOnClickListener {
+//            findNavController().popBackStack(R.id.cart, false)
+//        }
+//        binding.helpBtn.setOnClickListener {
+//            findNavController().navigate(OrderSummaryFragmentDirections.orderToCustomerSupport())
+//        }
     }
 
     private fun convertToVo(data: MultipleOrdersDetails): MultiOrderVo {
