@@ -132,23 +132,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3" />
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <LinearLayout
         android:id="@+id/dob"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/bg_rectangle"
-        android:backgroundTint="#E7F3FB"
-        android:fontFamily="@font/montserrat_medium"
-        android:hint="@string/date_of_birth_dd_mm_yyyy"
-        android:padding="@dimen/dimen_10dp"
-        android:textSize="16sp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/full_name" />
+        app:layout_constraintTop_toBottomOf="@+id/full_name"
+        android:orientation="vertical"
+        android:background="@drawable/bg_rectangle"
+        android:backgroundTint="#E7F3FB"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date of Birth"
+            android:textSize="16sp"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_margin="8dp"/>
+
+
+        <DatePicker
+            android:id="@+id/date_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner"
+            android:textSize="16sp" />
+
+    </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_gender"
