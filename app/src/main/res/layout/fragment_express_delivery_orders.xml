@@ -2,43 +2,25 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/ic_background"
     android:layout_height="match_parent">
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/expresslogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_ex_dlvr_card_on_store_page" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_back_arrow" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/store_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="@font/montserrat_regular"
         android:maxLines="1"
         android:text="Store Name"
         android:textSize="13sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_max_lines"
@@ -58,12 +40,11 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="178dp"
         android:layout_marginEnd="20dp"
         android:background="@color/text_color_primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/store_name" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -97,6 +78,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
+            android:background="@drawable/rounded_rectancle_2dp"
+            android:backgroundTint="@color/base_bg"
             android:layout_height="wrap_content">
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/searchSuggestion"
@@ -128,15 +111,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/add_item" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/appCompatImageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/or"
-        app:srcCompat="@drawable/ic_camera_button_express" />
+            <LinearLayout
+                android:id="@+id/uploadPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_rectangle"
+                android:backgroundTint="#008194"
+                android:padding="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/or" >
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    app:srcCompat="@drawable/ic_camera_icon"
+                    android:layout_marginStart="5dp"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/upload_photo_txt"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    app:fontFamily="@font/montserrat_bold"/>
+
+            </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/media_image"
@@ -145,18 +151,25 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appCompatImageView6"
+        app:layout_constraintTop_toBottomOf="@id/uploadPhoto"
         app:srcCompat="@drawable/ic_image_preview_box_express" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/txt_deliveringto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView6"
-        app:srcCompat="@drawable/ic_delivering_to" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/drop_address_text"
+                app:fontFamily="@font/montserrat_bold"
+                android:textColor="#000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Delivery Address"
+                android:padding="4dp"
+                android:background="@drawable/bg_rectangle"
+                android:backgroundTint="@color/base_bg"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/uploadPhoto" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/dropAddress"
@@ -165,8 +178,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="8dp"
-        android:drawablePadding="5dp"
-        android:drawableStart="@drawable/ic_location_icon"
         android:text="@string/edittxt_hint_citywide"
         android:fontFamily="@font/montserrat_regular"
         android:textColor="@android:color/black"
@@ -174,7 +185,7 @@
         android:maxLines="2"
         app:layout_constraintEnd_toStartOf="@+id/media_image"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_deliveringto" />
+        app:layout_constraintTop_toBottomOf="@+id/drop_address_text" />
 
     <View
         android:id="@+id/imageView2"
@@ -201,16 +212,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dropAddress" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/placeOrder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="45dp"
-        android:padding="20dp"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/ic_place_order"
-        app:layout_constraintTop_toBottomOf="@id/mobile_no"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/placeOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_rectangle"
+                android:backgroundTint="#E90000"
+                android:fontFamily="@font/montserrat_bold"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:src="@drawable/selector_place_order_button"
+                android:text="Place Order"
+                android:textColor="#fff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/media_image" />
             
 
 </androidx.constraintlayout.widget.ConstraintLayout>

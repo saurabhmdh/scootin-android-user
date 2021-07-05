@@ -12,6 +12,7 @@ import androidx.lifecycle.observe
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.request.RequestOptions
 import com.scootin.R
 import com.scootin.databinding.FragmentEssentialShopItemListBinding
@@ -55,6 +56,7 @@ class SweetShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEssentialShopItemListBinding.bind(view)
+        binding.storeList.layoutManager = GridLayoutManager(context,2)
         updateUI()
         updateListeners()
         viewModel.loadCount()
