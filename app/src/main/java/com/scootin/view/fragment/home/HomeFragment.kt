@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
@@ -34,6 +35,7 @@ import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.util.constants.AppConstants
 import com.scootin.util.ui.UtilPermission
 import com.scootin.view.activity.MainActivity
+import com.scootin.view.adapter.PromoOfferAdapter
 import com.scootin.view.vo.ServiceArea
 import com.scootin.viewmodel.home.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,6 +47,8 @@ import javax.inject.Inject
 class HomeFragment :  Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeFragmentViewModel by viewModels()
+    private var promoImagesList= mutableListOf<Int>()
+    private var promoImagesList2= mutableListOf<Int>()
 
     private lateinit var homeCategoryList: List<HomeResponseCategory>
 
@@ -61,6 +65,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         Timber.i("height =  ${binding.express.height} Width = ${binding.express.width}")
         updateListeners()
         checkForMap()
+        setUpViewPager()
 
         //Let me try firebase integration..
         FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener {
@@ -102,6 +107,16 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
             findNavController().navigate(HomeFragmentDirections.homeToServiceArea())
         }
 
+    }
+
+    private fun setUpViewPager(){
+        makeList()
+        binding.viewPager.adapter=PromoOfferAdapter(promoImagesList)
+        binding.viewPager.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+        binding.indicator.setViewPager(binding.viewPager)
+        binding.viewPager2.adapter=PromoOfferAdapter(promoImagesList2)
+        binding.viewPager2.orientation=ViewPager2.ORIENTATION_HORIZONTAL
+        binding.indicator2.setViewPager(binding.viewPager2)
     }
 
     private fun doNetworkCall() {
@@ -289,5 +304,21 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         } else {
             UtilPermission.requestMapPermission(this)
         }
+    }
+    private fun addToList(img:Int){
+        promoImagesList.add(img)
+    }
+    private fun addToList2(img:Int){
+        promoImagesList2.add(img)
+    }
+    private fun makeList(){
+        addToList(R.drawable.promo_example)
+        addToList(R.drawable.promo_example)
+        addToList(R.drawable.promo_example)
+        addToList(R.drawable.promo_example)
+        addToList2(R.drawable.promo_example)
+        addToList2(R.drawable.promo_example)
+        addToList2(R.drawable.promo_example)
+        addToList2(R.drawable.promo_example)
     }
 }
