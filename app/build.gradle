@@ -141,6 +141,7 @@ dependencies {
     implementation deps.navigation.navigation_ui_ktx
     implementation deps.navigation.fragment_ktx
     implementation deps.lottie
+    implementation deps.support.circular_indicator
 
     implementation deps.razoy_pay
     implementation deps.image_picker

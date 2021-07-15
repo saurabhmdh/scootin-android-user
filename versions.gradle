@@ -134,6 +134,7 @@ support.support_preference_fragment = "androidx.preference:preference-ktx:$versi
 support.palette = "androidx.palette:palette-ktx:$versions.support_palette"
 support.viewpager2 = "androidx.viewpager2:viewpager2:$versions.view_pager2"
 support.fragment_ktx = "androidx.fragment:fragment-ktx:$versions.fragment_version"
+support.circular_indicator="me.relex:circleindicator:2.1.6"
 
 support.activity_ktx = "androidx.activity:activity-ktx:$versions.support_activity_ktx"
 
