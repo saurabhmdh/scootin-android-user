@@ -37,6 +37,7 @@ class MedicinesDeliveryFragment : Fragment(R.layout.fragment_medicines_delivery)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
         binding = FragmentMedicinesDeliveryBinding.bind(view)
         binding.storeList.layoutManager = GridLayoutManager(context,2)
         updateUI()
