@@ -25,9 +25,11 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
-            android:layout_width="104dp"
-            android:layout_height="104dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -56,19 +58,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:minLines="1"
             android:fontFamily="@font/montserrat_regular"
-            android:text="@{data.title}"
-            android:textColor="#505050"
+            android:textColor="#000"
             android:textSize="12sp"
             android:textStyle="bold"
-            android:maxLength="60"
-            android:ellipsize="end"
+            android:maxLines="2"
             android:lines="2"
+            android:maxLength="60"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/store_name" />
+            app:layout_constraintTop_toBottomOf="@id/store_name"/>
 
 
         <androidx.appcompat.widget.AppCompatTextView
