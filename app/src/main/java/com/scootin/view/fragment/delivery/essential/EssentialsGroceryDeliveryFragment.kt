@@ -184,6 +184,20 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
 
     private fun setupSubCategoryListener(searchBox: CustomSearchView) {
 
+        binding.allEssentials.setOnClickListener {
+            if (binding.allEssentials.isSelected) {
+                return@setOnClickListener
+            }
+            clearPagingData()
+            Timber.i("Selected.. ${it.tag as String?}")
+            viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
+            binding.allEssentials.isSelected = true
+            binding.grocery.isSelected = false
+            binding.breakfast.isSelected = false
+            binding.household.isSelected = false
+            binding.hygiene.isSelected = false
+        }
+
         binding.grocery.setOnClickListener {
             if (binding.grocery.isSelected) {
                 return@setOnClickListener
@@ -195,6 +209,7 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
             binding.breakfast.isSelected = false
             binding.household.isSelected = false
             binding.hygiene.isSelected = false
+            binding.allEssentials.isSelected = false
         }
 
         binding.breakfast.setOnClickListener {
@@ -208,7 +223,7 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
             binding.breakfast.isSelected = true
             binding.household.isSelected = false
             binding.hygiene.isSelected = false
-
+            binding.allEssentials.isSelected = false
         }
         binding.household.setOnClickListener {
             if (binding.household.isSelected) {
@@ -221,6 +236,7 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
             binding.breakfast.isSelected = false
             binding.household.isSelected = true
             binding.hygiene.isSelected = false
+            binding.allEssentials.isSelected = false
         }
 
         binding.hygiene.setOnClickListener {
@@ -234,6 +250,7 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
             binding.breakfast.isSelected = false
             binding.household.isSelected = false
             binding.hygiene.isSelected = true
+            binding.allEssentials.isSelected = false
         }
     }
 

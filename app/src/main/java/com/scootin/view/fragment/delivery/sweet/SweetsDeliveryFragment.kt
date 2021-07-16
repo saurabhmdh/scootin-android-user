@@ -184,6 +184,19 @@ class SweetsDeliveryFragment : BaseFragment(R.layout.fragment_sweets_delivery) {
 
     private fun setupSubCategoryListener(searchBox: CustomSearchView) {
 
+        binding.allCategories.setOnClickListener {
+            if (binding.allCategories.isSelected) {
+                return@setOnClickListener
+            }
+            clearPagingData()
+            Timber.i("Selected.. ${it.tag as String?}")
+            viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
+            binding.allCategories.isSelected = true
+            binding.sweets.isSelected = false
+            binding.snacks.isSelected = false
+            binding.cake.isSelected = false
+        }
+
         binding.sweets.setOnClickListener {
             if (binding.sweets.isSelected) {
                 return@setOnClickListener
@@ -194,6 +207,7 @@ class SweetsDeliveryFragment : BaseFragment(R.layout.fragment_sweets_delivery) {
             binding.sweets.isSelected = true
             binding.snacks.isSelected = false
             binding.cake.isSelected = false
+            binding.allCategories.isSelected = false
         }
 
         binding.snacks.setOnClickListener {
@@ -206,6 +220,7 @@ class SweetsDeliveryFragment : BaseFragment(R.layout.fragment_sweets_delivery) {
             binding.sweets.isSelected = false
             binding.snacks.isSelected = true
             binding.cake.isSelected = false
+            binding.allCategories.isSelected = false
 
         }
         binding.cake.setOnClickListener {
@@ -218,6 +233,7 @@ class SweetsDeliveryFragment : BaseFragment(R.layout.fragment_sweets_delivery) {
             binding.sweets.isSelected = false
             binding.snacks.isSelected = false
             binding.cake.isSelected = true
+            binding.allCategories.isSelected = false
         }
 
     }

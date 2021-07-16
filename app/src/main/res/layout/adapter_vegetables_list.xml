@@ -34,11 +34,29 @@
             app:setImage="@{data.productImage}" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/name"
+            android:id="@+id/store_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="@{data.shopName}"
+            android:textAllCaps="true"
+            android:maxLength="1"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/montserrat_regular"
             android:text="@{data.title}"
@@ -46,10 +64,13 @@
             android:textColor="#a9a9a9"
             android:textSize="12sp"
             android:textStyle="bold"
+            android:minLines="2"
+            android:lines="2"
+            android:maxLines="2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image" />
+            app:layout_constraintTop_toBottomOf="@id/store_name" />
 
 
         <androidx.appcompat.widget.AppCompatTextView

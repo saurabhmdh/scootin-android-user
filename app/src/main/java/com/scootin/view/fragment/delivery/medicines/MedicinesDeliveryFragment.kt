@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.scootin.R
 import com.scootin.databinding.FragmentMedicinesDeliveryBinding
 import com.scootin.extensions.updateVisibility
@@ -37,7 +38,7 @@ class MedicinesDeliveryFragment : Fragment(R.layout.fragment_medicines_delivery)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMedicinesDeliveryBinding.bind(view)
-
+        binding.storeList.layoutManager = GridLayoutManager(context,2)
         updateUI()
         binding.storeList.updateVisibility(true)
 

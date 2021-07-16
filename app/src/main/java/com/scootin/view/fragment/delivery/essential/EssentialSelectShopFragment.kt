@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import com.scootin.R
 import com.scootin.databinding.FragmentGroceryDeliveryShopSelectBinding
 import com.scootin.network.AppExecutors
@@ -36,6 +37,7 @@ class EssentialSelectShopFragment : BaseFragment(R.layout.fragment_grocery_deliv
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentGroceryDeliveryShopSelectBinding.bind(view)
+        binding.storeList.layoutManager = GridLayoutManager(context,2)
         updateUI()
         updateListeners()
 

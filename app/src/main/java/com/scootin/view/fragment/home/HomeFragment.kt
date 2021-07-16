@@ -308,6 +308,8 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         addToList(R.drawable.promo_example)
         addToList(R.drawable.promo_example)
         addToList(R.drawable.promo_example)
+        addToList(R.drawable.promo_example)
+        addToList2(R.drawable.promo_example)
         addToList2(R.drawable.promo_example)
         addToList2(R.drawable.promo_example)
         addToList2(R.drawable.promo_example)
