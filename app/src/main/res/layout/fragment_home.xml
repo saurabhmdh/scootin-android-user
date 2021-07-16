@@ -1,115 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <me.relex.circleindicator.CircleIndicator3
-        android:id="@+id/indicator"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        app:ci_drawable="@drawable/red_ellipse"
-        app:ci_drawable_unselected="@drawable/grey_ellipse"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewPager" />
+            <me.relex.circleindicator.CircleIndicator3
+                android:id="@+id/indicator"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:ci_drawable="@drawable/red_ellipse"
+                app:ci_drawable_unselected="@drawable/grey_ellipse"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/viewPager" />
 
-    <LinearLayout
-        android:id="@+id/express"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/bg_express_delivery"
-        android:orientation="vertical"
-        android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/city_wide_delivery"
-        app:layout_constraintTop_toBottomOf="@id/indicator">
+            <LinearLayout
+                android:id="@+id/express"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/bg_express_delivery"
+                android:orientation="vertical"
+                android:padding="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/city_wide_delivery"
+                app:layout_constraintTop_toBottomOf="@id/indicator">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/montserrat_medium"
-            android:maxLines="2"
-            android:text="Express Delivery"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:maxLines="2"
+                    android:text="Express Delivery"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="60dp"
-            android:fontFamily="@font/montserrat_medium"
-            android:maxLines="2"
-            android:text="Upto 10 items Within 45 Min"
-            android:textColor="@color/white"
-            android:textSize="12sp" />
-    </LinearLayout>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="60dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:maxLines="2"
+                    android:text="Upto 10 items Within 45 Min"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/city_wide_delivery"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/bg_city_wide_delivery"
-        android:orientation="vertical"
-        android:padding="5dp"
-        app:layout_constraintEnd_toStartOf="@+id/express"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/indicator">
+            <LinearLayout
+                android:id="@+id/city_wide_delivery"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_city_wide_delivery"
+                android:orientation="vertical"
+                android:padding="5dp"
+                app:layout_constraintEnd_toStartOf="@+id/express"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/indicator">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/montserrat_medium"
-            android:maxLines="2"
-            android:text="Citywide Delivery"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:maxLines="2"
+                    android:text="Citywide Delivery"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/montserrat_medium"
-            android:maxLines="2"
-            android:text="Anything-Anywhere within city limits"
-            android:textColor="@color/white"
-            android:textSize="12sp" />
-    </LinearLayout>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:maxLines="2"
+                    android:text="Anything-Anywhere within city limits"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/essentials_grocery"
@@ -118,10 +118,10 @@
                 android:layout_marginStart="@dimen/home_screen_margin_start"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="24dp"
-                android:tag="252"
                 android:background="@drawable/bg_rectangle"
                 android:orientation="vertical"
                 android:padding="5dp"
+                android:tag="252"
                 app:layout_constraintEnd_toStartOf="@+id/vegetables_fruits"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/express">
@@ -151,10 +151,10 @@
                 android:layout_height="100dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="24dp"
-                android:tag="254"
                 android:background="@drawable/bg_rectangle"
                 android:orientation="vertical"
                 android:padding="5dp"
+                android:tag="254"
                 app:layout_constraintEnd_toStartOf="@+id/sweet_snacks"
                 app:layout_constraintStart_toEndOf="@id/essentials_grocery"
                 app:layout_constraintTop_toBottomOf="@id/express">
@@ -184,10 +184,10 @@
                 android:layout_height="100dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="24dp"
-                android:tag="253"
                 android:background="@drawable/bg_rectangle"
                 android:orientation="vertical"
                 android:padding="5dp"
+                android:tag="253"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/vegetables_fruits"
                 app:layout_constraintTop_toBottomOf="@id/express">
@@ -216,10 +216,10 @@
                 android:layout_height="100dp"
                 android:layout_marginStart="@dimen/home_screen_margin_start"
                 android:layout_marginTop="20dp"
-                android:tag="255"
                 android:background="@drawable/bg_rectangle"
                 android:orientation="vertical"
                 android:padding="5dp"
+                android:tag="255"
                 app:layout_constraintEnd_toStartOf="@+id/stationery"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/essentials_grocery">
@@ -249,10 +249,10 @@
                 android:layout_height="100dp"
                 android:layout_marginStart="@dimen/home_screen_margin_start"
                 android:layout_marginTop="20dp"
-                android:tag="256"
                 android:background="@drawable/bg_rectangle"
                 android:orientation="vertical"
                 android:padding="5dp"
+                android:tag="256"
                 app:layout_constraintEnd_toStartOf="@+id/clothing"
                 app:layout_constraintStart_toEndOf="@id/medicines"
                 app:layout_constraintTop_toBottomOf="@id/essentials_grocery">
@@ -283,10 +283,10 @@
                 android:layout_marginStart="@dimen/home_screen_margin_start"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="24dp"
-                android:tag="257"
                 android:background="@drawable/bg_rectangle"
                 android:orientation="vertical"
                 android:padding="5dp"
+                android:tag="257"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/stationery"
                 app:layout_constraintTop_toBottomOf="@id/essentials_grocery">
@@ -310,28 +310,28 @@
 
             </RelativeLayout>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager2"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clothing" />
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager2"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/clothing" />
 
-    <me.relex.circleindicator.CircleIndicator3
-        android:id="@+id/indicator2"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        app:ci_drawable="@drawable/red_ellipse"
-        app:ci_drawable_unselected="@drawable/grey_ellipse"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewPager2" />
+            <me.relex.circleindicator.CircleIndicator3
+                android:id="@+id/indicator2"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:ci_drawable="@drawable/red_ellipse"
+                app:ci_drawable_unselected="@drawable/grey_ellipse"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/viewPager2" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
