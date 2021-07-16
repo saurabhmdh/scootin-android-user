@@ -1,8 +1,13 @@
 package com.scootin.view.fragment.delivery.stationary
 
+import android.content.Context
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.RadioButton
+import android.widget.RadioGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -10,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.scootin.R
 import com.scootin.databinding.FragmentStationaryDeliveryBinding
 import com.scootin.extensions.getCheckedRadioButtonPosition
@@ -24,6 +30,7 @@ import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.ProductSearchAdapter
 import com.scootin.view.adapter.ProductSearchPagingAdapter
 import com.scootin.view.adapter.ShopSearchAdapter
+import com.scootin.view.custom.CustomSearchView
 import com.scootin.view.fragment.delivery.essential.EssentialsGroceryDeliveryFragmentDirections
 import com.scootin.view.vo.ProductSearchVO
 import com.scootin.viewmodel.delivery.CategoriesViewModel
@@ -50,9 +57,33 @@ class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_deliver
         binding = FragmentStationaryDeliveryBinding.bind(view)
 
         updateUI()
-        updateListeners()
+        setHasOptionsMenu(true)
 
-        binding.radioGroup.setOnCheckedChangeListener { radioGroup, optionId ->
+    }
+    override fun onDestroyView() {
+        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+        imm?.hideSoftInputFromWindow(view?.windowToken, 0)
+        super.onDestroyView()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_search_fragment, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        val searchBox = menu.findItem(R.id.action_search).actionView.findViewById<CustomSearchView>(
+            R.id.search_box
+        )
+
+
+        val radioGroup = menu.findItem(R.id.action_radio_group).actionView.findViewById<RadioGroup>(
+            R.id.radioGroup
+        )
+
+        updateListeners(searchBox,radioGroup)
+
+        radioGroup.setOnCheckedChangeListener { radioGroup, optionId ->
             when (optionId) {
                 R.id.by_product -> {
                     binding.productList.updateVisibility(true)
@@ -66,21 +97,24 @@ class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_deliver
                 }
             }
         }
+
     }
+
     private fun updateUI() {
         setStoreAdapter()
         setProductAdapter()
     }
 
-    private fun updateListeners() {
+    private fun updateListeners(searchBox: CustomSearchView, radioGroup: RadioGroup) {
         //When the screen load lets load the data for empty screen
+        binding.productList.layoutManager = GridLayoutManager(context,2)
+        binding.storeList.layoutManager = GridLayoutManager(context,2)
         viewModel.doSearch("")
         viewModel.loadCount()
-
-        binding.searchBox.setOnQueryTextListener(
+        searchBox.setOnQueryTextListener(
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    when (binding.radioGroup.getCheckedRadioButtonPosition()) {
+                    when (radioGroup.getCheckedRadioButtonPosition()) {
                         0 -> {
                             query?.let {
                                 viewModel.doSearch(it)
@@ -105,7 +139,7 @@ class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_deliver
 
             }
         )
-        binding.back.setOnClickListener { findNavController().popBackStack() }
+       // binding.back.setOnClickListener { findNavController().popBackStack() }
 
         viewModel.shops.observe(viewLifecycleOwner) {response->
             lifecycleScope.launch {
