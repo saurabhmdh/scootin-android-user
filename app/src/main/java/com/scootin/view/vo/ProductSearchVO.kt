@@ -17,7 +17,8 @@ data class ProductSearchVO(
     val activeForOrder: Boolean,
     val productImage: String?,
     var displayQuantity: Int,
-    var inventoryTypes: List<String>?
+    var inventoryTypes: List<String>?,
+    var shopName:String
 ): Parcelable {
     constructor(network: SearchProductsByCategoryResponse) : this(
         network.id,
@@ -29,6 +30,7 @@ data class ProductSearchVO(
         network.shopManagement.shopActiveForOrders,
         network.productImage?.url,
         0,
-        network.inventoryTypes
+        network.inventoryTypes,
+        network.shopManagement.name
     )
 }
