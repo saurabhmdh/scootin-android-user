@@ -47,6 +47,8 @@ import javax.inject.Inject
 class HomeFragment :  Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeFragmentViewModel by viewModels()
+
+
     private var promoImagesList= mutableListOf<Int>()
     private var promoImagesList2= mutableListOf<Int>()
 
