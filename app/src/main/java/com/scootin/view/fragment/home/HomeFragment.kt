@@ -141,14 +141,14 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     }
 
 
-//    private fun isActiveCategory(tag: Any?): Boolean {
-//        if (!::homeCategoryList.isInitialized) {
-//            return true
-//        }
-//        val tagID = tag as String?
-//        val data = homeCategoryList.find { it.id == tagID?.toInt()}
-//        return data?.active == true && !data.deleted
-//    }
+    private fun isActiveCategory(tag: Any?): Boolean {
+        if (!::homeCategoryList.isInitialized) {
+            return true
+        }
+        val tagID = tag as String?
+        val data = homeCategoryList.find { it.id == tagID?.toInt()}
+        return data?.active == true && !data.deleted
+    }
 
     private fun showDisabledText() {
         Toast.makeText(context, R.string.category_disabled ,Toast.LENGTH_SHORT).show()
@@ -164,70 +164,60 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         }
 
         binding.essentialsGrocery.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.homeToEssential())
-//            if (isActiveCategory(it.tag)) {
-//                viewModel.updateMainCategory(it.tag as String?)
-//                findNavController().navigate(HomeFragmentDirections.homeToEssential())
-//            } else {
-//                showDisabledText()
-//            }
+            if (isActiveCategory(it.tag)) {
+                viewModel.updateMainCategory(it.tag as String?)
+                findNavController().navigate(HomeFragmentDirections.homeToEssential())
+            } else {
+                showDisabledText()
+            }
         }
 
         binding.stationery.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.homeToStationary())
-//            if (isActiveCategory(it.tag)) {
-//                viewModel.updateMainCategory(it.tag as String?)
-//                findNavController().navigate(HomeFragmentDirections.homeToStationary())
-//            } else {
-//                showDisabledText()
-//            }
+            if (isActiveCategory(it.tag)) {
+                viewModel.updateMainCategory(it.tag as String?)
+                findNavController().navigate(HomeFragmentDirections.homeToStationary())
+            } else {
+                showDisabledText()
+            }
         }
 
         binding.sweetSnacks.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.homeToSweets())
-//            if (isActiveCategory(it.tag)) {
-//                viewModel.updateMainCategory(it.tag as String?)
-//                findNavController().navigate(HomeFragmentDirections.homeToSweets())
-//            } else {
-//                showDisabledText()
-//            }
+            if (isActiveCategory(it.tag)) {
+                viewModel.updateMainCategory(it.tag as String?)
+                findNavController().navigate(HomeFragmentDirections.homeToSweets())
+            } else {
+                showDisabledText()
+            }
         }
 
 
         binding.medicines.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.homeToMedicines())
-//            if (isActiveCategory(it.tag)) {
-//                viewModel.updateMainCategory(it.tag as String?)
-//                findNavController().navigate(HomeFragmentDirections.homeToMedicines())
-//            } else {
-//                showDisabledText()
-//            }
+            if (isActiveCategory(it.tag)) {
+                viewModel.updateMainCategory(it.tag as String?)
+                findNavController().navigate(HomeFragmentDirections.homeToMedicines())
+            } else {
+                showDisabledText()
+            }
         }
 
         binding.clothing.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.homeToClothes())
-//            if (isActiveCategory(it.tag)) {
-//                viewModel.updateMainCategory(it.tag as String?)
-//                findNavController().navigate(HomeFragmentDirections.homeToClothes())
-//            } else {
-//                showDisabledText()
-//            }
+            if (isActiveCategory(it.tag)) {
+                viewModel.updateMainCategory(it.tag as String?)
+                findNavController().navigate(HomeFragmentDirections.homeToClothes())
+            } else {
+                showDisabledText()
+            }
         }
 
 
         binding.vegetablesFruits.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.homeToVeg())
-//            if (isActiveCategory(it.tag)) {
-//                viewModel.updateMainCategory(it.tag as String?)
-//                findNavController().navigate(HomeFragmentDirections.homeToVeg())
-//            } else {
-//                showDisabledText()
-//            }
+            if (isActiveCategory(it.tag)) {
+                viewModel.updateMainCategory(it.tag as String?)
+                findNavController().navigate(HomeFragmentDirections.homeToVeg())
+            } else {
+                showDisabledText()
+            }
         }
-
-
-
-
 
         viewModel.getCartCount(AppHeaders.userID).observe(viewLifecycleOwner) {
             if (it.isSuccessful) {
