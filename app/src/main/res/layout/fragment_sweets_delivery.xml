@@ -10,12 +10,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="16dp"
         android:padding="@dimen/dimen_8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/all_categories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:tag="258"
+            app:srcCompat="@drawable/selected_subcategory_all_categories" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/sweets"

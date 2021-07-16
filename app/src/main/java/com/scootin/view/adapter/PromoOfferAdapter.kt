@@ -26,7 +26,7 @@ class PromoOfferAdapter(private var img:List<Int>):
     }
 
     override fun getItemCount(): Int {
-    return img.size
+    return 5
     }
 
 }
