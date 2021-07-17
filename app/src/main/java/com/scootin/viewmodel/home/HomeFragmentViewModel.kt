@@ -2,8 +2,10 @@ package com.scootin.viewmodel.home
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import com.google.android.libraries.places.api.model.Place
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -15,6 +17,7 @@ import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.RequestFCM
 import com.scootin.repository.CartRepository
 import com.scootin.repository.CategoryRepository
+import com.scootin.repository.DealRepository
 import com.scootin.repository.UserRepository
 import com.scootin.util.constants.AppConstants
 import com.scootin.view.vo.ServiceArea
@@ -30,6 +33,7 @@ internal constructor(
     private val cartRepository: CartRepository,
     private val userRepository: UserRepository,
     private val locationDao: LocationDao,
+    private val dealRepository: DealRepository
 ) : ObservableViewModel(), CoroutineScope {
 
     val serviceArea = MutableLiveData<ServiceArea>()
@@ -122,6 +126,9 @@ internal constructor(
             locationDao.insert(addressComponent)
         }
     }
+
+    //For deals
+    fun getAllDeals(type: String) = dealRepository.getAllDeals(type).cachedIn(viewModelScope).asLiveData()
 
     override val coroutineContext: CoroutineContext
         get() = viewModelScope.coroutineContext + Dispatchers.IO

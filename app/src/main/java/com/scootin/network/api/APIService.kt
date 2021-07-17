@@ -6,6 +6,7 @@ import com.scootin.network.response.*
 import com.scootin.network.response.cart.CartListResponseItem
 import com.scootin.network.response.cart.UserCartResponse
 import com.scootin.network.response.citywide.CityWideOrderResponse
+import com.scootin.network.response.home.DealResponse
 import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.network.response.home.ResponseServiceArea
 import com.scootin.network.response.inorder.InOrderDetail
@@ -374,4 +375,13 @@ interface APIService {
         @Path("orderId") orderId: String,
         @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<OrderDetail>
+
+
+    @POST("/deals/get-all")
+    suspend fun getDeals(
+        @Body requestDeal: RequestDeals,
+        @Query("page") offset: Int = 0,
+        @Query("size") limit: Int = 10,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<List<DealResponse>>
 }

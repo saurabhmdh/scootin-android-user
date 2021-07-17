@@ -11,14 +11,12 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
@@ -33,12 +31,14 @@ import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.response.home.HomeResponseCategory
 import com.scootin.util.constants.AppConstants
+import com.scootin.util.fragment.autoCleared
 import com.scootin.util.ui.UtilPermission
 import com.scootin.view.activity.MainActivity
-import com.scootin.view.adapter.PromoOfferAdapter
+import com.scootin.view.adapter.DealAdapter
 import com.scootin.view.vo.ServiceArea
 import com.scootin.viewmodel.home.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -48,9 +48,8 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeFragmentViewModel by viewModels()
 
-
-    private var promoImagesList= mutableListOf<Int>()
-    private var promoImagesList2= mutableListOf<Int>()
+    private var headerDealAdapter by autoCleared<DealAdapter>()
+    private var footerDealAdapter by autoCleared<DealAdapter>()
 
     private lateinit var homeCategoryList: List<HomeResponseCategory>
 
@@ -63,11 +62,10 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
-        setHasOptionsMenu(true)
-        Timber.i("height =  ${binding.express.height} Width = ${binding.express.width}")
+
         updateListeners()
         checkForMap()
-        setUpViewPager()
+        setupRecycledView()
 
         //Let me try firebase integration..
         FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener {
@@ -111,14 +109,16 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
 
     }
 
-    private fun setUpViewPager(){
-        makeList()
-        binding.viewPager.adapter=PromoOfferAdapter(promoImagesList)
-        binding.viewPager.orientation=ViewPager2.ORIENTATION_HORIZONTAL
-        binding.indicator.setViewPager(binding.viewPager)
-        binding.viewPager2.adapter=PromoOfferAdapter(promoImagesList2)
-        binding.viewPager2.orientation=ViewPager2.ORIENTATION_HORIZONTAL
-        binding.indicator2.setViewPager(binding.viewPager2)
+    private fun setupRecycledView() {
+        headerDealAdapter = DealAdapter()
+        footerDealAdapter = DealAdapter()
+
+        binding.headerDeals.apply {
+            adapter = headerDealAdapter
+        }
+        binding.footerDeals.apply {
+            adapter = footerDealAdapter
+        }
     }
 
     private fun doNetworkCall() {
@@ -226,6 +226,19 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
                 activity?.setupBadging(result.orZero())
             }
         }
+
+
+        viewModel.getAllDeals("HEADER").observe(viewLifecycleOwner) {
+            lifecycleScope.launch {
+                headerDealAdapter.submitData(it)
+            }
+        }
+
+        viewModel.getAllDeals("FOOTER").observe(viewLifecycleOwner) {
+            lifecycleScope.launch {
+                footerDealAdapter.submitData(it)
+            }
+        }
     }
 
 
@@ -297,22 +310,5 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
             UtilPermission.requestMapPermission(this)
         }
     }
-    private fun addToList(img:Int){
-        promoImagesList.add(img)
-    }
-    private fun addToList2(img:Int){
-        promoImagesList2.add(img)
-    }
-    private fun makeList(){
-        addToList(R.drawable.promo_example)
-        addToList(R.drawable.promo_example)
-        addToList(R.drawable.promo_example)
-        addToList(R.drawable.promo_example)
-        addToList(R.drawable.promo_example)
-        addToList2(R.drawable.promo_example)
-        addToList2(R.drawable.promo_example)
-        addToList2(R.drawable.promo_example)
-        addToList2(R.drawable.promo_example)
-        addToList2(R.drawable.promo_example)
-    }
+
 }
