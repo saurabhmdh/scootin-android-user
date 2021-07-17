@@ -16,6 +16,7 @@
             android:layout_marginEnd="4dp"
             android:background="@null"
             android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/operation2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -32,8 +33,9 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/decrement2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
                 android:layout_marginTop="3dp"
                 app:srcCompat="@drawable/ic_minus_bttn" />
 
@@ -41,18 +43,19 @@
                 android:id="@+id/count2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:fontFamily="@font/montserrat_regular"
                 android:paddingStart="2dp"
                 android:paddingEnd="2dp"
-                android:layout_gravity="center_vertical"
                 android:text="0"
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/increment2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
                 android:layout_marginTop="3dp"
                 app:srcCompat="@drawable/ic_plus_bttn" />
         </LinearLayout>
