@@ -22,10 +22,10 @@
             android:text="By Product"
             android:textSize="12sp"
             android:textStyle="bold"
-            android:textColor="#808080"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:buttonTint="#808080"
+            android:buttonTint="@color/white"
             android:checked="true"/>
 
         <RadioButton
@@ -33,8 +33,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_regular"
-            android:buttonTint="#808080"
-            android:textColor="#808080"
+            android:buttonTint="@color/white"
+            android:textColor="@color/white"
             android:selectAllOnFocus="false"
             android:text="By Store"
             android:textStyle="bold"
