@@ -11,28 +11,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/header_deals"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="20dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <me.relex.circleindicator.CircleIndicator3
-                android:id="@+id/indicator"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                app:ci_drawable="@drawable/red_ellipse"
-                app:ci_drawable_unselected="@drawable/grey_ellipse"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/viewPager" />
 
             <LinearLayout
                 android:id="@+id/express"
@@ -46,7 +36,7 @@
                 android:padding="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/city_wide_delivery"
-                app:layout_constraintTop_toBottomOf="@id/indicator">
+                app:layout_constraintTop_toBottomOf="@id/header_deals">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
@@ -85,7 +75,7 @@
                 android:padding="5dp"
                 app:layout_constraintEnd_toStartOf="@+id/express"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/indicator">
+                app:layout_constraintTop_toBottomOf="@id/header_deals">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
@@ -310,28 +300,18 @@
 
             </RelativeLayout>
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager2"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/footer_deals"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/clothing" />
-
-            <me.relex.circleindicator.CircleIndicator3
-                android:id="@+id/indicator2"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                app:ci_drawable="@drawable/red_ellipse"
-                app:ci_drawable_unselected="@drawable/grey_ellipse"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/viewPager2" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
