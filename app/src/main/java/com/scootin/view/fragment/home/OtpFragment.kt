@@ -47,9 +47,7 @@ class OtpFragment: BaseFragment(R.layout.fragment_send_otp) {
         binding.back.setOnClickListener {
             findNavController().popBackStack()
         }
-        binding.txtEdit.setOnClickListener {
-            findNavController().popBackStack()
-        }
+
         viewModel.loginComplete.observe(viewLifecycleOwner) { networkResponse ->
             when (networkResponse?.status) {
                 Status.LOADING -> {

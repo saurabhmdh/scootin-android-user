@@ -33,6 +33,9 @@ class UserDetailFragment: BaseFragment(R.layout.fragment_user_detail) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentUserDetailBinding.bind(view)
         updateUI()
+        binding.txtEdit.setOnClickListener {
+            findNavController().popBackStack()
+        }
         binding.mobile.setText(mobile)
         binding.btnSendOtp.setOnClickListener {
            findNavController().navigate(UserDetailFragmentDirections.actionUserDetailToOtp(mobile))
