@@ -236,7 +236,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
 
         viewModel.getAllDeals("FOOTER").observe(viewLifecycleOwner) {
             lifecycleScope.launch {
-                headerDealAdapter.submitData(it)
+                footerDealAdapter.submitData(it)
             }
         }
     }
@@ -310,22 +310,5 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
             UtilPermission.requestMapPermission(this)
         }
     }
-    private fun addToList(img:Int){
-        promoImagesList.add(img)
-    }
-    private fun addToList2(img:Int){
-        promoImagesList2.add(img)
-    }
-    private fun makeList(){
-        addToList(R.drawable.promo_example)
-        addToList(R.drawable.promo_example)
-        addToList(R.drawable.promo_example)
-        addToList(R.drawable.promo_example)
-        addToList(R.drawable.promo_example)
-        addToList2(R.drawable.promo_example)
-        addToList2(R.drawable.promo_example)
-        addToList2(R.drawable.promo_example)
-        addToList2(R.drawable.promo_example)
-        addToList2(R.drawable.promo_example)
-    }
+
 }
