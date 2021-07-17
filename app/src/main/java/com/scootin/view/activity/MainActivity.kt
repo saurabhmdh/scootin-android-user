@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), PaymentResultListener {
             setContentView(it.root)
         }
 
-        setSupportActionBar(binding.toolbar)
+//        setSupportActionBar(binding.toolbar)
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         } // Else, need to wait for onRestoreInstanceState
