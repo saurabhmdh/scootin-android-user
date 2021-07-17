@@ -55,10 +55,18 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginEnd="60dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:maxLines="2"
-                    android:text="Upto 10 items Within 45 Min"
+                    android:text="Upto 10 items"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:maxLines="2"
+                    android:text="Within 45 min"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -96,7 +104,16 @@
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/montserrat_medium"
                     android:maxLines="2"
-                    android:text="Anything-Anywhere within city limits"
+                    android:text="Anything-Anywhere "
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:maxLines="2"
+                    android:text="within city limits"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
             </LinearLayout>

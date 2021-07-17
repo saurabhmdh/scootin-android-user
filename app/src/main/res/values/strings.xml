@@ -199,4 +199,6 @@
     <string name="upload_photo_txt">Touch here to take a photo of the list or upload one from the gallery.*</string>
     <string name="shop_detail">Shop Detail</string>
     <string name="delivery_detail">Delivery Detail</string>
+    <string name="express_home_txt">Upto 10 items<br/> Within 45 Min</string>
+    <string name="citywidehome_txt">Anything-Anywhere <br/> within city limits</string>
 </resources>
