@@ -35,6 +35,8 @@ import com.scootin.util.fragment.autoCleared
 import com.scootin.util.ui.UtilPermission
 import com.scootin.view.activity.MainActivity
 import com.scootin.view.adapter.DealAdapter
+import com.scootin.view.adapter.DealFooterAdapter
+import com.scootin.view.custom.CirclePagerIndicatorDecoration
 import com.scootin.view.vo.ServiceArea
 import com.scootin.viewmodel.home.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,7 +51,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     private val viewModel: HomeFragmentViewModel by viewModels()
 
     private var headerDealAdapter by autoCleared<DealAdapter>()
-    private var footerDealAdapter by autoCleared<DealAdapter>()
+    private var footerDealAdapter by autoCleared<DealFooterAdapter>()
 
     private lateinit var homeCategoryList: List<HomeResponseCategory>
 
@@ -111,12 +113,14 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
 
     private fun setupRecycledView() {
         headerDealAdapter = DealAdapter()
-        footerDealAdapter = DealAdapter()
+        footerDealAdapter = DealFooterAdapter()
 
         binding.headerDeals.apply {
+            addItemDecoration(CirclePagerIndicatorDecoration())
             adapter = headerDealAdapter
         }
         binding.footerDeals.apply {
+            addItemDecoration(CirclePagerIndicatorDecoration())
             adapter = footerDealAdapter
         }
     }
