@@ -57,6 +57,7 @@ class ShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_list)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEssentialShopItemListBinding.bind(view)
+        binding.productList.layoutManager = GridLayoutManager(context,2)
         binding.storeList.layoutManager = GridLayoutManager(context,2)
         updateUI()
         updateListeners()
@@ -71,7 +72,7 @@ class ShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_list)
 
     private fun loadMedia() {
         binding.storeName.text = name
-        GlideApp.with(requireContext()).load(imageUrl).apply(RequestOptions().override(dpToPx(R.dimen.image_width), dpToPx(R.dimen.image_height))).into(binding.express)
+       // GlideApp.with(requireContext()).load(imageUrl).apply(RequestOptions().override(dpToPx(R.dimen.image_width), dpToPx(R.dimen.image_height))).into(binding.express)
     }
 
     fun dpToPx(resource: Int): Int {

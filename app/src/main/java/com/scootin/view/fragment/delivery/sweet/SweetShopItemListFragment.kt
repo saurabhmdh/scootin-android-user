@@ -71,9 +71,9 @@ class SweetShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_
     private fun loadMedia() {
         binding.storeName.text = name
 
-        GlideApp.with(requireContext()).load(imageUrl).apply(
-            RequestOptions().override(dpToPx(R.dimen.image_width), dpToPx(R.dimen.image_height))
-        ).into(binding.express)
+//        GlideApp.with(requireContext()).load(imageUrl).apply(
+//            RequestOptions().override(dpToPx(R.dimen.image_width), dpToPx(R.dimen.image_height))
+//        ).into(binding.express)
     }
 
     fun dpToPx(resource: Int): Int {

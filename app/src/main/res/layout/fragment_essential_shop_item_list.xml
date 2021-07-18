@@ -23,6 +23,7 @@
             android:padding="16dp"/>
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/screen_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Essential &amp; Grocery"
@@ -32,68 +33,72 @@
             android:fontFamily="@font/montserrat_bold"
             android:layout_centerHorizontal="true"/>
 
+        <com.scootin.view.custom.CustomSearchView
+            style="@style/SearchView"
+            android:id="@+id/search_box"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:theme="@style/SearchView"
+            android:background="@drawable/ic_search_field"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@null"
+            android:layout_below="@id/screen_title"
+            app:queryHint="Search for Items"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/search_box"
+            android:layout_marginTop="3dp"
+            android:orientation="horizontal"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STORE:"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="@color/white"
+                android:paddingStart="8dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/store_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Store Name"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="@color/white"
+                android:maxLines="1"
+                android:paddingStart="8dp"/>
+
+        </LinearLayout>
+
     </RelativeLayout>
 
     <!-- If we change this we can reuse this -->
-    <androidx.cardview.widget.CardView
-        android:layout_width="150dp"
-        android:layout_height="94dp"
-        android:clipToPadding="false"
-        android:elevation="10dp"
-        app:cardCornerRadius="@dimen/dimen_10"
-        android:layout_marginTop="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:layout_width="150dp"-->
+<!--        android:layout_height="94dp"-->
+<!--        android:clipToPadding="false"-->
+<!--        android:elevation="10dp"-->
+<!--        app:cardCornerRadius="@dimen/dimen_10"-->
+<!--        android:layout_marginTop="60dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/express"
-            android:layout_width="150dp"
-            android:layout_height="94dp"
-            android:scaleType="fitXY" />
-    </androidx.cardview.widget.CardView>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/store_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:textSize="13sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/imageView"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <View
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="178dp"
-        android:layout_marginEnd="20dp"
-        android:background="@color/text_color_primary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <com.scootin.view.custom.CustomSearchView
-        android:id="@+id/search_box"
-        android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="16dp"
-        app:iconifiedByDefault="false"
-        app:layout_constraintTop_toBottomOf="@id/imageView"
-        app:queryBackground="@null"
-        app:queryHint="@string/query_hint"
-        app:searchIcon="@null" />
-    <View
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@color/text_color_primary"
-        app:layout_constraintTop_toBottomOf="@id/search_box"/>
+<!--        <com.google.android.material.imageview.ShapeableImageView-->
+<!--            android:id="@+id/express"-->
+<!--            android:layout_width="150dp"-->
+<!--            android:layout_height="94dp"-->
+<!--            android:scaleType="fitXY" />-->
+<!--    </androidx.cardview.widget.CardView>-->
 
     <!--        https://stackoverflow.com/questions/45998522/recyclerview-does-not-show-all-items-inside-fragment-->
     <androidx.recyclerview.widget.RecyclerView
@@ -103,11 +108,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="@dimen/dimen_10"
         android:layout_marginEnd="16dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/fab_cart"
         app:layout_constraintEnd_toStartOf="@+id/layout_bag"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_box" />
+        app:layout_constraintTop_toBottomOf="@id/header" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/store_list"
@@ -117,9 +121,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="15dp"
         android:visibility="gone"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_box" />
+        app:layout_constraintTop_toBottomOf="@id/header" />
 
     <include layout="@layout/layout_bag" android:id="@+id/layout_bag"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
