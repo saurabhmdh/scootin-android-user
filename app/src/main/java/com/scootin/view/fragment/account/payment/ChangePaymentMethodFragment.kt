@@ -133,7 +133,7 @@ class ChangePaymentMethodFragment: BaseFragment(R.layout.fragment_change_payment
 //                }
 //        }
 
-        //binding.back.setOnClickListener { findNavController().popBackStack() }
+        binding.back.setOnClickListener { findNavController().popBackStack() }
     }
 
     private fun addUserConfirmOrderListener(mode: String) {
