@@ -112,7 +112,7 @@
                         android:textSize="12sp"
                         android:layout_marginStart="4dp"
                         android:fontFamily="@font/montserrat_medium"
-                        android:text="To be sure that the sent and delievred items are same."
+                        android:text="To be sure that the sent and delivered items are same."
                         android:textColor="#000" />
 
                 </LinearLayout>
