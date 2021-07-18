@@ -44,7 +44,7 @@ class OrderDetailFragment : BaseFragment(R.layout.fragment_my_order_track) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMyOrderTrackBinding.bind(view)
-        //binding.back.setOnClickListener { findNavController().popBackStack() }
+        binding.back.setOnClickListener { findNavController().popBackStack() }
         binding.lifecycleOwner = this
         binding.btnChangePaymentMode.setOnClickListener {
             findNavController().navigate(OrderDetailFragmentDirections.orderToChangePaymentMode(args.orderId,"NORMAL"))

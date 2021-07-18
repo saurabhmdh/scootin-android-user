@@ -45,7 +45,7 @@ class DirectOrderDetailFragment : BaseFragment(R.layout.fragment_track_direct_or
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentTrackDirectOrderBinding.bind(view)
-        //binding.back.setOnClickListener { findNavController().popBackStack() }
+        binding.back.setOnClickListener { findNavController().popBackStack() }
         binding.btnChangePaymentMode.setOnClickListener {
             findNavController().navigate(DirectOrderDetailFragmentDirections.directOrderToChangePaymentMode(args.orderId,"DIRECT"))
         }

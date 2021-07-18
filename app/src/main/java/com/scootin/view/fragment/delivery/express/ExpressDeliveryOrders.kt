@@ -118,9 +118,9 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
             onClickOfUploadMedia()
         }
 
-//        binding.back.setOnClickListener {
-//            findNavController().popBackStack(R.id.titleScreen, false)
-//        }
+        binding.back.setOnClickListener {
+            findNavController().popBackStack(R.id.titleScreen, false)
+        }
 
         //Lets load all address if there is no address then ask to add, incase there is
         viewModel.loadAllAddress().observe(viewLifecycleOwner) {
