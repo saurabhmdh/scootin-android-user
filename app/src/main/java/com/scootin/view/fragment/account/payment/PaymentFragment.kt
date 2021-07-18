@@ -77,17 +77,18 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
         }
 
         binding.confirmButton.setOnClickListener {
-            val mode = when(binding.radioGroup.getCheckedRadioButtonPosition()) {
-                    0 -> {
-                        "ONLINE"
-                    }
-                    1 -> {
-                        "CASH"
-                    }
-                    else -> {
-                        ""
-                    }
-                }
+//            val mode = when(binding.radioGroup.getCheckedRadioButtonPosition()) {
+//                    0 -> {
+//                        "ONLINE"
+//                    }
+//                    1 -> {
+//                        "CASH"
+//                    }
+//                    else -> {
+//                        ""
+//                    }
+//                }
+            val mode="ONLINE"
             showLoading()
             when (orderType) {
                 "DIRECT" -> {
