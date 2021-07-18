@@ -55,48 +55,9 @@ class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_deliver
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentStationaryDeliveryBinding.bind(view)
-
+        updateListeners()
         updateUI()
         setHasOptionsMenu(true)
-
-    }
-    override fun onDestroyView() {
-        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-        imm?.hideSoftInputFromWindow(view?.windowToken, 0)
-        super.onDestroyView()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_search_fragment, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        val searchBox = menu.findItem(R.id.action_search).actionView.findViewById<CustomSearchView>(
-            R.id.search_box
-        )
-
-
-        val radioGroup = menu.findItem(R.id.action_radio_group).actionView.findViewById<RadioGroup>(
-            R.id.radioGroup
-        )
-
-        updateListeners(searchBox,radioGroup)
-
-        radioGroup.setOnCheckedChangeListener { radioGroup, optionId ->
-            when (optionId) {
-                R.id.by_product -> {
-                    binding.productList.updateVisibility(true)
-                    binding.storeList.updateVisibility(false)
-                    binding.layoutBag.fabCart.updateVisibility(true)
-                }
-                R.id.by_store -> {
-                    binding.productList.updateVisibility(false)
-                    binding.storeList.updateVisibility(true)
-                    binding.layoutBag.fabCart.updateVisibility(false)
-                }
-            }
-        }
 
     }
 
@@ -105,16 +66,16 @@ class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_deliver
         setProductAdapter()
     }
 
-    private fun updateListeners(searchBox: CustomSearchView, radioGroup: RadioGroup) {
+    private fun updateListeners() {
         //When the screen load lets load the data for empty screen
         binding.productList.layoutManager = GridLayoutManager(context,2)
         binding.storeList.layoutManager = GridLayoutManager(context,2)
         viewModel.doSearch("")
         viewModel.loadCount()
-        searchBox.setOnQueryTextListener(
+        binding.searchBox.setOnQueryTextListener(
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    when (radioGroup.getCheckedRadioButtonPosition()) {
+                    when (binding.radioGroup.getCheckedRadioButtonPosition()) {
                         0 -> {
                             query?.let {
                                 viewModel.doSearch(it)
@@ -139,7 +100,23 @@ class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_deliver
 
             }
         )
-       // binding.back.setOnClickListener { findNavController().popBackStack() }
+
+        binding.radioGroup.setOnCheckedChangeListener { radioGroup, optionId ->
+            when (optionId) {
+                R.id.by_product -> {
+                    binding.productList.updateVisibility(true)
+                    binding.storeList.updateVisibility(false)
+                    binding.layoutBag.fabCart.updateVisibility(true)
+                }
+                R.id.by_store -> {
+                    binding.productList.updateVisibility(false)
+                    binding.storeList.updateVisibility(true)
+                    binding.layoutBag.fabCart.updateVisibility(false)
+                }
+            }
+        }
+
+        binding.back.setOnClickListener { findNavController().popBackStack() }
 
         viewModel.shops.observe(viewLifecycleOwner) {response->
             lifecycleScope.launch {
