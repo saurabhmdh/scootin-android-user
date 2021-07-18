@@ -4,7 +4,34 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:orientation="vertical"
+        android:background="@drawable/ic_top_banner_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_back"
+            android:padding="16dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vegetables &amp; Fruits"
+            android:textColor="@color/white"
+            android:layout_marginTop="16dp"
+            android:textSize="20sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
     <LinearLayout
         android:id="@+id/subcategory"
         android:layout_width="match_parent"
@@ -15,7 +42,15 @@
         android:layout_marginEnd="16dp"
         android:padding="@dimen/dimen_8"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/header">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/all_categories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:tag="252"
+            app:srcCompat="@drawable/selected_subcategory_all_categories" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/veg"

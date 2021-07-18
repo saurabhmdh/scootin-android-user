@@ -5,6 +5,14 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:orientation="vertical"
+        android:background="@drawable/ic_top_banner_small"
+        android:layout_alignParentTop="true"/>
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/category_list"
@@ -13,6 +21,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
         android:elevation="12dp"
+        android:layout_below="@id/header"
         android:layout_marginTop="208dp"
         android:layout_centerHorizontal="true">
 

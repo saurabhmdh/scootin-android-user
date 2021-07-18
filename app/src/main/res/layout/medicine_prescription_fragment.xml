@@ -8,25 +8,55 @@
 <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp">
+        android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:orientation="vertical"
+        android:background="@drawable/ic_top_banner_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_back"
+            android:padding="16dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medicine"
+            android:textColor="@color/white"
+            android:layout_marginTop="16dp"
+            android:textSize="20sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/medical_store_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:fontFamily="@font/montserrat_regular"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header"
         tools:text="Gayatri Medical" />
 
     <View
         android:id="@+id/empty"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:background="@color/text_color_primary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/medical_store_name" />
@@ -36,7 +66,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="22dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:fontFamily="@font/montserrat_regular"
         android:maxLines="2"
         android:text="@string/edittxt_hint_citywide"
@@ -53,6 +84,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:text="Delivery Address"
         android:padding="4dp"
         android:background="@drawable/bg_rectangle"
@@ -67,6 +100,7 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginStart="20dp"
         android:background="@color/text_color_primary"
         app:layout_constraintEnd_toStartOf="@+id/receiver_photo_box"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,6 +115,8 @@
         android:background="@drawable/bg_rectangle"
         android:backgroundTint="#008194"
         android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,6 +148,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_item">
 
@@ -134,8 +172,8 @@
         android:id="@+id/add_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:clipToPadding="false"
         android:orientation="vertical"
         app:cardCornerRadius="@dimen/dimen_10"
@@ -178,6 +216,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:src="@drawable/ic_image_preview_box_grocerylist"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/uploadPhoto" />
@@ -194,6 +234,8 @@
         android:paddingEnd="10dp"
         android:src="@drawable/selector_place_order_button"
         android:text="Place Order"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:textColor="#fff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
