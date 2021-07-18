@@ -32,7 +32,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Order Summary"
+                android:text="Order Detail"
                 android:textColor="@color/white"
                 android:layout_marginTop="16dp"
                 android:textSize="20sp"
