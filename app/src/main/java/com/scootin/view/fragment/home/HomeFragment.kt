@@ -120,11 +120,11 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         headerDealAdapter = DealAdapter()
         footerDealAdapter = DealFooterAdapter()
 
-        binding.headerDeals.apply {
+        binding.fragmentHomeContent.headerDeals.apply {
             addItemDecoration(CirclePagerIndicatorDecoration())
             adapter = headerDealAdapter
         }
-        binding.footerDeals.apply {
+        binding.fragmentHomeContent.footerDeals.apply {
             addItemDecoration(CirclePagerIndicatorDecoration())
             adapter = footerDealAdapter
         }
@@ -164,15 +164,15 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     }
 
     private fun updateListeners() {
-        binding.express.setOnClickListener {
+        binding.fragmentHomeContent.express.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.homeToExpressDelivery())
         }
 
-        binding.cityWideDelivery.setOnClickListener {
+        binding.fragmentHomeContent.cityWideDelivery.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.homeToCityDelivery())
         }
 
-        binding.essentialsGrocery.setOnClickListener {
+        binding.fragmentHomeContent.essentialsGrocery.setOnClickListener {
             if (isActiveCategory(it.tag)) {
                 viewModel.updateMainCategory(it.tag as String?)
                 findNavController().navigate(HomeFragmentDirections.homeToEssential())
@@ -181,7 +181,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
             }
         }
 
-        binding.stationery.setOnClickListener {
+        binding.fragmentHomeContent.stationery.setOnClickListener {
             if (isActiveCategory(it.tag)) {
                 viewModel.updateMainCategory(it.tag as String?)
                 findNavController().navigate(HomeFragmentDirections.homeToStationary())
@@ -190,7 +190,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
             }
         }
 
-        binding.sweetSnacks.setOnClickListener {
+        binding.fragmentHomeContent.sweetSnacks.setOnClickListener {
             if (isActiveCategory(it.tag)) {
                 viewModel.updateMainCategory(it.tag as String?)
                 findNavController().navigate(HomeFragmentDirections.homeToSweets())
@@ -200,7 +200,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         }
 
 
-        binding.medicines.setOnClickListener {
+        binding.fragmentHomeContent.medicines.setOnClickListener {
             if (isActiveCategory(it.tag)) {
                 viewModel.updateMainCategory(it.tag as String?)
                 findNavController().navigate(HomeFragmentDirections.homeToMedicines())
@@ -209,7 +209,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
             }
         }
 
-        binding.clothing.setOnClickListener {
+        binding.fragmentHomeContent.clothing.setOnClickListener {
             if (isActiveCategory(it.tag)) {
                 viewModel.updateMainCategory(it.tag as String?)
                 findNavController().navigate(HomeFragmentDirections.homeToClothes())
@@ -219,7 +219,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         }
 
 
-        binding.vegetablesFruits.setOnClickListener {
+        binding.fragmentHomeContent.vegetablesFruits.setOnClickListener {
             if (isActiveCategory(it.tag)) {
                 viewModel.updateMainCategory(it.tag as String?)
                 findNavController().navigate(HomeFragmentDirections.homeToVeg())
