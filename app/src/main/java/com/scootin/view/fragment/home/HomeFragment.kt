@@ -73,7 +73,6 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         updateListeners()
         checkForMap()
         setupRecycledView()
-        setHasOptionsMenu(true)
         //Let me try firebase integration..
         FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener {
             if(!it.isSuccessful) {
@@ -84,22 +83,11 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
             viewModel.updateFCMID(token)
         }
         doNetworkCall()
-    }
-    override fun onDestroyView() {
-        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-        imm?.hideSoftInputFromWindow(view?.windowToken, 0)
-        super.onDestroyView()
+        serviceArea()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_home_fragment, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
+    private fun serviceArea() {
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        val textBox = menu.findItem(R.id.action_text).actionView.findViewById<TextView>(
-            R.id.text_box
-        )
         viewModel.getServiceArea().observe(viewLifecycleOwner, {cache->
             if (cache == null) {
                 findNavController().navigate(HomeFragmentDirections.homeToServiceArea())
@@ -107,10 +95,10 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
                 val listType = object : TypeToken<ServiceArea>() {}.type
                 val serviceAreaInfo = Gson().fromJson<ServiceArea>(cache.value, listType)
                 viewModel.updateServiceAreaDetail(serviceAreaInfo)
-                textBox.text = serviceAreaInfo?.name
+                binding.textBox.text = serviceAreaInfo?.name
             }
         })
-        textBox.setOnClickListener {
+        binding.textBox.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.homeToServiceArea())
         }
 

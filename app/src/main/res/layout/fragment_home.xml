@@ -35,7 +35,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
-                    app:layout_scrollFlags="scroll|enterAlways" />
+                    app:layout_scrollFlags="scroll|enterAlways">
+
+                    <TextView
+                        android:id="@+id/text_box"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:textSize="18sp"
+                        android:paddingStart="16dp"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="8dp"
+                        android:textColor="@color/white"
+                        android:layout_centerVertical="true"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:drawablePadding="8dp"
+                        app:drawableStartCompat="@drawable/ic_location_icon" />
+
+                </androidx.appcompat.widget.Toolbar>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
