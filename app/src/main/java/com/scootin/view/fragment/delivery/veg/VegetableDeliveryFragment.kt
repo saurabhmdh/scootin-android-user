@@ -48,30 +48,10 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentVegetableDeliveryBinding.bind(view)
         updateUI()
-        setHasOptionsMenu(true)
+        updateListeners()
         binding.productList.layoutManager = GridLayoutManager(context,2)
         //updateListeners()
         viewModel.loadCount()
-    }
-    override fun onDestroyView() {
-        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-        imm?.hideSoftInputFromWindow(view?.windowToken, 0)
-        super.onDestroyView()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_veg_fragment, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        val searchBox = menu.findItem(R.id.action_search).actionView.findViewById<CustomSearchView>(
-            R.id.search_box
-        )
-
-        updateListeners(searchBox)
-
-
     }
 
     private fun updateUI() {
@@ -108,11 +88,11 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
         }
     }
 
-    private fun updateListeners(searchBox:CustomSearchView) {
+    private fun updateListeners() {
         //When the screen load lets load the data for empty screen
         viewModel.doSearch("")
 
-        searchBox.setOnQueryTextListener(
+        binding.searchBox.setOnQueryTextListener(
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     query?.let {
@@ -131,7 +111,7 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
 
             }
         )
-        //binding.back.setOnClickListener { findNavController().popBackStack() }
+        binding.back.setOnClickListener { findNavController().popBackStack() }
 
         viewModel.allProduct.observe(viewLifecycleOwner) {response->
             lifecycleScope.launch {
@@ -156,7 +136,7 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
             viewModel.loadCount()
         })
 
-        setupSubCategoryListener(searchBox)
+        setupSubCategoryListener(binding.searchBox)
     }
 
     private fun setupSubCategoryListener(searchBox: CustomSearchView) {

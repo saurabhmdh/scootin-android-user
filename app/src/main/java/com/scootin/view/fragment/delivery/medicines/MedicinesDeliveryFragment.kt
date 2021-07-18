@@ -41,28 +41,8 @@ class MedicinesDeliveryFragment : Fragment(R.layout.fragment_medicines_delivery)
         binding = FragmentMedicinesDeliveryBinding.bind(view)
         binding.storeList.layoutManager = GridLayoutManager(context,2)
         updateUI()
+        updateListeners()
         binding.storeList.updateVisibility(true)
-
-    }
-
-    override fun onDestroyView() {
-        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-        imm?.hideSoftInputFromWindow(view?.windowToken, 0)
-        super.onDestroyView()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_veg_fragment, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        val searchBox = menu.findItem(R.id.action_search).actionView.findViewById<CustomSearchView>(
-            R.id.search_box
-        )
-
-        updateListeners(searchBox)
-
 
     }
 
@@ -70,11 +50,11 @@ class MedicinesDeliveryFragment : Fragment(R.layout.fragment_medicines_delivery)
         setStoreAdapter()
     }
 
-    private fun updateListeners(searchBox:CustomSearchView) {
+    private fun updateListeners() {
         //When the screen load lets load the data for empty screen
         viewModel.doSearch("")
 
-        searchBox.setOnQueryTextListener(
+        binding.searchBox.setOnQueryTextListener(
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     query?.let {
@@ -93,7 +73,7 @@ class MedicinesDeliveryFragment : Fragment(R.layout.fragment_medicines_delivery)
 
             }
         )
-       // binding.back.setOnClickListener { findNavController().popBackStack() }
+        binding.back.setOnClickListener { findNavController().popBackStack() }
 
         viewModel.shops.observe(viewLifecycleOwner) {response->
             lifecycleScope.launch {
