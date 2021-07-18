@@ -1,6 +1,7 @@
 package com.scootin.view.fragment.home
 
 import android.Manifest
+import android.app.ActionBar
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Geocoder
@@ -9,9 +10,12 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -38,6 +42,8 @@ import com.scootin.view.adapter.DealAdapter
 import com.scootin.view.vo.ServiceArea
 import com.scootin.viewmodel.home.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -62,7 +68,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomeBinding.bind(view)
-
+        toolbar.setBackgroundResource(R.drawable.ic_top_banner)
         updateListeners()
         checkForMap()
         setupRecycledView()
