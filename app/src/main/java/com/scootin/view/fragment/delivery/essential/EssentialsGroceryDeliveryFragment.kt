@@ -56,70 +56,32 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
         binding = FragmentGroceryDeliveryBinding.bind(view)
         updateUI()
         setHasOptionsMenu(true)
-        //updateListeners()
+        updateListeners()
 
-
-    }
-
-    override fun onDestroyView() {
-        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-        imm?.hideSoftInputFromWindow(view?.windowToken, 0)
-        super.onDestroyView()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_search_fragment, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        val searchBox = menu.findItem(R.id.action_search).actionView.findViewById<CustomSearchView>(
-            R.id.search_box
-        )
-
-
-        val radioGroup = menu.findItem(R.id.action_radio_group).actionView.findViewById<RadioGroup>(
-            R.id.radioGroup
-        )
-
-        updateListeners(searchBox,radioGroup)
-
-        radioGroup.setOnCheckedChangeListener { radioGroup, optionId ->
-            when (optionId) {
-                R.id.by_product -> {
-                    binding.productList.updateVisibility(true)
-                    binding.storeList.updateVisibility(false)
-                    binding.layoutBag.fabCart.updateVisibility(true)
-                }
-                R.id.by_store -> {
-                    binding.productList.updateVisibility(false)
-                    binding.storeList.updateVisibility(true)
-                    binding.layoutBag.fabCart.updateVisibility(false)
-                }
-            }
-        }
 
     }
 
     private fun updateUI() {
         binding.grocery.isSelected = true
         viewModel.updateSubCategory("300") //Default item..
-
         setStoreAdapter()
         setProductAdapter()
     }
 
-    private fun updateListeners(searchBox:CustomSearchView, radioGroup:RadioGroup) {
+    private fun updateListeners() {
         //When the screen load lets load the data for empty screen
         binding.productList.layoutManager = GridLayoutManager(context,2)
         binding.storeList.layoutManager = GridLayoutManager(context,2)
         viewModel.doSearch("")
         viewModel.loadCount()
+        binding.back.setOnClickListener {
+            findNavController().popBackStack()
+        }
         showLoading()
-        searchBox.setOnQueryTextListener(
+        binding.searchBox.setOnQueryTextListener(
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    when (radioGroup.getCheckedRadioButtonPosition()) {
+                    when (binding.radioGroup.getCheckedRadioButtonPosition()) {
                         0 -> {
                             query?.let {
                                 viewModel.doSearch(it)
@@ -143,7 +105,20 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
                 }
             }
         )
-
+        binding.radioGroup.setOnCheckedChangeListener { radioGroup, optionId ->
+            when (optionId) {
+                R.id.by_product -> {
+                    binding.productList.updateVisibility(true)
+                    binding.storeList.updateVisibility(false)
+                    binding.layoutBag.fabCart.updateVisibility(true)
+                }
+                R.id.by_store -> {
+                    binding.productList.updateVisibility(false)
+                    binding.storeList.updateVisibility(true)
+                    binding.layoutBag.fabCart.updateVisibility(false)
+                }
+            }
+        }
         //binding.back.setOnClickListener { findNavController().popBackStack() }
 
         viewModel.shopsBySubcategory.observe(viewLifecycleOwner) {response->
@@ -179,7 +154,7 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
             }
         }
 
-        setupSubCategoryListener(searchBox)
+        setupSubCategoryListener(binding.searchBox)
     }
 
     private fun setupSubCategoryListener(searchBox: CustomSearchView) {

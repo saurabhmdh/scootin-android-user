@@ -24,6 +24,7 @@
             android:padding="16dp"/>
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/screen_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Essential &amp; Grocery"
@@ -32,6 +33,57 @@
             android:textSize="20sp"
             android:fontFamily="@font/montserrat_bold"
             android:layout_centerHorizontal="true"/>
+
+        <com.scootin.view.custom.CustomSearchView
+            style="@style/SearchView"
+            android:id="@+id/search_box"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_search_field"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@null"
+            android:layout_below="@id/screen_title"
+            app:queryHint="Search"
+            tools:ignore="MissingClass" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            android:layout_below="@id/search_box"
+            android:layout_alignParentEnd="true">
+
+            <RadioButton
+                android:id="@+id/by_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="Product"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:buttonTint="@color/white"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/by_store"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:buttonTint="@color/white"
+                android:textColor="@color/white"
+                android:selectAllOnFocus="false"
+                android:text="Store"
+                android:textStyle="bold"
+                android:textSize="12sp" />
+        </RadioGroup>
 
     </RelativeLayout>
 
