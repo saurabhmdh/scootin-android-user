@@ -10,7 +10,27 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:orientation="vertical"
+        android:background="@drawable/ic_top_banner_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add/ Modify Address"
+            android:textColor="@color/white"
+            android:layout_marginTop="16dp"
+            android:textSize="20sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/default_delivery_text_view"
@@ -23,7 +43,7 @@
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/header" />
 
 
     <View
