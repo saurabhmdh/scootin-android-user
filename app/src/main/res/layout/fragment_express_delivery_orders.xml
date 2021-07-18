@@ -24,6 +24,7 @@
             android:padding="16dp"/>
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/screen_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Express Delivery"
@@ -33,47 +34,39 @@
             android:fontFamily="@font/montserrat_bold"
             android:layout_centerHorizontal="true"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_search_field"
+            android:layout_below="@id/screen_title"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STORE:"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="@color/white"
+                android:paddingStart="8dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/store_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Store Name"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="@color/white"
+                android:maxLines="1"
+                android:paddingStart="8dp"/>
+
+        </LinearLayout>
+
     </RelativeLayout>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/store_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="20dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:maxLines="1"
-        android:text="Store Name"
-        android:textSize="13sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/txt_max_lines"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="2dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="(Max. 10 items are allowed)"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/imageView"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <View
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@color/text_color_primary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/store_name" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -81,7 +74,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView" >
+        app:layout_constraintTop_toBottomOf="@id/header" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -90,7 +83,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/add_item"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
@@ -109,7 +102,7 @@
             android:orientation="vertical"
             android:background="@drawable/rounded_rectancle_2dp"
             android:backgroundTint="@color/base_bg"
-            android:layout_height="wrap_content">
+            android:layout_height="180dp">
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/searchSuggestion"
                 android:layout_width="match_parent"

@@ -10,6 +10,7 @@ import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.scootin.R
 import com.scootin.databinding.FragmentExpressDeliveryBinding
 import com.scootin.databinding.FragmentExpressDeliveryShopSelectBinding
@@ -41,6 +42,7 @@ class ExpressDeliveryFragment : Fragment(R.layout.fragment_express_delivery_shop
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentExpressDeliveryShopSelectBinding.bind(view)
+        binding.storeList.layoutManager = GridLayoutManager(context,2)
         updateUI()
         updateListeners()
 
