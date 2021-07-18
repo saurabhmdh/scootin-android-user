@@ -44,96 +44,90 @@
                 android:layout_marginTop="15dp"
                 app:srcCompat="@drawable/ic_select_an_option" />
 
-            <!--        <RadioGroup-->
-            <!--            android:id="@+id/radioGroup"-->
-            <!--            android:layout_width="wrap_content"-->
-            <!--            android:layout_height="wrap_content"-->
-            <!--            android:layout_marginLeft="14dp"-->
-            <!--            android:layout_marginTop="18dp"-->
-            <!--            android:orientation="vertical">-->
+                <RadioGroup
+                    android:id="@+id/radioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginTop="18dp"
+                    android:orientation="vertical">
 
-            <!--            <RadioButton-->
-            <!--                android:id="@+id/materialRadioButton"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:tag="252"-->
-            <!--                android:fontFamily="@font/montserrat_regular"-->
-            <!--                android:text="@string/string_essentials"-->
-            <!--                android:textSize="13sp"-->
-            <!--                android:textStyle="bold"-->
-            <!--                android:textColor="#808080"-->
-            <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toTopOf="parent"-->
-            <!--                android:buttonTint="#808080"-->
-            <!--                android:checked="true"/>-->
+                    <RadioButton
+                        android:id="@+id/materialRadioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tag="252"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="@string/string_essentials"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="#808080"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:buttonTint="#808080"
+                        android:checked="true"/>
 
-            <!--            <RadioButton-->
-            <!--                android:id="@+id/materialRadioButton2"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:fontFamily="@font/montserrat_regular"-->
-            <!--                android:buttonTint="#808080"-->
-            <!--                android:textColor="#808080"-->
-            <!--                android:tag="253"-->
-            <!--                android:selectAllOnFocus="false"-->
-            <!--                android:text="@string/string_sweet"-->
-            <!--                android:textStyle="bold"-->
-            <!--                android:textSize="13sp" />-->
-            <!--            <RadioButton-->
-            <!--                android:id="@+id/materialRadioButton3"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:fontFamily="@font/montserrat_regular"-->
-            <!--                android:buttonTint="#808080"-->
-            <!--                android:textColor="#808080"-->
-            <!--                android:selectAllOnFocus="false"-->
-            <!--                android:tag="254"-->
-            <!--                android:text="@string/string_vegitable"-->
-            <!--                android:textStyle="bold"-->
-            <!--                android:textSize="13sp" />-->
-            <!--            <RadioButton-->
-            <!--                android:id="@+id/materialRadioButton4"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:fontFamily="@font/montserrat_regular"-->
-            <!--                android:buttonTint="#808080"-->
-            <!--                android:textColor="#808080"-->
-            <!--                android:selectAllOnFocus="false"-->
-            <!--                android:tag="255"-->
-            <!--                android:text="@string/string_medicines"-->
-            <!--                android:textStyle="bold"-->
-            <!--                android:textSize="13sp" />-->
-            <!--            <RadioButton-->
-            <!--                android:id="@+id/materialRadioButton5"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:fontFamily="@font/montserrat_regular"-->
-            <!--                android:buttonTint="#808080"-->
-            <!--                android:textColor="#808080"-->
-            <!--                android:tag="256"-->
-            <!--                android:selectAllOnFocus="false"-->
-            <!--                android:text="@string/string_stationary"-->
-            <!--                android:textStyle="bold"-->
-            <!--                android:textSize="13sp" />-->
-            <!--            <RadioButton-->
-            <!--                android:id="@+id/materialRadioButton6"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:fontFamily="@font/montserrat_regular"-->
-            <!--                android:buttonTint="#808080"-->
-            <!--                android:textColor="#808080"-->
-            <!--                android:tag="257"-->
-            <!--                android:selectAllOnFocus="false"-->
-            <!--                android:text="@string/string_clothing"-->
-            <!--                android:textStyle="bold"-->
-            <!--                android:textSize="13sp" />-->
-            <!--        </RadioGroup>-->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/category_list_recycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                    <RadioButton
+                        android:id="@+id/materialRadioButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:buttonTint="#808080"
+                        android:textColor="#808080"
+                        android:tag="253"
+                        android:selectAllOnFocus="false"
+                        android:text="@string/string_sweet"
+                        android:textStyle="bold"
+                        android:textSize="13sp" />
+                    <RadioButton
+                        android:id="@+id/materialRadioButton3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:buttonTint="#808080"
+                        android:textColor="#808080"
+                        android:selectAllOnFocus="false"
+                        android:tag="254"
+                        android:text="@string/string_vegitable"
+                        android:textStyle="bold"
+                        android:textSize="13sp" />
+                    <RadioButton
+                        android:id="@+id/materialRadioButton4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:buttonTint="#808080"
+                        android:textColor="#808080"
+                        android:selectAllOnFocus="false"
+                        android:tag="255"
+                        android:text="@string/string_medicines"
+                        android:textStyle="bold"
+                        android:textSize="13sp" />
+                    <RadioButton
+                        android:id="@+id/materialRadioButton5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:buttonTint="#808080"
+                        android:textColor="#808080"
+                        android:tag="256"
+                        android:selectAllOnFocus="false"
+                        android:text="@string/string_stationary"
+                        android:textStyle="bold"
+                        android:textSize="13sp" />
+                    <RadioButton
+                        android:id="@+id/materialRadioButton6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:buttonTint="#808080"
+                        android:textColor="#808080"
+                        android:tag="257"
+                        android:selectAllOnFocus="false"
+                        android:text="@string/string_clothing"
+                        android:textStyle="bold"
+                        android:textSize="13sp" />
+                </RadioGroup>
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -147,8 +141,8 @@
         android:fontFamily="@font/montserrat_bold"
         android:textColor="@color/white"
         android:background="@drawable/bg_rectangle"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="#E90000"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentEnd="true"/>
 </RelativeLayout>
