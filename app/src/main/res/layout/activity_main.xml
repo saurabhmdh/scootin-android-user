@@ -28,9 +28,9 @@
 <!--        <androidx.appcompat.widget.Toolbar-->
 <!--            android:id="@+id/toolbar"-->
 <!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_height="160dp"-->
 <!--            android:minHeight="?actionBarSize"-->
-<!--            android:background="@drawable/ic_top_banner_small"-->
+<!--            android:background="@drawable/ic_top_banner"-->
 <!--            android:theme="@style/ThemeOverlay.AppCompat.Dark" >-->
 
 <!--        </androidx.appcompat.widget.Toolbar>-->
