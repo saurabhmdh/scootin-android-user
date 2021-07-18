@@ -46,6 +46,9 @@ class EssentialHandwrittenFragment : BaseFragment(R.layout.hand_written_grocery_
     private val shopId by lazy {
         args.shopId
     }
+    private val shopName by lazy {
+        args.shopName
+    }
 //    private val deliverySlot by lazy {
 //        args.deliverySlot
 //    }
@@ -59,7 +62,7 @@ class EssentialHandwrittenFragment : BaseFragment(R.layout.hand_written_grocery_
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = HandWrittenGroceryListBinding.bind(view)
-
+        binding.storeName.setText(shopName)
         updateListener()
         binding.uploadPhoto.setOnClickListener {
             onClickOfUploadMedia()

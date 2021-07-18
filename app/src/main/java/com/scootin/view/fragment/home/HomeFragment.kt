@@ -73,7 +73,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         updateListeners()
         checkForMap()
         setupRecycledView()
-
+        setHasOptionsMenu(true)
         //Let me try firebase integration..
         FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener {
             if(!it.isSuccessful) {

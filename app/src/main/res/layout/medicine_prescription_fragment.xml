@@ -28,6 +28,7 @@
             android:padding="16dp"/>
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/screen_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Medicine"
@@ -36,6 +37,38 @@
             android:textSize="20sp"
             android:fontFamily="@font/montserrat_bold"
             android:layout_centerHorizontal="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_search_field"
+            android:layout_below="@id/screen_title"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STORE:"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="@color/white"
+                android:paddingStart="8dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/store_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Store Name"
+                android:maxLines="1"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="@color/white"
+                android:paddingStart="8dp"/>
+
+        </LinearLayout>
 
     </RelativeLayout>
 

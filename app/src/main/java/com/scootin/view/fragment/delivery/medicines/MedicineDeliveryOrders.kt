@@ -61,6 +61,10 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
         args.shopId
     }
 
+    private val shopName by lazy {
+        args.shopName
+    }
+
     private val args: MedicineDeliveryOrdersArgs by navArgs()
 
     var address: AddressDetails? = null
@@ -72,6 +76,7 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = MedicinePrescriptionFragmentBinding.bind(view)
+        binding.storeName.setText(shopName)
         initListener()
         updateUI()
         setSearchSuggestionList()
