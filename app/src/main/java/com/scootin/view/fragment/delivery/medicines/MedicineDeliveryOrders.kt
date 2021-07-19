@@ -113,7 +113,7 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
         binding.uploadPhoto.setOnClickListener {
             onClickOfUploadMedia()
         }
-        //binding.back.setOnClickListener { findNavController().popBackStack() }
+        binding.back.setOnClickListener { findNavController().popBackStack() }
 
         binding.warning.setOnClickListener {
             binding.termAccepted.isChecked = !binding.termAccepted.isChecked

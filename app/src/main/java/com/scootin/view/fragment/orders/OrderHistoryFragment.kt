@@ -33,6 +33,7 @@ class OrderHistoryFragment : Fragment(R.layout.fragment_order_history) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentOrderHistoryBinding.bind(view)
+        binding.back.setOnClickListener { findNavController().popBackStack() }
         setAdaper()
         setViewModel()
         //setupListener()

@@ -84,10 +84,10 @@ class OrderSummaryFragment : BaseFragment (R.layout.fragment_order_summary) {
             }
         }
 
-//        binding.back.setOnClickListener {
-//            findNavController().popBackStack(R.id.cart, false)
-//        }
-//        binding.helpBtn.setOnClickListener {
+        binding.back.setOnClickListener {
+            findNavController().popBackStack(R.id.cart, false)
+        }
+//        binding.he.setOnClickListener {
 //            findNavController().navigate(OrderSummaryFragmentDirections.orderToCustomerSupport())
 //        }
     }

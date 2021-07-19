@@ -32,7 +32,7 @@ class SupportFragment : Fragment(R.layout.customer_support) {
         binding.mailCustomerSupport.setOnClickListener {
             sendEmail("support@scootin.co.in", "Regarding order", "");
         }
-
+        binding.back.setOnClickListener { findNavController().popBackStack() }
         setupListener()
 
         binding.activeCallSupport.setOnClickListener {

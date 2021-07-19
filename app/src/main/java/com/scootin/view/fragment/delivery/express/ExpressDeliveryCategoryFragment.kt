@@ -47,7 +47,7 @@ class ExpressDeliveryCategoryFragment : Fragment(R.layout.fragment_express_deliv
     }
 
     private fun setupListener() {
-//        binding.back.setOnClickListener { findNavController().popBackStack() }
+        binding.back.setOnClickListener { findNavController().popBackStack() }
 
         binding.btnDone.setOnClickListener {
             val position = binding.radioGroup.getCheckedRadioButtonPosition()

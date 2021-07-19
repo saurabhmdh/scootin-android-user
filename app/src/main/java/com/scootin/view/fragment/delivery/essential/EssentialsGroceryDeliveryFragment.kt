@@ -119,7 +119,7 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
                 }
             }
         }
-        //binding.back.setOnClickListener { findNavController().popBackStack() }
+
 
         viewModel.shopsBySubcategory.observe(viewLifecycleOwner) {response->
             dismissLoading()

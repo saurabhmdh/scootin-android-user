@@ -27,6 +27,6 @@ class FragmentCityWideCategory: Fragment(R.layout.fragment_citywide_category) {
             findNavController().navigate(FragmentCityWideCategoryDirections.citycategoryToCitydelivery())
         }
 
-        //binding.back.setOnClickListener { findNavController().popBackStack() }
+        binding.back.setOnClickListener { findNavController().popBackStack() }
     }
 }
