@@ -184,7 +184,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
             binding.couponEdittext.getText()?.clear()
         }
 
-       // binding.back.setOnClickListener { findNavController().popBackStack() }
+        binding.back.setOnClickListener { findNavController().popBackStack() }
 
 
         binding.editDropAddress.setOnClickListener {

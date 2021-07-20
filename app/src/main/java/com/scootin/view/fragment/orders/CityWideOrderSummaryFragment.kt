@@ -61,9 +61,9 @@ class CityWideOrderSummaryFragment : Fragment(R.layout.fragment_citywide_order_s
         binding.back.setOnClickListener {
             findNavController().popBackStack(R.id.titleScreen, false)
         }
-        binding.helpBtn.setOnClickListener {
-            findNavController().navigate(CityWideOrderSummaryFragmentDirections.orderToCustomerSupport())
-        }
+//        binding.helpBtn.setOnClickListener {
+//            findNavController().navigate(CityWideOrderSummaryFragmentDirections.orderToCustomerSupport())
+//        }
     }
 
 
