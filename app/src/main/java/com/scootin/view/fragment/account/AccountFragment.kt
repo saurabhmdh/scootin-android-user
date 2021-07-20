@@ -48,7 +48,7 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
         viewModel.getUserInfo(AppHeaders.userMobileNumber).observe(viewLifecycleOwner) {
             when(it.status) {
                 Status.SUCCESS -> {
-                    binding.nameEditText.setText(it.data?.firstName)
+                    binding.nameEditText.text = it.data?.firstName
                 }
                 else -> {}
             }
