@@ -38,8 +38,13 @@ interface APIService {
     suspend fun registerUser(
         @Body requestRegisterUser: RequestRegisterUser,
         @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
-    ): Response<ResponseUser>
+    ): Response<UserInfo>
 
+    @GET("/user/get-user-by-mobile/{mobilenumber}")
+    suspend fun getUserDetail(
+        @Path("mobilenumber") mobileNumber: String,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<UserInfo>
 
     @GET("category/get-all-shop-category")
     suspend fun getHomeCategory(
