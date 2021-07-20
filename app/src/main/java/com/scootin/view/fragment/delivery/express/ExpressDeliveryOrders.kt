@@ -114,7 +114,7 @@ class ExpressDeliveryOrders : BaseFragment(R.layout.fragment_express_delivery_or
             alertDialog?.show()
         }
 
-        binding.mediaImage.setOnClickListener {
+        binding.uploadPhoto.setOnClickListener {
             onClickOfUploadMedia()
         }
 

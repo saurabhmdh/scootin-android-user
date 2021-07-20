@@ -39,21 +39,13 @@
 
     </RelativeLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/category_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:elevation="50dp"
-        android:layout_below="@id/header"
-        app:cardCornerRadius="8dp">
-
         <LinearLayout
             android:layout_width="230dp"
             android:layout_height="292dp"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/stroke_rectangle"
+            android:layout_marginTop="8dp"
+            android:elevation="50dp"
+            android:layout_below="@id/header"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -149,7 +141,6 @@
                 </RadioGroup>
 
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_done"
