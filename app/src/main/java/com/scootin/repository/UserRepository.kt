@@ -10,6 +10,7 @@ import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.AddAddressRequest
 import com.scootin.network.request.DistanceMeasure
 import com.scootin.network.request.RequestFCM
+import com.scootin.network.request.RequestRegisterUser
 import com.scootin.network.response.AddressDetails
 import com.scootin.network.response.State
 import com.scootin.network.response.login.ResponseUser
@@ -31,6 +32,13 @@ class UserRepository @Inject constructor(
         context: CoroutineContext
     ): LiveData<Resource<ResponseUser>> = object : NetworkBoundResource<ResponseUser>(context) {
         override suspend fun createCall(): Response<ResponseUser> = services.doLogin(options)
+    }.asLiveData()
+
+    fun registerUser(
+        request: RequestRegisterUser,
+        context: CoroutineContext
+    ): LiveData<Resource<ResponseUser>> = object : NetworkBoundResource<ResponseUser>(context) {
+        override suspend fun createCall(): Response<ResponseUser> = services.registerUser(request)
     }.asLiveData()
 
 //    suspend fun sendOTP(options: Map<String, String>) = services.requestOTP(options)

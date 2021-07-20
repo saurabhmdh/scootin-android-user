@@ -34,6 +34,13 @@ interface APIService {
         @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<ResponseUser>
 
+    @POST("user/add")
+    suspend fun registerUser(
+        @Body requestRegisterUser: RequestRegisterUser,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<ResponseUser>
+
+
     @GET("category/get-all-shop-category")
     suspend fun getHomeCategory(
         @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()

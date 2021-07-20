@@ -10,6 +10,7 @@ import com.scootin.database.dao.CacheDao
 import com.scootin.database.table.Cache
 import com.scootin.extensions.AbsentLiveData
 import com.scootin.network.AppExecutors
+import com.scootin.network.request.RequestRegisterUser
 import com.scootin.network.response.login.ResponseUser
 import com.scootin.repository.UserRepository
 import com.scootin.util.constants.AppConstants
@@ -72,4 +73,5 @@ class LoginViewModel @ViewModelInject internal constructor(
 //        emit(userRepo.sendOTP(mapOf("mobileNo" to mobileNumber)))
 //    }
 
+    fun registerUser(request: RequestRegisterUser) = userRepo.registerUser(request, viewModelScope.coroutineContext + Dispatchers.IO)
 }
