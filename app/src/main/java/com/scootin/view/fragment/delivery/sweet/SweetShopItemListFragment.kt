@@ -49,14 +49,15 @@ class SweetShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_
         args.name
     }
 
-    private val imageUrl by lazy {
-        args.url
+    private val screenTitle by lazy {
+        args.screenTitle
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEssentialShopItemListBinding.bind(view)
         binding.storeList.layoutManager = GridLayoutManager(context,2)
+        binding.screenTitle.text="Sweets, Snacks & Bakery"
         updateUI()
         updateListeners()
         viewModel.loadCount()

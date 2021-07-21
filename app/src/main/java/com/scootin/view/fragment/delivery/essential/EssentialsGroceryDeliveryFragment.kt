@@ -285,7 +285,7 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
                 override fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse) {
                     Timber.i("Shop Info $shopInfo")
                     //We need to move another screen
-                    findNavController().navigate(EssentialsGroceryDeliveryFragmentDirections.grossaryToShopList(shopInfo.name, shopInfo.shopID, shopInfo.imageUrl))
+                    findNavController().navigate(EssentialsGroceryDeliveryFragmentDirections.grossaryToShopList(shopInfo.name, shopInfo.shopID, "Essential & Grocery"))
                 }
             })
         binding.storeList.apply {

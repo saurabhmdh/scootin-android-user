@@ -182,7 +182,7 @@ class StationaryDeliveryFragment : Fragment(R.layout.fragment_stationary_deliver
         shopSearchAdapter = ShopSearchAdapter(object : ShopSearchAdapter.StoreImageAdapterClickListener {
                 override fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse) {
                     Timber.i("Shop Info $shopInfo")
-                    findNavController().navigate(StationaryDeliveryFragmentDirections.stationaryToShopList(shopInfo.name, shopInfo.shopID, shopInfo.imageUrl))
+                    findNavController().navigate(StationaryDeliveryFragmentDirections.stationaryToShopList(shopInfo.name, shopInfo.shopID, "Cosmetics & Personal Care"))
                 }
             })
         binding.storeList.apply {
