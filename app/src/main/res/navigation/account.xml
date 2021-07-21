@@ -56,6 +56,13 @@
             app:popEnterAnim="@anim/default_pop_enter_anim"
             app:popExitAnim="@anim/default_pop_exit_anim" />
 
+        <action
+            android:id="@+id/action_login_to_webview"
+            app:destination="@id/webview"
+            app:enterAnim="@anim/default_enter_anim"
+            app:exitAnim="@anim/default_exit_anim"
+            app:popEnterAnim="@anim/default_pop_enter_anim"
+            app:popExitAnim="@anim/default_pop_exit_anim" />
     </fragment>
 
     <fragment
@@ -272,4 +279,10 @@
             app:argType="boolean" />
     </fragment>
 
+    <fragment
+        android:id="@+id/webview"
+        android:name="com.scootin.view.fragment.home.BrowserFragment"
+        android:label="">
+        <argument android:name="url" app:argType="string" />
+    </fragment>
 </navigation>
