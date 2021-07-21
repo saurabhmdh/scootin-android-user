@@ -149,7 +149,7 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
             Timber.i("Selected.. ${it.tag as String?}")
             viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
             binding.veg.isSelected = true
-            binding.allCategories.isSelected=false
+            //binding.allCategories.isSelected=false
             binding.fruits.isSelected = false
 
         }
@@ -162,25 +162,25 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
             Timber.i("Selected.. ${it.tag as String?}")
             viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
             binding.veg.isSelected = false
-            binding.allCategories.isSelected=false
+            //binding.allCategories.isSelected=false
             binding.fruits.isSelected = true
 
 
         }
 
-        binding.allCategories.setOnClickListener {
-            if (binding.allCategories.isSelected) {
-                return@setOnClickListener
-            }
-            clearPagingData()
-            Timber.i("Selected.. ${it.tag as String?}")
-            viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
-            binding.veg.isSelected = false
-            binding.fruits.isSelected = false
-            binding.allCategories.isSelected=true
-
-
-        }
+//        binding.allCategories.setOnClickListener {
+//            if (binding.allCategories.isSelected) {
+//                return@setOnClickListener
+//            }
+//            clearPagingData()
+//            Timber.i("Selected.. ${it.tag as String?}")
+//            viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
+//            binding.veg.isSelected = false
+//            binding.fruits.isSelected = false
+//            binding.allCategories.isSelected=true
+//
+//
+//        }
 
     }
 

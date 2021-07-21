@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import com.scootin.R
 import com.scootin.databinding.AdapterVegetablesListBinding
 import com.scootin.extensions.updateInVisibility
 import com.scootin.extensions.updateVisibility
@@ -49,6 +50,10 @@ class ProductSearchPagingAdapter (
             } else {
                 binding.parentCount.updateVisibility(false)
                 binding.inactiveAdd.updateVisibility(true)
+            }
+
+            if(item.activeForOrder==false){
+                binding.inactiveAdd.setBackgroundResource(R.drawable.grey_ellipse)
             }
 
             val addVisible = item.displayQuantity == 0
