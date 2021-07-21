@@ -14,6 +14,7 @@ import com.scootin.database.dao.LocationDao
 import com.scootin.database.table.Cache
 import com.scootin.database.table.EntityLocation
 import com.scootin.network.manager.AppHeaders
+import com.scootin.network.request.RequestDeals
 import com.scootin.network.request.RequestFCM
 import com.scootin.repository.CartRepository
 import com.scootin.repository.CategoryRepository
@@ -128,7 +129,10 @@ internal constructor(
     }
 
     //For deals
-    fun getAllDeals(type: String) = dealRepository.getAllDeals(type).cachedIn(viewModelScope).asLiveData()
+//    fun getAllDeals(type: String) = dealRepository.getAllDeals(type).cachedIn(viewModelScope).asLiveData()
+    fun getAllDeals(type: String) = liveData(coroutineContext + handler) {
+        emit(dealRepository.getAllAvaliableDeals(RequestDeals(type)))
+    }
 
     override val coroutineContext: CoroutineContext
         get() = viewModelScope.coroutineContext + Dispatchers.IO
