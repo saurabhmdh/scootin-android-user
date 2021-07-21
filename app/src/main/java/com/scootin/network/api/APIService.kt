@@ -393,7 +393,7 @@ interface APIService {
     suspend fun getDeals(
         @Body requestDeal: RequestDeals,
         @Query("page") offset: Int = 0,
-        @Query("size") limit: Int = 10,
+        @Query("size") limit: Int = 50,
         @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<List<DealResponse>>
 }

@@ -1,25 +1,18 @@
 package com.scootin.view.fragment.home
 
 import android.Manifest
-import android.app.ActionBar
-import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.core.content.ContextCompat
-import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.common.api.ApiException
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
@@ -46,8 +39,8 @@ import com.scootin.viewmodel.home.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.util.*
 import javax.inject.Inject
 
 
@@ -60,6 +53,8 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     private var footerDealAdapter by autoCleared<DealFooterAdapter>()
 
     private lateinit var homeCategoryList: List<HomeResponseCategory>
+    private val timer = Timer()
+    private val footerTimer = Timer()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -105,8 +100,11 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     }
 
     private fun setupRecycledView() {
-        headerDealAdapter = DealAdapter()
-        footerDealAdapter = DealFooterAdapter()
+        headerDealAdapter = DealAdapter(appExecutors)
+        footerDealAdapter = DealFooterAdapter(appExecutors)
+
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(binding.fragmentHomeContent.headerDeals)
 
         binding.fragmentHomeContent.headerDeals.apply {
             addItemDecoration(CirclePagerIndicatorDecoration())
@@ -223,21 +221,23 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
                 activity?.setupBadging(result.orZero())
             }
         }
-
+        timer.scheduleAtFixedRate(headerTask, Date(),3000)
+        footerTimer.scheduleAtFixedRate(footerTask, Date(),4000)
 
         viewModel.getAllDeals("HEADER").observe(viewLifecycleOwner) {
-            lifecycleScope.launch {
-                headerDealAdapter.submitData(it)
+            if (it.isSuccessful) {
+                headerDealAdapter.submitList(it.body())
+            } else {
+               Toast.makeText(requireContext(), "There is problem with data, Please check network connection", Toast.LENGTH_SHORT).show()
             }
         }
 
         viewModel.getAllDeals("FOOTER").observe(viewLifecycleOwner) {
-            lifecycleScope.launch {
-                footerDealAdapter.submitData(it)
+            if (it.isSuccessful) {
+                footerDealAdapter.submitList(it.body())
             }
         }
     }
-
 
     private fun handlePlaceSuccessResponse(place: Place?, adminArea: String? = null) {
         place?.let {
@@ -306,6 +306,53 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         } else {
             UtilPermission.requestMapPermission(this)
         }
+    }
+
+    //This timer class will notify to UI that it should change the page
+    private val headerTask = object : TimerTask() {
+        override fun run() {
+            if(!isVisible) {
+                return
+            }
+            Timber.i("Timer task has been completed. Now we need to switch the image..")
+            try {
+                scrollHeader()
+            } catch (e: java.lang.Exception) {
+                Timber.i("Exception ${e.message}")
+            }
+        }
+    }
+
+    private val footerTask = object : TimerTask() {
+        override fun run() {
+            if(!isVisible) {
+                return
+            }
+            Timber.i("Timer task has been completed. Now we need to switch the image..")
+            try {
+                scrollFooter()
+            } catch (e: java.lang.Exception) {
+                Timber.i("Exception ${e.message}")
+            }
+        }
+    }
+
+    private fun scrollHeader() {
+        val layoutman = binding.fragmentHomeContent.headerDeals.layoutManager as LinearLayoutManager
+        val currentVisible = layoutman.findFirstVisibleItemPosition()
+        val total = binding.fragmentHomeContent.headerDeals.adapter?.itemCount
+        val position = if (currentVisible + 1 == total) 0 else currentVisible + 1
+        Timber.i("Trying to move.. ${position} while total ${total} at present visible $currentVisible")
+        layoutman.smoothScrollToPosition(binding.fragmentHomeContent.headerDeals, RecyclerView.State(), position)
+    }
+
+    private fun scrollFooter() {
+        val layoutman = binding.fragmentHomeContent.footerDeals.layoutManager as LinearLayoutManager
+        val currentVisible = layoutman.findFirstVisibleItemPosition()
+        val total = binding.fragmentHomeContent.footerDeals.adapter?.itemCount ?: 0
+        val position = if (currentVisible + 3 >= total) 0 else currentVisible + 3
+        Timber.i("scrolling footer ${position} while total ${total} at present visible $currentVisible")
+        layoutman.smoothScrollToPosition(binding.fragmentHomeContent.footerDeals, RecyclerView.State(), position)
     }
 
 }
