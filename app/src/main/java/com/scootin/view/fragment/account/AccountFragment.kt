@@ -13,8 +13,10 @@ import com.scootin.databinding.FragmentAccountBinding
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.manager.AppHeaders
+import com.scootin.util.constants.AppConstants
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.activity.SplashActivity
+import com.scootin.view.fragment.home.LoginFragmentDirections
 import com.scootin.viewmodel.account.AccountFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -83,6 +85,14 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
 
         binding.supportFragment.setOnClickListener {
             findNavController().navigate(AccountFragmentDirections.accountToSupportFragment())
+        }
+
+        binding.termsCondition.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginToWebview(AppConstants.TERMS_AND_CONDITION))
+        }
+
+        binding.returnPolicy.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginToWebview(AppConstants.PROHIBITED_ITEMS))
         }
 
         binding.logoutBtn.setOnClickListener {
