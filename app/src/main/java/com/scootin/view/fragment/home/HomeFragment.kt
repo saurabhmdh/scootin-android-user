@@ -221,8 +221,14 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
                 activity?.setupBadging(result.orZero())
             }
         }
-        timer.scheduleAtFixedRate(headerTask, Date(),3000)
-        footerTimer.scheduleAtFixedRate(footerTask, Date(),4000)
+        
+        try {
+            timer.scheduleAtFixedRate(getHeaderTask(), Date(),3000)
+            footerTimer.scheduleAtFixedRate(getFooterTask(), Date(),4000)
+        } catch (e: java.lang.Exception) {
+
+        }
+
 
         viewModel.getAllDeals("HEADER").observe(viewLifecycleOwner) {
             if (it.isSuccessful) {
@@ -309,33 +315,38 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     }
 
     //This timer class will notify to UI that it should change the page
-    private val headerTask = object : TimerTask() {
-        override fun run() {
-            if(!isVisible) {
-                return
-            }
-            Timber.i("Timer task has been completed. Now we need to switch the image..")
-            try {
-                scrollHeader()
-            } catch (e: java.lang.Exception) {
-                Timber.i("Exception ${e.message}")
+    fun getHeaderTask(): TimerTask{
+        return object : TimerTask() {
+            override fun run() {
+                if(!isVisible) {
+                    return
+                }
+                Timber.i("Timer task has been completed. Now we need to switch the image..")
+                try {
+                    scrollHeader()
+                } catch (e: java.lang.Exception) {
+                    Timber.i("Exception ${e.message}")
+                }
             }
         }
     }
 
-    private val footerTask = object : TimerTask() {
-        override fun run() {
-            if(!isVisible) {
-                return
-            }
-            Timber.i("Timer task has been completed. Now we need to switch the image..")
-            try {
-                scrollFooter()
-            } catch (e: java.lang.Exception) {
-                Timber.i("Exception ${e.message}")
+    fun getFooterTask(): TimerTask {
+        return object : TimerTask() {
+            override fun run() {
+                if (!isVisible) {
+                    return
+                }
+                Timber.i("Timer task has been completed. Now we need to switch the image..")
+                try {
+                    scrollFooter()
+                } catch (e: java.lang.Exception) {
+                    Timber.i("Exception ${e.message}")
+                }
             }
         }
     }
+
 
     private fun scrollHeader() {
         val layoutman = binding.fragmentHomeContent.headerDeals.layoutManager as LinearLayoutManager
