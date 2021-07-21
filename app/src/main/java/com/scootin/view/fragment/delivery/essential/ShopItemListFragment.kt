@@ -50,8 +50,8 @@ class ShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_list)
         args.name
     }
 
-    private val imageUrl by lazy {
-        args.url
+    private val screenTitle by lazy {
+        args.screenTitle
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,6 +59,7 @@ class ShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_list)
         binding = FragmentEssentialShopItemListBinding.bind(view)
         binding.productList.layoutManager = GridLayoutManager(context,2)
         binding.storeList.layoutManager = GridLayoutManager(context,2)
+        binding.screenTitle.text=screenTitle
         updateUI()
         updateListeners()
         viewModel.loadCount()

@@ -128,7 +128,7 @@
             android:name="shop_id"
             app:argType="long" />
         <argument
-            android:name="url"
+            android:name="screen_title"
             app:argType="string"
             app:nullable="true"/>
     </fragment>

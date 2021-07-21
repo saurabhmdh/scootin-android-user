@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="120dp"
@@ -19,19 +19,26 @@
             android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_back"
-            android:padding="16dp"/>
+            android:padding="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_back" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/screen_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_toRightOf="@id/back"
+            android:fontFamily="@font/montserrat_bold"
             android:text="Essential &amp; Grocery"
             android:textColor="@color/white"
-            android:layout_marginTop="16dp"
             android:textSize="20sp"
-            android:fontFamily="@font/montserrat_bold"
-            android:layout_centerHorizontal="true"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/back"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.scootin.view.custom.CustomSearchView
             style="@style/SearchView"
@@ -45,16 +52,21 @@
             android:background="@drawable/ic_search_field"
             app:iconifiedByDefault="false"
             app:queryBackground="@null"
-            android:layout_below="@id/screen_title"
+            app:layout_constraintTop_toBottomOf="@id/screen_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:queryHint="Search for Items"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/search_box"
             android:layout_marginTop="3dp"
             android:orientation="horizontal"
             android:layout_marginStart="8dp"
+            app:layout_constraintTop_toBottomOf="@id/search_box"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             android:layout_marginEnd="8dp">
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -79,7 +91,7 @@
 
         </LinearLayout>
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- If we change this we can reuse this -->
 <!--    <androidx.cardview.widget.CardView-->
