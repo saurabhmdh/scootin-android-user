@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.scootin.network.api.APIService
+import com.scootin.network.request.RequestDeals
 import com.scootin.network.response.home.DealResponse
 import com.scootin.pages.DealDataSource
 import kotlinx.coroutines.flow.Flow
@@ -18,4 +19,6 @@ class DealRepository @Inject constructor(
             DealDataSource(services, type)
         }.flow
     }
+
+    suspend fun getAllAvaliableDeals(requestDeal: RequestDeals) = services.getDeals(requestDeal)
 }
