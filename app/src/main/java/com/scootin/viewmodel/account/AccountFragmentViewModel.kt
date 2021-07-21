@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.scootin.database.dao.CacheDao
 import com.scootin.extensions.MakeLiveData
 import com.scootin.network.AppExecutors
+import com.scootin.network.request.RequestRegisterUser
 import com.scootin.network.response.AddressDetails
 import com.scootin.repository.UserRepository
 import com.scootin.util.constants.AppConstants
@@ -34,4 +35,6 @@ internal constructor(
         }
         MakeLiveData.create(true)
     }
+
+    fun getUserInfo(mobile: String) = userRepository.getUserDetail(mobile, viewModelScope.coroutineContext + Dispatchers.IO)
 }
