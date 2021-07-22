@@ -1,35 +1,29 @@
 package com.scootin.view.fragment.delivery.sweet
 
-import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.observe
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bumptech.glide.request.RequestOptions
 import com.scootin.R
 import com.scootin.databinding.FragmentEssentialShopItemListBinding
 import com.scootin.extensions.orZero
-import com.scootin.network.glide.GlideApp
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.AddToCartRequest
 import com.scootin.util.fragment.autoCleared
 import com.scootin.view.adapter.SweetsAdapter
-import com.scootin.view.fragment.delivery.essential.ShopItemListFragmentArgs
 import com.scootin.view.vo.ProductSearchVO
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-
+//Lets check for name..
 @AndroidEntryPoint
 class SweetShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_list) {
 
@@ -39,7 +33,7 @@ class SweetShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_
 
     private var productSearchAdapter by autoCleared<SweetsAdapter>()
 
-    private val args: ShopItemListFragmentArgs by navArgs()
+    private val args: SweetShopItemListFragmentArgs by navArgs()
 
     private val shopId by lazy {
         args.shopId
@@ -49,9 +43,9 @@ class SweetShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_
         args.name
     }
 
-    private val screenTitle by lazy {
-        args.screenTitle
-    }
+//    private val screenTitle by lazy {
+//        args.screenTitle
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
