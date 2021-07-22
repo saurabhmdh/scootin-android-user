@@ -135,8 +135,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/decrement"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="3dp"
                 app:srcCompat="@drawable/ic_minus_bttn" />
@@ -156,8 +156,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/increment"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="3dp"
                 app:srcCompat="@drawable/ic_plus_bttn" />

@@ -23,7 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-//Lets check for name..
+
 @AndroidEntryPoint
 class SweetShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_list) {
 
@@ -50,8 +50,8 @@ class SweetShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEssentialShopItemListBinding.bind(view)
-        binding.storeList.layoutManager = GridLayoutManager(context,2)
-        binding.screenTitle.text="Sweets, Snacks & Bakery"
+
+
         updateUI()
         updateListeners()
         viewModel.loadCount()
@@ -59,16 +59,15 @@ class SweetShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_
 
 
     private fun updateUI() {
+        binding.storeList.layoutManager = GridLayoutManager(context,2)
+        binding.screenTitle.text = "Sweets, Snacks & Bakery"
+        binding.productList.layoutManager = GridLayoutManager(context,2)
         setProductAdapter()
         loadMedia()
     }
 
     private fun loadMedia() {
         binding.storeName.text = name
-
-//        GlideApp.with(requireContext()).load(imageUrl).apply(
-//            RequestOptions().override(dpToPx(R.dimen.image_width), dpToPx(R.dimen.image_height))
-//        ).into(binding.express)
     }
 
     fun dpToPx(resource: Int): Int {
