@@ -107,6 +107,7 @@
             android:layout_height="25dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:visibility="gone"
             android:background="@drawable/rounded_rectancle_2dp"
             android:backgroundTint="@color/base_bg"
             android:layout_marginEnd="20dp"
