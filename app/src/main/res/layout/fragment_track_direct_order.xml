@@ -18,34 +18,29 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
             <RelativeLayout
                 android:id="@+id/header"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@drawable/ic_top_banner_small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_back"
-                    android:padding="16dp"/>
-
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/back"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Track Order"
                     android:textColor="@color/white"
-                    android:layout_marginTop="16dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="0dp"
+                    android:paddingTop="16dp"
+                    android:textAlignment="center"
                     android:textSize="20sp"
+                    android:drawableStart="@drawable/ic_back"
                     android:fontFamily="@font/montserrat_bold"
                     android:layout_centerHorizontal="true"/>
-
             </RelativeLayout>
 
             <androidx.core.widget.NestedScrollView
