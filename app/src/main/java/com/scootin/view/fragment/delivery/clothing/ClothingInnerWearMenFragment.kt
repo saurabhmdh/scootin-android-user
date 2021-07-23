@@ -2,7 +2,6 @@ package com.scootin.view.fragment.delivery.clothing
 
 import android.os.Bundle
 import android.view.View
-import android.widget.RadioButton
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,22 +14,17 @@ import com.scootin.databinding.FragmentClothingDeliveryBinding
 import com.scootin.extensions.getCheckedRadioButtonPosition
 import com.scootin.extensions.orZero
 import com.scootin.extensions.updateVisibility
-import com.scootin.network.AppExecutors
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.AddToCartRequest
-import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.util.fragment.autoCleared
-import com.scootin.view.adapter.ProductSearchAdapter
 import com.scootin.view.adapter.ProductSearchPagingAdapter
 import com.scootin.view.adapter.ShopSearchAdapter
-import com.scootin.view.fragment.delivery.essential.EssentialsGroceryDeliveryFragmentDirections
 import com.scootin.view.vo.ProductSearchVO
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import javax.inject.Inject
 
 
 @AndroidEntryPoint

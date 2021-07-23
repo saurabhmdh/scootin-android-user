@@ -43,7 +43,7 @@
                         android:layout_height="?attr/actionBarSize"
                         android:textSize="18sp"
                         android:paddingStart="16dp"
-                        android:paddingTop="20dp"
+                        android:paddingTop="16dp"
                         android:paddingBottom="8dp"
                         android:textColor="@color/white"
                         android:layout_centerVertical="true"

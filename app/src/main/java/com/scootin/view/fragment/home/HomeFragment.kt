@@ -223,8 +223,8 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         }
         
         try {
-            timer.scheduleAtFixedRate(getHeaderTask(), Date(),3000)
-            footerTimer.scheduleAtFixedRate(getFooterTask(), Date(),4000)
+            timer.scheduleAtFixedRate(getHeaderTask(), Date(),5000)
+            footerTimer.scheduleAtFixedRate(getFooterTask(), Date(),6000)
         } catch (e: java.lang.Exception) {
 
         }

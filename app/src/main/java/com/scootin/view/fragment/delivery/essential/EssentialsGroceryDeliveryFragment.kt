@@ -1,25 +1,14 @@
 package com.scootin.view.fragment.delivery.essential
 
-import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.RadioGroup
-import android.widget.TextView
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.observe
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.scootin.R
 import com.scootin.databinding.FragmentGroceryDeliveryBinding
 import com.scootin.extensions.getCheckedRadioButtonPosition
@@ -33,14 +22,11 @@ import com.scootin.view.adapter.ProductSearchPagingAdapter
 import com.scootin.view.adapter.ShopSearchAdapter
 import com.scootin.view.custom.CustomSearchView
 import com.scootin.view.fragment.BaseFragment
-import com.scootin.view.fragment.home.HomeFragmentDirections
 import com.scootin.view.vo.ProductSearchVO
-import com.scootin.view.vo.ServiceArea
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.lang.Exception
 
 
 @AndroidEntryPoint
