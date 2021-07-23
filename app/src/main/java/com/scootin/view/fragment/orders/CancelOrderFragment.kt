@@ -14,7 +14,9 @@ class CancelOrderFragment : Fragment(R.layout.fragment_cancel_order) {
         super.onViewCreated(view, savedInstanceState)
 
         Handler().postDelayed({
-            findNavController().popBackStack()
+            if(isVisible) {
+                findNavController().popBackStack()
+            }
         }, 3000)
     }
 
