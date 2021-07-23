@@ -52,7 +52,7 @@ class ProductSearchPagingAdapter (
                 binding.inactiveAdd.updateVisibility(true)
             }
 
-            if(item.activeForOrder==false){
+            if(!item.activeForOrder){
                 binding.inactiveAdd.setBackgroundResource(R.drawable.grey_ellipse)
             }
 
@@ -81,11 +81,11 @@ class ProductSearchPagingAdapter (
                     item.displayQuantity -=1
                     binding.count.text = item.displayQuantity.toString()
                     imageAdapterClickListener.onDecrementItem(it, binding.data, item.displayQuantity)
-
                 } else {
                     item.displayQuantity = 0
                     binding.addItem.updateVisibility(true)
                     binding.operation.updateVisibility(false)
+                    imageAdapterClickListener.onDecrementItem(it, binding.data, item.displayQuantity)
                 }
 
             }
