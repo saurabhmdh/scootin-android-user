@@ -158,7 +158,7 @@ class ClothingInnerWearMenFragment : Fragment(R.layout.fragment_clothing_deliver
         shopSearchAdapter = ShopSearchAdapter(object : ShopSearchAdapter.StoreImageAdapterClickListener {
                 override fun onSelectButtonSelected(shopInfo: SearchShopsByCategoryResponse) {
                     Timber.i("Shop Info $shopInfo")
-                    findNavController().navigate(ClothingInnerWearMenFragmentDirections.menInnerWearToShopList(shopInfo.name, shopInfo.shopID, shopInfo.imageUrl))
+                    findNavController().navigate(ClothingInnerWearMenFragmentDirections.menInnerWearToShopList(shopInfo.name, shopInfo.shopID, "Clothing"))
                 }
             })
         binding.storeList.apply {
