@@ -14,7 +14,9 @@ class SuccessFragment : Fragment(R.layout.fragment_success) {
         super.onViewCreated(view, savedInstanceState)
 
         Handler().postDelayed({
-            findNavController().popBackStack()
+            if(isVisible) {
+                findNavController().popBackStack()
+            }
         }, 1500)
     }
 }
