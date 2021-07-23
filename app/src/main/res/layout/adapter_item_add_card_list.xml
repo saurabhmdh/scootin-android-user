@@ -109,19 +109,6 @@
             app:layout_constraintTop_toBottomOf="@+id/price"
             app:layout_constraintStart_toEndOf="@+id/space" />
 
-        <!--<androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/spinner"
-            android:layout_width="140dp"
-            android:layout_height="17dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
-            android:background="@drawable/spinner_grad_bg"
-            android:paddingStart="5dp"
-            android:spinnerMode="dropdown"
-            android:theme="@style/ThemeOverlay.AppCompat.Light"
-            app:layout_constraintStart_toEndOf="@+id/space"
-            app:layout_constraintTop_toBottomOf="@+id/detail" /> -->
-
         <LinearLayout
             android:id="@+id/operation"
             android:layout_width="wrap_content"
