@@ -1,18 +1,12 @@
 package com.scootin.view.fragment.delivery.veg
 
 
-import android.content.Context
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.RadioGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.observe
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
@@ -20,7 +14,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.scootin.R
 import com.scootin.databinding.FragmentVegetableDeliveryBinding
 import com.scootin.extensions.orZero
-import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.AddToCartRequest
@@ -49,14 +42,14 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
         binding = FragmentVegetableDeliveryBinding.bind(view)
         updateUI()
         updateListeners()
-        binding.productList.layoutManager = GridLayoutManager(context,2)
-        //updateListeners()
+
         viewModel.loadCount()
     }
 
     private fun updateUI() {
         binding.veg.isSelected = true
-        viewModel.updateSubCategory("252")
+        viewModel.updateSubCategory("400")
+        binding.productList.layoutManager = GridLayoutManager(context,2)
         setProductAdapter()
     }
 
@@ -113,7 +106,7 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
         )
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
-        viewModel.allProduct.observe(viewLifecycleOwner) {response->
+        viewModel.allProductBySubCategory.observe(viewLifecycleOwner) {response->
             lifecycleScope.launch {
                 productSearchAdapter.submitData(response)
             }
