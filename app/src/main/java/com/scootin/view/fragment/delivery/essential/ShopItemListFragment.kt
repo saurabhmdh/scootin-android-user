@@ -59,7 +59,7 @@ class ShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_list)
         binding = FragmentEssentialShopItemListBinding.bind(view)
         binding.productList.layoutManager = GridLayoutManager(context,2)
         binding.storeList.layoutManager = GridLayoutManager(context,2)
-        binding.screenTitle.text=screenTitle
+        binding.back.text=screenTitle
         updateUI()
         updateListeners()
         viewModel.loadCount()

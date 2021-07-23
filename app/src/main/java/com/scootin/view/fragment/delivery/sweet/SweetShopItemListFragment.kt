@@ -60,7 +60,7 @@ class SweetShopItemListFragment: Fragment(R.layout.fragment_essential_shop_item_
 
     private fun updateUI() {
         binding.storeList.layoutManager = GridLayoutManager(context,2)
-        binding.screenTitle.text = "Sweets, Snacks & Bakery"
+        binding.back.text = "Sweets, Snacks & Bakery"
         binding.productList.layoutManager = GridLayoutManager(context,2)
         setProductAdapter()
         loadMedia()

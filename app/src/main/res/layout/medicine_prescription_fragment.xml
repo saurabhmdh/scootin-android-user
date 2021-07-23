@@ -20,20 +20,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_back"
-            android:padding="16dp"/>
-
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/screen_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/back"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:drawableStart="@drawable/ic_back"
+            android:textAlignment="center"
             android:text="Medicine"
             android:textColor="@color/white"
-            android:layout_marginTop="16dp"
             android:textSize="20sp"
             android:fontFamily="@font/montserrat_bold"
             android:layout_centerHorizontal="true"/>
@@ -42,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/ic_search_field"
-            android:layout_below="@id/screen_title"
+            android:layout_below="@id/back"
             android:layout_marginTop="12dp"
             android:orientation="horizontal"
             android:layout_marginStart="8dp"

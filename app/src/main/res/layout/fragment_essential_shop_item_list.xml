@@ -8,36 +8,28 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/ic_top_banner_small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_back" />
-
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/screen_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/back"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:drawableStart="@drawable/ic_back"
+            android:textAlignment="center"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_toRightOf="@id/back"
             android:fontFamily="@font/montserrat_bold"
             android:text="Essential &amp; Grocery"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/back"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.scootin.view.custom.CustomSearchView
@@ -52,7 +44,7 @@
             android:background="@drawable/ic_search_field"
             app:iconifiedByDefault="false"
             app:queryBackground="@null"
-            app:layout_constraintTop_toBottomOf="@id/screen_title"
+            app:layout_constraintTop_toBottomOf="@id/back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:queryHint="Search for Items"/>
