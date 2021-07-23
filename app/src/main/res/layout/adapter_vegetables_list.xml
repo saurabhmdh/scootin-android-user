@@ -84,6 +84,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="3dp"
             android:layout_marginEnd="8dp"
+            android:lines="1"
+            android:maxLines="1"
+            android:minLines="1"
             android:fontFamily="@font/montserrat_regular"
             android:scaleType="fitXY"
             android:text="@{data.description}"
@@ -91,7 +94,6 @@
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name" />
 
@@ -140,12 +142,11 @@
             android:id="@+id/inactive_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:paddingBottom="5dp"
-            android:background="@drawable/ic_ellipse"
+            android:background="@drawable/grey_ellipse"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detail">
+            app:layout_constraintTop_toBottomOf="@id/detail">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
@@ -161,16 +162,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detail"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/discountPrice">
+            app:layout_constraintHorizontal_bias="1.0">
 
             <RelativeLayout
                 android:id="@+id/add_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="5dp"
+                android:paddingBottom="5dp"
                 android:background="@drawable/ic_ellipse">
 
                 <androidx.appcompat.widget.AppCompatImageView
