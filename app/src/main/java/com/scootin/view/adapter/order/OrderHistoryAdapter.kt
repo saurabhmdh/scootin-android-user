@@ -75,6 +75,7 @@ class OrderHistoryAdapter(
                     binding.orderStatus.setText("Cancelled")
                     binding.orderStatus.setTextColor(Color.parseColor("#D10000"))
                 }
+
             }
             binding.imgTrack.setOnClickListener {
                 imageAdapterClickListener.onViewDetailsSelected(it, item)

@@ -145,7 +145,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="25dp">
+                android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
@@ -167,7 +167,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="25dp">
+                android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
@@ -191,7 +191,7 @@
             <RelativeLayout
                 android:id="@+id/promo_applied"
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
+                android:layout_height="wrap_content"
                 android:visibility="gone">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -216,7 +216,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="25dp">
+                android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
@@ -238,7 +238,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
+                android:layout_height="wrap_content"
                 android:paddingStart="@dimen/dimen_4"
                 android:paddingEnd="@dimen/dimen_4">
 
@@ -264,7 +264,7 @@
             <RelativeLayout
                 android:id="@+id/total_saving_tab"
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
+                android:layout_height="wrap_content"
                 android:background="@drawable/rounded_rectancle_2dp"
                 android:backgroundTint="#008194"
                 android:padding="4dp"
@@ -494,6 +494,7 @@
                 android:backgroundTint="#E90000"
                 android:gravity="center"
                 android:text="Remove"
+                android:visibility="gone"
                 android:textColor="#FFF"
                 android:textSize="12sp"
                 android:textStyle="bold"
