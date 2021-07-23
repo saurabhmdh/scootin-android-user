@@ -170,7 +170,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                 return@setOnClickListener
             }
             else{
-                binding.applyPromoButton.visibility=View.INVISIBLE
+                binding.applyPromoButton.visibility=View.GONE
                 binding.removePromoButton.visibility=View.VISIBLE
             }
             promoCode = binding.couponEdittext.text!!.toString()

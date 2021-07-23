@@ -10,8 +10,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/root_view"
         android:layout_width="match_parent"
-        android:layout_height="108dp"
-        android:background="@color/base_bg"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/base_bg"
+        android:background="@drawable/stroke_rectangle"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -62,6 +63,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -114,9 +116,9 @@
             android:layout_margin="5dp"
             android:background="@drawable/bg_rectangle"
             android:backgroundTint="#01C27F"
+            android:fontFamily="@font/montserrat_bold"
             android:text="@string/track"
             android:textColor="@color/white"
-            android:fontFamily="@font/montserrat_bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 <!--        <androidx.appcompat.widget.AppCompatTextView-->
