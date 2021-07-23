@@ -52,9 +52,7 @@ class ProductSearchPagingAdapter (
                 binding.inactiveAdd.updateVisibility(true)
             }
 
-            if(!item.activeForOrder){
-                binding.inactiveAdd.setBackgroundResource(R.drawable.grey_ellipse)
-            }
+            //binding.inactiveAdd.isSelected = !item.activeForOrder
 
             val addVisible = item.displayQuantity == 0
 
