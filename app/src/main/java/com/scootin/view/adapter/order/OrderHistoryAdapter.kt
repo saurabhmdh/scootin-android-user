@@ -71,10 +71,14 @@ class OrderHistoryAdapter(
                 } else if (orderStatus == "COMPLETED") {
                     binding.orderStatus.setText("Delivered")
                     binding.orderStatus.setTextColor(Color.parseColor("#38AA35"))
-                } else if (orderStatus == "CANCELLED") {
+                } else if (orderStatus == "CANCEL") {
                     binding.orderStatus.setText("Cancelled")
                     binding.orderStatus.setTextColor(Color.parseColor("#D10000"))
                 }
+               if(orderStatus=="COMPLETED"||orderStatus=="CANCEL"){
+                   binding.imgTrack.setText("Details")
+               }
+
 
             }
             binding.imgTrack.setOnClickListener {
