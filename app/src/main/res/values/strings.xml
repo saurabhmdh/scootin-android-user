@@ -92,7 +92,7 @@
     <!-- TODO: Remove or change this placeholder text -->
 
     <string name="finding_location">Finding location..</string>
-    <string name="OrderID">Order ID</string>
+    <string name="OrderID">Order ID:</string>
     <string name="_250">250</string>
     <string name="separator">/</string>
     <string name="_0">0</string>

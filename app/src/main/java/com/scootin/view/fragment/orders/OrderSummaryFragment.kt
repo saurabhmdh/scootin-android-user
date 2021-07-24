@@ -3,7 +3,6 @@ package com.scootin.view.fragment.orders
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
@@ -14,6 +13,7 @@ import com.scootin.extensions.orDefault
 import com.scootin.network.AppExecutors
 import com.scootin.network.api.Status
 import com.scootin.network.response.AddressDetails
+import com.scootin.network.response.inorder.InOrderDetail
 import com.scootin.network.response.inorder.MultipleOrdersDetails
 import com.scootin.network.response.inorder.OrderInventoryDetails
 import com.scootin.util.fragment.autoCleared
@@ -92,6 +92,19 @@ class OrderSummaryFragment : BaseFragment (R.layout.fragment_order_summary) {
 //        }
     }
 
+    private fun updateDate(data: InOrderDetail?) {
+        data?.let {
+            val orderText = if (it.orderDetails.deliveryDetails?.deliveredDateTime == null) {
+                "Order Date: "
+            } else {
+                "Delivery Date: "
+            }
+            val latestDate = it.orderDetails.deliveryDetails?.deliveredDateTime ?: it.orderDetails.orderDate
+            binding.orderDateTime.text = orderText + latestDate
+        }
+
+    }
+
     private fun convertToVo(data: MultipleOrdersDetails): MultiOrderVo {
         val multiOrders = data.orderDetails.joinToString { it.id.toString() }
         val deliveryAddress = data.orderDetails.first().addressDetails
@@ -100,8 +113,9 @@ class OrderSummaryFragment : BaseFragment (R.layout.fragment_order_summary) {
         val totalGSTAmount = data.orderDetails.sumByDouble { it.paymentDetails.totalGSTAmount.orDefault(0.0) }
         val totalSaving = data.orderDetails.sumByDouble { it.paymentDetails.totalSaving.orDefault(0.0) }
         val totalAmount = data.orderDetails.sumByDouble { it.paymentDetails.totalAmount.orDefault(0.0) }
+        val orderDate=data.orderDetails.joinToString { it.orderDate }
 
-        return MultiOrderVo(multiOrders, deliveryAddress, amount, deliveryFreeAmount, totalGSTAmount, totalSaving, totalAmount)
+        return MultiOrderVo(multiOrders, deliveryAddress, amount, deliveryFreeAmount, totalGSTAmount, totalSaving, totalAmount,orderDate)
     }
 
 

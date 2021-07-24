@@ -9,5 +9,6 @@ data class MultiOrderVo(
     val deliveryFreeAmount: Double,
     val totalGSTAmount: Double,
     val totalSaving: Double,
-    val totalAmount: Double
+    val totalAmount: Double,
+    val orderDate: String
 )

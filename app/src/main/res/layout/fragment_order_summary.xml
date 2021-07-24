@@ -125,7 +125,7 @@
                         android:layout_marginStart="5dp"
                         android:textStyle="bold"
                         android:layout_below="@id/order_number"
-                        android:text="@{data.multiOrders}" />
+                        setDateFromOrderDate="@{data.orderDate}" />
 
                 </RelativeLayout>
                 <RelativeLayout

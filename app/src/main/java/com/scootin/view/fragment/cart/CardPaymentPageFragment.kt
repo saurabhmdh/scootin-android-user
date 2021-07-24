@@ -50,7 +50,8 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPaymenttStatusBinding.bind(view)
-
+       // binding.payByCard.isSelected=true
+        paymentModeSelector()
         setListener()
     }
 
@@ -108,13 +109,12 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
 
             alertDialog?.setPositiveButton("Confirm") { dialogInterface, which ->
 
-            val mode = when(binding.radioGroup.getCheckedRadioButtonPosition()) {
-                0 -> {"ONLINE"}
-                1 -> {"ONLINE"}
-                2 -> {"ONLINE"}
-                3 -> {"CASH"}
-                else -> {""}
+            var mode="ONLINE"
+
+            if(binding.cod.isSelected){
+                mode="CASH"
             }
+
             showLoading()
 
                // val mode="CASH"
@@ -203,6 +203,33 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
         address = result
         binding.editDropAddress.text = UtilUIComponent.setOneLineAddress(address)
         Timber.i("update the address $result")
+    }
+
+    private fun paymentModeSelector(){
+        binding.payByCard.setOnClickListener {
+            binding.payByCard.isSelected=true
+            binding.netBanking.isSelected=false
+            binding.upi.isSelected=false
+            binding.cod.isSelected=false
+        }
+        binding.netBanking.setOnClickListener {
+            binding.payByCard.isSelected=false
+            binding.netBanking.isSelected=true
+            binding.upi.isSelected=false
+            binding.cod.isSelected=false
+        }
+        binding.upi.setOnClickListener {
+            binding.payByCard.isSelected=false
+            binding.netBanking.isSelected=false
+            binding.upi.isSelected=true
+            binding.cod.isSelected=false
+        }
+        binding.cod.setOnClickListener {
+            binding.payByCard.isSelected=false
+            binding.netBanking.isSelected=false
+            binding.upi.isSelected=false
+            binding.cod.isSelected=true
+        }
     }
 
 

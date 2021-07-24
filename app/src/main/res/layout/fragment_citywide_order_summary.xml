@@ -109,7 +109,7 @@
                         android:id="@+id/txt_order_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Order Date &amp; Time"
+                        android:text="Order Date &amp; Time: "
                         android:fontFamily="@font/montserrat_bold"
                         android:layout_below="@id/txt_orders"
                         android:textColor="#000"/>
