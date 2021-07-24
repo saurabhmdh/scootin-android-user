@@ -389,6 +389,15 @@ interface APIService {
     ): Response<OrderDetail>
 
 
+    @POST("/information/get-last")
+    suspend fun getInformation(
+        @Body requestDeal: RequestDeals,
+        @Query("page") offset: Int = 0,
+        @Query("size") limit: Int = 50,
+        @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
+    ): Response<DealResponse>
+
+
     @POST("/deals/get-all")
     suspend fun getDeals(
         @Body requestDeal: RequestDeals,

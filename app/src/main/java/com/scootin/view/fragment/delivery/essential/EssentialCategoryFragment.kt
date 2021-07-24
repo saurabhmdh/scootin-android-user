@@ -8,14 +8,17 @@ import androidx.appcompat.widget.ListPopupWindow
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.scootin.R
+import com.scootin.bindings.setImage
 import com.scootin.databinding.FragmentEssentialCategoryBinding
 import com.scootin.extensions.getCheckedRadioButtonPosition
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.AddressDetails
 import com.scootin.util.fragment.autoCleared
 import com.scootin.viewmodel.account.AddressFragmentViewModel
+import com.scootin.viewmodel.home.HomeFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
@@ -27,7 +30,7 @@ class EssentialCategoryFragment : Fragment(R.layout.fragment_essential_category)
 
     @Inject
     lateinit var appExecutors: AppExecutors
-    private val addressViewModel: AddressFragmentViewModel by viewModels()
+    private val viewModel: HomeFragmentViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,6 +39,14 @@ class EssentialCategoryFragment : Fragment(R.layout.fragment_essential_category)
     }
 
     private fun updateListeners() {
+
+        viewModel.getInformation("ESSENTIAL").observe(viewLifecycleOwner,{
+            if(it.isSuccessful){
+                val url=it.body()?.media?.url
+                binding.essentialInformation.setImage(url)
+            }
+        })
+
         binding.btnDone.setOnClickListener {
             //If there is no delivery slot it should make error
 //            if (binding.deliverySlot.selectedItem?.toString().isNullOrEmpty()) {

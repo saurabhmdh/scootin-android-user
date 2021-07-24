@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -21,6 +22,7 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.scootin.R
+import com.scootin.bindings.setImage
 import com.scootin.databinding.FragmentHomeBinding
 import com.scootin.extensions.orZero
 import com.scootin.network.AppExecutors
@@ -129,6 +131,13 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
                 }
                 Status.LOADING -> {
                 }
+            }
+        })
+
+        viewModel.getInformation("HOME_PAGE").observe(viewLifecycleOwner,{
+            if(it.isSuccessful){
+              val url=it.body()?.media?.url
+                binding.fragmentHomeContent.homeInformation.setImage(url)
             }
         })
 

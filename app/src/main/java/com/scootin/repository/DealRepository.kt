@@ -21,4 +21,5 @@ class DealRepository @Inject constructor(
     }
 
     suspend fun getAllAvaliableDeals(requestDeal: RequestDeals) = services.getDeals(requestDeal)
+    suspend fun getInformation(requestDeal: RequestDeals) = services.getInformation(requestDeal)
 }

@@ -93,6 +93,15 @@
             </RadioGroup>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/essential_information"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/category_list"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_done"
         android:layout_width="wrap_content"

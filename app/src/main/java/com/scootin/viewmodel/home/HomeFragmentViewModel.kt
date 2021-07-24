@@ -134,6 +134,10 @@ internal constructor(
         emit(dealRepository.getAllAvaliableDeals(RequestDeals(type)))
     }
 
+    fun getInformation(type: String) = liveData(coroutineContext + handler) {
+        emit(dealRepository.getInformation(RequestDeals(type)))
+    }
+
     override val coroutineContext: CoroutineContext
         get() = viewModelScope.coroutineContext + Dispatchers.IO
 
