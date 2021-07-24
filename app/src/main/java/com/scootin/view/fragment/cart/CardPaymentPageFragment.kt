@@ -50,7 +50,6 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPaymenttStatusBinding.bind(view)
-       // binding.payByCard.isSelected=true
         paymentModeSelector()
         setListener()
     }
