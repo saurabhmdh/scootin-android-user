@@ -21,11 +21,15 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
+                android:id="@+id/back"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Review Shopping Bag"
                 android:textColor="@color/white"
-                android:layout_marginTop="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:textAlignment="center"
+                android:drawableStart="@drawable/ic_back"
                 android:textSize="20sp"
                 android:fontFamily="@font/montserrat_bold"
                 android:layout_centerHorizontal="true"/>
