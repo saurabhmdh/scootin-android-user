@@ -43,9 +43,6 @@ class CartListFragment : BaseFragment(R.layout.fragment_cart_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentCartListBinding.bind(view)
-        binding.back.setOnClickListener {
-            findNavController().popBackStack(R.id.home,false)
-        }
         setAddCartListAdapter()
         setData()
         setListener()
