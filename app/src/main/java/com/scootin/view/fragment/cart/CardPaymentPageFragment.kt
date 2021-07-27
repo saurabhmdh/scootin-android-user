@@ -66,8 +66,13 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                 if (data?.couponDiscount != 0.0) {
                     binding.promoApplied.visibility = View.VISIBLE
                     binding.discountApplied.text = "Discount Applied (${promoCode})"
+                    binding.applyPromoButton.visibility=View.GONE
+                    binding.removePromoButton.visibility=View.VISIBLE
+
                 } else {
                     binding.promoApplied.visibility = View.GONE
+                    binding.applyPromoButton.visibility=View.VISIBLE
+                    binding.removePromoButton.visibility=View.GONE
                 }
 
             } else {
@@ -168,10 +173,10 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
                 Toast.makeText(context, "Please enter a valid coupon code", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            else{
-                binding.applyPromoButton.visibility=View.GONE
-                binding.removePromoButton.visibility=View.VISIBLE
-            }
+//            else{
+//                binding.applyPromoButton.visibility=View.GONE
+//                binding.removePromoButton.visibility=View.VISIBLE
+//            }
             promoCode = binding.couponEdittext.text!!.toString()
             showLoading()
             viewModel.loadPaymentInfo(promoCode)
