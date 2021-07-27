@@ -25,6 +25,7 @@
 
     <color name="backgroundTint">#ffc0cb</color>
     <color name="actionTextColor">@color/order_status_delivered_color</color>
-
+    <color name="bottomNavRedColor">#E90000</color>
+    <color name="bottomNavGreyColor">#878787</color>
     <color name="dark_blue">#0F31F5</color>
 </resources>
