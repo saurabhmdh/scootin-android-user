@@ -220,6 +220,9 @@
                 android:scrollbars="none"
                 android:text="@string/edittxt_hint_citywide"
                 android:textSize="12dp"
+                android:minLines="2"
+                android:maxLines="2"
+                android:lines="2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pickupAddress" />
