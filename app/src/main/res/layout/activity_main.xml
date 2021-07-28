@@ -34,9 +34,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:labelVisibilityMode="unlabeled"
+        app:itemIconTint="@color/bottom_color"
         app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
         android:background="@drawable/ic_navigation_botton_background"
-        app:itemIconTint="@android:color/white"
         app:menu="@menu/bottom_nav"/>
 
 </LinearLayout>
