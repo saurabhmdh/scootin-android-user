@@ -83,7 +83,7 @@ interface APIService {
     ): Response<List<ServiceArea>>
 
 
-    @POST("/search/{serviceAreaId}/find-all-products-in-subcategories")
+    @POST("/search/{serviceAreaId}/find-all-shops-in-subcategories")
     suspend fun findShopsBySubCategory(
         @Path("serviceAreaId") serviceAreaId: String,
         @Body requestSearch: RequestSearchBySabCategories,
@@ -113,7 +113,7 @@ interface APIService {
     ): Response<List<SearchProductsByCategoryResponse>>
 
 
-    @POST("/search/{serviceAreaId}/find-all-shops-in-subcategories")
+    @POST("/search/{serviceAreaId}/find-all-products-in-subcategories")
     suspend fun searchProductBySubCategories(
         @Path("serviceAreaId") serviceAreaId: String,
         @Query("page") offset: Int = 0,
