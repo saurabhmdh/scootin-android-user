@@ -4,16 +4,15 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.scootin.network.api.APIService
-import com.scootin.network.manager.AppHeaders
-import com.scootin.network.request.*
-import com.scootin.network.response.SearchProductsByCategoryResponse
+import com.scootin.network.request.RequestSearch
+import com.scootin.network.request.RequestSearchBySabCategories
+import com.scootin.network.request.RequestSearchWithCategoryAndSubCategory
+import com.scootin.network.request.RequestSearchWithFilter
 import com.scootin.network.response.SearchShopsByCategoryResponse
-import com.scootin.network.response.order.OrderHistoryItem
 import com.scootin.pages.*
 import com.scootin.view.vo.ProductSearchVO
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MultipartBody
-import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -29,9 +28,9 @@ class SearchRepository @Inject constructor(
         }.flow
     }
 
-    fun searchShopsBySubCategory(requestSearch: RequestSearch, serviceAreaId: String, categoryId: String): Flow<PagingData<SearchShopsByCategoryResponse>> {
+    fun searchShopsBySubCategory(requestSearch: RequestSearchBySabCategories, serviceAreaId: String): Flow<PagingData<SearchShopsByCategoryResponse>> {
         return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20, enablePlaceholders = false)) {
-            SearchShopBySubCategoryDataSource(services, serviceAreaId, categoryId, requestSearch)
+            SearchShopBySubCategoryDataSource(services, serviceAreaId, requestSearch)
         }.flow
     }
 
@@ -53,9 +52,9 @@ class SearchRepository @Inject constructor(
         }.flow
     }
 
-    fun searchProductBySubCategories(query: String, serviceAreaId: String, subCategoryId: String): Flow<PagingData<ProductSearchVO>> {
+    fun searchProductBySubCategories(requestSearch: RequestSearchBySabCategories, serviceAreaId: String): Flow<PagingData<ProductSearchVO>> {
         return Pager(config = PagingConfig(pageSize = 20, initialLoadSize = 20, enablePlaceholders = false)) {
-            SearchProductBySubcategory(services, serviceAreaId, subCategoryId, RequestSearch(query = query))
+            SearchProductBySubcategory(services, serviceAreaId, requestSearch)
         }.flow
     }
 

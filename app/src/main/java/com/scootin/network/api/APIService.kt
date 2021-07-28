@@ -83,11 +83,10 @@ interface APIService {
     ): Response<List<ServiceArea>>
 
 
-    @POST("/search/{serviceAreaId}/{categoryId}/get-all-shops-by-subcategory")
+    @POST("/search/{serviceAreaId}/find-all-products-in-subcategories")
     suspend fun findShopsBySubCategory(
         @Path("serviceAreaId") serviceAreaId: String,
-        @Path("categoryId") categoryId: String,
-        @Body requestSearch: RequestSearch,
+        @Body requestSearch: RequestSearchBySabCategories,
         @Query("page") offset: Int = 0,
         @Query("size") limit: Int = 10,
         @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
@@ -114,13 +113,12 @@ interface APIService {
     ): Response<List<SearchProductsByCategoryResponse>>
 
 
-    @POST("/search/{serviceAreaId}/{subCategoryId}/get-all-products-with-subcategory")
+    @POST("/search/{serviceAreaId}/find-all-shops-in-subcategories")
     suspend fun searchProductBySubCategories(
         @Path("serviceAreaId") serviceAreaId: String,
-        @Path("subCategoryId") subCategoryId: String,
         @Query("page") offset: Int = 0,
         @Query("size") limit: Int = 10,
-        @Body requestSearch: RequestSearch,
+        @Body requestSearch: RequestSearchBySabCategories,
         @HeaderMap map: Map<String, String> = AppHeaders.getHeaderMap()
     ): Response<List<SearchProductsByCategoryResponse>>
 

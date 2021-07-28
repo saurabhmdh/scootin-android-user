@@ -1,18 +1,10 @@
 package com.scootin.view.fragment.delivery.sweet
 
-import android.content.Context
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.observe
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
@@ -25,21 +17,17 @@ import com.scootin.extensions.updateVisibility
 import com.scootin.network.AppExecutors
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.AddToCartRequest
-import com.scootin.network.response.SearchProductsByCategoryResponse
 import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.util.fragment.autoCleared
-import com.scootin.view.adapter.ProductSearchPagingAdapter
 import com.scootin.view.adapter.ShopSearchAdapter
 import com.scootin.view.adapter.SweetsAdapter
 import com.scootin.view.custom.CustomSearchView
 import com.scootin.view.fragment.BaseFragment
-import com.scootin.view.fragment.delivery.essential.EssentialsGroceryDeliveryFragmentDirections
 import com.scootin.view.vo.ProductSearchVO
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.lang.Exception
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -64,7 +52,8 @@ class SweetsDeliveryFragment : BaseFragment(R.layout.fragment_sweets_delivery) {
 
     private fun updateUI() {
         binding.sweets.isSelected = true
-        viewModel.updateSubCategory("258") //Default item..
+        val defaultItem = listOf("258")
+        viewModel.updateSubCategory(defaultItem) //Default item..
 
         setStoreAdapter()
         setProductAdapter()
@@ -172,12 +161,13 @@ class SweetsDeliveryFragment : BaseFragment(R.layout.fragment_sweets_delivery) {
 //        }
 
         binding.sweets.setOnClickListener {
-            if (binding.sweets.isSelected) {
+            val subcategory = it.tag as String?
+            if (binding.sweets.isSelected || subcategory.isNullOrEmpty()) {
                 return@setOnClickListener
             }
             clearPagingData()
             Timber.i("Selected.. ${it.tag as String?}")
-            viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
+            viewModel.executeNewRequest(listOf(subcategory), searchBox.query?.toString().orEmpty())
             binding.sweets.isSelected = true
             binding.snacks.isSelected = false
             binding.cake.isSelected = false
@@ -185,12 +175,13 @@ class SweetsDeliveryFragment : BaseFragment(R.layout.fragment_sweets_delivery) {
         }
 
         binding.snacks.setOnClickListener {
-            if (binding.snacks.isSelected) {
+            val subcategory = it.tag as String?
+            if (binding.snacks.isSelected || subcategory.isNullOrEmpty()) {
                 return@setOnClickListener
             }
             clearPagingData()
             Timber.i("Selected.. ${it.tag as String?}")
-            viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
+            viewModel.executeNewRequest(listOf(subcategory), searchBox.query?.toString().orEmpty())
             binding.sweets.isSelected = false
             binding.snacks.isSelected = true
             binding.cake.isSelected = false
@@ -198,12 +189,13 @@ class SweetsDeliveryFragment : BaseFragment(R.layout.fragment_sweets_delivery) {
 
         }
         binding.cake.setOnClickListener {
-            if (binding.cake.isSelected) {
+            val subcategory = it.tag as String?
+            if (binding.cake.isSelected || subcategory.isNullOrEmpty()) {
                 return@setOnClickListener
             }
             clearPagingData()
             Timber.i("Selected.. ${it.tag as String?}")
-            viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
+            viewModel.executeNewRequest(listOf(subcategory), searchBox.query?.toString().orEmpty())
             binding.sweets.isSelected = false
             binding.snacks.isSelected = false
             binding.cake.isSelected = true

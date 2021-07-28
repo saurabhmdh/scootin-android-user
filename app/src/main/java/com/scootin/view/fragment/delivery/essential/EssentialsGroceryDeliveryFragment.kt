@@ -49,7 +49,9 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
 
     private fun updateUI() {
         binding.grocery.isSelected = true
-        viewModel.updateSubCategory("300") //Default item..
+        //Saurabh: For now we are making default item as first one
+        val defaultItem = listOf("300")
+        viewModel.updateSubCategory(defaultItem) //Default item..
         setStoreAdapter()
         setProductAdapter()
     }
@@ -151,7 +153,14 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
             }
             clearPagingData()
             Timber.i("Selected.. ${it.tag as String?}")
-            viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
+            //Lets try to make it arrays
+            val listOfElements = listOf(
+                "300",
+                "301",
+                "302",
+                "303"
+            )
+            viewModel.executeNewRequest(listOfElements, searchBox.query?.toString().orEmpty())
             binding.allEssentials.isSelected = true
             binding.grocery.isSelected = false
             binding.breakfast.isSelected = false
@@ -160,12 +169,14 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
         }
 
         binding.grocery.setOnClickListener {
-            if (binding.grocery.isSelected) {
+            val subcategory = it.tag as String?
+            if (binding.grocery.isSelected || subcategory.isNullOrEmpty()) {
                 return@setOnClickListener
             }
             clearPagingData()
+
             Timber.i("Selected.. ${it.tag as String?}")
-            viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
+            viewModel.executeNewRequest(listOf(subcategory), searchBox.query?.toString().orEmpty())
             binding.grocery.isSelected = true
             binding.breakfast.isSelected = false
             binding.household.isSelected = false
@@ -174,12 +185,14 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
         }
 
         binding.breakfast.setOnClickListener {
-            if (binding.breakfast.isSelected) {
+            val subcategory = it.tag as String?
+
+            if (binding.breakfast.isSelected || subcategory.isNullOrEmpty()) {
                 return@setOnClickListener
             }
             clearPagingData()
             Timber.i("Selected.. ${it.tag as String?}")
-            viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
+            viewModel.executeNewRequest(listOf(subcategory), searchBox.query?.toString().orEmpty())
             binding.grocery.isSelected = false
             binding.breakfast.isSelected = true
             binding.household.isSelected = false
@@ -187,12 +200,13 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
             binding.allEssentials.isSelected = false
         }
         binding.household.setOnClickListener {
-            if (binding.household.isSelected) {
+            val subcategory = it.tag as String?
+            if (binding.household.isSelected || subcategory.isNullOrEmpty()) {
                 return@setOnClickListener
             }
             clearPagingData()
             Timber.i("Selected.. ${it.tag as String?}")
-            viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
+            viewModel.executeNewRequest(listOf(subcategory), searchBox.query?.toString().orEmpty())
             binding.grocery.isSelected = false
             binding.breakfast.isSelected = false
             binding.household.isSelected = true
@@ -201,12 +215,13 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
         }
 
         binding.hygiene.setOnClickListener {
-            if (binding.hygiene.isSelected) {
+            val subcategory = it.tag as String?
+            if (binding.hygiene.isSelected || subcategory.isNullOrEmpty()) {
                 return@setOnClickListener
             }
             clearPagingData()
             Timber.i("Selected.. ${it.tag as String?}")
-            viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
+            viewModel.executeNewRequest(listOf(subcategory), searchBox.query?.toString().orEmpty())
             binding.grocery.isSelected = false
             binding.breakfast.isSelected = false
             binding.household.isSelected = false

@@ -4,12 +4,15 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.scootin.database.dao.CacheDao
 import com.scootin.database.dao.LocationDao
 import com.scootin.database.table.Cache
 import com.scootin.network.manager.AppHeaders
 import com.scootin.network.request.*
 import com.scootin.network.response.SearchShopsByCategoryResponse
+import com.scootin.network.response.State
 import com.scootin.network.response.cart.CartListResponseItem
 import com.scootin.repository.CartRepository
 import com.scootin.repository.SearchRepository
@@ -49,25 +52,23 @@ class CategoriesViewModel @ViewModelInject internal constructor(
         _search_by_shop.postValue(SearchShopsItem(query, shopId))
     }
 
-    fun updateSubCategory(selectedCategoryID: String?) {
+    fun updateSubCategory(selectedCategoryID: List<String>) {
         launch {
-            selectedCategoryID?.let {
-                cacheDao.insert(Cache(AppConstants.SUB_CATEGORY, it))
-            }
+            val selectedCategories = Gson().toJson(selectedCategoryID)
+            cacheDao.insertCache(Cache(AppConstants.SUB_CATEGORY, selectedCategories))
         }
     }
 
-    fun executeNewRequest(selectedCategoryID: String?, query: String) {
+    fun executeNewRequest(selectedCategoryID: List<String>, query: String) {
         launch {
             updateSubCategoryAndMakeRequest(selectedCategoryID, query)
         }
     }
 
-    suspend fun updateSubCategoryAndMakeRequest(selectedCategoryID: String?, query: String) {
-        selectedCategoryID?.let {
-            cacheDao.insertCache(Cache(AppConstants.SUB_CATEGORY, it))
-            _search.postValue(SearchShopsByCategory(query))
-        }
+    private suspend fun updateSubCategoryAndMakeRequest(selectedCategoryID: List<String>, query: String) {
+        val selectedCategories = Gson().toJson(selectedCategoryID)
+        cacheDao.insertCache(Cache(AppConstants.SUB_CATEGORY, selectedCategories))
+        _search.postValue(SearchShopsByCategory(query))
     }
 
     data class SearchShopsItem(val query: String, val shopId: Long)
@@ -96,17 +97,23 @@ class CategoriesViewModel @ViewModelInject internal constructor(
     val shopsBySubcategory: LiveData<PagingData<SearchShopsByCategoryResponse>> =
         _search.switchMap { search ->
             liveData(context = viewModelScope.coroutineContext + Dispatchers.IO + handler) {
-                Timber.i("zSearch Detail ${search.query}")
+                Timber.i("Search Detail ${search.query}")
                 val locationInfo = locationDao.getEntityLocation()
-                val mainCategory = cacheDao.getCacheData(AppConstants.SUB_CATEGORY)?.value
+                val subCategory = cacheDao.getCacheData(AppConstants.SUB_CATEGORY)?.value
                 val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
 
-                val request = RequestSearch(locationInfo.latitude, locationInfo.longitude, search.query)
+                val listType = object : TypeToken<List<String>>() {}.type
+                val subCategories = Gson().fromJson<List<String>>(subCategory, listType)
+                val sabs = mutableListOf<Long>()
+                subCategories?.forEach {
+                    sabs.add(it.toLong())
+                }
+
+                val request = RequestSearchBySabCategories(locationInfo.latitude, locationInfo.longitude, search.query, sabs)
                 emitSource(
                     searchRepository.searchShopsBySubCategory(
                         request,
                         serviceArea.orEmpty(),
-                        mainCategory.orEmpty()
                     ).cachedIn(viewModelScope).asLiveData()
                 )
             }
@@ -174,8 +181,16 @@ class CategoriesViewModel @ViewModelInject internal constructor(
             val subCategory = cacheDao.getCacheData(AppConstants.SUB_CATEGORY)?.value
             val serviceArea = cacheDao.getCacheData(AppConstants.SERVICE_AREA)?.value
 
+            val listType = object : TypeToken<List<String>>() {}.type
+            val subCategories = Gson().fromJson<List<String>>(subCategory, listType)
+            val sabs = mutableListOf<Long>()
+            subCategories?.forEach {
+                sabs.add(it.toLong())
+            }
+
+            val request = RequestSearchBySabCategories(0.0, 0.0, it.query, sabs)
             Timber.i("EssentialsGrocer All products subCategory = ${subCategory}")
-            emitSource(searchRepository.searchProductBySubCategories(it.query,  serviceArea.orEmpty(), subCategory.orEmpty()).cachedIn(viewModelScope).asLiveData())
+            emitSource(searchRepository.searchProductBySubCategories(request,  serviceArea.orEmpty()).cachedIn(viewModelScope).asLiveData())
         }
     }
 

@@ -48,7 +48,8 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
 
     private fun updateUI() {
         binding.veg.isSelected = true
-        viewModel.updateSubCategory("400")
+        val defaultItem = listOf("400")
+        viewModel.updateSubCategory(defaultItem)
         binding.productList.layoutManager = GridLayoutManager(context,2)
         setProductAdapter()
     }
@@ -135,12 +136,13 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
     private fun setupSubCategoryListener(searchBox: CustomSearchView) {
 
         binding.veg.setOnClickListener {
-            if (binding.veg.isSelected) {
+            val subcategory = it.tag as String?
+            if (binding.veg.isSelected || subcategory.isNullOrEmpty()) {
                 return@setOnClickListener
             }
             clearPagingData()
             Timber.i("Selected.. ${it.tag as String?}")
-            viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
+            viewModel.executeNewRequest(listOf(subcategory), searchBox.query?.toString().orEmpty())
             binding.veg.isSelected = true
             //binding.allCategories.isSelected=false
             binding.fruits.isSelected = false
@@ -148,12 +150,13 @@ class VegetableDeliveryFragment : Fragment(R.layout.fragment_vegetable_delivery)
         }
 
         binding.fruits.setOnClickListener {
-            if (binding.fruits.isSelected) {
+            val subcategory = it.tag as String?
+            if (binding.fruits.isSelected || subcategory.isNullOrEmpty()) {
                 return@setOnClickListener
             }
             clearPagingData()
             Timber.i("Selected.. ${it.tag as String?}")
-            viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
+            viewModel.executeNewRequest(listOf(subcategory), searchBox.query?.toString().orEmpty())
             binding.veg.isSelected = false
             //binding.allCategories.isSelected=false
             binding.fruits.isSelected = true
