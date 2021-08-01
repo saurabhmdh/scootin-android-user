@@ -4,12 +4,12 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -55,8 +55,8 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     private var footerDealAdapter by autoCleared<DealFooterAdapter>()
 
     private lateinit var homeCategoryList: List<HomeResponseCategory>
-    private val timer = Timer()
-    private val footerTimer = Timer()
+    private var timer = Timer()
+    private var footerTimer = Timer()
 
     @Inject
     lateinit var appExecutors: AppExecutors
@@ -102,7 +102,20 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     }
 
     private fun setupRecycledView() {
-        headerDealAdapter = DealAdapter(appExecutors)
+        headerDealAdapter = DealAdapter(appExecutors, object : DealAdapter.OnTouch{
+            override fun onTouch(event: MotionEvent?): Boolean {
+                when(event?.action) {
+                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                        startMovement()
+                    }
+                    MotionEvent.ACTION_DOWN -> {
+                        stopMovement()
+                    }
+                }
+                return true
+            }
+
+        })
         footerDealAdapter = DealFooterAdapter(appExecutors)
 
         val snapHelper = LinearSnapHelper()
@@ -111,6 +124,17 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         binding.fragmentHomeContent.headerDeals.apply {
             addItemDecoration(CirclePagerIndicatorDecoration())
             adapter = headerDealAdapter
+//            addOnScrollListener(object : RecyclerView.OnScrollListener(){
+//                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//                    Timber.i("Saurabh new State ${newState}")
+//                    if (newState == 0) {
+////                        startMovement()
+//                    } else if (newState == 1) {
+////                        stopMovement()
+//                    }
+//                    super.onScrollStateChanged(recyclerView, newState)
+//                }
+//            })
         }
         binding.fragmentHomeContent.footerDeals.apply {
             addItemDecoration(CirclePagerIndicatorDecoration())
@@ -230,14 +254,8 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
                 activity?.setupBadging(result.orZero())
             }
         }
-        
-        try {
-            timer.scheduleAtFixedRate(getHeaderTask(), Date(),5000)
-            footerTimer.scheduleAtFixedRate(getFooterTask(), Date(),6000)
-        } catch (e: java.lang.Exception) {
 
-        }
-
+        startMovement()
 
         viewModel.getAllDeals("HEADER").observe(viewLifecycleOwner) {
             if (it.isSuccessful) {
@@ -251,6 +269,27 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
             if (it.isSuccessful) {
                 footerDealAdapter.submitList(it.body())
             }
+        }
+    }
+
+    fun startMovement() {
+        try {
+            stopMovement() //First lets stop current movement if its going on..
+            timer = Timer()
+            footerTimer = Timer()
+            timer.scheduleAtFixedRate(getHeaderTask(), Date(),5000)
+            footerTimer.scheduleAtFixedRate(getFooterTask(), Date(),6000)
+        } catch (e: java.lang.Exception) {
+
+        }
+    }
+
+    fun stopMovement() {
+        try {
+            timer.cancel()
+            footerTimer.cancel()
+        } catch (e: java.lang.Exception) {
+
         }
     }
 
