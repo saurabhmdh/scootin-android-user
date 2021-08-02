@@ -6,13 +6,15 @@
         <item name="colorPrimary">@android:color/white</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="autoCompleteTextViewStyle">@style/SearchView</item>
+
     </style>
 
     <style name="CustomToolbar" parent="ThemeOverlay.AppCompat.Dark">
         <item name="actionBarSize">168dp</item>
     </style>
 
-    <style name="SearchView" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+    <style name="SearchView" parent="Theme.MaterialComponents.DayNight.DarkActionBar.Bridge">
         <item name="android:textColorHint">@color/white</item>
         <item name="android:textColor">@color/white</item>
         <item name="editTextColor">@color/white</item>
