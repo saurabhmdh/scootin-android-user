@@ -45,6 +45,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
 
     var orderId: List<Long>? = emptyList()
     var address: AddressDetails? = null
+    var mode="null"
 
     //We need to load order in-order to get more information about order
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -102,6 +103,12 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
 
 
         binding.confirmButton.setOnClickListener {
+
+            if(mode=="null"){
+                Toast.makeText(requireContext(), "Please select a payment mode", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
             if (address == null) {
                 Toast.makeText(requireContext(), "Please add a address", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
@@ -113,10 +120,13 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
 
             alertDialog?.setPositiveButton("Confirm") { dialogInterface, which ->
 
-            var mode="ONLINE"
+
 
             if(binding.cod.isSelected){
                 mode="CASH"
+            }
+                else if(binding.payByCard.isSelected||binding.netBanking.isSelected||binding.upi.isSelected){
+                    mode="ONLINE"
             }
 
             showLoading()
@@ -193,7 +203,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
         binding.back.setOnClickListener { findNavController().popBackStack() }
 
 
-        binding.editDropAddress.setOnClickListener {
+        binding.dropAddress.setOnClickListener {
             findNavController().navigate(IntentConstants.openAddressPage())
         }
 
