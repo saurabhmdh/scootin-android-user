@@ -105,7 +105,7 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/receiver_photo_box"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sender_photo_box" />
+        app:layout_constraintTop_toBottomOf="@+id/uploadPhoto" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/drop_address_text"
@@ -143,7 +143,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@drawable/bg_rectangle"
-        android:backgroundTint="#008194"
+        android:backgroundTint="@color/dark_grey"
         android:orientation="horizontal"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -173,16 +173,19 @@
 
 
     <LinearLayout
-        android:id="@+id/sender_photo_box"
+        android:id="@+id/medicine_instructions"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
+        android:padding="@dimen/dimen_10dp"
         android:orientation="vertical"
+        android:background="@drawable/bg_rectangle"
+        android:backgroundTint="#AF0000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/uploadPhoto">
+        app:layout_constraintTop_toBottomOf="@+id/receiver_photo_box">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -193,6 +196,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_dot"
+                android:tint="@color/white"
                 android:layout_marginTop="7dp"
                 android:layout_gravity="top"/>
 
@@ -204,7 +208,7 @@
                 android:layout_marginStart="4dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="Please provide a clear and readable photo."
-                android:textColor="#000" />
+                android:textColor="#fff" />
 
         </LinearLayout>
 
@@ -217,6 +221,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_dot"
+                android:tint="@color/white"
                 android:layout_marginTop="7dp"
                 android:layout_gravity="top"/>
 
@@ -228,7 +233,7 @@
                 android:layout_marginStart="4dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="No medicine will be sold without doctor's prescription."
-                android:textColor="#000" />
+                android:textColor="#fff" />
 
         </LinearLayout>
 
@@ -241,6 +246,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_dot"
+                android:tint="@color/white"
                 android:layout_marginTop="7dp"
                 android:layout_gravity="top"/>
 
@@ -252,7 +258,7 @@
                 android:layout_marginStart="4dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:text=" Only over the counter/ general medicines and medicinal items for general use can be sold without doctor's prescription. Please mention the medicine/non medicinal item name and quantity below, as needed."
-                android:textColor="#000" />
+                android:textColor="#fff" />
 
         </LinearLayout>
 
@@ -290,6 +296,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
         android:clipToPadding="false"
         android:orientation="vertical"
         app:cardCornerRadius="@dimen/dimen_10"
@@ -297,7 +304,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.7"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/receiver_photo_box">
+        app:layout_constraintTop_toBottomOf="@+id/medicine_instructions">
 
         <LinearLayout
             android:id="@+id/linear_layout"
@@ -336,7 +343,7 @@
         android:layout_marginEnd="20dp"
         android:src="@drawable/ic_image_preview_box_grocerylist"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sender_photo_box" />
+        app:layout_constraintTop_toBottomOf="@+id/uploadPhoto" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/placeOrder"
