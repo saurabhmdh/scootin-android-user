@@ -104,7 +104,14 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
 
         binding.confirmButton.setOnClickListener {
 
-            if(mode=="null"){
+            if(binding.cod.isSelected){
+                mode="CASH"
+            }
+            else if(binding.payByCard.isSelected||binding.netBanking.isSelected||binding.upi.isSelected){
+                mode="ONLINE"
+            }
+
+            else{
                 Toast.makeText(requireContext(), "Please select a payment mode", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
@@ -120,14 +127,6 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
 
             alertDialog?.setPositiveButton("Confirm") { dialogInterface, which ->
 
-
-
-            if(binding.cod.isSelected){
-                mode="CASH"
-            }
-                else if(binding.payByCard.isSelected||binding.netBanking.isSelected||binding.upi.isSelected){
-                    mode="ONLINE"
-            }
 
             showLoading()
 
