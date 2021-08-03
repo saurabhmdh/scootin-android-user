@@ -1,6 +1,8 @@
 package com.scootin.view.adapter
 
 import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.scootin.databinding.AdapterPromoOffersBinding
@@ -29,7 +31,7 @@ import com.scootin.network.response.home.DealResponse
 //        }
 //    }
 //}
-class DealAdapter(val appExecutors: AppExecutors) :DataBoundListAdapter<DealResponse, AdapterPromoOffersBinding>(appExecutors,
+class DealAdapter(val appExecutors: AppExecutors, val onTouch: OnTouch) :DataBoundListAdapter<DealResponse, AdapterPromoOffersBinding>(appExecutors,
     diffCallback = object : DiffUtil.ItemCallback<DealResponse>() {
         override fun areItemsTheSame(oldItem: DealResponse, newItem: DealResponse) = oldItem.id == newItem.id
         override fun areContentsTheSame(oldItem: DealResponse, newItem: DealResponse) = oldItem == newItem
@@ -46,6 +48,10 @@ class DealAdapter(val appExecutors: AppExecutors) :DataBoundListAdapter<DealResp
         isLast: Boolean
     ) {
         binding.data = item
+        binding.promoImg.setOnTouchListener({ v, event -> onTouch.onTouch(event) })
     }
 
+    interface OnTouch {
+        fun onTouch(event: MotionEvent?): Boolean
+    }
 }
