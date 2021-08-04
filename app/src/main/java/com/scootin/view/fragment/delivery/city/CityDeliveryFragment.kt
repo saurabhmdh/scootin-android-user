@@ -131,14 +131,14 @@ class CityDeliveryFragment : BaseFragment(R.layout.fragment_citywide_delivery) {
             binding.termAccepted.isChecked = !binding.termAccepted.isChecked
         }
 
-        binding.pickupAddress.setOnClickListener {
+        binding.pickupAddressText.setOnClickListener {
             click = 0
             viewModel.media = media
             viewModel.dropAddress = dropAddress
             findNavController().navigate(IntentConstants.openAddressPage())
         }
 
-        binding.dropAddress.setOnClickListener {
+        binding.dropAddressText.setOnClickListener {
             click = 1
             viewModel.media = media
             viewModel.pickupAddress = pickupAddress

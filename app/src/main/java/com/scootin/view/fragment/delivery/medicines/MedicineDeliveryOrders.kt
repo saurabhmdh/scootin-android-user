@@ -138,7 +138,7 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
             }
         }
 
-        binding.dropAddress.setOnClickListener {
+        binding.dropAddressText.setOnClickListener {
             viewModel.list = searchItemAddAdapter.list
             viewModel.media = media
             findNavController().navigate(IntentConstants.openAddressPage())
@@ -172,7 +172,7 @@ class MedicineDeliveryOrders : BaseFragment(R.layout.medicine_prescription_fragm
             searchItemAddAdapter.addAdd(viewModel.list)
         }
 
-        binding.medicalStoreName.text = "${args.shopName}"
+        binding.storeName.text = "${args.shopName}"
     }
 
     private fun placeDirectOrder() {

@@ -54,7 +54,7 @@
         android:layout_marginTop="5dp"
         android:orientation="horizontal"
         android:background="@drawable/bg_rectangle"
-        android:backgroundTint="#008194"
+        android:backgroundTint="@color/dark_grey"
         android:padding="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >

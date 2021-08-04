@@ -68,33 +68,34 @@
 
     </RelativeLayout>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/medical_store_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:fontFamily="@font/montserrat_regular"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header"
-        tools:text="Gayatri Medical" />
+<!--    <androidx.appcompat.widget.AppCompatTextView-->
+<!--        android:id="@+id/medical_store_name"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:fontFamily="@font/montserrat_regular"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/header"-->
+<!--        tools:text="Gayatri Medical" />-->
 
-    <View
-        android:id="@+id/empty"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@color/text_color_primary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medical_store_name" />
+<!--    <View-->
+<!--        android:id="@+id/empty"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:background="@color/text_color_primary"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/medical_store_name" />-->
+
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/dropAddress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="16dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="@font/montserrat_regular"
@@ -140,16 +141,16 @@
         android:id="@+id/uploadPhoto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/bg_rectangle"
-        android:backgroundTint="#008194"
+        android:backgroundTint="@color/dark_grey"
         android:orientation="horizontal"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/empty">
+        app:layout_constraintTop_toBottomOf="@id/header">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
@@ -170,6 +171,98 @@
 
     </LinearLayout>
 
+
+    <LinearLayout
+        android:id="@+id/medicine_instructions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:padding="@dimen/dimen_10dp"
+        android:orientation="vertical"
+        android:background="@drawable/bg_rectangle"
+        android:backgroundTint="#AF0000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/receiver_photo_box">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_dot"
+                android:tint="@color/white"
+                android:layout_marginTop="7dp"
+                android:layout_gravity="top"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:textSize="12sp"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Please provide a clear and readable photo."
+                android:textColor="#fff" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_dot"
+                android:tint="@color/white"
+                android:layout_marginTop="7dp"
+                android:layout_gravity="top"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:textSize="12sp"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="No medicine will be sold without doctor's prescription."
+                android:textColor="#fff" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_dot"
+                android:tint="@color/white"
+                android:layout_marginTop="7dp"
+                android:layout_gravity="top"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:textSize="12sp"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text=" Only over the counter/ general medicines and medicinal items for general use can be sold without doctor's prescription. Please mention the medicine/non medicinal item name and quantity below, as needed."
+                android:textColor="#fff" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/warning"
@@ -203,6 +296,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
         android:clipToPadding="false"
         android:orientation="vertical"
         app:cardCornerRadius="@dimen/dimen_10"
@@ -210,7 +304,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.7"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/receiver_photo_box">
+        app:layout_constraintTop_toBottomOf="@+id/medicine_instructions">
 
         <LinearLayout
             android:id="@+id/linear_layout"
