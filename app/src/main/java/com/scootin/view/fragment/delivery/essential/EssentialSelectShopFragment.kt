@@ -2,6 +2,7 @@ package com.scootin.view.fragment.delivery.essential
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.scootin.R
 import com.scootin.databinding.FragmentGroceryDeliveryShopSelectBinding
+import com.scootin.extensions.getCheckedRadioButtonPosition
 import com.scootin.network.AppExecutors
 import com.scootin.network.response.SearchShopsByCategoryResponse
 import com.scootin.util.fragment.autoCleared
@@ -58,6 +60,27 @@ class EssentialSelectShopFragment : BaseFragment(R.layout.fragment_grocery_deliv
                 shopSearchAdapter.submitData(response)
             }
         }
+        binding.searchBox.setOnQueryTextListener(
+            object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+
+                            query?.let {
+                                viewModel.doSearch(it)
+                            }
+
+
+                    Timber.i("onQueryTextSubmit $query ")
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    if (newText.isNullOrEmpty()) {
+                        viewModel.doSearch("")
+                    }
+                    return false
+                }
+            }
+        )
     }
 
 

@@ -2,6 +2,7 @@ package com.scootin.view.fragment.delivery.express
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -63,6 +64,28 @@ class ExpressDeliveryFragment : Fragment(R.layout.fragment_express_delivery_shop
                 shopSearchAdapter.submitData(response)
             }
         }
+
+        binding.searchBox.setOnQueryTextListener(
+            object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+
+                    query?.let {
+                        viewModel.doSearch(it)
+                    }
+
+
+                    Timber.i("onQueryTextSubmit $query ")
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    if (newText.isNullOrEmpty()) {
+                        viewModel.doSearch("")
+                    }
+                    return false
+                }
+            }
+        )
     }
 
     private fun setStoreAdapter() {
