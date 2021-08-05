@@ -307,7 +307,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_medium"
                     android:maxLines="2"
-                    android:text="Clothing"
+                    android:text="Snacks &amp;    Food"
                     android:textColor="#000"
                     android:textSize="12sp"
                     android:textStyle="bold" />
@@ -317,7 +317,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    app:srcCompat="@drawable/ic_tshirt" />
+                    app:srcCompat="@drawable/ic_food_and_snacks" />
 
             </RelativeLayout>
 

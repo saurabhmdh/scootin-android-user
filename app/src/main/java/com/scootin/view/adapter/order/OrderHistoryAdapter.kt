@@ -1,5 +1,6 @@
 package com.scootin.view.adapter.order
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,7 @@ class OrderHistoryAdapter(
         fun onViewDetailsSelected(view: View, item: OrderHistoryItem)
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(
         holder: DataBoundViewHolder<AdapterOrderHistoryListBinding>,
         position: Int
@@ -76,7 +78,10 @@ class OrderHistoryAdapter(
                     binding.orderStatus.setTextColor(Color.parseColor("#D10000"))
                 }
                if(orderStatus=="COMPLETED"||orderStatus=="CANCEL"){
-                   binding.imgTrack.setText("Details")
+                   binding.imgTrack.setImageResource(R.drawable.ic_details_button)
+               }
+                else{
+                   binding.imgTrack.setImageResource(R.drawable.ic_track_button)
                }
 
 

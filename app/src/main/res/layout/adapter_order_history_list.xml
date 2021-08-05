@@ -109,16 +109,12 @@
 
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/img_track"
             android:layout_width="80dp"
             android:layout_height="35dp"
             android:layout_margin="5dp"
-            android:background="@drawable/bg_rectangle"
-            android:backgroundTint="#01C27F"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="@string/track"
-            android:textColor="@color/white"
+            app:srcCompat="@drawable/ic_track_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 <!--        <androidx.appcompat.widget.AppCompatTextView-->
