@@ -16,18 +16,18 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/back"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/back"
+            android:layout_centerHorizontal="true"
+            android:drawableStart="@drawable/ic_back"
+            android:fontFamily="@font/montserrat_bold"
             android:paddingStart="16dp"
             android:paddingTop="16dp"
-            android:drawableStart="@drawable/ic_back"
+            android:text="Snacks &amp; Food"
             android:textAlignment="center"
-            android:text="Clothing"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:fontFamily="@font/montserrat_bold"
-            android:layout_centerHorizontal="true"/>
+            android:textSize="20sp" />
 
         <com.scootin.view.custom.CustomSearchView
             style="@style/SearchView"
