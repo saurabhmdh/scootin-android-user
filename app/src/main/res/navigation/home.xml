@@ -432,10 +432,6 @@
         android:label="Home" />
 
     <fragment
-        android:id="@+id/cakenbouquet"
-        android:name="com.scootin.view.fragment.delivery.sweet.CakenBouqetDeliveryFragment"
-        android:label="Home" />
-    <fragment
         android:id="@+id/innerwearmen"
         android:name="com.scootin.view.fragment.delivery.clothing.ClothingInnerWearMenFragment"
         android:label="Home" >

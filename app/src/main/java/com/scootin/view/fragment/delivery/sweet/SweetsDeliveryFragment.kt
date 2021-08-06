@@ -23,7 +23,9 @@ import com.scootin.view.adapter.ShopSearchAdapter
 import com.scootin.view.adapter.SweetsAdapter
 import com.scootin.view.custom.CustomSearchView
 import com.scootin.view.fragment.BaseFragment
+import com.scootin.view.vo.GroceryFilters
 import com.scootin.view.vo.ProductSearchVO
+import com.scootin.view.vo.SweetFilter
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -51,10 +53,7 @@ class SweetsDeliveryFragment : BaseFragment(R.layout.fragment_sweets_delivery) {
     }
 
     private fun updateUI() {
-        binding.sweets.isSelected = true
-        val defaultItem = listOf("258")
-        viewModel.updateSubCategory(defaultItem) //Default item..
-
+        selectSubCategory(SweetFilter.fromValue(viewModel.selectedCategoryId), true)
         setStoreAdapter()
         setProductAdapter()
     }
@@ -147,31 +146,12 @@ class SweetsDeliveryFragment : BaseFragment(R.layout.fragment_sweets_delivery) {
 
     private fun setupSubCategoryListener(searchBox: CustomSearchView) {
 
-//        binding.sw.setOnClickListener {
-//            if (binding.allCategories.isSelected) {
-//                return@setOnClickListener
-//            }
-//            clearPagingData()
-//            Timber.i("Selected.. ${it.tag as String?}")
-//            viewModel.executeNewRequest(it.tag as String?, searchBox.query?.toString().orEmpty())
-//            binding.allCategories.isSelected = true
-//            binding.sweets.isSelected = false
-//            binding.snacks.isSelected = false
-//            binding.cake.isSelected = false
-//        }
-
         binding.sweets.setOnClickListener {
             val subcategory = it.tag as String?
             if (binding.sweets.isSelected || subcategory.isNullOrEmpty()) {
                 return@setOnClickListener
             }
-            clearPagingData()
-            Timber.i("Selected.. ${it.tag as String?}")
-            viewModel.executeNewRequest(listOf(subcategory), searchBox.query?.toString().orEmpty())
-            binding.sweets.isSelected = true
-            binding.snacks.isSelected = false
-            binding.cake.isSelected = false
-           // binding.allCategories.isSelected = false
+            selectSubCategory(SweetFilter.SWEETS, false)
         }
 
         binding.snacks.setOnClickListener {
@@ -179,13 +159,7 @@ class SweetsDeliveryFragment : BaseFragment(R.layout.fragment_sweets_delivery) {
             if (binding.snacks.isSelected || subcategory.isNullOrEmpty()) {
                 return@setOnClickListener
             }
-            clearPagingData()
-            Timber.i("Selected.. ${it.tag as String?}")
-            viewModel.executeNewRequest(listOf(subcategory), searchBox.query?.toString().orEmpty())
-            binding.sweets.isSelected = false
-            binding.snacks.isSelected = true
-            binding.cake.isSelected = false
-           // binding.allCategories.isSelected = false
+            selectSubCategory(SweetFilter.SNACKS, false)
 
         }
         binding.cake.setOnClickListener {
@@ -193,16 +167,47 @@ class SweetsDeliveryFragment : BaseFragment(R.layout.fragment_sweets_delivery) {
             if (binding.cake.isSelected || subcategory.isNullOrEmpty()) {
                 return@setOnClickListener
             }
-            clearPagingData()
-            Timber.i("Selected.. ${it.tag as String?}")
-            viewModel.executeNewRequest(listOf(subcategory), searchBox.query?.toString().orEmpty())
-            binding.sweets.isSelected = false
-            binding.snacks.isSelected = false
-            binding.cake.isSelected = true
-          //  binding.allCategories.isSelected = false
+            selectSubCategory(SweetFilter.CAKE, false)
         }
 
     }
+
+    private fun selectSubCategory(filter: SweetFilter, isFirstRun: Boolean) {
+        if (isFirstRun.not()) {
+            clearPagingData()
+        }
+        var subcategory = listOf<String>()
+        viewModel.selectedCategoryId = filter.value
+
+        when(filter) {
+            SweetFilter.SWEETS -> {
+                subcategory = listOf(
+                    "258"
+                )
+                binding.sweets.isSelected = true
+                binding.snacks.isSelected = false
+                binding.cake.isSelected = false
+            }
+            SweetFilter.SNACKS -> {
+                subcategory = listOf(
+                    "260"
+                )
+                binding.sweets.isSelected = false
+                binding.snacks.isSelected = true
+                binding.cake.isSelected = false
+            }
+            SweetFilter.CAKE -> {
+                subcategory = listOf(
+                    "259"
+                )
+                binding.sweets.isSelected = false
+                binding.snacks.isSelected = false
+                binding.cake.isSelected = true
+            }
+        }
+        viewModel.executeNewRequest(subcategory, binding.searchBox.query?.toString().orEmpty())
+    }
+
 
     private fun clearPagingData() {
         lifecycleScope.launch {
