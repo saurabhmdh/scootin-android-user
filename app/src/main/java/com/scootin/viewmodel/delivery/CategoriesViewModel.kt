@@ -38,6 +38,8 @@ class CategoriesViewModel @ViewModelInject internal constructor(
 
     private val _search_by_shop = MutableLiveData<SearchShopsItem>()
 
+    public var selectedCategoryId = 0
+
     fun updateShop(shopId: Long) {
         _selectedShop.postValue(shopId)
     }
