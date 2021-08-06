@@ -22,6 +22,7 @@ import com.scootin.view.adapter.ProductSearchPagingAdapter
 import com.scootin.view.adapter.ShopSearchAdapter
 import com.scootin.view.custom.CustomSearchView
 import com.scootin.view.fragment.BaseFragment
+import com.scootin.view.vo.GroceryFilters
 import com.scootin.view.vo.ProductSearchVO
 import com.scootin.viewmodel.delivery.CategoriesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,10 +49,7 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
     }
 
     private fun updateUI() {
-        binding.grocery.isSelected = true
-        //Saurabh: For now we are making default item as first one
-        val defaultItem = listOf("300")
-        viewModel.updateSubCategory(defaultItem) //Default item..
+        selectSubCategory(GroceryFilters.fromValue(viewModel.selectedCategoryId), true)
         setStoreAdapter()
         setProductAdapter()
     }
@@ -151,21 +149,7 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
             if (binding.allEssentials.isSelected) {
                 return@setOnClickListener
             }
-            clearPagingData()
-            Timber.i("Selected.. ${it.tag as String?}")
-            //Lets try to make it arrays
-            val listOfElements = listOf(
-                "300",
-                "301",
-                "302",
-                "303"
-            )
-            viewModel.executeNewRequest(listOfElements, searchBox.query?.toString().orEmpty())
-            binding.allEssentials.isSelected = true
-            binding.grocery.isSelected = false
-            binding.breakfast.isSelected = false
-            binding.household.isSelected = false
-            binding.hygiene.isSelected = false
+            selectSubCategory(GroceryFilters.ALL, false)
         }
 
         binding.grocery.setOnClickListener {
@@ -173,45 +157,22 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
             if (binding.grocery.isSelected || subcategory.isNullOrEmpty()) {
                 return@setOnClickListener
             }
-            clearPagingData()
-
-            Timber.i("Selected.. ${it.tag as String?}")
-            viewModel.executeNewRequest(listOf(subcategory), searchBox.query?.toString().orEmpty())
-            binding.grocery.isSelected = true
-            binding.breakfast.isSelected = false
-            binding.household.isSelected = false
-            binding.hygiene.isSelected = false
-            binding.allEssentials.isSelected = false
+            selectSubCategory(GroceryFilters.GROCERY, false)
         }
 
         binding.breakfast.setOnClickListener {
             val subcategory = it.tag as String?
-
             if (binding.breakfast.isSelected || subcategory.isNullOrEmpty()) {
                 return@setOnClickListener
             }
-            clearPagingData()
-            Timber.i("Selected.. ${it.tag as String?}")
-            viewModel.executeNewRequest(listOf(subcategory), searchBox.query?.toString().orEmpty())
-            binding.grocery.isSelected = false
-            binding.breakfast.isSelected = true
-            binding.household.isSelected = false
-            binding.hygiene.isSelected = false
-            binding.allEssentials.isSelected = false
+            selectSubCategory(GroceryFilters.BREAKFAST, false)
         }
         binding.household.setOnClickListener {
             val subcategory = it.tag as String?
             if (binding.household.isSelected || subcategory.isNullOrEmpty()) {
                 return@setOnClickListener
             }
-            clearPagingData()
-            Timber.i("Selected.. ${it.tag as String?}")
-            viewModel.executeNewRequest(listOf(subcategory), searchBox.query?.toString().orEmpty())
-            binding.grocery.isSelected = false
-            binding.breakfast.isSelected = false
-            binding.household.isSelected = true
-            binding.hygiene.isSelected = false
-            binding.allEssentials.isSelected = false
+            selectSubCategory(GroceryFilters.HOUSEHOLD, false)
         }
 
         binding.hygiene.setOnClickListener {
@@ -219,15 +180,73 @@ class EssentialsGroceryDeliveryFragment : BaseFragment(R.layout.fragment_grocery
             if (binding.hygiene.isSelected || subcategory.isNullOrEmpty()) {
                 return@setOnClickListener
             }
-            clearPagingData()
-            Timber.i("Selected.. ${it.tag as String?}")
-            viewModel.executeNewRequest(listOf(subcategory), searchBox.query?.toString().orEmpty())
-            binding.grocery.isSelected = false
-            binding.breakfast.isSelected = false
-            binding.household.isSelected = false
-            binding.hygiene.isSelected = true
-            binding.allEssentials.isSelected = false
+            selectSubCategory(GroceryFilters.HYGIENE, false)
         }
+    }
+
+    private fun selectSubCategory(filter: GroceryFilters, isFirstRun: Boolean) {
+        if (isFirstRun.not()) {
+            clearPagingData()
+        }
+        var subcategory = listOf<String>()
+        viewModel.selectedCategoryId = filter.value
+
+        when(filter) {
+            GroceryFilters.ALL -> {
+                subcategory = listOf(
+                    "300",
+                    "301",
+                    "302",
+                    "303"
+                )
+                binding.allEssentials.isSelected = true
+                binding.grocery.isSelected = false
+                binding.breakfast.isSelected = false
+                binding.household.isSelected = false
+                binding.hygiene.isSelected = false
+            }
+            GroceryFilters.GROCERY -> {
+                subcategory = listOf(
+                    "300"
+                )
+                binding.grocery.isSelected = true
+                binding.breakfast.isSelected = false
+                binding.household.isSelected = false
+                binding.hygiene.isSelected = false
+                binding.allEssentials.isSelected = false
+            }
+            GroceryFilters.BREAKFAST -> {
+                subcategory = listOf(
+                    "301"
+                )
+                binding.grocery.isSelected = false
+                binding.breakfast.isSelected = true
+                binding.household.isSelected = false
+                binding.hygiene.isSelected = false
+                binding.allEssentials.isSelected = false
+            }
+            GroceryFilters.HOUSEHOLD -> {
+                subcategory = listOf(
+                    "302"
+                )
+                binding.grocery.isSelected = false
+                binding.breakfast.isSelected = false
+                binding.household.isSelected = true
+                binding.hygiene.isSelected = false
+                binding.allEssentials.isSelected = false
+            }
+            GroceryFilters.HYGIENE -> {
+                subcategory = listOf(
+                    "303"
+                )
+                binding.grocery.isSelected = false
+                binding.breakfast.isSelected = false
+                binding.household.isSelected = false
+                binding.hygiene.isSelected = true
+                binding.allEssentials.isSelected = false
+            }
+        }
+        viewModel.executeNewRequest(subcategory, binding.searchBox.query?.toString().orEmpty())
     }
 
     private fun clearPagingData() {
