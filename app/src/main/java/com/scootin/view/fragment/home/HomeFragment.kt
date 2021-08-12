@@ -52,7 +52,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
     private val viewModel: HomeFragmentViewModel by viewModels()
 
     private var headerDealAdapter by autoCleared<DealAdapter>()
-    private var footerDealAdapter by autoCleared<DealFooterAdapter>()
+    private var footerDealAdapter by autoCleared<DealAdapter>()
 
     private lateinit var homeCategoryList: List<HomeResponseCategory>
     private var timer = Timer()
@@ -116,7 +116,20 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
             }
 
         })
-        footerDealAdapter = DealFooterAdapter(appExecutors)
+        footerDealAdapter = DealAdapter(appExecutors, object : DealAdapter.OnTouch{
+            override fun onTouch(event: MotionEvent?): Boolean {
+                when(event?.action) {
+                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                        startMovement()
+                    }
+                    MotionEvent.ACTION_DOWN -> {
+                        stopMovement()
+                    }
+                }
+                return true
+            }
+
+        })
 
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(binding.fragmentHomeContent.headerDeals)
@@ -278,7 +291,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
             timer = Timer()
             footerTimer = Timer()
             timer.scheduleAtFixedRate(getHeaderTask(), Date(),5000)
-            footerTimer.scheduleAtFixedRate(getFooterTask(), Date(),6000)
+            footerTimer.scheduleAtFixedRate(getFooterTask(), Date(),5000)
         } catch (e: java.lang.Exception) {
 
         }
@@ -409,7 +422,7 @@ class HomeFragment :  Fragment(R.layout.fragment_home) {
         val layoutman = binding.fragmentHomeContent.footerDeals.layoutManager as LinearLayoutManager
         val currentVisible = layoutman.findFirstVisibleItemPosition()
         val total = binding.fragmentHomeContent.footerDeals.adapter?.itemCount ?: 0
-        val position = if (currentVisible + 3 >= total) 0 else currentVisible + 3
+        val position = if (currentVisible + 1 == total) 0 else currentVisible + 1
         Timber.i("scrolling footer ${position} while total ${total} at present visible $currentVisible")
         layoutman.smoothScrollToPosition(binding.fragmentHomeContent.footerDeals, RecyclerView.State(), position)
     }
