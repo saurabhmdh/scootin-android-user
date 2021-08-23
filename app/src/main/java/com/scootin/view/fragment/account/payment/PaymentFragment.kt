@@ -58,7 +58,7 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPaymentBinding.bind(view)
-
+        paymentModeSelector()
         setListener()
     }
 
@@ -88,7 +88,18 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
 //                        ""
 //                    }
 //                }
-            val mode="ONLINE"
+            var mode=""
+            if(binding.cod.isSelected){
+                mode="CASH"
+            }
+            else if(binding.payByCard.isSelected||binding.netBanking.isSelected||binding.upi.isSelected){
+                mode="ONLINE"
+            }
+
+            else{
+                Toast.makeText(requireContext(), "Please select a payment mode", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
             showLoading()
             when (orderType) {
                 "DIRECT" -> {
@@ -194,6 +205,33 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
                 }
             }
 
+        }
+    }
+
+    private fun paymentModeSelector(){
+        binding.payByCard.setOnClickListener {
+            binding.payByCard.isSelected=true
+            binding.netBanking.isSelected=false
+            binding.upi.isSelected=false
+            binding.cod.isSelected=false
+        }
+        binding.netBanking.setOnClickListener {
+            binding.payByCard.isSelected=false
+            binding.netBanking.isSelected=true
+            binding.upi.isSelected=false
+            binding.cod.isSelected=false
+        }
+        binding.upi.setOnClickListener {
+            binding.payByCard.isSelected=false
+            binding.netBanking.isSelected=false
+            binding.upi.isSelected=true
+            binding.cod.isSelected=false
+        }
+        binding.cod.setOnClickListener {
+            binding.payByCard.isSelected=false
+            binding.netBanking.isSelected=false
+            binding.upi.isSelected=false
+            binding.cod.isSelected=true
         }
     }
 

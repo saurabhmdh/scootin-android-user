@@ -45,7 +45,6 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
 
     var orderId: List<Long>? = emptyList()
     var address: AddressDetails? = null
-    var mode="null"
 
     //We need to load order in-order to get more information about order
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -103,7 +102,7 @@ class CardPaymentPageFragment : BaseFragment(R.layout.fragment_paymentt_status) 
 
 
         binding.confirmButton.setOnClickListener {
-
+            var mode="null"
             if(binding.cod.isSelected){
                 mode="CASH"
             }

@@ -65,12 +65,13 @@ class ChangePaymentMethodFragment: BaseFragment(R.layout.fragment_change_payment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentChangePaymentMethodBinding.bind(view)
-
+        paymentModeSelector()
         setListener()
     }
 
 
     private fun setListener() {
+
         viewModel.loadOrder(orderId.toLong())
 
         //Let me load new order
@@ -88,15 +89,16 @@ class ChangePaymentMethodFragment: BaseFragment(R.layout.fragment_change_payment
         }
 
         binding.confirmButton.setOnClickListener {
-//            val mode = when (binding.radioGroup.getCheckedRadioButtonPosition()) {
-//                0 -> {
-//                    "ONLINE"
-//                }
-//                else -> {
-//                    ""
-//                }
-//            }
-            val mode="ONLINE"
+            var mode="null"
+            if(binding.payByCard.isSelected||binding.netBanking.isSelected||binding.upi.isSelected){
+                mode="ONLINE"
+            }
+
+            else{
+                Toast.makeText(requireContext(), "Please select a payment mode", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
             showLoading()
             when (orderType) {
                 "DIRECT" -> {
@@ -134,6 +136,25 @@ class ChangePaymentMethodFragment: BaseFragment(R.layout.fragment_change_payment
 //        }
 
         binding.back.setOnClickListener { findNavController().popBackStack() }
+    }
+
+    private fun paymentModeSelector(){
+        binding.payByCard.setOnClickListener {
+            binding.payByCard.isSelected=true
+            binding.netBanking.isSelected=false
+            binding.upi.isSelected=false
+        }
+        binding.netBanking.setOnClickListener {
+            binding.payByCard.isSelected=false
+            binding.netBanking.isSelected=true
+            binding.upi.isSelected=false
+        }
+        binding.upi.setOnClickListener {
+            binding.payByCard.isSelected=false
+            binding.netBanking.isSelected=false
+            binding.upi.isSelected=true
+        }
+
     }
 
     private fun addUserConfirmOrderListener(mode: String) {

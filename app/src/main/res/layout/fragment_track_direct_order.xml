@@ -141,6 +141,16 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/order_status_string" />
 
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Placed"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:textColor="#000"
+                        app:layout_constraintEnd_toEndOf="@+id/place_icon"
+                        app:layout_constraintStart_toStartOf="@+id/place_icon"
+                        app:layout_constraintTop_toBottomOf="@+id/place_icon" />
+
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/progressId"
@@ -163,6 +173,17 @@
                         app:layout_constraintStart_toEndOf="@id/progressId"
                         app:layout_constraintTop_toBottomOf="@id/order_status_string" />
 
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="Packed"
+                        android:textColor="#000"
+                        app:layout_constraintEnd_toEndOf="@+id/packed_icon"
+                        app:layout_constraintStart_toStartOf="@+id/packed_icon"
+                        app:layout_constraintTop_toBottomOf="@+id/packed_icon" />
+
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/progressId2"
@@ -184,6 +205,17 @@
                         app:layout_constraintStart_toEndOf="@id/progressId2"
                         app:layout_constraintTop_toBottomOf="@id/order_status_string" />
 
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dispatched"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:textColor="#000"
+                        app:layout_constraintEnd_toEndOf="@+id/dispatched_icon"
+                        app:layout_constraintStart_toStartOf="@+id/dispatched_icon"
+                        app:layout_constraintTop_toBottomOf="@+id/dispatched_icon" />
+
+
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/progressId3"
                         android:layout_width="0dp"
@@ -204,6 +236,17 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/progressId3"
                         app:layout_constraintTop_toBottomOf="@id/order_status_string" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Delivered"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:textColor="#000"
+                        app:layout_constraintEnd_toEndOf="@+id/delivered_icon"
+                        app:layout_constraintStart_toStartOf="@+id/delivered_icon"
+                        app:layout_constraintTop_toBottomOf="@+id/delivered_icon" />
+
 
                     <LinearLayout
                         android:id="@+id/payment_tab"

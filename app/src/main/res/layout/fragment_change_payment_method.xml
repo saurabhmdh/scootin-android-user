@@ -221,7 +221,7 @@
                         app:layout_constraintEnd_toStartOf="@+id/net_banking"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5"
-                        app:srcCompat="@drawable/ic_pay_by_card_tile" />
+                        app:srcCompat="@drawable/pay_by_card_selector" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/net_banking"
@@ -236,7 +236,7 @@
                         app:layout_constraintStart_toEndOf="@+id/pay_by_card"
                         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5"
                         app:layout_constraintVertical_bias="1.0"
-                        app:srcCompat="@drawable/ic_net_banking" />
+                        app:srcCompat="@drawable/net_banking_selector" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/upi"
@@ -251,7 +251,7 @@
                         app:layout_constraintStart_toEndOf="@+id/net_banking"
                         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5"
                         app:layout_constraintVertical_bias="1.0"
-                        app:srcCompat="@drawable/ic_upi_tile" />
+                        app:srcCompat="@drawable/upi_payment_selector" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
