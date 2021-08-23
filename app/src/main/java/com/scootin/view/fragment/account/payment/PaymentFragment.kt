@@ -113,24 +113,42 @@ class PaymentFragment : BaseFragment(R.layout.fragment_payment) {
 
         binding.applyPromoButton.setOnClickListener {
             if (binding.couponEdittext.text?.toString()?.isEmpty() == true) {
-                Toast.makeText(context, "Please enter valid coupon code", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Please enter a valid coupon code", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            val promoCode = binding.couponEdittext.text.toString()
+//            else{
+//                binding.applyPromoButton.visibility=View.GONE
+//                binding.removePromoButton.visibility=View.VISIBLE
+//            }
+            val promoCode = binding.couponEdittext.text!!.toString()
             showLoading()
-            viewModel.applyPromo(orderId, AppHeaders.userID, PromoCodeRequest(promoCode, orderType)).observe(viewLifecycleOwner) {
-                if (it.isSuccessful) {
-                    dismissLoading()
-                    binding.discountApplied.text = "Discount Applied (${promoCode})"
-                    binding.promoApplied.visibility = View.VISIBLE
-                    viewModel.loadOrder(orderId.toLong())
-                } else {
-                    dismissLoading()
-                    Toast.makeText(requireContext(), "Invalid promocode!!", Toast.LENGTH_SHORT).show()
-                }
-            }
+            viewModel.loadPaymentInfo(promoCode)
+//            if (binding.couponEdittext.text?.toString()?.isEmpty() == true) {
+//                Toast.makeText(context, "Please enter valid coupon code", Toast.LENGTH_SHORT).show()
+//                return@setOnClickListener
+//            }
+//            val promoCode = binding.couponEdittext.text.toString()
+//            showLoading()
+//            viewModel.applyPromo(orderId, AppHeaders.userID, PromoCodeRequest(promoCode, orderType)).observe(viewLifecycleOwner) {
+//                if (it.isSuccessful) {
+//                    dismissLoading()
+//                    binding.discountApplied.text = "Discount Applied (${promoCode})"
+//                    binding.promoApplied.visibility = View.VISIBLE
+//                    viewModel.loadOrder(orderId.toLong())
+//                } else {
+//                    dismissLoading()
+//                    Toast.makeText(requireContext(), "Invalid promocode!!", Toast.LENGTH_SHORT).show()
+//                }
+//            }
         }
 
+        binding.removePromoButton.setOnClickListener {
+            viewModel.loadPaymentInfo("")
+            binding.promoApplied.visibility = View.GONE
+            binding.applyPromoButton.visibility=View.VISIBLE
+            binding.removePromoButton.visibility=View.GONE
+            binding.couponEdittext.getText()?.clear()
+        }
         binding.back.setOnClickListener { findNavController().popBackStack() }
     }
 
